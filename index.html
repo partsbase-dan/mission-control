@@ -1258,8 +1258,8 @@
         </div>
       </div>
       <button onclick="showTab('exec')" id="outertab-exec" class="outer-tab"><span class="nav-icon">◈</span><span>Exec View</span></button>
-      <button onclick="togglePlanGroup()" id="outertab-plan" class="outer-tab expanded"><span class="nav-icon">◎</span><span>180-Day Plan</span><span class="chevron">›</span></button>
-      <div class="plan-nav" id="plan-nav" aria-label="180-Day Plan sections">
+      <button onclick="togglePlanGroup()" id="outertab-plan" class="outer-tab"><span class="nav-icon">◎</span><span>180-Day Plan</span><span class="chevron">›</span></button>
+      <div class="plan-nav collapsed" id="plan-nav" aria-label="180-Day Plan sections">
         <button onclick="showTab('plan');showInnerTab('overview')" id="tab-overview" class="active">Overview</button>
         <button onclick="showTab('plan');showInnerTab('sprints')" id="tab-sprints">Sprints</button>
         <button onclick="showTab('plan');showInnerTab('milestones')" id="tab-milestones">Milestones</button>
@@ -1542,7 +1542,7 @@ updateClock();
 setInterval(updateClock, 1000);
 
 // ── Navigation ──
-let planGroupExpanded = true;
+let planGroupExpanded = false;
 
 const TAB_CONFIG = {
   overview:  { panel: 'overview', inner: null,        title: ['Dashboard',         'Overview · PartsBase GTM operating system'] },
