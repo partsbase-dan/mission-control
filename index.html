@@ -2026,7 +2026,7 @@ function renderDecisions() {
 
 function renderEmail() {
   const a = EMAIL_AUDIT;
-  const cv = c => c==='green'?'var(--green)':'var(--label)';
+  const cv = c => c==='green'?'var(--green)':'var(--label)'; // green = good metrics only
 
   const kpis = a.kpis.map(k => `<div class="pc" style="text-align:center;margin-bottom:0">
     <div style="font-size:11px;color:var(--muted);margin-bottom:4px">${k.label}</div>
@@ -2047,7 +2047,7 @@ function renderEmail() {
   const working = a.whatsWorking.map((w,i,arr) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;${i<arr.length-1?'border-bottom:1px solid var(--border)':''}">
     <span style="font-size:13px;color:var(--label)">${w.l}</span>
     <span style="font-size:13px;font-weight:600;color:var(--green)">${w.v}</span>
-  </div>`).join('');
+  </div>`).join(''); // green = confirmed positive metrics
 
   const fieldRows = a.fieldQuality.map(f => `<div style="display:flex;justify-content:space-between;padding:2px 0">
     <span style="font-size:11px;color:var(--label)">${f.l}</span>
@@ -2198,7 +2198,7 @@ function renderIcp() {
     <td style="font-weight:500;color:var(--text)">${r.seg}</td>
     <td style="text-align:center;font-weight:600">${r.total.toLocaleString()}</td>
     <td style="text-align:center;color:var(--label);font-weight:600">${r.oro.toLocaleString()}</td>
-    <td style="text-align:center;color:var(--label);font-weight:600">${r.prospects.toLocaleString()}</td>
+    <td style="text-align:center;color:var(--green);font-weight:600">${r.prospects.toLocaleString()}</td>
     <td style="text-align:center;color:var(--muted)">${r.rev}</td>
   </tr>`).join('');
 
@@ -2206,7 +2206,7 @@ function renderIcp() {
     <td style="font-weight:600;color:var(--label)">${r.tier}</td>
     <td style="text-align:center;font-weight:700">${r.total.toLocaleString()}</td>
     <td style="text-align:center;color:var(--label);font-weight:700">${r.oro.toLocaleString()}</td>
-    <td style="text-align:center;color:var(--label);font-weight:700">${r.prospects.toLocaleString()}</td>
+    <td style="text-align:center;color:var(--green);font-weight:700">${r.prospects.toLocaleString()}</td>
   </tr>`).join('');
 
   const xrefBlocks = d.crossRef.map(x => {
@@ -2303,7 +2303,7 @@ function renderIcp() {
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px">
         <div style="background:var(--surface2);border-radius:6px;padding:10px;text-align:center"><div style="font-size:17px;font-weight:700;color:var(--text)">69,566</div><div style="font-size:11px;color:var(--muted)">Total Tier 1</div></div>
         <div style="background:var(--surface2);border-radius:6px;padding:10px;text-align:center"><div style="font-size:17px;font-weight:700;color:var(--text)">10,773</div><div style="font-size:11px;color:var(--muted)">ORO portal matches</div></div>
-        <div style="background:var(--surface2);border-radius:6px;padding:10px;text-align:center"><div style="font-size:17px;font-weight:700;color:var(--text)">58,793</div><div style="font-size:11px;color:var(--muted)">Acquisition prospects</div></div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px;text-align:center"><div style="font-size:17px;font-weight:700;color:var(--green)">58,793</div><div style="font-size:11px;color:var(--muted)">Acquisition prospects</div></div>
       </div>
       <div style="padding:0 14px 14px;font-size:11px;color:var(--muted)">⬆ Up from 11,673 previously tagged contacts — <strong>6× improvement</strong>. ORO cross-reference complete May 22, 2026. Output CSVs: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">oro_cross_ref_tier1_customers.csv</code> · <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">oro_cross_ref_tier1_prospects.csv</code></div>
     </div>
@@ -2312,7 +2312,7 @@ function renderIcp() {
       <table class="plan-table">
         <thead><tr><th></th><th style="text-align:center">Total</th><th style="text-align:center">ORO Matches</th><th style="text-align:center">Prospects</th></tr></thead>
         <tbody>${oroRows}
-          <tr><td style="font-weight:700;color:var(--text);border-top:2px solid var(--border)">Total ICP</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">193,394</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">22,925</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">170,469</td></tr>
+          <tr><td style="font-weight:700;color:var(--text);border-top:2px solid var(--border)">Total ICP</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">193,394</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">22,925</td><td style="text-align:center;font-weight:700;color:var(--green);border-top:2px solid var(--border)">170,469</td></tr>
         </tbody>
       </table>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px">
