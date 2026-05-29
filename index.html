@@ -1265,7 +1265,6 @@
         <button onclick="showTab('plan');showInnerTab('milestones')" id="tab-milestones">Milestones</button>
         <button onclick="showTab('plan');showInnerTab('risks')" id="tab-risks">Risk Register</button>
         <button onclick="showTab('plan');showInnerTab('stack')" id="tab-stack">Tech Stack</button>
-        <button onclick="showTab('plan');showInnerTab('decisions')" id="tab-decisions">Decisions</button>
       </div>
       <button onclick="showTab('resources')" id="outertab-resources" class="outer-tab"><span class="nav-icon">📚</span><span>Resources</span></button>
       <button onclick="showTab('email')" id="outertab-email" class="outer-tab"><span class="nav-icon">✉</span><span>Email Health</span></button>
@@ -2513,23 +2512,7 @@ function toggleResource(id) {
 function renderResources() {
   const el = document.getElementById('resources-list');
   if (!el) return;
-  el.innerHTML = (PLAN.resources || []).map(r => {
-    const c = RESOURCE_TYPE_COLORS[r.type] || RESOURCE_TYPE_COLORS.reference;
-    return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px;">
-      <button onclick="toggleResource('${r.id}')" style="width:100%;display:flex;align-items:center;gap:12px;padding:14px 16px;background:none;border:none;cursor:pointer;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='none'">
-        <span id="res-chevron-${r.id}" style="font-size:11px;color:var(--muted);transition:transform 0.15s;flex-shrink:0;">›</span>
-        <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;flex-shrink:0;${c.pill}">${c.label}</span>
-        <span style="font-size:13px;font-weight:600;color:var(--text);flex:1;min-width:0;">${r.label}</span>
-        <span style="font-size:11px;color:var(--muted);white-space:nowrap;">${r.desc}</span>
-      </button>
-      <div id="res-body-${r.id}" style="display:none;border-top:1px solid var(--border);">
-        <div style="padding:4px 16px 8px;background:var(--surface2);">
-          <code style="font-size:10px;color:var(--muted);">${r.file}</code>
-        </div>
-        <pre id="res-pre-${r.id}" style="margin:0;padding:20px;font-size:12px;line-height:1.7;color:var(--label);white-space:pre-wrap;word-break:break-word;background:var(--surface);max-height:600px;overflow-y:auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"></pre>
-      </div>
-    </div>`;
-  }).join('');
+  el.innerHTML = `<div style="font-size:13px;color:var(--muted);padding:24px 0;">Coming soon!</div>`;
 }
 
 function renderAll() {
