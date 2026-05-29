@@ -1941,7 +1941,7 @@ function renderSprints() {
   document.getElementById('tab-sprints-content').innerHTML = PLAN.sprints.map(sprint => {
     const {done, total, pct} = sprintProgress(sprint);
     const allDone = done === total && total > 0;
-    const collapsed = allDone; // completed sprints start collapsed
+    const collapsed = true; // all sprints start collapsed
     const tasks = sprint.tasks.map((task, i) => {
       const checked = taskDone(sprint.id, i);
       return `<div class="task-item"><span style="flex-shrink:0">${checked?'✅':'⬜'}</span><span class="${checked?'task-done':''}" style="font-size:13px;color:var(--label)">${task}</span></div>`;
