@@ -2088,10 +2088,13 @@ function renderEmail() {
     return `<div class="pc">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px">
         <div><span class="badge badge-blue" style="margin-bottom:4px">${phase.phase}</span><div class="plan-h2">${phase.subtitle}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${phase.timeline}</div></div>
-        <div style="text-align:right;flex-shrink:0"><div style="font-size:15px;font-weight:700;color:var(--text)">${pct}%</div><div style="font-size:11px;color:var(--muted)">${done}/${phase.tasks.length} tasks</div></div>
+        <div style="text-align:right;flex-shrink:0;display:flex;align-items:center;gap:12px">
+          <div><div style="font-size:15px;font-weight:700;color:var(--text)">${pct}%</div><div style="font-size:11px;color:var(--muted)">${done}/${phase.tasks.length} tasks</div></div>
+          <button onclick="const l=this.closest('.pc').querySelector('.email-tasks');l.classList.toggle('hidden');this.textContent=l.classList.contains('hidden')?'▸ Show':'▾ Hide'" style="font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:4px 10px;cursor:pointer;white-space:nowrap">▸ Show</button>
+        </div>
       </div>
       <div class="progress-bar" style="margin:10px 0"><div class="progress-fill" style="width:${pct}%"></div></div>
-      <div style="border-top:1px solid var(--border);padding-top:6px">${tasks}</div>
+      <div class="email-tasks hidden" style="border-top:1px solid var(--border);padding-top:6px">${tasks}</div>
     </div>`;
   }).join('');
 
