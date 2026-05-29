@@ -2373,71 +2373,7 @@ function renderExec() {
     </div>`;
 
   el.innerHTML = `
-    <!-- Budget Model -->
-    <div class="plan-label">Budget Scenarios — What Each Level Produces <span style="font-size:10px;font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">— ARPU sourced from Amelia MCP · 395 new customers Feb–May 2026 · $300 blended CAC</span></div>
-
-    <!-- Scenario rows -->
-    ${[
-      { label:'Conservative', budget:'$7,500/mo', customers:'25', arr:'$105K', year1:'$1.3M', highlight:false },
-      { label:'Base Case',    budget:'$10,000/mo', customers:'33', arr:'$139K', year1:'$1.7M', highlight:false },
-      { label:'Full Program', budget:'$17,500/mo', customers:'58', arr:'$244K', year1:'$2.9M', highlight:true  },
-    ].map(s => `
-    <div style="display:grid;grid-template-columns:120px repeat(4,1fr);gap:10px;margin-bottom:10px;align-items:stretch">
-      <!-- Scenario label -->
-      <div style="background:${s.highlight?'rgba(99,102,241,0.12)':'var(--surface2)'};border-radius:7px;padding:12px;display:flex;flex-direction:column;justify-content:center">
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;color:${s.highlight?'var(--accent)':'var(--muted)'};margin-bottom:3px">${s.label}</div>
-        <div style="font-size:16px;font-weight:700;color:${s.highlight?'var(--accent)':'var(--text)'};">${s.budget}</div>
-      </div>
-      <!-- Metric boxes -->
-      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
-        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">New Customers/mo</div>
-        <div style="font-size:20px;font-weight:700;color:var(--text)">${s.customers}</div>
-      </div>
-      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
-        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">New ARR/Month</div>
-        <div style="font-size:20px;font-weight:700;color:var(--green)">${s.arr}</div>
-      </div>
-      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
-        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Year 1 New ARR</div>
-        <div style="font-size:20px;font-weight:700;color:var(--green)">${s.year1}</div>
-      </div>
-      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
-        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Magic Number</div>
-        <div style="font-size:20px;font-weight:700;color:var(--green)">29:1</div>
-      </div>
-    </div>`).join('')}
-
-    <!-- Definitions -->
-    <div style="display:grid;grid-template-columns:120px repeat(4,1fr);gap:10px;margin-bottom:6px;align-items:start">
-      <div></div>
-      <div style="padding:0 2px">
-        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">New Customers/mo</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.5">Projected net-new paid accounts from this budget. Based on $300 blended CAC confirmed from actual new-customer SOs (Amelia, Feb–May 2026). <em>Run-rate target — not a Month 1 promise.</em> Months 1–2 will be 15–25 while campaigns ramp.</div>
-      </div>
-      <div style="padding:0 2px">
-        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">New ARR/Month</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.5">Annualized subscription revenue from one month's new customer cohort (new customers × segment-weighted ARPA × 12). ARPA inputs confirmed from 395 real new customers in Amelia. This is contracted ARR added — not cash received in that month.</div>
-      </div>
-      <div style="padding:0 2px">
-        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">Year 1 New ARR</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.5">Total new ARR created over 12 months of acquisition cohorts. Each monthly cohort adds its New ARR/Month figure to the base. Assumes steady run-rate after ramp. Does not include upsell or expansion from existing customers.</div>
-      </div>
-      <div style="padding:0 2px">
-        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">Magic Number</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.5">Net new ARR generated per $1 of S&amp;M spend. Confirmed 29:1 from current actuals ($512K net new ARR ÷ $17,500 S&amp;M). Scales with budget — the ratio holds because CAC and ARPA are stable. Benchmark: &gt;1.0 is efficient; 29:1 is exceptional.</div>
-      </div>
-    </div>
-
-    <!-- Ramp note -->
-    <div style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.2);border-radius:6px;padding:10px 14px;margin-bottom:22px;display:flex;gap:10px;align-items:flex-start">
-      <div style="font-size:14px;margin-top:1px">⚠</div>
-      <div>
-        <div style="font-size:11px;font-weight:600;color:var(--yellow);margin-bottom:3px">Ramp Reality — Months 2–4</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.5">These projections are <strong style="color:var(--label)">steady-state targets</strong>, not Day 1 outputs. Paid campaigns need 4–6 weeks to exit the learning phase. Clay outbound needs HubSpot live first. Realistic ramp: <strong style="color:var(--label)">10–15 customers in Months 2–4</strong>, building to run rate by Month 3–4. Year 1 ARR at full ramp is $1.8–2.2M before hitting the modeled run rate.</div>
-      </div>
-    </div>
-
-    <!-- 30/60/90/180 Phase Cards -->
+    <!-- 1. What Gets Built — What You'll See -->
     <div class="plan-label">What Gets Built — What You'll See</div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px">
       ${phaseCard(
@@ -2464,6 +2400,66 @@ function renderExec() {
         '$2.9M new ARR run rate · NDR approaching 100%',
         'Board-ready: marketing owns a line to revenue · expansion covering churn'
       )}
+    </div>
+
+    <!-- 2. Ramp Reality -->
+    <div style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.2);border-radius:6px;padding:10px 14px;margin-bottom:22px;display:flex;gap:10px;align-items:flex-start">
+      <div style="font-size:14px;margin-top:1px">⚠</div>
+      <div>
+        <div style="font-size:11px;font-weight:600;color:var(--yellow);margin-bottom:3px">Ramp Reality — Months 2–4</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5">These projections are <strong style="color:var(--label)">steady-state targets</strong>, not Day 1 outputs. Paid campaigns need 4–6 weeks to exit the learning phase. Clay outbound needs HubSpot live first. Realistic ramp: <strong style="color:var(--label)">10–15 customers in Months 2–4</strong>, building to run rate by Month 3–4. Year 1 ARR at full ramp is $1.8–2.2M before hitting the modeled run rate.</div>
+      </div>
+    </div>
+
+    <!-- 3. Budget Scenarios -->
+    <div class="plan-label">Budget Scenarios — What Each Level Produces <span style="font-size:10px;font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">— ARPU sourced from Amelia MCP · 395 new customers Feb–May 2026 · $300 blended CAC</span></div>
+
+    ${[
+      { label:'Conservative', budget:'$7,500/mo', customers:'25', arr:'$105K', year1:'$1.3M', highlight:false },
+      { label:'Base Case',    budget:'$10,000/mo', customers:'33', arr:'$139K', year1:'$1.7M', highlight:false },
+      { label:'Full Program', budget:'$17,500/mo', customers:'58', arr:'$244K', year1:'$2.9M', highlight:true  },
+    ].map(s => `
+    <div style="display:grid;grid-template-columns:120px repeat(4,1fr);gap:10px;margin-bottom:10px;align-items:stretch">
+      <div style="background:${s.highlight?'rgba(99,102,241,0.12)':'var(--surface2)'};border-radius:7px;padding:12px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;color:${s.highlight?'var(--accent)':'var(--muted)'};margin-bottom:3px">${s.label}</div>
+        <div style="font-size:16px;font-weight:700;color:${s.highlight?'var(--accent)':'var(--text)'};">${s.budget}</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">New Customers/mo</div>
+        <div style="font-size:20px;font-weight:700;color:var(--text)">${s.customers}</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">New ARR/Month</div>
+        <div style="font-size:20px;font-weight:700;color:var(--green)">${s.arr}</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Year 1 New ARR</div>
+        <div style="font-size:20px;font-weight:700;color:var(--green)">${s.year1}</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Magic Number</div>
+        <div style="font-size:20px;font-weight:700;color:var(--green)">29:1</div>
+      </div>
+    </div>`).join('')}
+
+    <div style="display:grid;grid-template-columns:120px repeat(4,1fr);gap:10px;margin-bottom:22px;align-items:start">
+      <div></div>
+      <div style="padding:0 2px">
+        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">New Customers/mo</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5">Projected net-new paid accounts from this budget. Based on $300 blended CAC confirmed from actual new-customer SOs (Amelia, Feb–May 2026). <em>Run-rate target — not a Month 1 promise.</em> Months 1–2 will be 15–25 while campaigns ramp.</div>
+      </div>
+      <div style="padding:0 2px">
+        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">New ARR/Month</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5">Annualized subscription revenue from one month's new customer cohort (new customers × segment-weighted ARPA × 12). ARPA inputs confirmed from 395 real new customers in Amelia. This is contracted ARR added — not cash received in that month.</div>
+      </div>
+      <div style="padding:0 2px">
+        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">Year 1 New ARR</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5">Total new ARR created over 12 months of acquisition cohorts. Each monthly cohort adds its New ARR/Month figure to the base. Assumes steady run-rate after ramp. Does not include upsell or expansion from existing customers.</div>
+      </div>
+      <div style="padding:0 2px">
+        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">Magic Number</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5">Net new ARR generated per $1 of S&amp;M spend. Confirmed 29:1 from current actuals ($512K net new ARR ÷ $17,500 S&amp;M). Scales with budget — the ratio holds because CAC and ARPA are stable. Benchmark: &gt;1.0 is efficient; 29:1 is exceptional.</div>
+      </div>
     </div>
 
   `;
