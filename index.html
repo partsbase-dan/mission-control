@@ -84,6 +84,7 @@
   .rag-amber { background:rgba(245,200,76,0.08);  border-left:4px solid var(--yellow); border-radius:6px; padding:14px 16px; margin-bottom:12px; }
   .rag-green { background:rgba(61,220,151,0.08);  border-left:4px solid var(--green);  border-radius:6px; padding:14px 16px; margin-bottom:12px; }
   .rag-none  { background:var(--surface2);        border-left:4px solid var(--muted);  border-radius:6px; padding:14px 16px; margin-bottom:12px; }
+  .rag-blue  { background:rgba(99,102,241,0.08); border-left:4px solid var(--accent); border-radius:6px; padding:14px 16px; margin-bottom:12px; }
   .progress-bar  { background:var(--surface3); border-radius:99px; height:8px; }
   .progress-fill { background:var(--accent);   border-radius:99px; height:8px; transition:width .3s; }
   .cl-setup    { border-left:3px solid var(--muted); }
@@ -212,9 +213,8 @@
     "day180": "2026-12-01"
   },
   "workstreams": {
-    "tracking": "red",
-    "hubspot": "none",
-    "icp": "red",
+    "tracking": "blue",
+    "hubspot": "blue",
     "claypoc": "none",
     "scoring": "none",
     "seo": "none",
@@ -235,11 +235,6 @@
         "id": "hubspot",
         "label": "HubSpot Migration",
         "detail": "HubSpot = contacts/CRM/MAP \u00b7 ORO transitions to leads-only (woven into existing systems) \u00b7 HubSpot feeds ORO for downstream tracking \u00b7 Mailchimp \u2192 Marketing Hub \u00b7 IT approval + vendor contract required"
-      },
-      {
-        "id": "icp",
-        "label": "ICP Reclassification",
-        "detail": "Airlines, Overhaul Shops, Regional Airlines \u2192 T1 \u00b7 must complete before Clay seeding"
       },
       {
         "id": "vector",
@@ -1459,16 +1454,6 @@
 
       <!-- OVERVIEW -->
       <div id="tab-overview-content">
-        <div class="rag-red" style="padding:14px;border-radius:8px;margin-bottom:18px">
-          <div style="display:flex;align-items:flex-start;gap:10px">
-            <span class="status-dot red" style="flex-shrink:0;margin-top:4px"></span>
-            <div>
-              <div style="font-size:13px;font-weight:600;color:var(--red)">Pre-Start Critical Finding — SEO Audit 2026-05-11</div>
-              <div style="font-size:13px;color:var(--red);opacity:.85;margin-top:4px">partsbase.com scores 42/100 (Grade D). Client-side SPA — every page serves the same static HTML shell. No page-specific titles, H1s, or body copy. GA4 route-change tracking is broken, which means no reliable data on traffic sources, conversions, or campaign performance.</div>
-              <div style="font-size:11px;font-weight:600;color:var(--red);margin-top:6px">Day 1 action: Share with engineering. Fix = GTM History Change trigger. Unblocks the entire tracking stack.</div>
-            </div>
-          </div>
-        </div>
         <div class="plan-label">Workstream Status</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px" id="ragGrid"></div>
         <div class="plan-label">Phase Targets</div>
@@ -1931,14 +1916,14 @@ function sprintProgress(s) {
   return { done, total:s.tasks.length, pct: s.tasks.length ? Math.round(done/s.tasks.length*100) : 0 };
 }
 
-const RAG_CARD = { red:'rag-red', amber:'rag-amber', green:'rag-green', none:'rag-none' };
+const RAG_CARD = { red:'rag-red', amber:'rag-amber', green:'rag-green', blue:'rag-blue', none:'rag-none' };
 const CL_TYPE  = { setup:'cl-setup', task:'cl-task', rag:'cl-rag', note:'cl-note', risk:'cl-risk', milestone:'cl-milestone' };
 
 function renderOverview() {
   document.getElementById('ragGrid').innerHTML = PLAN.workstreams.map(ws => {
     const rag = wsRag(ws.id);
-    const ragBadge = rag==='red'?'badge-red':rag==='amber'?'badge-amber':rag==='green'?'badge-green':'badge-slate';
-    const ragText = rag==='none'?'Not started':rag==='green'?'On track':rag==='amber'?'At risk':'Blocked';
+    const ragBadge = rag==='red'?'badge-red':rag==='amber'?'badge-amber':rag==='green'?'badge-green':rag==='blue'?'badge-blue':'badge-slate';
+    const ragText = rag==='none'?'Not started':rag==='green'?'On track':rag==='amber'?'At risk':rag==='blue'?'In progress':'Blocked';
     return `<div class="${RAG_CARD[rag]}">
       <div style="font-size:13px;font-weight:600;color:var(--text)">${ws.label}</div>
       <div style="font-size:11px;color:var(--muted);margin-top:2px">${ws.detail}</div>

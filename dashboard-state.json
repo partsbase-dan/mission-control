@@ -10,9 +10,8 @@
     "day180": "2026-12-01"
   },
   "workstreams": {
-    "tracking": "red",
-    "hubspot": "none",
-    "icp": "red",
+    "tracking": "blue",
+    "hubspot": "blue",
     "claypoc": "none",
     "scoring": "none",
     "seo": "none",
@@ -33,11 +32,6 @@
         "id": "hubspot",
         "label": "HubSpot Migration",
         "detail": "HubSpot = contacts/CRM/MAP \u00b7 ORO transitions to leads-only (woven into existing systems) \u00b7 HubSpot feeds ORO for downstream tracking \u00b7 Mailchimp \u2192 Marketing Hub \u00b7 IT approval + vendor contract required"
-      },
-      {
-        "id": "icp",
-        "label": "ICP Reclassification",
-        "detail": "Airlines, Overhaul Shops, Regional Airlines \u2192 T1 \u00b7 must complete before Clay seeding"
       },
       {
         "id": "vector",
