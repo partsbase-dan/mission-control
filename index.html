@@ -2026,7 +2026,7 @@ function renderDecisions() {
 
 function renderEmail() {
   const a = EMAIL_AUDIT;
-  const cv = c => c==='red'?'var(--red)':c==='green'?'var(--green)':'var(--yellow)';
+  const cv = c => c==='green'?'var(--green)':'var(--label)';
 
   const kpis = a.kpis.map(k => `<div class="pc" style="text-align:center;margin-bottom:0">
     <div style="font-size:11px;color:var(--muted);margin-bottom:4px">${k.label}</div>
@@ -2034,14 +2034,14 @@ function renderEmail() {
     <div style="font-size:11px;color:var(--muted);margin-top:4px">${k.sub}</div>
   </div>`).join('');
 
-  const critIssues = a.criticalIssues.map(i => `<div class="rag-red" style="padding:10px;border-radius:6px;margin-bottom:6px">
-    <div style="font-size:13px;font-weight:600;color:var(--red)">${i.t}</div>
-    <div style="font-size:11px;color:var(--red);opacity:.85;margin-top:2px">${i.d}</div>
+  const critIssues = a.criticalIssues.map(i => `<div style="background:var(--surface2);border-left:3px solid var(--border);border-radius:0 6px 6px 0;padding:10px;margin-bottom:6px">
+    <div style="font-size:13px;font-weight:600;color:var(--text)">${i.t}</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:2px">${i.d}</div>
   </div>`).join('');
 
-  const watchItems = a.watchItems.map(i => `<div class="rag-amber" style="padding:10px;border-radius:6px;margin-bottom:6px">
-    <div style="font-size:13px;font-weight:600;color:var(--yellow)">${i.t}</div>
-    <div style="font-size:11px;color:var(--yellow);opacity:.85;margin-top:2px">${i.d}</div>
+  const watchItems = a.watchItems.map(i => `<div style="background:var(--surface2);border-left:3px solid var(--border);border-radius:0 6px 6px 0;padding:10px;margin-bottom:6px">
+    <div style="font-size:13px;font-weight:600;color:var(--text)">${i.t}</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:2px">${i.d}</div>
   </div>`).join('');
 
   const working = a.whatsWorking.map((w,i,arr) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;${i<arr.length-1?'border-bottom:1px solid var(--border)':''}">
@@ -2065,8 +2065,8 @@ function renderEmail() {
   </div>`).join('');
 
   const classRows = a.classification.map((c,i,arr) => `<div style="display:flex;justify-content:space-between;padding:4px 0;${i<arr.length-1?'border-bottom:1px solid var(--border)':''}">
-    <span style="font-size:11px;font-weight:500;color:${c.col}">${c.l}</span>
-    <span style="font-size:11px;font-weight:700;color:${c.col}">${c.c.toLocaleString()}</span>
+    <span style="font-size:11px;font-weight:500;color:var(--label)">${c.l}</span>
+    <span style="font-size:11px;font-weight:700;color:var(--text)">${c.c.toLocaleString()}</span>
   </div>`).join('');
 
   const questions = a.openQuestions.map((q,i,arr) => `<div style="display:flex;align-items:flex-start;gap:10px;${i<arr.length-1?'padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:14px':''}">
@@ -2101,15 +2101,14 @@ function renderEmail() {
         <div style="font-size:15px;font-weight:700;color:var(--text)">Mailchimp Audit — PartsBase, Inc.</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px">Audited ${a.meta.date} · Account: ${a.meta.account} · ${a.meta.total.toLocaleString()} total contacts</div>
       </div>
-      <span class="badge badge-red">Reputation Emergency</span>
+      <span class="badge badge-slate">Historical Audit — May 20</span>
     </div>
-    <div class="rag-red" style="padding:14px;border-radius:8px;margin-bottom:18px">
+    <div class="rag-none" style="padding:14px;border-radius:8px;margin-bottom:18px">
       <div style="display:flex;align-items:flex-start;gap:10px">
-        <span class="status-dot red" style="flex-shrink:0;margin-top:4px"></span>
         <div>
-          <div style="font-size:13px;font-weight:600;color:var(--red)">${a.alert.title}</div>
-          <div style="font-size:12px;color:var(--red);opacity:.85;margin-top:4px">${a.alert.body}</div>
-          <div style="font-size:11px;font-weight:600;color:var(--red);margin-top:6px">${a.alert.action}</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text)">${a.alert.title}</div>
+          <div style="font-size:12px;color:var(--label);margin-top:4px">${a.alert.body}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">${a.alert.action}</div>
         </div>
       </div>
     </div>
@@ -2122,13 +2121,13 @@ function renderEmail() {
       </div>
     </div>
     <div class="plan-label">Contact Data Scan — May 20, 2026</div>
-    <div class="rag-red" style="padding:14px;border-radius:8px;margin-bottom:12px">
-      <div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:4px">${a.rootCause.title}</div>
-      <div style="font-size:12px;color:var(--red);opacity:.85">${a.rootCause.body}</div>
+    <div class="rag-none" style="padding:14px;border-radius:8px;margin-bottom:12px">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">${a.rootCause.title}</div>
+      <div style="font-size:12px;color:var(--label)">${a.rootCause.body}</div>
     </div>
-    <div class="rag-amber" style="padding:14px;border-radius:8px;margin-bottom:18px">
-      <div style="font-size:13px;font-weight:600;color:var(--yellow);margin-bottom:4px">${a.icpMismatch.title}</div>
-      <div style="font-size:12px;color:var(--yellow);opacity:.85">${a.icpMismatch.body}</div>
+    <div class="rag-none" style="padding:14px;border-radius:8px;margin-bottom:18px">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">${a.icpMismatch.title}</div>
+      <div style="font-size:12px;color:var(--label)">${a.icpMismatch.body}</div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px">
       <div class="pc"><div class="plan-label" style="margin-top:0">Field Quality</div>${fieldRows}</div>
