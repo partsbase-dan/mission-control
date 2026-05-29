@@ -213,8 +213,6 @@
           <div class="brand-sub">Mission Control</div>
         </div>
       </div>
-      <div class="search-box"><span>⌕</span><span>Search workspace...</span><span style="margin-left:auto;color:#676a74;">⌘ K</span></div>
-      <button onclick="showTab('overview')" id="outertab-overview" class="outer-tab active"><span class="nav-icon">▦</span><span>Dashboard</span></button>
       <button onclick="showTab('today')" id="outertab-today" class="outer-tab"><span class="nav-icon">◷</span><span>Today</span></button>
       <button onclick="togglePlanGroup()" id="outertab-plan" class="outer-tab expanded"><span class="nav-icon">◎</span><span>180-Day Plan</span><span class="chevron">›</span></button>
       <div class="plan-nav" id="plan-nav" aria-label="180-Day Plan sections">
@@ -224,7 +222,6 @@
         <button onclick="showTab('plan');showInnerTab('risks')" id="tab-risks">Risk Register</button>
         <button onclick="showTab('plan');showInnerTab('stack')" id="tab-stack">Tech Stack</button>
         <button onclick="showTab('plan');showInnerTab('decisions')" id="tab-decisions">Decisions</button>
-        <button onclick="showTab('plan');showInnerTab('changelog')" id="tab-changelog">Changelog</button>
       </div>
       <button onclick="showTab('resources')" id="outertab-resources" class="outer-tab"><span class="nav-icon">📚</span><span>Resources</span></button>
       <button onclick="showTab('email')" id="outertab-email" class="outer-tab"><span class="nav-icon">✉</span><span>Email Health</span></button>
@@ -361,21 +358,8 @@
 
 <!-- ═══ TAB: TODAY ═══ -->
 <div id="outer-today" class="hidden tab-content">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-    <div style="font-size:11px;color:var(--muted);" id="today-last-refreshed">Data from last brief run</div>
-  </div>
 
-  <div class="grid-4">
-    <div class="card">
-      <div class="card-title">Inbox</div>
-      <div class="kpi-value" id="today-inbox-value" style="color:var(--green)">Clean</div>
-      <div class="kpi-sub" id="today-inbox-sub">1 unread · 0 action needed</div>
-    </div>
-    <div class="card">
-      <div class="card-title">Meetings Today</div>
-      <div class="kpi-value" id="today-meetings-value" style="color:var(--yellow)">—</div>
-      <div class="kpi-sub" id="today-meetings-sub">loading…</div>
-    </div>
+  <div class="grid-2" style="margin-bottom:16px;">
     <div class="card">
       <div class="card-title">Active Builds</div>
       <div class="kpi-value" style="color:var(--accent)">1</div>
@@ -389,25 +373,6 @@
   </div>
 
   <div class="grid-2">
-    <div class="card">
-      <div class="card-title" id="today-date-title">Today</div>
-      <div class="brief-card">
-        <div class="brief-section">
-          <div class="brief-label">Calendar</div>
-          <div id="today-calendar-list"><div style="font-size:12px;color:var(--muted);">Run Morning Brief to populate →</div></div>
-        </div>
-        <div class="brief-section">
-          <div class="brief-label">Inbox</div>
-          <div id="today-inbox-status" style="font-size:12px;color:var(--muted);">Run Morning Brief to populate →</div>
-        </div>
-        <div class="brief-section">
-          <div class="brief-label">Focus window</div>
-          <div id="today-focus" style="font-size:12px;color:var(--muted);">Calculated after brief runs</div>
-        </div>
-      </div>
-      <div style="margin-top:8px;" id="today-brief-link"></div>
-    </div>
-
     <div class="card">
       <div class="card-title">AI Builds</div>
       <div class="row">
@@ -441,49 +406,6 @@
     </div>
   </div>
 
-  <div class="grid-3">
-    <div class="card">
-      <div class="card-title">Domains</div>
-      <div class="row"><div class="row-main"><div class="row-title">work-ops</div><div class="row-sub">Daily digest · /triage · week preview</div></div><span class="tag tag-green">Live</span></div>
-      <div class="row"><div class="row-main"><div class="row-title">ai-builds</div><div class="row-sub">Project tracker · /build · Fri digest</div></div><span class="tag tag-green">Live</span></div>
-      <div class="row"><div class="row-main"><div class="row-title">investments</div><div class="row-sub">Portfolio · ROI/IRR analysis</div></div><span class="tag tag-gray">Stub</span></div>
-      <div class="row"><div class="row-main"><div class="row-title">content</div><div class="row-sub">Campaign calendar · Mailchimp</div></div><span class="tag tag-gray">Stub</span></div>
-      <div class="row"><div class="row-main"><div class="row-title">personal</div><div class="row-sub">Scope TBD</div></div><span class="tag tag-gray">Stub</span></div>
-    </div>
-    <div class="card">
-      <div class="card-title">Workflows</div>
-      <div class="workflow-row" onclick="runWorkflow('morning-brief')">
-        <div class="workflow-info">
-          <div class="workflow-name">Morning Brief</div>
-          <div class="workflow-desc">Inbox · Calendar · Teams — today's snapshot</div>
-        </div>
-        <button class="workflow-btn" id="btn-morning-brief">▶ Run</button>
-      </div>
-      <div class="workflow-row" onclick="runWorkflow('week-preview')">
-        <div class="workflow-info">
-          <div class="workflow-name">Week Preview</div>
-          <div class="workflow-desc">7-day calendar · carry-overs · focus areas</div>
-        </div>
-        <button class="workflow-btn" id="btn-week-preview">▶ Run</button>
-      </div>
-      <div class="workflow-row" onclick="runWorkflow('build-digest')">
-        <div class="workflow-info">
-          <div class="workflow-name">Build Digest</div>
-          <div class="workflow-desc">Sprint status · shipped · blocked · next week</div>
-        </div>
-        <button class="workflow-btn" id="btn-build-digest">▶ Run</button>
-      </div>
-      <div style="font-size:11px;color:var(--muted);margin-top:10px;">Static mode: copies prompt to clipboard → paste into Claude Code. Local helper mode can run this directly.</div>
-    </div>
-    <div class="card">
-      <div class="card-title">Memory</div>
-      <div class="row"><div class="row-main"><div class="row-title">CLAUDE.md</div><div class="row-sub">Cross-cutting · people · terms · projects</div></div><span class="tag tag-blue">Root</span></div>
-      <div class="row"><div class="row-main"><div class="row-title">memory/people.md</div><div class="row-sub">8 contacts seeded today</div></div><span class="tag tag-blue">Tier 2</span></div>
-      <div class="row"><div class="row-main"><div class="row-title">memory/terminology.md</div><div class="row-sub">12 terms · PB · MarTech · AI stack</div></div><span class="tag tag-blue">Tier 2</span></div>
-      <div class="row"><div class="row-main"><div class="row-title">work-ops/CLAUDE.md</div><div class="row-sub">Chief-of-staff role · urgency rules</div></div><span class="tag tag-purple">Domain</span></div>
-      <div class="row"><div class="row-main"><div class="row-title">ai-builds/CLAUDE.md</div><div class="row-sub">Principal engineer role · skill refs</div></div><span class="tag tag-purple">Domain</span></div>
-    </div>
-  </div>
 
   <div class="mc-footer">PartsBase Mission Control · ~/Claude/PartsBase/CoWork/</div>
 </div>
@@ -537,13 +459,6 @@
       <!-- JS-rendered tabs -->
       <div id="tab-decisions-content" class="hidden"></div>
 
-      <!-- CHANGELOG -->
-      <div id="tab-changelog-content" class="hidden">
-        <div class="rag-none" style="padding:14px;border-radius:8px;margin-bottom:14px;font-size:13px;color:var(--label)">
-          <strong>How this works:</strong> Every time you message Claude with an update, Claude edits <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">dashboard-state.json</code> and appends an entry here. Reload the page after Claude changes the state file.
-        </div>
-        <div id="changelogList"></div>
-      </div>
 
       <!-- EXEC VIEW -->
       <div id="tab-exec-content" class="hidden"></div>
@@ -652,7 +567,7 @@ function togglePlanGroup() {
 })();
 
 // ── Inner tabs ──
-const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','changelog','exec','resources'];
+const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources'];
 function showInnerTab(name) {
   INNER_TABS.forEach(t => {
     document.getElementById('tab-' + t + '-content').classList.toggle('hidden', t !== name);
@@ -942,7 +857,7 @@ let S = {};
 
 async function loadState() {
   try {
-    const res = await fetch('./dashboard-state.json?t=' + Date.now());
+    const res = await fetch('../dashboard-state.json?t=' + Date.now());
     S = await res.json();
   } catch(e) {
     S = { workstreams:{}, tasks:{}, milestones:{}, risks:{}, stack:{}, notes:{}, changelog:[], meta:{} };
@@ -1011,10 +926,12 @@ function renderSprints() {
 
 function renderMilestones() {
   const phases = [
-    {label:'Day 30 — Foundation + Digital Funnel First Light', ids:['m1','m2','m3','m3b','m4','m4b','m4c']},
-    {label:'Day 60 — Platform Migration + Digital Flow Live',  ids:['m5','m5b','m5c','m5d','m6']},
-    {label:'Day 90 — Scale + Optimize',                        ids:['m7','m8','m9','m10']},
-    {label:'Day 120–180 — Revenue Intelligence',               ids:['m11','m12','m13','m14']},
+    {label:'Ramp — Discovery Complete',                        ids:['m1']},
+    {label:'Day 7–14 — Fix the Foundation',                   ids:['micp','m2','m3','m3b']},
+    {label:'Day 30 — HubSpot + Vector + Clay Live',           ids:['m4','m4b','m4c']},
+    {label:'Day 60 — Full Funnel + Email + Lead Scoring',     ids:['m4d','m5','m5b','m5c','m5d','m6']},
+    {label:'Day 90 — Scale + Attribute',                      ids:['m7','m7b','m8','m9','m10']},
+    {label:'Day 180 — Revenue Intelligence',                  ids:['m11','m12','m13','m14','m15']},
   ];
   document.getElementById('tab-milestones-content').innerHTML = phases.map(phase => {
     const items = PLAN.milestones.filter(m => phase.ids.includes(m.id));
@@ -1408,99 +1325,67 @@ function renderExec() {
     </div>`;
 
   el.innerHTML = `
-    <!-- Header -->
-    <div style="margin-bottom:22px">
-      <div style="font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.3px">PartsBase GTM Program — 2026</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:3px">Building the AI-powered demand generation engine from scratch · Jun 2 → Dec 1, 2026 · Dan Rodgers, Senior AI Engineer, Martech</div>
-    </div>
-
-    <!-- Business Foundation -->
-    <div class="plan-label" style="margin-top:0">Business Foundation <span style="font-size:10px;font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">— Amelia MCP verified May 27, 2026</span></div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
-      <div style="background:var(--surface2);border-radius:7px;padding:14px">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:5px">Booked Revenue (FY2025)</div>
-        <div style="font-size:26px;font-weight:700;color:var(--green);letter-spacing:-0.5px">$36.8M</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">+11% YoY · 6,695 customers</div>
-      </div>
-      <div style="background:var(--surface2);border-radius:7px;padding:14px">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:5px">Active Customers</div>
-        <div style="font-size:26px;font-weight:700;color:var(--text);letter-spacing:-0.5px">6,695</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">217 countries · 2.7% annual churn</div>
-      </div>
-      <div style="background:var(--surface2);border-radius:7px;padding:14px">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:5px">LTV:CAC</div>
-        <div style="font-size:26px;font-weight:700;color:var(--green);letter-spacing:-0.5px">365–490×</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">$300 CAC · 1.2 mo payback · Magic Number 29:1</div>
-      </div>
-      <div style="background:var(--surface2);border-radius:7px;padding:14px">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:5px">ARPU — New / Base</div>
-        <div style="font-size:26px;font-weight:700;color:var(--text);letter-spacing:-0.5px">$343 / $460</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">Mix shift confirmed · BAS-009 add-on penetration gap (23% → 61%)</div>
-      </div>
-    </div>
-
-    <!-- Two Revenue Streams -->
-    <div class="plan-label">How This Work Produces the Numbers</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px">
-
-      <!-- Stream 1: AI Inbound -->
-      <div class="pc" style="display:flex;flex-direction:column;gap:0">
-        <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px">Stream 1 · AI Inbound Funnel</div>
-        <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px">GA4 → Vector → HubSpot</div>
-        <div style="font-size:11px;color:var(--red);background:rgba(220,80,80,0.07);border-radius:4px;padding:6px 8px;margin-bottom:10px">TODAY: GA4 broken on SPA · 0 attribution · leads lost in transit · funnel invisible</div>
-        <div style="flex:1;margin-bottom:14px">
-          <div style="font-size:12px;color:var(--label);padding:4px 0;border-bottom:1px solid var(--border)">GA4 + GTM — every route tracked · true CAC by channel unlocked</div>
-          <div style="font-size:12px;color:var(--label);padding:4px 0;border-bottom:1px solid var(--border)">Vector — ~37% of anonymous visitors ID'd · ICP-filtered pipeline from dark traffic</div>
-          <div style="font-size:12px;color:var(--label);padding:4px 0">HubSpot lead scoring — MQLs routed in 4h · no manual handoffs</div>
-        </div>
-        <div style="background:rgba(61,220,151,0.07);border-radius:6px;padding:10px 12px;margin-top:auto">
-          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);margin-bottom:4px">Moves</div>
-          <div style="font-size:13px;font-weight:700;color:var(--green)">CAC by channel confirmed · 20–30 MQLs/mo by Day 60</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:2px">Quick Ratio 5.4× maintained · attribution model ready for budget pitch Day 90</div>
-        </div>
-      </div>
-
-      <!-- Stream 2: AI Outbound -->
-      <div class="pc" style="display:flex;flex-direction:column;gap:0">
-        <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px">Stream 2 · AI Outbound</div>
-        <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px">Clay → Claude → HubSpot</div>
-        <div style="font-size:11px;color:var(--red);background:rgba(220,80,80,0.07);border-radius:4px;padding:6px 8px;margin-bottom:10px">TODAY: No outbound motion · new cohort ARPA $342/mo · NDR 96.5% (expansion not covering churn)</div>
-        <div style="flex:1;margin-bottom:14px">
-          <div style="font-size:12px;color:var(--label);padding:4px 0;border-bottom:1px solid var(--border)">Clay — T1 ICPs enriched: MRO, OEM, Contract Mfr · $415–712/mo ARPA segments</div>
-          <div style="font-size:12px;color:var(--label);padding:4px 0;border-bottom:1px solid var(--border)">Claude API — AI-personalized outreach at scale · T1 targeting closes ARPA gap</div>
-          <div style="font-size:12px;color:var(--label);padding:4px 0">HubSpot upgrade trigger — expansion MRR $3.2K → $9.7K/mo · NDR toward 100%</div>
-        </div>
-        <div style="background:rgba(61,220,151,0.07);border-radius:6px;padding:10px 12px;margin-top:auto">
-          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);margin-bottom:4px">Moves</div>
-          <div style="font-size:13px;font-weight:700;color:var(--green)">≥2 meetings/week · new cohort ARPA $342 → $415+ · NDR 96.5% → 100%+</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:2px">ARPA compression stopped · $2.9M new ARR run rate · budget increase case built</div>
-        </div>
-      </div>
-
-    </div>
-
     <!-- Budget Model -->
-    <div class="plan-label">What $17,500/Month Produces</div>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:22px">
-      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center">
-        <div style="font-size:10px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Monthly Budget</div>
-        <div style="font-size:20px;font-weight:700;color:var(--accent)">$17,500</div>
+    <div class="plan-label">Budget Scenarios — What Each Level Produces <span style="font-size:10px;font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">— ARPU sourced from Amelia MCP · 395 new customers Feb–May 2026 · $300 blended CAC</span></div>
+
+    <!-- Scenario rows -->
+    ${[
+      { label:'Conservative', budget:'$7,500/mo', customers:'25', arr:'$105K', year1:'$1.3M', highlight:false },
+      { label:'Base Case',    budget:'$10,000/mo', customers:'33', arr:'$139K', year1:'$1.7M', highlight:false },
+      { label:'Full Program', budget:'$17,500/mo', customers:'58', arr:'$244K', year1:'$2.9M', highlight:true  },
+    ].map(s => `
+    <div style="display:grid;grid-template-columns:120px repeat(4,1fr);gap:10px;margin-bottom:10px;align-items:stretch">
+      <!-- Scenario label -->
+      <div style="background:${s.highlight?'rgba(99,102,241,0.12)':'var(--surface2)'};border-radius:7px;padding:12px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;color:${s.highlight?'var(--accent)':'var(--muted)'};margin-bottom:3px">${s.label}</div>
+        <div style="font-size:16px;font-weight:700;color:${s.highlight?'var(--accent)':'var(--text)'};">${s.budget}</div>
       </div>
-      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center">
-        <div style="font-size:10px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">New Customers/mo</div>
-        <div style="font-size:20px;font-weight:700;color:var(--text)">58</div>
+      <!-- Metric boxes -->
+      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">New Customers/mo</div>
+        <div style="font-size:20px;font-weight:700;color:var(--text)">${s.customers}</div>
       </div>
-      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center">
-        <div style="font-size:10px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">New ARR/Month</div>
-        <div style="font-size:20px;font-weight:700;color:var(--green)">$244K</div>
+      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">New ARR/Month</div>
+        <div style="font-size:20px;font-weight:700;color:var(--green)">${s.arr}</div>
       </div>
-      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center">
-        <div style="font-size:10px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Year 1 New ARR</div>
-        <div style="font-size:20px;font-weight:700;color:var(--green)">$2.9M</div>
+      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Year 1 New ARR</div>
+        <div style="font-size:20px;font-weight:700;color:var(--green)">${s.year1}</div>
       </div>
-      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center">
-        <div style="font-size:10px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Budget ROI (LTV)</div>
-        <div style="font-size:20px;font-weight:700;color:var(--green)">372×</div>
+      <div style="background:var(--surface2);border-radius:7px;padding:12px;text-align:center;${s.highlight?'border:1px solid rgba(99,102,241,0.25)':''}">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Magic Number</div>
+        <div style="font-size:20px;font-weight:700;color:var(--green)">29:1</div>
+      </div>
+    </div>`).join('')}
+
+    <!-- Definitions -->
+    <div style="display:grid;grid-template-columns:120px repeat(4,1fr);gap:10px;margin-bottom:6px;align-items:start">
+      <div></div>
+      <div style="padding:0 2px">
+        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">New Customers/mo</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5">Projected net-new paid accounts from this budget. Based on $300 blended CAC confirmed from actual new-customer SOs (Amelia, Feb–May 2026). <em>Run-rate target — not a Month 1 promise.</em> Months 1–2 will be 15–25 while campaigns ramp.</div>
+      </div>
+      <div style="padding:0 2px">
+        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">New ARR/Month</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5">Annualized subscription revenue from one month's new customer cohort (new customers × segment-weighted ARPA × 12). ARPA inputs confirmed from 395 real new customers in Amelia. This is contracted ARR added — not cash received in that month.</div>
+      </div>
+      <div style="padding:0 2px">
+        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">Year 1 New ARR</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5">Total new ARR created over 12 months of acquisition cohorts. Each monthly cohort adds its New ARR/Month figure to the base. Assumes steady run-rate after ramp. Does not include upsell or expansion from existing customers.</div>
+      </div>
+      <div style="padding:0 2px">
+        <div style="font-size:11px;font-weight:600;color:var(--label);margin-bottom:3px">Magic Number</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5">Net new ARR generated per $1 of S&amp;M spend. Confirmed 29:1 from current actuals ($512K net new ARR ÷ $17,500 S&amp;M). Scales with budget — the ratio holds because CAC and ARPA are stable. Benchmark: &gt;1.0 is efficient; 29:1 is exceptional.</div>
+      </div>
+    </div>
+
+    <!-- Ramp note -->
+    <div style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.2);border-radius:6px;padding:10px 14px;margin-bottom:22px;display:flex;gap:10px;align-items:flex-start">
+      <div style="font-size:14px;margin-top:1px">⚠</div>
+      <div>
+        <div style="font-size:11px;font-weight:600;color:var(--yellow);margin-bottom:3px">Ramp Reality — Months 2–4</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5">These projections are <strong style="color:var(--label)">steady-state targets</strong>, not Day 1 outputs. Paid campaigns need 4–6 weeks to exit the learning phase. Clay outbound needs HubSpot live first. Realistic ramp: <strong style="color:var(--label)">10–15 customers in Months 2–4</strong>, building to run rate by Month 3–4. Year 1 ARR at full ramp is $1.8–2.2M before hitting the modeled run rate.</div>
       </div>
     </div>
 
@@ -1533,8 +1418,6 @@ function renderExec() {
       )}
     </div>
 
-    <!-- Decisions Needed -->
-    ${decisionCards ? `<div class="plan-label">Decisions Needed</div><div style="margin-bottom:8px">${decisionCards}</div>` : ''}
   `;
 }
 
@@ -1614,11 +1497,8 @@ function renderAll() {
   renderEmail();
   renderIcp();
   renderDecisions();
-  renderChangelog();
   renderExec();
   renderResources();
-  const count = (S.changelog||[]).length;
-  if(count > 1) document.getElementById('tab-changelog').textContent = 'Changelog (' + count + ')';
 }
 
 // ── Workflow trigger buttons ──
