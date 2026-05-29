@@ -2153,9 +2153,9 @@ function renderEmail() {
 
 function renderIcp() {
   const d = ICP_DATA;
-  const CV = { green:'var(--green)', blue:'var(--accent)', purple:'var(--purple)', yellow:'var(--yellow)', red:'var(--red)', muted:'var(--muted)' };
-  const BG = { green:'rgba(52,211,153,.07)', blue:'rgba(125,143,245,.07)', purple:'rgba(167,139,250,.07)', yellow:'rgba(245,200,76,.07)', red:'rgba(255,107,112,.07)', muted:'rgba(100,116,139,.07)' };
-  const cv = c => CV[c] || 'var(--text)';
+  const CV = { green:'var(--label)', blue:'var(--label)', purple:'var(--label)', yellow:'var(--label)', red:'var(--label)', muted:'var(--muted)' };
+  const BG = { green:'var(--surface2)', blue:'var(--surface2)', purple:'var(--surface2)', yellow:'var(--surface2)', red:'var(--surface2)', muted:'var(--surface2)' };
+  const cv = c => CV[c] || 'var(--label)';
   const bg = c => BG[c] || 'var(--surface2)';
 
   const tierTbody = d.tiers.map(t => {
@@ -2178,7 +2178,7 @@ function renderIcp() {
   </div>`).join('');
 
   const antiP = d.antiPersona.map((a,i,arr) => `<div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;${i<arr.length-1?'border-bottom:1px solid var(--border)':''}">
-    <span style="color:var(--label)">${a.l}</span><span style="color:var(--red);font-weight:600">${a.v}</span>
+    <span style="color:var(--label)">${a.l}</span><span style="color:var(--label);font-weight:600">${a.v}</span>
   </div>`).join('');
 
   const personaRows = d.personas.map(p => `<tr>
@@ -2187,48 +2187,46 @@ function renderIcp() {
     <td style="color:${cv(p.col)}">${p.type}</td>
   </tr>`).join('');
 
-  const summaryCards = d.summary.map(s => `<div style="background:${bg(s.col)};border:1px solid ${cv(s.col)};border-radius:8px;padding:14px;text-align:center">
-    <div style="font-size:22px;font-weight:700;color:${cv(s.col)}">${s.count.toLocaleString()}</div>
-    <div style="font-size:11px;font-weight:600;color:${cv(s.col)};margin-top:4px">${s.tier}</div>
+  const summaryCards = d.summary.map(s => `<div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center">
+    <div style="font-size:22px;font-weight:700;color:var(--text)">${s.count.toLocaleString()}</div>
+    <div style="font-size:11px;font-weight:600;color:var(--label);margin-top:4px">${s.tier}</div>
     <div style="font-size:10px;color:var(--muted);margin-top:2px">${s.desc}</div>
-    <div style="font-size:11px;font-weight:700;color:${cv(s.col)};margin-top:4px">${s.pct}</div>
+    <div style="font-size:11px;font-weight:600;color:var(--muted);margin-top:4px">${s.pct}</div>
   </div>`).join('');
 
   const t1rows = d.tier1Breakdown.map(r => `<tr>
     <td style="font-weight:500;color:var(--text)">${r.seg}</td>
     <td style="text-align:center;font-weight:600">${r.total.toLocaleString()}</td>
-    <td style="text-align:center;color:var(--accent);font-weight:600">${r.oro.toLocaleString()}</td>
-    <td style="text-align:center;color:var(--green);font-weight:600">${r.prospects.toLocaleString()}</td>
+    <td style="text-align:center;color:var(--label);font-weight:600">${r.oro.toLocaleString()}</td>
+    <td style="text-align:center;color:var(--label);font-weight:600">${r.prospects.toLocaleString()}</td>
     <td style="text-align:center;color:var(--muted)">${r.rev}</td>
   </tr>`).join('');
 
   const oroRows = d.oroSplit.map(r => `<tr>
-    <td style="font-weight:600;color:${cv(r.col)}">${r.tier}</td>
+    <td style="font-weight:600;color:var(--label)">${r.tier}</td>
     <td style="text-align:center;font-weight:700">${r.total.toLocaleString()}</td>
-    <td style="text-align:center;color:var(--accent);font-weight:700">${r.oro.toLocaleString()}</td>
-    <td style="text-align:center;color:var(--green);font-weight:700">${r.prospects.toLocaleString()}</td>
+    <td style="text-align:center;color:var(--label);font-weight:700">${r.oro.toLocaleString()}</td>
+    <td style="text-align:center;color:var(--label);font-weight:700">${r.prospects.toLocaleString()}</td>
   </tr>`).join('');
 
   const xrefBlocks = d.crossRef.map(x => {
-    const c = {red:'var(--red)',amber:'var(--yellow)',green:'var(--green)'}[x.sev];
-    const b = {red:'rgba(255,107,112,.07)',amber:'rgba(245,200,76,.07)',green:'rgba(52,211,153,.07)'}[x.sev];
-    return `<div style="background:${b};border:1px solid ${c};border-radius:8px;padding:14px">
-      <div style="font-weight:600;color:${c};font-size:13px;margin-bottom:8px">${x.title}</div>
+    return `<div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px">
+      <div style="font-weight:600;color:var(--text);font-size:13px;margin-bottom:8px">${x.title}</div>
       <div style="font-size:12px;color:var(--label);line-height:1.5">${x.body}</div>
     </div>`;
   }).join('');
 
   const nextStepCols = d.nextSteps.map(s => {
     const items = s.items.map(i=>`<div style="font-size:12px;color:var(--label);padding:3px 0">${i}</div>`).join('');
-    return `<div style="border-left:4px solid ${cv(s.col)};padding-left:10px">
-      <div style="font-size:12px;font-weight:600;color:${cv(s.col)};margin-bottom:8px">${s.title}</div>${items}
+    return `<div style="border-left:4px solid var(--border);padding-left:10px">
+      <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px">${s.title}</div>${items}
     </div>`;
   }).join('');
 
   const flags = d.dataFlags.map(f => {
     const items = f.items.map(i=>`<div style="font-size:12px;color:var(--label);padding:2px 0">${i}</div>`).join('');
-    return `<div style="background:${bg(f.col)};border-radius:6px;padding:12px">
-      <div style="font-size:12px;font-weight:600;color:${cv(f.col)};margin-bottom:6px">${f.title}</div>${items}
+    return `<div style="background:var(--surface2);border-radius:6px;padding:12px">
+      <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px">${f.title}</div>${items}
     </div>`;
   }).join('');
 
@@ -2239,13 +2237,12 @@ function renderIcp() {
         <div style="font-size:11px;color:var(--muted);margin-top:2px">Source: Sales battle cards cross-referenced with Mailchimp contact export — May 20, 2026</div>
       </div>
     </div>
-    <div class="rag-amber" style="padding:14px;border-radius:8px;margin-bottom:18px">
+    <div class="rag-none" style="padding:14px;border-radius:8px;margin-bottom:18px">
       <div style="display:flex;align-items:flex-start;gap:10px">
-        <span style="font-size:18px">🎯</span>
         <div>
-          <div style="font-size:13px;font-weight:600;color:var(--yellow)">${d.coverageGap.title}</div>
-          <div style="font-size:12px;color:var(--yellow);opacity:.85;margin-top:4px">${d.coverageGap.body}</div>
-          <div style="font-size:11px;font-weight:600;color:var(--yellow);margin-top:6px">${d.coverageGap.note}</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text)">${d.coverageGap.title}</div>
+          <div style="font-size:12px;color:var(--label);margin-top:4px">${d.coverageGap.body}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">${d.coverageGap.note}</div>
         </div>
       </div>
     </div>
@@ -2258,10 +2255,10 @@ function renderIcp() {
       <div style="display:flex;flex-direction:column;gap:14px">
         <div class="pc"><div class="plan-label" style="margin-top:0">ICP Size Criteria</div>${sizeCrit}</div>
         <div class="pc">
-          <div class="plan-label" style="margin-top:0;color:var(--red)">❌ Anti-Persona — Flagged for Suppression</div>
+          <div class="plan-label" style="margin-top:0">Anti-Persona — Flagged for Suppression</div>
           ${antiP}
           <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;padding:6px 0 2px;border-top:1px solid var(--border);margin-top:4px">
-            <span style="color:var(--red)">Total</span><span style="color:var(--red)">72,564</span>
+            <span style="color:var(--label)">Total</span><span style="color:var(--label)">72,564</span>
           </div>
           <div style="font-size:11px;color:var(--muted);margin-top:4px">Cross-check against ORO before suppressing — some match portal accounts and should be protected from blanket removal.</div>
         </div>
@@ -2271,15 +2268,15 @@ function renderIcp() {
       <div class="pc">
         <div class="plan-label" style="margin-top:0">Buyers vs. Sellers</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="background:rgba(125,143,245,.07);border:1px solid rgba(125,143,245,.3);border-radius:6px;padding:10px">
-            <div style="font-weight:600;color:var(--accent);font-size:13px;margin-bottom:4px">Buyers</div>
+          <div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px">
+            <div style="font-weight:600;color:var(--text);font-size:13px;margin-bottom:4px">Buyers</div>
             <div style="font-size:11px;color:var(--label)">OEMs, Contract Manufacturers<br>MROs, FBOs/AMOs, Brokers<br>Airlines, Charter/Corporate</div>
-            <div style="margin-top:8px;padding-top:6px;border-top:1px solid rgba(125,143,245,.2);font-size:11px;font-weight:600;color:var(--accent)">Goal: Source parts &amp; reduce costs</div>
+            <div style="margin-top:8px;padding-top:6px;border-top:1px solid var(--border);font-size:11px;font-weight:600;color:var(--muted)">Goal: Source parts &amp; reduce costs</div>
           </div>
-          <div style="background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.3);border-radius:6px;padding:10px">
-            <div style="font-weight:600;color:var(--green);font-size:13px;margin-bottom:4px">Sellers</div>
+          <div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px">
+            <div style="font-weight:600;color:var(--text);font-size:13px;margin-bottom:4px">Sellers</div>
             <div style="font-size:11px;color:var(--label)">Distributors, Brokers<br>MROs, FBOs/AMOs</div>
-            <div style="margin-top:8px;padding-top:6px;border-top:1px solid rgba(52,211,153,.2);font-size:11px;font-weight:600;color:var(--green)">Goal: List inventory &amp; increase revenue</div>
+            <div style="margin-top:8px;padding-top:6px;border-top:1px solid var(--border);font-size:11px;font-weight:600;color:var(--muted)">Goal: List inventory &amp; increase revenue</div>
           </div>
         </div>
       </div>
@@ -2288,11 +2285,11 @@ function renderIcp() {
         <table class="plan-table"><thead><tr><th>Persona</th><th>Title</th><th>Type</th></tr></thead><tbody>${personaRows}</tbody></table>
       </div>
     </div>
-    <div class="rag-green" style="padding:14px;border-radius:8px;margin-bottom:18px">
-      <div style="display:flex;align-items:flex-start;gap:10px"><span style="font-size:18px">✅</span>
+    <div class="rag-none" style="padding:14px;border-radius:8px;margin-bottom:18px">
+      <div style="display:flex;align-items:flex-start;gap:10px">
         <div>
-          <div style="font-size:13px;font-weight:600;color:var(--green)">Contact Classification Complete — 3 rounds, 406,548 contacts (May 20, 2026)</div>
-          <div style="font-size:12px;color:var(--green);opacity:.85;margin-top:4px">Output: <code style="background:rgba(52,211,153,.12);padding:1px 4px;border-radius:3px">resources/icp_classification_output.csv</code> — ready to re-import to Mailchimp or load to any CRM. Unknown dropped from <strong>65.9% → 12.2%</strong>.</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text)">Contact Classification Complete — 3 rounds, 406,548 contacts (May 20, 2026)</div>
+          <div style="font-size:12px;color:var(--label);margin-top:4px">Output: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">resources/icp_classification_output.csv</code> — ready to re-import to Mailchimp or load to any CRM. Unknown dropped from <strong>65.9% → 12.2%</strong>.</div>
         </div>
       </div>
     </div>
@@ -2300,34 +2297,34 @@ function renderIcp() {
     <div class="pc" style="padding:0;overflow:hidden;margin-bottom:14px">
       <div style="padding:14px 14px 4px"><div class="plan-label" style="margin:0">Tier 1 Breakdown — 69,566 contacts · 57% of PartsBase Revenue · ORO cross-reference complete</div></div>
       <table class="plan-table">
-        <thead><tr><th>Segment</th><th style="text-align:center">Total</th><th style="text-align:center;color:var(--accent)">ORO Matches</th><th style="text-align:center;color:var(--green)">Prospects</th><th style="text-align:center">Revenue</th></tr></thead>
+        <thead><tr><th>Segment</th><th style="text-align:center">Total</th><th style="text-align:center">ORO Matches</th><th style="text-align:center">Prospects</th><th style="text-align:center">Revenue</th></tr></thead>
         <tbody>${t1rows}</tbody>
       </table>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px">
         <div style="background:var(--surface2);border-radius:6px;padding:10px;text-align:center"><div style="font-size:17px;font-weight:700;color:var(--text)">69,566</div><div style="font-size:11px;color:var(--muted)">Total Tier 1</div></div>
-        <div style="background:rgba(125,143,245,.08);border-radius:6px;padding:10px;text-align:center"><div style="font-size:17px;font-weight:700;color:var(--accent)">10,773</div><div style="font-size:11px;color:var(--accent)">ORO portal matches</div></div>
-        <div style="background:rgba(52,211,153,.08);border-radius:6px;padding:10px;text-align:center"><div style="font-size:17px;font-weight:700;color:var(--green)">58,793</div><div style="font-size:11px;color:var(--green)">Acquisition prospects</div></div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px;text-align:center"><div style="font-size:17px;font-weight:700;color:var(--text)">10,773</div><div style="font-size:11px;color:var(--muted)">ORO portal matches</div></div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px;text-align:center"><div style="font-size:17px;font-weight:700;color:var(--text)">58,793</div><div style="font-size:11px;color:var(--muted)">Acquisition prospects</div></div>
       </div>
       <div style="padding:0 14px 14px;font-size:11px;color:var(--muted)">⬆ Up from 11,673 previously tagged contacts — <strong>6× improvement</strong>. ORO cross-reference complete May 22, 2026. Output CSVs: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">oro_cross_ref_tier1_customers.csv</code> · <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">oro_cross_ref_tier1_prospects.csv</code></div>
     </div>
     <div class="pc" style="padding:0;overflow:hidden;margin-bottom:14px">
       <div style="padding:14px 14px 4px"><div class="plan-label" style="margin:0">ORO Match vs. Prospect Split — All ICP Tiers · ORO Cross-Reference May 22, 2026</div></div>
       <table class="plan-table">
-        <thead><tr><th></th><th style="text-align:center">Total</th><th style="text-align:center;color:var(--accent)">ORO Matches</th><th style="text-align:center;color:var(--green)">Prospects</th></tr></thead>
+        <thead><tr><th></th><th style="text-align:center">Total</th><th style="text-align:center">ORO Matches</th><th style="text-align:center">Prospects</th></tr></thead>
         <tbody>${oroRows}
-          <tr><td style="font-weight:700;color:var(--text);border-top:2px solid var(--border)">Total ICP</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">193,394</td><td style="text-align:center;font-weight:700;color:var(--accent);border-top:2px solid var(--border)">22,925</td><td style="text-align:center;font-weight:700;color:var(--green);border-top:2px solid var(--border)">170,469</td></tr>
+          <tr><td style="font-weight:700;color:var(--text);border-top:2px solid var(--border)">Total ICP</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">193,394</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">22,925</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">170,469</td></tr>
         </tbody>
       </table>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px">
-        <div style="background:rgba(245,200,76,.07);border-radius:6px;padding:10px"><div style="font-size:12px;font-weight:600;color:var(--yellow);margin-bottom:4px">⚠️ 88 AntiPersona contacts match ORO portal accounts</div><div style="font-size:11px;color:var(--label)">Classified as wrong persona but matched to ORO portal accounts. Excluded from blanket suppression pending account-status review. File: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">oro_cross_ref_antipersona_protect.csv</code></div></div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px"><div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px">88 AntiPersona contacts match ORO portal accounts</div><div style="font-size:11px;color:var(--label)">Classified as wrong persona but matched to ORO portal accounts. Excluded from blanket suppression pending account-status review. File: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">oro_cross_ref_antipersona_protect.csv</code></div></div>
         <div style="background:var(--surface2);border-radius:6px;padding:10px"><div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px">31,443 ORO rows have hard-bounced emails</div><div style="font-size:11px;color:var(--label)">ORO portal-account rows matched to Mailchimp <em>cleaned</em> list. If active, these accounts cannot be reached until updated. Coordinate with sales/CS after account-status review.</div></div>
       </div>
     </div>
     <div class="pc" style="margin-bottom:14px">
       <div class="plan-label" style="margin-top:0">Email Health × ICP Classification — Cross-Reference Findings</div>
-      <div class="rag-red" style="padding:10px;border-radius:6px;margin-bottom:14px">
-        <div style="font-size:13px;font-weight:600;color:var(--red)">⚠️ Entire list is rated ★1–★2 — no contacts scored ★3, ★4, or ★5</div>
-        <div style="font-size:12px;color:var(--red);opacity:.85;margin-top:4px">Mailchimp's engagement score is flat across every ICP tier. Tier 1 contacts (your best ICP) are just as cold as anti-persona contacts. This is a system-wide deliverability crisis, not a targeting problem.</div>
+      <div class="rag-none" style="padding:10px;border-radius:6px;margin-bottom:14px">
+        <div style="font-size:13px;font-weight:600;color:var(--text)">Entire list is rated ★1–★2 — no contacts scored ★3, ★4, or ★5</div>
+        <div style="font-size:12px;color:var(--label);margin-top:4px">Mailchimp's engagement score is flat across every ICP tier. Tier 1 contacts (your best ICP) are just as cold as anti-persona contacts. This is a system-wide deliverability crisis, not a targeting problem.</div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">${xrefBlocks}</div>
     </div>
