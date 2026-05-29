@@ -2034,13 +2034,13 @@ function renderEmail() {
     <div style="font-size:11px;color:var(--muted);margin-top:4px">${k.sub}</div>
   </div>`).join('');
 
-  const critIssues = a.criticalIssues.map(i => `<div style="background:var(--surface2);border-left:3px solid var(--border);border-radius:0 6px 6px 0;padding:10px;margin-bottom:6px">
+  const critIssues = a.criticalIssues.map(i => `<div style="background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:10px;margin-bottom:6px">
     <div style="font-size:13px;font-weight:600;color:var(--text)">${i.t}</div>
     <div style="font-size:11px;color:var(--muted);margin-top:2px">${i.d}</div>
   </div>`).join('');
 
   const watchItems = a.watchItems.map(i => `<div style="background:var(--surface2);border-left:3px solid var(--border);border-radius:0 6px 6px 0;padding:10px;margin-bottom:6px">
-    <div style="font-size:13px;font-weight:600;color:var(--text)">${i.t}</div>
+    <div style="font-size:13px;font-weight:600;color:var(--label)">${i.t}</div>
     <div style="font-size:11px;color:var(--muted);margin-top:2px">${i.d}</div>
   </div>`).join('');
 
@@ -2166,8 +2166,8 @@ function renderIcp() {
       <td style="text-align:right;color:var(--muted)">${s.tagged}</td>
       <td style="text-align:right;color:${c};font-weight:600">${s.classified}</td>
     </tr>${s.note?`<tr><td colspan="4" style="padding-left:16px;font-size:11px;color:var(--muted);font-style:italic;padding-top:0;padding-bottom:6px">${s.note}</td></tr>`:''}`).join('');
-    return `<tr><td colspan="4" style="padding:5px 8px;background:${bg(t.col)}">
-      <span style="font-size:11px;font-weight:700;color:${c}">${t.tier}</span>
+    return `<tr><td colspan="4" style="padding:5px 8px;background:var(--surface2)">
+      <span style="font-size:11px;font-weight:700;color:var(--accent)">${t.tier}</span>
       <span style="font-size:11px;color:var(--muted);float:right">${t.total.toLocaleString()} total</span>
     </td></tr>${segs}`;
   }).join('');
@@ -2288,7 +2288,7 @@ function renderIcp() {
     <div class="rag-none" style="padding:14px;border-radius:8px;margin-bottom:18px">
       <div style="display:flex;align-items:flex-start;gap:10px">
         <div>
-          <div style="font-size:13px;font-weight:600;color:var(--text)">Contact Classification Complete — 3 rounds, 406,548 contacts (May 20, 2026)</div>
+          <div style="font-size:13px;font-weight:600;color:var(--green)">Contact Classification Complete — 3 rounds, 406,548 contacts (May 20, 2026)</div>
           <div style="font-size:12px;color:var(--label);margin-top:4px">Output: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">resources/icp_classification_output.csv</code> — ready to re-import to Mailchimp or load to any CRM. Unknown dropped from <strong>65.9% → 12.2%</strong>.</div>
         </div>
       </div>
@@ -2297,7 +2297,7 @@ function renderIcp() {
     <div class="pc" style="padding:0;overflow:hidden;margin-bottom:14px">
       <div style="padding:14px 14px 4px"><div class="plan-label" style="margin:0">Tier 1 Breakdown — 69,566 contacts · 57% of PartsBase Revenue · ORO cross-reference complete</div></div>
       <table class="plan-table">
-        <thead><tr><th>Segment</th><th style="text-align:center">Total</th><th style="text-align:center">ORO Matches</th><th style="text-align:center">Prospects</th><th style="text-align:center">Revenue</th></tr></thead>
+        <thead><tr><th>Segment</th><th style="text-align:center">Total</th><th style="text-align:center">ORO Matches</th><th style="text-align:center;color:var(--green)">Prospects</th><th style="text-align:center">Revenue</th></tr></thead>
         <tbody>${t1rows}</tbody>
       </table>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px">
@@ -2310,7 +2310,7 @@ function renderIcp() {
     <div class="pc" style="padding:0;overflow:hidden;margin-bottom:14px">
       <div style="padding:14px 14px 4px"><div class="plan-label" style="margin:0">ORO Match vs. Prospect Split — All ICP Tiers · ORO Cross-Reference May 22, 2026</div></div>
       <table class="plan-table">
-        <thead><tr><th></th><th style="text-align:center">Total</th><th style="text-align:center">ORO Matches</th><th style="text-align:center">Prospects</th></tr></thead>
+        <thead><tr><th></th><th style="text-align:center">Total</th><th style="text-align:center">ORO Matches</th><th style="text-align:center;color:var(--green)">Prospects</th></tr></thead>
         <tbody>${oroRows}
           <tr><td style="font-weight:700;color:var(--text);border-top:2px solid var(--border)">Total ICP</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">193,394</td><td style="text-align:center;font-weight:700;border-top:2px solid var(--border)">22,925</td><td style="text-align:center;font-weight:700;color:var(--green);border-top:2px solid var(--border)">170,469</td></tr>
         </tbody>
