@@ -857,7 +857,8 @@ let S = {};
 
 async function loadState() {
   try {
-    const res = await fetch('../dashboard-state.json?t=' + Date.now());
+    const stateUrl = window.location.pathname.includes('/CoWork/') ? '../dashboard-state.json' : 'dashboard-state.json';
+    const res = await fetch(stateUrl + '?t=' + Date.now());
     S = await res.json();
   } catch(e) {
     S = { workstreams:{}, tasks:{}, milestones:{}, risks:{}, stack:{}, notes:{}, changelog:[], meta:{} };
