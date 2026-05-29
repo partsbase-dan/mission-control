@@ -824,7 +824,10 @@
       }
     ]
   },
-  "tasks": {},
+  "tasks": {
+    "s0_0": true, "s0_1": true, "s0_2": true, "s0_3": true,
+    "s0_4": true, "s0_5": true, "s0_6": true, "s0_7": true
+  },
   "risks": {
     "r1": "red",
     "r2": "amber",
@@ -1937,6 +1940,8 @@ function renderOverview() {
 function renderSprints() {
   document.getElementById('tab-sprints-content').innerHTML = PLAN.sprints.map(sprint => {
     const {done, total, pct} = sprintProgress(sprint);
+    const allDone = done === total && total > 0;
+    const collapsed = allDone; // completed sprints start collapsed
     const tasks = sprint.tasks.map((task, i) => {
       const checked = taskDone(sprint.id, i);
       return `<div class="task-item"><span style="flex-shrink:0">${checked?'✅':'⬜'}</span><span class="${checked?'task-done':''}" style="font-size:13px;color:var(--label)">${task}</span></div>`;
@@ -1944,14 +1949,17 @@ function renderSprints() {
     return `<div class="pc">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px">
         <div><span class="badge badge-blue" style="margin-bottom:4px">${sprint.label}</span><div class="plan-h2">${sprint.subtitle}</div></div>
-        <div style="text-align:right;flex-shrink:0"><div style="font-size:15px;font-weight:700;color:var(--text)">${pct}%</div><div style="font-size:11px;color:var(--muted)">${done}/${total} tasks</div></div>
+        <div style="text-align:right;flex-shrink:0;display:flex;align-items:center;gap:12px">
+          <div><div style="font-size:15px;font-weight:700;color:var(--text)">${pct}%</div><div style="font-size:11px;color:var(--muted)">${done}/${total} tasks</div></div>
+          <button onclick="this.closest('.pc').querySelector('.sprint-tasks').classList.toggle('hidden');this.textContent=this.textContent==='▾ Hide'?'▸ Show':'▾ Hide'" style="font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:4px 10px;cursor:pointer;white-space:nowrap">${collapsed?'▸ Show':'▾ Hide'}</button>
+        </div>
       </div>
       <div class="progress-bar" style="margin:10px 0"><div class="progress-fill" style="width:${pct}%"></div></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;font-size:13px;color:var(--label)">
         <div><span style="color:var(--text);font-weight:500">Goal:</span> ${sprint.goal}</div>
         <div><span style="color:var(--text);font-weight:500">Deliverable:</span> ${sprint.deliverable}</div>
       </div>
-      <div style="border-top:1px solid var(--border);padding-top:6px">${tasks}</div>
+      <div class="sprint-tasks${collapsed?' hidden':''}" style="border-top:1px solid var(--border);padding-top:6px">${tasks}</div>
     </div>`;
   }).join('');
 }

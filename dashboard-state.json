@@ -621,7 +621,10 @@
       }
     ]
   },
-  "tasks": {},
+  "tasks": {
+    "s0_0": true, "s0_1": true, "s0_2": true, "s0_3": true,
+    "s0_4": true, "s0_5": true, "s0_6": true, "s0_7": true
+  },
   "risks": {
     "r1": "red",
     "r2": "amber",
