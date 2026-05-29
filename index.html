@@ -200,6 +200,1050 @@
     .tab-content { padding: 18px; }
   }
 </style>
+<script>window.__DASHBOARD_STATE__ = {
+  "meta": {
+    "created": "2026-05-11",
+    "lastUpdated": "2026-05-28",
+    "updatedBy": "ORO framing update \u2014 leads-only, HubSpot feeds ORO",
+    "executionStart": "2026-06-02",
+    "day30": "2026-07-02",
+    "day60": "2026-08-01",
+    "day90": "2026-09-01",
+    "day180": "2026-12-01"
+  },
+  "workstreams": {
+    "tracking": "red",
+    "hubspot": "none",
+    "icp": "red",
+    "claypoc": "none",
+    "scoring": "none",
+    "seo": "none",
+    "outbound": "none",
+    "email": "red",
+    "attribution": "none",
+    "health": "none"
+  },
+  "milestones": {},
+  "plan": {
+    "workstreams": [
+      {
+        "id": "tracking",
+        "label": "Tracking & Analytics",
+        "detail": "SPA fix \u00b7 GA4 \u00b7 GTM History Change trigger \u00b7 blocked on container access"
+      },
+      {
+        "id": "hubspot",
+        "label": "HubSpot Migration",
+        "detail": "HubSpot = contacts/CRM/MAP \u00b7 ORO transitions to leads-only (woven into existing systems) \u00b7 HubSpot feeds ORO for downstream tracking \u00b7 Mailchimp \u2192 Marketing Hub \u00b7 IT approval + vendor contract required"
+      },
+      {
+        "id": "icp",
+        "label": "ICP Reclassification",
+        "detail": "Airlines, Overhaul Shops, Regional Airlines \u2192 T1 \u00b7 must complete before Clay seeding"
+      },
+      {
+        "id": "vector",
+        "label": "Vector (Visitor De-Anon)",
+        "detail": "Pixel deploy \u00b7 ICP filter \u00b7 ad retargeting exports \u00b7 ~37% ID rate"
+      },
+      {
+        "id": "claypoc",
+        "label": "Clay + Claude Outbound",
+        "detail": "Enrichment \u00b7 AI personalization \u00b7 T1 outbound POC (MRO, Distributor, Overhaul Shop, Regional Airline)"
+      },
+      {
+        "id": "digitalflow",
+        "label": "Digital Funnel Flow",
+        "detail": "Ad \u2192 Website \u2192 Vector/Form \u2192 Clay \u2192 HubSpot end-to-end"
+      },
+      {
+        "id": "emailcampaigns",
+        "label": "Email Campaigns",
+        "detail": "HubSpot Marketing Hub \u00b7 supplier acquisition + buyer nurture"
+      },
+      {
+        "id": "scoring",
+        "label": "Lead Scoring",
+        "detail": "Firmographic + behavioral \u00b7 MQL threshold > 75 \u00b7 score decay"
+      },
+      {
+        "id": "profound",
+        "label": "Profound (AEO)",
+        "detail": "Answer engine optimization \u00b7 AI search visibility for aviation queries \u00b7 Day 60 target"
+      },
+      {
+        "id": "seo",
+        "label": "SEO Content Engine",
+        "detail": "Long-tail aviation parts \u00b7 AI pipeline + 10 pages by Day 90 \u00b7 SPA fix dependency"
+      },
+      {
+        "id": "outbound",
+        "label": "Outbound Motion",
+        "detail": "Clay + Claude sequences \u00b7 LinkedIn via MeetAlfred \u00b7 T1 = MRO, Distributor, Overhaul Shop, Regional Airline"
+      },
+      {
+        "id": "attribution",
+        "label": "Attribution Model",
+        "detail": "W-shaped \u00b7 CAC by channel \u00b7 90 days clean data required (available Dec 1)"
+      },
+      {
+        "id": "health",
+        "label": "Customer Health Scoring",
+        "detail": "Churn signals \u00b7 6,695-account base \u00b7 active ARPA confirmed $459.99/mo \u00b7 NDR ~96.5% (WATCH) \u00b7 expansion MRR target: >$9.7K/mo to offset churn \u00b7 HubSpot upgrade trigger = NDR fix"
+      }
+    ],
+    "sprints": [
+      {
+        "id": "s0",
+        "label": "Ramp & Discovery",
+        "subtitle": "May 18 \u2013 May 30 \u2014 COMPLETE",
+        "goal": "Full context, data foundation, and stack decisions before execution.",
+        "deliverable": "RevOps baseline, ICP analysis, ORO \u00d7 Mailchimp cross-reference, stack confirmed, skills infrastructure live.",
+        "tasks": [
+          "Pre-start SEO audit complete \u2014 partsbase.com 42/100 (Grade D, SPA root cause)",
+          "Stack decisions confirmed: HubSpot CRM + Marketing Hub, Clay, Vector",
+          "ORO \u00d7 Mailchimp cross-reference complete \u2014 suppression list + 58,793 acquisition candidates ready",
+          "Mailchimp audit \u2014 complaint rate 27\u201330%, 213k dead contacts, suppression plan ready",
+          "RevOps baseline: $14.3M ARR, 61\u00d7 LTV:CAC, 1.3-month CAC payback",
+          "ICP mismatch identified \u2014 Airlines, Overhaul Shops, Regional Airlines reclassified T1",
+          "Site-architecture audit \u2014 83 pages, 3 orphaned routes, SPA = primary SEO constraint",
+          "Skills infrastructure live \u2014 partsbase-dan/vetted-skills (177 skills), Mission Control OS operational"
+        ]
+      },
+      {
+        "id": "s1",
+        "label": "Sprint 1",
+        "subtitle": "Week 1\u20132 \u00b7 June 2\u201313 \u2014 Fix the Foundation",
+        "goal": "ICP reclassified. GA4 fires correctly on all routes. Baseline metrics exist.",
+        "deliverable": "ICP model updated. GTM History Change trigger deployed. Baseline funnel report.",
+        "tasks": [
+          "Update ICP model: reclassify Airlines, Overhaul Shops, Regional Airlines to T1 in icp-brief.md + memory/icp.md",
+          "Update Clay table filter logic to reflect T1 reclassification before any seeding",
+          "Get GTM container access from Omar Servin or Sergio Corona \u2014 hard deadline June 9",
+          "Confirm front-end framework with engineering (React / Next.js / Angular)",
+          "Deploy GTM History Change trigger \u2014 fires page_view on every SPA route change",
+          "Verify page_title and page_location populate correctly per route",
+          "Validate UTM parameters persist across SPA route changes",
+          "Instrument rfq_submitted (server-side + client-side)",
+          "Instrument demo_requested, contact_supplier_clicked, part_search_performed",
+          "Instrument search_no_results (feeds supplier acquisition weekly)",
+          "Instrument aog_inquiry (triggers immediate sales alert)",
+          "Validate all events in GA4 DebugView",
+          "Set UTM naming convention: Q[N]-[YEAR]-[CHANNEL]-[TYPE]",
+          "Pull Google Search Console data \u2014 what is actually indexed now?",
+          "Document baseline: traffic, conversion rates, lead volume by source",
+          "Digital ad spend audit \u2014 channel performance and current cost-per-lead"
+        ]
+      },
+      {
+        "id": "s2",
+        "label": "Sprint 2",
+        "subtitle": "Weeks 2\u20134 \u00b7 June 9 \u2013 July 2 \u2014 HubSpot Initiation + Vector + Clay",
+        "goal": "HubSpot portal provisioned. Vector pixel live. Clay enrichment running.",
+        "deliverable": "HubSpot IT approval + contract signed. Vector identifying visitors. Clay \u2192 HubSpot push wired.",
+        "tasks": [
+          "Initiate HubSpot IT approval with Omar Servin \u2014 Week 1 action",
+          "Initiate HubSpot vendor contract with Sergio Corona \u2014 Week 1 action",
+          "Get quote for HubSpot Enterprise tier",
+          "Audit ORO leads data \u2014 field mapping for HubSpot leads sync (ORO stays as leads tracker)",
+          "Map ORO leads fields \u2192 HubSpot contact properties for leads handoff",
+          "Demo HubSpot to one sales rep \u2014 adoption target is Day 90, not Day 30",
+          "Contract and onboard Vector (Mark Lawry \u00b7 $2k/mo confirmed)",
+          "Deploy Vector pixel via GTM",
+          "Configure ICP filter in Vector: aviation industry, 10\u2013200 employees, not current customers",
+          "Set up Vector retargeting exports to Google / Meta / LinkedIn ad platforms",
+          "Validate de-anonymization rate (~37% of visitors identified)",
+          "Set up Clay workspace and connect data sources",
+          "Configure Clay enrichment waterfall: company \u2192 contact \u2192 email verification",
+          "Build Clay \u2192 HubSpot push workflow (enriched contacts auto-create or update)",
+          "Seed Clay table with 100\u2013200 aviation contacts \u2014 weight Overhaul Shop + Regional Airline alongside MRO/Distributor"
+        ]
+      },
+      {
+        "id": "s3",
+        "label": "Sprint 3",
+        "subtitle": "Weeks 3\u20135 \u00b7 June 16 \u2013 July 2 \u2014 Clay + Claude Outbound POC",
+        "goal": "One live outbound workflow targeting T1 segments.",
+        "deliverable": "5-step sequence running to MRO, Distributor, Overhaul Shop, Regional Airline contacts.",
+        "tasks": [
+          "Run Clay LinkedIn enrichment on seeded T1 contacts",
+          "Run Clay email finder for work emails",
+          "Add Claude API column \u2014 aviation segment classifier (T1/T2/T3)",
+          "Add Claude API column \u2014 personalized opening line on Clay output",
+          "Apply T1 filter: MRO, Distributor, Overhaul Shop, Regional Airline \u00b7 10\u2013200 employees \u00b7 not on PartsBase \u00b7 email found",
+          "Export T1 (~40\u201360 contacts) to HubSpot sequence",
+          "Load 5-step sequence: Day 0 AI email \u00b7 Day 2 LinkedIn \u00b7 Day 5 follow-up \u00b7 Day 8 LinkedIn msg \u00b7 Day 12 final",
+          "Set up MeetAlfred for LinkedIn automation",
+          "Track: open rate, reply rate, meetings booked",
+          "Present results to Rodrigo at Day 30 check-in (July 2)"
+        ]
+      },
+      {
+        "id": "s4",
+        "label": "Sprint 4\u20135",
+        "subtitle": "Month 2 \u00b7 July\u2013Aug 1 \u2014 Digital Funnel + Email Campaigns",
+        "goal": "Full funnel live. HubSpot CRM configured. First email campaign sent.",
+        "deliverable": "Ad \u2192 Web \u2192 Vector \u2192 Clay \u2192 HubSpot end-to-end. Mailchimp decommissioned.",
+        "tasks": [
+          "Configure HubSpot CRM: contact records, company records, deal pipeline",
+          "Define lifecycle stages: Subscriber \u2192 Lead \u2192 MQL \u2192 SQL \u2192 Opportunity \u2192 Customer",
+          "Connect all web forms to HubSpot with proper field mapping",
+          "Set MQL\u2192SQL handoff SLA: SDR responds within 4 hours, AE books demo within 24 hours",
+          "Configure HubSpot \u2192 ORO leads sync (HubSpot captures, ORO tracks downstream)",
+          "Wire Vector output \u2192 Clay enrichment trigger",
+          "Wire Clay enrichment \u2192 HubSpot (enriched contact with segment tag + lead score inputs)",
+          "Validate full loop: ad click \u2192 landing \u2192 Vector/form \u2192 Clay \u2192 HubSpot record without manual intervention",
+          "Complete sender reputation remediation: list hygiene, SPF/DKIM/DMARC in HubSpot, warm-up schedule",
+          "Migrate active Mailchimp lists \u2192 HubSpot (mapped, segmented, consent-verified)",
+          "Decommission Mailchimp sends \u2014 HubSpot becomes sole sender",
+          "Design first campaign: T1 supplier acquisition (MRO, Distributor, Overhaul Shop, Regional Airline not on PartsBase)",
+          "3-email nurture sequence: problem \u2192 solution \u2192 proof \u00b7 personalization via Clay segment tags",
+          "Set up Profound account \u2014 AEO baseline for aviation parts queries",
+          "Build HubSpot attribution report: W-shaped (40% first / 20% mid / 40% last)",
+          "Configure lead scoring baseline: rfq_submitted +30, demo_requested +30, pricing_page +15, part_search\u00d73 +10, Vector ICP match +20",
+          "Set MQL threshold: score > 75 \u00b7 wire MQL \u2192 sales alert"
+        ]
+      },
+      {
+        "id": "s6",
+        "label": "Sprint 6\u20139",
+        "subtitle": "Month 3 \u00b7 Aug\u2013Sep 1 \u2014 Scale + Optimize",
+        "goal": "Outbound at 2+ meetings/week. SEO pipeline live. Lead scoring tuned. Pipeline attributed.",
+        "deliverable": "Weekly GTM report automated. AI content pipeline producing indexed pages. Sales rep in HubSpot.",
+        "tasks": [
+          "Scale outbound: run full Clay enrichment on all T1 segments",
+          "Review 30 days of HubSpot data with sales team",
+          "Calibrate MQL threshold against actual MQL \u2192 SQL conversion data",
+          "Add aviation-segment scoring dimension (MRO, airline, overhaul shop, regional airline, distributor)",
+          "Wire expansion scoring: accounts searching new part categories = upsell signal",
+          "Pull Google Search Console data post-SPA-fix \u2014 what is actually indexed now?",
+          "Identify high-intent long-tail searches: part numbers, ATA codes, manufacturer names",
+          "Build AI content pipeline: part category pages, ATA code guides, manufacturer spec pages",
+          "Target: pipeline built and first 10 pages indexed \u2014 50 pages is Day 180 target",
+          "A/B test outbound subject lines and first-email CTAs",
+          "Build second campaign: buyer-side nurture (MRO, airline, overhaul shop segments)",
+          "Automate lifecycle nurture: new lead \u2192 MQL nurture sequence triggers automatically",
+          "Get one sales rep actively logging activity in HubSpot \u2014 Day 90 adoption target",
+          "Build weekly GTM report: pipeline sourced, pipeline influenced, closed-won (automated Monday delivery)",
+          "Present to Rodrigo: full funnel from digital spend \u2192 pipeline with channel-level attribution"
+        ]
+      }
+    ],
+    "milestones": [
+      {
+        "id": "m1",
+        "label": "Pre-start SEO audit complete \u2014 partsbase.com 42/100 (Grade D, SPA root cause)",
+        "target": "Ramp",
+        "date": "2026-05-11"
+      },
+      {
+        "id": "micp",
+        "label": "ICP model updated \u2014 Airlines, Overhaul Shops, Regional Airlines reclassified T1",
+        "target": "Day 7",
+        "date": "2026-06-09"
+      },
+      {
+        "id": "m2",
+        "label": "GTM History Change trigger deployed + validated in GA4 DebugView",
+        "target": "Day 7",
+        "date": "2026-06-09"
+      },
+      {
+        "id": "m3",
+        "label": "Digital ad spend audit delivered \u2014 channel performance baseline",
+        "target": "Day 14",
+        "date": "2026-06-16"
+      },
+      {
+        "id": "m3b",
+        "label": "Baseline funnel report (traffic \u00b7 channels \u00b7 CVR) delivered",
+        "target": "Day 14",
+        "date": "2026-06-16"
+      },
+      {
+        "id": "m4",
+        "label": "HubSpot IT approval + vendor contract signed \u00b7 portal provisioned",
+        "target": "Day 30",
+        "date": "2026-07-02"
+      },
+      {
+        "id": "m4b",
+        "label": "Vector pixel live \u2014 visitors identified and ICP-filtered",
+        "target": "Day 30",
+        "date": "2026-07-02"
+      },
+      {
+        "id": "m4c",
+        "label": "Clay workspace live \u2014 enrichment running on T1 targets",
+        "target": "Day 30",
+        "date": "2026-07-02"
+      },
+      {
+        "id": "m4d",
+        "label": "HubSpot CRM configured \u2014 lifecycle stages, forms, deal pipeline, ORO leads-only sync configured",
+        "target": "Day 60",
+        "date": "2026-08-01"
+      },
+      {
+        "id": "m5",
+        "label": "Digital funnel end-to-end: Ad \u2192 Web \u2192 Vector/Form \u2192 Clay \u2192 HubSpot",
+        "target": "Day 60",
+        "date": "2026-08-01"
+      },
+      {
+        "id": "m5b",
+        "label": "HubSpot Marketing Hub live \u2014 Mailchimp decommissioned",
+        "target": "Day 60",
+        "date": "2026-08-01"
+      },
+      {
+        "id": "m5c",
+        "label": "First email campaign sent (open rate >35% \u00b7 click rate >3%)",
+        "target": "Day 60",
+        "date": "2026-08-01"
+      },
+      {
+        "id": "m5d",
+        "label": "Profound AEO baseline + first recommendations implemented",
+        "target": "Day 60",
+        "date": "2026-08-01"
+      },
+      {
+        "id": "m6",
+        "label": "Lead scoring active \u2014 MQLs routing to sales automatically",
+        "target": "Day 60",
+        "date": "2026-08-01"
+      },
+      {
+        "id": "m7",
+        "label": "Outbound motion: meetings booked \u22652/week",
+        "target": "Day 90",
+        "date": "2026-09-01"
+      },
+      {
+        "id": "m7b",
+        "label": "HubSpot CRM \u2014 at least one sales rep actively logging activity",
+        "target": "Day 90",
+        "date": "2026-09-01"
+      },
+      {
+        "id": "m8",
+        "label": "AI SEO content pipeline built + first 10 pages indexed",
+        "target": "Day 90",
+        "date": "2026-09-01"
+      },
+      {
+        "id": "m9",
+        "label": "MQL\u2192SQL rate calibrated (target >15%)",
+        "target": "Day 90",
+        "date": "2026-09-01"
+      },
+      {
+        "id": "m10",
+        "label": "Weekly GTM report automated \u2014 pipeline attributed by channel",
+        "target": "Day 90",
+        "date": "2026-09-01"
+      },
+      {
+        "id": "m11",
+        "label": "Full W-shaped attribution model live \u2014 CAC by channel verified",
+        "target": "Day 180",
+        "date": "2026-12-01"
+      },
+      {
+        "id": "m12",
+        "label": "Customer health scoring active \u2014 50+ at-risk accounts flagged to CS",
+        "target": "Day 180",
+        "date": "2026-12-01"
+      },
+      {
+        "id": "m13",
+        "label": "Marketing directly attributable to pipeline + closed revenue",
+        "target": "Day 180",
+        "date": "2026-12-01"
+      },
+      {
+        "id": "m14",
+        "label": "50 SEO content pages live and indexed",
+        "target": "Day 180",
+        "date": "2026-12-01"
+      },
+      {
+        "id": "m15",
+        "label": "Programmatic SEO live \u2014 supplier profiles indexed at scale",
+        "target": "Day 180",
+        "date": "2026-12-01"
+      }
+    ],
+    "risks": [
+      {
+        "id": "r1",
+        "label": "GTM container access blocked \u2014 GA4 fix can't deploy",
+        "prob": "High",
+        "impact": "Critical",
+        "mitigation": "Hard deadline June 9 \u2014 escalate to Rodrigo as business risk if not resolved by then",
+        "owner": "Dan + Omar/Sergio"
+      },
+      {
+        "id": "r2",
+        "label": "Mailchimp sender reputation too damaged to recover cleanly",
+        "prob": "Medium",
+        "impact": "High",
+        "mitigation": "213k suppression pending Rodrigo approval. Do not send to dead list. HubSpot warm-up plan ready.",
+        "owner": "Dan + Alejandra"
+      },
+      {
+        "id": "r3",
+        "label": "ORO leads data needs audit before HubSpot sync",
+        "prob": "Medium",
+        "impact": "High",
+        "mitigation": "Audit ORO leads fields before syncing to HubSpot; ORO continues as leads-only tracker so full migration not required \u2014 scope is leads handoff only",
+        "owner": "Dan + Omar + Sergio"
+      },
+      {
+        "id": "r4",
+        "label": "ICP sequences built before reclassification \u2014 wrong segments",
+        "prob": "High",
+        "impact": "High",
+        "mitigation": "ICP update is Sprint 1 Day 1 task. Clay seeding blocked until complete.",
+        "owner": "Dan"
+      },
+      {
+        "id": "r5",
+        "label": "ORO data too dirty to migrate cleanly to HubSpot",
+        "prob": "Medium",
+        "impact": "High",
+        "mitigation": "Audit ORO before any import; field mapping complete before data moves. Start fresh if quality too low.",
+        "owner": "Dan"
+      },
+      {
+        "id": "r6",
+        "label": "Sales team doesn't adopt HubSpot by Day 90",
+        "prob": "Medium",
+        "impact": "High",
+        "mitigation": "Demo to one rep in Sprint 2. Build for their workflow, not for marketing. Day 90 adoption target is realistic.",
+        "owner": "Dan"
+      },
+      {
+        "id": "r7",
+        "label": "Revenue concentration \u2014 top 3 segments = ~55% ARR",
+        "prob": "Medium",
+        "impact": "Medium",
+        "mitigation": "Weight outbound toward Overhaul Shop + Regional Airline to diversify while increasing ARPU mix.",
+        "owner": "Dan"
+      },
+      {
+        "id": "r8",
+        "label": "GDPR non-compliance for EU contacts",
+        "prob": "Medium",
+        "impact": "High",
+        "mitigation": "CookiePro loads before content. Consent-verify all lists before email sends. Scope hreflang for top 5 EU markets.",
+        "owner": "Dan + IT"
+      },
+      {
+        "id": "r9",
+        "label": "Vector de-anonymization rate below projected ~37%",
+        "prob": "Low",
+        "impact": "Medium",
+        "mitigation": "Contractual rate. ICP filter tightens actionable volume regardless of total ID rate.",
+        "owner": "Dan"
+      },
+      {
+        "id": "r10",
+        "label": "Attribution model built on bad data",
+        "prob": "Low",
+        "impact": "Critical",
+        "mitigation": "Not built until GA4 confirmed clean for 90 days. Gate enforced \u2014 target date Dec 1.",
+        "owner": "Dan"
+      }
+    ],
+    "stack": [
+      {
+        "tool": "GA4 + GTM",
+        "layer": "Tracking",
+        "priority": "Critical",
+        "sprint": "Sprint 1",
+        "defaultStatus": "broken",
+        "note": "Fix SPA History Change trigger \u2014 target June 9. Blocked on container access. Blocks attribution + lead scoring."
+      },
+      {
+        "tool": "HubSpot CRM",
+        "layer": "CRM",
+        "priority": "Critical",
+        "sprint": "Sprint 2",
+        "defaultStatus": "onboarding",
+        "note": "Manages contacts, pipeline, and MAP. ORO transitions to leads-only \u2014 HubSpot feeds ORO for downstream system tracking. Confirmed May 22. Loop in Sergio Corona for vendor onboarding."
+      },
+      {
+        "tool": "HubSpot Marketing Hub",
+        "layer": "Email / MAP",
+        "priority": "Critical",
+        "sprint": "Sprint 4",
+        "defaultStatus": "onboarding",
+        "note": "Replaces Mailchimp. Migrate after sender rep remediation. Mailchimp decommission target: Aug 1."
+      },
+      {
+        "tool": "Vector",
+        "layer": "Visitor De-Anon",
+        "priority": "High",
+        "sprint": "Sprint 2",
+        "defaultStatus": "confirmed",
+        "note": "$2k/mo confirmed (Mark Lawry). ~37% visitor ID rate. ICP filtering + ad retargeting exports. Target live: July 2."
+      },
+      {
+        "tool": "CookiePro",
+        "layer": "Compliance",
+        "priority": "High",
+        "sprint": "Sprint 2",
+        "defaultStatus": "not-started",
+        "note": "GDPR/CCPA required \u2014 217 countries. Must load before content."
+      },
+      {
+        "tool": "Clay",
+        "layer": "Data Enrichment",
+        "priority": "High",
+        "sprint": "Sprint 2",
+        "defaultStatus": "confirmed",
+        "note": "T1 ICP filter updated before seeding (MRO, Distributor, Overhaul Shop, Regional Airline). Target live: July 2."
+      },
+      {
+        "tool": "Claude API",
+        "layer": "AI Workflows",
+        "priority": "High",
+        "sprint": "Sprint 3",
+        "defaultStatus": "not-started",
+        "note": "Segment classifier + personalization layer running on Clay output for outbound sequences."
+      },
+      {
+        "tool": "MeetAlfred",
+        "layer": "Social Outbound",
+        "priority": "High",
+        "sprint": "Sprint 3",
+        "defaultStatus": "not-started",
+        "note": "LinkedIn sequences alongside Clay + Claude email outreach. Phase 2 after Clay POC live."
+      },
+      {
+        "tool": "Profound",
+        "layer": "AEO",
+        "priority": "Medium",
+        "sprint": "Sprint 4",
+        "defaultStatus": "not-started",
+        "note": "tryprofound.com \u2014 AI search visibility for aviation queries. Early mover advantage. Target: Day 60 (Aug 1)."
+      },
+      {
+        "tool": "SEMrush + GSC",
+        "layer": "SEO",
+        "priority": "Medium",
+        "sprint": "Sprint 4",
+        "defaultStatus": "not-started",
+        "note": "Needs SPA tracking fix first. AI content pipeline target: 10 pages Day 90, 50 pages Day 180."
+      },
+      {
+        "tool": "Optimizely",
+        "layer": "Experimentation",
+        "priority": "Medium",
+        "sprint": "Sprint 5",
+        "defaultStatus": "not-started",
+        "note": "A/B testing for campaigns and landing pages. Phase 2."
+      },
+      {
+        "tool": "Hotjar",
+        "layer": "UX Analytics",
+        "priority": "Medium",
+        "sprint": "Sprint 5",
+        "defaultStatus": "not-started",
+        "note": "Pricing + demo pages first. Phase 2."
+      },
+      {
+        "tool": "Looker Studio",
+        "layer": "Attribution",
+        "priority": "Low",
+        "sprint": "Sprint 6",
+        "defaultStatus": "not-started",
+        "note": "HubSpot + GA4 data source. Needs 90 days clean data \u2014 available Dec 1."
+      }
+    ],
+    "decisions": [
+      {
+        "date": "2026-05-11",
+        "decision": "W-shaped attribution model",
+        "rationale": "Balances discovery (40%) and closing (40%) for B2B marketplace",
+        "madeBy": "Dan",
+        "impact": "Sets Phase 3 measurement framework \u2014 not built until Dec 1"
+      },
+      {
+        "date": "2026-05-11",
+        "decision": "Supplier acquisition as outbound POC target",
+        "rationale": "Revenue lever \u2014 suppliers pay, buyers search free",
+        "madeBy": "Dan",
+        "impact": "Focuses Clay + Claude POC scope on T1 segments"
+      },
+      {
+        "date": "2026-05-20",
+        "decision": "Mailchimp declared sender reputation emergency",
+        "rationale": "Complaint rate 27\u201330% vs 4% threshold. 213k dead contacts (52% of list). Immediate remediation required.",
+        "madeBy": "Dan",
+        "impact": "Halts email expansion until list cleaned. Suppression pending Rodrigo approval."
+      },
+      {
+        "date": "2026-05-22",
+        "decision": "ORO \u00d7 Mailchimp cross-reference completed",
+        "rationale": "Matched ORO portal-account exports against Mailchimp to identify subscribed matches, prospects, cleaned contacts, and protected anti-persona records.",
+        "madeBy": "Dan",
+        "impact": "Suppression list + 58,793 T1 acquisition candidates + 88 anti-persona protects all ready."
+      },
+      {
+        "date": "2026-05-22",
+        "decision": "Stack confirmed: HubSpot CRM + Marketing Hub, Clay, Vector",
+        "rationale": "Single CRM/MAP platform replacing ORO + Mailchimp. Clay for enrichment. Vector preferred over RB2B for retargeting export capability.",
+        "madeBy": "Dan (Rodrigo aligned)",
+        "impact": "Tool selection closed. Execution begins June 2."
+      },
+      {
+        "date": "2026-05-26",
+        "decision": "Profound added for AEO",
+        "rationale": "AI-generated answers are a growing buyer discovery channel. Most aviation competitors not invested here yet \u2014 early presence compounds.",
+        "madeBy": "Dan",
+        "impact": "Added to Day 60 workstream. Shares signal with SEO content calendar."
+      },
+      {
+        "date": "2026-05-27",
+        "decision": "ICP reclassification: Airlines, Regional Airlines, Overhaul Shops \u2192 T1",
+        "rationale": "RevOps baseline shows these are highest new-cohort ARPU segments ($520\u2013$620/mo, 2.5\u00d7 T3 average). T3 classification would misdirect outbound from launch.",
+        "madeBy": "Dan",
+        "impact": "Updates icp-brief.md, memory/icp.md, Clay filter, HubSpot sequence targeting. Sprint 1 Day 1 action."
+      },
+      {
+        "date": "2026-05-27",
+        "decision": "Execution clock rebaselined to June 2",
+        "rationale": "May 18\u201330 used for ramp + discovery. All milestones rebased: Day 30 = July 2, Day 60 = Aug 1, Day 90 = Sep 1, Day 180 = Dec 1.",
+        "madeBy": "Dan",
+        "impact": "Plan v2 and dashboard updated to reflect new timeline."
+      },
+      {
+        "date": "2026-05-27",
+        "decision": "HubSpot milestone split: portal by Day 30 \u00b7 CRM configured by Day 60",
+        "rationale": "IT approval + vendor contract + CRM configuration in 30 days from standing start was unrealistic. Portal provisioning is achievable by July 2; full CRM config by Aug 1.",
+        "madeBy": "Dan",
+        "impact": "Day 30 milestone is now 'portal provisioned'. Day 60 milestone adds 'CRM configured'. Sales rep adoption stays at Day 90."
+      }
+    ]
+  },
+  "tasks": {},
+  "risks": {
+    "r1": "red",
+    "r2": "amber",
+    "r3": "amber",
+    "r4": "amber",
+    "r5": "amber",
+    "r6": "green",
+    "r7": "green"
+  },
+  "stack": {},
+  "notes": {
+    "weekNote": "Ramp & Discovery complete (May 18\u201330). Execution Week 1 starts June 2. Clock rebaselined: Day 30 = July 2, Day 60 = Aug 1, Day 90 = Sep 1. Two open blockers entering execution: (1) GTM container access not yet granted \u2014 GA4 SPA fix target June 9; (2) Mailchimp suppression pending Rodrigo approval. ICP reclassification (Airlines, Overhaul Shops \u2192 T1) must complete before Clay seeding or HubSpot sequences are built.",
+    "decisions_log": ""
+  },
+  "changelog": [
+    {
+      "timestamp": "2026-05-11T00:00:00.000Z",
+      "author": "Claude",
+      "type": "setup",
+      "message": "Dashboard initialised. Pre-start SEO audit complete \u2014 partsbase.com scores 42/100 (Grade D). SPA rendering issue identified as R1 (Critical). All workstreams set to Not Started."
+    },
+    {
+      "timestamp": "2026-05-21T00:00:00.000Z",
+      "author": "Claude",
+      "type": "setup",
+      "message": "Dashboard merge complete \u2014 Day 4. Mission Control OS + 180-Day Plan unified into CoWork/dashboard.html. Workstreams updated: Tracking \u2192 RED (SPA fix pending Day 7), Email Health \u2192 RED (Mailchimp sender rep emergency). Week note added."
+    },
+    {
+      "timestamp": "2026-05-22T12:00:00.000-04:00",
+      "author": "Codex",
+      "type": "note",
+      "message": "Data QA cleanup complete. Overview cards now refresh from Today JSON, Email Health is split from Customer Health Scoring, classification claims use consistent denominators, causality language softened, and attribution timing aligned to the 90-day clean-data dependency."
+    },
+    {
+      "timestamp": "2026-05-22T09:30:00.000-04:00",
+      "author": "Claude (scheduled refresh)",
+      "type": "note",
+      "message": "Day 5 scheduled dashboard refresh. Calendar confirmed: 3 meetings (Consultative Selling 10am, ClickUp/Cat 1pm, Jordan new-hire connect 2pm). Inbox: 0 unread, 3 emails in last 48h \u2014 all read. Action items surfaced: (1) Seismic Onboarding Day 3 module overdue since May 20 \u2014 complete ASAP; (2) Teams background email from jhernandez \u2014 verify name/title on background image. Teams chat pull timed out \u2014 mentions field may be stale. Focus blocks updated: morning 8\u201310am, midday 11am\u20131pm, afternoon 2:15\u20135pm. No workstream or risk status changes."
+    },
+    {
+      "timestamp": "2026-05-22T10:45:00.000-04:00",
+      "author": "Codex",
+      "type": "data-qa",
+      "message": "ORO x Mailchimp findings reconciled. Reframed ORO matches as portal-account matches, corrected source counts (29,997 subscribed ORO matches, 31,443 cleaned, 3,020 unsubscribed, 31,204 not in Mailchimp), repaired t2t3 customer combined CSV to 12,152 rows, and updated dashboard language to avoid active paid customer / consent overclaims."
+    },
+    {
+      "timestamp": "2026-05-26T00:00:00.000Z",
+      "author": "Dan + Claude",
+      "type": "analysis",
+      "message": "Customer segment intelligence built from ORO exports. Real data: 6,357 active customers, ~$14.3M ARR (revenue period unconfirmed), 490 new customers at $326/mo avg ARPU vs $188/mo legacy base. Tier 1 ICP = Airlines/Overhaul Shops/Regional Airlines (LTV:CAC 186\u2013222\u00d7). $10.5M upsell opportunity in existing base (ARPU gap). CEO budget impact brief and segment analysis saved to resources/customerdata/. GTM metrics in Exec View updated with actuals."
+    },
+    {
+      "timestamp": "2026-05-22T18:33:01.319Z",
+      "author": "Codex",
+      "type": "note",
+      "message": "Merged first Exec View scheduled-task output into root dashboard-state.json under exec_view while preserving operational dashboard state. Added toolbox/exec-view-refresh.md to prevent future full overwrites and wrong-path writes."
+    },
+    {
+      "timestamp": "2026-05-22T19:00:00.000-04:00",
+      "author": "Claude (exec-view scheduled refresh)",
+      "type": "note",
+      "message": "Exec view refreshed \u2014 end of Day 5 / Week 1. All source files readable this cycle; source_gaps cleared. Key updates: (1) Stack decisions locked May 22 \u2014 HubSpot CRM/MAP, Clay, Vector confirmed. (2) ORO x Mailchimp cross-reference validated with corrected numbers: 29,997 subscribed matches, 31,443 cleaned, 3,020 unsubscribed, 31,204 not in Mailchimp. (3) 88-contact ORO anti-persona protect list confirmed. (4) Two REDs active \u2014 Mailchimp suppression blocked on Rodrigo approval; GA4 fix blocked on GTM container access. Decisions_needed updated to reflect stack lock and new ORO account export request."
+    },
+    {
+      "timestamp": "2026-05-27T12:00:00.000-04:00",
+      "author": "Dan + Claude",
+      "type": "analysis",
+      "message": "RevOps baseline complete (Day 10). Actuals confirmed from ORO CRM + customer revenue exports: 6,357 active accounts, $14.3M ARR, active ARPU $187.85/mo, new-cohort ARPU $325.77/mo (+73%). LTV:CAC confirmed 61\u00d7 (corrects earlier 107\u00d7 estimate). CAC payback 1.3 months. Critical ICP mismatch surfaced: Airlines, Regional Airlines, and Overhaul Shops classified T3 in current ICP model but are the highest new-cohort ARPU segments ($520\u2013$620/mo, 2.5\u00d7 T3 average). Reclassification required before HubSpot sequence build. Upsell opportunity in existing base: ~$10.5M ARR if legacy accounts reach new-cohort ARPU. Geographic shift: international accounts now 51% of new cohort vs 39% of active base. Site-architecture audit on partsbase.com: 83 pages in sitemap, 3 orphaned routes, SPA routing confirmed as primary SEO constraint. customer_intelligence section added to dashboard state."
+    }
+  ],
+  "exec_view": {
+    "refreshed_at": "2026-05-27T12:00:00-04:00",
+    "headline": "Week 2: stack confirmed, RevOps baseline set (Amelia verified), ICP mismatch caught. Execution begins June 2. Two items need your decision before we can move.",
+    "narrative": "Discovery is complete. The stack is confirmed (HubSpot, Clay, Vector). Amelia MCP has verified the revenue baseline: $36.8M booked revenue (FY2025, +11% YoY), 6,695 active customers in 217 countries, 2.7% annual churn \u2014 producing a confirmed LTV:CAC of 365\u00d7 at $300 CAC. An ICP mismatch was identified and corrected before it could misdirect the outbound launch. Two items are blocking execution: GTM container access (blocks all tracking and downstream scoring) and Mailchimp suppression authorization (blocks email recovery).",
+    "exec_proof_points": [
+      {
+        "date": "2026-05-27",
+        "item": "RevOps baseline confirmed from Amelia MCP live data: $36.8M booked revenue (FY2025), 6,695 active customers, 2.7% churn, 365\u00d7 LTV:CAC, 1.2-month CAC payback",
+        "impact": "Unit economics are exceptional \u2014 3\u00d7 stronger than prior estimates based on confirmed 2.7% churn vs 8% assumed. New cohort ARPU $342.63/mo across 395 new customers (L3M). Upsell opportunity quantification pending active base ARPU query."
+      },
+      {
+        "date": "2026-05-27",
+        "item": "ICP mismatch identified and corrected before outbound launch \u2014 Airlines and Overhaul Shops reclassified T1",
+        "impact": "Without this fix, HubSpot sequences would have launched targeting the wrong segments. Corrected before any build began."
+      },
+      {
+        "date": "2026-05-22",
+        "item": "Full GTM stack confirmed: HubSpot CRM + Marketing Hub, Clay, Vector \u2014 all locked, no further evaluation",
+        "impact": "Tool selection is closed. Execution begins June 2 against a fixed stack."
+      }
+    ],
+    "exec_milestones": [
+      {
+        "milestone": "GTM container access granted \u2192 GA4 SPA fix deployed and validated in GA4 DebugView",
+        "by": "2026-06-09",
+        "depends_on": "GTM container access from Engineering/IT (Omar Servin or Sergio Corona)"
+      },
+      {
+        "milestone": "HubSpot IT approval + vendor contract signed \u2192 portal provisioned",
+        "by": "2026-07-02",
+        "depends_on": "IT approval (Omar Servin) + vendor onboarding (Sergio Corona)"
+      },
+      {
+        "milestone": "Vector pixel live + Clay enrichment running \u2192 first identified visitors flowing into HubSpot",
+        "by": "2026-07-02",
+        "depends_on": null
+      }
+    ],
+    "summary": [
+      "Mailchimp Sender Reputation: RED \u2014 Complaint rate 27\u201330% vs. <4% threshold. 213k dead contacts (52% of list) require suppression. Net list loss: 3,700/mo. Blocked on Rodrigo approval. ORO cross-reference complete: 29,997 subscribed ORO portal-account matches identified, 31,443 cleaned/bounced. Action plan documented at resources/mailchimp-action-plan.md.",
+      "GA4 + GTM SPA Fix: RED \u2014 page_view never fires on SPA route changes. Blocks HubSpot lead scoring, attribution, and SEO content engine. Day 7 target (May 25) is at risk. Blocked on GTM container access from Engineering/IT.",
+      "Stack Decisions Locked (May 22): HubSpot CRM + Marketing Hub confirmed (replaces ORO + Mailchimp). Clay confirmed for data enrichment. Vector confirmed for visitor de-anonymization. These are no longer under evaluation.",
+      "HubSpot Setup + Clay POC: AMBER \u2014 Planning phase. Onboarding in progress. Day 30 credibility milestone (2+ meetings booked from Clay + Claude outbound) requires HubSpot to be live; clock is running.",
+      "MarTech Email Classifier: AMBER \u2014 Full spec complete (May 21, \u00a71\u2013\u00a79). Awaiting Dan approval. Block 3 blocked on ORO CRM output JSON schema confirmation from CRM team.",
+      "RevOps Baseline (May 27 \u2014 Amelia MCP confirmed): $36.8M booked revenue FY2025 (+11% YoY), 6,695 active customers across 217 countries, 2.7% annual churn (was 8% assumed). New cohort ARPU $342.63/mo (395 customers, Feb\u2013May 2026). LTV:CAC 365\u00d7, CAC payback 1.2 months. Active base ARPU and gross margin still pending finance confirmation.",
+      "ICP Tier Update (Amelia-verified): Contract Manufacturer ($460/mo, n=30), OEM ($435/mo, n=24), and MRO ($416/mo, n=45) are the most reliable Tier 1 targets by sample size and ARPU. Regional Airline has the highest ARPU ($712/mo) but n=4 \u2014 directional only. Airline dropped to Tier 3 at $209/mo. All segments still have exceptional LTV:CAC (223\u00d7\u2013760\u00d7) at $300 CAC \u2014 the question is which to weight in paid acquisition and outbound."
+    ],
+    "risks": [
+      {
+        "severity": "critical",
+        "title": "Mailchimp deliverability in violation \u2014 complaint rates 6\u20137x over threshold",
+        "detail": "Microsoft O365 at 27.3%, Proofpoint at 30.3%, Cisco Ironport at 32.6%. Threshold is <4%. 213k contacts (52% of 406k list) have not opened in last 50 sends. Net loss 3,700 contacts/month. Zero automations \u2014 all sends are manual one-off. Risk: domain blacklisting across B2B inbox providers. 90% of B2B targets are on Microsoft O365.",
+        "next_action": "Get Rodrigo Garcia approval to suppress 213k dead contacts. Protect 88 ORO anti-persona matches before blanket suppression. Do not send to 3,020 ORO unsubscribed matches.",
+        "owner": "Dan + Alejandra Avalos",
+        "target_date": "2026-06-04"
+      },
+      {
+        "severity": "critical",
+        "title": "GA4 SPA tracking broken \u2014 all downstream MarTech is blind",
+        "detail": "partsbase.com is a SPA. GA4 page_view never fires on route changes. HubSpot lead scoring, attribution modeling, and SEO content engine are all blocked until this is fixed. Pre-start SEO audit: 42/100. Day 7 target per 180-day plan is May 25 \u2014 currently at risk.",
+        "next_action": "Get GTM container access from Engineering/IT (Omar Servin or Sergio Corona). Confirm front-end framework (React/Next.js/Angular). Deploy History Change trigger. Validate in GA4 DebugView.",
+        "owner": "Dan + Engineering",
+        "target_date": "2026-05-28"
+      },
+      {
+        "severity": "high",
+        "title": "HubSpot onboarding not yet started \u2014 Day 30 POC window closing",
+        "detail": "HubSpot is confirmed (May 22) but formal IT onboarding has not begun. Clay + Claude outbound POC needs HubSpot live for sequence loading. Day 30 milestone (June 17) requires 2+ meetings booked. Each week of delay compresses the POC window.",
+        "next_action": "Loop Omar Servin for IT approval. Loop Sergio Corona for vendor contract/onboarding. Seed Clay table in parallel \u2014 prompt templates already built.",
+        "owner": "Dan + Omar Servin + Sergio Corona",
+        "target_date": "2026-06-11"
+      },
+      {
+        "severity": "high",
+        "title": "ORO CRM customer data unvalidated \u2014 active account status unknown",
+        "detail": "ORO cross-reference is complete but ORO_Customers.csv confirms portal/login accounts, not active paid customers. 31,443 ORO rows match cleaned/hard-bounced Mailchimp contacts. 31,204 ORO rows are not in Mailchimp at all. Cannot safely activate customer nurture, upsell, or email recovery workflows until subscription/account status is joined.",
+        "next_action": "Request account/subscription export from Sergio/IT/Sales Ops keyed by Site Id or email with active status, plan tier, ARR, renewal date, and consent fields.",
+        "owner": "Dan + Sergio Corona",
+        "target_date": "2026-06-04"
+      },
+      {
+        "severity": "high",
+        "title": "ICP model mismatch \u2014 highest-value segments targeted as T3",
+        "detail": "Airlines, Regional Airlines, and Overhaul Shops are classified T3 in the current ICP framework. RevOps analysis (May 27) shows these are the highest new-cohort ARPU segments: Regional Airline $620/mo, Overhaul Shop $581/mo, Airline $520/mo \u2014 all 2.5\u00d7 T3 average and 60\u201390% above T1 MRO/Distributor segments. Current ICP tier directs outbound effort and sequence content away from the highest-value segments. If HubSpot sequences are built before reclassification, targeting is misconfigured from launch.",
+        "next_action": "Reclassify Airlines, Regional Airlines, and Overhaul Shops to T1 in ICP framework (resources/icp-brief.md, memory/icp.md). Update Clay table filter logic before first POC sequence run.",
+        "owner": "Dan",
+        "target_date": "2026-06-04"
+      },
+      {
+        "severity": "medium",
+        "title": "Revenue concentration risk \u2014 top 3 segments are ~55% of ARR",
+        "detail": "MRO, Distributor, and Airline-type segments collectively represent approximately 55% of total ARR. Concentration in 3 segment types creates exposure if any single segment contracts. Expansion into underrepresented high-ARPU segments (Overhaul Shop, Regional Airline) diversifies the base and increases average ARPU simultaneously.",
+        "next_action": "Factor concentration into HubSpot sequence prioritization \u2014 weight Overhaul Shop and Regional Airline prospecting alongside MRO/Distributor to reduce concentration while improving ARPU mix.",
+        "owner": "Dan",
+        "target_date": "2026-06-17"
+      }
+    ],
+    "decisions_needed": [
+      {
+        "urgency": "urgent",
+        "decision": "Authorize Mailchimp mass suppression of 213k dead contacts",
+        "needed_from": "Rodrigo Garcia (CTOO)",
+        "deadline": "2026-06-06",
+        "context": "Complaint rate is 27\u201330% against a <4% threshold \u2014 domain blacklisting risk is active. Suppression is irreversible and will reduce list size by 52%, but that list is already dead. High performers (Mike - Renewals, PBExpo) are unaffected. 88 anti-persona contacts will be protected before execution."
+      },
+      {
+        "urgency": "urgent",
+        "decision": "Grant GTM container access for GA4 SPA fix",
+        "needed_from": "Omar Servin or Sergio Corona (Engineering / IT)",
+        "deadline": "2026-06-09",
+        "context": "Without GTM container access, GA4 never fires on SPA route changes. This blocks HubSpot lead scoring, attribution, and all SEO measurement. Implementation spec is ready \u2014 this is a 1-day deploy once access is granted."
+      },
+      {
+        "urgency": "this_week",
+        "decision": "Approve HubSpot vendor onboarding \u2014 IT approval + contract process",
+        "needed_from": "Omar Servin (IT approval) + Sergio Corona (vendor contract)",
+        "deadline": "2026-06-16",
+        "context": "HubSpot manages contacts, pipeline, and Marketing Hub (replaces Mailchimp). ORO transitions to leads-only \u2014 HubSpot will feed leads to ORO for downstream tracking. Contract and IT approval required before portal setup. Target: CRM live by July 2."
+      },
+      {
+        "urgency": "pending",
+        "decision": "Approve S&M budget increase at Day 90 check-in (July \u2192 September)",
+        "needed_from": "Rodrigo Garcia (CTOO)",
+        "deadline": "2026-09-01",
+        "context": "Magic Number is ~29:1 (you generate $29 in annual ARR per $1 of S&M spend). At $17,500/month, the business is massively underinvesting relative to its unit economics (LTV:CAC 365\u2013490\u00d7, CAC payback 1.2 months). The Day 90 check-in is the right moment to present 90-day actuals and make the budget case. Build the slide starting Day 60."
+      }
+    ],
+    "priorities_7day": [
+      {
+        "rank": 1,
+        "action": "Reclassify Airlines, Regional Airlines, and Overhaul Shops from T3 to T1 in ICP model (resources/icp-brief.md, memory/icp.md). Update Clay table filter logic before any HubSpot sequences are built \u2014 wrong tier = wrong outbound from launch.",
+        "by": "2026-06-03",
+        "depends_on": null
+      },
+      {
+        "rank": 2,
+        "action": "Get Rodrigo Garcia approval for 213k Mailchimp suppression; protect 88 ORO anti-persona matches before executing",
+        "by": "2026-05-29",
+        "depends_on": "Rodrigo Garcia decision"
+      },
+      {
+        "rank": 3,
+        "action": "Get GTM container access; confirm front-end framework with engineering; deploy and validate GA4 History Change trigger",
+        "by": "2026-05-28",
+        "depends_on": "GTM container access from Omar/Sergio"
+      },
+      {
+        "rank": 4,
+        "action": "Initiate HubSpot IT approval with Omar Servin; loop Sergio Corona for vendor contract/onboarding",
+        "by": "2026-05-29",
+        "depends_on": null
+      },
+      {
+        "rank": 5,
+        "action": "Request ORO account/subscription export (active status, plan tier, ARR, renewal date, consent fields) from Sergio or Sales Ops \u2014 needed to validate $14.3M ARR figure and confirm active vs churned",
+        "by": "2026-06-03",
+        "depends_on": null
+      },
+      {
+        "rank": 6,
+        "action": "Seed Clay table with 100\u2013200 aviation parts supplier contacts \u2014 weight Overhaul Shop + Regional Airline alongside MRO/Distributor based on ICP reclassification",
+        "by": "2026-06-03",
+        "depends_on": "ICP reclassification (rank 1)"
+      },
+      {
+        "rank": 7,
+        "action": "Review and approve MarTech Email Classifier spec (ai-builds/outputs/spec-martech-email-classifier-2026-05-21.md)",
+        "by": "2026-06-03",
+        "depends_on": null
+      }
+    ],
+    "proof_points_recent": [
+      {
+        "date": "2026-05-27",
+        "item": "ARPA gap diagnosed via Amelia SKU-level analysis: mix shift confirmed (not price erosion). BAS-001 User License $73.90 new vs $118.29 renewal. BAS-009 Inventory Mgmt penetration 23% new vs 61% renewal \u2014 closes as customers mature.",
+        "impact": "ARPA compression risk is lower than feared \u2014 it is a lifecycle/maturity gap, not a pricing problem. HubSpot upgrade trigger (Day 30\u201360) + guided onboarding for BAS-009 is the right fix. Day 30 deliverable complete."
+      },
+      {
+        "date": "2026-05-27",
+        "item": "SaaS health report run against live Amelia data: active base ARPA $459.99/mo confirmed \u00b7 MRR $2.37M \u00b7 Quick Ratio 5.4:1 \u00b7 Magic Number 29:1 \u00b7 NDR ~96.5% (WATCH) \u00b7 LTV:CAC 365\u2013490\u00d7 \u00b7 3 priority issues surfaced",
+        "impact": "Active base ARPA now confirmed (was 'pending'). Magic Number 29:1 quantifies the Day 90 budget increase case. NDR gap ($3.2K expansion vs $9.7K churn MRR) identifies the HubSpot upgrade trigger as the highest-value Day 30-60 build. ARPA gap (new cohort $342 vs base $460) flagged for monitoring to prevent long-term ARPA compression."
+      },
+      {
+        "date": "2026-05-27",
+        "item": "RevOps baseline verified from Amelia MCP live data: $36.8M booked revenue FY2025, 6,695 active customers, 217 countries, 2.7% annual churn, LTV:CAC 365\u00d7, CAC payback 1.2 months, new cohort ARPU $342.63/mo (395 customers, L3M)",
+        "impact": "Amelia confirms unit economics are 3\u00d7 stronger than prior ORO-based estimates. Churn at 2.7% (vs 8% assumed) triples LTV. All downstream GTM files updated to Amelia figures."
+      },
+      {
+        "date": "2026-05-27",
+        "item": "ICP mismatch identified: Airlines, Regional Airlines, Overhaul Shops are highest new-ARPU segments (2.5\u00d7 T3 average) but currently classified T3 in the outbound model",
+        "impact": "Prevents misconfigured HubSpot sequences from launching against the wrong tier. Correcting before build saves weeks of rework post-launch."
+      },
+      {
+        "date": "2026-05-27",
+        "item": "Site-architecture audit on partsbase.com: 83 pages mapped, 3 orphaned routes identified, SPA routing confirmed as primary SEO constraint",
+        "impact": "Confirms GA4 fix must precede any content investment. Structural baseline ready for post-fix SEO content strategy."
+      },
+      {
+        "date": "2026-05-22",
+        "item": "Core stack locked: HubSpot CRM + Marketing Hub, Clay, and Vector all confirmed \u2014 not under evaluation",
+        "impact": "Ends tool-selection overhead. Team can execute against a fixed stack starting Week 2."
+      },
+      {
+        "date": "2026-05-22",
+        "item": "ORO x Mailchimp cross-reference completed and validated \u2014 95,231 ORO rows cross-referenced against 656k Mailchimp records",
+        "impact": "Suppression list, Tier 1 acquisition candidate list (58,793 contacts), and 88-contact ORO protection list are all ready for activation pending leadership approval."
+      },
+      {
+        "date": "2026-05-21",
+        "item": "Mailchimp full audit completed \u2014 complaint rates, dead contact volume, top performers, and segment taxonomy documented",
+        "impact": "213k suppression target quantified. Remediation plan ready to execute on approval. Mike - Renewals and PBExpo segments confirmed as protected high-value assets."
+      },
+      {
+        "date": "2026-05-21",
+        "item": "MarTech Email Classifier spec generated via /build \u2014 full \u00a71\u2013\u00a79 spec at ai-builds/outputs/spec-martech-email-classifier-2026-05-21.md",
+        "impact": "First spec-driven build artifact. ~500 emails/day, <$0.01/email, Claude Haiku. Ready for approval and Block 1 implementation."
+      },
+      {
+        "date": "2026-05-21",
+        "item": "Mission Control OS live \u2014 daily brief, inbox triage, exec-view refresh, and /build workflow all operational with M365 connector",
+        "impact": "Week 1 operating system is in place. Scheduled workflows running without manual intervention."
+      }
+    ],
+    "source_gaps": []
+  },
+  "customer_intelligence": {
+    "generated_at": "2026-05-27",
+    "source": "Amelia MCP \u2014 live Athena CRM/subscription data (pai_analytics_layer)",
+    "confidence": "\ud83d\udfe2 Customer counts, churn, new cohort ARPU, active base ARPU, MRR, Quick Ratio confirmed from Amelia \u00b7 \ud83d\udfe1 LTV uses confirmed churn (2.7%) + assumed gross margin (72%) \u00b7 \ud83d\udfe1 NDR/churned MRR estimated (ARPU proxy) \u00b7 \ud83d\udd34 Gross margin needs finance confirmation",
+    "booked_revenue_fy2025": 36766782,
+    "booked_revenue_fy2024": 33132761,
+    "yoy_growth_pct": 11.0,
+    "active_accounts": 6695,
+    "countries": 217,
+    "annual_churn_pct": 2.7,
+    "monthly_churn_pct": 0.225,
+    "arpu_active_monthly": 459.99,
+    "arpu_active_monthly_source": "Amelia crm_account.last_renew_price / 12 \u00b7 5,149 accounts with price \u00b7 confirmed 2026-05-27",
+    "arpu_new_cohort_monthly": 342.63,
+    "arpu_new_cohort_window": "2026-02-27 to 2026-05-27 (395 new customers)",
+    "arpu_gap_note": "New cohort ARPA ($342.63) is 26% below active base ($459.99) \u2014 monitor for ARPA compression as new cohorts renew",
+    "mrr_total_implied": 2368475,
+    "mrr_accounts_with_price": 5149,
+    "mrr_accounts_no_price": 1546,
+    "mrr_note": "1,546 Ordered accounts have no last_renew_price (new, pre-renewal) \u2014 MRR floor is $2.37M from renewing base",
+    "ltv_new_cohort": 109642,
+    "ltv_active_base": 147197,
+    "ltv_active_base_formula": "$459.99 \u00d7 0.72 / 0.00225 = $147,197",
+    "ltv_cac_new_cohort": 365,
+    "ltv_cac_active_base": 490,
+    "ltv_cac": 365,
+    "cac_payback_months": 1.2,
+    "quick_ratio_apr2026": 5.4,
+    "quick_ratio_note": "(New MRR $49,152 + Expansion MRR $3,198) / Churned MRR $9,660 = 5.4 \u2014 EXCELLENT",
+    "magic_number": 29,
+    "magic_number_note": "Net New ARR (~$512K) / S&M spend ($17,500) = ~29:1 \u2014 justifies budget increase pitch at Day 90",
+    "ndr_est_pct": 96.5,
+    "ndr_note": "Estimated: expansion ($3,198/mo) covering only 1/3 of churn ($9,660/mo) \u2014 WATCH \u00b7 target: get to 100%+ via HubSpot upgrade trigger",
+    "expansion_mrr_monthly_apr2026": 3198,
+    "churned_mrr_monthly_est_apr2026": 9660,
+    "net_new_mrr_monthly_apr2026": 42690,
+    "mom_mrr_growth_pct": 1.8,
+    "upsell_opportunity_arr": 2178490,
+    "upsell_opportunity_note": "1,546 Ordered accounts at $342.63/mo new cohort ARPA \u2192 active base ARPA $459.99 = $117.36/mo \u00d7 12 \u00d7 1,546 = $2.18M ARR opportunity",
+    "geographic_mix": {
+      "note": "International share growing in new cohorts \u2014 requires ICP model to explicitly segment US vs international targeting in HubSpot",
+      "active_base_intl_pct": 39,
+      "new_cohort_intl_pct": 51
+    },
+    "top_segments_by_new_arpu": [
+      {
+        "segment": "Regional Airline",
+        "arpu_monthly_new_cohort": 712.29,
+        "ltv": 227933,
+        "ltv_cac_at_300": 760,
+        "l3m_n": 4,
+        "note": "Highest ARPU \u2014 small sample, directional"
+      },
+      {
+        "segment": "Contract Manufacturer",
+        "arpu_monthly_new_cohort": 460.47,
+        "ltv": 147350,
+        "ltv_cac_at_300": 491,
+        "l3m_n": 30,
+        "note": "Tier 1 \u2014 reliable sample"
+      },
+      {
+        "segment": "OEM",
+        "arpu_monthly_new_cohort": 435.22,
+        "ltv": 139270,
+        "ltv_cac_at_300": 464,
+        "l3m_n": 24,
+        "note": "Tier 1 \u2014 reliable sample"
+      },
+      {
+        "segment": "MRO",
+        "arpu_monthly_new_cohort": 415.56,
+        "ltv": 132979,
+        "ltv_cac_at_300": 443,
+        "l3m_n": 45,
+        "note": "Tier 1 \u2014 largest reliable sample"
+      },
+      {
+        "segment": "Broker",
+        "arpu_monthly_new_cohort": 332.97,
+        "ltv": 106550,
+        "ltv_cac_at_300": 355,
+        "l3m_n": 83,
+        "note": "Tier 2 \u2014 highest volume"
+      },
+      {
+        "segment": "Distributor",
+        "arpu_monthly_new_cohort": 325.35,
+        "ltv": 104112,
+        "ltv_cac_at_300": 347,
+        "l3m_n": 58,
+        "note": "Tier 2"
+      },
+      {
+        "segment": "Airline",
+        "arpu_monthly_new_cohort": 209.39,
+        "ltv": 67005,
+        "ltv_cac_at_300": 223,
+        "l3m_n": 22,
+        "note": "Tier 3 \u2014 lower than prior estimate"
+      }
+    ],
+    "site_architecture_audit": {
+      "date": "2026-05-27",
+      "tool": "site-architecture skill (partsbase-dan/vetted-skills)",
+      "pages_in_sitemap": 83,
+      "seo_baseline_score": 42,
+      "orphaned_routes_count": 3,
+      "primary_constraint": "SPA routing \u2014 GA4 page_view never fires on route change. All content investment is unmeasurable until GA4 History Change trigger is deployed.",
+      "secondary_findings": "URL structure generally clean. Internal linking gaps in /solutions and /products sections. No breadcrumbs on deep pages. Hub pages (solutions index) have thin content."
+    },
+    "arpa_gap_note": "New cohort ARPA ($342.63) is 26% below active base ($459.99). Diagnosed 2026-05-27: mix shift (not price erosion). Two drivers: (1) BAS-001 User License new=$73.90/mo vs renewal=$118.29/mo \u2014 60% gap, reflects shorter contract tenure; (2) add-on penetration gap \u2014 BAS-009 Inventory Mgmt 23% new vs 61% renewal, BAS-003 US Search 10% vs 26%, BAS-005 Batch Search 0.8% vs 9.4%. ARPA gap closes naturally as customers mature. Accelerate via HubSpot upgrade trigger + guided onboarding for BAS-009.",
+    "arpa_gap_diagnosis": "mix_shift",
+    "arpa_gap_diagnosed_date": "2026-05-27",
+    "arpa_gap_primary_driver": "Add-on penetration gap: BAS-009 Inventory Mgmt (23% new vs 61% renewal), BAS-003 US Search (10% vs 26%), BAS-005 Batch Search (0.8% vs 9.4%)",
+    "arpa_gap_secondary_driver": "BAS-001 User License pricing: $73.90/mo new vs $118.29/mo renewal \u2014 reflects contract tenure + price escalation, NOT discounting on same tier",
+    "arpa_expansion_opportunity": "If BAS-009 penetration for new cohort rises from 23% to 40%, estimated +$23K/mo MRR from add-on upsell in new accounts"
+  }
+};</script>
 </head>
 <body>
 
@@ -857,9 +1901,13 @@ let S = {};
 
 async function loadState() {
   try {
-    const stateUrl = window.location.pathname.includes('/CoWork/') ? '../dashboard-state.json' : 'dashboard-state.json';
-    const res = await fetch(stateUrl + '?t=' + Date.now());
-    S = await res.json();
+    if (window.__DASHBOARD_STATE__) {
+      S = window.__DASHBOARD_STATE__;
+    } else {
+      const stateUrl = window.location.pathname.includes('/CoWork/') ? '../dashboard-state.json' : 'dashboard-state.json';
+      const res = await fetch(stateUrl + '?t=' + Date.now());
+      S = await res.json();
+    }
   } catch(e) {
     S = { workstreams:{}, tasks:{}, milestones:{}, risks:{}, stack:{}, notes:{}, changelog:[], meta:{} };
   }
