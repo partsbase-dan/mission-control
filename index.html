@@ -2162,9 +2162,9 @@ function renderIcp() {
     const c = cv(t.col);
     const segs = t.segments.map(s => `<tr>
       <td style="padding-left:16px">${s.l}</td>
-      <td style="text-align:center;color:${c};font-weight:600">${s.rev}</td>
+      <td style="text-align:center;color:var(--accent);font-weight:600">${s.rev}</td>
       <td style="text-align:right;color:var(--muted)">${s.tagged}</td>
-      <td style="text-align:right;color:${c};font-weight:600">${s.classified}</td>
+      <td style="text-align:right;color:var(--green);font-weight:600">${s.classified}</td>
     </tr>${s.note?`<tr><td colspan="4" style="padding-left:16px;font-size:11px;color:var(--muted);font-style:italic;padding-top:0;padding-bottom:6px">${s.note}</td></tr>`:''}`).join('');
     return `<tr><td colspan="4" style="padding:5px 8px;background:var(--surface2)">
       <span style="font-size:11px;font-weight:700;color:var(--accent)">${t.tier}</span>
@@ -2172,8 +2172,8 @@ function renderIcp() {
     </td></tr>${segs}`;
   }).join('');
 
-  const sizeCrit = d.sizeCriteria.map(s => `<div style="background:${bg(s.col)};border-radius:6px;padding:10px;margin-bottom:8px">
-    <div style="font-weight:600;color:${cv(s.col)};font-size:13px">${s.l}</div>
+  const sizeCrit = d.sizeCriteria.map(s => `<div style="background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:10px;margin-bottom:8px">
+    <div style="font-weight:600;color:var(--text);font-size:13px">${s.l}</div>
     <div style="font-size:11px;color:var(--label);margin-top:4px">${s.desc}</div>
   </div>`).join('');
 
@@ -2250,7 +2250,7 @@ function renderIcp() {
       <div class="pc" style="padding:0;overflow:hidden">
         <div style="padding:14px 14px 6px"><div class="plan-label" style="margin:0">Revenue by Segment — Before &amp; After Classification</div></div>
         <div style="padding:0 14px 8px;font-size:11px;color:var(--muted)">Tagged = contacts with Aviation Industry Class tag before classification. Classified = total found by classify_contacts.py.</div>
-        <table class="plan-table"><thead><tr><th>Segment</th><th style="text-align:center">Revenue</th><th style="text-align:right">Tagged</th><th style="text-align:right">Classified</th></tr></thead><tbody>${tierTbody}</tbody></table>
+        <table class="plan-table"><thead><tr><th>Segment</th><th style="text-align:center;color:var(--accent)">Revenue</th><th style="text-align:right">Tagged</th><th style="text-align:right;color:var(--green)">Classified</th></tr></thead><tbody>${tierTbody}</tbody></table>
       </div>
       <div style="display:flex;flex-direction:column;gap:14px">
         <div class="pc"><div class="plan-label" style="margin-top:0">ICP Size Criteria</div>${sizeCrit}</div>
