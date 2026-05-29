@@ -1257,7 +1257,7 @@
           <div class="brand-sub">Mission Control</div>
         </div>
       </div>
-      <button onclick="showTab('today')" id="outertab-today" class="outer-tab"><span class="nav-icon">◷</span><span>Today</span></button>
+      <button onclick="showTab('exec')" id="outertab-exec" class="outer-tab"><span class="nav-icon">◈</span><span>Exec View</span></button>
       <button onclick="togglePlanGroup()" id="outertab-plan" class="outer-tab expanded"><span class="nav-icon">◎</span><span>180-Day Plan</span><span class="chevron">›</span></button>
       <div class="plan-nav" id="plan-nav" aria-label="180-Day Plan sections">
         <button onclick="showTab('plan');showInnerTab('overview')" id="tab-overview" class="active">Overview</button>
@@ -1270,7 +1270,6 @@
       <button onclick="showTab('resources')" id="outertab-resources" class="outer-tab"><span class="nav-icon">📚</span><span>Resources</span></button>
       <button onclick="showTab('email')" id="outertab-email" class="outer-tab"><span class="nav-icon">✉</span><span>Email Health</span></button>
       <button onclick="showTab('icp')" id="outertab-icp" class="outer-tab"><span class="nav-icon">⌖</span><span>ICP &amp; Targeting</span></button>
-      <button onclick="showTab('exec')" id="outertab-exec" class="outer-tab"><span class="nav-icon">◈</span><span>Exec View</span></button>
       <div class="sidebar-footer">
         <div style="font-size:11px;color:#5f626b;margin-top:18px;">Dan Rodgers · MarTech</div>
       </div>
@@ -1561,7 +1560,7 @@ function showTab(name) {
   Object.keys(TAB_CONFIG).forEach(b => document.getElementById('outertab-' + b)?.classList.remove('active'));
   document.getElementById('outertab-' + name)?.classList.add('active');
   ['overview', 'today', 'plan'].forEach(p =>
-    document.getElementById('outer-' + p)?.classList.toggle('hidden', p !== cfg.panel)
+    document.getElementById('outer-' + p)?.classList.toggle('hidden', cfg.panel !== p)
   );
   if (cfg.inner) showInnerTab(cfg.inner);
   document.getElementById('page-title').textContent = cfg.title[0];
@@ -2548,6 +2547,7 @@ function renderAll() {
   renderDecisions();
   renderExec();
   renderResources();
+  showTab('exec');
 }
 
 // ── Workflow trigger buttons ──
