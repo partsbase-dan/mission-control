@@ -20,7 +20,7 @@
     "attribution": "none",
     "health": "none"
   },
-  "milestones": {},
+  "milestones": { "m1": true },
   "plan": {
     "workstreams": [
       {

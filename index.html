@@ -223,7 +223,7 @@
     "attribution": "none",
     "health": "none"
   },
-  "milestones": {},
+  "milestones": { "m1": true },
   "plan": {
     "workstreams": [
       {
@@ -1985,11 +1985,16 @@ function renderMilestones() {
         <span class="badge ${done?'badge-green':'badge-slate'}">${done?'Done':'Pending'}</span>
       </div>`;
     }).join('');
+    const phaseCollapsed = true;
     return `<div class="pc">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
         <div class="plan-h2" style="margin:0">${phase.label}</div>
-        <span style="font-size:11px;color:var(--muted)">${doneCount}/${items.length} complete</span>
-      </div>${rows}
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:11px;color:var(--muted)">${doneCount}/${items.length} complete</span>
+          <button onclick="const l=this.closest('.pc').querySelector('.ms-list');l.classList.toggle('hidden');this.textContent=l.classList.contains('hidden')?'▸ Show':'▾ Hide'" style="font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:4px 10px;cursor:pointer;white-space:nowrap">${phaseCollapsed?'▸ Show':'▾ Hide'}</button>
+        </div>
+      </div>
+      <div class="ms-list${phaseCollapsed?' hidden':''}">${rows}</div>
     </div>`;
   }).join('');
 }
