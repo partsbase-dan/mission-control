@@ -1,0 +1,65 @@
+.pb-check {
+  /* display: grid; */
+  /* place-items: center; */
+}
+
+.pb-check-xs {
+  width: 20px;
+  height: 20px;
+}
+
+.pb-check-sm {
+  width: 24px;
+  height: 24px;
+}
+
+.pb-check-md {
+  width: 28px;
+  height: 28px;
+}
+
+.pb-check-lg {
+  width: 32px;
+  height: 32px;
+}
+
+.pb-check-xl {
+  width: 36px;
+  height: 36px;
+}
+
+.pb-check-2xl {
+  width: 40px;
+  height: 40px;
+}
+
+.pb-check-info rect {
+  fill: var(--color-100);
+  color: var(--color-100);
+
+}
+
+.pb-check-info path {
+  fill: var(--color-500);
+    color: var(--color-500);
+}
+
+.pb-check-success rect {
+  fill: var(--success-100);
+    color: var(--success-100);
+}
+
+.pb-check-success path {
+  fill: var(--success-600);
+    color: var(--success-600);
+}
+
+.pb-check-default rect {
+  fill: var(--gray-100);
+    color: var(--gray-100);
+}
+
+.pb-check-default path {
+  fill: var(--gray-500);
+    color: var(--gray-500);
+}

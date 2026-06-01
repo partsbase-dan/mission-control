@@ -1,0 +1,70 @@
+{
+  "$schema": "brand-fonts",
+  "families": [
+    {
+      "name": "Roboto",
+      "role": "body",
+      "surface": "public",
+      "files": [
+        "Roboto-variable-latin.woff2",
+        "Roboto-variable-latin-ext.woff2",
+        "Roboto-variable-cyrillic.woff2",
+        "Roboto-variable-cyrillic-ext.woff2",
+        "Roboto-variable-greek.woff2",
+        "Roboto-variable-greek-ext.woff2",
+        "Roboto-variable-vietnamese.woff2",
+        "Roboto-variable-math.woff2",
+        "Roboto-variable-symbols.woff2"
+      ],
+      "variable": true
+    },
+    {
+      "name": "Avenir Next LT Pro",
+      "role": "body",
+      "surface": "private",
+      "files": [
+        "AvenirNextLTPro-UltLt.otf", "AvenirNextLTPro-UltLtIt.otf",
+        "AvenirNextLTPro-Regular.otf", "AvenirNextLTPro-It.otf",
+        "AvenirNextLTPro-Medium.otf", "AvenirNextLTPro-MediumIt.otf",
+        "AvenirNextLTPro-Demi.otf", "AvenirNextLTPro-DemiIt.otf",
+        "AvenirNextLTPro-Bold.otf", "AvenirNextLTPro-BoldIt.otf",
+        "AvenirNextLTPro-Heavy.otf", "AvenirNextLTPro-HeavyIt.otf"
+      ]
+    },
+    {
+      "name": "Avenir Next LT Pro Condensed",
+      "role": "body-condensed",
+      "surface": "private",
+      "files": [
+        "AvenirNextLTPro-UltLtCn.otf", "AvenirNextLTPro-UltLtCnIt.otf",
+        "AvenirNextLTPro-Cn.otf", "AvenirNextLTPro-CnIt.otf",
+        "AvenirNextLTPro-MediumCn.otf", "AvenirNextLTPro-MediumCnIt.otf",
+        "AvenirNextLTPro-DemiCn.otf", "AvenirNextLTPro-DemiCnIt.otf",
+        "AvenirNextLTPro-BoldCn.otf", "AvenirNextLTPro-BoldCnIt.otf",
+        "AvenirNextLTPro-HeavyCn.otf", "AvenirNextLTPro-HeavyCnIt.otf"
+      ]
+    },
+    {
+      "name": "TradeMarker",
+      "role": "display",
+      "surface": "marketing",
+      "files": ["TradeMarker-Bold.otf", "TradeMarker-BoldItalic.otf"]
+    },
+    {
+      "name": "Font Awesome 5 Free",
+      "role": "icons",
+      "files": ["fa-solid-900.ttf", "fa-regular-400.ttf", "fa-brands-400.ttf"]
+    },
+    {
+      "name": "FontAwesome",
+      "role": "icons-legacy",
+      "files": ["fontawesome-webfont.ttf"]
+    },
+    {
+      "name": "Ionicons",
+      "role": "icons-legacy",
+      "files": ["ionicons.ttf"]
+    }
+  ],
+  "declared_in": "system/fonts.css"
+}

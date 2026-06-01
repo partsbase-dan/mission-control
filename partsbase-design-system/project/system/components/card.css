@@ -1,0 +1,46 @@
+.pb-card {
+  border-radius: 20px;
+  background-color: white;
+}
+
+.pb-card-hover {
+  box-shadow: var(--cards-hover);
+}
+
+.pb-card-gray {
+  box-shadow: 32px 32px 64px 0px #0a0d1214;
+}
+
+.pb-card-border {
+  box-shadow: 0px 2px 6px 0px #1079f824;
+}
+
+.pb-card-color {
+  box-shadow: var(--cards-hover);
+}
+
+.pb-card-badge {
+  background-color: var(--color-100);
+  border: 1px solid var(--color-200);
+}
+
+.pb-card-badge:hover {
+  border: 1px solid var(--color-300);
+  box-shadow: 10px 10px 20px 0px #0082f114;
+}
+
+.pb-card {
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+  will-change: box-shadow, transform;
+  perspective: 600px; /* smoother tilt */
+}
+
+.pb-card-texture {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) -16.22%,
+    #fff 115.32%
+  );
+}

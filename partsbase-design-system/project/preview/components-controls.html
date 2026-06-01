@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Controls — PartsBase Design System</title>
+<link rel="stylesheet" href="../system/pb-system.css?v=3" />
+<link rel="stylesheet" href="../system/components/pbtoggle.css?v=8" />
+<link rel="stylesheet" href="_preview.css" />
+<style>
+  .demo-row { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+  .stack { display: flex; flex-direction: column; gap: 8px; }
+  .field-caption { font-size: var(--text-sm-size); color: var(--gray-500); }
+
+  /* Select (lightweight replica of pb-select) */
+  .pb-select-container { width: 280px; position: relative; }
+  .pb-select-trigger {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px;
+    border: 1px solid var(--gray-300);
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    color: var(--color-800);
+    font-size: var(--text-md-size);
+    min-height: 44px;
+  }
+  .pb-select-trigger:hover { border-color: var(--color-400); }
+  .pb-select-trigger.open { border-color: var(--color-500); box-shadow: var(--focus-ring); }
+  .pb-select-trigger.error { border-color: var(--error-500); }
+  .pb-select-trigger svg { color: var(--gray-500); }
+  .pb-select-menu {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+    padding: 6px;
+    font-size: var(--text-md-size);
+    z-index: 10;
+  }
+  .pb-select-option {
+    padding: 10px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--color-800);
+  }
+  .pb-select-option:hover { background: var(--color-100); }
+  .pb-select-option.selected { color: var(--color-600); font-weight: var(--font-medium); }
+
+  /* Text input */
+  .pb-input {
+    width: 280px;
+    padding: 10px 16px;
+    border: 1px solid var(--gray-300);
+    border-radius: 10px;
+    font-family: var(--font-sans);
+    font-size: var(--text-md-size);
+    color: var(--color-800);
+    min-height: 44px;
+    background: #fff;
+    outline: none;
+  }
+  .pb-input:focus { border-color: var(--color-500); box-shadow: var(--focus-ring); }
+  .pb-input.error { border-color: var(--error-500); }
+  .pb-label { font-size: var(--text-sm-size); font-weight: var(--font-medium); color: var(--color-800); }
+  .pb-helper { font-size: var(--text-sm-size); color: var(--gray-500); }
+  .pb-helper.error { color: var(--error-600); }
+</style>
+</head>
+<body>
+
+<header class="preview-header">
+  <div>
+    <div class="preview-eyebrow">Components</div>
+    <h1>Toggles, tabs &amp; inputs</h1>
+    <p>Switchers for binary / small-N choices (<span class="mono">PBToggle</span>), content pivots (<span class="mono">Tabs</span>), and form primitives (select, input).</p>
+  </div>
+</header>
+
+<section class="preview-section">
+  <h2>PBToggle</h2>
+  <p class="section-sub">Two-option pill with a sliding thumb. Use for audience switches ("buyer / seller"), mode toggles, binary chooser at section-level.</p>
+  <div class="demo-row">
+    <div class="pb-toggle" role="tablist">
+      <div class="pb-toggle-thumb left" aria-hidden="true"></div>
+      <div class="pb-toggle-option active" role="tab">I'm a buyer</div>
+      <div class="pb-toggle-option" role="tab">I'm a seller</div>
+    </div>
+    <div class="pb-toggle" role="tablist">
+      <div class="pb-toggle-thumb right" aria-hidden="true"></div>
+      <div class="pb-toggle-option" role="tab">Monthly</div>
+      <div class="pb-toggle-option active" role="tab">Annual</div>
+    </div>
+  </div>
+</section>
+
+<section class="preview-section">
+  <h2>Tabs</h2>
+  <p class="section-sub">Unordered content pivots — selected is filled <span class="mono">color-100</span>, stroked <span class="mono">color-300</span>, text <span class="mono">color-600</span>.</p>
+  <div class="pb-tabs">
+    <div class="pb-tab active">Overview</div>
+    <div class="pb-tab">Features</div>
+    <div class="pb-tab">Pricing</div>
+    <div class="pb-tab">FAQ</div>
+  </div>
+</section>
+
+<section class="preview-section">
+  <h2>Select</h2>
+  <p class="section-sub">10px radius, 44px min height, hairline <span class="mono">gray-300</span>. Focus inherits the blue focus ring.</p>
+  <div class="demo-row" style="gap: 48px; align-items: flex-start;">
+    <div class="stack">
+      <span class="pb-label">Category</span>
+      <div class="pb-select-container">
+        <div class="pb-select-trigger" aria-expanded="false">
+          <span>Select category</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <span class="pb-helper">Pick the closest match for your search.</span>
+    </div>
+    <div class="stack">
+      <span class="pb-label">Category</span>
+      <div class="pb-select-container">
+        <div class="pb-select-trigger open" aria-expanded="true">
+          <span style="color: var(--color-800)">Avionics</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="pb-select-menu">
+          <div class="pb-select-option">Airframe</div>
+          <div class="pb-select-option selected">Avionics <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="pb-select-option">Engine</div>
+          <div class="pb-select-option">Interior</div>
+          <div class="pb-select-option">Landing gear</div>
+        </div>
+      </div>
+    </div>
+    <div class="stack">
+      <span class="pb-label">Category</span>
+      <div class="pb-select-container">
+        <div class="pb-select-trigger error" aria-expanded="false">
+          <span style="color: var(--gray-500)">Select category</span>
+          <span style="display: flex; gap: 6px; align-items: center;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="none" stroke="#F04438"/><path d="M8 4.5v4" stroke="#F04438" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.5" r="1" fill="#F04438"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+      </div>
+      <span class="pb-helper error">Category is required.</span>
+    </div>
+  </div>
+</section>
+
+<section class="preview-section">
+  <h2>Text input</h2>
+  <p class="section-sub">Same geometry as select — 10px radius, 44px min height, focus ring via <span class="mono">--focus-ring</span>.</p>
+  <div class="demo-row" style="gap: 48px; align-items: flex-start;">
+    <div class="stack">
+      <label class="pb-label" for="i1">Part number</label>
+      <input id="i1" class="pb-input" placeholder="e.g. 1234-56-789" />
+      <span class="pb-helper">Alphanumeric, dashes allowed.</span>
+    </div>
+    <div class="stack">
+      <label class="pb-label" for="i2">Part number</label>
+      <input id="i2" class="pb-input" value="A320-B7-4432" />
+      <span class="pb-helper">4 matches across 12 sellers.</span>
+    </div>
+    <div class="stack">
+      <label class="pb-label" for="i3">Part number</label>
+      <input id="i3" class="pb-input error" value="A320" />
+      <span class="pb-helper error">Part number must be at least 6 characters.</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

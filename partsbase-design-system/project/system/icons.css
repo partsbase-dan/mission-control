@@ -1,0 +1,110 @@
+/* PartsBase icon baseline.
+ *
+ * Matches the FontAwesome 5 class names the Web.Spa codebase uses today:
+ *   <i class="fas fa-search"></i>     Solid    (900)
+ *   <i class="far fa-user"></i>       Regular  (400)
+ *   <i class="fab fa-twitter"></i>    Brands   (400)
+ *   <i class="fa fa-search"></i>      Legacy   (FA4 book) — still works
+ *
+ * Codepoints are resolved by FontAwesome's own CSS in production. For
+ * design-system previews we expose just the rendering primitives; a
+ * small hand-picked starter map is included below so common icons render
+ * without pulling in the full 1.2MB fa.css. Add more as needed.
+ */
+
+.fa, .fas, .far, .fab {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fas { font-family: "Font Awesome 5 Free"; font-weight: 900; }
+.far { font-family: "Font Awesome 5 Free"; font-weight: 400; }
+.fab { font-family: "Font Awesome 5 Brands"; font-weight: 400; }
+.fa  { font-family: "FontAwesome"; font-weight: normal; }
+
+/* Sizing helpers (FA compatible) */
+.fa-xs { font-size: 0.75em; }
+.fa-sm { font-size: 0.875em; }
+.fa-lg { font-size: 1.333em; vertical-align: -0.0667em; }
+.fa-2x { font-size: 2em; }
+.fa-3x { font-size: 3em; }
+
+/* Spin */
+@keyframes fa-spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+.fa-spin { animation: fa-spin 2s infinite linear; }
+
+/* Starter glyph map — the icons most-referenced in the Web.Spa codebase.
+ * All codepoints come from FontAwesome 5 Free / Brands. Add more inline
+ * with `content: "\fXXX"` when a design needs them. */
+
+/* solid (fas) */
+.fa-search::before          { content: "\f002"; }
+.fa-times::before           { content: "\f00d"; }
+.fa-times-circle::before    { content: "\f057"; }
+.fa-check::before           { content: "\f00c"; }
+.fa-check-circle::before    { content: "\f058"; }
+.fa-plus::before            { content: "\f067"; }
+.fa-minus::before           { content: "\f068"; }
+.fa-angle-down::before      { content: "\f107"; }
+.fa-angle-up::before        { content: "\f106"; }
+.fa-angle-left::before      { content: "\f104"; }
+.fa-angle-right::before     { content: "\f105"; }
+.fa-arrow-up::before        { content: "\f062"; }
+.fa-arrow-down::before      { content: "\f063"; }
+.fa-arrow-circle-up::before   { content: "\f0aa"; }
+.fa-arrow-circle-down::before { content: "\f0ab"; }
+.fa-chevron-circle-right::before { content: "\f138"; }
+.fa-chevron-circle-down::before  { content: "\f13a"; }
+.fa-bars::before            { content: "\f0c9"; }
+.fa-cogs::before            { content: "\f085"; }
+.fa-user::before            { content: "\f007"; }
+.fa-user-circle::before     { content: "\f2bd"; }
+.fa-shopping-cart::before   { content: "\f07a"; }
+.fa-paper-plane::before     { content: "\f1d8"; }
+.fa-phone::before           { content: "\f095"; }
+.fa-envelope::before        { content: "\f0e0"; }
+.fa-reply::before           { content: "\f3e5"; }
+.fa-print::before           { content: "\f02f"; }
+.fa-download::before        { content: "\f019"; }
+.fa-trash-alt::before       { content: "\f2ed"; }
+.fa-redo-alt::before        { content: "\f2f9"; }
+.fa-sign-out-alt::before    { content: "\f2f5"; }
+.fa-tachometer-alt::before  { content: "\f3fd"; }
+.fa-address-card::before    { content: "\f2bb"; }
+.fa-cloud-upload-alt::before{ content: "\f382"; }
+.fa-university::before      { content: "\f19c"; }
+.fa-file-alt::before        { content: "\f15c"; }
+.fa-file-pdf::before        { content: "\f1c1"; }
+.fa-chart-area::before      { content: "\f1fe"; }
+.fa-chart-bar::before       { content: "\f080"; }
+.fa-chart-line::before      { content: "\f201"; }
+.fa-spinner::before         { content: "\f110"; }
+.fa-map-marker-alt::before  { content: "\f3c5"; }
+.fa-wrench::before          { content: "\f0ad"; }
+.fa-plane::before           { content: "\f072"; }
+.fa-users::before           { content: "\f0c0"; }
+.fa-eye::before             { content: "\f06e"; }
+.fa-camera::before          { content: "\f030"; }
+.fa-ban::before             { content: "\f05e"; }
+.fa-clock::before           { content: "\f017"; }
+.fa-pen-square::before      { content: "\f14b"; }
+.fa-list-ul::before         { content: "\f0ca"; }
+.fa-exclamation-circle::before  { content: "\f06a"; }
+.fa-exclamation-triangle::before{ content: "\f071"; }
+.fa-info-circle::before     { content: "\f05a"; }
+.fa-lightbulb::before       { content: "\f0eb"; }
+.fa-arrow-alt-circle-up::before   { content: "\f35b"; }
+.fa-arrow-alt-circle-down::before { content: "\f358"; }
+
+/* brands (fab) */
+.fa-facebook-f::before      { content: "\f39e"; }
+.fa-twitter::before         { content: "\f099"; }
+.fa-linkedin-in::before     { content: "\f0e1"; }
+.fa-youtube::before         { content: "\f167"; }
+.fa-telegram-plane::before  { content: "\f3fe"; }

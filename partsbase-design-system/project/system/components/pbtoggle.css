@@ -1,0 +1,78 @@
+/* PBToggle — two-option pill with a sliding thumb.
+ *
+ * Robust geometry: the thumb uses percentages so it auto-fits inside whatever
+ * the track's content box actually is, no matter what border/padding rules
+ * end up on the track.
+ */
+
+.pb-toggle {
+  --pb-toggle-option-w: 160px;
+  --pb-toggle-pad: 4px;
+
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+
+  width: calc(var(--pb-toggle-option-w) * 2);
+  height: 52px;
+  padding: var(--pb-toggle-pad);
+
+  background-color: var(--gray-150, #EEF2F6);
+  border: 2px solid var(--color-150, #D1E4FB);
+  border-radius: 999px;
+  box-sizing: content-box;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pb-toggle-thumb {
+  position: absolute;
+  top: var(--pb-toggle-pad);
+  left: var(--pb-toggle-pad);
+  width: var(--pb-toggle-option-w);
+  height: calc(100% - var(--pb-toggle-pad) * 2 - 4px); /* minus top+bottom pad + 2*border */
+  background: #fff;
+  border: 2px solid var(--color-400);
+  border-radius: 999px;
+  box-shadow: var(--blue-focus, 0 0 0 4px rgba(12, 112, 232, 0.12));
+  z-index: 0;
+  box-sizing: border-box;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease;
+  will-change: transform;
+}
+.pb-toggle-thumb.right {
+  transform: translateX(var(--pb-toggle-option-w));
+}
+
+.pb-toggle-option {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 var(--pb-toggle-option-w);
+  width: var(--pb-toggle-option-w) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  font-family: var(--font-sans) !important;
+  font-size: 17px !important;
+  line-height: 1 !important;
+  font-weight: var(--font-semibold);
+  color: var(--color-700);
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.pb-toggle-option.active { color: var(--color-500); }
+.pb-toggle-option:hover:not(.active) { color: var(--color-600); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-toggle-thumb { transition: none; }
+}

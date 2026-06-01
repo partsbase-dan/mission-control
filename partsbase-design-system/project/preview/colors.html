@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Colors — PartsBase Design System</title>
+<link rel="stylesheet" href="../system/pb-system.css" />
+<link rel="stylesheet" href="_preview.css" />
+<style>
+  .ramp {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 8px;
+  }
+  .ramp.short { grid-template-columns: repeat(9, 1fr); }
+  .ramp.semantic { grid-template-columns: repeat(11, 1fr); }
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 108px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--gray-200);
+  }
+  .swatch .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: var(--font-semibold);
+  }
+  .swatch .hex {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    opacity: 0.85;
+  }
+  .ramp-label {
+    font-size: var(--text-sm-size);
+    font-weight: var(--font-semibold);
+    color: var(--gray-700);
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .ramp-block + .ramp-block { margin-top: 28px; }
+
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .role-card {
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .role-card h3 {
+    margin: 0 0 10px;
+    font-size: var(--text-md-size);
+    font-weight: var(--font-semibold);
+    color: var(--color-800);
+  }
+  .role-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0;
+    font-size: var(--text-sm-size);
+  }
+  .role-chip {
+    width: 20px; height: 20px; border-radius: 6px;
+    border: 1px solid rgba(0,0,0,.08);
+  }
+  .role-name { flex: 0 0 140px; font-weight: var(--font-medium); color: var(--color-800); }
+  .role-hex { font-family: ui-monospace, Menlo, Consolas, monospace; color: var(--gray-600); font-size: 12px; }
+  .role-use { color: var(--gray-600); font-size: var(--text-sm-size); }
+</style>
+</head>
+<body>
+
+<header class="preview-header">
+  <div>
+    <div class="preview-eyebrow">Colors</div>
+    <h1>Palette</h1>
+    <p>Blue-anchored brand ramp paired with cool neutrals and the standard semantic scales. 500/600 carry most interactive weight; 800 is the dominant ink color for headings.</p>
+  </div>
+</header>
+
+<section class="preview-section">
+  <h2>Brand</h2>
+  <p class="section-sub">Blues are the heart of the identity. <span class="mono">--color-600</span> is the default button fill, <span class="mono">--color-500</span> anchors accents, <span class="mono">--color-800</span> is the ink for headings.</p>
+  <div class="ramp">
+    <div class="swatch" style="background:var(--color-25); color:var(--color-800);"><div class="top"><span>25</span></div><span class="hex">#F6FAFE</span></div>
+    <div class="swatch" style="background:var(--color-50); color:var(--color-800);"><div class="top"><span>50</span></div><span class="hex">#D2E1F2</span></div>
+    <div class="swatch" style="background:var(--color-100); color:var(--color-800);"><div class="top"><span>100</span></div><span class="hex">#F1F9FF</span></div>
+    <div class="swatch" style="background:var(--color-150); color:var(--color-800);"><div class="top"><span>150</span></div><span class="hex">#D2E1F2</span></div>
+    <div class="swatch" style="background:var(--color-200); color:var(--color-800);"><div class="top"><span>200</span></div><span class="hex">#CAE0FC</span></div>
+    <div class="swatch" style="background:var(--color-300); color:var(--color-800);"><div class="top"><span>300</span></div><span class="hex">#9EC6FA</span></div>
+    <div class="swatch" style="background:var(--color-400); color:#fff;"><div class="top"><span>400</span></div><span class="hex">#4B9CF0</span></div>
+    <div class="swatch" style="background:var(--color-500); color:#fff;"><div class="top"><span>500</span></div><span class="hex">#007FE9</span></div>
+    <div class="swatch" style="background:var(--color-600); color:#fff;"><div class="top"><span>600</span></div><span class="hex">#0C70E8</span></div>
+    <div class="swatch" style="background:var(--color-700); color:#fff;"><div class="top"><span>700</span></div><span class="hex">#305178</span></div>
+    <div class="swatch" style="background:var(--color-800); color:#fff;"><div class="top"><span>800</span></div><span class="hex">#002857</span></div>
+  </div>
+</section>
+
+<section class="preview-section">
+  <h2>Gray</h2>
+  <p class="section-sub">Cool neutrals — slightly blue-tinted. <span class="mono">--gray-600/700</span> for secondary text, <span class="mono">--gray-200</span> for hairline borders.</p>
+  <div class="ramp short">
+    <div class="swatch" style="background:var(--gray-50); color:var(--gray-800);"><div class="top"><span>50</span></div><span class="hex">#FAFAFA</span></div>
+    <div class="swatch" style="background:var(--gray-100); color:var(--gray-800);"><div class="top"><span>100</span></div><span class="hex">#F5F5F5</span></div>
+    <div class="swatch" style="background:var(--gray-150); color:var(--gray-800);"><div class="top"><span>150</span></div><span class="hex">#F1F9FF</span></div>
+    <div class="swatch" style="background:var(--gray-200); color:var(--gray-800);"><div class="top"><span>200</span></div><span class="hex">#E9EAEB</span></div>
+    <div class="swatch" style="background:var(--gray-300); color:var(--gray-800);"><div class="top"><span>300</span></div><span class="hex">#D5D7DA</span></div>
+    <div class="swatch" style="background:var(--gray-400); color:#fff;"><div class="top"><span>400</span></div><span class="hex">#A4A7AE</span></div>
+    <div class="swatch" style="background:var(--gray-500); color:#fff;"><div class="top"><span>500</span></div><span class="hex">#717680</span></div>
+    <div class="swatch" style="background:var(--gray-600); color:#fff;"><div class="top"><span>600</span></div><span class="hex">#535862</span></div>
+    <div class="swatch" style="background:var(--gray-800); color:#fff;"><div class="top"><span>800</span></div><span class="hex">#252B37</span></div>
+  </div>
+</section>
+
+<section class="preview-section">
+  <h2>Semantic</h2>
+  <p class="section-sub">Error / warning / success share the same 25–900 structure — 500 for icons, 100 for tinted backgrounds, 700 for text on tint.</p>
+
+  <div class="ramp-block">
+    <div class="ramp-label">Error</div>
+    <div class="ramp semantic">
+      <div class="swatch" style="background:var(--error-25); color:var(--error-900);"><div class="top"><span>25</span></div><span class="hex">#FFFBFA</span></div>
+      <div class="swatch" style="background:var(--error-50); color:var(--error-900);"><div class="top"><span>50</span></div><span class="hex">#FEF3F2</span></div>
+      <div class="swatch" style="background:var(--error-100); color:var(--error-900);"><div class="top"><span>100</span></div><span class="hex">#FEE4E2</span></div>
+      <div class="swatch" style="background:var(--error-200); color:var(--error-900);"><div class="top"><span>200</span></div><span class="hex">#FECDCA</span></div>
+      <div class="swatch" style="background:var(--error-300); color:var(--error-900);"><div class="top"><span>300</span></div><span class="hex">#FDA29B</span></div>
+      <div class="swatch" style="background:var(--error-400); color:#fff;"><div class="top"><span>400</span></div><span class="hex">#F97066</span></div>
+      <div class="swatch" style="background:var(--error-500); color:#fff;"><div class="top"><span>500</span></div><span class="hex">#F04438</span></div>
+      <div class="swatch" style="background:var(--error-600); color:#fff;"><div class="top"><span>600</span></div><span class="hex">#D92D20</span></div>
+      <div class="swatch" style="background:var(--error-700); color:#fff;"><div class="top"><span>700</span></div><span class="hex">#B42318</span></div>
+      <div class="swatch" style="background:var(--error-800); color:#fff;"><div class="top"><span>800</span></div><span class="hex">#912018</span></div>
+      <div class="swatch" style="background:var(--error-900); color:#fff;"><div class="top"><span>900</span></div><span class="hex">#7A271A</span></div>
+    </div>
+  </div>
+
+  <div class="ramp-block">
+    <div class="ramp-label">Warning</div>
+    <div class="ramp semantic">
+      <div class="swatch" style="background:var(--warning-25); color:var(--warning-900);"><div class="top"><span>25</span></div><span class="hex">#FFFCF5</span></div>
+      <div class="swatch" style="background:var(--warning-50); color:var(--warning-900);"><div class="top"><span>50</span></div><span class="hex">#FFFAEB</span></div>
+      <div class="swatch" style="background:var(--warning-100); color:var(--warning-900);"><div class="top"><span>100</span></div><span class="hex">#FEF0C7</span></div>
+      <div class="swatch" style="background:var(--warning-200); color:var(--warning-900);"><div class="top"><span>200</span></div><span class="hex">#FEDF89</span></div>
+      <div class="swatch" style="background:var(--warning-300); color:var(--warning-900);"><div class="top"><span>300</span></div><span class="hex">#FEC84B</span></div>
+      <div class="swatch" style="background:var(--warning-400); color:var(--warning-900);"><div class="top"><span>400</span></div><span class="hex">#FDB022</span></div>
+      <div class="swatch" style="background:var(--warning-500); color:#fff;"><div class="top"><span>500</span></div><span class="hex">#F79009</span></div>
+      <div class="swatch" style="background:var(--warning-600); color:#fff;"><div class="top"><span>600</span></div><span class="hex">#DC6803</span></div>
+      <div class="swatch" style="background:var(--warning-700); color:#fff;"><div class="top"><span>700</span></div><span class="hex">#B54708</span></div>
+      <div class="swatch" style="background:var(--warning-800); color:#fff;"><div class="top"><span>800</span></div><span class="hex">#93370D</span></div>
+      <div class="swatch" style="background:var(--warning-900); color:#fff;"><div class="top"><span>900</span></div><span class="hex">#7A2E0E</span></div>
+    </div>
+  </div>
+
+  <div class="ramp-block">
+    <div class="ramp-label">Success</div>
+    <div class="ramp semantic">
+      <div class="swatch" style="background:var(--success-25); color:var(--success-900);"><div class="top"><span>25</span></div><span class="hex">#F6FEF9</span></div>
+      <div class="swatch" style="background:var(--success-50); color:var(--success-900);"><div class="top"><span>50</span></div><span class="hex">#ECFDF3</span></div>
+      <div class="swatch" style="background:var(--success-100); color:var(--success-900);"><div class="top"><span>100</span></div><span class="hex">#D1FADF</span></div>
+      <div class="swatch" style="background:var(--success-200); color:var(--success-900);"><div class="top"><span>200</span></div><span class="hex">#A6F4C5</span></div>
+      <div class="swatch" style="background:var(--success-300); color:var(--success-900);"><div class="top"><span>300</span></div><span class="hex">#6CE9A6</span></div>
+      <div class="swatch" style="background:var(--success-400); color:#fff;"><div class="top"><span>400</span></div><span class="hex">#32D583</span></div>
+      <div class="swatch" style="background:var(--success-500); color:#fff;"><div class="top"><span>500</span></div><span class="hex">#12B76A</span></div>
+      <div class="swatch" style="background:var(--success-600); color:#fff;"><div class="top"><span>600</span></div><span class="hex">#039855</span></div>
+      <div class="swatch" style="background:var(--success-700); color:#fff;"><div class="top"><span>700</span></div><span class="hex">#027A48</span></div>
+      <div class="swatch" style="background:var(--success-800); color:#fff;"><div class="top"><span>800</span></div><span class="hex">#05603A</span></div>
+      <div class="swatch" style="background:var(--success-900); color:#fff;"><div class="top"><span>900</span></div><span class="hex">#054F31</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="preview-section">
+  <h2>Role tokens</h2>
+  <p class="section-sub">How to spend the ramp in UI — not new colors, just the default mapping.</p>
+  <div class="pair">
+    <div class="role-card">
+      <h3>Text & surface</h3>
+      <div class="role-row"><span class="role-chip" style="background:var(--color-800)"></span><span class="role-name">Ink / heading</span><span class="role-use">color-800</span><span class="role-hex">#002857</span></div>
+      <div class="role-row"><span class="role-chip" style="background:var(--gray-700)"></span><span class="role-name">Body</span><span class="role-use">gray-700</span><span class="role-hex">#414651</span></div>
+      <div class="role-row"><span class="role-chip" style="background:var(--gray-500)"></span><span class="role-name">Muted / caption</span><span class="role-use">gray-500</span><span class="role-hex">#717680</span></div>
+      <div class="role-row"><span class="role-chip" style="background:var(--gray-200)"></span><span class="role-name">Hairline border</span><span class="role-use">gray-200</span><span class="role-hex">#E9EAEB</span></div>
+      <div class="role-row"><span class="role-chip" style="background:var(--color-100); border-color:var(--color-200)"></span><span class="role-name">Tint surface</span><span class="role-use">color-100</span><span class="role-hex">#F1F9FF</span></div>
+    </div>
+    <div class="role-card">
+      <h3>Interactive</h3>
+      <div class="role-row"><span class="role-chip" style="background:var(--color-600)"></span><span class="role-name">Primary fill</span><span class="role-use">color-600</span><span class="role-hex">#0C70E8</span></div>
+      <div class="role-row"><span class="role-chip" style="background:var(--color-500)"></span><span class="role-name">Hover / accent</span><span class="role-use">color-500</span><span class="role-hex">#007FE9</span></div>
+      <div class="role-row"><span class="role-chip" style="background:var(--color-800)"></span><span class="role-name">Secondary fill</span><span class="role-use">color-800</span><span class="role-hex">#002857</span></div>
+      <div class="role-row"><span class="role-chip" style="background:var(--color-600); outline:2px solid var(--color-600); outline-offset:-6px; background:#fff;"></span><span class="role-name">Outlined</span><span class="role-use">border color-600</span><span class="role-hex">—</span></div>
+      <div class="role-row"><span class="role-chip" style="background:var(--error-600)"></span><span class="role-name">Destructive</span><span class="role-use">error-600</span><span class="role-hex">#D92D20</span></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

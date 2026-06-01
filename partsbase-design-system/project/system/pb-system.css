@@ -1,0 +1,34 @@
+/* PartsBase Design System — single entry point.
+ * Load this before any component CSS on a prototype page.
+ */
+/* All brand fonts are self-hosted from /fonts — Roboto (public body, variable
+ * woff2), Avenir Next LT Pro (private body, 24 styles), TradeMarker (display),
+ * FontAwesome 5 + Ionicons (icons). No Google Fonts CDN. */
+@import "./fonts.css?v=3";
+@import "./colors.css";
+@import "./typography.css";
+@import "./icons.css";
+@import "./spacing.css";
+@import "./sizing.css";
+@import "./shadows.css";
+@import "./grid.css";
+@import "./utilities.css";
+
+@import "./components/button.css";
+@import "./components/card.css";
+@import "./components/badge.css";
+@import "./components/tabs.css";
+@import "./components/pbtoggle.css";
+@import "./components/check.css";
+
+/* Baseline so previews feel like the real app */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--color-800);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+* { box-sizing: border-box; }

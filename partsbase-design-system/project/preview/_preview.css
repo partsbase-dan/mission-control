@@ -1,0 +1,73 @@
+/* Shared chrome for every design-system preview card.
+ * Each card is a standalone HTML page sized to fit in the review pane.
+ */
+
+body {
+  padding: 48px;
+  background: #fff;
+  color: var(--color-800);
+}
+
+.preview-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.preview-header h1 {
+  margin: 0;
+  font-size: var(--text-display-sm-size);
+  line-height: var(--text-display-sm-line);
+  font-weight: var(--font-bold);
+  color: var(--color-800);
+  letter-spacing: -0.02em;
+}
+
+.preview-header .preview-eyebrow {
+  font-size: var(--text-sm-size);
+  font-weight: var(--font-semibold);
+  color: var(--color-500);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.preview-header p {
+  margin: 6px 0 0;
+  font-size: var(--text-md-size);
+  line-height: var(--text-md-line);
+  color: var(--gray-600);
+  max-width: 56ch;
+}
+
+.preview-section {
+  margin-bottom: 56px;
+}
+
+.preview-section:last-child {
+  margin-bottom: 0;
+}
+
+.preview-section > h2 {
+  margin: 0 0 4px;
+  font-size: var(--text-xl-size);
+  line-height: var(--text-xl-line);
+  font-weight: var(--font-semibold);
+  color: var(--color-800);
+}
+
+.preview-section > .section-sub {
+  margin: 0 0 24px;
+  font-size: var(--text-sm-size);
+  line-height: var(--text-sm-line);
+  color: var(--gray-500);
+}
+
+.mono {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  color: var(--gray-600);
+}

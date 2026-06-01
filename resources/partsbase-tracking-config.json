@@ -1,0 +1,117 @@
+{
+  "business_type": "b2b_marketplace",
+  "company": "PartsBase",
+  "industry": "Aviation Parts Marketplace",
+  "key_pages": [
+    {"name": "Homepage", "path": "/"},
+    {"name": "Search Results", "path": "/search"},
+    {"name": "Part Listing", "path": "/parts/{id}"},
+    {"name": "Supplier Directory", "path": "/suppliers"},
+    {"name": "Supplier Profile", "path": "/suppliers/{id}"},
+    {"name": "Pricing / Membership", "path": "/pricing"},
+    {"name": "Register", "path": "/register"},
+    {"name": "Demo Request", "path": "/demo"},
+    {"name": "RFQ Form", "path": "/rfq"}
+  ],
+  "conversion_actions": [
+    {"name": "Demo Requested", "type": "lead", "value": 0},
+    {"name": "RFQ Submitted", "type": "lead", "value": 0},
+    {"name": "Membership Signup Started", "type": "registration", "value": 0},
+    {"name": "Membership Purchase Completed", "type": "purchase", "value": 299},
+    {"name": "Contact Supplier Clicked", "type": "engagement", "value": 0}
+  ],
+  "custom_events": [
+    {
+      "event": "part_search_performed",
+      "trigger": "User submits a part number or keyword search",
+      "parameters": ["search_term", "results_count", "ata_code", "part_number"],
+      "priority": "high",
+      "notes": "Core engagement metric — volume and search terms inform content and SEO strategy"
+    },
+    {
+      "event": "rfq_submitted",
+      "trigger": "User submits a Request for Quote form",
+      "parameters": ["part_number", "ata_code", "quantity", "supplier_id", "source_page"],
+      "priority": "critical",
+      "is_conversion": true,
+      "notes": "Highest-intent buyer action — must fire reliably"
+    },
+    {
+      "event": "supplier_listing_viewed",
+      "trigger": "User views a supplier profile or listing page",
+      "parameters": ["supplier_id", "supplier_name", "aviation_segment", "source"],
+      "priority": "high"
+    },
+    {
+      "event": "part_detail_viewed",
+      "trigger": "User views a specific part detail page",
+      "parameters": ["part_number", "ata_code", "supplier_id", "condition"],
+      "priority": "high"
+    },
+    {
+      "event": "contact_supplier_clicked",
+      "trigger": "User clicks to contact or message a supplier",
+      "parameters": ["supplier_id", "part_number", "contact_method"],
+      "priority": "critical",
+      "is_conversion": true
+    },
+    {
+      "event": "demo_requested",
+      "trigger": "User submits demo request form (supplier acquisition)",
+      "parameters": ["company_name", "company_size", "aviation_segment", "source_page"],
+      "priority": "critical",
+      "is_conversion": true
+    },
+    {
+      "event": "membership_signup_started",
+      "trigger": "User begins membership registration flow",
+      "parameters": ["membership_type", "page_location", "source"],
+      "priority": "critical"
+    },
+    {
+      "event": "membership_purchase_completed",
+      "trigger": "User completes membership payment",
+      "parameters": ["membership_type", "value", "currency", "transaction_id"],
+      "priority": "critical",
+      "is_conversion": true
+    },
+    {
+      "event": "search_no_results",
+      "trigger": "Part search returns zero results",
+      "parameters": ["search_term", "part_number", "ata_code"],
+      "priority": "high",
+      "notes": "High-value signal — these are buyer needs we can't fulfill. Feed to supplier acquisition team."
+    },
+    {
+      "event": "aog_inquiry",
+      "trigger": "User indicates AOG (Aircraft on Ground) urgency",
+      "parameters": ["part_number", "airline_name", "contact_method"],
+      "priority": "critical",
+      "notes": "AOG = highest urgency. Should trigger immediate sales alert."
+    }
+  ],
+  "paid_channels": ["google_ads", "linkedin"],
+  "consent_required": true,
+  "consent_platform": "CookiePro",
+  "custom_dimensions": {
+    "user_scoped": [
+      {"name": "Account Type", "parameter": "account_type", "description": "buyer | supplier | unknown"},
+      {"name": "Aviation Segment", "parameter": "aviation_segment", "description": "MRO | airline | distributor | OEM | defense | charter"},
+      {"name": "Membership Tier", "parameter": "membership_tier", "description": "free | basic | premium"},
+      {"name": "Company Name", "parameter": "company_name", "description": "For B2B attribution"}
+    ],
+    "event_scoped": [
+      {"name": "Part Number", "parameter": "part_number", "description": "Aviation part number searched/viewed"},
+      {"name": "ATA Code", "parameter": "ata_code", "description": "ATA chapter code for categorization"},
+      {"name": "Supplier ID", "parameter": "supplier_id", "description": "Which supplier was viewed/contacted"},
+      {"name": "AOG Flag", "parameter": "is_aog", "description": "Boolean — urgency flag"},
+      {"name": "Source Country", "parameter": "source_country", "description": "Country of buyer/supplier"}
+    ]
+  },
+  "implementation_notes": [
+    "AOG inquiry events should trigger a Slack/HubSpot alert to sales within 5 minutes — these are high-urgency",
+    "search_no_results events should feed a weekly report to whoever owns supplier acquisition — those terms are demand we can't serve",
+    "Track ata_code on all part events — this is the taxonomy that connects search to supplier inventory to content strategy",
+    "membership_purchase_completed must fire server-side as well as client-side to prevent ad blockers from killing conversion data"
+  ]
+}

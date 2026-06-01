@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Brand — PartsBase Design System</title>
+<link rel="stylesheet" href="../system/pb-system.css" />
+<link rel="stylesheet" href="_preview.css" />
+<style>
+  .logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .logo-card {
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 14px; align-items: flex-start;
+    min-height: 140px;
+    background: #fff;
+  }
+  .logo-card.dark { background: var(--color-800); border-color: var(--color-800); }
+  .logo-card img { height: 28px; width: auto; }
+  .logo-card.master img { height: 38px; }
+  .logo-card .name { font-size: var(--text-sm-size); font-weight: var(--font-semibold); color: var(--color-800); white-space: nowrap; }
+  .logo-card.dark .name { color: #fff; }
+  .logo-card .desc { font-size: var(--text-sm-size); color: var(--gray-600); margin: 0; }
+  .logo-card.dark .desc { color: var(--color-200); }
+
+  .tile-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .tile {
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    display: grid; place-items: center;
+    padding: 20px;
+    position: relative;
+  }
+  .tile img { max-width: 80%; height: auto; }
+  .tile-caption {
+    position: absolute;
+    left: 12px; bottom: 10px;
+    font-size: 11px;
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .tile.b1 { background: var(--color-800); }
+  .tile.b1 .tile-caption { color: rgba(255,255,255,0.7); }
+  .tile.b3 { background: var(--color-100); border: 1px solid var(--color-200); }
+  .tile.b3 .tile-caption { color: var(--color-700); }
+  .tile.b4 { background: #fff; border: 1px solid var(--gray-200); }
+  .tile.b4 .tile-caption { color: var(--gray-600); }
+
+  .tile.dont { background: var(--color-500); position: relative; }
+  .tile.dont::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(to top left, transparent calc(50% - 1px), rgba(220,38,38,0.85) 50%, transparent calc(50% + 1px));
+    border-radius: 16px;
+    pointer-events: none;
+  }
+  .tile.dont .tile-caption { color: #fff; }
+
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .voice-card { border: 1px solid var(--gray-200); border-radius: 14px; padding: 22px; }
+  .voice-card h3 { margin: 0 0 8px; font-size: var(--text-md-size); font-weight: var(--font-semibold); color: var(--color-800); }
+  .voice-card p { margin: 0; color: var(--gray-700); font-size: var(--text-sm-size); line-height: var(--text-sm-line); }
+  .voice-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--gray-700); font-size: var(--text-sm-size); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<header class="preview-header">
+  <div>
+    <div class="preview-eyebrow">Brand</div>
+    <h1>Logos &amp; product marks</h1>
+    <p>One master PartsBase logo + a family of product lockups. All marks carry the same wordmark and swap a subtitle per product. Use the light mark on dark backgrounds, the dark mark on light.</p>
+  </div>
+</header>
+
+<section class="preview-section">
+  <h2>Master logo</h2>
+  <p class="section-sub">Always use the dark mark on light surfaces and the light mark on dark surfaces. Never recolor the swoosh.</p>
+  <div class="logo-grid">
+    <div class="logo-card master"><img src="../system/logos/pb-logo-light.svg" alt="PartsBase" /><span class="name">On light</span><p class="desc">On white, <span class="mono">color-25</span>, or <span class="mono">color-100</span>.</p></div>
+    <div class="logo-card master dark"><img src="../system/logos/pb-logo-dark.svg" alt="PartsBase" /><span class="name">On dark</span><p class="desc">On <span class="mono">color-800</span>, imagery, or dark hero backgrounds.</p></div>
+    <div class="logo-card master" style="background: var(--color-100); border-color: var(--color-200);"><img src="../system/logos/pb-logo-light.svg" alt="PartsBase" /><span class="name">On tint</span><p class="desc">Safe on brand tint panels.</p></div>
+  </div>
+</section>
+
+<section class="preview-section">
+  <h2>Product marks</h2>
+  <p class="section-sub">Each PartsBase product has a dedicated lockup. On product landing pages, use the matching mark; in the unified marketplace, use the master logo. Product marks are designed for light surfaces — for dark backgrounds, invert or place inside a tinted card.</p>
+  <div class="logo-grid">
+    <div class="logo-card"><img src="../system/logos/pb-loc.svg" alt="PBLocator" /><span class="name">PBLocator</span><p class="desc">Buyer search + supplier discovery.</p></div>
+    <div class="logo-card"><img src="../system/logos/pb-store.svg" alt="PBStore" /><span class="name">PBStore</span><p class="desc">Ready-to-ship parts at list price.</p></div>
+    <div class="logo-card"><img src="../system/logos/pb-lis.svg" alt="PBLister" /><span class="name">PBLister</span><p class="desc">Aircraft + engine marketplace.</p></div>
+    <div class="logo-card"><img src="../system/logos/pb-int.svg" alt="PBIntegration" /><span class="name">PBIntegration</span><p class="desc">ERP / inventory sync.</p></div>
+    <div class="logo-card"><img src="../system/logos/pb-adv.svg" alt="PBAdvertising" /><span class="name">PBAdvertising</span><p class="desc">Promoted listings + campaigns.</p></div>
+    <div class="logo-card"><img src="../system/logos/pb-expo.svg" alt="PBExpo" /><span class="name">PBExpo</span><p class="desc">Annual in-person expo.</p></div>
+    <div class="logo-card"><img src="../system/logos/pb-express.svg" alt="PBExpress" /><span class="name">PBExpress</span><p class="desc">Fast-fulfillment SKU program.</p></div>
+    <div class="logo-card"><img src="../system/logos/pb-gd.svg" alt="PBGovernmentData" /><span class="name">PBGovernmentData</span><p class="desc">Gov + defense procurement.</p></div>
+  </div>
+</section>
+
+<section class="preview-section">
+  <h2>Background clearance</h2>
+  <p class="section-sub">Give the logo at least one x-height of clear space on all sides. Use the <strong>light-background mark</strong> on white and tints; use the <strong>dark-background mark</strong> (white "Parts") on navy <span class="mono">color-800</span> or imagery. Avoid placing either mark on mid-blue — the blue swoosh collides with the background.</p>
+  <div class="tile-row">
+    <div class="tile b4"><img src="../system/logos/pb-logo-light.svg" alt="" /><span class="tile-caption">✓ On white</span></div>
+    <div class="tile b3"><img src="../system/logos/pb-logo-light.svg" alt="" /><span class="tile-caption">✓ On tint — color-100</span></div>
+    <div class="tile b1"><img src="../system/logos/pb-logo-dark.svg" alt="" /><span class="tile-caption">✓ On navy — color-800</span></div>
+    <div class="tile" style="background: #0A1F3D;"><img src="../system/logos/pb-logo-dark.svg" alt="" /><span class="tile-caption" style="color: rgba(255,255,255,0.7);">✓ On deep navy / imagery</span></div>
+  </div>
+  <h3 style="margin: 24px 0 8px; font-size: var(--text-md-size); font-weight: var(--font-semibold); color: var(--color-800);">Don't</h3>
+  <div class="tile-row">
+    <div class="tile dont" style="background: var(--color-500);"><img src="../system/logos/pb-logo-light.svg" alt="" /><span class="tile-caption">✗ Either mark on mid-blue</span></div>
+    <div class="tile dont" style="background: var(--color-300);"><img src="../system/logos/pb-logo-light.svg" alt="" /><span class="tile-caption">✗ On pale blue — low contrast</span></div>
+    <div class="tile dont" style="background: #fff; border: 1px solid var(--gray-200);"><img src="../system/logos/pb-logo-light.svg" alt="" style="opacity:0.3;" /><span class="tile-caption" style="color: var(--gray-500);">✗ Reduced opacity</span></div>
+    <div class="tile dont" style="background: linear-gradient(135deg, var(--color-500), #f59e0b);"><img src="../system/logos/pb-logo-dark.svg" alt="" /><span class="tile-caption">✗ Busy gradients</span></div>
+  </div>
+</section>
+
+<section class="preview-section">
+  <h2>Voice &amp; content</h2>
+  <p class="section-sub">Short, declarative, domain-aware. Never cutesy — customers are airlines, MROs, and defense buyers.</p>
+  <div class="voice-grid">
+    <div class="voice-card">
+      <h3>Do</h3>
+      <p>Be direct about the value. Lead with the outcome, follow with the mechanic. Use industry terms (MRO, OEM, FBO, BOM, PMA) — the audience expects them.</p>
+      <ul>
+        <li>"Search, compare, and connect with trusted suppliers."</li>
+        <li>"Buy ready-to-send parts at the click of a button."</li>
+        <li>"Serving 6,000+ aerospace companies in 140+ countries."</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <h3>Don't</h3>
+      <p>No startup-speak, no emoji, no exclamation marks. Don't explain what aerospace is — the reader already works in it.</p>
+      <ul>
+        <li>"Unlock aerospace superpowers 🚀"</li>
+        <li>"The Uber for airplane parts"</li>
+        <li>"Built for the modern aviation hustler"</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

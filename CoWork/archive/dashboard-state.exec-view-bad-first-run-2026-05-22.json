@@ -1,0 +1,277 @@
+{
+  "_schema": "dashboard-state v1.0 — refreshed by exec-view scheduled task, full overwrite each run",
+  "refreshed_at": "2026-05-22T14:00:00-04:00",
+  "refresh_source": "exec-view scheduled task",
+
+  "today": {
+    "date": "2026-05-22",
+    "day_of_week": "Friday",
+    "total_meeting_hours": 1.5,
+    "meetings": [
+      { "time": "10:00–11:00", "title": "Consultative Selling", "prep": false, "notes": "Onboarding cohort training." },
+      { "time": "13:00–13:15", "title": "Dan & Cat | ClickUp vendor call", "prep": true, "notes": "Know your ask — evaluating or just taking the call?" },
+      { "time": "14:00–14:15", "title": "Dan x Jordan | New hire connect", "prep": false, "notes": "First-month check-in with Jordan Clarke." }
+    ],
+    "focus_blocks": [
+      { "label": "Morning", "hours": 2.0, "window": "08:00–10:00" },
+      { "label": "Midday", "hours": 2.0, "window": "11:00–13:00" },
+      { "label": "Afternoon", "hours": 2.75, "window": "14:15–17:00" }
+    ],
+    "inbox_actions": [
+      { "from": "noreply@seismic.com", "subject": "Onboarding Day 3 assignment overdue", "priority": "medium", "due": "2026-05-20" },
+      { "from": "jhernandez@partsbase.com", "subject": "Teams Background — verify details", "priority": "low", "due": null }
+    ]
+  },
+
+  "executive_summary": {
+    "as_of": "2026-05-22",
+    "headline": "Two RED emergencies dominate the next 2 weeks: Mailchimp sender reputation is in critical violation (>25% complaint rate) and GA4 tracking is broken across partsbase.com (SPA page_view never fires). Both block downstream MarTech work. Mitigation plans are defined; execution requires immediate resourcing.",
+    "status_by_project": [
+      {
+        "id": "proj_006",
+        "name": "Mailchimp Sender Reputation Recovery",
+        "rag": "RED",
+        "one_liner": "Complaint rate 27–30% vs. <4% threshold. 213k dead contacts (52% of list) must be suppressed. Net list shrinkage: 3,700/mo.",
+        "sprint_end": "2026-06-04",
+        "phase": "implementation"
+      },
+      {
+        "id": "proj_003",
+        "name": "GA4 + GTM SPA Fix",
+        "rag": "RED",
+        "one_liner": "page_view never fires on route changes. Blocks HubSpot lead scoring, attribution, and SEO engine. GTM History Change trigger is the fix.",
+        "sprint_end": "2026-05-28",
+        "phase": "implementation"
+      },
+      {
+        "id": "proj_004",
+        "name": "HubSpot Setup",
+        "rag": "AMBER",
+        "one_liner": "Planning phase. Blocked by GA4 fix (proj_003) and Omar Servin tool approval. ORO CRM migration vs. fresh-start decision pending.",
+        "sprint_end": "2026-06-11",
+        "phase": "planning"
+      },
+      {
+        "id": "proj_005",
+        "name": "Clay + Claude Outbound POC",
+        "rag": "AMBER",
+        "one_liner": "Day 30 credibility moment. Blocked by HubSpot (proj_004). Target: 2+ meetings from first 50 contacts.",
+        "sprint_end": "2026-06-11",
+        "phase": "planning"
+      },
+      {
+        "id": "proj_002",
+        "name": "MarTech Email Classifier",
+        "rag": "BLUE",
+        "one_liner": "Spec-draft complete (2026-05-21). Awaiting Dan approval. ORO CRM output JSON schema TBD before Block 3.",
+        "sprint_end": null,
+        "phase": "design"
+      },
+      {
+        "id": "proj_001",
+        "name": "Campaign Intelligence Agent",
+        "rag": "GRAY",
+        "one_liner": "Backlog. Seed entry only — content domain not yet built.",
+        "sprint_end": null,
+        "phase": "idea"
+      }
+    ],
+    "active_count": 4,
+    "red_count": 2,
+    "amber_count": 2,
+    "shipped_this_week": []
+  },
+
+  "gtm_risks": [
+    {
+      "id": "risk_001",
+      "severity": "CRITICAL",
+      "title": "Mailchimp deliverability in violation — Microsoft O365 at 27.3%, Proofpoint at 30.3%",
+      "detail": "Complaint rate threshold is <4%. Current rates are 6–7x over limit. 439k contacts total; 213k (52%) have not opened in last 50 sends. Net shrinkage of 3,700 contacts/month. Zero automations in place — all sends are manual one-off. If not remediated, risk of domain block by major ISPs.",
+      "owner": "Dan + Alejandra Avalos",
+      "target_date": "2026-06-04",
+      "next_action": "Suppress 213k dead contacts immediately. Launch re-engagement campaign for borderline segment before full suppression.",
+      "blocker": null
+    },
+    {
+      "id": "risk_002",
+      "severity": "CRITICAL",
+      "title": "GA4 SPA tracking broken — zero valid page_view events on partsbase.com",
+      "detail": "partsbase.com is a Single Page Application. GA4 page_view never fires on route changes. All downstream tracking (HubSpot lead scoring, attribution modeling, SEO content engine) is blind. Pre-start audit: 42/100. This was a Day 7 target per the 180-day plan and remains unresolved.",
+      "owner": "Dan + Engineering",
+      "target_date": "2026-05-28",
+      "next_action": "Confirm front-end framework with engineering (React/Next.js/Angular). Deploy GTM History Change trigger.",
+      "blocker": "Engineering access to GTM container"
+    },
+    {
+      "id": "risk_003",
+      "severity": "HIGH",
+      "title": "HubSpot setup blocked — ORO CRM migration decision and tool approval outstanding",
+      "detail": "HubSpot is the mandated CRM/MAP. Setup cannot proceed without: (1) ORO CRM state evaluation (migrate vs. fresh start), (2) Omar Servin IT Architect approval for new tool onboarding, (3) GA4 fix as prerequisite for tracking integration.",
+      "owner": "Dan",
+      "target_date": "2026-06-11",
+      "next_action": "Get HubSpot access provisioned. Evaluate ORO CRM state. Loop Omar Servin.",
+      "blocker": "Omar Servin approval + GA4 fix"
+    },
+    {
+      "id": "risk_004",
+      "severity": "HIGH",
+      "title": "Day 30 outbound POC at risk — HubSpot dependency not yet unblocked",
+      "detail": "Clay + Claude outbound POC is the Day 30 credibility milestone (target: 2+ meetings booked from first 50 contacts). Blocked until HubSpot is live for sequence loading. Clock is running.",
+      "owner": "Dan",
+      "target_date": "2026-06-11",
+      "next_action": "Seed Clay table with aviation parts supplier contacts now (distributors + surplus dealers). Prompt templates already built.",
+      "blocker": "HubSpot (proj_004) must be live first"
+    }
+  ],
+
+  "decisions_needed": [
+    {
+      "id": "dec_001",
+      "urgency": "URGENT",
+      "decision": "Authorize Mailchimp mass suppression of 213k dead contacts",
+      "context": "Suppressing 52% of the list is irreversible and will reduce vanity metrics immediately. However, it is required to bring complaint rates under the 4% threshold and protect domain reputation. High performers (Mike - Renewals: 45% open; PBExpo: 37–45% open) are unaffected.",
+      "needed_from": "Rodrigo Garcia (CTOO)",
+      "deadline": "2026-05-29"
+    },
+    {
+      "id": "dec_002",
+      "urgency": "URGENT",
+      "decision": "Grant engineering team access to GTM container for GA4 SPA fix deployment",
+      "context": "GTM History Change trigger deployment requires engineering access to the GTM container. Dan has the implementation spec ready. Blocked on access provisioning.",
+      "needed_from": "Engineering / IT (Omar Servin or Sergio Corona)",
+      "deadline": "2026-05-28"
+    },
+    {
+      "id": "dec_003",
+      "urgency": "THIS WEEK",
+      "decision": "ORO CRM: migrate to HubSpot vs. run in parallel",
+      "context": "HubSpot setup requires a clear decision on ORO's fate. Running parallel systems creates data drift and doubles maintenance load. Migration path requires CRM team to confirm output JSON schema (also blocks MarTech Email Classifier spec Block 3).",
+      "needed_from": "Rodrigo Garcia + CRM team",
+      "deadline": "2026-06-04"
+    },
+    {
+      "id": "dec_004",
+      "urgency": "THIS WEEK",
+      "decision": "Omar Servin IT Architect approval for HubSpot onboarding",
+      "context": "Per iron rule: loop in Omar Servin before any new tool commitment. HubSpot is the CRM/MAP mandated by the role but formal IT approval is still pending. Sergio Corona handles vendor contracts once approved.",
+      "needed_from": "Omar Servin",
+      "deadline": "2026-06-04"
+    }
+  ],
+
+  "priorities_7day": [
+    {
+      "rank": 1,
+      "project": "proj_006",
+      "action": "Execute Mailchimp suppression: export 213k dead contacts, load suppression list, confirm complaint rate drop",
+      "by": "2026-05-29",
+      "depends_on": "Leadership approval (dec_001)"
+    },
+    {
+      "rank": 2,
+      "project": "proj_003",
+      "action": "Confirm front-end framework with engineering; deploy GTM History Change trigger; validate GA4 page_view firing on route changes",
+      "by": "2026-05-28",
+      "depends_on": "GTM container access (dec_002)"
+    },
+    {
+      "rank": 3,
+      "project": "proj_002",
+      "action": "Review and approve MarTech Email Classifier spec at ai-builds/outputs/spec-martech-email-classifier-2026-05-21.md",
+      "by": "2026-05-27",
+      "depends_on": null
+    },
+    {
+      "rank": 4,
+      "project": "proj_004",
+      "action": "Initiate HubSpot access provisioning; present ORO CRM migration recommendation to Rodrigo",
+      "by": "2026-05-29",
+      "depends_on": "Omar Servin approval (dec_004)"
+    },
+    {
+      "rank": 5,
+      "project": "proj_005",
+      "action": "Pre-build: seed Clay table with 100–200 aviation parts supplier contacts while waiting on HubSpot",
+      "by": "2026-05-29",
+      "depends_on": null
+    },
+    {
+      "rank": 6,
+      "project": null,
+      "action": "Complete overdue Seismic onboarding assignment: 2025 PartsBase Cohort Onboarding Day 3 (due 2026-05-20, overdue)",
+      "by": "2026-05-22",
+      "depends_on": null
+    }
+  ],
+
+  "proof_points_recent": [
+    {
+      "date": "2026-05-21",
+      "item": "MarTech Email Classifier spec generated via /build (spec-driven-workflow) — full §1–§9 spec + build plan at ai-builds/outputs/spec-martech-email-classifier-2026-05-21.md",
+      "impact": "First spec-driven build artifact. Demonstrates end-to-end /build workflow is operational."
+    },
+    {
+      "date": "2026-05-21",
+      "item": "Mission Control OS fully built and operational — work-ops and ai-builds domains live with scheduled workflows, M365 connector active",
+      "impact": "Daily brief, /triage, /build, and this exec-view refresh all running on schedule."
+    },
+    {
+      "date": "2026-05-21",
+      "item": "Mailchimp deliverability audit completed — complaint rates, dead contact volume, and top-performing segments quantified",
+      "impact": "Baseline established. 213k suppression target identified. High-value segments (Mike - Renewals, PBExpo) protected."
+    },
+    {
+      "date": "2026-05-21",
+      "item": "ORO CRM + Mailchimp cross-reference analysis initiated — findings and next steps documented in resources/ORO CRM/",
+      "impact": "Groundwork for HubSpot migration decision and MarTech Email Classifier output schema."
+    }
+  ],
+
+  "stale_flags": [
+    {
+      "id": "stale_001",
+      "item": "GA4 fix was a Day 7 target per 180-day plan — still unresolved as of 2026-05-22",
+      "action": "Escalate GTM container access immediately. This is now behind schedule."
+    },
+    {
+      "id": "stale_002",
+      "item": "ORO CRM and mailchimp-action-plan resource files could not be read this refresh cycle (outside session folder access)",
+      "action": "Ensure ~/Claude/PartsBase/resources/ is accessible to scheduled tasks. ORO findings and mailchimp action-plan data missing from this state snapshot."
+    },
+    {
+      "id": "stale_003",
+      "item": "partsbase-success-plan.md could not be read — 180-day milestone tracking not refreshed",
+      "action": "Add ~/Claude/PartsBase/ to session accessible folders or copy relevant milestone data into CoWork/memory/."
+    },
+    {
+      "id": "stale_004",
+      "item": "Alejandra Avalos (Mailchimp contractor) has no email on file — loop-in required for suppression execution",
+      "action": "Confirm Alejandra's contact info before initiating suppression workflow."
+    }
+  ],
+
+  "build_pipeline": {
+    "specs_awaiting_approval": ["spec-martech-email-classifier-2026-05-21.md"],
+    "in_implementation": ["proj_003 (GA4+GTM)", "proj_006 (Mailchimp)"],
+    "blocked": ["proj_004 (HubSpot — Omar approval + GA4)", "proj_005 (Outbound POC — HubSpot)"],
+    "backlog": ["proj_001 (Campaign Intelligence Agent)"]
+  },
+
+  "changelog": [
+    {
+      "timestamp": "2026-05-22T14:00:00-04:00",
+      "run": "exec-view scheduled task",
+      "changes": [
+        "CREATED dashboard-state.json — first run, no prior state to compare.",
+        "Populated executive summary from projects.json (4 active, 2 RED, 2 AMBER).",
+        "Documented 4 GTM risks: 2 CRITICAL (Mailchimp, GA4), 2 HIGH (HubSpot, Outbound POC timeline).",
+        "Documented 4 leadership decisions needed, 2 URGENT (suppression authorization, GTM access).",
+        "Set 7-day priorities ranked by urgency and dependency order.",
+        "Recorded 4 recent proof points from 2026-05-21 system build.",
+        "Flagged 4 stale items including Day 7 GA4 miss and 3 resource files outside session access.",
+        "NOTE: resources/ORO CRM/ and resources/mailchimp-action-plan.md were inaccessible this run (outside CoWork session folder). ORO CRM and mailchimp action-plan details sourced from projects.json notes only. Fix: extend session access to ~/Claude/PartsBase/resources/ or migrate key facts into CoWork/memory/."
+      ]
+    }
+  ]
+}
