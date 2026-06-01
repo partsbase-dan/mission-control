@@ -1,8 +1,8 @@
 {
   "meta": {
     "created": "2026-05-11",
-    "lastUpdated": "2026-05-28",
-    "updatedBy": "ORO framing update \u2014 leads-only, HubSpot feeds ORO",
+    "lastUpdated": "2026-06-01",
+    "updatedBy": "Design system reskin \u2014 light mode, inline logo, DS tokens",
     "executionStart": "2026-06-02",
     "day30": "2026-07-02",
     "day60": "2026-08-01",
@@ -20,7 +20,9 @@
     "attribution": "none",
     "health": "none"
   },
-  "milestones": { "m1": true },
+  "milestones": {
+    "m1": true
+  },
   "plan": {
     "workstreams": [
       {
@@ -622,8 +624,14 @@
     ]
   },
   "tasks": {
-    "s0_0": true, "s0_1": true, "s0_2": true, "s0_3": true,
-    "s0_4": true, "s0_5": true, "s0_6": true, "s0_7": true
+    "s0_0": true,
+    "s0_1": true,
+    "s0_2": true,
+    "s0_3": true,
+    "s0_4": true,
+    "s0_5": true,
+    "s0_6": true,
+    "s0_7": true
   },
   "risks": {
     "r1": "red",
