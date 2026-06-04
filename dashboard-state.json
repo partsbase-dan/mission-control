@@ -1,8 +1,8 @@
 {
   "meta": {
     "created": "2026-05-11",
-    "lastUpdated": "2026-06-01",
-    "updatedBy": "Design system reskin \u2014 light mode, inline logo, DS tokens",
+    "lastUpdated": "2026-06-04",
+    "updatedBy": "Vector + Clay setup complete \u2014 milestones m4b + m4c closed early",
     "executionStart": "2026-06-02",
     "day30": "2026-07-02",
     "day60": "2026-08-01",
@@ -12,7 +12,8 @@
   "workstreams": {
     "tracking": "blue",
     "hubspot": "blue",
-    "claypoc": "none",
+    "vector": "green",
+    "claypoc": "green",
     "scoring": "none",
     "seo": "none",
     "outbound": "none",
@@ -21,7 +22,9 @@
     "health": "none"
   },
   "milestones": {
-    "m1": true
+    "m1": true,
+    "m4b": true,
+    "m4c": true
   },
   "plan": {
     "workstreams": [
@@ -631,7 +634,12 @@
     "s0_4": true,
     "s0_5": true,
     "s0_6": true,
-    "s0_7": true
+    "s0_7": true,
+    "s2_6": true,
+    "s2_7": true,
+    "s2_8": true,
+    "s2_11": true,
+    "s2_12": true
   },
   "risks": {
     "r1": "red",
@@ -648,6 +656,12 @@
     "decisions_log": ""
   },
   "changelog": [
+    {
+      "timestamp": "2026-06-04T00:00:00.000-04:00",
+      "author": "Dan",
+      "type": "milestone",
+      "message": "Vector + Clay setup complete (Day 3). Vector pixel live on partsbase.com + pbexpo.com · ICP filter configured · routing to Clay. Clay workspace live · enrichment waterfall configured. Milestones m4b + m4c closed 28 days ahead of Day 30 target. Clay → HubSpot push pending HubSpot contract. Retargeting export (Google/Meta/LinkedIn) pending Clay routing completion."
+    },
     {
       "timestamp": "2026-05-11T00:00:00.000Z",
       "author": "Claude",
