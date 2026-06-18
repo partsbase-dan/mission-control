@@ -1,8 +1,8 @@
 {
   "meta": {
     "created": "2026-05-11",
-    "lastUpdated": "2026-06-04",
-    "updatedBy": "Vector + Clay setup complete \u2014 milestones m4b + m4c closed early",
+    "lastUpdated": "2026-06-18",
+    "updatedBy": "Sprint 1 + Sprint 2 closed \u2014 Day 7\u201314 milestones (micp, m2, m3, m3b) marked complete",
     "executionStart": "2026-06-02",
     "day30": "2026-07-02",
     "day60": "2026-08-01",
@@ -23,6 +23,10 @@
   },
   "milestones": {
     "m1": true,
+    "micp": true,
+    "m2": true,
+    "m3": true,
+    "m3b": true,
     "m4b": true,
     "m4c": true
   },
@@ -635,11 +639,37 @@
     "s0_5": true,
     "s0_6": true,
     "s0_7": true,
+    "s1_0": true,
+    "s1_1": true,
+    "s1_2": true,
+    "s1_3": true,
+    "s1_4": true,
+    "s1_5": true,
+    "s1_6": true,
+    "s1_7": true,
+    "s1_8": true,
+    "s1_9": true,
+    "s1_10": true,
+    "s1_11": true,
+    "s1_12": true,
+    "s1_13": true,
+    "s1_14": true,
+    "s1_15": true,
+    "s2_0": true,
+    "s2_1": true,
+    "s2_2": true,
+    "s2_3": true,
+    "s2_4": true,
+    "s2_5": true,
     "s2_6": true,
     "s2_7": true,
     "s2_8": true,
+    "s2_9": true,
+    "s2_10": true,
     "s2_11": true,
-    "s2_12": true
+    "s2_12": true,
+    "s2_13": true,
+    "s2_14": true
   },
   "risks": {
     "r1": "red",
@@ -656,6 +686,12 @@
     "decisions_log": ""
   },
   "changelog": [
+    {
+      "timestamp": "2026-06-18T00:00:00.000-04:00",
+      "author": "Dan",
+      "type": "milestone",
+      "message": "Sprint 1 + Sprint 2 closed out. All 16 Sprint 1 tasks and 15 Sprint 2 tasks marked complete. Day 7–14 milestones closed: ICP reclassification (micp), GTM History Change trigger deployed (m2), Digital ad spend audit delivered (m3), Baseline funnel report delivered (m3b)."
+    },
     {
       "timestamp": "2026-06-04T00:00:00.000-04:00",
       "author": "Dan",
