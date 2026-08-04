@@ -203,6 +203,7 @@
       <button onclick="showTab('resources')" id="outertab-resources" class="outer-tab"><span class="nav-icon">📚</span><span>Resources</span></button>
       <button onclick="showTab('email')" id="outertab-email" class="outer-tab"><span class="nav-icon">✉</span><span>Email Health</span></button>
       <button onclick="showTab('icp')" id="outertab-icp" class="outer-tab"><span class="nav-icon">⌖</span><span>ICP &amp; Targeting</span></button>
+      <button onclick="showTab('pbexpo')" id="outertab-pbexpo" class="outer-tab"><span class="nav-icon">🎫</span><span>PBExpo Campaign</span></button>
       <div class="sidebar-footer">
         <div style="font-size:11px;color:#5f626b;margin-top:18px;">Dan Rodgers · MarTech</div>
       </div>
@@ -459,6 +460,97 @@
         </div>
       </div>
 
+      <!-- ═══ PBEXPO 2027 CAMPAIGN ═══ -->
+      <div id="tab-pbexpo-content" class="hidden" style="padding:24px">
+        <div style="margin-bottom:18px">
+          <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px">PBExpo 2027 — Attendee Registration Campaign</div>
+          <div style="font-size:12px;color:var(--muted)">A ~6-month, multi-channel campaign to drive buyer-side registrations from registration-open through event day, plus a re-engagement track for past attendees. Miami Beach Convention Center · <b>Mar 10–11, 2027</b> (confirm official date).</div>
+        </div>
+
+        <div class="grid-4">
+          <div class="card"><div class="card-title">Runway</div><div class="kpi-value" id="pbx-runway">~6 mo</div><div class="kpi-sub">Reg open → event</div></div>
+          <div class="card"><div class="card-title">Audiences</div><div class="kpi-value">2</div><div class="kpi-sub">New buyers + past attendees</div></div>
+          <div class="card"><div class="card-title">Channels</div><div class="kpi-value">4</div><div class="kpi-sub">Email · Social · Paid · LP</div></div>
+          <div class="card"><div class="card-title">Days to event</div><div class="kpi-value" id="pbx-countdown" style="color:var(--accent)">—</div><div class="kpi-sub" id="pbx-countdown-sub">to Mar 10, 2027</div></div>
+        </div>
+
+        <div class="rag-amber" style="margin-bottom:18px">⚠️ <b>Confirm before launch:</b> public listings disagree on the date — aggregators show March 10–11, 2027 (Neventum, 10times); one older listing shows Feb 27–28. Lock the official date from pbexpo.org before any asset ships. This plan assumes March 10–11, 2027.</div>
+
+        <div class="section-label">Vetted Skills used</div>
+        <div class="card" style="margin-bottom:12px">
+          <div style="font-weight:700;font-size:14px;margin-bottom:10px">Primary — the backbone</div>
+          <div class="grid-3">
+            <div class="skill-row" style="flex-direction:column;align-items:flex-start;gap:4px"><span class="skill-cmd">launch-strategy</span><span style="font-size:11.5px;color:var(--label)">Phased structure + launch-day playbook</span></div>
+            <div class="skill-row" style="flex-direction:column;align-items:flex-start;gap:4px"><span class="skill-cmd">email-sequence</span><span style="font-size:11.5px;color:var(--label)">Event-based drips (both flows)</span></div>
+            <div class="skill-row" style="flex-direction:column;align-items:flex-start;gap:4px"><span class="skill-cmd">marketing-demand-acquisition</span><span style="font-size:11.5px;color:var(--label)">Multi-channel engine + attribution</span></div>
+            <div class="skill-row" style="flex-direction:column;align-items:flex-start;gap:4px"><span class="skill-cmd">marketing-strategy-pmm</span><span style="font-size:11.5px;color:var(--label)">Positioning + ICP, one story</span></div>
+            <div class="skill-row" style="flex-direction:column;align-items:flex-start;gap:4px"><span class="skill-cmd">marketing-psychology</span><span style="font-size:11.5px;color:var(--label)">Scarcity, social proof, FOMO</span></div>
+          </div>
+          <div style="font-weight:700;font-size:14px;margin:16px 0 8px">Supporting — channel &amp; asset execution</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="tag tag-blue">copywriting</span><span class="tag tag-blue">page-cro</span><span class="tag tag-blue">signup-flow-cro</span><span class="tag tag-blue">form-cro</span><span class="tag tag-blue">social-content</span><span class="tag tag-blue">social-media-manager</span><span class="tag tag-blue">paid-ads</span><span class="tag tag-blue">ad-creative</span><span class="tag tag-blue">content-strategy</span><span class="tag tag-blue">campaign-analytics</span><span class="tag tag-blue">analytics-tracking</span><span class="tag tag-blue">utm-link-generator</span>
+          </div>
+        </div>
+
+        <div class="section-label">Audience &amp; segmentation</div>
+        <div class="grid-3">
+          <div class="card"><div style="font-weight:700;margin-bottom:6px">Track A · New buyers <span class="tag tag-blue">Primary</span></div><div style="font-size:12px;color:var(--label)">Buyer Bob (Purchasing Dir), Procurement Paula (1,000+ emp), MRO Mark (buyer + seller). Priority segments: MROs, Distributors, Brokers, OEMs, Contract Mfrs.</div></div>
+          <div class="card"><div style="font-weight:700;margin-bottom:6px">Track B · Past attendees <span class="tag tag-green">Warm</span></div><div style="font-size:12px;color:var(--label)">Prior-year registrants — highest-intent, lowest-CAC. Separate "welcome back / what's new in 2027" flow.</div></div>
+          <div class="card"><div style="font-weight:700;margin-bottom:6px">Suppress <span class="tag tag-red">Anti-persona</span></div><div style="font-size:12px;color:var(--label)">Pilots, flight attendants, ATCs, students (~31k in Mailchimp). Enrich Airlines lists before sequencing. Protects deliverability.</div></div>
+        </div>
+
+        <div class="section-label">Channel strategy</div>
+        <div class="card" style="margin-bottom:12px">
+          <div class="row"><div class="row-main"><div class="row-title">Email <span class="tag tag-blue">Core</span></div><div class="row-sub">Announce · nurture · urgency · reminders — HubSpot preferred; Mailchimp only if deliverability fixed</div></div></div>
+          <div class="row"><div class="row-main"><div class="row-title">LinkedIn / organic</div><div class="row-sub">Awareness, credibility, reveals, countdown — MeetAlfred for outbound touches</div></div></div>
+          <div class="row"><div class="row-main"><div class="row-title">Paid ads</div><div class="row-sub">Cold registrations + retarget abandoners — LinkedIn (decision-makers) + Google (AOG/parts intent)</div></div></div>
+          <div class="row"><div class="row-main"><div class="row-title">Landing page + CRO</div><div class="row-sub">Conversion surface — dedicated, SEO-optimized, single primary CTA</div></div></div>
+        </div>
+
+        <div class="section-label">Phased timeline (~6 months)</div>
+        <div class="grid-2">
+          <div class="rag-blue"><b>Phase 0 · Foundation</b> <span style="color:var(--muted);font-size:11px">(now → reg open)</span><div style="font-size:12px;color:var(--label);margin-top:4px">Fix GA4/GTM · resolve Mailchimp deliverability / warm HubSpot · build landing page · segment lists + suppress anti-persona · UTM taxonomy · lock early-bird offer</div></div>
+          <div class="rag-blue"><b>Phase 1 · Launch / Announce</b> <span style="color:var(--muted);font-size:11px">(mid-Aug → Sep)</span><div style="font-size:12px;color:var(--label);margin-top:4px">"Registration is open" email + LinkedIn · early-bird live · past-attendee welcome-back flow · paid brand + retargeting</div></div>
+          <div class="rag-blue"><b>Phase 2 · Awareness &amp; Value</b> <span style="color:var(--muted);font-size:11px">(Sep → Nov)</span><div style="font-size:12px;color:var(--label);margin-top:4px">Rolling reveals (exhibitors, speakers, agenda) · testimonials · content engine · segment-personalized "why attend"</div></div>
+          <div class="rag-blue"><b>Phase 3 · Early-bird Urgency</b> <span style="color:var(--muted);font-size:11px">(Nov → mid-Dec)</span><div style="font-size:12px;color:var(--label);margin-top:4px">Deadline countdown (T-2wk/T-1wk/T-0) · loss-aversion framing · paid leans into deadline</div></div>
+          <div class="rag-blue"><b>Phase 4 · Sustained Nurture</b> <span style="color:var(--muted);font-size:11px">(mid-Dec → Jan)</span><div style="font-size:12px;color:var(--label);margin-top:4px">Lighter holiday cadence · new-year re-engagement · second offer tier (group/team passes)</div></div>
+          <div class="rag-blue"><b>Phase 5 · Final Push</b> <span style="color:var(--muted);font-size:11px">(Feb → event)</span><div style="font-size:12px;color:var(--label);margin-top:4px">Countdown series (T-4wk → T-2d) · last-chance · logistics/travel · know-before-you-go</div></div>
+        </div>
+        <div class="rag-green" style="margin-bottom:18px"><b>Phase 6 · During &amp; Post</b> <span style="color:var(--muted);font-size:11px">(March)</span><div style="font-size:12px;color:var(--label);margin-top:4px">Live social coverage · post-event thank-you + recap · feed two pipelines: 2028 early-interest list + warm handoff of high-fit attendees to booth-sales / marketplace motions</div></div>
+
+        <div class="section-label">Email flows</div>
+        <div class="grid-2">
+          <div class="card"><div style="font-weight:700;margin-bottom:8px">Flow A · New buyer drip</div>
+            <div class="row"><div class="row-main"><div class="row-title">1 · Announcement + early-bird</div><div class="row-sub">Reg opens</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">2 · Why attend (ROI, by segment)</div><div class="row-sub">+3–4 days</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">3 · Social proof</div><div class="row-sub">+1 week</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">4 · Reveal (speakers/agenda)</div><div class="row-sub">+2 weeks</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">5 · Urgency (early-bird deadline)</div><div class="row-sub">T-7 / T-2 / T-0</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">6 · Value reinforcement</div><div class="row-sub">Post-early-bird</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">7 · Countdown / last chance</div><div class="row-sub">T-4wk → T-2d</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">8 · Confirmation + know-before-you-go</div><div class="row-sub">On registration</div></div></div>
+          </div>
+          <div class="card"><div style="font-weight:700;margin-bottom:8px">Flow B · Past-attendee re-engage <span class="tag tag-green">Warm</span></div>
+            <div class="row"><div class="row-main"><div class="row-title">1 · Welcome back</div><div class="row-sub">Reg open · reference prior attendance</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">2 · What's new / bigger this year</div><div class="row-sub">+4–5 days</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">3 · Early-bird urgency</div><div class="row-sub">Early-bird window</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">4 · Last chance</div><div class="row-sub">Final push</div></div></div>
+            <div style="margin-top:12px;font-weight:700;font-size:13px">Testimonials to deploy</div>
+            <div style="font-size:11.5px;color:var(--label);font-style:italic;margin-top:6px">"PBEXPO has doubled in size..." — Sean Gallagan<br>"...you have to be here to talk about it." — Joshua Abshire<br>"...digitization of the supply chain..." — Claudia Espinosa</div>
+          </div>
+        </div>
+
+        <div class="section-label">Budget, KPIs &amp; critical blockers</div>
+        <div class="grid-2">
+          <div class="card"><div style="font-weight:700;margin-bottom:6px">Budget &amp; KPIs</div><div style="font-size:12px;color:var(--label)">Marketplace budget: <b>$17.5k/mo @ $300 CAC</b> — confirm if PBExpo has a separate line. <b>KPIs:</b> registrations (total / segment / channel), funnel (open→CTR→LP→reg), cost-per-registration, paid ROAS, % early-bird, past-attendee reactivation. Baseline: the 2026 registrations xlsx.</div></div>
+          <div class="card" style="border-left:3px solid var(--red)"><div style="font-weight:700;margin-bottom:6px;color:var(--red)">Pre-launch blockers</div><div style="font-size:12px;color:var(--label)"><b>1.</b> Mailchimp complaint rate 27–30% (&lt;4% threshold) — execute 213k suppression / warm HubSpot domain. <b>2.</b> GA4/GTM tracking broken — fix before paid. <b>3.</b> HubSpot onboarding gates Phase 1.</div></div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+          <div style="font-size:11px;color:var(--muted)">Full plan: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">CoWork/content/outputs/PBExpo-2027-Registration-Campaign-Plan.md</code> · Shareable version: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">pbexpo-campaign.html</code></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -492,6 +584,7 @@ const TAB_CONFIG = {
   resources: { panel: 'plan',     inner: 'resources', title: ['Resources Library', 'Playbooks, strategies, and reference docs built for PartsBase'] },
   email:     { panel: 'plan',     inner: 'email',     title: ['Email Health',      'Mailchimp remediation, sender reputation, and list hygiene'] },
   icp:       { panel: 'plan',     inner: 'icp',       title: ['ICP & Targeting',   'Segmentation, ORO matching, and activation pools'] },
+  pbexpo:    { panel: 'plan',     inner: 'pbexpo',    title: ['PBExpo 2027 Campaign', 'Attendee registration campaign plan · reg open → Mar 2027'] },
   exec:      { panel: 'plan',     inner: 'exec',      title: ['Exec View',         'Leadership summary and 90-day GTM narrative'] },
 };
 
@@ -551,7 +644,7 @@ function togglePlanGroup() {
 })();
 
 // ── Inner tabs ──
-const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources'];
+const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo'];
 function showInnerTab(name) {
   INNER_TABS.forEach(t => {
     document.getElementById('tab-' + t + '-content').classList.toggle('hidden', t !== name);
@@ -1622,6 +1715,16 @@ async function refreshToday() {
 
 loadState();
 refreshToday();
+
+// ── PBExpo countdown ──
+(function(){
+  var el = document.getElementById('pbx-countdown'); if(!el) return;
+  var eventDate = new Date('2027-03-10T09:00:00-05:00');
+  var d = Math.max(0, Math.ceil((eventDate - new Date())/86400000));
+  el.textContent = d;
+  var sub = document.getElementById('pbx-countdown-sub');
+  if(sub) sub.textContent = '~' + Math.floor(d/7) + ' weeks to Mar 10, 2027';
+})();
 </script>
 </body>
 </html>
