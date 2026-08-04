@@ -462,6 +462,11 @@
 
       <!-- ═══ PBEXPO 2027 CAMPAIGN ═══ -->
       <div id="tab-pbexpo-content" class="hidden" style="padding:24px">
+        <div style="display:flex;gap:22px;margin-bottom:20px;border-bottom:1px solid var(--border)">
+          <button id="pbxsub-plan-btn" onclick="showPbxSub('plan')" style="background:none;border:none;border-bottom:2px solid var(--accent);color:var(--accent);font-weight:700;font-size:13px;padding:4px 2px 10px;cursor:pointer">Campaign Plan</button>
+          <button id="pbxsub-sequences-btn" onclick="showPbxSub('sequences')" style="background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);font-weight:600;font-size:13px;padding:4px 2px 10px;cursor:pointer">Email Sequences</button>
+        </div>
+        <div id="pbx-sub-plan">
         <div style="margin-bottom:18px">
           <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px">PBExpo 2027 — Attendee Registration Campaign</div>
           <div style="font-size:12px;color:var(--muted)">Miami Beach Convention Center · <b>Mar 10–11, 2027</b></div>
@@ -554,7 +559,7 @@
           <div class="row"><div class="row-main"><div class="row-title">Source mix — 70% owned · 30% paid</div><div class="row-sub">Owned (~6,600): house email, past-attendee reactivation, organic social, PR. Paid (~2,800): LinkedIn, Google Search + LP retargeting, paid social. Planning assumption — no 2026 channel data.</div></div></div>
           <div class="row"><div class="row-main"><div class="row-title">Paid spend — ~$70k over ~6 mo <span class="tag tag-blue">~$25 CPR</span></div><div class="row-sub">2,800 paid regs × ~$25 blended CPR (LinkedIn $35–45, Google/retargeting $12–20). Range $56k–$84k at $20–30 CPR.</div></div></div>
           <div class="row"><div class="row-main"><div class="row-title">Paid channel split</div><div class="row-sub">LinkedIn ~$35k (50%, decision-makers) · Google Search + retargeting ~$24.5k (35%) · Paid social ~$10.5k (15%)</div></div></div>
-          <div class="row"><div class="row-main"><div class="row-title">Efficiency bridge</div><div class="row-sub">At the ~$300 marketplace CAC, a registration→member conversion of ~8% makes the ~$25 CPR self-funding; above 8% acquires pipeline below standard CAC.</div></div></div>
+          <div class="row"><div class="row-main"><div class="row-title">Efficiency bridge <span class="tag tag-green">Amelia-grounded</span></div><div class="row-sub">Live marketplace data: at ~$25 CPR, a registration-driven new member costs a small fraction of first-year membership value (~6× covered) even at tradeshow-channel conversion — and renewals compound it. Registration→member is the ROI lever.</div></div></div>
           <div class="row"><div class="row-main"><div class="row-title">Attendee-revenue upside</div><div class="row-sub">Paid upgrades — $500 (Operators Pavilion) · $1,000 (Operators Pavilion + both VIP suites). Direct revenue that offsets paid CAC; size once a target attach rate is set.</div></div></div>
         </div>
         <div class="card">
@@ -564,6 +569,128 @@
         <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
           <div style="font-size:11px;color:var(--muted)">Full plan: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">CoWork/content/outputs/PBExpo-2027-Registration-Campaign-Plan.md</code> · Shareable version: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">pbexpo-campaign.html</code></div>
         </div>
+        </div><!-- /pbx-sub-plan -->
+
+        <div id="pbx-sub-sequences" class="hidden">
+          <div style="margin-bottom:16px">
+            <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px">Email sequences — full copy</div>
+            <div style="font-size:12px;color:var(--muted)">Ready to load into HubSpot. Registration is free, so subjects avoid price/early-bird language — urgency comes from agenda reveals, app meeting-booking, and the hotel block. Merge fields: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">{First}</code> <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">{Company}</code> <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">{segment}</code>. Anchor: registration opens Aug 18, event Mar 10–11.</div>
+          </div>
+
+          <!-- FLOW A -->
+          <div class="card" style="margin-bottom:16px;border-left:3px solid var(--accent)">
+            <div style="font-weight:700;font-size:15px">Flow A · New buyer drip</div>
+            <div style="font-size:11.5px;color:var(--muted);margin-bottom:12px">8 emails · MROs, distributors, brokers, OEMs, contract mfrs</div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">A1 · <span style="color:var(--accent)">Subj:</span> PBExpo 2027 registration is open — free to attend</div><span class="tag tag-blue" style="white-space:nowrap">Aug 18 · Day 0</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">A/B subj: "You're invited: PBExpo 2027, Miami Beach" · Preview: The world's largest aviation &amp; aerospace networking event returns.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>Registration for PBExpo 2027 is officially open — and it's free to attend.<br><br>March 10–11, 2027 · Miami Beach Convention Center. Two days where the aviation and aerospace supply chain does business face-to-face — suppliers, MROs, distributors, and OEMs in one room.<br><br>Why {Company} should be there:<br>• 86% of attendees are decision-makers — every conversation counts.<br>• Source parts, solve AOG challenges, and build relationships that outlast any transaction.<br>• Complimentary food, drinks, and networking receptions — the entire event is free.<br><br>→ Register free<br><br>See you in Miami,<br>The PBExpo Team</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">A2 · <span style="color:var(--accent)">Subj:</span> 86% of the room makes the buying decisions</div><span class="tag tag-blue" style="white-space:nowrap">+3–4 days</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: What two days at PBExpo does for your sourcing.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>When 86% of the people in the room are decision-makers, you're not collecting business cards — you're closing gaps in your supply chain.<br><br>At PBExpo you can:<br>• Meet suppliers you've only emailed — and pre-book those meetings in the PBExpo app.<br>• Compare capabilities and quotes across MROs, distributors, brokers, and OEMs in person.<br>• Track down the hard-to-source parts and the partners who can actually deliver.<br><br>For a {segment} like {Company}, that's a quarter of sourcing calls compressed into 48 hours.<br><br>→ Register free</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">A3 · <span style="color:var(--accent)">Subj:</span> "You have to be here to talk about it"</div><span class="tag tag-blue" style="white-space:nowrap">+1 week</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: What the industry says about PBExpo.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>Don't take our word for it:<br><br><i>"PBEXPO has doubled in size…"</i> — Sean Gallagan<br><i>"…you have to be here to talk about it."</i> — Joshua Abshire<br><i>"…the digitization of the supply chain…"</i> — Claudia Espinosa<br><br>150+ airlines. Thousands of buyers and suppliers. One room, two days.<br><br>→ Register free</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">A4 · <span style="color:var(--accent)">Subj:</span> The agenda is live — keynotes, panels &amp; the Maintenance Games</div><span class="tag tag-blue" style="white-space:nowrap">+2–3 wk (Sep)</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: Build your PBExpo schedule now.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>The PBExpo 2027 agenda just dropped:<br>• Keynotes and panels on the topics shaping aviation's supply chain.<br>• The Maintenance Games — the industry's most-watched live competition.<br>• Two networking receptions with complimentary food and drinks.<br><br>Open the PBExpo app to view the full agenda and start booking meetings with exhibitors and attendees.<br><br>→ View the agenda</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">A5 · <span style="color:var(--accent)">Subj:</span> Book your PBExpo meetings before the calendar fills</div><span class="tag tag-blue" style="white-space:nowrap">T-6 → T-4 wk</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: The best sourcing happens in meetings booked in advance.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>The best deals at PBExpo happen in meetings you set before you arrive.<br><br>In the PBExpo app you can:<br>• Browse exhibitors and filter by capability.<br>• Request meetings with suppliers, PartsBase, and other attendees.<br>• Manage your two-day schedule so nothing slips.<br><br>Popular exhibitors book up fast — lock in your meetings now.<br><br>→ Open the app</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">A6 · <span style="color:var(--accent)">Subj:</span> Reserve your Miami Beach room before the block closes</div><span class="tag tag-blue" style="white-space:nowrap">T-4 wk</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: Handle the logistics — and consider premium networking.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>You're registered — now the logistics.<br>• Hotel: we've secured a discounted room block near the convention center. Rooms are limited and the block closes soon. → Book your room<br>• Getting here: MIA and FLL are both ~30–40 minutes away.<br>• Go premium: add Operators Pavilion access ($500), or Operators Pavilion + both VIP suites ($1,000), for high-value networking.</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">A7 · <span style="color:var(--accent)">Subj:</span> 2 weeks out — everything you need for PBExpo</div><span class="tag tag-blue" style="white-space:nowrap">T-2wk → T-2d</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: Final agenda, meetings, and last chance to register.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>PBExpo 2027 is almost here — March 10–11, Miami Beach Convention Center.<br>• Final agenda is set — review it in the app.<br>• Haven't booked meetings? There's still time.<br>• Not registered yet? It's free — register now before you travel.<br><br>See you in Miami.</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">A8 · <span style="color:var(--accent)">Subj:</span> You're in — your PBExpo 2027 game plan</div><span class="tag tag-green" style="white-space:nowrap">Trigger · on reg</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: Everything to make the most of two days.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>You're registered for PBExpo 2027. Here's your game plan:<br>• Download the PBExpo app and build your agenda.<br>• Book meetings with exhibitors before you arrive.<br>• Save the dates: March 10–11 · Miami Beach Convention Center.<br>• Want more access? Add Operators Pavilion / VIP upgrades anytime.<br><br>Questions? Just reply — we're here to help.</div>
+            </div>
+          </div>
+
+          <!-- FLOW B -->
+          <div class="card" style="margin-bottom:16px;border-left:3px solid var(--green)">
+            <div style="font-weight:700;font-size:15px">Flow B · Past-attendee re-engage <span class="tag tag-green">Warm</span></div>
+            <div style="font-size:11.5px;color:var(--muted);margin-bottom:12px">4 emails · prior-year registrants · higher intent, lower CAC</div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">B1 · <span style="color:var(--accent)">Subj:</span> Welcome back — PBExpo 2027 registration is open</div><span class="tag tag-green" style="white-space:nowrap">Aug 18 · Reg open</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">A/B subj: "You know the value — PBExpo 2027 is open" · Preview: The room you already know is worth being in.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>Great to have you back. PBExpo 2027 registration — March 10–11, Miami Beach — is now open. As a past attendee, you already know what that room is worth.<br><br>This year's bigger: more exhibitors, more airlines, more of the connections that made last time count.<br><br>→ Register free</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">B2 · <span style="color:var(--accent)">Subj:</span> What's new at PBExpo 2027</div><span class="tag tag-green" style="white-space:nowrap">+4–5 days</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: Since we saw you last, PBExpo has grown.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>Since we saw you last, PBExpo has "doubled in size" — Sean Gallagan's words, not ours.<br><br>New for 2027:<br>• An expanded exhibitor floor and more airlines than ever.<br>• The Career Runway hiring zone.<br>• An enhanced app for pre-booking meetings.<br><br>→ See what's new</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">B3 · <span style="color:var(--accent)">Subj:</span> Lock in your meetings and your room</div><span class="tag tag-green" style="white-space:nowrap">Mid-window</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: The attendees who win PBExpo plan ahead.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>You know the drill — the attendees who get the most out of PBExpo plan ahead.<br>• Book meetings in the app before the floor fills.<br>• Reserve your hotel before the room block closes.<br>• Add Operators Pavilion ($500) or VIP ($1,000) access for premium networking.<br><br>→ Plan your show</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">B4 · <span style="color:var(--accent)">Subj:</span> One week to PBExpo — see you there?</div><span class="tag tag-green" style="white-space:nowrap">T-1 week</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: You've done this before. You know it's worth it.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>PBExpo 2027 is a week away. You've done this before — you know it delivers.<br><br>Final agenda is live, meetings are filling, and it's free to attend.<br><br>→ Confirm your spot</div>
+            </div>
+          </div>
+
+          <!-- FLOW C -->
+          <div class="card" style="border-left:3px solid var(--accent)">
+            <div style="font-weight:700;font-size:15px">Flow C · Career Runway <span class="tag tag-blue">Students &amp; job seekers</span></div>
+            <div style="font-size:11.5px;color:var(--muted);margin-bottom:12px">4 emails · light-touch · kept separate from buyer drips to protect deliverability</div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">C1 · <span style="color:var(--accent)">Subj:</span> Launch your aviation career at PBExpo's Career Runway</div><span class="tag tag-blue" style="white-space:nowrap">Reg open</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">A/B subj: "Free entry to aviation's biggest hiring event" · Preview: Where students and job seekers meet aviation employers.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>Ready to break into aviation and aerospace? PBExpo 2027's Career Runway is where it starts — free to attend.<br><br>March 10–11 · Miami Beach Convention Center. Our dedicated hiring zone connects students and job seekers with the MROs, OEMs, and staffing firms that are actively hiring.<br><br>→ Register free</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">C2 · <span style="color:var(--accent)">Subj:</span> These aviation employers are hiring at PBExpo</div><span class="tag tag-blue" style="white-space:nowrap">+1 week</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: Bring your resume — the Career Runway floor is filling.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>The Career Runway floor is filling with companies looking for talent like you — MROs, OEMs, distributors, and staffing partners from across the aviation supply chain.<br><br>Bring your resume, meet employers face-to-face, and catch the Maintenance Games happening right next door.<br><br>→ See who's hiring</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:9px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">C3 · <span style="color:var(--accent)">Subj:</span> Your Career Runway game plan</div><span class="tag tag-blue" style="white-space:nowrap">T-2 weeks</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: How to stand out on the hiring floor.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>Two weeks to PBExpo. Here's how to stand out on the Career Runway:<br>• Bring printed resumes — plenty of them.<br>• Research the employers exhibiting in the hiring zone.<br>• Dress for real hiring conversations.<br>• Watch the Maintenance Games nearby to see the trades in action.<br><br>→ Plan your visit</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-weight:700;font-size:13px">C4 · <span style="color:var(--accent)">Subj:</span> One week — your aviation career starts at PBExpo</div><span class="tag tag-blue" style="white-space:nowrap">T-1 week</span></div>
+              <div style="font-size:11px;color:var(--muted);font-style:italic;margin:3px 0 8px">Preview: Free to attend, packed with employers hiring.</div>
+              <div style="font-size:12px;color:var(--label);line-height:1.55">Hi {First},<br><br>The Career Runway is a week away — free to attend, and packed with employers hiring across aviation and aerospace.<br><br>Don't miss your shot to meet them in person.<br><br>→ Register free</div>
+            </div>
+          </div>
+        </div><!-- /pbx-sub-sequences -->
       </div>
 
     </div>
@@ -665,6 +792,20 @@ function showInnerTab(name) {
     document.getElementById('tab-' + t + '-content').classList.toggle('hidden', t !== name);
     const nav = document.getElementById('tab-' + t);
     if (nav) nav.classList.toggle('active', t === name);
+  });
+}
+
+// ── PBExpo sub-tabs (Campaign Plan / Email Sequences) ──
+function showPbxSub(name) {
+  const isPlan = name === 'plan';
+  document.getElementById('pbx-sub-plan').classList.toggle('hidden', !isPlan);
+  document.getElementById('pbx-sub-sequences').classList.toggle('hidden', isPlan);
+  [['pbxsub-plan-btn', isPlan], ['pbxsub-sequences-btn', !isPlan]].forEach(([id, on]) => {
+    const b = document.getElementById(id);
+    if (!b) return;
+    b.style.color = on ? 'var(--accent)' : 'var(--muted)';
+    b.style.borderBottom = on ? '2px solid var(--accent)' : '2px solid transparent';
+    b.style.fontWeight = on ? '700' : '600';
   });
 }
 
