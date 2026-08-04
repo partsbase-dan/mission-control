@@ -465,6 +465,7 @@
         <div style="display:flex;gap:22px;margin-bottom:20px;border-bottom:1px solid var(--border)">
           <button id="pbxsub-plan-btn" onclick="showPbxSub('plan')" style="background:none;border:none;border-bottom:2px solid var(--accent);color:var(--accent);font-weight:700;font-size:13px;padding:4px 2px 10px;cursor:pointer">Campaign Plan</button>
           <button id="pbxsub-sequences-btn" onclick="showPbxSub('sequences')" style="background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);font-weight:600;font-size:13px;padding:4px 2px 10px;cursor:pointer">Email Sequences</button>
+          <button id="pbxsub-strategy-btn" onclick="showPbxSub('strategy')" style="background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);font-weight:600;font-size:13px;padding:4px 2px 10px;cursor:pointer">Strategy Playbook</button>
         </div>
         <div id="pbx-sub-plan">
         <div style="margin-bottom:18px">
@@ -588,6 +589,64 @@
           <div id="pbx-email-detail" class="card"></div>
           <div id="pbx-nav" style="display:flex;align-items:center;justify-content:center;gap:18px;margin-top:14px"></div>
         </div><!-- /pbx-sub-sequences -->
+
+        <div id="pbx-sub-strategy" class="hidden">
+          <div style="margin-bottom:16px">
+            <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px">Strategy playbook</div>
+            <div style="font-size:12px;color:var(--muted)">Synthesized from 19 vetted marketing skills + current B2B-event benchmarks. Every play serves one message.</div>
+          </div>
+
+          <div class="card" style="margin-bottom:16px;border-left:3px solid var(--accent);background:var(--surface2)">
+            <div style="font-weight:700;font-size:15px;margin-bottom:5px">🎯 The one message — "Walk in with a pipeline, not a floor map."</div>
+            <div style="font-size:12.5px;color:var(--label);line-height:1.55">The app's AI matchmaking pre-books a schedule of best-fit meetings before arrival. Teams want <b>qualified leads, not badges</b>. The AI is the <i>how</i>; the pipeline is the <i>what</i> — lead every channel with the outcome. Free event, so sell <b>time-ROI</b> ("two days that replace a quarter of prospecting"), not price.</div>
+          </div>
+
+          <div class="section-label">Top plays — highest leverage</div>
+          <div class="card" style="margin-bottom:16px">
+            <div class="row"><div class="row-main"><div class="row-title">1 · One message everywhere</div><div class="row-sub">Outcome-led hero + jobs-to-be-done framing on every email, ad, and the landing page. Meetings, not badges.</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">2 · Pre-target → reg-open one-two punch (Aug 18)</div><div class="row-sub">Warm the matchmaking idea Aug 1–17, convert the same audience on open day. Sequencing beats spend (Rule of 7).</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">3 · Zeigarnik + loss-aversion engine</div><div class="row-sub">"Your AI matches are waiting / others are booking your buyers" across email + retargeting — cheap, repeatable, warm-audience.</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">4 · Persona-split the one promise (A/B/C)</div><div class="row-sub">Pipeline (new buyers) · efficiency-vs-last-year (past attendees) · two-sided matching (Career Runway). One engine, three jobs.</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">5 · Commitment-then-upgrade</div><div class="row-sub">Build the free match-list first, then anchor $1,000 → $500 as "premium visibility to buyers you already matched with."</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">6 · Before/After hero creative</div><div class="row-sub">"Floor map → booked pipeline" — a crumpled map vs a phone of pre-booked, fit-scored meetings. The campaign's visual spine.</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">7 · Flagship guide → lead magnet → 8+ assets</div><div class="row-sub">"How to walk into PBExpo with a pipeline" ranks, gates leads, and repurposes into carousels/threads/emails.</div></div></div>
+            <div class="row"><div class="row-main"><div class="row-title">8 · Fix SSR + Event/FAQ schema <span class="tag tag-red">Eng dependency</span></div><div class="row-sub">Server-render title/H1/body or organic + AI-citation = zero. Gates the whole SEO channel — a concrete engineering ask for Rodrigo.</div></div></div>
+          </div>
+
+          <div class="section-label">By channel</div>
+          <div class="grid-2">
+            <div class="card"><div style="font-weight:700;margin-bottom:8px">✉️ Email — HubSpot (Flows A/B/C)</div><div style="font-size:12px;color:var(--label);line-height:1.65">• <b>Zeigarnik open loop:</b> "your AI matches are waiting — unopened."<br>• <b>Loss aversion:</b> "every day you wait, your best-fit buyers book with someone else."<br>• <b>Goal-gradient nudge:</b> "profile 60% complete — finish so AI finds your best 10 meetings."<br>• <b>Founder welcome</b> (plain-text, reciprocity) after registration.<br>• <b>Abandoned-reg recovery + heavy reminders</b> — lifts reg→attendance ~50%→~71%.</div></div>
+
+            <div class="card"><div style="font-weight:700;margin-bottom:8px">🔗 Social / LinkedIn (organic)</div><div style="font-size:12px;color:var(--label);line-height:1.65">• <b>Pre-booked-agenda screenshots:</b> "a rep's Tuesday at PBExpo — booked before takeoff."<br>• <b>Contrarian hook:</b> "Stop collecting badges."<br>• <b>How-it-works</b> 3-step carousel.<br>• <b>X thread</b> + reply to bigger aviation accounts (link in first reply, not body).<br>• <b>Save-worthy list:</b> "10 questions to pre-load into your matchmaking profile."</div></div>
+
+            <div class="card"><div style="font-weight:700;margin-bottom:8px">💰 Paid (LinkedIn + Google)</div><div style="font-size:12px;color:var(--label);line-height:1.65">• <b>PAS ad:</b> "working the floor cold" → matchmaking fix (Director+ MRO/OEM/distributor).<br>• <b>Before-After-Bridge:</b> floor map → calendar of meetings.<br>• <b>Google Search:</b> intercept "aviation trade show / aerospace expo / competitor" — RSA "Pre-book your buyer meetings."<br>• <b>Retargeting abandoned reg:</b> "your matches are ready — slots fill first."<br>• <b>Pre-targeting warm-up</b> Aug 1–17.</div></div>
+
+            <div class="card"><div style="font-weight:700;margin-bottom:8px">🎨 Ad creative</div><div style="font-size:12px;color:var(--label);line-height:1.65">• <b>Before/After hero</b> (floor map vs booked agenda, "94% fit — MRO buyer" tags).<br>• <b>Specificity:</b> "86% are decision-makers — book meetings with them before you land."<br>• <b>Testimonial set</b> (Gallagan "doubled in size" / Abshire FOMO / Espinosa digitization).<br>• <b>Video:</b> 3-sec hook "What if your whole Miami schedule was booked before you packed?"<br>• <b>Real urgency only:</b> Aug 18 open · VIP suites capped.</div></div>
+
+            <div class="card"><div style="font-weight:700;margin-bottom:8px">🔍 SEO</div><div style="font-size:12px;color:var(--label);line-height:1.65">• ⚠️ <b>Fix SSR</b> (server-render title/H1/body) — the gate.<br>• <b>Event + FAQPage schema</b> (server-injected) → Google event card (free) + AI citations.<br>• <b>Whitelist AI bots</b> (GPTBot/PerplexityBot/ClaudeBot).<br>• <b>Dedicated /matchmaking page</b> + HowTo schema — own "AI matchmaking trade show."<br>• Target 3 intent clusters: navigational · category · matchmaking-feature.</div></div>
+
+            <div class="card"><div style="font-weight:700;margin-bottom:8px">🎯 Landing page / CRO</div><div style="font-size:12px;color:var(--label);line-height:1.65">• <b>Outcome hero:</b> "Walk in with a pipeline, not a floor map."<br>• <b>Loud FREE</b> + "no catch" objection handling.<br>• <b>One CTA · 4-field form</b> · defer matchmaking prefs to post-signup ("set up your AI matchmaking").<br>• <b>Trust bar at the CTA</b> (86% decision-makers · 150+ airlines · logos) — lifts LP conversion ~32%→~54%.<br>• <b>Confirmation → app download + first pre-booked meeting</b> (the activation event).</div></div>
+
+            <div class="card"><div style="font-weight:700;margin-bottom:8px">📝 Content</div><div style="font-size:12px;color:var(--label);line-height:1.65">• <b>Pillars:</b> trade-show-for-pipeline how-to · supply-chain digitization POV · app education · ROI proof · Career Runway.<br>• <b>Flagship guide</b> "walk in with a pipeline" → gated lead magnet → repurpose to 8+ assets.<br>• <b>Proprietary-data report</b> (PartsBase/Amelia sourcing data) → earns links + authority.</div></div>
+
+            <div class="card"><div style="font-weight:700;margin-bottom:8px">🔁 Growth loops</div><div style="font-size:12px;color:var(--label);line-height:1.65">• <b>Referral at the aha</b> (after first booked meeting): "invite a colleague — both skip the line to VIP receptions."<br>• <b>Free tool:</b> "Trade-Show Pipeline ROI Calculator" (inputs → projected pipeline; value before gate).<br>• <b>Career Runway:</b> status rewards + a free resume-grader tool.</div></div>
+
+            <div class="card"><div style="font-weight:700;margin-bottom:8px">📊 Measurement</div><div style="font-size:12px;color:var(--label);line-height:1.65">• <b>Clean event taxonomy now:</b> registration_started/completed · app_downloaded · meeting_prebooked — with an <b>audience_segment</b> (A/B/C) param.<br>• <b>Fix GA4 page_title defect</b>; route conversions via dataLayer.<br>• <b>Instrument the funnel;</b> watch the biggest drop (expect registered→app-adopted).<br>• <b>Time-decay attribution</b> over the 6-mo runway (not last-click).<br>• <b>A/B test</b> hero, form steps, confirmation app-prompt.</div></div>
+          </div>
+
+          <div class="section-label" style="margin-top:16px">Proof points &amp; benchmarks</div>
+          <div class="grid-2">
+            <div class="card"><div style="font-weight:700;margin-bottom:6px">Proof to cite</div><div style="font-size:12px;color:var(--label);line-height:1.65">• <b>Grip/Clarion:</b> +44% meetings, 100% buyer engagement, a $12K order from a matched meeting.<br>• <b>ITB Berlin:</b> 96% rated meeting quality high.<br>• <b>52% of attendees</b> come primarily for connections.<br>• <b>Strongest = first-party:</b> our Amelia lead→member data (~$3.9k value, 4.1%) anchors "a booked meeting is worth $X."</div></div>
+            <div class="card"><div style="font-weight:700;margin-bottom:6px">Benchmarks</div><div style="font-size:12px;color:var(--label);line-height:1.65">• LP conversion ~30% cold → <b>~54% with social proof</b> on the page.<br>• Email CTOR target <b>10–15%</b>; send every 10–14 days, tightening to weekly.<br>• Reg→attendance ~50% → <b>~71% with AI reminder sequences</b>.<br>• Free events see 40–60% no-show — reminder cadence must be heavy.</div></div>
+          </div>
+
+          <div class="section-label" style="margin-top:16px">Sequencing — one important flag</div>
+          <div class="rag-amber" style="margin-bottom:8px">⚠️ <b>6-month runway is longer than the 12–16-week best practice.</b> Run a low-frequency <b>awareness phase Aug–Dec</b> (teasers, reveals, matchmaking education), then ramp hard urgency in the final <b>4–6 weeks (Jan–Mar)</b> — or you'll fatigue the list. No price lever, so substitute <b>meeting-slot scarcity</b> + calendar-ROI as the FOMO engine. Matchmaking needs critical mass early → add a "reserve your matches" post-registration CTA to keep the long runway warm.</div>
+
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
+            <div style="font-size:11px;color:var(--muted)">Sources: 19 vetted marketing skills (psychology, demand-acquisition, launch-strategy, PMM, copywriting, paid-ads, social, ad-creative, content, SEO, CRO, analytics) + B2B-event benchmarks (Grip/Clarion, Swapcard, MarketingProfs, Omnisend). Benchmarks are cross-industry — validate against HubSpot/Amelia before hard-committing.</div>
+          </div>
+        </div><!-- /pbx-sub-strategy -->
       </div>
 
     </div>
@@ -694,17 +753,17 @@ function showInnerTab(name) {
 
 // ── PBExpo sub-tabs (Campaign Plan / Email Sequences) ──
 function showPbxSub(name) {
-  const isPlan = name === 'plan';
-  document.getElementById('pbx-sub-plan').classList.toggle('hidden', !isPlan);
-  document.getElementById('pbx-sub-sequences').classList.toggle('hidden', isPlan);
-  [['pbxsub-plan-btn', isPlan], ['pbxsub-sequences-btn', !isPlan]].forEach(([id, on]) => {
-    const b = document.getElementById(id);
+  ['plan', 'sequences', 'strategy'].forEach(s => {
+    const panel = document.getElementById('pbx-sub-' + s);
+    if (panel) panel.classList.toggle('hidden', s !== name);
+    const b = document.getElementById('pbxsub-' + s + '-btn');
     if (!b) return;
+    const on = s === name;
     b.style.color = on ? 'var(--accent)' : 'var(--muted)';
     b.style.borderBottom = on ? '2px solid var(--accent)' : '2px solid transparent';
     b.style.fontWeight = on ? '700' : '600';
   });
-  if (!isPlan && typeof pbxRenderSeq === 'function') pbxRenderSeq();
+  if (name === 'sequences' && typeof pbxRenderSeq === 'function') pbxRenderSeq();
 }
 
 // ── PBExpo email sequences (interactive storyboard) ──
