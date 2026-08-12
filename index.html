@@ -204,6 +204,7 @@
       <button onclick="showTab('email')" id="outertab-email" class="outer-tab"><span class="nav-icon">✉</span><span>Email Health</span></button>
       <button onclick="showTab('icp')" id="outertab-icp" class="outer-tab"><span class="nav-icon">⌖</span><span>ICP &amp; Targeting</span></button>
       <button onclick="showTab('pbexpo')" id="outertab-pbexpo" class="outer-tab"><span class="nav-icon">🎫</span><span>PBExpo Campaign</span></button>
+      <button onclick="showTab('adbuild')" id="outertab-adbuild" class="outer-tab"><span class="nav-icon">⚙</span><span>How Ads Are Built</span></button>
       <div class="sidebar-footer">
         <div style="font-size:11px;color:#5f626b;margin-top:18px;">Dan Rodgers · MarTech</div>
       </div>
@@ -649,6 +650,179 @@
         </div><!-- /pbx-sub-strategy -->
       </div>
 
+      <!-- ═══ HOW ADS ARE BUILT ═══ -->
+      <div id="tab-adbuild-content" class="hidden" style="padding:24px">
+        <div style="margin-bottom:18px">
+          <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px">How LinkedIn Ads Are Built</div>
+          <div style="font-size:12px;color:var(--muted)">Someone submits a form; a finished ad set arrives in Teams for approval. Two human decisions in the chain — the request and the approval. Everything between them runs on servers, with no laptop involved.</div>
+        </div>
+
+        <div class="grid-4">
+          <div class="card"><div class="card-title">Human touchpoints</div><div class="kpi-value">2</div><div class="kpi-sub">Submit the form · approve in Teams</div></div>
+          <div class="card"><div class="card-title">Form → approval card</div><div class="kpi-value" style="color:var(--accent)">~40s</div><div class="kpi-sub">Copy, render, QA, post</div></div>
+          <div class="card"><div class="card-title">Ads per request</div><div class="kpi-value">3</div><div class="kpi-sub">One per approved template</div></div>
+          <div class="card"><div class="card-title">Systems in the chain</div><div class="kpi-value">7</div><div class="kpi-sub">Plus LinkedIn API at launch</div></div>
+        </div>
+
+        <div class="section-label">The flow</div>
+        <div class="card" style="margin-bottom:18px;overflow-x:auto">
+          <svg viewBox="0 0 1200 310" style="width:100%;min-width:900px;height:auto;display:block" role="img" aria-label="Ad build flow from form request through approval to gated launch">
+            <defs>
+              <marker id="ab-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--muted)"/>
+              </marker>
+              <marker id="ab-arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--yellow)"/>
+              </marker>
+            </defs>
+
+            <!-- human markers -->
+            <text x="89"   y="56" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--yellow)">HUMAN</text>
+            <text x="939"  y="56" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--yellow)">HUMAN</text>
+
+            <!-- stage 1 -->
+            <rect x="12" y="66" width="155" height="88" rx="8" fill="var(--surface2)" stroke="var(--yellow)" stroke-width="1.5"/>
+            <text x="89" y="94"  text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--text)">Request</text>
+            <text x="89" y="114" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">Fillout form</text>
+            <text x="89" y="132" text-anchor="middle" font-size="10" fill="var(--muted)">Offer, value prop,</text>
+            <text x="89" y="145" text-anchor="middle" font-size="10" fill="var(--muted)">claims, landing URL</text>
+
+            <!-- stage 2 -->
+            <rect x="182" y="66" width="155" height="88" rx="8" fill="var(--surface)" stroke="var(--border)"/>
+            <text x="259" y="94"  text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--text)">Trigger</text>
+            <text x="259" y="114" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">Zapier</text>
+            <text x="259" y="132" text-anchor="middle" font-size="10" fill="var(--muted)">Pushes the request</text>
+            <text x="259" y="145" text-anchor="middle" font-size="10" fill="var(--muted)">to GitHub</text>
+
+            <!-- stage 3 -->
+            <rect x="352" y="66" width="155" height="88" rx="8" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="429" y="94"  text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--text)">Copy</text>
+            <text x="429" y="114" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">Claude (Opus 5)</text>
+            <text x="429" y="132" text-anchor="middle" font-size="10" fill="var(--muted)">Headline, CTA, post</text>
+            <text x="429" y="145" text-anchor="middle" font-size="10" fill="var(--muted)">text — 3 angles</text>
+
+            <!-- stage 4 -->
+            <rect x="522" y="66" width="155" height="88" rx="8" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="599" y="94"  text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--text)">Creative</text>
+            <text x="599" y="114" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">Figma templates</text>
+            <text x="599" y="132" text-anchor="middle" font-size="10" fill="var(--muted)">Copy drawn onto the</text>
+            <text x="599" y="145" text-anchor="middle" font-size="10" fill="var(--muted)">approved design</text>
+
+            <!-- stage 5 -->
+            <rect x="692" y="66" width="155" height="88" rx="8" fill="var(--surface)" stroke="var(--border)"/>
+            <text x="769" y="94"  text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--text)">QA gate</text>
+            <text x="769" y="114" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">Automated checks</text>
+            <text x="769" y="132" text-anchor="middle" font-size="10" fill="var(--muted)">Claims, UTMs, length,</text>
+            <text x="769" y="145" text-anchor="middle" font-size="10" fill="var(--muted)">tone — blocks or passes</text>
+
+            <!-- stage 6 -->
+            <rect x="862" y="66" width="155" height="88" rx="8" fill="var(--surface2)" stroke="var(--yellow)" stroke-width="1.5"/>
+            <text x="939" y="94"  text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--text)">Approval</text>
+            <text x="939" y="114" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">Teams card</text>
+            <text x="939" y="132" text-anchor="middle" font-size="10" fill="var(--muted)">Verdict per ad, with</text>
+            <text x="939" y="145" text-anchor="middle" font-size="10" fill="var(--muted)">a link to the renders</text>
+
+            <!-- stage 7 -->
+            <rect x="1032" y="66" width="155" height="88" rx="8" fill="var(--surface)" stroke="var(--muted)" stroke-dasharray="4 3"/>
+            <text x="1109" y="94"  text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--text)">Launch</text>
+            <text x="1109" y="114" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">LinkedIn Ads API</text>
+            <text x="1109" y="132" text-anchor="middle" font-size="10" font-weight="700" fill="var(--yellow)">OFF by default</text>
+            <text x="1109" y="145" text-anchor="middle" font-size="10" fill="var(--muted)">Creates drafts only</text>
+
+            <!-- forward arrows -->
+            <line x1="169" y1="110" x2="180" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ab-arrow)"/>
+            <line x1="339" y1="110" x2="350" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ab-arrow)"/>
+            <line x1="509" y1="110" x2="520" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ab-arrow)"/>
+            <line x1="679" y1="110" x2="690" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ab-arrow)"/>
+            <line x1="849" y1="110" x2="860" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ab-arrow)"/>
+            <line x1="1019" y1="110" x2="1030" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ab-arrow)"/>
+
+            <!-- feedback loop — drawn first so the label sits on top of its own line -->
+            <path d="M 939 154 L 939 214 L 429 214 L 429 156" fill="none" stroke="var(--yellow)" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ab-arrow-amber)"/>
+            <rect x="512" y="200" width="345" height="28" rx="6" fill="var(--surface)" stroke="var(--yellow)"/>
+            <text x="684" y="218" text-anchor="middle" font-size="11" font-weight="600" fill="var(--yellow)">Request changes → rewritten, re-rendered, re-posted</text>
+
+            <!-- runs-on band, clear of the loop -->
+            <rect x="182" y="248" width="835" height="26" rx="6" fill="var(--surface3)" stroke="var(--border)"/>
+            <text x="599" y="265" text-anchor="middle" font-size="11" font-weight="600" fill="var(--label)">Runs on GitHub Actions and Power Automate — no laptop, no one signed in</text>
+
+            <text x="12" y="296" font-size="10.5" fill="var(--muted)">Rejected ads never reach LinkedIn. Approved ads become drafts, which is still a separate deliberate step from spending money.</text>
+          </svg>
+        </div>
+
+        <div class="section-label">What each stage does</div>
+        <div class="card" style="margin-bottom:18px;padding:0;overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:640px">
+            <thead>
+              <tr style="background:var(--surface2)">
+                <th style="text-align:left;padding:10px 14px;font-weight:700;color:var(--label);border-bottom:1px solid var(--border)">Stage</th>
+                <th style="text-align:left;padding:10px 14px;font-weight:700;color:var(--label);border-bottom:1px solid var(--border)">What happens</th>
+                <th style="text-align:left;padding:10px 14px;font-weight:700;color:var(--label);border-bottom:1px solid var(--border)">System</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border)">Request</td><td style="padding:10px 14px;color:var(--label);border-bottom:1px solid var(--border)">Requester states the offer, the value proposition, the claims they can stand behind, and the landing page. Nothing else is needed.</td><td style="padding:10px 14px;color:var(--accent);font-weight:600;border-bottom:1px solid var(--border)">Fillout</td></tr>
+              <tr><td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border)">Trigger</td><td style="padding:10px 14px;color:var(--label);border-bottom:1px solid var(--border)">The submission is pushed to the build system as an event. Nothing polls, nothing waits.</td><td style="padding:10px 14px;color:var(--accent);font-weight:600;border-bottom:1px solid var(--border)">Zapier → GitHub</td></tr>
+              <tr><td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border)">Copy</td><td style="padding:10px 14px;color:var(--label);border-bottom:1px solid var(--border)">Claude writes three genuinely different arguments — not one idea reworded. It is given the revenue mix, the personas, what has historically produced leads, and what produced none.</td><td style="padding:10px 14px;color:var(--accent);font-weight:600;border-bottom:1px solid var(--border)">Claude API</td></tr>
+              <tr><td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border)">Creative</td><td style="padding:10px 14px;color:var(--label);border-bottom:1px solid var(--border)">Copy is drawn onto the approved templates at their exact position, font, size and colour. Imagery, layout and branding are never touched — only the text changes.</td><td style="padding:10px 14px;color:var(--accent);font-weight:600;border-bottom:1px solid var(--border)">Figma + renderer</td></tr>
+              <tr><td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border)">QA gate</td><td style="padding:10px 14px;color:var(--label);border-bottom:1px solid var(--border)">Automated checks run before any human sees it. A failure blocks the whole request rather than shipping a flawed ad.</td><td style="padding:10px 14px;color:var(--accent);font-weight:600;border-bottom:1px solid var(--border)">GitHub Actions</td></tr>
+              <tr><td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border)">Approval</td><td style="padding:10px 14px;color:var(--label);border-bottom:1px solid var(--border)">A card arrives in the Teams channel with a verdict control per ad and a link to a page showing all three rendered. Approve, request changes, or reject.</td><td style="padding:10px 14px;color:var(--accent);font-weight:600;border-bottom:1px solid var(--border)">Power Automate → Teams</td></tr>
+              <tr><td style="padding:10px 14px;font-weight:600">Launch</td><td style="padding:10px 14px;color:var(--label)">Disabled by default. Even when switched on, campaigns are created as drafts — never live, never spending, without another deliberate action.</td><td style="padding:10px 14px;color:var(--accent);font-weight:600">LinkedIn Ads API</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-label">Why the fonts are what they are</div>
+        <div class="card" style="margin-bottom:18px">
+          <div style="font-size:12.5px;color:var(--label);line-height:1.65">
+            <p style="margin:0 0 10px">The template text slots use <b>Bruno Ace Regular</b> for the headline and <b>Roboto Medium</b> for the call-to-action line. That was a constraint, not a preference: <b>Avenir Next from the brand guidelines is not available in the Figma environment</b>, and Figma refuses to write text into a layer whose font it cannot load.</p>
+            <p style="margin:0 0 10px">It turned out to be a useful constraint. Bruno Ace and Roboto are both Google Fonts, freely licensed, so the automated renderer uses the genuine font files and reproduces the template exactly. Had the slots used Avenir Next — a licensed font — the renderer would have to substitute a lookalike and the layouts would drift from the approved design.</p>
+            <p style="margin:0">One consequence worth knowing: the headline slot holds three lines at 34pt, which is <b>about 47 characters</b>. Copy is capped at 45 to leave headroom. Anything longer is flagged as overflowing and sent back for a shorter headline rather than rendered clipped. Longer headlines are a template decision, not a copywriting one.</p>
+          </div>
+        </div>
+
+        <div class="section-label">What stops a bad ad</div>
+        <div class="grid-2" style="margin-bottom:18px">
+          <div class="card">
+            <div style="font-weight:700;margin-bottom:8px;font-size:13px">Before a human sees it</div>
+            <div style="font-size:12px;color:var(--label);line-height:1.7">
+              • Every number in the copy must trace to a claim the requester supplied — invented figures are rejected<br>
+              • No superlatives ("best", "largest", "only") unless that exact claim was supplied<br>
+              • Aviation terms stay upper-cased: AOG, MRO, OEM, 8130<br>
+              • No fake urgency, no emoji, no ALL-CAPS emphasis<br>
+              • Never promises anything about compliance, traceability or certification<br>
+              • Landing URL must carry full UTM tagging or the request is blocked<br>
+              • Copy that would render outside its slot is flagged, not shipped
+            </div>
+          </div>
+          <div class="card">
+            <div style="font-weight:700;margin-bottom:8px;font-size:13px">Before anything spends money</div>
+            <div style="font-size:12px;color:var(--label);line-height:1.7">
+              • Approval in Teams is required — nothing proceeds without a recorded verdict<br>
+              • Launching is a separate system with its own switch, off by default<br>
+              • Campaigns are created as <b>drafts</b>, never live<br>
+              • A single kill-switch file halts every write across the whole system<br>
+              • Optimisation logic only ever <i>proposes</i> changes; applying them is a distinct, gated step<br>
+              • Every change is recorded so it can be reversed<br>
+              • Rejected creative is regenerated, and a repeatedly rejected ad escalates to a person instead of looping
+            </div>
+          </div>
+        </div>
+
+        <div class="section-label">Honest limits</div>
+        <div class="card" style="margin-bottom:18px;border-left:3px solid var(--yellow)">
+          <div style="font-size:12px;color:var(--label);line-height:1.7">
+            <b>Imagery is fixed, not generated.</b> The AI writes words; it never invents visuals. Ads are built on pre-approved templates, which is what keeps brand fidelity intact and lets copy be measured against a constant creative shell.<br><br>
+            <b>The images sit one click from the approval card, not inside it.</b> Teams fetches card images anonymously, and every storage option currently available refuses anonymous requests. The card links to a page showing all three ads instead. Fixing this needs a storage account; it does not block anything.<br><br>
+            <b>Templates are a snapshot.</b> The renderer holds a copy of the design and its measurements. If a template changes, that copy has to be refreshed or ads keep using the old design.
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+          <div style="font-size:11px;color:var(--muted)">Build repo: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px">partsbase-dan/partsbase-linkedin-ads</code> · every request, decision and change is recorded in version history</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -683,6 +857,7 @@ const TAB_CONFIG = {
   email:     { panel: 'plan',     inner: 'email',     title: ['Email Health',      'Mailchimp remediation, sender reputation, and list hygiene'] },
   icp:       { panel: 'plan',     inner: 'icp',       title: ['ICP & Targeting',   'Segmentation, ORO matching, and activation pools'] },
   pbexpo:    { panel: 'plan',     inner: 'pbexpo',    title: ['PBExpo 2027 Campaign', 'Attendee registration campaign plan · reg open → Mar 2027'] },
+  adbuild:   { panel: 'plan',     inner: 'adbuild',   title: ['How Ads Are Built', 'LinkedIn ad pipeline · form to approval, and the systems in between'] },
   exec:      { panel: 'plan',     inner: 'exec',      title: ['Exec View',         'Leadership summary and 90-day GTM narrative'] },
 };
 
@@ -742,7 +917,7 @@ function togglePlanGroup() {
 })();
 
 // ── Inner tabs ──
-const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo'];
+const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild'];
 function showInnerTab(name) {
   INNER_TABS.forEach(t => {
     document.getElementById('tab-' + t + '-content').classList.toggle('hidden', t !== name);
