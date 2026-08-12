@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-08-12T18:50:04+00:00",
+  "window": {
+    "start": "2026-08-09",
+    "end": "2026-08-12",
+    "days": 3
+  },
+  "cpl_target": 152.0,
+  "totals": {
+    "spend": 0.0,
+    "leads": 0,
+    "cpl": null,
+    "cpl_vs_target": null,
+    "active_campaigns": 0,
+    "total_campaigns": 18
+  },
+  "alerts": [
+    "The LinkedIn token expires in 12 days."
+  ],
+  "campaigns": [],
+  "proposals": [],
+  "applied": []
+}

@@ -204,6 +204,7 @@
       <button onclick="showTab('email')" id="outertab-email" class="outer-tab"><span class="nav-icon">✉</span><span>Email Health</span></button>
       <button onclick="showTab('icp')" id="outertab-icp" class="outer-tab"><span class="nav-icon">⌖</span><span>ICP &amp; Targeting</span></button>
       <button onclick="showTab('pbexpo')" id="outertab-pbexpo" class="outer-tab"><span class="nav-icon">🎫</span><span>PBExpo Campaign</span></button>
+      <button onclick="showTab('adperf')" id="outertab-adperf" class="outer-tab"><span class="nav-icon">◉</span><span>Ad Performance</span></button>
       <button onclick="showTab('adbuild')" id="outertab-adbuild" class="outer-tab"><span class="nav-icon">⚙</span><span>How Ads Are Built</span></button>
       <div class="sidebar-footer">
         <div style="font-size:11px;color:#5f626b;margin-top:18px;">Dan Rodgers · MarTech</div>
@@ -651,6 +652,8 @@
       </div>
 
       <!-- ═══ HOW ADS ARE BUILT ═══ -->
+      <div id="tab-adperf-content" class="hidden" style="padding:24px"></div>
+
       <div id="tab-adbuild-content" class="hidden" style="padding:24px">
         <div style="margin-bottom:18px">
           <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px">How LinkedIn Ads Are Built</div>
@@ -857,6 +860,7 @@ const TAB_CONFIG = {
   email:     { panel: 'plan',     inner: 'email',     title: ['Email Health',      'Mailchimp remediation, sender reputation, and list hygiene'] },
   icp:       { panel: 'plan',     inner: 'icp',       title: ['ICP & Targeting',   'Segmentation, ORO matching, and activation pools'] },
   pbexpo:    { panel: 'plan',     inner: 'pbexpo',    title: ['PBExpo 2027 Campaign', 'Attendee registration campaign plan · reg open → Mar 2027'] },
+  adperf:    { panel: 'plan',     inner: 'adperf',    title: ['Ad Performance',    'LinkedIn spend, leads and cost per lead · refreshed by the daily check'] },
   adbuild:   { panel: 'plan',     inner: 'adbuild',   title: ['How Ads Are Built', 'LinkedIn ad pipeline · form to approval, and the systems in between'] },
   exec:      { panel: 'plan',     inner: 'exec',      title: ['Exec View',         'Leadership summary and 90-day GTM narrative'] },
 };
@@ -917,7 +921,7 @@ function togglePlanGroup() {
 })();
 
 // ── Inner tabs ──
-const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild'];
+const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild','adperf'];
 function showInnerTab(name) {
   INNER_TABS.forEach(t => {
     document.getElementById('tab-' + t + '-content').classList.toggle('hidden', t !== name);
@@ -1421,6 +1425,89 @@ async function loadState() {
   }
   PLAN = S.plan || PLAN_DEFAULTS;  // JSON is source of truth; fallback to hardcoded
   renderAll();
+  loadAdPerformance();
+}
+
+// ── AD PERFORMANCE ──
+// ad-performance.json is written by the daily check in partsbase-linkedin-ads and pushed here,
+// so this tab reflects the last run without anyone editing the dashboard. Read the numbers from
+// the JSON contract — never re-derive CPL here, or the two can disagree.
+const money = v => (v === null || v === undefined) ? '—'
+  : '$' + Number(v).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+function renderAdPerformance(d) {
+  const el = document.getElementById('tab-adperf-content');
+  if (!el) return;
+  if (!d) {
+    el.innerHTML = `<div class="card"><div style="font-weight:700;margin-bottom:6px">No report yet</div>
+      <div style="font-size:12px;color:var(--label)">The daily check publishes <code>ad-performance.json</code> here on weekdays at 08:00 ET. Nothing to show until it has run against a spending account.</div></div>`;
+    return;
+  }
+  const t = d.totals || {};
+  const over = t.cpl_vs_target === 'over';
+  const cplColour = t.cpl === null || t.cpl === undefined ? 'var(--muted)'
+    : (over ? 'var(--red)' : 'var(--green)');
+
+  const alerts = (d.alerts || []).map(a =>
+    `<div class="rag-amber" style="margin-bottom:8px">⚠️ ${a}</div>`).join('');
+
+  const rows = (d.campaigns || []).map(c => `<tr>
+      <td style="padding:10px 14px;font-weight:500;border-bottom:1px solid var(--border)">${c.name || '—'}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${c.status || '—'}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${money(c.spend)}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${c.leads ?? 0}</td>
+      <td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border);color:${c.over_target ? 'var(--red)' : 'var(--text)'}">${money(c.cpl)}</td>
+    </tr>`).join('');
+
+  const proposals = (d.proposals || []).map(p => `<tr>
+      <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${p.skill || '—'}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid var(--border)"><span class="badge badge-amber">${p.risk || '?'}</span></td>
+      <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${p.campaign || '—'}</td>
+      <td style="padding:10px 14px;font-size:12px;color:var(--label);border-bottom:1px solid var(--border)">${p.rationale || '—'}</td>
+    </tr>`).join('');
+
+  const w = d.window || {};
+  el.innerHTML = `
+    <div style="margin-bottom:18px">
+      <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px">Ad Performance</div>
+      <div style="font-size:12px;color:var(--muted)">Last ${w.days ?? '—'} days (${w.start ?? '—'} → ${w.end ?? '—'}) · generated ${d.generated_at ?? '—'} · target CPL ${money(d.cpl_target)}</div>
+    </div>
+    <div class="grid-4">
+      <div class="card"><div class="card-title">Spend</div><div class="kpi-value">${money(t.spend)}</div><div class="kpi-sub">last ${w.days ?? '—'} days</div></div>
+      <div class="card"><div class="card-title">Leads</div><div class="kpi-value">${t.leads ?? 0}</div><div class="kpi-sub">one-click lead forms</div></div>
+      <div class="card"><div class="card-title">Cost per lead</div><div class="kpi-value" style="color:${cplColour}">${money(t.cpl)}</div><div class="kpi-sub">${t.cpl === null || t.cpl === undefined ? 'no leads yet' : (over ? 'above the ' + money(d.cpl_target) + ' benchmark' : 'at or under benchmark')}</div></div>
+      <div class="card"><div class="card-title">Active campaigns</div><div class="kpi-value">${t.active_campaigns ?? 0}</div><div class="kpi-sub">of ${t.total_campaigns ?? 0} in the account</div></div>
+    </div>
+    ${alerts}
+    <div class="section-label">Per campaign</div>
+    <div class="card" style="margin-bottom:18px;padding:0;overflow-x:auto">
+      ${rows ? `<table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px"><thead><tr style="background:var(--surface2)">
+        ${['Campaign','Status','Spend','Leads','CPL'].map(h=>`<th style="text-align:left;padding:10px 14px;font-weight:700;color:var(--label);border-bottom:1px solid var(--border)">${h}</th>`).join('')}
+      </tr></thead><tbody>${rows}</tbody></table>`
+      : `<div style="padding:14px;font-size:12px;color:var(--label)">No campaign is active and none spent in this window.</div>`}
+    </div>
+    <div class="section-label">Proposed changes</div>
+    <div class="card" style="margin-bottom:18px;padding:0;overflow-x:auto">
+      ${proposals ? `<table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px"><thead><tr style="background:var(--surface2)">
+        ${['Skill','Risk','Campaign','Why'].map(h=>`<th style="text-align:left;padding:10px 14px;font-weight:700;color:var(--label);border-bottom:1px solid var(--border)">${h}</th>`).join('')}
+      </tr></thead><tbody>${proposals}</tbody></table>`
+      : `<div style="padding:14px;font-size:12px;color:var(--label)">Nothing proposed in this window.</div>`}
+    </div>
+    <div class="rag-none" style="font-size:12px;color:var(--label)">
+      <b>${(d.applied || []).length === 0 ? 'No change has been applied to the ad account.' : ''}</b>
+      The optimisation skills are propose-only; applying a change is a separate, gated step.
+    </div>`;
+}
+
+async function loadAdPerformance() {
+  try {
+    const url = window.location.pathname.includes('/CoWork/') ? '../ad-performance.json' : 'ad-performance.json';
+    const res = await fetch(url + '?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    renderAdPerformance(await res.json());
+  } catch (e) {
+    renderAdPerformance(null);
+  }
 }
 
 const wsRag    = id  => S.workstreams?.[id] || 'none';
