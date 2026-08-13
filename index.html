@@ -668,14 +668,26 @@
 
         <div class="grid-2" style="margin-bottom:12px">
           <div class="card" style="border-left:3px solid var(--green)">
-            <div style="font-weight:700;margin-bottom:6px">Sponsored video with a lead form</div>
+            <div style="font-weight:700;margin-bottom:6px">Lead-gen campaigns · video</div>
             <div class="kpi-value" style="color:var(--green)">$170.50</div>
-            <div class="kpi-sub">$12,787.64 → <b>75 of the 76 leads</b></div>
+            <div class="kpi-sub">19 ads · $12,787.64 · <b>75 of the 76 leads</b></div>
           </div>
-          <div class="card" style="border-left:3px solid var(--red)">
-            <div style="font-weight:700;margin-bottom:6px">Everything else</div>
-            <div class="kpi-value" style="color:var(--red)">1 lead</div>
-            <div class="kpi-sub">$7,895.53 across static, boosts and giveaways</div>
+          <div class="card" style="border-left:3px solid var(--yellow)">
+            <div style="font-weight:700;margin-bottom:6px">Lead-gen campaigns · image</div>
+            <div class="kpi-value" style="color:var(--yellow)">1 ad</div>
+            <div class="kpi-sub">$311.07 · 1 lead · <b>too small to conclude anything</b></div>
+          </div>
+        </div>
+
+        <div class="rag-amber" style="margin-bottom:12px">⚠️ <b>Image was never really tested against video.</b> Exactly one image ad ever ran under a lead-generation objective. The other twelve ran as WEBSITE_VISIT or BRAND_AWARENESS, which carry no lead form — zero leads there is a measurement artifact, not a result. Five video ads outside lead-gen scored zero for the same reason. Do not claim image creative underperforms; the data does not support it.</div>
+
+        <div class="card" style="margin-bottom:12px;border-left:3px solid var(--red)">
+          <div style="font-weight:700;margin-bottom:6px">The finding that does hold: objective, not format</div>
+          <div style="font-size:12.5px;color:var(--label);line-height:1.7">
+            <b>$7,584.46 — 37% of all spend — went to campaigns that could not produce a lead by construction.</b>
+            WEBSITE_VISIT, BRAND_AWARENESS and VIDEO_VIEW objectives have no lead form attached.
+            Every one of the 76 leads came from the four campaigns with a LEAD_GENERATION objective.
+            The lever with evidence behind it is objective selection, not video vs image.
           </div>
         </div>
 
@@ -700,7 +712,7 @@
 
         <div class="rag-amber" style="margin-bottom:8px">⚠️ <b>Say "sponsored video with a lead form", not "video".</b> The campaign named <code>PBExpo-Booth-Push-Video</code> spent $773.63 for zero leads, and two boosted video posts spent $865.75 for zero. The winners are video creatives with lead forms running inside the <code>Exhibitors |</code> ad sets — the distinction is the lead form, not the format.</div>
         <div class="rag-none" style="font-size:12px;color:var(--label)">
-          <b>$152.01</b> is the CPL of the <code>Exhibitors | Seniority</code> ad set, not of any single creative — the best creative-level CPL is <b>$124.62</b>. Creatives are classified by name, not by LinkedIn's format field. Source: <code>audit/baseline-2026-08-11.md</code> in partsbase-linkedin-ads.
+          <b>$152.01</b> is the CPL of the <code>Exhibitors | Seniority</code> ad set, not of any single creative — the best creative-level CPL is <b>$124.62</b>. Media type is resolved per creative from LinkedIn (<code>urn:li:video</code> vs <code>urn:li:image</code>), not inferred from names — two ads called "PBExpo - Booth - A/B" are video despite the name. Buckets reconcile to the full $20,683.17, including $668.70 that never delivered an impression. <code>oneClickLeads</code> counts LinkedIn lead-form submissions only, so it reads zero for any campaign without a form regardless of how the creative performed. Source: <code>audit/baseline-2026-08-11.md</code> in partsbase-linkedin-ads.
         </div>
       </div>
 
