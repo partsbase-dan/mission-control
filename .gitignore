@@ -1,0 +1,33 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Mission Control — deploy-only repository
+#
+# This repo publishes exactly one thing: the GitHub Pages dashboard.
+# Everything else in this workspace is local working material — ~31 GB of ad
+# media, CRM exports, migration sets, skills, and scripts — and must never be
+# committed. Several of those files contain customer contact data.
+#
+# So the rule is inverted: ignore everything, then explicitly allow the files
+# that actually deploy. A new data file can never be committed by accident.
+#
+# TO PUBLISH A NEW FILE: add an explicit `!filename` line below.
+# Root files are load-bearing for the deploy — see CLAUDE.md, "Root Files —
+# Do Not Relocate" — so keep this list in sync with that table.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Ignore everything by default.
+*
+
+# ── The published site ───────────────────────────────────────────────────────
+!index.html
+!linkedin-walkthrough.html
+!hubspot-vs-nooks-slide.html
+
+# Dashboard data. dashboard-state.json is fetched as a root sibling by both
+# viewers; ad-performance.json is written here by the partsbase-linkedin-ads
+# weekday ad-account check.
+!dashboard-state.json
+!ad-performance.json
+
+# ── This file ────────────────────────────────────────────────────────────────
+# Tracked so the protection survives a fresh clone.
+!.gitignore
