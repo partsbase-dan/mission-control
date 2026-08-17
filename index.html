@@ -1271,10 +1271,118 @@ Don't miss your shot to meet them in person.
 
 → Register free` },
   ]},
+  N: { name: 'Flow N · Post-reg nurture', sub: 'Registered attendees · Aug 2026 through post-event · MOCK PATH, structure only', tag: 'Placeholder', tagClass: 'tag-yellow', placeholder: true, emails: [
+    { n: 'N1', when: '+1 day', subj: `[LOCKED] Your PBExpo app, and how to get matched`, meta: `Structure locked, copy draft. Needs: app deep link.`, body: `[PLACEHOLDER COPY. Structure approved, wording not written.]
+
+Purpose: convert a registration into an active app profile. This is the single highest-leverage step in the whole nurture, because every later beat depends on the attendee having a profile the matchmaking can read.
+
+Beats to cover:
+• Download the app, [APP LINK NEEDED]
+• Build a profile: what {Company} is sourcing or selling
+• What happens next: matches start surfacing once the profile is complete
+
+Success metric: app profile completion rate.` },
+    { n: 'N2', when: '+1 week', subj: `[LOCKED] Your first matches are ready`, meta: `Structure locked. Needs: matchmaking go-live date, minimum match threshold.`, body: `[PLACEHOLDER COPY.]
+
+Purpose: first proof that the core promise is real. Show actual matched companies, not a generic nudge.
+
+Beats to cover:
+• [N] attendees matched to {Company} so far
+• How to request a meeting
+• Why early requests win: the best-fit people fill their two days first
+
+Open decisions:
+• Does matchmaking run this far out from the event, or does it open closer in? If it opens later, this email moves and N3 becomes the first nurture touch.
+• Minimum match count before we send. Sending "you have 1 match" is worse than not sending.` },
+    { n: 'N3', when: '[EVENT: agenda publish]', subj: `[EVENT-GATED] The agenda is live, build your two days`, meta: `Waiting on: agenda publish date. Currently assumed Sep 2026.`, body: `[PLACEHOLDER COPY.]
+
+Purpose: registered attendees never receive A5, so this carries the agenda reveal for them. Same event, different voice: they are already in, so this is about planning rather than persuading.
+
+Beats to cover:
+• Sessions and keynote tracks now live
+• Add sessions to your in-app schedule
+• [MAINTENANCE GAMES SCHEDULE, if confirmed by then]
+
+Trigger: fires on agenda publish, not on a fixed date. Needs the publish date locked before this can be scheduled.` },
+    { n: 'N4', when: '[EVENT: speaker reveal]', subj: `[EVENT-GATED] [SPEAKER NAME] is speaking at PBExpo 2027`, meta: `Waiting on: speaker lineup, confirmation dates, and whether reveals are staged or announced at once.`, body: `[PLACEHOLDER COPY. No speakers confirmed to me.]
+
+Purpose: a mid-window re-engagement beat during the long Oct to Jan quiet stretch. Registration is in August and the event is in March, so there is roughly a five-month gap with nothing else to say. Speaker reveals are the natural filler.
+
+Beats to cover:
+• Who is speaking and why it matters to {segment}
+• Add the session to your schedule
+
+Open decisions:
+• Staged reveals (one email per speaker) or a single lineup announcement? Staged gives more touches but needs more assets.
+• How many of these? This is the main lever for filling the Oct to Jan gap.` },
+    { n: 'N5', when: '[EVENT: TBD]', subj: `[EVENT-GATED] [MAINTENANCE GAMES / PAVILION DETAIL]`, meta: `Waiting on: Maintenance Games format and Operators Pavilion details.`, body: `[PLACEHOLDER COPY.]
+
+Purpose: a second mid-window beat, and the natural place to surface the Operators Pavilion to registered operators.
+
+Beats to cover:
+• Maintenance Games format, teams, and how to watch or enter [FORMAT TBD]
+• Operators Pavilion: what it is, who it is for, and the upgrade path
+• Segment split: operators get the Pavilion angle, everyone else gets the Games
+
+Open decisions:
+• Is the Pavilion upgrade sold to registered attendees post-registration, or only at the point of registration? This changes whether the email is informational or transactional.` },
+    { n: 'N6', when: 'T-6 wk', subj: `[NEEDS DATA] New since you registered: [N] exhibitors, [N] matches`, meta: `Waiting on: exhibitor data feed into HubSpot. Without it this email cannot be personalized and should be cut.`, body: `[PLACEHOLDER COPY.]
+
+Purpose: re-engage attendees who registered in August and have not opened the app since. The hook is accumulated value: the room got better while they were away.
+
+Beats to cover:
+• [N] exhibitors added since your registration date
+• [N] new best-fit matches waiting
+• One click back into the app
+
+Hard dependency: this needs a live exhibitor count and a per-contact match count flowing into HubSpot. If that feed does not exist, cut this email rather than send a generic version. A vague "lots of new exhibitors" is weaker than silence.` },
+    { n: 'N7', when: 'T-4 wk', subj: `[LOCKED] Book your room before the block closes`, meta: `Structure locked. Mirrors A7 for registered attendees. Needs: hotel block link and close date.`, body: `[PLACEHOLDER COPY.]
+
+Purpose: registered attendees never receive A7, so this carries the hotel block deadline for them. Real deadline, so real urgency. This is the one nurture email with a genuine hard date.
+
+Beats to cover:
+• Room block closes [DATE NEEDED]
+• Booking link [NEEDED]
+• Travel: MIA and FLL both roughly 30 to 40 minutes out
+• Upgrade path: Operators Pavilion $500, Pavilion plus both VIP suites $1,000
+
+Success metric: room block bookings attributed to this send.` },
+    { n: 'N8', when: 'T-2 wk', subj: `[LOCKED] Know before you go`, meta: `Structure locked. Mirrors A8 for registered attendees.`, body: `[PLACEHOLDER COPY.]
+
+Purpose: reduce day-of friction and drive final schedule completion.
+
+Beats to cover:
+• Your meeting schedule, and how many slots are still open
+• Venue, parking, badge pickup times [DETAILS NEEDED]
+• Final agenda
+• What to bring
+
+Success metric: share of registrants arriving with at least [N] meetings booked. This is the number that proves the matchmaking promise held.` },
+    { n: 'N9', when: 'T-1 day', subj: `[LOCKED] Tomorrow: your PBExpo schedule`, meta: `Structure locked. Send window matters more than copy here.`, body: `[PLACEHOLDER COPY.]
+
+Purpose: day-before logistics. Short, scannable, mobile first. Most people read this on a phone in an airport.
+
+Beats to cover:
+• Doors open [TIME NEEDED], badge pickup at [LOCATION NEEDED]
+• Your first meeting and where it is
+• Wi-Fi, floor plan, help desk
+
+Open decision: send time. Evening before, or morning of day one?` },
+    { n: 'N10', when: '+2 days post-event', subj: `[EVENT-GATED] Thanks for coming, here is what happened`, meta: `Waiting on: recap assets, 2028 date, and whether next-year registration opens at the show.`, body: `[PLACEHOLDER COPY.]
+
+Purpose: close the loop, capture feedback while it is fresh, and start the Flow B past-attendee pool for the next cycle. This email is what makes next year's warm list exist.
+
+Beats to cover:
+• Recap: attendance, highlights, Maintenance Games result [ASSETS NEEDED]
+• Feedback survey [NEEDS BUILDING]
+• Save the date for 2028 [DATE NOT SET]
+
+Downstream: everyone who receives this becomes Flow B (past-attendee re-engage) for the next cycle. Tag them here or the warm pool has to be rebuilt from scratch later.` },
+  ]},
 };
 let pbxState = { flow: 'A', step: 0 };
 function pbxRenderSeq() {
-  const flows = ['A', 'B', 'C'];
+  const flows = ['A', 'B', 'C', 'N'];
   document.getElementById('pbx-flow-pills').innerHTML = flows.map(f => {
     const on = f === pbxState.flow, d = PBX_SEQ[f];
     const tag = d.tag ? ` <span class="tag ${d.tagClass}">${d.tag}</span>` : '';
@@ -1287,7 +1395,10 @@ function pbxRenderSeq() {
     return `<button onclick="pbxSelStep(${i})" style="flex:0 0 132px;width:132px;text-align:left;background:${on ? 'var(--accent)' : 'var(--surface)'};color:${on ? '#fff' : 'var(--text)'};border:1px solid ${on ? 'var(--accent)' : 'var(--border)'};border-radius:9px;padding:8px 10px;cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center;gap:4px"><span style="font-weight:800;font-size:14px">${e.n}</span><span style="font-size:9px;opacity:.85;white-space:nowrap">${e.when}</span></div><div style="font-size:10.5px;line-height:1.3;margin-top:4px;opacity:.92;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${e.subj}</div></button>`;
   }).join('');
   const e = d.emails[pbxState.step];
-  document.getElementById('pbx-email-detail').innerHTML =
+  const placeholderBanner = d.placeholder
+    ? `<div class="rag-amber" style="margin:-4px 0 14px">⚠️ <b>Mock path, not approved copy.</b> This flow shows the shape of the post-registration journey so the real events can be slotted in once they are decided. Nothing here is written for sending. <span style="color:var(--muted)">[LOCKED]</span> = timing is fixed, copy still to write. <span style="color:var(--muted)">[EVENT-GATED]</span> = waiting on a date or asset. <span style="color:var(--muted)">[NEEDS DATA]</span> = blocked on a feed.</div>`
+    : '';
+  document.getElementById('pbx-email-detail').innerHTML = placeholderBanner +
     `<div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px"><div style="font-weight:800;font-size:15px">${e.n} · ${(d.name.split(' · ')[1] || '')}</div><span class="tag tag-blue">${e.when}</span></div>`
     + `<div style="font-weight:700;font-size:14.5px;color:var(--text);margin-bottom:5px"><span style="color:var(--accent)">Subject:</span> ${e.subj}</div>`
     + `<div style="font-size:11px;color:var(--muted);font-style:italic;margin-bottom:12px">${e.meta}</div>`
