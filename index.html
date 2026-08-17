@@ -1271,8 +1271,8 @@ Don't miss your shot to meet them in person.
 
 → Register free` },
   ]},
-  N: { name: 'Flow N · Post-reg nurture', sub: 'Registered attendees · Aug 2026 through post-event · MOCK PATH, structure only', tag: 'Placeholder', tagClass: 'tag-yellow', placeholder: true, emails: [
-    { n: 'N1', when: '+1 day', subj: `[LOCKED] Your PBExpo app, and how to get matched`, meta: `Structure locked, copy draft. Needs: app deep link.`, body: `[PLACEHOLDER COPY. Structure approved, wording not written.]
+  D: { name: 'Flow D · Post-reg nurture', sub: 'Registered attendees · Aug 2026 through post-event · MOCK PATH, structure only', tag: 'Placeholder', tagClass: 'tag-yellow', placeholder: true, emails: [
+    { n: 'D1', when: '+1 day', subj: `[LOCKED] Your PBExpo app, and how to get matched`, meta: `Structure locked, copy draft. Needs: app deep link.`, body: `[PLACEHOLDER COPY. Structure approved, wording not written.]
 
 Purpose: convert a registration into an active app profile. This is the single highest-leverage step in the whole nurture, because every later beat depends on the attendee having a profile the matchmaking can read.
 
@@ -1282,7 +1282,7 @@ Beats to cover:
 • What happens next: matches start surfacing once the profile is complete
 
 Success metric: app profile completion rate.` },
-    { n: 'N2', when: '+1 week', subj: `[LOCKED] Your first matches are ready`, meta: `Structure locked. Needs: matchmaking go-live date, minimum match threshold.`, body: `[PLACEHOLDER COPY.]
+    { n: 'D2', when: '+1 week', subj: `[LOCKED] Your first matches are ready`, meta: `Structure locked. Needs: matchmaking go-live date, minimum match threshold.`, body: `[PLACEHOLDER COPY.]
 
 Purpose: first proof that the core promise is real. Show actual matched companies, not a generic nudge.
 
@@ -1292,9 +1292,9 @@ Beats to cover:
 • Why early requests win: the best-fit people fill their two days first
 
 Open decisions:
-• Does matchmaking run this far out from the event, or does it open closer in? If it opens later, this email moves and N3 becomes the first nurture touch.
+• Does matchmaking run this far out from the event, or does it open closer in? If it opens later, this email moves and D3 becomes the first nurture touch.
 • Minimum match count before we send. Sending "you have 1 match" is worse than not sending.` },
-    { n: 'N3', when: '[EVENT: agenda publish]', subj: `[EVENT-GATED] The agenda is live, build your two days`, meta: `Waiting on: agenda publish date. Currently assumed Sep 2026.`, body: `[PLACEHOLDER COPY.]
+    { n: 'D3', when: '[EVENT: agenda publish]', subj: `[EVENT-GATED] The agenda is live, build your two days`, meta: `Waiting on: agenda publish date. Currently assumed Sep 2026.`, body: `[PLACEHOLDER COPY.]
 
 Purpose: registered attendees never receive A5, so this carries the agenda reveal for them. Same event, different voice: they are already in, so this is about planning rather than persuading.
 
@@ -1304,7 +1304,7 @@ Beats to cover:
 • [MAINTENANCE GAMES SCHEDULE, if confirmed by then]
 
 Trigger: fires on agenda publish, not on a fixed date. Needs the publish date locked before this can be scheduled.` },
-    { n: 'N4', when: '[EVENT: speaker reveal]', subj: `[EVENT-GATED] [SPEAKER NAME] is speaking at PBExpo 2027`, meta: `Waiting on: speaker lineup, confirmation dates, and whether reveals are staged or announced at once.`, body: `[PLACEHOLDER COPY. No speakers confirmed to me.]
+    { n: 'D4', when: '[EVENT: speaker reveal]', subj: `[EVENT-GATED] [SPEAKER NAME] is speaking at PBExpo 2027`, meta: `Waiting on: speaker lineup, confirmation dates, and whether reveals are staged or announced at once.`, body: `[PLACEHOLDER COPY. No speakers confirmed to me.]
 
 Purpose: a mid-window re-engagement beat during the long Oct to Jan quiet stretch. Registration is in August and the event is in March, so there is roughly a five-month gap with nothing else to say. Speaker reveals are the natural filler.
 
@@ -1315,7 +1315,7 @@ Beats to cover:
 Open decisions:
 • Staged reveals (one email per speaker) or a single lineup announcement? Staged gives more touches but needs more assets.
 • How many of these? This is the main lever for filling the Oct to Jan gap.` },
-    { n: 'N5', when: '[EVENT: TBD]', subj: `[EVENT-GATED] [MAINTENANCE GAMES / PAVILION DETAIL]`, meta: `Waiting on: Maintenance Games format and Operators Pavilion details.`, body: `[PLACEHOLDER COPY.]
+    { n: 'D5', when: '[EVENT: TBD]', subj: `[EVENT-GATED] [MAINTENANCE GAMES / PAVILION DETAIL]`, meta: `Waiting on: Maintenance Games format and Operators Pavilion details.`, body: `[PLACEHOLDER COPY.]
 
 Purpose: a second mid-window beat, and the natural place to surface the Operators Pavilion to registered operators.
 
@@ -1326,7 +1326,7 @@ Beats to cover:
 
 Open decisions:
 • Is the Pavilion upgrade sold to registered attendees post-registration, or only at the point of registration? This changes whether the email is informational or transactional.` },
-    { n: 'N6', when: 'T-6 wk', subj: `[NEEDS DATA] New since you registered: [N] exhibitors, [N] matches`, meta: `Waiting on: exhibitor data feed into HubSpot. Without it this email cannot be personalized and should be cut.`, body: `[PLACEHOLDER COPY.]
+    { n: 'D6', when: 'T-6 wk', subj: `[NEEDS DATA] New since you registered: [N] exhibitors, [N] matches`, meta: `Waiting on: exhibitor data feed into HubSpot. Without it this email cannot be personalized and should be cut.`, body: `[PLACEHOLDER COPY.]
 
 Purpose: re-engage attendees who registered in August and have not opened the app since. The hook is accumulated value: the room got better while they were away.
 
@@ -1336,7 +1336,7 @@ Beats to cover:
 • One click back into the app
 
 Hard dependency: this needs a live exhibitor count and a per-contact match count flowing into HubSpot. If that feed does not exist, cut this email rather than send a generic version. A vague "lots of new exhibitors" is weaker than silence.` },
-    { n: 'N7', when: 'T-4 wk', subj: `[LOCKED] Book your room before the block closes`, meta: `Structure locked. Mirrors A7 for registered attendees. Needs: hotel block link and close date.`, body: `[PLACEHOLDER COPY.]
+    { n: 'D7', when: 'T-4 wk', subj: `[LOCKED] Book your room before the block closes`, meta: `Structure locked. Mirrors A7 for registered attendees. Needs: hotel block link and close date.`, body: `[PLACEHOLDER COPY.]
 
 Purpose: registered attendees never receive A7, so this carries the hotel block deadline for them. Real deadline, so real urgency. This is the one nurture email with a genuine hard date.
 
@@ -1347,7 +1347,7 @@ Beats to cover:
 • Upgrade path: Operators Pavilion $500, Pavilion plus both VIP suites $1,000
 
 Success metric: room block bookings attributed to this send.` },
-    { n: 'N8', when: 'T-2 wk', subj: `[LOCKED] Know before you go`, meta: `Structure locked. Mirrors A8 for registered attendees.`, body: `[PLACEHOLDER COPY.]
+    { n: 'D8', when: 'T-2 wk', subj: `[LOCKED] Know before you go`, meta: `Structure locked. Mirrors A8 for registered attendees.`, body: `[PLACEHOLDER COPY.]
 
 Purpose: reduce day-of friction and drive final schedule completion.
 
@@ -1358,7 +1358,7 @@ Beats to cover:
 • What to bring
 
 Success metric: share of registrants arriving with at least [N] meetings booked. This is the number that proves the matchmaking promise held.` },
-    { n: 'N9', when: 'T-1 day', subj: `[LOCKED] Tomorrow: your PBExpo schedule`, meta: `Structure locked. Send window matters more than copy here.`, body: `[PLACEHOLDER COPY.]
+    { n: 'D9', when: 'T-1 day', subj: `[LOCKED] Tomorrow: your PBExpo schedule`, meta: `Structure locked. Send window matters more than copy here.`, body: `[PLACEHOLDER COPY.]
 
 Purpose: day-before logistics. Short, scannable, mobile first. Most people read this on a phone in an airport.
 
@@ -1368,7 +1368,7 @@ Beats to cover:
 • Wi-Fi, floor plan, help desk
 
 Open decision: send time. Evening before, or morning of day one?` },
-    { n: 'N10', when: '+2 days post-event', subj: `[EVENT-GATED] Thanks for coming, here is what happened`, meta: `Waiting on: recap assets, 2028 date, and whether next-year registration opens at the show.`, body: `[PLACEHOLDER COPY.]
+    { n: 'D10', when: '+2 days post-event', subj: `[EVENT-GATED] Thanks for coming, here is what happened`, meta: `Waiting on: recap assets, 2028 date, and whether next-year registration opens at the show.`, body: `[PLACEHOLDER COPY.]
 
 Purpose: close the loop, capture feedback while it is fresh, and start the Flow B past-attendee pool for the next cycle. This email is what makes next year's warm list exist.
 
@@ -1382,7 +1382,7 @@ Downstream: everyone who receives this becomes Flow B (past-attendee re-engage) 
 };
 let pbxState = { flow: 'A', step: 0 };
 function pbxRenderSeq() {
-  const flows = ['A', 'B', 'C', 'N'];
+  const flows = ['A', 'B', 'C', 'D'];
   document.getElementById('pbx-flow-pills').innerHTML = flows.map(f => {
     const on = f === pbxState.flow, d = PBX_SEQ[f];
     const tag = d.tag ? ` <span class="tag ${d.tagClass}">${d.tag}</span>` : '';
