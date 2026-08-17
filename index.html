@@ -175,7 +175,90 @@
     .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
     .plan-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-left: 0; }
     .tab-content { padding: 18px; }
+    .ic-grid { grid-template-columns: 1fr !important; }
+    .dt-search { flex: 1 1 100%; }   /* search takes its own row; chips wrap under it */
+    .dt-count { margin-left: 0; }
+    .dt-scroll { max-height: none; }
   }
+
+  /* ════════════════════════════════════════════════════════════════
+     UI primitives — patterns ported from beautifului.dev (MIT),
+     re-implemented in vanilla CSS/JS on the PartsBase palette.
+     ════════════════════════════════════════════════════════════════ */
+
+  /* ── Filter / Records table ── */
+  .dt-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: 0px 2px 6px 0px #1079f824; overflow: hidden; }
+  .dt-toolbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+  .dt-search { position: relative; flex: 1 1 200px; min-width: 170px; }
+  .dt-search input { width: 100%; font-family: inherit; font-size: 13px; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px 7px 30px; outline: none; transition: border-color .15s, box-shadow .15s; }
+  .dt-search input::placeholder { color: var(--muted); }
+  .dt-search input:focus { border-color: var(--accent); background: var(--surface); box-shadow: 0 0 0 3px rgba(12,112,232,.12); }
+  .dt-search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 12px; pointer-events: none; }
+  .dt-chip { font-family: inherit; font-size: 11px; font-weight: 600; padding: 5px 11px; border-radius: 99px; border: 1px solid var(--border); background: var(--surface2); color: var(--label); cursor: pointer; white-space: nowrap; transition: all .15s; }
+  .dt-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .dt-chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .dt-count { font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .dt-scroll { max-height: 62vh; overflow: auto; }
+  .dt-wrap table { width: 100%; border-collapse: collapse; }
+  .dt-wrap th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); background: var(--surface2); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 2; white-space: nowrap; }
+  .dt-wrap th.sortable { cursor: pointer; user-select: none; }
+  .dt-wrap th.sortable:hover { color: var(--accent); }
+  .dt-wrap th.sorted { color: var(--accent); }
+  .dt-caret { margin-left: 5px; font-size: 8px; opacity: .25; }
+  .dt-wrap th.sorted .dt-caret { opacity: 1; }
+  .dt-wrap td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--label); font-size: 13px; vertical-align: top; }
+  .dt-wrap tbody tr:hover td { background: var(--surface2); }
+  .dt-wrap tbody tr:last-child td { border-bottom: none; }
+  .dt-empty { padding: 34px 16px; text-align: center; font-size: 13px; color: var(--muted); }
+
+  /* ── Insight card ── */
+  .ic-grid { display: grid; gap: 12px; margin-bottom: 18px; }
+  .ic { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 16px 18px; box-shadow: 0px 2px 6px 0px #1079f824; }
+  .ic-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.9px; color: var(--muted); }
+  .ic-row { display: flex; align-items: baseline; gap: 8px; margin-top: 7px; }
+  .ic-value { font-size: 27px; font-weight: 700; letter-spacing: -0.8px; color: var(--text); line-height: 1; font-variant-numeric: tabular-nums; }
+  .ic-unit { font-size: 13px; font-weight: 600; color: var(--muted); }
+  .ic-delta { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 99px; white-space: nowrap; margin-left: auto; }
+  .ic-delta.up { background: #d1fadf; color: #027a48; }
+  .ic-delta.down { background: #fee2e2; color: #b91c1c; }
+  .ic-delta.flat { background: #f3f4f6; color: #4b5563; }
+  .ic-sub { font-size: 11px; color: var(--muted); margin-top: 5px; }
+  .ic-meter { height: 6px; border-radius: 99px; background: var(--border); margin-top: 11px; overflow: hidden; }
+  .ic-meter > span { display: block; height: 100%; border-radius: 99px; background: var(--accent); transition: width .45s ease; }
+  .ic-seg { display: flex; gap: 3px; margin-top: 11px; }
+  .ic-seg > i { height: 6px; border-radius: 99px; }
+
+  /* ── Command palette (⌘K) ── */
+  .cmdk-trigger { display: flex; align-items: center; gap: 7px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; font-family: inherit; font-size: 12px; color: var(--muted); cursor: pointer; transition: all .15s; }
+  .cmdk-trigger:hover { border-color: var(--accent); color: var(--accent); }
+  .cmdk-backdrop { position: fixed; inset: 0; background: rgba(0,40,87,.30); z-index: 200; display: flex; align-items: flex-start; justify-content: center; padding: 12vh 16px 16px; }
+  .cmdk { width: min(580px, 100%); background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 24px 64px rgba(0,40,87,.26); overflow: hidden; }
+  .cmdk-input { width: 100%; border: none; border-bottom: 1px solid var(--border); padding: 15px 18px; font-family: inherit; font-size: 15px; color: var(--text); outline: none; background: var(--surface); }
+  .cmdk-input::placeholder { color: var(--muted); }
+  .cmdk-list { max-height: 46vh; overflow: auto; padding: 6px; }
+  .cmdk-group { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); padding: 10px 12px 5px; }
+  .cmdk-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 9px; cursor: pointer; }
+  .cmdk-item.sel { background: #f0f7ff; }
+  .cmdk-item.sel .cmdk-title { color: var(--accent); }
+  .cmdk-icon { width: 20px; text-align: center; color: var(--muted); flex-shrink: 0; font-size: 13px; }
+  .cmdk-title { font-size: 13px; font-weight: 500; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cmdk-sub { font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; flex-shrink: 0; }
+  .cmdk-foot { display: flex; gap: 14px; align-items: center; padding: 9px 14px; border-top: 1px solid var(--border); font-size: 11px; color: var(--muted); background: var(--surface2); }
+  .cmdk-empty { padding: 30px 16px; text-align: center; font-size: 13px; color: var(--muted); }
+  kbd { font-family: 'SF Mono','Fira Code',monospace; font-size: 10px; background: var(--surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 1px 5px; color: var(--label); }
+
+  /* ── Task rows ── */
+  .tr-row { display: flex; align-items: center; gap: 11px; padding: 10px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 9px; margin-bottom: 6px; }
+  .tr-row:last-child { margin-bottom: 0; }
+  .tr-row.is-done { background: var(--surface); }
+  .tr-mark { width: 16px; height: 16px; border-radius: 99px; flex-shrink: 0; display: grid; place-items: center; font-size: 9px; font-weight: 700; color: #fff; }
+  .tr-mark.done { background: #12b76a; }
+  .tr-mark.pending { background: transparent; border: 1.5px dashed #c3c7cf; }
+  .tr-mark.next { background: var(--accent); box-shadow: 0 0 0 3px rgba(12,112,232,.16); }
+  .tr-main { flex: 1; min-width: 0; }
+  .tr-title { font-size: 13px; font-weight: 500; color: var(--text); }
+  .tr-row.is-done .tr-title { color: var(--muted); text-decoration: line-through; }
+  .tr-target { font-size: 11px; color: var(--muted); white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -217,6 +300,7 @@
           <div class="page-subtitle" id="page-subtitle">Overview · PartsBase GTM operating system</div>
         </div>
         <div class="topbar-actions">
+          <button class="cmdk-trigger" onclick="cmdkOpen()" title="Search everything"><span>⌕</span><span>Search</span><kbd id="cmdk-hint">⌘K</kbd></button>
           <div class="status-pill"><span id="date-display"></span> · <span id="time-display"></span></div>
           <div class="avatar">DR</div>
         </div>
@@ -396,6 +480,8 @@
 
       <!-- OVERVIEW -->
       <div id="tab-overview-content">
+        <div class="plan-label" style="margin-top:0">Plan Health</div>
+        <div class="ic-grid" style="grid-template-columns:repeat(4,1fr)" id="planHealth"></div>
         <div class="plan-label">LinkedIn Ads — Executive Walkthrough</div>
         <a href="linkedin-walkthrough.html" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;gap:16px;text-decoration:none;background:var(--accent);color:#fff;border-radius:12px;padding:16px 20px;margin-bottom:18px;box-shadow:0 2px 6px 0 rgba(16,121,248,.24)">
           <div>
@@ -506,7 +592,7 @@
 
         <div class="section-label">Audience &amp; segmentation</div>
         <div class="grid-4">
-          <div class="card"><div style="font-weight:700;margin-bottom:6px">Track A · New buyers <span class="tag tag-blue">Primary</span></div><div style="font-size:12px;color:var(--label)">Buyer Bob (Purchasing Dir), Procurement Paula (1,000+ emp), MRO Mark (buyer + seller). Priority segments: MROs, Distributors, Brokers, OEMs, Contract Mfrs.</div></div>
+          <div class="card"><div style="font-weight:700;margin-bottom:6px">Track A · Buyers + operators <span class="tag tag-blue">Primary</span></div><div style="font-size:12px;color:var(--label)">Buyer Bob (Purchasing Dir), Procurement Paula (1,000+ emp), MRO Mark (buyer + seller). Priority segments: MROs, Distributors, Brokers, OEMs, Contract Mfrs. Also carries general attendees and airlines/operators, plus the Operators Pavilion upgrade. Gated on airline-list enrichment: anti-persona must be suppressed before this sends.</div></div>
           <div class="card"><div style="font-weight:700;margin-bottom:6px">Track B · Past attendees <span class="tag tag-green">Warm</span></div><div style="font-size:12px;color:var(--label)">Prior-year registrants — highest-intent, lowest-CAC. Separate "welcome back / what's new in 2027" flow. Amelia: returning attendees now outnumber first-timers (2026) — a compounding, high-intent pool.</div></div>
           <div class="card"><div style="font-weight:700;margin-bottom:6px">Track C · Students &amp; job seekers <span class="tag tag-blue">Career Runway</span></div><div style="font-size:12px;color:var(--label)">Attendees for PBExpo's Career Runway hiring zone. Own light-touch invite flow, separate from buyer drips. Existing targeting: Career Runway fit lists.</div></div>
           <div class="card"><div style="font-weight:700;margin-bottom:6px">Suppress <span class="tag tag-red">Anti-persona</span></div><div style="font-size:12px;color:var(--label)">Pilots, flight attendants, ATCs. Enrich Airlines lists before sequencing. Protects deliverability.</div></div>
@@ -1009,17 +1095,17 @@ function showPbxSub(name) {
 
 // ── PBExpo email sequences (interactive storyboard) ──
 const PBX_SEQ = {
-  A: { name: 'Flow A · New buyer drip', sub: 'MROs, distributors, brokers, OEMs, contract mfrs · Aug 18 reg-open → event', tag: '', tagClass: '', emails: [
-    { n: 'A1', when: 'Aug 18 · Day 0', subj: `PBExpo 2027 registration is open — free to attend`, meta: `A/B: "You're invited: PBExpo 2027, Miami Beach" · Preview: The world's largest aviation & aerospace networking event returns.`, body: `Hi {First},
+  A: { name: 'Flow A · Attendee drip', sub: 'Buyers, general attendees, airlines and operators · Aug 18 reg-open through event', tag: 'Primary', tagClass: 'tag-blue', emails: [
+    { n: 'A1', when: 'Aug 18 · Day 0', subj: `PBExpo 2027 registration is open, free to attend`, meta: `A/B: "You're invited: PBExpo 2027, Miami Beach" · Preview: The world's largest aviation and aerospace networking event returns.`, body: `Hi {First},
 
-Registration for PBExpo 2027 is officially open — and it's free to attend.
+Registration for PBExpo 2027 is officially open, and it's free to attend.
 
-March 10–11, 2027 · Miami Beach Convention Center. Two days where the aviation and aerospace supply chain does business face-to-face — suppliers, MROs, distributors, and OEMs in one room.
+March 10–11, 2027 · Miami Beach Convention Center. Two days where the aviation and aerospace supply chain does business face to face: suppliers, MROs, distributors, OEMs, and operators in one room.
 
 Why {Company} should be there:
-• 86% of attendees are decision-makers — every conversation counts.
+• 86% of attendees are decision-makers. Every conversation counts.
 • Source parts, solve AOG challenges, and build relationships that outlast any transaction.
-• Complimentary food, drinks, and networking receptions — the entire event is free.
+• Complimentary food, drinks, and networking receptions. The entire event is free.
 
 → Register free
 
@@ -1027,86 +1113,109 @@ See you in Miami,
 The PBExpo Team` },
     { n: 'A2', when: '+3–4 days', subj: `86% of the room makes the buying decisions`, meta: `Preview: What two days at PBExpo does for your sourcing.`, body: `Hi {First},
 
-When 86% of the people in the room are decision-makers, you're not collecting business cards — you're closing gaps in your supply chain.
+When 86% of the people in the room are decision-makers, you're not collecting business cards. You're closing gaps in your supply chain.
 
 At PBExpo you can:
-• Meet suppliers you've only emailed — the app's AI matchmaking surfaces your best-fit prospects and lets you pre-book them.
+• Meet suppliers you've only emailed. The app's AI matchmaking surfaces your best-fit prospects and lets you pre-book them.
 • Compare capabilities and quotes across MROs, distributors, brokers, and OEMs in person.
 • Track down the hard-to-source parts and the partners who can actually deliver.
 
 For a {segment} like {Company}, that's a quarter of sourcing calls compressed into 48 hours.
 
 → Register free` },
-    { n: 'A3', when: '+1 week', subj: `"You have to be here to talk about it"`, meta: `Preview: What the industry says about PBExpo.`, body: `Hi {First},
+    { n: 'A3', when: '+1 week', subj: `{Company}'s next hard-to-source part is probably in this room`, meta: `Operators and airlines angle. Preview: AOG, teardowns, and the suppliers who actually stock it.`, body: `Hi {First},
+
+If you run or support a fleet, you already know the problem. The part you need is never the part that's easy to find.
+
+PBExpo puts the people who stock it in front of you for two days: MROs, distributors, brokers, OEMs, and teardown specialists from across the supply chain.
+
+What operators use the show for:
+• Build a backup supplier bench before the next AOG, not during it.
+• Compare lead times and capabilities face to face instead of over email.
+• Source the hard-to-find and end-of-life parts that stall a return to service.
+
+For a {segment} like {Company}, that's a quarter of sourcing calls compressed into 48 hours.
+
+→ Register free` },
+    { n: 'A4', when: '+2 weeks', subj: `"You have to be here to talk about it"`, meta: `Preview: What the industry says about PBExpo.`, body: `Hi {First},
 
 Don't take our word for it:
 
-"PBEXPO has doubled in size…" — Sean Gallagan
-"…you have to be here to talk about it." — Joshua Abshire
-"…the digitization of the supply chain…" — Claudia Espinosa
+"PBEXPO has doubled in size…"
+Sean Gallagan
+
+"…you have to be here to talk about it."
+Joshua Abshire
+
+"…the digitization of the supply chain…"
+Claudia Espinosa
 
 150+ airlines. Thousands of buyers and suppliers. One room, two days.
 
 → Register free` },
-    { n: 'A4', when: '+2–3 wk (Sep)', subj: `The agenda is live — keynotes, panels & the Maintenance Games`, meta: `Preview: Build your PBExpo schedule now.`, body: `Hi {First},
+    { n: 'A5', when: '+3 wk (Sep)', subj: `The agenda is live: keynotes, panels and the Maintenance Games`, meta: `Preview: Build your PBExpo schedule now.`, body: `Hi {First},
 
 The PBExpo 2027 agenda just dropped:
 • Keynotes and panels on the topics shaping aviation's supply chain.
-• The Maintenance Games — the industry's most-watched live competition.
+• The Maintenance Games, the industry's most-watched live competition.
 • Two networking receptions with complimentary food and drinks.
+• New for 2027: the Operators Pavilion, a dedicated space for airlines and operators to meet suppliers away from the main floor traffic.
 
 Open the PBExpo app to view the full agenda and start booking meetings with exhibitors and attendees.
 
 → View the agenda` },
-    { n: 'A5', when: 'T-6 → T-4 wk', subj: `AI matchmaking: walk into PBExpo with a schedule full of leads`, meta: `Preview: The app finds your best-fit prospects before you arrive.`, body: `Hi {First},
+    { n: 'A6', when: 'T-6 → T-4 wk', subj: `AI matchmaking: walk into PBExpo with a schedule full of leads`, meta: `Preview: The app finds your best-fit prospects before you arrive.`, body: `Hi {First},
 
-PBExpo's biggest advantage isn't the floor — it's the AI-powered matchmaking in the PBExpo app.
+PBExpo's biggest advantage isn't the floor. It's the AI-powered matchmaking in the PBExpo app.
 
-Tell it what {Company} is looking for, and it strategically identifies attendees with similar interests and intent — then lets you book those meetings before you arrive. You walk in with a schedule full of best-fit prospects, not a badge and a map.
+Tell it what {Company} is looking for, and it strategically identifies attendees with similar interests and intent, then lets you book those meetings before you arrive. You walk in with a schedule full of best-fit prospects, not a badge and a map.
 
 In the app you can:
 • Get matched to attendees and exhibitors by interest and intent.
 • Book meetings with suppliers, PartsBase, and other buyers.
 • Manage your whole two-day schedule.
 
-Bring your team back real leads — book your matches now.
+Bring your team back real leads. Book your matches now.
 
 → Open the app` },
-    { n: 'A6', when: 'T-4 wk', subj: `Reserve your Miami Beach room before the block closes`, meta: `Preview: Handle the logistics — and consider premium networking.`, body: `Hi {First},
+    { n: 'A7', when: 'T-4 wk', subj: `Reserve your Miami Beach room before the block closes`, meta: `Preview: Handle the logistics, then consider premium networking.`, body: `Hi {First},
 
-You're registered — now the logistics.
+You're registered. Now the logistics.
 • Hotel: we've secured a discounted room block near the convention center. Rooms are limited and the block closes soon. → Book your room
-• Getting here: MIA and FLL are both ~30–40 minutes away.
-• Go premium: add Operators Pavilion access ($500), or Operators Pavilion + both VIP suites ($1,000), for high-value networking.` },
-    { n: 'A7', when: 'T-2wk → T-2d', subj: `2 weeks out — everything you need for PBExpo`, meta: `Preview: Final agenda, meetings, and last chance to register.`, body: `Hi {First},
+• Getting here: MIA and FLL are both roughly 30 to 40 minutes away.
+• Go premium: add Operators Pavilion access ($500), or Operators Pavilion plus both VIP suites ($1,000), for high-value networking.
 
-PBExpo 2027 is almost here — March 10–11, Miami Beach Convention Center.
-• Final agenda is set — review it in the app.
+If you're attending as an operator, the Pavilion is where suppliers come to you, in a room built for fleet conversations rather than booth traffic.` },
+    { n: 'A8', when: 'T-2wk → T-2d', subj: `2 weeks out: everything you need for PBExpo`, meta: `Preview: Final agenda, meetings, and last chance to register.`, body: `Hi {First},
+
+PBExpo 2027 is almost here. March 10–11, Miami Beach Convention Center.
+• Final agenda is set. Review it in the app.
 • Haven't booked meetings? There's still time.
-• Not registered yet? It's free — register now before you travel.
+• Not registered yet? It's free. Register now before you travel.
 
 See you in Miami.` },
-    { n: 'A8', when: 'Trigger · on reg', subj: `You're in — your PBExpo 2027 game plan`, meta: `Preview: Everything to make the most of two days.`, body: `Hi {First},
+    { n: 'A9', when: 'Trigger · on reg', subj: `You're in. Your PBExpo 2027 game plan`, meta: `Preview: Everything to make the most of two days.`, body: `Hi {First},
 
 You're registered for PBExpo 2027. Here's your game plan:
 • Download the PBExpo app and build your agenda.
 • Book meetings with exhibitors before you arrive.
 • Save the dates: March 10–11 · Miami Beach Convention Center.
-• Want more access? Add Operators Pavilion / VIP upgrades anytime.
+• Want more access? Add Operators Pavilion or VIP upgrades anytime.
 
-Questions? Just reply — we're here to help.` },
+Questions? Just reply. We're here to help.` },
   ]},
-  B: { name: 'Flow B · Past-attendee re-engage', sub: 'Prior-year registrants · higher intent, lower CAC', tag: 'Warm', tagClass: 'tag-green', emails: [
-    { n: 'B1', when: 'Aug 18 · Reg open', subj: `Welcome back — PBExpo 2027 registration is open`, meta: `A/B: "You know the value — PBExpo 2027 is open" · Preview: The room you already know is worth being in.`, body: `Hi {First},
 
-Great to have you back. PBExpo 2027 registration — March 10–11, Miami Beach — is now open. As a past attendee, you already know what that room is worth.
+  B: { name: 'Flow B · Past-attendee re-engage', sub: 'Prior-year registrants · higher intent, lower CAC', tag: 'Warm', tagClass: 'tag-green', emails: [
+    { n: 'B1', when: 'Aug 18 · Reg open', subj: `Welcome back, PBExpo 2027 registration is open`, meta: `A/B: "You know the value. PBExpo 2027 is open" · Preview: The room you already know is worth being in.`, body: `Hi {First},
+
+Great to have you back. PBExpo 2027 registration is now open for March 10–11, Miami Beach. As a past attendee, you already know what that room is worth.
 
 This year's bigger: more exhibitors, more airlines, more of the connections that made last time count.
 
 → Register free` },
     { n: 'B2', when: '+4–5 days', subj: `What's new at PBExpo 2027`, meta: `Preview: Since we saw you last, PBExpo has grown.`, body: `Hi {First},
 
-Since we saw you last, PBExpo has "doubled in size" — Sean Gallagan's words, not ours.
+Since we saw you last, PBExpo has "doubled in size." Sean Gallagan's words, not ours.
 
 New for 2027:
 • An expanded exhibitor floor and more airlines than ever.
@@ -1116,15 +1225,15 @@ New for 2027:
 → See what's new` },
     { n: 'B3', when: 'Mid-window', subj: `Lock in your meetings and your room`, meta: `Preview: The attendees who win PBExpo plan ahead.`, body: `Hi {First},
 
-You know the drill — the attendees who get the most out of PBExpo plan ahead.
+You know the drill. The attendees who get the most out of PBExpo plan ahead.
 • Book meetings in the app before the floor fills.
 • Reserve your hotel before the room block closes.
 • Add Operators Pavilion ($500) or VIP ($1,000) access for premium networking.
 
 → Plan your show` },
-    { n: 'B4', when: 'T-1 week', subj: `One week to PBExpo — see you there?`, meta: `Preview: You've done this before. You know it's worth it.`, body: `Hi {First},
+    { n: 'B4', when: 'T-1 week', subj: `One week to PBExpo, see you there?`, meta: `Preview: You've done this before. You know it's worth it.`, body: `Hi {First},
 
-PBExpo 2027 is a week away. You've done this before — you know it delivers.
+PBExpo 2027 is a week away. You've done this before, so you know it delivers.
 
 Final agenda is live, meetings are filling, and it's free to attend.
 
@@ -1133,14 +1242,14 @@ Final agenda is live, meetings are filling, and it's free to attend.
   C: { name: 'Flow C · Career Runway', sub: 'Students & job seekers · light-touch, separate from buyer drips', tag: 'Students & job seekers', tagClass: 'tag-blue', emails: [
     { n: 'C1', when: 'Reg open', subj: `Launch your aviation career at PBExpo's Career Runway`, meta: `A/B: "Free entry to aviation's biggest hiring event" · Preview: Where students and job seekers meet aviation employers.`, body: `Hi {First},
 
-Ready to break into aviation and aerospace? PBExpo 2027's Career Runway is where it starts — free to attend.
+Ready to break into aviation and aerospace? PBExpo 2027's Career Runway is where it starts, and it's free to attend.
 
 March 10–11 · Miami Beach Convention Center. Our dedicated hiring zone connects students and job seekers with the MROs, OEMs, and staffing firms that are actively hiring.
 
 → Register free` },
-    { n: 'C2', when: '+1 week', subj: `These aviation employers are hiring at PBExpo`, meta: `Preview: Bring your resume — the Career Runway floor is filling.`, body: `Hi {First},
+    { n: 'C2', when: '+1 week', subj: `These aviation employers are hiring at PBExpo`, meta: `Preview: Bring your resume. The Career Runway floor is filling.`, body: `Hi {First},
 
-The Career Runway floor is filling with companies looking for talent like you — MROs, OEMs, distributors, and staffing partners from across the aviation supply chain.
+The Career Runway floor is filling with companies looking for talent like you: MROs, OEMs, distributors, and staffing partners from across the aviation supply chain.
 
 Bring your resume, meet employers face-to-face, and catch the Maintenance Games happening right next door.
 
@@ -1148,15 +1257,15 @@ Bring your resume, meet employers face-to-face, and catch the Maintenance Games 
     { n: 'C3', when: 'T-2 weeks', subj: `Your Career Runway game plan`, meta: `Preview: How to stand out on the hiring floor.`, body: `Hi {First},
 
 Two weeks to PBExpo. Here's how to stand out on the Career Runway:
-• Bring printed resumes — plenty of them.
+• Bring printed resumes, plenty of them.
 • Research the employers exhibiting in the hiring zone.
 • Dress for real hiring conversations.
 • Watch the Maintenance Games nearby to see the trades in action.
 
 → Plan your visit` },
-    { n: 'C4', when: 'T-1 week', subj: `One week — your aviation career starts at PBExpo`, meta: `Preview: Free to attend, packed with employers hiring.`, body: `Hi {First},
+    { n: 'C4', when: 'T-1 week', subj: `One week until your aviation career starts at PBExpo`, meta: `Preview: Free to attend, packed with employers hiring.`, body: `Hi {First},
 
-The Career Runway is a week away — free to attend, and packed with employers hiring across aviation and aerospace.
+The Career Runway is a week away. Free to attend, and packed with employers hiring across aviation and aerospace.
 
 Don't miss your shot to meet them in person.
 
@@ -1290,7 +1399,7 @@ const PLAN_DEFAULTS = {
     { date:'2026-05-26', decision:'/demo page CRO audit completed', rationale:'Full 7-dimension audit of primary supplier acquisition conversion page. Three highest-risk areas: CTA copy ("Request a Demo" → "See How It Works for Suppliers"), form fields (cut to 5 max), and thank-you page (dead-end after form submit). Quick wins scoped and actionable within current sprint.', madeBy:'Dan + CRO Advisor', impact:'Estimated 30–50% lift in /demo page conversion rate if quick wins implemented before paid campaigns launch.' },
   ],
   resources: [
-    { id:'plan-v2',      label:'30/60/90 Plan v2',                        file:'partsbase-success-plan-v2.md',                          type:'plan',       desc:'Full refined plan: HubSpot migration, Vector, Clay, Profound, digital funnel flow' },
+    { id:'plan-v2',      label:'30/60/90 Plan v2',                        file:'resources/archive/partsbase-success-plan-v2.md',                          type:'plan',       desc:'Full refined plan: HubSpot migration, Vector, Clay, Profound, digital funnel flow' },
     { id:'analytics',    label:'GA4/GTM Implementation Guide',             file:'resources/analytics-tracking-implementation.md',         type:'playbook',   desc:'SPA fix, all 10 custom events, server-side MP, CookiePro consent, full validation checklist' },
     { id:'paid-ads',     label:'Paid Ads Playbook',                        file:'resources/paid-ads-playbook.md',                         type:'playbook',   desc:'Google + LinkedIn campaign architecture, ad copy banks, keyword lists, 3-month ramp' },
     { id:'cro-audit',    label:'/demo Page CRO Audit',                     file:'resources/demo-page-cro-audit.md',                       type:'analysis',   desc:'7-dimension audit: CTA, form, trust signals, objection handling. Quick wins prioritized.' },
@@ -1593,7 +1702,224 @@ function sprintProgress(s) {
 const RAG_CARD = { red:'rag-red', amber:'rag-amber', green:'rag-green', blue:'rag-blue', none:'rag-none' };
 const CL_TYPE  = { setup:'cl-setup', task:'cl-task', rag:'cl-rag', note:'cl-note', risk:'cl-risk', milestone:'cl-milestone' };
 
+/* ════════════════════════════════════════════════════════════════
+   UI primitives — patterns ported from beautifului.dev (MIT).
+   Vanilla JS, no build step, no framework.
+   ════════════════════════════════════════════════════════════════ */
+
+const _esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+
+/* ── Filter / Records table: sortable columns, live filter, facet chips ── */
+const DT = {};
+
+function dataTable(mountId, cfg) {
+  const el = document.getElementById(mountId);
+  if (!el) return;
+  const t = DT[cfg.id] = Object.assign({ mountId, q:'', sort:null, dir:1, facet:null }, cfg);
+  if (t.defaultSort) { t.sort = t.defaultSort.key; t.dir = t.defaultSort.dir || 1; }
+  const chips = (t.facets || []).map(f =>
+    `<button class="dt-chip" id="dt-${t.id}-f-${f.slug}" onclick="dtFacet('${t.id}','${f.slug}')">${_esc(f.label)}</button>`).join('');
+  el.innerHTML = `<div class="dt-wrap">
+    <div class="dt-toolbar">
+      <div class="dt-search"><span class="dt-search-icon">⌕</span><input id="dt-${t.id}-q" type="text" autocomplete="off" placeholder="${_esc(t.placeholder || 'Filter…')}" oninput="dtSearch('${t.id}',this.value)"></div>
+      ${chips}
+      <span class="dt-count" id="dt-${t.id}-count"></span>
+    </div>
+    <div class="dt-scroll"><table><thead><tr id="dt-${t.id}-head"></tr></thead><tbody id="dt-${t.id}-body"></tbody></table></div>
+  </div>`;
+  dtHead(t.id);
+  dtPaint(t.id);
+}
+
+function dtHead(id) {
+  const t = DT[id];
+  document.getElementById(`dt-${id}-head`).innerHTML = t.columns.map(c => {
+    const sortable = c.sortable !== false, on = t.sort === c.key;
+    return `<th class="${sortable?'sortable':''}${on?' sorted':''}"${sortable?` onclick="dtSort('${id}','${c.key}')"`:''}${c.width?` style="width:${c.width}"`:''}>${_esc(c.label)}${sortable?`<span class="dt-caret">${on?(t.dir===1?'▲':'▼'):'▲'}</span>`:''}</th>`;
+  }).join('');
+}
+
+function dtVisible(id) {
+  const t = DT[id];
+  let rows = t.rows.slice();
+  if (t.facet) { const f = (t.facets||[]).find(x => x.slug === t.facet); if (f) rows = rows.filter(f.test); }
+  const q = t.q.trim().toLowerCase();
+  if (q) rows = rows.filter(r => t.search(r).toLowerCase().includes(q));
+  if (t.sort) {
+    const col = t.columns.find(c => c.key === t.sort);
+    if (col) {
+      const val = r => col.sortValue ? col.sortValue(r) : r[col.key];
+      rows.sort((a,b) => {
+        const x = val(a), y = val(b);
+        if (typeof x === 'number' && typeof y === 'number') return (x - y) * t.dir;
+        return String(x).localeCompare(String(y)) * t.dir;
+      });
+    }
+  }
+  return rows;
+}
+
+function dtPaint(id) {
+  const t = DT[id], rows = dtVisible(id), noun = t.noun || 'rows';
+  document.getElementById(`dt-${id}-body`).innerHTML = rows.length
+    ? rows.map(r => `<tr>${t.columns.map(c => `<td${c.style?` style="${c.style}"`:''}>${c.render ? c.render(r) : _esc(r[c.key])}</td>`).join('')}</tr>`).join('')
+    : `<tr><td colspan="${t.columns.length}"><div class="dt-empty">Nothing matches that filter.</div></td></tr>`;
+  document.getElementById(`dt-${id}-count`).textContent =
+    rows.length === t.rows.length ? `${t.rows.length} ${noun}` : `${rows.length} of ${t.rows.length} ${noun}`;
+  (t.facets || []).forEach(f =>
+    document.getElementById(`dt-${id}-f-${f.slug}`)?.classList.toggle('on', t.facet === f.slug));
+}
+
+function dtSort(id, key) { const t = DT[id]; if (t.sort === key) t.dir *= -1; else { t.sort = key; t.dir = 1; } dtHead(id); dtPaint(id); }
+function dtSearch(id, v)  { DT[id].q = v; dtPaint(id); }
+function dtFacet(id, slug){ const t = DT[id]; t.facet = t.facet === slug ? null : slug; dtPaint(id); }
+
+/* ── Insight card: value + optional delta, meter, or segmented bar ── */
+function insightCard(o) {
+  const delta = o.delta ? `<span class="ic-delta ${o.delta.dir}">${_esc(o.delta.label)}</span>` : '';
+  const meter = o.pct != null
+    ? `<div class="ic-meter"><span style="width:${Math.max(0,Math.min(100,o.pct))}%${o.meterColor?`;background:${o.meterColor}`:''}"></span></div>` : '';
+  const segs = (o.segments || []).filter(s => s.n > 0);
+  const seg = segs.length
+    ? `<div class="ic-seg">${segs.map(s => `<i style="flex:${s.n};background:${s.color}" title="${_esc(s.label)}: ${s.n}"></i>`).join('')}</div>` : '';
+  return `<div class="ic">
+    <div class="ic-label">${_esc(o.label)}</div>
+    <div class="ic-row"><span class="ic-value"${o.color?` style="color:${o.color}"`:''}>${_esc(o.value)}</span>${o.unit?`<span class="ic-unit">${_esc(o.unit)}</span>`:''}${delta}</div>
+    <div class="ic-sub">${o.sub || ''}</div>${meter}${seg}</div>`;
+}
+
+/* ── Command palette (⌘K / Ctrl-K) ── */
+const CMDK = { open:false, q:'', sel:0, list:[] };
+
+function cmdkSource() {
+  const items = [];
+  const jump = (inner) => () => { showTab('plan'); showInnerTab(inner); setPlanGroupExpanded(true); };
+  items.push({ g:'Go to', icon:'◈', title:'Exec View',     sub:'Leadership summary',  go:() => showTab('exec') });
+  items.push({ g:'Go to', icon:'▦', title:'Dashboard',     sub:'Overview',            go:() => showTab('overview') });
+  items.push({ g:'Go to', icon:'☀', title:'Today',         sub:'Calendar & workflows',go:() => showTab('today') });
+  [['overview','Plan Overview','Workstream status'], ['sprints','Sprints','Task progress'],
+   ['milestones','Milestones','Phase targets'],      ['risks','Risk Register','Probability & impact'],
+   ['stack','Tech Stack','Tools & rollout'],         ['decisions','Decision Log','What was decided, and why']]
+    .forEach(([id, title, sub]) => items.push({ g:'Go to', icon:'◎', title, sub, go: jump(id) }));
+  ['resources','email','icp','pbexpo','adperf','adbuild'].forEach(k =>
+    items.push({ g:'Go to', icon:'›', title:TAB_CONFIG[k].title[0], sub:TAB_CONFIG[k].title[1].split('·')[0].trim(), go:() => showTab(k) }));
+
+  (PLAN.risks || []).forEach(r => items.push({ g:'Risks', icon:'⚑', title:r.label, sub:`${r.impact} impact`, go:() => { jump('risks')(); dtSearch('risks', r.label); document.getElementById('dt-risks-q').value = r.label; } }));
+  (PLAN.stack || []).forEach(s => items.push({ g:'Stack', icon:'▣', title:s.tool, sub:s.layer, go:() => { jump('stack')(); dtSearch('stack', s.tool); document.getElementById('dt-stack-q').value = s.tool; } }));
+  (PLAN.milestones || []).forEach(m => items.push({ g:'Milestones', icon:'◆', title:m.label, sub:m.target, go: jump('milestones') }));
+  return items;
+}
+
+function cmdkOpen() {
+  CMDK.open = true; CMDK.q = ''; CMDK.sel = 0;
+  const el = document.createElement('div');
+  el.className = 'cmdk-backdrop'; el.id = 'cmdk-backdrop';
+  el.onclick = e => { if (e.target === el) cmdkClose(); };
+  el.innerHTML = `<div class="cmdk">
+    <input class="cmdk-input" id="cmdk-input" type="text" autocomplete="off" placeholder="Search sections, risks, tools, milestones…">
+    <div class="cmdk-list" id="cmdk-list"></div>
+    <div class="cmdk-foot"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span></div>
+  </div>`;
+  document.body.appendChild(el);
+  const input = document.getElementById('cmdk-input');
+  input.addEventListener('input', () => { CMDK.q = input.value; CMDK.sel = 0; cmdkPaint(); });
+  input.focus();
+  cmdkPaint();
+}
+
+function cmdkClose() { CMDK.open = false; document.getElementById('cmdk-backdrop')?.remove(); }
+
+function cmdkPaint() {
+  const q = CMDK.q.trim().toLowerCase();
+  CMDK.list = cmdkSource()
+    .filter(i => !q || (i.title + ' ' + i.sub + ' ' + i.g).toLowerCase().includes(q))
+    .slice(0, 40);
+  if (CMDK.sel >= CMDK.list.length) CMDK.sel = Math.max(0, CMDK.list.length - 1);
+  const el = document.getElementById('cmdk-list');
+  if (!CMDK.list.length) { el.innerHTML = `<div class="cmdk-empty">No match.</div>`; return; }
+  let lastGroup = null;
+  el.innerHTML = CMDK.list.map((i, n) => {
+    const head = i.g !== lastGroup ? `<div class="cmdk-group">${_esc(lastGroup = i.g)}</div>` : '';
+    return `${head}<div class="cmdk-item${n === CMDK.sel ? ' sel' : ''}" onclick="cmdkRun(${n})" onmousemove="cmdkHover(${n})">
+      <span class="cmdk-icon">${i.icon}</span><span class="cmdk-title">${_esc(i.title)}</span><span class="cmdk-sub">${_esc(i.sub)}</span></div>`;
+  }).join('');
+  el.querySelector('.cmdk-item.sel')?.scrollIntoView({ block:'nearest' });
+}
+
+function cmdkHover(n) { if (CMDK.sel !== n) { CMDK.sel = n; cmdkPaint(); } }
+function cmdkRun(n) { const i = CMDK.list[n]; if (!i) return; cmdkClose(); i.go(); }
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); CMDK.open ? cmdkClose() : cmdkOpen(); return; }
+  if (!CMDK.open) return;
+  if (e.key === 'Escape')    { e.preventDefault(); cmdkClose(); }
+  if (e.key === 'ArrowDown') { e.preventDefault(); CMDK.sel = Math.min(CMDK.sel + 1, CMDK.list.length - 1); cmdkPaint(); }
+  if (e.key === 'ArrowUp')   { e.preventDefault(); CMDK.sel = Math.max(CMDK.sel - 1, 0); cmdkPaint(); }
+  if (e.key === 'Enter')     { e.preventDefault(); cmdkRun(CMDK.sel); }
+});
+
+if (!/Mac|iPhone|iPad/.test(navigator.platform || '')) {
+  const hint = document.getElementById('cmdk-hint');
+  if (hint) hint.textContent = 'Ctrl K';
+}
+
+function renderPlanHealth() {
+  const el = document.getElementById('planHealth');
+  if (!el) return;
+
+  let tDone = 0, tTotal = 0;
+  PLAN.sprints.forEach(s => s.tasks.forEach((_, i) => { tTotal++; if (taskDone(s.id, i)) tDone++; }));
+  const msDoneN = PLAN.milestones.filter(m => msDone(m.id)).length;
+  const msTotal = PLAN.milestones.length;
+
+  const rag = { red:0, amber:0, green:0 };
+  PLAN.risks.forEach(r => { rag[riskRag(r.id)] = (rag[riskRag(r.id)] || 0) + 1; });
+  const openRisk = rag.red + rag.amber;
+
+  // Bucket every tool: the "other" catch-all guarantees the parts sum to the total,
+  // so a new status value in dashboard-state.json can never be silently dropped.
+  const stackOf = s => stackSt(s.tool) || s.defaultStatus;
+  const buckets = STACK_BUCKETS.map(b => Object.assign({ n: 0 }, b));
+  const other   = { label:'other', color:'#d5d8de', n:0 };
+  PLAN.stack.forEach(s => {
+    const st = stackOf(s);
+    (buckets.find(b => b.st.includes(st)) || other).n++;
+  });
+  if (other.n) buckets.push(other);
+  const broken = buckets.find(b => b.key === 'broken')?.n || 0;
+
+  const overall = overallProgress();
+
+  el.innerHTML = [
+    insightCard({
+      label: 'Overall progress', value: overall, unit: '%', pct: overall,
+      sub: `${tDone + msDoneN} of ${tTotal + msTotal} tasks and milestones closed`,
+    }),
+    insightCard({
+      label: 'Milestones', value: `${msDoneN}/${msTotal}`, pct: msTotal ? msDoneN / msTotal * 100 : 0,
+      sub: `${msTotal - msDoneN} still open across six phases`,
+    }),
+    insightCard({
+      label: 'Risk posture', value: openRisk, unit: 'open',
+      color: rag.red ? 'var(--red)' : rag.amber ? 'var(--yellow)' : 'var(--green)',
+      sub: `${rag.red} blocked · ${rag.amber} at risk · ${rag.green} contained`,
+      segments: [
+        { n: rag.red,   color:'#f97066', label:'Blocked' },
+        { n: rag.amber, color:'#fec84b', label:'At risk' },
+        { n: rag.green, color:'#32d583', label:'Contained' },
+      ],
+    }),
+    insightCard({
+      label: 'Stack rollout', value: PLAN.stack.length, unit: 'tools',
+      sub: buckets.filter(b => b.n).map(b =>
+        b.key === 'broken' ? `<b style="color:var(--red)">${b.n} broken</b>` : `${b.n} ${b.label}`).join(' · '),
+      segments: buckets.map(b => ({ n: b.n, color: b.color, label: b.label })),
+    }),
+  ].join('');
+}
+
 function renderOverview() {
+  renderPlanHealth();
   document.getElementById('ragGrid').innerHTML = PLAN.workstreams.map(ws => {
     const rag = wsRag(ws.id);
     const ragBadge = rag==='red'?'badge-red':rag==='amber'?'badge-amber':rag==='green'?'badge-green':rag==='blue'?'badge-blue':'badge-slate';
@@ -1644,18 +1970,24 @@ function renderMilestones() {
     {label:'Day 90 — Scale + Attribute',                      ids:['m7','m7b','m8','m9','m10']},
     {label:'Day 180 — Revenue Intelligence',                  ids:['m11','m12','m13','m14','m15']},
   ];
+  const phasesSeenIncomplete = { seen: false };
   document.getElementById('tab-milestones-content').innerHTML = phases.map(phase => {
     const items = PLAN.milestones.filter(m => phase.ids.includes(m.id));
     const doneCount = items.filter(m => msDone(m.id)).length;
+    // First not-done milestone in the first incomplete phase is the "next up" marker.
+    const nextId = items.find(m => !msDone(m.id))?.id;
+    const isNextPhase = doneCount < items.length && !phasesSeenIncomplete.seen && (phasesSeenIncomplete.seen = true);
     const rows = items.map(m => {
       const done = msDone(m.id);
-      return `<div class="ms-item">
-        <span style="flex-shrink:0">${done?'✅':'⬜'}</span>
-        <div style="flex:1;font-size:13px;color:${done?'var(--muted)':'var(--text)'};${done?'text-decoration:line-through':''}">${m.label}</div>
-        <span style="font-size:11px;color:var(--muted);white-space:nowrap">${m.target}</span>
-        <span class="badge ${done?'badge-green':'badge-slate'}">${done?'Done':'Pending'}</span>
+      const next = !done && m.id === nextId && isNextPhase;
+      return `<div class="tr-row${done?' is-done':''}">
+        <span class="tr-mark ${done?'done':next?'next':'pending'}">${done?'✓':''}</span>
+        <div class="tr-main"><div class="tr-title">${m.label}</div></div>
+        <span class="tr-target">${m.target}</span>
+        <span class="badge ${done?'badge-green':next?'badge-blue':'badge-slate'}">${done?'Done':next?'Next up':'Pending'}</span>
       </div>`;
     }).join('');
+    const pct = items.length ? Math.round(doneCount/items.length*100) : 0;
     const phaseCollapsed = true;
     return `<div class="pc">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
@@ -1665,34 +1997,106 @@ function renderMilestones() {
           <button onclick="const l=this.closest('.pc').querySelector('.ms-list');l.classList.toggle('hidden');this.textContent=l.classList.contains('hidden')?'▸ Show':'▾ Hide'" style="font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:4px 10px;cursor:pointer;white-space:nowrap">${phaseCollapsed?'▸ Show':'▾ Hide'}</button>
         </div>
       </div>
+      <div class="progress-bar" style="margin-bottom:12px;height:6px"><div class="progress-fill" style="width:${pct}%;height:6px"></div></div>
       <div class="ms-list${phaseCollapsed?' hidden':''}">${rows}</div>
     </div>`;
   }).join('');
 }
 
+const RISK_RANK   = { Critical:4, High:3, Medium:2, Low:1 };
+const RAG_RANK    = { red:3, amber:2, green:1 };
+const RAG_BADGE   = { red:'badge-red', amber:'badge-amber', green:'badge-green' };
+const RAG_LABEL   = { red:'Red', amber:'Amber', green:'Green' };
+const STATUS_BADGE= { broken:'badge-red', partial:'badge-amber', 'not-started':'badge-slate', onboarding:'badge-amber', confirmed:'badge-blue', 'in-progress':'badge-blue', done:'badge-green' };
+const STACK_BUCKETS = [
+  { key:'live',    label:'live',        color:'#32d583', st:['done','in-progress'] },
+  { key:'partial', label:'partial',     color:'#fec84b', st:['partial'] },
+  { key:'coming',  label:'onboarding',  color:'#0C70E8', st:['onboarding','confirmed'] },
+  { key:'todo',    label:'not started', color:'#d5d8de', st:['not-started'] },
+  { key:'broken',  label:'broken',      color:'#f97066', st:['broken'] },
+];
+
 function renderRisks() {
-  const impactStyle = i => i==='Critical'?'color:var(--red);font-weight:600':i==='High'?'color:var(--yellow)':'';
-  const ragBadge = r => r==='red'?'badge-red':r==='amber'?'badge-amber':'badge-green';
-  const ragLabel = r => r==='red'?'Red':r==='amber'?'Amber':'Green';
-  document.getElementById('tab-risks-content').innerHTML = `<div class="pc" style="padding:0;overflow:hidden"><table class="plan-table"><thead><tr>${['Risk','Probability','Impact','Status','Mitigation','Owner'].map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${PLAN.risks.map(r => {
-    const rag = riskRag(r.id);
-    return `<tr><td style="color:var(--text);font-weight:500">${r.label}</td><td>${r.prob}</td><td style="${impactStyle(r.impact)}">${r.impact}</td><td><span class="badge ${ragBadge(rag)}">${ragLabel(rag)}</span></td><td style="font-size:12px">${r.mitigation}</td><td style="font-size:12px">${r.owner}</td></tr>`;
-  }).join('')}</tbody></table></div>`;
+  const sev  = v => v==='Critical' ? 'color:var(--red);font-weight:600' : v==='High' ? 'color:var(--yellow);font-weight:500' : '';
+  const rows = PLAN.risks.map(r => Object.assign({ rag: riskRag(r.id) }, r));
+  dataTable('tab-risks-content', {
+    id: 'risks',
+    noun: 'risks',
+    placeholder: 'Filter risks, mitigations, owners…',
+    rows,
+    search: r => `${r.label} ${r.prob} ${r.impact} ${r.mitigation} ${r.owner}`,
+    defaultSort: { key:'impact', dir:-1 },
+    facets: [
+      { slug:'red',      label:'Blocked',   test: r => r.rag === 'red' },
+      { slug:'amber',    label:'At risk',   test: r => r.rag === 'amber' },
+      { slug:'green',    label:'Contained', test: r => r.rag === 'green' },
+      { slug:'critical', label:'Critical impact', test: r => r.impact === 'Critical' },
+    ],
+    columns: [
+      { key:'label',      label:'Risk',        style:'color:var(--text);font-weight:500' },
+      { key:'prob',       label:'Probability', width:'110px', sortValue: r => RISK_RANK[r.prob] || 0 },
+      { key:'impact',     label:'Impact',      width:'100px', sortValue: r => RISK_RANK[r.impact] || 0,
+        render: r => `<span style="${sev(r.impact)}">${_esc(r.impact)}</span>` },
+      { key:'rag',        label:'Status',      width:'100px', sortValue: r => RAG_RANK[r.rag] || 0,
+        render: r => `<span class="badge ${RAG_BADGE[r.rag] || 'badge-slate'}">${RAG_LABEL[r.rag] || r.rag}</span>` },
+      { key:'mitigation', label:'Mitigation',  style:'font-size:12px' },
+      { key:'owner',      label:'Owner',       width:'150px', style:'font-size:12px' },
+    ],
+  });
 }
 
 function renderStack() {
-  const statusBadge = { broken:'badge-red', 'not-started':'badge-slate', onboarding:'badge-amber', confirmed:'badge-blue', 'in-progress':'badge-blue', done:'badge-green' };
-  const prioStyle = p => p==='Critical'?'color:var(--red);font-weight:600':p==='High'?'color:var(--yellow)':'';
-  document.getElementById('tab-stack-content').innerHTML = `<div class="pc" style="padding:0;overflow:hidden"><table class="plan-table"><thead><tr>${['Tool','Layer','Priority','Sprint','Status','Notes'].map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${PLAN.stack.map(s => {
-    const status = stackSt(s.tool) || s.defaultStatus;
-    return `<tr><td style="color:var(--text);font-weight:500">${s.tool}</td><td>${s.layer}</td><td style="${prioStyle(s.priority)}">${s.priority}</td><td>${s.sprint}</td><td><span class="badge ${statusBadge[status]||'badge-slate'}">${status}</span></td><td style="font-size:12px">${s.note}</td></tr>`;
-  }).join('')}</tbody></table></div>`;
+  const prio = p => p==='Critical' ? 'color:var(--red);font-weight:600' : p==='High' ? 'color:var(--yellow);font-weight:500' : '';
+  const rows = PLAN.stack.map(s => Object.assign({ status: stackSt(s.tool) || s.defaultStatus }, s));
+  dataTable('tab-stack-content', {
+    id: 'stack',
+    noun: 'tools',
+    placeholder: 'Filter tools, layers, notes…',
+    rows,
+    search: s => `${s.tool} ${s.layer} ${s.priority} ${s.sprint} ${s.status} ${s.note}`,
+    defaultSort: { key:'priority', dir:-1 },
+    // Facets come from the same bucket table as the Plan Health card, so the two never disagree.
+    facets: STACK_BUCKETS
+      .filter(b => rows.some(s => b.st.includes(s.status)))
+      .map(b => ({ slug:b.key, label:b.label.charAt(0).toUpperCase() + b.label.slice(1), test: s => b.st.includes(s.status) })),
+    columns: [
+      { key:'tool',     label:'Tool',     width:'190px', style:'color:var(--text);font-weight:500' },
+      { key:'layer',    label:'Layer',    width:'150px' },
+      { key:'priority', label:'Priority', width:'100px', sortValue: s => RISK_RANK[s.priority] || 0,
+        render: s => `<span style="${prio(s.priority)}">${_esc(s.priority)}</span>` },
+      { key:'sprint',   label:'Sprint',   width:'95px' },
+      { key:'status',   label:'Status',   width:'115px',
+        render: s => `<span class="badge ${STATUS_BADGE[s.status] || 'badge-slate'}">${_esc(s.status)}</span>` },
+      { key:'note',     label:'Notes',    style:'font-size:12px' },
+    ],
+  });
 }
 
 function renderDecisions() {
   const savedLog = S.notes?.decisions_log || '';
-  const extraRows = savedLog ? savedLog.split('\n').filter(l=>l.trim()).map(l=>`<tr><td colspan="5" style="font-size:11px;color:var(--muted)">${l}</td></tr>`).join('') : '';
-  document.getElementById('tab-decisions-content').innerHTML = `<div class="pc" style="padding:0;overflow:hidden;margin-bottom:12px"><table class="plan-table"><thead><tr>${['Date','Decision','Rationale','Made by','Impact'].map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${PLAN.decisions.map(d=>`<tr><td style="font-size:11px;white-space:nowrap;color:var(--muted)">${d.date}</td><td style="color:var(--text);font-weight:500">${d.decision}</td><td style="font-size:12px">${d.rationale}</td><td style="font-size:12px">${d.madeBy}</td><td style="font-size:12px">${d.impact}</td></tr>`).join('')}${extraRows}</tbody></table></div><div class="rag-none" style="font-size:12px;color:var(--label)">New decisions: message Claude → adds a row to dashboard-state.json → refresh.</div>`;
+  const extra = savedLog.split('\n').filter(l => l.trim())
+    .map(l => ({ date:'—', decision:l, rationale:'From dashboard-state.json', madeBy:'—', impact:'—' }));
+  const rows = PLAN.decisions.concat(extra);
+  const owners = [...new Set(PLAN.decisions.map(d => d.madeBy))];
+  document.getElementById('tab-decisions-content').innerHTML =
+    `<div id="decisions-table" style="margin-bottom:12px"></div>
+     <div class="rag-none" style="font-size:12px;color:var(--label)">New decisions: message Claude → adds a row to dashboard-state.json → refresh.</div>`;
+  dataTable('decisions-table', {
+    id: 'decisions',
+    noun: 'decisions',
+    placeholder: 'Filter decisions, rationale, impact…',
+    rows,
+    search: d => `${d.date} ${d.decision} ${d.rationale} ${d.madeBy} ${d.impact}`,
+    defaultSort: { key:'date', dir:-1 },
+    facets: owners.filter(o => o && o.length < 24).map(o => ({ slug: o.replace(/\W+/g,'').toLowerCase(), label:o, test: d => d.madeBy === o })),
+    columns: [
+      { key:'date',      label:'Date',      width:'95px',  style:'font-size:11px;white-space:nowrap;color:var(--muted)' },
+      { key:'decision',  label:'Decision',  width:'240px', style:'color:var(--text);font-weight:500' },
+      { key:'rationale', label:'Rationale', style:'font-size:12px' },
+      { key:'madeBy',    label:'Made by',   width:'130px', style:'font-size:12px' },
+      { key:'impact',    label:'Impact',    style:'font-size:12px' },
+    ],
+  });
 }
 
 function renderEmail() {
