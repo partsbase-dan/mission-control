@@ -594,7 +594,7 @@
         <div class="grid-4">
           <div class="card"><div style="font-weight:700;margin-bottom:6px">Track A · Buyers + operators <span class="tag tag-blue">Primary</span></div><div style="font-size:12px;color:var(--label)">Buyer Bob (Purchasing Dir), Procurement Paula (1,000+ emp), MRO Mark (buyer + seller). Priority segments: MROs, Distributors, Brokers, OEMs, Contract Mfrs. Also carries general attendees and airlines/operators, plus the Operators Pavilion upgrade. Gated on airline-list enrichment: anti-persona must be suppressed before this sends.</div></div>
           <div class="card"><div style="font-weight:700;margin-bottom:6px">Track B · Past attendees <span class="tag tag-green">Warm</span></div><div style="font-size:12px;color:var(--label)">Prior-year registrants — highest-intent, lowest-CAC. Separate "welcome back / what's new in 2027" flow. Amelia: returning attendees now outnumber first-timers (2026) — a compounding, high-intent pool.</div></div>
-          <div class="card"><div style="font-weight:700;margin-bottom:6px">Track C · Students &amp; job seekers <span class="tag tag-blue">Career Runway</span></div><div style="font-size:12px;color:var(--label)">Attendees for PBExpo's Career Runway hiring zone. Own light-touch invite flow, separate from buyer drips. Existing targeting: Career Runway fit lists.</div></div>
+          <div class="card"><div style="font-weight:700;margin-bottom:6px">Track C · Employers hiring <span class="tag tag-blue">Career Runway</span></div><div style="font-size:12px;color:var(--label)">Aviation companies with open roles — the side that <em>buys</em> Career Runway space, so this track carries revenue rather than headcount. Target on hiring signal (live postings, headcount growth) across Owner, President, GM, plus HR and Talent Acquisition. Own flow, separate from buyer drips. <b>Open dependency:</b> candidate supply for the zone now has no email track — sourced via school and association partners instead.</div></div>
           <div class="card"><div style="font-weight:700;margin-bottom:6px">Suppress <span class="tag tag-red">Anti-persona</span></div><div style="font-size:12px;color:var(--label)">Pilots, flight attendants, ATCs. Enrich Airlines lists before sequencing. Protects deliverability.</div></div>
         </div>
 
@@ -638,7 +638,7 @@
             <div style="margin-top:12px;font-weight:700;font-size:13px">Testimonials to deploy</div>
             <div style="font-size:11.5px;color:var(--label);font-style:italic;margin-top:6px">"PBEXPO has doubled in size..." — Sean Gallagan<br>"...you have to be here to talk about it." — Joshua Abshire<br>"...digitization of the supply chain..." — Claudia Espinosa</div>
           </div>
-          <div class="card"><div style="font-weight:700;margin-bottom:8px">Flow C · Career Runway <span class="tag tag-blue">Students &amp; job seekers</span></div>
+          <div class="card"><div style="font-weight:700;margin-bottom:8px">Flow C · Career Runway <span class="tag tag-blue">Employers hiring</span></div>
             <div class="row"><div class="row-main"><div class="row-title">1 · Invite — launch your aviation career (free)</div><div class="row-sub">Reg open</div></div></div>
             <div class="row"><div class="row-main"><div class="row-title">2 · Who's hiring — MROs, OEMs, staffing firms</div><div class="row-sub">+1 week</div></div></div>
             <div class="row"><div class="row-main"><div class="row-title">3 · Prep — resume tips, plan your day</div><div class="row-sub">T-2 wk</div></div></div>
@@ -1239,37 +1239,37 @@ Final agenda is live, meetings are filling, and it's free to attend.
 
 → Confirm your spot` },
   ]},
-  C: { name: 'Flow C · Career Runway', sub: 'Students & job seekers · light-touch, separate from buyer drips', tag: 'Students & job seekers', tagClass: 'tag-blue', emails: [
-    { n: 'C1', when: 'Reg open', subj: `Launch your aviation career at PBExpo's Career Runway`, meta: `A/B: "Free entry to aviation's biggest hiring event" · Preview: Where students and job seekers meet aviation employers.`, body: `Hi {First},
+  C: { name: 'Flow C · Career Runway', sub: 'Employers hiring · light-touch, separate from buyer drips', tag: 'Employers hiring', tagClass: 'tag-blue', emails: [
+    { n: 'C1', when: 'Reg open', subj: `Recruit aviation talent on the PBExpo floor`, meta: `A/B: "Hire where the industry already is" · Preview: The Career Runway puts your open roles in front of working aviation professionals.`, body: `Hi {First},
 
-Ready to break into aviation and aerospace? PBExpo 2027's Career Runway is where it starts, and it's free to attend.
+Hiring in aviation and aerospace usually means sorting resumes from people who have never touched the industry. The Career Runway at PBExpo 2027 is PartsBase's dedicated hiring zone, and the professionals walking it already work in aviation.
 
-March 10–11 · Miami Beach Convention Center. Our dedicated hiring zone connects students and job seekers with the MROs, OEMs, and staffing firms that are actively hiring.
+March 10–11 · Miami Beach Convention Center. Put your open roles in front of technicians, engineers, supply chain, operations and corporate talent, in person.
 
-→ Register free` },
-    { n: 'C2', when: '+1 week', subj: `These aviation employers are hiring at PBExpo`, meta: `Preview: Bring your resume. The Career Runway floor is filling.`, body: `Hi {First},
+→ Reserve your space` },
+    { n: 'C2', when: '+1 week', subj: `The Career Runway floor is filling for 2027`, meta: `Preview: Fewer unqualified applicants. More conversations that go somewhere.`, body: `Hi {First},
 
-The Career Runway floor is filling with companies looking for talent like you: MROs, OEMs, distributors, and staffing partners from across the aviation supply chain.
+MROs, OEMs, distributors and staffing partners are claiming Career Runway space for March. Each one is there for the same reason: candidates who already understand the work.
 
-Bring your resume, meet employers face-to-face, and catch the Maintenance Games happening right next door.
+A day on the hiring floor replaces weeks of screening.
 
-→ See who's hiring` },
-    { n: 'C3', when: 'T-2 weeks', subj: `Your Career Runway game plan`, meta: `Preview: How to stand out on the hiring floor.`, body: `Hi {First},
+→ See how it works` },
+    { n: 'C3', when: 'T-2 weeks', subj: `Your Career Runway hiring plan`, meta: `Preview: How to leave PBExpo with a named pipeline.`, body: `Hi {First},
 
-Two weeks to PBExpo. Here's how to stand out on the Career Runway:
-• Bring printed resumes, plenty of them.
-• Research the employers exhibiting in the hiring zone.
-• Dress for real hiring conversations.
-• Watch the Maintenance Games nearby to see the trades in action.
+Two weeks to PBExpo. What the teams who hire well on the floor do differently:
+• Bring the hiring manager, not only a recruiter.
+• Post the specific roles, with pay bands, at the stand.
+• Book interview slots in the PBExpo app before doors open.
+• Send someone to the Maintenance Games to spot working technicians.
 
-→ Plan your visit` },
-    { n: 'C4', when: 'T-1 week', subj: `One week until your aviation career starts at PBExpo`, meta: `Preview: Free to attend, packed with employers hiring.`, body: `Hi {First},
+→ Plan your floor presence` },
+    { n: 'C4', when: 'T-1 week', subj: `One week to recruit at PBExpo`, meta: `Preview: Last call for Career Runway space.`, body: `Hi {First},
 
-The Career Runway is a week away. Free to attend, and packed with employers hiring across aviation and aerospace.
+The Career Runway opens in a week, with aviation professionals on-site across every level and function.
 
-Don't miss your shot to meet them in person.
+If you have roles open, this is two days of face-to-face hiring instead of another month of inbound resumes.
 
-→ Register free` },
+→ Reserve your space` },
   ]},
   D: { name: 'Flow D · Post-reg nurture', sub: 'Registered attendees · Aug 2026 through post-event · MOCK PATH, structure only', tag: 'Placeholder', tagClass: 'tag-yellow', placeholder: true, emails: [
     { n: 'D1', when: '+1 day', subj: `[LOCKED] Your PBExpo app, and how to get matched`, meta: `Structure locked, copy draft. Needs: app deep link.`, body: `[PLACEHOLDER COPY. Structure approved, wording not written.]
