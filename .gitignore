@@ -21,6 +21,9 @@
 !index.html
 !linkedin-walkthrough.html
 !hubspot-vs-nooks-slide.html
+# Self-contained creative gallery. Thumbnails are inlined as base64 so no ad media
+# is tracked. Regenerate with scripts/build_creative_gallery.py.
+!creative-gallery.html
 
 # Dashboard data. dashboard-state.json is fetched as a root sibling by both
 # viewers; ad-performance.json is written here by the partsbase-linkedin-ads
