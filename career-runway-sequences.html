@@ -22,8 +22,15 @@ color:var(--muted);margin:42px 0 14px;padding-bottom:9px;border-bottom:1px solid
 .toc a{text-decoration:none;background:var(--card);border:1px solid var(--rule);border-radius:999px;
 padding:7px 15px;font-size:13px;font-weight:600;color:var(--ink)}
 .toc a:hover{border-color:var(--blue);color:var(--blue)}
+.toc a.egl{background:var(--mint);border-color:var(--mint);color:#083d31;font-weight:800}
 .seq{background:var(--card);border:1px solid var(--rule);border-radius:14px;
 padding:24px 26px 26px;margin-bottom:22px}
+.seq.eg{border:2px solid var(--mint);box-shadow:0 2px 18px rgba(46,214,176,.16)}
+.seq.eg .tier{background:var(--mint);color:#083d31}
+.rules{margin-top:16px;background:#e6f6ef;border-left:3px solid var(--mint);
+border-radius:0 8px 8px 0;padding:12px 15px;font-size:13px}
+.rules b{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1d6b46}
+.rules ul{margin:8px 0 0;padding-left:18px} .rules li{margin:4px 0}
 .seqhead{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
 .seqname{font-size:22px;font-weight:900;letter-spacing:-.015em;display:flex;align-items:center;gap:10px}
 .tier{background:var(--navy);color:#fff;font-size:12px;font-weight:800;border-radius:7px;
@@ -79,22 +86,60 @@ tr:last-child td{border-bottom:none}
 code{background:var(--paper);border:1px solid var(--rule);border-radius:4px;
 padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
 .tw{overflow-x:auto}
+.lead{font-size:13.5px;color:#2a3340;max-width:80ch;margin:0 0 14px}
 @media(max-width:700px){.seqhead{flex-direction:column}.nums{gap:16px}.nums div{text-align:left}}
 </style>
 </head><body>
 <header><div class="wrap">
 <h1>Career Runway Sequences</h1>
-<p class="sub">Selling Career Runway exhibit space to employers. This is a sales motion, not attendee nurture. Runs Sept 2026 onward, roughly six months ahead of the event; it hands off to the event-countdown drip (Flow C) at T-8 weeks.</p>
+<p class="sub">Selling Career Runway exhibit space to employers. The evergreen sequence is the one to ship: email only, rolling enrolment, and it needs a single input. The four tiered sequences below add rep-led call and LinkedIn steps for when there is capacity to work the top accounts 1:1.</p>
 <div class="meta">PBExpo 2027 · March 10–11, 2027 · Miami Beach Convention Center &middot; 360 companies · 698 contacts · 590 with email</div>
 </div></header>
 <div class="wrap">
 
-<div class="note"><b>Not ready to send.</b> Five inputs are missing, and every sequence references at least one of them. Tokens in orange throughout this page are deliberate blanks, not oversights.
-<ul><li><code>{{BOOTH_URL}}</code> — Career Runway booking / enquiry page URL, with UTMs from the UTM registry.</li><li><code>{{PRICE}}</code> — Career Runway stand price and what a package includes. Used in Tier 2 and Tier 4, where cost is the main objection.</li><li><code>{{DEADLINE}}</code> — Space-reservation deadline or early-rate cutoff. Drives the urgency step in every sequence.</li><li><code>{{PROOF_POINT}}</code> — One verifiable 2026 Career Runway result — exhibitors on the floor, candidates through the zone, or a named employer quote. Every slot marked PROOF_POINT is deliberately empty: no sequence ships with an invented statistic.</li><li><code>{{SENDER}}</code> — Sending identity and reply-to. Tier 1 should send from a named rep, not a marketing alias.</li></ul></div>
+<div class="note"><b>The evergreen sequence ships on one input.</b> It needs <code>{{SENDER}}</code> and nothing else — <code>{{BOOTH_URL}}</code> appears once in the breakup, and the rest are written around. The four tiered sequences below need more. Tokens in orange are deliberate blanks, not oversights.
+<ul><li><code>{{BOOTH_URL}}</code> — Career Runway booking / enquiry page URL, with UTMs from the UTM registry. The evergreen sequence uses it once, in the breakup email only.</li><li><code>{{SENDER}}</code> — Sending identity and reply-to. The only hard blocker on the evergreen sequence. Use a named person — four of the five emails ask for a reply, so it must land in a monitored inbox.</li><li><code>{{PRICE}}</code> — Stand price and package contents. Tier 2 and Tier 4 only. The evergreen sequence is written around it.</li><li><code>{{DEADLINE}}</code> — Space-reservation or early-rate cutoff. Tiered sequences only. The evergreen sequence is written around it.</li><li><code>{{PROOF_POINT}}</code> — One verifiable 2026 Career Runway result. Tiered sequences only. Every slot is deliberately empty: no sequence ships with an invented statistic.</li><li><code>{{cr_open_roles}}</code> — Verified open-role count. Florida list only, so the evergreen sequence does not use it.</li></ul></div>
 
 <h2>Sequences</h2>
-<div class="toc"><a href="#t1">1 · Florida Anchor</a><a href="#t2">2 · Florida Core</a><a href="#t3">3 · National Hirer</a><a href="#t4">4 · Long Tail</a></div>
-<section class="seq" id="t1">
+<div class="toc"><a href="#eg" class=egl>Evergreen</a><a href="#t1">1 · Florida Anchor</a><a href="#t2">2 · Florida Core</a><a href="#t3">3 · National Hirer</a><a href="#t4">4 · Long Tail</a></div>
+<section class="seq eg" id="eg">
+<div class="seqhead">
+  <div>
+    <div class="seqname"><span class="tier">Evergreen</span>Career Runway — Evergreen</div>
+    <p class="who">Any employer hiring in Florida aviation. Rolling enrolment, no batch, no wave. Add contacts as they are enriched or as new lists land.</p>
+  </div>
+  <div class="nums">
+    <div><b>360</b><span>companies</span></div>
+    <div><b>698</b><span>contacts</span></div>
+    <div><b>590</b><span>with email</span></div>
+    <div><b>5</b><span>steps</span></div>
+  </div>
+</div>
+<div class="motion"><b>Motion.</b> Email only, five steps over 26 days, timed from the day each contact is enrolled rather than from the event. No call or LinkedIn tasks, so it needs no rep capacity. Unenrols on reply.</div>
+<div class="rationale"><b>Why this copy.</b> Written against the cold-email playbook, not the marketing-email one. Subject lines are two or three lowercase words that look like internal mail rather than a pitch. Four of the five emails ask for a one-line reply instead of a click, which converts better cold and keeps link count down while sender reputation is still being rebuilt. Every email opens in the reader&#x27;s world and stands alone, because a rolling enrolment means nobody is guaranteed to have read the previous one.</div>
+<div class="rules"><b>What makes it evergreen</b><ul><li>Timing is relative to enrolment day, not to March 10. No email says &quot;next week&quot; or &quot;two weeks out&quot;.</li><li>No <span class="tk">{{cr_open_roles}}</span> token. That data exists for the Florida list only, and an empty token in a cold email is worse than no personalisation. Tier 1 contacts who deserve that specificity should run the rep-led sequence instead.</li><li>One link, in the last email only. Cold email with multiple links draws spam filtering, and PartsBase sender reputation is still being rebuilt. The other four ask for a reply.</li><li>Ships on one input. Only <span class="tk open">{{SENDER}}</span> is required — <span class="tk open">{{BOOTH_URL}}</span> appears once, in the breakup, and <span class="tk open">{{PRICE}}</span>, <span class="tk open">{{DEADLINE}}</span> and <span class="tk open">{{PROOF_POINT}}</span> are written around entirely.</li><li>Stop enrolling on 2027-02-05. The sequence runs 26 days and the last email needs to land with real time before the March 10 doors.</li></ul></div>
+<div class="steps"><div class="step email">
+<div class="stephead"><span class="dot">✉</span>
+<span class="daylbl">Day 1</span>
+<span class="pill email">email</span></div>
+<div class="subj">florida aviation hiring</div><div class="subjb">A/B variant · hiring in florida</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>If <span class="tk">{{Company}}</span> is hiring aviation roles, you already know the problem: most applicants have never worked in aviation, and the first stretch of every search goes to screening that out.</p><p>PBExpo 2027 has a hiring floor called the Career Runway, where everyone walking it already works in the industry. March 10–11, Miami Beach.</p><p>Worth fifteen minutes?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="stephead"><span class="dot">✉</span>
+<span class="daylbl">Day 4</span>
+<span class="pill email">email</span><span class="pill">reply in thread</span></div>
+<div class="subj">(thread reply — HubSpot adds the Re:)</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>A Career Runway stand is floor space in the hiring zone, your open roles posted where candidates are actively looking, and two days of conversations with people who don&#x27;t need aviation explained to them.</p><p>The difference from a job board isn&#x27;t volume. It&#x27;s that the screening happens before the conversation instead of after it.</p><p>Want me to send what it&#x27;d look like for <span class="tk">{{Company}}</span>?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="stephead"><span class="dot">✉</span>
+<span class="daylbl">Day 9</span>
+<span class="pill email">email</span></div>
+<div class="subj">the maintenance games</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>What separates the employers who leave PBExpo with a real pipeline from the ones who leave with a stack of business cards:</p><p>They bring the hiring manager, not just a recruiter. They post pay bands at the stand. They book interviews in the app before doors open. And they send someone to the Maintenance Games, which is where the working technicians spend their time.</p><p>None of that costs extra. Happy to send the full list if it&#x27;s useful.</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="stephead"><span class="dot">✉</span>
+<span class="daylbl">Day 16</span>
+<span class="pill email">email</span></div>
+<div class="subj">screening time</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>When a role sits open, the cost isn&#x27;t the job posting. It&#x27;s the screening weeks, the interviews that go nowhere, and the work not getting done meanwhile.</p><p>Two days on the Career Runway cuts the top of that funnel out. Everyone in front of you already understands the job, so you&#x27;re sorting for fit instead of for relevance.</p><p>Is hiring still a priority for <span class="tk">{{Company}}</span> this year?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="stephead"><span class="dot">✉</span>
+<span class="daylbl">Day 26</span>
+<span class="pill email">email</span></div>
+<div class="subj">closing this out</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>I&#x27;ve not heard back, so I&#x27;ll stop here rather than keep landing in your inbox.</p><p>If the timing&#x27;s just wrong and hiring picks up before March, reply to this and I&#x27;ll pick it straight back up.</p><p><span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div></div>
+</section><section class="seq" id="t1">
 <div class="seqhead">
   <div>
     <div class="seqname"><span class="tier">1</span>Florida Anchor</div>
@@ -109,6 +154,7 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
 </div>
 <div class="motion"><b>Motion.</b> Rep-led and 1:1. Manual LinkedIn and call steps interleaved. Do not bulk-send.</div>
 <div class="rationale"><b>Why this copy.</b> These have the two things that close a booth sale: a real hiring problem you can name, and no travel cost to attend. The copy leads with their own open-role count and treats the show as a local resource rather than a trip.</div>
+
 <div class="steps"><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 1</span>
@@ -149,6 +195,7 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
 </div>
 <div class="motion"><b>Motion.</b> Semi-automated. One call task only, at the end. Safe to run at volume.</div>
 <div class="rationale"><b>Why this copy.</b> Smaller Florida operators with no dedicated talent budget. They lose technicians to the large MROs in their own market. The angle is competitive, and cost is the objection to handle early — so price appears in email two rather than being withheld.</div>
+
 <div class="steps"><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 1</span>
@@ -181,6 +228,7 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
 </div>
 <div class="motion"><b>Motion.</b> Semi-automated with a call task mid-sequence. Largest bucket — the volume engine.</div>
 <div class="rationale"><b>Why this copy.</b> These already spend money recruiting into a Florida market they don&#x27;t live in. The proposition is not &quot;come to a show&quot; but &quot;consolidate your Florida hiring trip into two days.&quot; Openings data does not exist for this list, so no copy references a role count.</div>
+
 <div class="steps"><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 1</span>
@@ -217,6 +265,7 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
 </div>
 <div class="motion"><b>Motion.</b> Fully automated, no rep time. Three emails, self-serve CTA, then exit.</div>
 <div class="rationale"><b>Why this copy.</b> Every non-aviation and public-sector employer in the list lands here, so no line assumes the reader works in aviation. The job of this sequence is to find the few real prospects cheaply and let the rest go quiet.</div>
+
 <div class="steps"><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 1</span>
@@ -231,6 +280,13 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
 <span class="pill email">email</span></div>
 <div class="subj">Closing this out</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>I&#x27;ll assume this isn&#x27;t a fit and stop emailing.</p><p>If that changes before <span class="tk open">{{DEADLINE}}</span>, the page below has everything.</p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div></div>
 </section>
+
+<h2>Enrolment</h2>
+<p class="lead">Volume ramps rather than starting at full list. PartsBase sender reputation is still being rebuilt after the Mailchimp remediation, and a 590-contact first send would undo that. Order is by company score, so the best prospects go first and the ramp doubles as a quality test — if week 1 gets no replies, the copy is wrong and only 50 contacts were spent finding out.</p>
+<div class="tw"><table><thead><tr><th>Week</th><th>Contacts</th><th>Bucket mix</th><th>Score range</th></tr></thead>
+<tbody><tr><td><b>1</b></td><td>50</td><td>Florida Anchor 31, National Hirer 19</td><td>82–100</td></tr><tr><td><b>2</b></td><td>100</td><td>Florida Anchor 52, National Hirer 48</td><td>75–82</td></tr><tr><td><b>3</b></td><td>150</td><td>National Hirer 105, Florida Anchor 35, Florida Core 10</td><td>69–75</td></tr><tr><td><b>4</b></td><td>150</td><td>National Hirer 67, Florida Core 43, Long Tail 40</td><td>56–69</td></tr><tr><td><b>5</b></td><td>140</td><td>Long Tail 133, Florida Core 7</td><td>26–56</td></tr></tbody></table></div>
+<div class="note" style="border-left-color:var(--blue);margin-top:18px"><b>Before the first send</b>
+<ul><li>Suppress anyone already in a PBExpo attendee or exhibitor sequence — this is a separate buying motion and a double-enrolment reads as a blast.</li><li>Dedupe on email before the first enrolment. Five contacts appear in both source workbooks (L3Harris ×3, Kaman, AMI).</li><li>108 of the 698 contacts have a LinkedIn profile but no work email. They cannot be enrolled — route them to Clay for email discovery or work them on LinkedIn.</li><li>Stop enrolling on 2027-02-05 so the 26-day arc completes before the doors open.</li></ul></div>
 
 <h2>HubSpot properties to create first</h2>
 <div class="tw"><table><thead><tr><th>Property</th><th>Type</th><th>Why</th></tr></thead>
