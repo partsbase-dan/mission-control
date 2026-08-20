@@ -25,6 +25,10 @@
 # is tracked. Regenerate with scripts/build_creative_gallery.py.
 !creative-gallery.html
 
+# Career Runway outbound sequences. Copy, scoring model and bucket counts only —
+# no contact rows. Regenerate with scripts/build_career_runway_page.py.
+!career-runway-sequences.html
+
 # Dashboard data. dashboard-state.json is fetched as a root sibling by both
 # viewers; ad-performance.json is written here by the partsbase-linkedin-ads
 # weekday ad-account check.
