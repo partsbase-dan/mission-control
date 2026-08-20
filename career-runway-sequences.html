@@ -27,7 +27,7 @@ padding:7px 15px;font-size:13px;font-weight:600;color:var(--ink)}
 padding:24px 26px 26px;margin-bottom:22px}
 .seq.eg{border:2px solid var(--mint);box-shadow:0 2px 18px rgba(46,214,176,.16)}
 .seq.eg .tier{background:var(--mint);color:#083d31}
-.rules{margin-top:16px;background:#e6f6ef;border-left:3px solid var(--mint);
+.rules{margin:0 0 22px;background:#e6f6ef;border-left:3px solid var(--mint);
 border-radius:0 8px 8px 0;padding:12px 15px;font-size:13px}
 .rules b{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1d6b46}
 .rules ul{margin:8px 0 0;padding-left:18px} .rules li{margin:4px 0}
@@ -92,54 +92,19 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
 </head><body>
 <header><div class="wrap">
 <h1>Career Runway Sequences</h1>
-<p class="sub">Selling Career Runway exhibit space to employers. The evergreen sequence is the one to ship: email only, rolling enrolment, and it needs a single input. The four tiered sequences below add rep-led call and LinkedIn steps for when there is capacity to work the top accounts 1:1.</p>
+<p class="sub">Selling Career Runway exhibit space to employers. Four email-only sequences, one per scoring bucket, all evergreen — enrolment is rolling and every step is timed from the day a contact is added rather than from the event, so people can keep being added as lists are enriched. No call or LinkedIn steps, so none of it needs rep capacity.</p>
 <div class="meta">PBExpo 2027 · March 10–11, 2027 · Miami Beach Convention Center &middot; 360 companies · 698 contacts · 590 with email</div>
 </div></header>
 <div class="wrap">
 
-<div class="note"><b>The evergreen sequence ships on one input.</b> It needs <code>{{SENDER}}</code> and nothing else — <code>{{BOOTH_URL}}</code> appears once in the breakup, and the rest are written around. The four tiered sequences below need more. Tokens in orange are deliberate blanks, not oversights.
-<ul><li><code>{{BOOTH_URL}}</code> — Career Runway booking / enquiry page URL, with UTMs from the UTM registry. The evergreen sequence uses it once, in the breakup email only.</li><li><code>{{SENDER}}</code> — Sending identity and reply-to. The only hard blocker on the evergreen sequence. Use a named person — four of the five emails ask for a reply, so it must land in a monitored inbox.</li><li><code>{{PRICE}}</code> — Stand price and package contents. Tier 2 and Tier 4 only. The evergreen sequence is written around it.</li><li><code>{{DEADLINE}}</code> — Space-reservation or early-rate cutoff. Tiered sequences only. The evergreen sequence is written around it.</li><li><code>{{PROOF_POINT}}</code> — One verifiable 2026 Career Runway result. Tiered sequences only. Every slot is deliberately empty: no sequence ships with an invented statistic.</li><li><code>{{cr_open_roles}}</code> — Verified open-role count. Florida list only, so the evergreen sequence does not use it.</li></ul></div>
+<div class="note"><b>All four ship on one input.</b> Each needs <code>{{SENDER}}</code> and nothing else — <code>{{BOOTH_URL}}</code> appears once per sequence in the breakup, and price, deadline and proof point are written around. Tokens in orange are deliberate blanks, not oversights.
+<ul><li><code>{{SENDER}}</code> — Sending identity and reply-to. The only hard blocker across all four sequences. Use a named person, not a marketing alias — most emails ask for a reply, so it has to land in a monitored inbox.</li><li><code>{{BOOTH_URL}}</code> — Career Runway booking / enquiry page URL with UTMs. Used once per sequence, in the breakup email only.</li><li><code>{{cr_open_roles}}</code> — Verified open-role count. Tier 1 and Tier 2 only, where coverage is 95% and 93%. Set the HubSpot fallback to the word &quot;several&quot; so the 5% without a number still read naturally. Never enable it for Tier 3 (0% coverage) or Tier 4 (24%).</li><li><code>{{PRICE}}</code> — Optional. Stand price and package contents. Every sequence is written around it, but it is the fastest objection-handler for the smaller Tier 2 operators if you want to add a line.</li><li><code>{{PROOF_POINT}}</code> — Optional. One verifiable 2026 Career Runway result. Deliberately absent everywhere rather than filled with an invented statistic.</li></ul></div>
+
+<div class="rules"><b>What makes these evergreen</b><ul><li>Every step is timed from the day a contact is enrolled, not from March 10. No email says &quot;next week&quot; or &quot;two weeks out&quot;, so a person added in November reads the same arc as one added in January.</li><li>Email only. No call or LinkedIn steps in any of the four, so none of this needs rep capacity.</li><li>One link per sequence, in the breakup email only. Cold email with multiple links draws spam filtering, and PartsBase sender reputation is still being rebuilt after the Mailchimp remediation. Every other email asks for a one-line reply.</li><li><span class="tk">{{cr_open_roles}}</span> appears in Tier 1 and Tier 2 only, where coverage is 95% and 93%. Set the HubSpot fallback to &quot;several&quot; so the remainder still read naturally. Tier 3 has zero coverage and Tier 4 has 24% — the token is absent from both.</li><li>Ships on one input. Only <span class="tk open">{{SENDER}}</span> is required; <span class="tk open">{{BOOTH_URL}}</span> appears once per sequence in the breakup, and price, deadline and proof point are written around entirely.</li><li>Stop enrolling on 2027-02-05. The longest arc runs 24 days and the last email needs to land with real time before the March 10 doors.</li></ul></div>
 
 <h2>Sequences</h2>
-<div class="toc"><a href="#eg" class=egl>Evergreen</a><a href="#t1">1 · Florida Anchor</a><a href="#t2">2 · Florida Core</a><a href="#t3">3 · National Hirer</a><a href="#t4">4 · Long Tail</a></div>
-<section class="seq eg" id="eg">
-<div class="seqhead">
-  <div>
-    <div class="seqname"><span class="tier">Evergreen</span>Career Runway — Evergreen</div>
-    <p class="who">Any employer hiring in Florida aviation. Rolling enrolment, no batch, no wave. Add contacts as they are enriched or as new lists land.</p>
-  </div>
-  <div class="nums">
-    <div><b>360</b><span>companies</span></div>
-    <div><b>698</b><span>contacts</span></div>
-    <div><b>590</b><span>with email</span></div>
-    <div><b>5</b><span>steps</span></div>
-  </div>
-</div>
-<div class="motion"><b>Motion.</b> Email only, five steps over 26 days, timed from the day each contact is enrolled rather than from the event. No call or LinkedIn tasks, so it needs no rep capacity. Unenrols on reply.</div>
-<div class="rationale"><b>Why this copy.</b> Written against the cold-email playbook, not the marketing-email one. Subject lines are two or three lowercase words that look like internal mail rather than a pitch. Four of the five emails ask for a one-line reply instead of a click, which converts better cold and keeps link count down while sender reputation is still being rebuilt. Every email opens in the reader&#x27;s world and stands alone, because a rolling enrolment means nobody is guaranteed to have read the previous one.</div>
-<div class="rules"><b>What makes it evergreen</b><ul><li>Timing is relative to enrolment day, not to March 10. No email says &quot;next week&quot; or &quot;two weeks out&quot;.</li><li>No <span class="tk">{{cr_open_roles}}</span> token. That data exists for the Florida list only, and an empty token in a cold email is worse than no personalisation. Tier 1 contacts who deserve that specificity should run the rep-led sequence instead.</li><li>One link, in the last email only. Cold email with multiple links draws spam filtering, and PartsBase sender reputation is still being rebuilt. The other four ask for a reply.</li><li>Ships on one input. Only <span class="tk open">{{SENDER}}</span> is required — <span class="tk open">{{BOOTH_URL}}</span> appears once, in the breakup, and <span class="tk open">{{PRICE}}</span>, <span class="tk open">{{DEADLINE}}</span> and <span class="tk open">{{PROOF_POINT}}</span> are written around entirely.</li><li>Stop enrolling on 2027-02-05. The sequence runs 26 days and the last email needs to land with real time before the March 10 doors.</li></ul></div>
-<div class="steps"><div class="step email">
-<div class="stephead"><span class="dot">✉</span>
-<span class="daylbl">Day 1</span>
-<span class="pill email">email</span></div>
-<div class="subj">florida aviation hiring</div><div class="subjb">A/B variant · hiring in florida</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>If <span class="tk">{{Company}}</span> is hiring aviation roles, you already know the problem: most applicants have never worked in aviation, and the first stretch of every search goes to screening that out.</p><p>PBExpo 2027 has a hiring floor called the Career Runway, where everyone walking it already works in the industry. March 10–11, Miami Beach.</p><p>Worth fifteen minutes?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
-<div class="stephead"><span class="dot">✉</span>
-<span class="daylbl">Day 4</span>
-<span class="pill email">email</span><span class="pill">reply in thread</span></div>
-<div class="subj">(thread reply — HubSpot adds the Re:)</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>A Career Runway stand is floor space in the hiring zone, your open roles posted where candidates are actively looking, and two days of conversations with people who don&#x27;t need aviation explained to them.</p><p>The difference from a job board isn&#x27;t volume. It&#x27;s that the screening happens before the conversation instead of after it.</p><p>Want me to send what it&#x27;d look like for <span class="tk">{{Company}}</span>?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
-<div class="stephead"><span class="dot">✉</span>
-<span class="daylbl">Day 9</span>
-<span class="pill email">email</span></div>
-<div class="subj">the maintenance games</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>What separates the employers who leave PBExpo with a real pipeline from the ones who leave with a stack of business cards:</p><p>They bring the hiring manager, not just a recruiter. They post pay bands at the stand. They book interviews in the app before doors open. And they send someone to the Maintenance Games, which is where the working technicians spend their time.</p><p>None of that costs extra. Happy to send the full list if it&#x27;s useful.</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
-<div class="stephead"><span class="dot">✉</span>
-<span class="daylbl">Day 16</span>
-<span class="pill email">email</span></div>
-<div class="subj">screening time</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>When a role sits open, the cost isn&#x27;t the job posting. It&#x27;s the screening weeks, the interviews that go nowhere, and the work not getting done meanwhile.</p><p>Two days on the Career Runway cuts the top of that funnel out. Everyone in front of you already understands the job, so you&#x27;re sorting for fit instead of for relevance.</p><p>Is hiring still a priority for <span class="tk">{{Company}}</span> this year?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
-<div class="stephead"><span class="dot">✉</span>
-<span class="daylbl">Day 26</span>
-<span class="pill email">email</span></div>
-<div class="subj">closing this out</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>I&#x27;ve not heard back, so I&#x27;ll stop here rather than keep landing in your inbox.</p><p>If the timing&#x27;s just wrong and hiring picks up before March, reply to this and I&#x27;ll pick it straight back up.</p><p><span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div></div>
-</section><section class="seq" id="t1">
+<div class="toc"><a href="#t1">1 · Florida Anchor</a><a href="#t2">2 · Florida Core</a><a href="#t3">3 · National Hirer</a><a href="#t4">4 · Long Tail</a></div>
+<section class="seq" id="t1">
 <div class="seqhead">
   <div>
     <div class="seqname"><span class="tier">1</span>Florida Anchor</div>
@@ -149,42 +114,38 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
     <div><b>95</b><span>companies</span></div>
     <div><b>132</b><span>contacts</span></div>
     <div><b>118</b><span>with email</span></div>
-    <div><b>6</b><span>steps</span></div>
+    <div><b>5</b><span>steps</span></div>
   </div>
 </div>
-<div class="motion"><b>Motion.</b> Rep-led and 1:1. Manual LinkedIn and call steps interleaved. Do not bulk-send.</div>
-<div class="rationale"><b>Why this copy.</b> These have the two things that close a booth sale: a real hiring problem you can name, and no travel cost to attend. The copy leads with their own open-role count and treats the show as a local resource rather than a trip.</div>
+<div class="motion"><b>Motion.</b> Email only, five steps over 24 days from enrolment day. Rolling enrolment. Unenrols on reply.</div>
+<div class="rationale"><b>Why this copy.</b> The only bucket where the strongest personalisation is available and safe: 95% of these contacts have a verified open-role count, and all of them are in-state. Both facts are in the first two lines, because if you remove them the email still makes sense — which is the test for whether personalisation is doing any work.</div>
 
 <div class="steps"><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 1</span>
 <span class="pill email">email</span></div>
-<div class="subj"><span class="tk">{{Company}}</span> is hiring. The floor is in your state.</div><div class="subjb">A/B variant · Your <span class="tk">{{cr_open_roles}}</span> open roles, and 2 days in March</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p><span class="tk">{{Company}}</span> has <span class="tk">{{cr_open_roles}}</span> roles open right now, and most of them need someone who already knows aviation.</p><p>PBExpo 2027 is March 10–11 at the Miami Beach Convention Center. The Career Runway is the hiring floor inside it — two days of face-to-face access to technicians, engineers, supply chain and operations people who already work in this industry.</p><p>The show is in your state. Your team can staff a stand without booking a flight or flying candidates in.</p><p>Worth fifteen minutes to see whether it fits the 2027 hiring plan?</p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div><div class="variant"><b>Swap when pb_membership = Paid</b><p><span class="tk">{{Company}}</span> already uses PartsBase to source parts. The Career Runway is the same network pointed at people instead of inventory — and you have <span class="tk">{{cr_open_roles}}</span> roles open right now.</p></div></div><div class="step linkedin">
-<div class="stephead"><span class="dot">in</span>
-<span class="daylbl">Day 3</span>
-<span class="pill linkedin">LinkedIn</span></div>
-<div class="subj">Connect + light touch</div><div class="ebody"><p>Connection request, no pitch. If already connected, comment on a recent <span class="tk">{{Company}}</span> hiring post or share the Career Runway page with one line: &quot;Running this in March if you&#x27;re still filling <span class="tk">{{cr_open_roles}}</span> roles.&quot;</p></div></div><div class="step email">
+<div class="subj">your open roles</div><div class="subjb">A/B variant · florida aviation hiring</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p><span class="tk">{{Company}}</span> is carrying <span class="tk">{{cr_open_roles}}</span> open roles right now, and most of them need someone who already knows aviation. You know how much of that search goes to screening out people who don&#x27;t.</p><p>PBExpo 2027 has a hiring floor called the Career Runway. Everyone walking it already works in the industry. March 10–11, Miami Beach — in-state for you, so a stand costs you time rather than travel budget.</p><p>Worth fifteen minutes?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
-<span class="daylbl">Day 5</span>
+<span class="daylbl">Day 4</span>
 <span class="pill email">email</span><span class="pill">reply in thread</span></div>
-<div class="subj">Re: <span class="tk">{{Company}}</span> is hiring. The floor is in your state.</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>One thing that makes aviation hiring different: a general job board sends you applicants who have to be taught what an AOG is. Everyone walking the Career Runway already works in the industry.</p><p>That changes what your team spends its time on. Fewer applications to screen, more conversations that go somewhere.</p><p>If <span class="tk">{{Company}}</span> is filling <span class="tk">{{cr_open_roles}}</span> roles between now and March, two days on the floor replaces several weeks of screening.</p><p><span class="tk open">{{PROOF_POINT}}</span></p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step call">
-<div class="stephead"><span class="dot">☏</span>
+<div class="subj">(thread reply — HubSpot adds the Re:)</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>A stand on the Career Runway is floor space in the hiring zone, your open roles posted where candidates are actively looking for exactly that, and two days of conversations with people who don&#x27;t need aviation explained to them.</p><p>The difference from a job board isn&#x27;t volume. It&#x27;s that the screening happens before the conversation instead of after it.</p><p>Want me to send what it&#x27;d look like for <span class="tk">{{Company}}</span>?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 9</span>
-<span class="pill call">call</span></div>
-<div class="subj">Call task — hiring-plan discovery</div><div class="ebody"><p>Ask, in order: which roles are hardest to fill; what they are using now; whether they have ever recruited at a trade show. Do not pitch the stand until you have the first answer. If voicemail, reference the <span class="tk">{{cr_open_roles}}</span> number and say you&#x27;ll follow up by email.</p></div></div><div class="step email">
-<div class="stephead"><span class="dot">✉</span>
-<span class="daylbl">Day 12</span>
 <span class="pill email">email</span></div>
-<div class="subj">How teams actually hire on the Career Runway floor</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>What separates the employers who leave PBExpo with a named pipeline from the ones who leave with a stack of business cards:</p><ul class="beats"><li>Bring the hiring manager, not only a recruiter. Candidates commit when they meet the person they&#x27;d report to.</li><li>Post the specific roles, with pay bands, at the stand. Vague postings get vague conversations.</li><li>Book interview slots in the PBExpo app before doors open.</li><li>Send someone to the Maintenance Games. That&#x27;s where the working technicians are.</li></ul><p>Happy to walk through what a stand would look like for <span class="tk">{{Company}}</span>.</p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="subj">the maintenance games</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>What separates the employers who leave PBExpo with a real pipeline from the ones who leave with a stack of business cards:</p><p>They bring the hiring manager, not just a recruiter. They post pay bands at the stand. They book interviews in the app before doors open. And they send someone to the Maintenance Games, which is where the working technicians spend their time.</p><p>None of that costs extra. Happy to send the full list if it&#x27;s useful.</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
-<span class="daylbl">Day 17</span>
+<span class="daylbl">Day 16</span>
 <span class="pill email">email</span></div>
-<div class="subj">Close the file on <span class="tk">{{Company}}</span>?</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>I&#x27;ve not heard back, so I&#x27;ll assume Career Runway isn&#x27;t a fit for <span class="tk">{{Company}}</span> this cycle and stop there.</p><p>If that&#x27;s wrong and the timing is just bad, tell me and I&#x27;ll come back in the new year — space for March is held until <span class="tk open">{{DEADLINE}}</span>.</p><p><span class="tk open">{{SENDER}}</span></p></div></div></div>
+<div class="subj">screening time</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>When a role sits open, the cost isn&#x27;t the job posting. It&#x27;s the screening weeks, the interviews that go nowhere, and the work not getting done meanwhile.</p><p>With <span class="tk">{{cr_open_roles}}</span> roles open, two days on the Career Runway cuts the top of that funnel out. Everyone in front of you already understands the job, so you&#x27;re sorting for fit instead of for relevance.</p><p>Is this worth a look for <span class="tk">{{Company}}</span>?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="stephead"><span class="dot">✉</span>
+<span class="daylbl">Day 24</span>
+<span class="pill email">email</span></div>
+<div class="subj">closing this out</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>I&#x27;ve not heard back, so I&#x27;ll stop here rather than keep landing in your inbox.</p><p>If the timing&#x27;s just wrong and hiring picks up before March, reply to this and I&#x27;ll pick it straight back up.</p><p><span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div></div>
 </section><section class="seq" id="t2">
 <div class="seqhead">
   <div>
     <div class="seqname"><span class="tier">2</span>Florida Core</div>
-    <p class="who">Florida-headquartered aviation employers with lighter or unverified hiring signal. Score 52–69.</p>
+    <p class="who">Florida-headquartered aviation employers with lighter hiring signal. Score 52–69.</p>
   </div>
   <div class="nums">
     <div><b>42</b><span>companies</span></div>
@@ -193,68 +154,64 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
     <div><b>4</b><span>steps</span></div>
   </div>
 </div>
-<div class="motion"><b>Motion.</b> Semi-automated. One call task only, at the end. Safe to run at volume.</div>
-<div class="rationale"><b>Why this copy.</b> Smaller Florida operators with no dedicated talent budget. They lose technicians to the large MROs in their own market. The angle is competitive, and cost is the objection to handle early — so price appears in email two rather than being withheld.</div>
+<div class="motion"><b>Motion.</b> Email only, four steps over 20 days from enrolment day. Rolling enrolment. Unenrols on reply.</div>
+<div class="rationale"><b>Why this copy.</b> Smaller Florida operators competing for the same licensed technicians as the large MROs down the road, usually with one person doing hiring on top of their real job. The angle is competitive rather than aspirational, and the small-team objection is turned into the argument for going.</div>
 
 <div class="steps"><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 1</span>
 <span class="pill email">email</span></div>
-<div class="subj">You&#x27;re competing for the same A&amp;Ps as the big MROs</div><div class="subjb">A/B variant · Aviation hiring in <span class="tk">{{City}}</span>, two days in March</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>Every aviation employer in Florida is recruiting from the same pool of technicians and licensed staff. The large MROs win a lot of those hires because candidates see them first.</p><p>The Career Runway at PBExpo 2027 puts a small team in front of the same people, on the same floor, on the same two days. March 10–11, Miami Beach Convention Center.</p><p>You&#x27;re already in Florida, so attending costs you time rather than travel budget.</p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="subj">florida techs</div><div class="subjb">A/B variant · hiring a&amp;ps</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>Every aviation employer in Florida is recruiting from the same pool of licensed technicians. The large MROs win a lot of those hires purely because candidates see them first.</p><p>PBExpo 2027 has a hiring floor — the Career Runway — where a small team gets in front of the same people, on the same two days. March 10–11, Miami Beach.</p><p>You&#x27;re already in-state, so it costs you time rather than travel budget.</p><p>Worth a look?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 6</span>
-<span class="pill email">email</span></div>
-<div class="subj">What a Career Runway stand costs</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>Straight answer, since it&#x27;s usually the first question: <span class="tk open">{{PRICE}}</span>.</p><p>Compare that with what one bad hire costs, or with a year of job-board spend that produces applicants who&#x27;ve never worked on an aircraft.</p><p>What you get for it: two days of face-to-face access to aviation professionals, a stand on the hiring floor, and your open roles in front of people who already understand them.</p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<span class="pill email">email</span><span class="pill">reply in thread</span></div>
+<div class="subj">(thread reply — HubSpot adds the Re:)</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>A smaller team is the argument for this, not against it.</p><p>When hiring is one person&#x27;s job on top of their real job, the expensive part isn&#x27;t advertising the role. It&#x27;s the screening. Sorting through applicants who&#x27;ve never touched an aircraft is what eats the calendar.</p><p>With <span class="tk">{{cr_open_roles}}</span> roles open, two days where everyone already works in aviation changes what that person spends their week on.</p><p>Want the details?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 13</span>
 <span class="pill email">email</span></div>
-<div class="subj">Two days replaces two months of screening</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>A smaller team is the argument for the Career Runway, not against it.</p><p>When hiring is one person&#x27;s job on top of their real job, the expensive part isn&#x27;t the advertising. It&#x27;s the screening. Sorting through applicants who have never touched aviation is what eats the calendar.</p><p>On the Career Runway everyone in front of you already works in the industry. You&#x27;re screening for fit, not for basic relevance.</p><p><span class="tk open">{{PROOF_POINT}}</span></p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step call">
-<div class="stephead"><span class="dot">☏</span>
+<div class="subj">working the floor</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>If you do come, the teams who get the most out of it do four things: bring the hiring manager rather than only a recruiter, post pay bands at the stand, book interview slots in the app before doors open, and send someone to the Maintenance Games where the working technicians are.</p><p>None of it costs extra. It&#x27;s the difference between showing up and working the floor.</p><p>Is hiring still a priority for <span class="tk">{{Company}}</span> this year?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 20</span>
-<span class="pill call">call</span></div>
-<div class="subj">Call task — single attempt, then exit</div><div class="ebody"><p>One call. If no answer, leave a voicemail referencing the March dates and the <span class="tk open">{{DEADLINE}}</span> cutoff, then let the sequence end. Do not re-enroll this cycle.</p></div></div></div>
+<span class="pill email">email</span></div>
+<div class="subj">closing this out</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>I&#x27;ve not heard back, so I&#x27;ll stop here rather than keep landing in your inbox.</p><p>If the timing&#x27;s just wrong and hiring picks up before March, reply to this and I&#x27;ll pick it straight back up.</p><p><span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div></div>
 </section><section class="seq" id="t3">
 <div class="seqhead">
   <div>
     <div class="seqname"><span class="tier">3</span>National Hirer</div>
-    <p class="who">Aviation and defense employers headquartered outside Florida but hiring into Florida. Score 58+.</p>
+    <p class="who">Aviation and defense employers headquartered outside Florida but hiring into it. Score 58+.</p>
   </div>
   <div class="nums">
     <div><b>129</b><span>companies</span></div>
     <div><b>292</b><span>contacts</span></div>
     <div><b>239</b><span>with email</span></div>
-    <div><b>5</b><span>steps</span></div>
+    <div><b>4</b><span>steps</span></div>
   </div>
 </div>
-<div class="motion"><b>Motion.</b> Semi-automated with a call task mid-sequence. Largest bucket — the volume engine.</div>
-<div class="rationale"><b>Why this copy.</b> These already spend money recruiting into a Florida market they don&#x27;t live in. The proposition is not &quot;come to a show&quot; but &quot;consolidate your Florida hiring trip into two days.&quot; Openings data does not exist for this list, so no copy references a role count.</div>
+<div class="motion"><b>Motion.</b> Email only, four steps over 21 days from enrolment day. Rolling enrolment. Unenrols on reply. Largest bucket.</div>
+<div class="rationale"><b>Why this copy.</b> These already spend money recruiting into a market they don&#x27;t live in, so the proposition is consolidation rather than attendance. No email references a role count — the NonFlorida workbook has no openings data at all, and a fabricated or empty number here would be obvious.</div>
 
 <div class="steps"><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 1</span>
 <span class="pill email">email</span></div>
-<div class="subj">You&#x27;re hiring in Florida. The candidates are in one room in March.</div><div class="subjb">A/B variant · Your Florida hiring, condensed into two days</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p><span class="tk">{{Company}}</span> is recruiting into Florida from outside it, which usually means flying people down for interviews, or hoping a job board reaches the right market.</p><p>PBExpo 2027 is March 10–11 at the Miami Beach Convention Center. The Career Runway is the hiring floor: aviation professionals across technical, operations, supply chain and corporate functions, in person, over two days.</p><p>One trip covers a market you&#x27;re currently recruiting into remotely.</p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div><div class="variant"><b>Swap when pb_membership = Paid</b><p><span class="tk">{{Company}}</span> already uses PartsBase on the parts side. The Career Runway is the same industry network pointed at hiring — and it sits in a market you&#x27;re currently recruiting into from a distance.</p></div></div><div class="step email">
+<div class="subj">florida hiring</div><div class="subjb">A/B variant · recruiting into florida</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>Recruiting into Florida from outside it usually means flying people down for interviews, or hoping a job board reaches the right market.</p><p>PBExpo 2027 has a hiring floor — the Career Runway — where aviation professionals across technical, operations, supply chain and corporate roles are in one room for two days. March 10–11, Miami Beach.</p><p>One trip covers a market <span class="tk">{{Company}}</span> is currently recruiting into remotely.</p><p>Worth fifteen minutes?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 5</span>
 <span class="pill email">email</span><span class="pill">reply in thread</span></div>
-<div class="subj">Re: You&#x27;re hiring in Florida</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>Two things that make this work for a multi-site employer:</p><p>The floor isn&#x27;t only Florida candidates. Aviation professionals travel to PBExpo from across the country, so a stand recruits for more than one location at once.</p><p>And everyone on it already works in the industry. You&#x27;re not explaining what your company does before you can talk about the role.</p><p><span class="tk open">{{PROOF_POINT}}</span></p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step call">
-<div class="stephead"><span class="dot">☏</span>
-<span class="daylbl">Day 11</span>
-<span class="pill call">call</span></div>
-<div class="subj">Call task — qualify the Florida footprint</div><div class="ebody"><p>Confirm they&#x27;re actually hiring into Florida and find out how many sites they staff. A multi-site answer moves this to the Tier 1 motion; a single-role answer means let the sequence finish on its own.</p></div></div><div class="step email">
+<div class="subj">(thread reply — HubSpot adds the Re:)</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>Two things that matter if you staff more than one site.</p><p>The floor isn&#x27;t only Florida candidates — aviation professionals travel to PBExpo from across the country, so a stand recruits for more than one location at once.</p><p>And everyone on it already works in the industry, so you&#x27;re not explaining what <span class="tk">{{Company}}</span> does before you can talk about the role.</p><p>Want me to send the details?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
-<span class="daylbl">Day 14</span>
+<span class="daylbl">Day 12</span>
 <span class="pill email">email</span></div>
-<div class="subj">March 10–11, and what it takes to be ready</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>If the Career Runway is on your 2027 list, the useful thing to know now is what a good stand needs: the hiring manager on-site, specific roles posted with pay bands, and interview slots booked in the PBExpo app before doors open.</p><p>That&#x27;s a decision to make in the autumn, not in February. Space is held until <span class="tk open">{{DEADLINE}}</span>.</p><p>Worth a short call?</p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="subj">working the floor</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>If the Career Runway makes your 2027 list, the useful thing to know now is what a good stand needs: the hiring manager on site, specific roles posted with pay bands, and interview slots booked in the app before doors open.</p><p>That&#x27;s an autumn decision, not a February one — the teams who plan it early are the ones who leave with a named pipeline.</p><p>Is Florida hiring still on the plan for <span class="tk">{{Company}}</span>?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 21</span>
 <span class="pill email">email</span></div>
-<div class="subj">Last note on March</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>I&#x27;ll stop here. If Florida hiring picks up for <span class="tk">{{Company}}</span> before <span class="tk open">{{DEADLINE}}</span>, the Career Runway floor is the fastest way to cover it.</p><p>Reply any time and I&#x27;ll pick it back up.</p><p><span class="tk open">{{SENDER}}</span></p></div></div></div>
+<div class="subj">closing this out</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>I&#x27;ve not heard back, so I&#x27;ll stop here rather than keep landing in your inbox.</p><p>If the timing&#x27;s just wrong and hiring picks up before March, reply to this and I&#x27;ll pick it straight back up.</p><p><span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div></div>
 </section><section class="seq" id="t4">
 <div class="seqhead">
   <div>
     <div class="seqname"><span class="tier">4</span>Long Tail</div>
-    <p class="who">Weak, unverified, or off-ICP hiring signal. Includes generalist staffing firms, public sector, and non-aviation employers. Score below threshold.</p>
+    <p class="who">Weak, unverified or off-ICP hiring signal. Includes generalist staffing, public sector and non-aviation employers.</p>
   </div>
   <div class="nums">
     <div><b>94</b><span>companies</span></div>
@@ -263,26 +220,26 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
     <div><b>3</b><span>steps</span></div>
   </div>
 </div>
-<div class="motion"><b>Motion.</b> Fully automated, no rep time. Three emails, self-serve CTA, then exit.</div>
-<div class="rationale"><b>Why this copy.</b> Every non-aviation and public-sector employer in the list lands here, so no line assumes the reader works in aviation. The job of this sequence is to find the few real prospects cheaply and let the rest go quiet.</div>
+<div class="motion"><b>Motion.</b> Email only, three steps over 24 days from enrolment day. Rolling enrolment. Unenrols on reply. Fully automated, no rep time.</div>
+<div class="rationale"><b>Why this copy.</b> Every non-aviation and public-sector employer in the list lands here, so no line assumes the reader works in aviation. The job of this sequence is to surface the few real prospects cheaply and let the rest go quiet, which is why it is three emails rather than five.</div>
 
 <div class="steps"><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 1</span>
 <span class="pill email">email</span></div>
-<div class="subj">Hiring in Florida in 2027?</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>PBExpo 2027 runs March 10–11 at the Miami Beach Convention Center, and the Career Runway inside it is a dedicated hiring floor.</p><p>Employers take a stand, post their open roles, and meet candidates face to face over two days. Attendance skews heavily toward aviation and aerospace professionals, but the roles being filled on the floor run from technical to corporate.</p><p>If <span class="tk">{{Company}}</span> is hiring in Florida next year, it may be worth a look.</p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="subj">march 10-11</div><div class="subjb">A/B variant · hiring in florida</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>PBExpo 2027 runs March 10–11 at the Miami Beach Convention Center, and there&#x27;s a dedicated hiring floor inside it called the Career Runway.</p><p>Employers take a stand, post their open roles, and meet candidates face to face over two days. Attendance skews heavily aviation and aerospace, though the roles being filled run from technical through to corporate.</p><p>If <span class="tk">{{Company}}</span> is hiring in Florida next year, worth a look?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 10</span>
 <span class="pill email">email</span></div>
-<div class="subj">Career Runway, in one paragraph</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>Short version: a hiring floor inside an aviation trade show, March 10–11 in Miami Beach. <span class="tk open">{{PRICE}}</span>. You get a stand, your roles posted, and two days of face-to-face candidate conversations.</p><p>It works best for employers who need people who already know the industry.</p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
+<div class="subj">career runway</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>Short version, in case the first note was badly timed: a hiring floor inside an aviation trade show, March 10–11 in Miami Beach. You get a stand, your roles posted, and two days of face-to-face candidate conversations.</p><p>It works best for employers who need people who already know the industry.</p><p>Want me to send the details?</p><p><span class="tk open">{{SENDER}}</span></p></div></div><div class="step email">
 <div class="stephead"><span class="dot">✉</span>
 <span class="daylbl">Day 24</span>
 <span class="pill email">email</span></div>
-<div class="subj">Closing this out</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>I&#x27;ll assume this isn&#x27;t a fit and stop emailing.</p><p>If that changes before <span class="tk open">{{DEADLINE}}</span>, the page below has everything.</p><p class="cta-line">→ <span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div></div>
+<div class="subj">closing this out</div><div class="ebody"><p>Hi <span class="tk">{{First}}</span>,</p><p>I&#x27;ve not heard back, so I&#x27;ll stop here rather than keep landing in your inbox.</p><p>If the timing&#x27;s just wrong and hiring picks up before March, reply to this and I&#x27;ll pick it straight back up.</p><p><span class="tk open">{{BOOTH_URL}}</span></p><p><span class="tk open">{{SENDER}}</span></p></div></div></div>
 </section>
 
 <h2>Enrolment</h2>
-<p class="lead">Volume ramps rather than starting at full list. PartsBase sender reputation is still being rebuilt after the Mailchimp remediation, and a 590-contact first send would undo that. Order is by company score, so the best prospects go first and the ramp doubles as a quality test — if week 1 gets no replies, the copy is wrong and only 50 contacts were spent finding out.</p>
+<p class="lead">Each bucket enrols into its own sequence, continuously. The weekly caps below are a shared sending budget across all four, not a schedule any one sequence has to follow — PartsBase sender reputation is still being rebuilt after the Mailchimp remediation, and a 590-contact first week would undo that. Order is by company score, so the ramp doubles as a quality test: if week 1 draws no replies, the copy is wrong and only 50 of the best contacts were spent finding out. After week 5 the caps stop mattering and you simply add people as they are enriched.</p>
 <div class="tw"><table><thead><tr><th>Week</th><th>Contacts</th><th>Bucket mix</th><th>Score range</th></tr></thead>
 <tbody><tr><td><b>1</b></td><td>50</td><td>Florida Anchor 31, National Hirer 19</td><td>82–100</td></tr><tr><td><b>2</b></td><td>100</td><td>Florida Anchor 52, National Hirer 48</td><td>75–82</td></tr><tr><td><b>3</b></td><td>150</td><td>National Hirer 105, Florida Anchor 35, Florida Core 10</td><td>69–75</td></tr><tr><td><b>4</b></td><td>150</td><td>National Hirer 67, Florida Core 43, Long Tail 40</td><td>56–69</td></tr><tr><td><b>5</b></td><td>140</td><td>Long Tail 133, Florida Core 7</td><td>26–56</td></tr></tbody></table></div>
 <div class="note" style="border-left-color:var(--blue);margin-top:18px"><b>Before the first send</b>
