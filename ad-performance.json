@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-20T12:23:06+00:00",
+  "generated_at": "2026-08-21T12:22:21+00:00",
   "window": {
-    "start": "2026-08-17",
-    "end": "2026-08-20",
+    "start": "2026-08-18",
+    "end": "2026-08-21",
     "days": 3
   },
   "cpl_target": 152.0,
@@ -12,7 +12,7 @@
     "cpl": null,
     "cpl_vs_target": null,
     "active_campaigns": 0,
-    "total_campaigns": 18
+    "total_campaigns": 19
   },
   "alerts": [],
   "campaigns": [],
