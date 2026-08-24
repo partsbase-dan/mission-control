@@ -1,21 +1,34 @@
 {
-  "generated_at": "2026-08-24T12:23:14+00:00",
+  "generated_at": "2026-08-24T16:44:10+00:00",
   "window": {
-    "start": "2026-08-21",
+    "start": "2026-08-24",
     "end": "2026-08-24",
-    "days": 3
+    "days": 0
   },
   "cpl_target": 152.0,
   "totals": {
-    "spend": 0.0,
+    "spend": 9.93,
+    "registrations": 0,
+    "cost_per_registration": null,
     "leads": 0,
     "cpl": null,
     "cpl_vs_target": null,
-    "active_campaigns": 0,
+    "active_campaigns": 1,
     "total_campaigns": 19
   },
   "alerts": [],
-  "campaigns": [],
+  "campaigns": [
+    {
+      "name": "PBExpo 2027 Registration Open - Attendees",
+      "status": "ACTIVE",
+      "spend": 9.93,
+      "registrations": 0,
+      "cost_per_registration": null,
+      "leads": 0,
+      "cpl": null,
+      "over_target": false
+    }
+  ],
   "proposals": [],
   "applied": []
 }
