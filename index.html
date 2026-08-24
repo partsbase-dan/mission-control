@@ -1738,6 +1738,8 @@ async function loadState() {
 // the JSON contract — never re-derive CPL here, or the two can disagree.
 const money = v => (v === null || v === undefined) ? '—'
   : '$' + Number(v).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+const num = v => (v === null || v === undefined) ? '—' : Number(v).toLocaleString('en-US');
+const pct = v => (v === null || v === undefined) ? '—' : Number(v).toFixed(2) + '%';
 
 function renderAdPerformance(d) {
   const el = document.getElementById('adperf-live');   // NOT the whole tab — the baseline below is static
@@ -1752,6 +1754,15 @@ function renderAdPerformance(d) {
   const cplColour = t.cpl === null || t.cpl === undefined ? 'var(--muted)'
     : (over ? 'var(--red)' : 'var(--green)');
 
+  // Below ~1,000 impressions CTR is noise, so it is reported without a verdict.
+  const impr = t.impressions ?? 0;
+  const ctrJudgeable = impr >= 1000 && t.ctr_pct !== null && t.ctr_pct !== undefined;
+  const ctrColour = !ctrJudgeable ? 'var(--text)'
+    : (t.ctr_pct < 0.30 ? 'var(--red)' : (t.ctr_pct > 0.55 ? 'var(--green)' : 'var(--text)'));
+  const ctrNote = !ctrJudgeable ? `too few impressions to judge`
+    : (t.ctr_pct < 0.30 ? 'below the 0.30% cold-traffic floor'
+       : (t.ctr_pct > 0.55 ? 'above the 0.55% cold-traffic band' : 'within the 0.30–0.55% band'));
+
   const alerts = (d.alerts || []).map(a =>
     `<div class="rag-amber" style="margin-bottom:8px">⚠️ ${a}</div>`).join('');
 
@@ -1759,6 +1770,8 @@ function renderAdPerformance(d) {
       <td style="padding:10px 14px;font-weight:500;border-bottom:1px solid var(--border)">${c.name || '—'}</td>
       <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${c.status || '—'}</td>
       <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${money(c.spend)}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${num(c.impressions)}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${pct(c.ctr_pct)}</td>
       <td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border)">${c.registrations ?? 0}</td>
       <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${money(c.cost_per_registration)}</td>
       <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${c.leads ?? 0}</td>
@@ -1781,20 +1794,21 @@ function renderAdPerformance(d) {
     </div>
     <div class="grid-4">
       <div class="card"><div class="card-title">Spend</div><div class="kpi-value">${money(t.spend)}</div><div class="kpi-sub">${span}</div></div>
+      <div class="card"><div class="card-title">Impressions</div><div class="kpi-value">${num(t.impressions)}</div><div class="kpi-sub">${num(t.clicks)} click${(t.clicks ?? 0) === 1 ? '' : 's'}</div></div>
       <div class="card"><div class="card-title">Registrations</div><div class="kpi-value" style="color:var(--accent)">${t.registrations ?? 0}</div><div class="kpi-sub">what the attendee campaigns optimise to</div></div>
       <div class="card"><div class="card-title">Cost per registration</div><div class="kpi-value">${money(t.cost_per_registration)}</div><div class="kpi-sub">${(t.registrations ?? 0) === 0 ? 'none yet' : 'vs $2.13 in 2025'}</div></div>
-      <div class="card"><div class="card-title">Active campaigns</div><div class="kpi-value">${t.active_campaigns ?? 0}</div><div class="kpi-sub">of ${t.total_campaigns ?? 0} in the account</div></div>
     </div>
-    <div class="grid-3" style="margin-top:14px">
+    <div class="grid-4" style="margin-top:14px">
+      <div class="card"><div class="card-title">CTR</div><div class="kpi-value" style="color:${ctrColour}">${pct(t.ctr_pct)}</div><div class="kpi-sub">${ctrNote}</div></div>
+      <div class="card"><div class="card-title">CPM</div><div class="kpi-value">${money(t.cpm)}</div><div class="kpi-sub">$33–65 typical for B2B</div></div>
       <div class="card"><div class="card-title">Leads (lead forms)</div><div class="kpi-value">${t.leads ?? 0}</div><div class="kpi-sub">counted separately from registrations</div></div>
-      <div class="card"><div class="card-title">Cost per lead</div><div class="kpi-value" style="color:${cplColour}">${money(t.cpl)}</div><div class="kpi-sub">${t.cpl === null || t.cpl === undefined ? 'no leads yet' : (over ? 'above the ' + money(d.cpl_target) + ' benchmark' : 'at or under benchmark')}</div></div>
-      <div class="card"><div class="card-title">Window</div><div class="kpi-value" style="font-size:19px">${w.start ?? '—'}</div><div class="kpi-sub">to ${w.end ?? '—'}</div></div>
+      <div class="card"><div class="card-title">Active campaigns</div><div class="kpi-value">${t.active_campaigns ?? 0}</div><div class="kpi-sub">of ${t.total_campaigns ?? 0} in the account</div></div>
     </div>
     ${alerts}
     <div class="section-label">Per campaign</div>
     <div class="card" style="margin-bottom:18px;padding:0;overflow-x:auto">
       ${rows ? `<table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px"><thead><tr style="background:var(--surface2)">
-        ${['Campaign','Status','Spend','Regs','Cost/reg','Leads','CPL'].map(h=>`<th style="text-align:left;padding:10px 14px;font-weight:700;color:var(--label);border-bottom:1px solid var(--border)">${h}</th>`).join('')}
+        ${['Campaign','Status','Spend','Impr','CTR','Regs','Cost/reg','Leads','CPL'].map(h=>`<th style="text-align:left;padding:10px 14px;font-weight:700;color:var(--label);border-bottom:1px solid var(--border)">${h}</th>`).join('')}
       </tr></thead><tbody>${rows}</tbody></table>`
       : `<div style="padding:14px;font-size:12px;color:var(--label)">No campaign is active and none spent in this window.</div>`}
     </div>
