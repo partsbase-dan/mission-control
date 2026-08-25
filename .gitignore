@@ -29,6 +29,10 @@
 # no contact rows. Regenerate with scripts/build_career_runway_page.py.
 !career-runway-sequences.html
 
+# PBExpo 2027 registration campaign brief. Ported from the Claude artifact so it is
+# viewable without a Claude login. Self-contained — fonts inlined, no scripts.
+!filling-the-floor.html
+
 # Dashboard data. dashboard-state.json is fetched as a root sibling by both
 # viewers; ad-performance.json is written here by the partsbase-linkedin-ads
 # weekday ad-account check.
