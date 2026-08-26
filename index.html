@@ -311,10 +311,9 @@
       <button onclick="showTab('resources')" id="outertab-resources" class="outer-tab"><span class="nav-icon">📚</span><span>Resources</span></button>
       <button onclick="showTab('email')" id="outertab-email" class="outer-tab"><span class="nav-icon">✉</span><span>Email Health</span></button>
       <button onclick="showTab('icp')" id="outertab-icp" class="outer-tab"><span class="nav-icon">⌖</span><span>ICP &amp; Targeting</span></button>
-      <button onclick="showTab('pbexpo')" id="outertab-pbexpo" class="outer-tab"><span class="nav-icon">🎫</span><span>PBExpo Campaign</span></button>
       <button onclick="showTab('adperf')" id="outertab-adperf" class="outer-tab"><span class="nav-icon">◉</span><span>Ad Performance</span></button>
       <button onclick="showTab('adbuild')" id="outertab-adbuild" class="outer-tab"><span class="nav-icon">⚙</span><span>How Ads Are Built</span></button>
-      <button onclick="showTab('fillfloor')" id="outertab-fillfloor" class="outer-tab"><span class="nav-icon">▦</span><span>Filling the Floor</span></button>
+      <button onclick="showTab('fillfloor')" id="outertab-fillfloor" class="outer-tab"><span class="nav-icon">▦</span><span>PBExpo '27 Campaigns</span></button>
       <a href="creative-gallery.html" target="_blank" rel="noopener" id="outertab-creative" class="outer-tab" style="text-decoration:none"><span class="nav-icon">▣</span><span>Creative Gallery</span><span class="chevron">↗</span></a>
       <a href="career-runway-sequences.html" target="_blank" rel="noopener" id="outertab-crseq" class="outer-tab" style="text-decoration:none"><span class="nav-icon">✈</span><span>Career Runway Sequences</span><span class="chevron">↗</span></a>
       <div class="sidebar-footer">
@@ -584,7 +583,10 @@
         </div>
       </div>
 
-      <!-- ═══ PBEXPO 2027 CAMPAIGN ═══ -->
+      <!-- ═══ PBEXPO 2027 CAMPAIGN — ARCHIVED 2026-08-26 ═══
+           Superseded by PBExpo '27 Campaigns (#tab-fillfloor-content). Hidden from the
+           sidebar and the command palette, markup kept so it can be restored. Holds the
+           only copy of the Flow A–D email sequence viewer, including Flow C A/B. -->
       <div id="tab-pbexpo-content" class="hidden" style="padding:24px">
         <div style="display:flex;gap:22px;margin-bottom:20px;border-bottom:1px solid var(--border)">
           <button id="pbxsub-plan-btn" onclick="showPbxSub('plan')" style="background:none;border:none;border-bottom:2px solid var(--accent);color:var(--accent);font-weight:700;font-size:13px;padding:4px 2px 10px;cursor:pointer">Campaign Plan</button>
@@ -1245,10 +1247,13 @@ const TAB_CONFIG = {
   resources: { panel: 'plan',     inner: 'resources', title: ['Resources Library', 'Playbooks, strategies, and reference docs built for PartsBase'] },
   email:     { panel: 'plan',     inner: 'email',     title: ['Email Health',      'Mailchimp remediation, sender reputation, and list hygiene'] },
   icp:       { panel: 'plan',     inner: 'icp',       title: ['ICP & Targeting',   'Segmentation, ORO matching, and activation pools'] },
-  pbexpo:    { panel: 'plan',     inner: 'pbexpo',    title: ['PBExpo 2027 Campaign', 'Attendee registration campaign plan · reg open → Mar 2027'] },
+  // ARCHIVED 2026-08-26 — superseded by PBExpo '27 Campaigns. The panel markup is
+  // still in the page; restore by re-adding this entry, the sidebar button, and
+  // 'pbexpo' to the command-palette list below.
+  // pbexpo:    { panel: 'plan',     inner: 'pbexpo',    title: ['PBExpo 2027 Campaign', 'Attendee registration campaign plan · reg open → Mar 2027'] },
   adperf:    { panel: 'plan',     inner: 'adperf',    title: ['Ad Performance',    'LinkedIn spend, leads and cost per lead · refreshed by the daily check'] },
   adbuild:   { panel: 'plan',     inner: 'adbuild',   title: ['How Ads Are Built', 'LinkedIn ad pipeline · form to approval, and the systems in between'] },
-  fillfloor: { panel: 'plan',     inner: 'fillfloor', title: ['Filling the Floor', 'PBExpo 2027 registration \u00b7 tracks, plays and flows for the Sep\u2013Dec window'] },
+  fillfloor: { panel: 'plan',     inner: 'fillfloor', title: ["PBExpo '27 Campaigns", 'Registration campaign \u00b7 tracks, plays and flows for the Sep\u2013Dec window'] },
   exec:      { panel: 'plan',     inner: 'exec',      title: ['Exec View',         'Leadership summary and 90-day GTM narrative'] },
 };
 
@@ -2205,7 +2210,7 @@ function cmdkSource() {
    ['milestones','Milestones','Phase targets'],      ['risks','Risk Register','Probability & impact'],
    ['stack','Tech Stack','Tools & rollout'],         ['decisions','Decision Log','What was decided, and why']]
     .forEach(([id, title, sub]) => items.push({ g:'Go to', icon:'◎', title, sub, go: jump(id) }));
-  ['resources','email','icp','pbexpo','adperf','adbuild'].forEach(k =>
+  ['resources','email','icp','fillfloor','adperf','adbuild'].forEach(k =>
     items.push({ g:'Go to', icon:'›', title:TAB_CONFIG[k].title[0], sub:TAB_CONFIG[k].title[1].split('·')[0].trim(), go:() => showTab(k) }));
 
   (PLAN.risks || []).forEach(r => items.push({ g:'Risks', icon:'⚑', title:r.label, sub:`${r.impact} impact`, go:() => { jump('risks')(); dtSearch('risks', r.label); document.getElementById('dt-risks-q').value = r.label; } }));
