@@ -119,18 +119,19 @@ dd{margin:0;font-size:13px;color:var(--muted)}
 .ptable .pchan{font-size:11px;color:var(--muted);white-space:nowrap;width:1%}
 .pempty{padding:16px 12px;font-size:12.5px;color:var(--muted)}
 
-.trow.live .what{color:var(--accent)}
-.trow.off{opacity:.62}
-/* Task Rows — vertical flow steps, replacing the horizontal scroll chains */
-.trows{display:flex;flex-direction:column}
-.trow{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid var(--border)}
-.trow:last-child{border-bottom:none}
-.trow .when{flex:0 0 132px;font-size:10.5px;font-weight:600;text-transform:uppercase;
-  letter-spacing:.6px;color:var(--accent);padding-top:2px}
-.trow .what{font-size:13px;font-weight:600;color:var(--text);line-height:1.35}
-.trow .why{font-size:11.5px;color:var(--muted);line-height:1.4;margin-top:1px}
-@media(max-width:560px){.trow{flex-direction:column;gap:1px}.trow .when{flex:none}}
 
+
+/* Task Rows — vertical flow steps, replacing the horizontal scroll chains */
+
+
+
+
+
+
+@media(max-width:560px){}
+
+tr.live td.k{color:var(--accent)}
+tr.off{opacity:.62}
 /* Records Table extras */
 .rt td.idx{width:30px;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
 .rt tfoot td{border-top:1px solid var(--border);border-bottom:none;padding-top:10px;
@@ -151,10 +152,10 @@ dd{margin:0;font-size:13px;color:var(--muted)}
 
   <div class="grid-4">
     <div class="card"><div class="card-title">Days to event</div>
-      <div class="kpi-value" style="color:var(--accent)">197</div>
-      <div class="kpi-sub">to Mar 10, 2027</div></div>
+      <div class="kpi-value" id="daysToEvent" style="color:var(--accent)">197</div>
+      <div class="kpi-sub" id="daysSub">to Mar 10, 2027</div></div>
     <div class="card"><div class="card-title">Runway in window</div>
-      <div class="kpi-value">17</div><div class="kpi-sub">weeks, Sep 1 &rarr; Dec 31</div></div>
+      <div class="kpi-value" id="runwayWeeks">17</div><div class="kpi-sub" id="runwaySub">weeks, Sep 1 &rarr; Dec 31</div></div>
     <div class="card"><div class="card-title">Registration tracks</div>
       <div class="kpi-value">3</div><div class="kpi-sub">Buyers · Past attendees · Employers</div></div>
     <div class="card"><div class="card-title">Channels</div>
@@ -216,31 +217,31 @@ dd{margin:0;font-size:13px;color:var(--muted)}
     <h2>Track A &middot; new buyer registration drip</h2>
     <p class="card-sub">Eight emails, event-triggered, running from registration open to the show
       &mdash; the spine of cold acquisition</p>
-    <div class="trows"><div class="trow"><div class="when">Trigger</div><div><div class="what">Registration opens</div><div class="why">Announce + early-bird</div></div></div><div class="trow"><div class="when">+3–4 days</div><div><div class="what">Why attend</div><div class="why">Segment-personalised ROI</div></div></div><div class="trow"><div class="when">+1 week</div><div><div class="what">Social proof</div><div class="why">Testimonials, who is exhibiting</div></div></div><div class="trow"><div class="when">+2 weeks</div><div><div class="what">The reveal</div><div class="why">Speakers, agenda, exhibitors</div></div></div><div class="trow"><div class="when">T-7 / T-2 / T-0</div><div><div class="what">Early-bird urgency</div><div class="why">Deadline countdown</div></div></div><div class="trow"><div class="when">After early-bird</div><div><div class="what">Value reinforcement</div><div class="why">Still worth it, new reveals</div></div></div><div class="trow"><div class="when">T-4wk → T-2d</div><div><div class="what">Final push</div><div class="why">Scarcity and logistics</div></div></div><div class="trow"><div class="when">On registration</div><div><div class="what">Confirmation</div><div class="why">Know-before-you-go, cuts no-shows</div></div></div></div>
+    <div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>When</th><th>Email</th><th>Purpose</th></tr></thead><tbody><tr><td class="idx">1</td><td><span class="pill">Trigger</span></td><td class="k">Registration opens</td><td>Announce + early-bird</td></tr><tr><td class="idx">2</td><td><span class="pill">+3–4 days</span></td><td class="k">Why attend</td><td>Segment-personalised ROI</td></tr><tr><td class="idx">3</td><td><span class="pill">+1 week</span></td><td class="k">Social proof</td><td>Testimonials, who is exhibiting</td></tr><tr><td class="idx">4</td><td><span class="pill">+2 weeks</span></td><td class="k">The reveal</td><td>Speakers, agenda, exhibitors</td></tr><tr><td class="idx">5</td><td><span class="pill">T-7 / T-2 / T-0</span></td><td class="k">Early-bird urgency</td><td>Deadline countdown</td></tr><tr><td class="idx">6</td><td><span class="pill">After early-bird</span></td><td class="k">Value reinforcement</td><td>Still worth it, new reveals</td></tr><tr><td class="idx">7</td><td><span class="pill">T-4wk → T-2d</span></td><td class="k">Final push</td><td>Scarcity and logistics</td></tr><tr><td class="idx">8</td><td><span class="pill">On registration</span></td><td class="k">Confirmation</td><td>Know-before-you-go, cuts no-shows</td></tr></tbody><tfoot><tr><td></td><td class="k">8 emails</td><td colspan="2"></td></tr></tfoot></table></div>
   </div>
   <div class="card" style="margin-bottom:16px">
     <h2>Track B &middot; past-attendee re-engagement</h2>
     <p class="card-sub">Four emails, shorter and warmer because they have already been. Written,
       but not yet scheduled &mdash; this is the flow with the least work and the most upside</p>
-    <div class="trows"><div class="trow"><div class="when">Step 1</div><div><div class="what">Welcome back</div><div class="why">2027 registration is open</div></div></div><div class="trow"><div class="when">Step 2</div><div><div class="what">What is new</div><div class="why">Bigger show, what changed</div></div></div><div class="trow"><div class="when">Step 3</div><div><div class="what">Early-bird urgency</div><div class="why">Deadline, prior-attendee framing</div></div></div><div class="trow"><div class="when">Step 4</div><div><div class="what">Last chance</div><div class="why">Final call before the window shuts</div></div></div></div>
+    <div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>When</th><th>Email</th><th>Purpose</th></tr></thead><tbody><tr><td class="idx">1</td><td><span class="pill">Step 1</span></td><td class="k">Welcome back</td><td>2027 registration is open</td></tr><tr><td class="idx">2</td><td><span class="pill">Step 2</span></td><td class="k">What is new</td><td>Bigger show, what changed</td></tr><tr><td class="idx">3</td><td><span class="pill">Step 3</span></td><td class="k">Early-bird urgency</td><td>Deadline, prior-attendee framing</td></tr><tr><td class="idx">4</td><td><span class="pill">Step 4</span></td><td class="k">Last chance</td><td>Final call before the window shuts</td></tr></tbody><tfoot><tr><td></td><td class="k">4 emails</td><td colspan="2"></td></tr></tfoot></table></div>
   </div>
   <div class="card" style="margin-bottom:16px">
     <h2>Track C &middot; Career Runway employer sequences</h2>
     <p class="card-sub">698 contacts across four buckets, 590 enrollable. Rolling enrolment,
       unenrols on reply, weekly caps ramp from 50 so week one doubles as a copy test</p>
-    <div class="flowblock"><div class="flow-name">Florida Anchor</div><div class="flow-meta">T1 · score 70+ · 5 steps over 24 days</div><div class="trows"><div class="trow"><div class="when">Day 1</div><div><div class="what">Your open roles</div><div class="why">Named-role personalisation</div></div></div><div class="trow"><div class="when">Day 4</div><div><div class="what">Thread reply</div><div class="why">Re: on the same thread</div></div></div><div class="trow"><div class="when">Day 9</div><div><div class="what">The Maintenance Games</div><div class="why">Traffic proof</div></div></div><div class="trow"><div class="when">Day 16</div><div><div class="what">Screening time</div><div class="why">Time-cost of hiring</div></div></div><div class="trow"><div class="when">Day 24</div><div><div class="what">Closing this out</div><div class="why">Breakup + booking link</div></div></div></div></div><div class="flowblock"><div class="flow-name">Florida Core</div><div class="flow-meta">T2 · score 52–69 · 4 steps over 20 days</div><div class="trows"><div class="trow"><div class="when">Day 1</div><div><div class="what">Hiring A&Ps in Florida</div><div class="why">Local competition angle</div></div></div><div class="trow"><div class="when">Day 6</div><div><div class="what">Thread reply</div><div class="why">Re: on the same thread</div></div></div><div class="trow"><div class="when">Day 13</div><div><div class="what">Working the floor</div><div class="why">How the booth works</div></div></div><div class="trow"><div class="when">Day 20</div><div><div class="what">Closing this out</div><div class="why">Breakup + booking link</div></div></div></div></div><div class="flowblock"><div class="flow-name">National Hirer</div><div class="flow-meta">T3 · score 58+ · 4 steps over 21 days · largest bucket</div><div class="trows"><div class="trow"><div class="when">Day 1</div><div><div class="what">Recruiting into Florida</div><div class="why">Consolidation pitch</div></div></div><div class="trow"><div class="when">Day 5</div><div><div class="what">Thread reply</div><div class="why">Re: on the same thread</div></div></div><div class="trow"><div class="when">Day 12</div><div><div class="what">Working the floor</div><div class="why">How the booth works</div></div></div><div class="trow"><div class="when">Day 21</div><div><div class="what">Closing this out</div><div class="why">Breakup + booking link</div></div></div></div></div><div class="flowblock"><div class="flow-name">Long Tail</div><div class="flow-meta">T4 · weak or off-ICP signal · 3 steps over 24 days · fully automated</div><div class="trows"><div class="trow"><div class="when">Day 1</div><div><div class="what">March 10–11, Miami Beach</div><div class="why">No aviation assumption</div></div></div><div class="trow"><div class="when">Day 10</div><div><div class="what">The Career Runway</div><div class="why">What it is</div></div></div><div class="trow"><div class="when">Day 24</div><div><div class="what">Closing this out</div><div class="why">Breakup + booking link</div></div></div></div></div>
+    <div class="flowblock"><div class="flow-name">Florida Anchor</div><div class="flow-meta">T1 · score 70+ · 5 steps over 24 days</div><div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>Day</th><th>Subject</th><th>Angle</th></tr></thead><tbody><tr><td class="idx">1</td><td><span class="pill">Day 1</span></td><td class="k">Your open roles</td><td>Named-role personalisation</td></tr><tr><td class="idx">2</td><td><span class="pill">Day 4</span></td><td class="k">Thread reply</td><td>Re: on the same thread</td></tr><tr><td class="idx">3</td><td><span class="pill">Day 9</span></td><td class="k">The Maintenance Games</td><td>Traffic proof</td></tr><tr><td class="idx">4</td><td><span class="pill">Day 16</span></td><td class="k">Screening time</td><td>Time-cost of hiring</td></tr><tr><td class="idx">5</td><td><span class="pill">Day 24</span></td><td class="k">Closing this out</td><td>Breakup + booking link</td></tr></tbody><tfoot><tr><td></td><td class="k">5 emails</td><td colspan="2"></td></tr></tfoot></table></div></div><div class="flowblock"><div class="flow-name">Florida Core</div><div class="flow-meta">T2 · score 52–69 · 4 steps over 20 days</div><div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>Day</th><th>Subject</th><th>Angle</th></tr></thead><tbody><tr><td class="idx">1</td><td><span class="pill">Day 1</span></td><td class="k">Hiring A&Ps in Florida</td><td>Local competition angle</td></tr><tr><td class="idx">2</td><td><span class="pill">Day 6</span></td><td class="k">Thread reply</td><td>Re: on the same thread</td></tr><tr><td class="idx">3</td><td><span class="pill">Day 13</span></td><td class="k">Working the floor</td><td>How the booth works</td></tr><tr><td class="idx">4</td><td><span class="pill">Day 20</span></td><td class="k">Closing this out</td><td>Breakup + booking link</td></tr></tbody><tfoot><tr><td></td><td class="k">4 emails</td><td colspan="2"></td></tr></tfoot></table></div></div><div class="flowblock"><div class="flow-name">National Hirer</div><div class="flow-meta">T3 · score 58+ · 4 steps over 21 days · largest bucket</div><div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>Day</th><th>Subject</th><th>Angle</th></tr></thead><tbody><tr><td class="idx">1</td><td><span class="pill">Day 1</span></td><td class="k">Recruiting into Florida</td><td>Consolidation pitch</td></tr><tr><td class="idx">2</td><td><span class="pill">Day 5</span></td><td class="k">Thread reply</td><td>Re: on the same thread</td></tr><tr><td class="idx">3</td><td><span class="pill">Day 12</span></td><td class="k">Working the floor</td><td>How the booth works</td></tr><tr><td class="idx">4</td><td><span class="pill">Day 21</span></td><td class="k">Closing this out</td><td>Breakup + booking link</td></tr></tbody><tfoot><tr><td></td><td class="k">4 emails</td><td colspan="2"></td></tr></tfoot></table></div></div><div class="flowblock"><div class="flow-name">Long Tail</div><div class="flow-meta">T4 · weak or off-ICP signal · 3 steps over 24 days · fully automated</div><div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>Day</th><th>Subject</th><th>Angle</th></tr></thead><tbody><tr><td class="idx">1</td><td><span class="pill">Day 1</span></td><td class="k">March 10–11, Miami Beach</td><td>No aviation assumption</td></tr><tr><td class="idx">2</td><td><span class="pill">Day 10</span></td><td class="k">The Career Runway</td><td>What it is</td></tr><tr><td class="idx">3</td><td><span class="pill">Day 24</span></td><td class="k">Closing this out</td><td>Breakup + booking link</td></tr></tbody><tfoot><tr><td></td><td class="k">3 emails</td><td colspan="2"></td></tr></tfoot></table></div></div>
   </div>
   <div class="card" style="margin-bottom:16px">
     <h2>Paid &middot; the ad ladder</h2>
     <p class="card-sub">Cold reach is live. The two steps that make it efficient are not</p>
-    <div class="trows"><div class="trow live"><div class="when">Live now</div><div><div class="what">Cold video — C &amp; H</div><div class="why">Free-registration message on LinkedIn</div></div></div><div class="trow"><div class="when">Next</div><div><div class="what">Engaged retargeting</div><div class="why">Video viewers 50%+ and page visitors get the drink-ticket offer</div></div></div><div class="trow off"><div class="when">Blocked</div><div><div class="what">Suppress registrants</div><div class="why">Stop paying to reach people who already signed up</div></div></div><div class="trow off"><div class="when">Not yet</div><div><div class="what">Site-visitor retargeting</div><div class="why">Vector de-anonymisation is confirmed but not live</div></div></div></div>
+    <div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>Stage</th><th>Step</th><th>Detail</th></tr></thead><tbody><tr class="live"><td class="idx">1</td><td><span class="pill">Live now</span></td><td class="k">Cold video — C &amp; H</td><td>Free-registration message on LinkedIn</td></tr><tr><td class="idx">2</td><td><span class="pill">Next</span></td><td class="k">Engaged retargeting</td><td>Video viewers 50%+ and page visitors get the drink-ticket offer</td></tr><tr class="off"><td class="idx">3</td><td><span class="pill">Blocked</span></td><td class="k">Suppress registrants</td><td>Stop paying to reach people who already signed up</td></tr><tr class="off"><td class="idx">4</td><td><span class="pill">Not yet</span></td><td class="k">Site-visitor retargeting</td><td>Vector de-anonymisation is confirmed but not live</td></tr></tbody><tfoot><tr><td></td><td class="k">4 rungs</td><td colspan="2"></td></tr></tfoot></table></div>
   </div>
   <div class="card">
     <h2>SMS &middot; registered contacts only</h2>
     <p class="card-sub">Mailchimp SMS is available to us. It cannot acquire registrants &mdash;
       only people who have registered and consented can be texted &mdash; so its job is showing
       up, not signing up</p>
-    <div class="trows"><div class="trow off"><div class="when">On registration</div><div><div class="what">Confirmation text</div><div class="why">Saves the date, sets expectations</div></div></div><div class="trow off"><div class="when">T-2 weeks</div><div><div class="what">Know before you go</div><div class="why">Book meetings in the PBExpo app</div></div></div><div class="trow off"><div class="when">T-1 day</div><div><div class="what">Doors open</div><div class="why">Badge QR and floor logistics</div></div></div></div>
+    <div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>When</th><th>Message</th><th>Purpose</th></tr></thead><tbody><tr class="off"><td class="idx">1</td><td><span class="pill">On registration</span></td><td class="k">Confirmation text</td><td>Saves the date, sets expectations</td></tr><tr class="off"><td class="idx">2</td><td><span class="pill">T-2 weeks</span></td><td class="k">Know before you go</td><td>Book meetings in the PBExpo app</td></tr><tr class="off"><td class="idx">3</td><td><span class="pill">T-1 day</span></td><td class="k">Doors open</td><td>Badge QR and floor logistics</td></tr></tbody><tfoot><tr><td></td><td class="k">3 sends</td><td colspan="2"></td></tr></tfoot></table></div>
     <div class="rag-amber" style="margin-top:14px">
       <p><b>The September action is consent, not sending.</b> We already collect a mobile number
         at registration &mdash; 34 of the 38 rows in the August export have one &mdash; but there
@@ -366,6 +367,35 @@ dd{margin:0;font-size:13px;color:var(--muted)}
       tr.hidden = !on; if(on) shown++; });
     empty.hidden = shown>0;
   });
+})();
+</script>
+<script>
+(function(){
+  var DAY=864e5,
+      EVENT=new Date(2027,2,10),          // Mar 10 2027
+      WSTART=new Date(2026,8,1),          // Sep 1 2026
+      WEND=new Date(2026,11,31);          // Dec 31 2026
+  var now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  var d=document.getElementById('daysToEvent'), ds=document.getElementById('daysSub');
+  if(d){
+    var days=Math.round((EVENT-today)/DAY);
+    if(days>0){ d.textContent=days; }
+    else if(days===0){ d.textContent='Today'; d.style.fontSize='22px'; if(ds) ds.textContent='Mar 10, 2027'; }
+    else { d.textContent=Math.abs(days); if(ds) ds.textContent='days since Mar 10, 2027'; }
+  }
+  var w=document.getElementById('runwayWeeks'), ws=document.getElementById('runwaySub');
+  if(w){
+    if(today>WEND){                       // window has closed
+      w.textContent='0';
+      if(ws) ws.textContent='window closed Dec 31';
+    } else if(today>WSTART){              // inside it — never round a remaining day down to zero
+      w.textContent=Math.max(1, Math.round(((WEND-today)/DAY+1)/7));
+      if(ws) ws.textContent='weeks left, to Dec 31';
+    } else {                              // not open yet — show its full length
+      w.textContent=Math.round(((WEND-WSTART)/DAY+1)/7);
+      if(ws) ws.textContent='weeks, Sep 1 \u2192 Dec 31';
+    }
+  }
 })();
 </script>
 </body></html>
