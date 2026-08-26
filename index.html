@@ -144,6 +144,9 @@
   .outer-tab .chevron { margin-left: auto; color: var(--muted); transition: transform 0.15s; }
   .outer-tab.expanded .chevron { transform: rotate(90deg); }
   .nav-icon { width: 18px; color: currentColor; text-align: center; font-size: 13px; }
+  .nav-group { font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .9px; color: var(--muted); padding: 0 11px; margin: 16px 0 5px; }
+  .nav-group:first-of-type { margin-top: 12px; }
   .plan-nav { margin-left: 30px; margin-top: 6px; display: grid; gap: 2px; }
   .plan-nav.collapsed { display: none; }
   .plan-nav button { border: 0; background: transparent; color: var(--muted); cursor: pointer; text-align: left; border-radius: 6px; padding: 7px 9px; font-size: 12px; line-height: 1.2; font-family: inherit; }
@@ -263,7 +266,7 @@
 /* Filling the Floor (inline tab) — scoped to #tab-fillfloor-content so its
    .card/.tag/table rules cannot reach the rest of the dashboard. */
 #tab-fillfloor-content{--shadow:0px 2px 6px 0px #1079f824}
-#tab-fillfloor-content .wrap{max-width:1020px;margin:0 auto;padding:28px 24px 72px}#tab-fillfloor-content .page-head{margin-bottom:22px}#tab-fillfloor-content h1{font-size:20px;font-weight:600;letter-spacing:-.3px;margin:0;color:var(--text)}#tab-fillfloor-content .page-sub{font-size:13px;color:var(--muted);margin:6px 0 0;max-width:74ch}#tab-fillfloor-content .section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.9px;
+#tab-fillfloor-content .page-head{margin-bottom:22px}#tab-fillfloor-content h1{font-size:20px;font-weight:600;letter-spacing:-.3px;margin:0;color:var(--text)}#tab-fillfloor-content .page-sub{font-size:13px;color:var(--muted);margin:6px 0 0;max-width:74ch}#tab-fillfloor-content .section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.9px;
   color:var(--muted);margin:26px 0 10px}#tab-fillfloor-content .card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:20px;
   box-shadow:var(--shadow)}#tab-fillfloor-content h2{font-size:15px;font-weight:700;color:var(--text);margin:0 0 4px}#tab-fillfloor-content .card-sub{font-size:12.5px;color:var(--muted);margin:0 0 14px}#tab-fillfloor-content p{margin:0 0 10px;color:var(--label)}#tab-fillfloor-content p:last-child{margin-bottom:0}#tab-fillfloor-content b,#tab-fillfloor-content strong{color:var(--text);font-weight:600}#tab-fillfloor-content .grid{display:grid;gap:12px}#tab-fillfloor-content .kpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}#tab-fillfloor-content .cols3{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}#tab-fillfloor-content .kpi-value{font-size:28px;font-weight:700;letter-spacing:-.8px;color:var(--text);
   font-variant-numeric:tabular-nums;line-height:1}#tab-fillfloor-content .kpi-value.warn{color:var(--yellow)}#tab-fillfloor-content .kpi-label{font-size:12px;font-weight:600;color:var(--text);margin-top:8px}#tab-fillfloor-content .kpi-sub{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.45}#tab-fillfloor-content .rag-blue{background:#f0f7ff;border-left:4px solid var(--accent);border-radius:6px;
@@ -300,6 +303,7 @@
         </div>
       </div>
       <button onclick="showTab('exec')" id="outertab-exec" class="outer-tab"><span class="nav-icon">◈</span><span>Exec View</span></button>
+      <div class="nav-group">Plan</div>
       <button onclick="togglePlanGroup()" id="outertab-plan" class="outer-tab"><span class="nav-icon">◎</span><span>180-Day Plan</span><span class="chevron">›</span></button>
       <div class="plan-nav collapsed" id="plan-nav" aria-label="180-Day Plan sections">
         <button onclick="showTab('plan');showInnerTab('overview')" id="tab-overview" class="active">Overview</button>
@@ -311,9 +315,11 @@
       <button onclick="showTab('resources')" id="outertab-resources" class="outer-tab"><span class="nav-icon">📚</span><span>Resources</span></button>
       <button onclick="showTab('email')" id="outertab-email" class="outer-tab"><span class="nav-icon">✉</span><span>Email Health</span></button>
       <button onclick="showTab('icp')" id="outertab-icp" class="outer-tab"><span class="nav-icon">⌖</span><span>ICP &amp; Targeting</span></button>
+      <div class="nav-group">Campaigns</div>
+      <button onclick="showTab('fillfloor')" id="outertab-fillfloor" class="outer-tab"><span class="nav-icon">▦</span><span>PBExpo '27 Campaigns</span></button>
       <button onclick="showTab('adperf')" id="outertab-adperf" class="outer-tab"><span class="nav-icon">◉</span><span>Ad Performance</span></button>
       <button onclick="showTab('adbuild')" id="outertab-adbuild" class="outer-tab"><span class="nav-icon">⚙</span><span>How Ads Are Built</span></button>
-      <button onclick="showTab('fillfloor')" id="outertab-fillfloor" class="outer-tab"><span class="nav-icon">▦</span><span>PBExpo '27 Campaigns</span></button>
+      <div class="nav-group">Reference</div>
       <a href="creative-gallery.html" target="_blank" rel="noopener" id="outertab-creative" class="outer-tab" style="text-decoration:none"><span class="nav-icon">▣</span><span>Creative Gallery</span><span class="chevron">↗</span></a>
       <a href="career-runway-sequences.html" target="_blank" rel="noopener" id="outertab-crseq" class="outer-tab" style="text-decoration:none"><span class="nav-icon">✈</span><span>Career Runway Sequences</span><span class="chevron">↗</span></a>
       <div class="sidebar-footer">
