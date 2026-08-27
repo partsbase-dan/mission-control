@@ -366,7 +366,6 @@
       <div class="plan-nav collapsed" id="campaign-nav" aria-label="PBExpo 2027 Campaign sections">
         <button onclick="showTab('ffover')" id="tab-ffover">Overview</button>
         <button onclick="showTab('ffplays')" id="tab-ffplays">Plays</button>
-        <button onclick="showTab('ffflows')" id="tab-ffflows">Flows</button>
         <button onclick="showTab('ffcopy')" id="tab-ffcopy">Email &amp; SMS</button>
         <button onclick="showTab('ffcal')" id="tab-ffcal">Calendar</button>
         <button onclick="showTab('ffmeas')" id="tab-ffmeas">Measurement</button>
@@ -895,22 +894,18 @@
   </div>
       <div id="tab-ffplays-content" class="ffsec hidden" style="padding:24px"><div class="section-label">The plays &mdash; what marketing can run for registrations</div>
   <div class="card">
-    <div class="chips" id="playchips"><button class="chip" data-f="all" aria-pressed="true">All<span class="n">9</span></button><button class="chip" data-f="live" aria-pressed="false">Live<span class="n">2</span></button><button class="chip" data-f="booked" aria-pressed="false">Booked<span class="n">3</span></button><button class="chip" data-f="needs" aria-pressed="false">Needs work<span class="n">2</span></button><button class="chip" data-f="blocked" aria-pressed="false">Blocked<span class="n">2</span></button></div>
-    <table class="ptable" id="playtable"><tbody><tr data-g="live"><td class="pname"><span class="skill-cmd">paid-linkedin</span></td><td class="pwhat">Two video ads live against free registration</td><td class="pchan">Paid</td><td class="pstatus"><span class="tag tag-green">Live</span></td></tr><tr data-g="needs"><td class="pname"><span class="skill-cmd">attendee-drumbeat</span></td><td class="pwhat">Weekly email + matching social. Booked, but thin through Sep&ndash;Oct</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-yellow">Needs filling</span></td></tr><tr data-g="live"><td class="pname"><span class="skill-cmd">past-attendee-winback</span></td><td class="pwhat">Four emails to prior registrants, copy written, first send 14 Sep</td><td class="pchan">Email flow</td><td class="pstatus"><span class="tag tag-green">Copy ready</span></td></tr><tr data-g="needs"><td class="pname"><span class="skill-cmd">career-runway-sequences</span></td><td class="pwhat">4 sequences &middot; 16 emails &middot; 2 lists, written and waiting on a sender</td><td class="pchan">Email sequence</td><td class="pstatus"><span class="tag tag-yellow">Needs a decision</span></td></tr><tr data-g="booked"><td class="pname"><span class="skill-cmd">social-proof-logos</span></td><td class="pwhat">Confirmed buyers &amp; airlines logo list &mdash; Sep 30, Nov 18, Dec 11</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-blue">Booked</span></td></tr><tr data-g="booked"><td class="pname"><span class="skill-cmd">offer-free-badge</span></td><td class="pwhat">Free badge plus a drink ticket at the Networking Reception &mdash; Oct 21</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-blue">Booked</span></td></tr><tr data-g="booked"><td class="pname"><span class="skill-cmd">incentives</span></td><td class="pwhat">AirPod raffle Nov 7 &middot; VIP wristband Dec 9 &middot; countdown Dec 18</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-blue">Booked</span></td></tr><tr data-g="blocked"><td class="pname"><span class="skill-cmd">sms-showup</span></td><td class="pwhat">Mailchimp SMS to registered contacts. Needs an opt-in field on the form</td><td class="pchan">SMS</td><td class="pstatus"><span class="tag tag-yellow">Consent first</span></td></tr><tr data-g="blocked"><td class="pname"><span class="skill-cmd">visitor-retargeting</span></td><td class="pwhat">Retarget identified site visitors. Vector is confirmed but not yet live</td><td class="pchan">Paid</td><td class="pstatus"><span class="tag tag-gray">Not yet</span></td></tr></tbody></table>
+    <div class="chips" id="playchips"><button class="chip" data-f="all" aria-pressed="true">All<span class="n">9</span></button><button class="chip" data-f="live" aria-pressed="false">Live<span class="n">2</span></button><button class="chip" data-f="booked" aria-pressed="false">Booked<span class="n">3</span></button><button class="chip" data-f="needs" aria-pressed="false">Needs work<span class="n">1</span></button><button class="chip" data-f="blocked" aria-pressed="false">Blocked<span class="n">3</span></button></div>
+    <table class="ptable" id="playtable"><tbody><tr data-g="live"><td class="pname"><span class="skill-cmd">paid-linkedin</span></td><td class="pwhat">Two video ads live against free registration</td><td class="pchan">Paid</td><td class="pstatus"><span class="tag tag-green">Live</span></td></tr><tr data-g="needs"><td class="pname"><span class="skill-cmd">attendee-drumbeat</span></td><td class="pwhat">Weekly email + matching social. Booked, but thin through Sep&ndash;Oct</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-yellow">Needs filling</span></td></tr><tr data-g="live"><td class="pname"><span class="skill-cmd">past-attendee-winback</span></td><td class="pwhat">Four emails to prior registrants, copy written, first send 14 Sep</td><td class="pchan">Email flow</td><td class="pstatus"><span class="tag tag-green">Copy ready</span></td></tr><tr data-g="blocked"><td class="pname"><span class="skill-cmd">career-runway-sequences</span></td><td class="pwhat">4 sequences &middot; 16 emails, written in full. Parked &mdash; off the plan for now</td><td class="pchan">Email sequence</td><td class="pstatus"><span class="tag tag-gray">Parked</span></td></tr><tr data-g="booked"><td class="pname"><span class="skill-cmd">social-proof-logos</span></td><td class="pwhat">Confirmed buyers &amp; airlines logo list &mdash; Sep 30, Nov 18, Dec 11</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-blue">Booked</span></td></tr><tr data-g="booked"><td class="pname"><span class="skill-cmd">offer-free-badge</span></td><td class="pwhat">Free badge plus a drink ticket at the Networking Reception &mdash; Oct 21</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-blue">Booked</span></td></tr><tr data-g="booked"><td class="pname"><span class="skill-cmd">incentives</span></td><td class="pwhat">AirPod raffle Nov 9 &middot; VIP wristband Dec 9 &middot; countdown Dec 18</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-blue">Booked</span></td></tr><tr data-g="blocked"><td class="pname"><span class="skill-cmd">sms-showup</span></td><td class="pwhat">Mailchimp SMS to registered contacts. Needs an opt-in field on the form</td><td class="pchan">SMS</td><td class="pstatus"><span class="tag tag-yellow">Consent first</span></td></tr><tr data-g="blocked"><td class="pname"><span class="skill-cmd">visitor-retargeting</span></td><td class="pwhat">Retarget identified site visitors. Vector is confirmed but not yet live</td><td class="pchan">Paid</td><td class="pstatus"><span class="tag tag-gray">Not yet</span></td></tr></tbody></table>
     <div class="pempty" id="playempty" hidden>No plays in this group.</div>
   </div>
 
-  </div>
-      <div id="tab-ffflows-content" class="ffsec hidden" style="padding:24px"><div class="section-label">The flows behind each track</div>
+  
+  <div class="section-label">The flows behind the plays</div>
   <div class="card" style="margin-bottom:16px">
     <h2>Track A &middot; new buyer registration drip</h2>
     <p class="card-sub">Eight emails, event-triggered, running from registration open to the show
       &mdash; the spine of cold acquisition</p>
     <div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>When</th><th>Email</th><th>Purpose</th></tr></thead><tbody><tr><td class="idx">1</td><td><span class="pill">Trigger</span></td><td class="k">Registration opens</td><td>Announce + early-bird</td></tr><tr><td class="idx">2</td><td><span class="pill">+3–4 days</span></td><td class="k">Why attend</td><td>Segment-personalised ROI</td></tr><tr><td class="idx">3</td><td><span class="pill">+1 week</span></td><td class="k">Social proof</td><td>Testimonials, who is exhibiting</td></tr><tr><td class="idx">4</td><td><span class="pill">+2 weeks</span></td><td class="k">The reveal</td><td>Speakers, agenda, exhibitors</td></tr><tr><td class="idx">5</td><td><span class="pill">T-7 / T-2 / T-0</span></td><td class="k">Early-bird urgency</td><td>Deadline countdown</td></tr><tr><td class="idx">6</td><td><span class="pill">After early-bird</span></td><td class="k">Value reinforcement</td><td>Still worth it, new reveals</td></tr><tr><td class="idx">7</td><td><span class="pill">T-4wk → T-2d</span></td><td class="k">Final push</td><td>Scarcity and logistics</td></tr><tr><td class="idx">8</td><td><span class="pill">On registration</span></td><td class="k">Confirmation</td><td>Know-before-you-go, cuts no-shows</td></tr></tbody><tfoot><tr><td></td><td class="k">8 emails</td><td colspan="2"></td></tr></tfoot></table></div>
-  </div>
-  <div class="card" style="margin-bottom:16px">
-    <h2>Track B &middot; past-attendee re-engagement</h2>
-    <p class="card-sub">Four emails to 2026 attendees who have not registered. Copy, dates and the SMS flows all live under <b>Email &amp; SMS</b> in the sidebar</p>
   </div>
   <div class="card" style="margin-bottom:16px">
     <div class="rag-none" style="margin:0 0 12px"><p><b>Parked.</b> The five enrolment waves are off the plan and the calendar for now. The sequences and their copy stay here so putting them back is a scheduling decision, not a rewrite.</p></div>
@@ -924,7 +919,9 @@
     <p class="card-sub">Cold reach is live. The two steps that make it efficient are not</p>
     <div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>Stage</th><th>Step</th><th>Detail</th></tr></thead><tbody><tr class="live"><td class="idx">1</td><td><span class="pill">Live now</span></td><td class="k">Cold video — C &amp; H</td><td>Free-registration message on LinkedIn</td></tr><tr><td class="idx">2</td><td><span class="pill">Next</span></td><td class="k">Engaged retargeting</td><td>Video viewers 50%+ and page visitors get the drink-ticket offer</td></tr><tr class="off"><td class="idx">3</td><td><span class="pill">Blocked</span></td><td class="k">Suppress registrants</td><td>Stop paying to reach people who already signed up</td></tr><tr class="off"><td class="idx">4</td><td><span class="pill">Not yet</span></td><td class="k">Site-visitor retargeting</td><td>Vector de-anonymisation is confirmed but not live</td></tr></tbody><tfoot><tr><td></td><td class="k">4 rungs</td><td colspan="2"></td></tr></tfoot></table></div>
   </div>
-  </div>
+</div>
+
+      
       
       
             <div id="tab-ffcopy-content" class="ffsec hidden" style="padding:24px">
@@ -1373,8 +1370,7 @@ const TAB_CONFIG = {
   adperf:    { panel: 'plan',     inner: 'adperf',    title: ['Ad Performance',    'LinkedIn spend, leads and cost per lead · refreshed by the daily check'] },
   adbuild:   { panel: 'plan',     inner: 'adbuild',   title: ['How Ads Are Built', 'LinkedIn ad pipeline · form to approval, and the systems in between'] },
   ffover: { panel: 'plan',     inner: 'ffover', title: ["PBExpo '27 Campaigns", 'Tracks, lead hook and the shape of the window'] },
-  ffplays: { panel: 'plan',     inner: 'ffplays', title: ["PBExpo '27 Campaigns", 'What marketing can run for registrations'] },
-  ffflows: { panel: 'plan',     inner: 'ffflows', title: ["PBExpo '27 Campaigns", 'Email drips, Career Runway sequences and the paid ladder'] },
+  ffplays: { panel: 'plan',     inner: 'ffplays', title: ["PBExpo '27 Campaigns", 'What marketing can run for registrations, and the flows behind them'] },
   ffcopy: { panel: 'plan',     inner: 'ffcopy', title: ["PBExpo '27 Campaigns", 'Win-back, SMS, dates and every message in one place'] },
   ffcal: { panel: 'plan',     inner: 'ffcal', title: ["PBExpo '27 Campaigns", 'Where every send lands, Sep–Dec'] },
   ffmeas: { panel: 'plan',     inner: 'ffmeas', title: ["PBExpo '27 Campaigns", 'What we track, and what would unlock more'] },
@@ -1407,7 +1403,7 @@ function setPlanGroupExpanded(expanded) {
 }
 
 let campaignGroupExpanded = false;
-const CAMPAIGN_TABS = ['ffover', 'ffplays', 'ffflows', 'ffcopy', 'ffcal', 'ffmeas'];
+const CAMPAIGN_TABS = ['ffover', 'ffplays', 'ffcopy', 'ffcal', 'ffmeas'];
 
 function setCampaignGroupExpanded(expanded) {
   campaignGroupExpanded = expanded;
@@ -1465,7 +1461,7 @@ function togglePlanGroup() {
 })();
 
 // ── Inner tabs ──
-const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild','adperf','ffover','ffplays','ffflows','ffcopy','ffcal','ffmeas'];
+const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild','adperf','ffover','ffplays','ffcopy','ffcal','ffmeas'];
 function showInnerTab(name) {
   INNER_TABS.forEach(t => {
     document.getElementById('tab-' + t + '-content').classList.toggle('hidden', t !== name);
