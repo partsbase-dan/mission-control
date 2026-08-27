@@ -131,7 +131,7 @@
   /* App shell */
   .app-shell { min-height: 100vh; padding: 24px; background: #e8eaf0; }
   .app-frame { min-height: calc(100vh - 48px); display: grid; grid-template-columns: 282px minmax(0, 1fr); background: var(--surface); border: 1px solid #d0d3db; border-radius: 12px; overflow: hidden; box-shadow: 0px 4px 6px -2px rgba(23,65,151,0.05), 0px 12px 24px -4px rgba(23,65,151,0.10); }
-  .sidebar { background: #F1F9FF; border-right: 1px solid var(--border); padding: 18px 16px; display: flex; flex-direction: column; min-height: calc(100vh - 50px); }
+  .sidebar { background: #F1F9FF; border-right: 1px solid var(--border); padding: 18px 16px; display: flex; flex-direction: column; min-height: calc(100vh - 50px); max-height: calc(100vh - 50px); overflow-y: auto; }
   .brand-row { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 0 10px 18px; border-bottom: 1px solid var(--border); margin-bottom: 18px; }
   .brand-mark { display: block; }
   .brand-name { font-size: 14px; font-weight: 650; color: var(--text); letter-spacing: -0.01em; }
@@ -263,46 +263,46 @@
   .tr-row.is-done .tr-title { color: var(--muted); text-decoration: line-through; }
   .tr-target { font-size: 11px; color: var(--muted); white-space: nowrap; }
 
-/* Filling the Floor (inline tab) — scoped to #tab-fillfloor-content so its
+/* Filling the Floor (inline tab) — scoped to .ffsec so its
    .card/.tag/table rules cannot reach the rest of the dashboard. */
-#tab-fillfloor-content .flowblock .tablewrap{margin:0;padding:0}
-#tab-fillfloor-content .calwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:14px}
-#tab-fillfloor-content .cmonth{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 10px 8px}
-#tab-fillfloor-content .cmh{font-size:11.5px;font-weight:700;color:var(--text);margin-bottom:7px}
-#tab-fillfloor-content .cdow{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:3px}
-#tab-fillfloor-content .cdow span{font-size:9px;font-weight:600;color:var(--muted);text-align:center;letter-spacing:.5px}
-#tab-fillfloor-content .cgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
-#tab-fillfloor-content .cd{min-height:46px;border:1px solid var(--border);background:var(--surface);border-radius:5px;padding:3px 4px;display:flex;flex-direction:column;gap:2px;overflow:hidden}
-#tab-fillfloor-content .cd.out{border:0;background:transparent}
-#tab-fillfloor-content .cd.free{background:#fbfcfd;border-style:dashed}
-#tab-fillfloor-content .cd.has{border-color:var(--accent);background:#f0f7ff;box-shadow:0 0 0 1px var(--accent) inset}
-#tab-fillfloor-content .cd .dn{font-size:9.5px;font-weight:600;color:var(--muted);line-height:1}
-#tab-fillfloor-content .cd.has .dn{color:var(--accent)}
-#tab-fillfloor-content .cd .sms{font-size:9px;font-weight:700;color:#fff;background:var(--accent);border-radius:3px;padding:1px 3px;line-height:1.25}
-#tab-fillfloor-content .cd .named{font-size:8.5px;color:var(--label);line-height:1.2;overflow:hidden}
-#tab-fillfloor-content .cd .dots{font-size:8px;color:#b9c0ca;letter-spacing:1px;line-height:1;margin-top:auto}
-#tab-fillfloor-content .callegend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:12px}
-#tab-fillfloor-content .callegend b{color:var(--text);font-weight:600}
-#tab-fillfloor-content{--shadow:0px 2px 6px 0px #1079f824}
-#tab-fillfloor-content .page-head{margin-bottom:22px}#tab-fillfloor-content h1{font-size:20px;font-weight:600;letter-spacing:-.3px;margin:0;color:var(--text)}#tab-fillfloor-content .page-sub{font-size:13px;color:var(--muted);margin:6px 0 0;max-width:74ch}#tab-fillfloor-content .section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.9px;
-  color:var(--muted);margin:26px 0 10px}#tab-fillfloor-content .card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:20px;
-  box-shadow:var(--shadow)}#tab-fillfloor-content h2{font-size:15px;font-weight:700;color:var(--text);margin:0 0 4px}#tab-fillfloor-content .card-sub{font-size:12.5px;color:var(--muted);margin:0 0 14px}#tab-fillfloor-content p{margin:0 0 10px;color:var(--label)}#tab-fillfloor-content p:last-child{margin-bottom:0}#tab-fillfloor-content b,#tab-fillfloor-content strong{color:var(--text);font-weight:600}#tab-fillfloor-content .grid{display:grid;gap:12px}#tab-fillfloor-content .kpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}#tab-fillfloor-content .cols3{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}#tab-fillfloor-content .kpi-value{font-size:28px;font-weight:700;letter-spacing:-.8px;color:var(--text);
-  font-variant-numeric:tabular-nums;line-height:1}#tab-fillfloor-content .kpi-value.warn{color:var(--yellow)}#tab-fillfloor-content .kpi-label{font-size:12px;font-weight:600;color:var(--text);margin-top:8px}#tab-fillfloor-content .kpi-sub{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.45}#tab-fillfloor-content .rag-blue{background:#f0f7ff;border-left:4px solid var(--accent);border-radius:6px;
-  padding:14px 16px;margin-bottom:12px}#tab-fillfloor-content .rag-amber{background:#fffcf5;border-left:4px solid #fec84b;border-radius:6px;
-  padding:14px 16px;margin-bottom:12px}#tab-fillfloor-content .rag-red{background:#fff5f5;border-left:4px solid #f97066;border-radius:6px;
-  padding:14px 16px;margin-bottom:12px}#tab-fillfloor-content .rag-none{background:var(--surface2);border-left:4px solid var(--border);border-radius:6px;
-  padding:14px 16px;margin-bottom:12px}#tab-fillfloor-content .rag-blue:last-child,#tab-fillfloor-content .rag-amber:last-child,#tab-fillfloor-content .rag-red:last-child,#tab-fillfloor-content .rag-none:last-child{margin-bottom:0}#tab-fillfloor-content .tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 8px;
-  border-radius:4px;white-space:nowrap}#tab-fillfloor-content .badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 8px;
-  border-radius:99px;white-space:nowrap}#tab-fillfloor-content .tag-green,#tab-fillfloor-content .badge-green{background:#d1fadf;color:#027a48}#tab-fillfloor-content .tag-yellow,#tab-fillfloor-content .badge-amber{background:#fef0c7;color:#b54708}#tab-fillfloor-content .tag-blue,#tab-fillfloor-content .badge-blue{background:#dbeafe;color:#1d4ed8}#tab-fillfloor-content .tag-red,#tab-fillfloor-content .badge-red{background:#fee2e2;color:#b91c1c}#tab-fillfloor-content .tag-gray,#tab-fillfloor-content .badge-slate{background:#f3f4f6;color:#4b5563}#tab-fillfloor-content .tablewrap{overflow-x:auto;margin:0 -20px;padding:0 20px}#tab-fillfloor-content table{width:100%;border-collapse:collapse;min-width:560px}#tab-fillfloor-content th{text-align:left;padding:10px 14px;font-size:10px;font-weight:600;text-transform:uppercase;
-  letter-spacing:.7px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}#tab-fillfloor-content td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--label);font-size:13px;
-  vertical-align:top}#tab-fillfloor-content tbody tr:last-child td{border-bottom:none}#tab-fillfloor-content td.num,#tab-fillfloor-content th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}#tab-fillfloor-content td.k{color:var(--text);font-weight:600;white-space:nowrap}#tab-fillfloor-content ul{margin:0;padding-left:17px;color:var(--label)}#tab-fillfloor-content li{margin:6px 0}#tab-fillfloor-content dl{margin:0}#tab-fillfloor-content dt{font-size:14px;font-weight:600;color:var(--text);margin:16px 0 3px}#tab-fillfloor-content dl>dt:first-child{margin-top:0}#tab-fillfloor-content dd{margin:0;font-size:13px;color:var(--muted)}#tab-fillfloor-content .foot{margin-top:26px;font-size:12px;color:var(--muted);max-width:82ch}#tab-fillfloor-content .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}#tab-fillfloor-content .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px}#tab-fillfloor-content .card-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.9px;
-  color:var(--muted);margin-bottom:12px}#tab-fillfloor-content .skill-cmd{font-size:12px;color:var(--accent);font-family:'SF Mono','Fira Code',ui-monospace,monospace;
-  font-weight:600}#tab-fillfloor-content .skill-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+.ffsec .flowblock .tablewrap{margin:0;padding:0}
+.ffsec .calwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:14px}
+.ffsec .cmonth{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 10px 8px}
+.ffsec .cmh{font-size:11.5px;font-weight:700;color:var(--text);margin-bottom:7px}
+.ffsec .cdow{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:3px}
+.ffsec .cdow span{font-size:9px;font-weight:600;color:var(--muted);text-align:center;letter-spacing:.5px}
+.ffsec .cgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.ffsec .cd{min-height:46px;border:1px solid var(--border);background:var(--surface);border-radius:5px;padding:3px 4px;display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.ffsec .cd.out{border:0;background:transparent}
+.ffsec .cd.free{background:#fbfcfd;border-style:dashed}
+.ffsec .cd.has{border-color:var(--accent);background:#f0f7ff;box-shadow:0 0 0 1px var(--accent) inset}
+.ffsec .cd .dn{font-size:9.5px;font-weight:600;color:var(--muted);line-height:1}
+.ffsec .cd.has .dn{color:var(--accent)}
+.ffsec .cd .sms{font-size:9px;font-weight:700;color:#fff;background:var(--accent);border-radius:3px;padding:1px 3px;line-height:1.25}
+.ffsec .cd .named{font-size:8.5px;color:var(--label);line-height:1.2;overflow:hidden}
+.ffsec .cd .dots{font-size:8px;color:#b9c0ca;letter-spacing:1px;line-height:1;margin-top:auto}
+.ffsec .callegend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:12px}
+.ffsec .callegend b{color:var(--text);font-weight:600}
+.ffsec{--shadow:0px 2px 6px 0px #1079f824}
+.ffsec .page-head{margin-bottom:22px}.ffsec h1{font-size:20px;font-weight:600;letter-spacing:-.3px;margin:0;color:var(--text)}.ffsec .page-sub{font-size:13px;color:var(--muted);margin:6px 0 0;max-width:74ch}.ffsec .section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.9px;
+  color:var(--muted);margin:26px 0 10px}.ffsec .card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:20px;
+  box-shadow:var(--shadow)}.ffsec h2{font-size:15px;font-weight:700;color:var(--text);margin:0 0 4px}.ffsec .card-sub{font-size:12.5px;color:var(--muted);margin:0 0 14px}.ffsec p{margin:0 0 10px;color:var(--label)}.ffsec p:last-child{margin-bottom:0}.ffsec b,.ffsec strong{color:var(--text);font-weight:600}.ffsec .grid{display:grid;gap:12px}.ffsec .kpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.ffsec .cols3{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}.ffsec .kpi-value{font-size:28px;font-weight:700;letter-spacing:-.8px;color:var(--text);
+  font-variant-numeric:tabular-nums;line-height:1}.ffsec .kpi-value.warn{color:var(--yellow)}.ffsec .kpi-label{font-size:12px;font-weight:600;color:var(--text);margin-top:8px}.ffsec .kpi-sub{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.45}.ffsec .rag-blue{background:#f0f7ff;border-left:4px solid var(--accent);border-radius:6px;
+  padding:14px 16px;margin-bottom:12px}.ffsec .rag-amber{background:#fffcf5;border-left:4px solid #fec84b;border-radius:6px;
+  padding:14px 16px;margin-bottom:12px}.ffsec .rag-red{background:#fff5f5;border-left:4px solid #f97066;border-radius:6px;
+  padding:14px 16px;margin-bottom:12px}.ffsec .rag-none{background:var(--surface2);border-left:4px solid var(--border);border-radius:6px;
+  padding:14px 16px;margin-bottom:12px}.ffsec .rag-blue:last-child,.ffsec .rag-amber:last-child,.ffsec .rag-red:last-child,.ffsec .rag-none:last-child{margin-bottom:0}.ffsec .tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 8px;
+  border-radius:4px;white-space:nowrap}.ffsec .badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 8px;
+  border-radius:99px;white-space:nowrap}.ffsec .tag-green,.ffsec .badge-green{background:#d1fadf;color:#027a48}.ffsec .tag-yellow,.ffsec .badge-amber{background:#fef0c7;color:#b54708}.ffsec .tag-blue,.ffsec .badge-blue{background:#dbeafe;color:#1d4ed8}.ffsec .tag-red,.ffsec .badge-red{background:#fee2e2;color:#b91c1c}.ffsec .tag-gray,.ffsec .badge-slate{background:#f3f4f6;color:#4b5563}.ffsec .tablewrap{overflow-x:auto;margin:0 -20px;padding:0 20px}.ffsec table{width:100%;border-collapse:collapse;min-width:560px}.ffsec th{text-align:left;padding:10px 14px;font-size:10px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.7px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}.ffsec td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--label);font-size:13px;
+  vertical-align:top}.ffsec tbody tr:last-child td{border-bottom:none}.ffsec td.num,.ffsec th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.ffsec td.k{color:var(--text);font-weight:600;white-space:nowrap}.ffsec ul{margin:0;padding-left:17px;color:var(--label)}.ffsec li{margin:6px 0}.ffsec dl{margin:0}.ffsec dt{font-size:14px;font-weight:600;color:var(--text);margin:16px 0 3px}.ffsec dl>dt:first-child{margin-top:0}.ffsec dd{margin:0;font-size:13px;color:var(--muted)}.ffsec .foot{margin-top:26px;font-size:12px;color:var(--muted);max-width:82ch}.ffsec .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}.ffsec .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px}.ffsec .card-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.9px;
+  color:var(--muted);margin-bottom:12px}.ffsec .skill-cmd{font-size:12px;color:var(--accent);font-family:'SF Mono','Fira Code',ui-monospace,monospace;
+  font-weight:600}.ffsec .skill-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
   padding:11px 13px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;
-  margin-bottom:6px}#tab-fillfloor-content .skill-row:last-child{margin-bottom:0}#tab-fillfloor-content .skill-row .what{font-size:12.5px;color:var(--label);text-align:right;max-width:56%}#tab-fillfloor-content .hook{border-left:3px solid var(--accent);background:var(--surface2)}#tab-fillfloor-content .flowblock{margin-bottom:22px}#tab-fillfloor-content .flowblock:last-child{margin-bottom:0}#tab-fillfloor-content .flow-name{font-size:13.5px;font-weight:700;color:var(--text);margin:0 0 2px}#tab-fillfloor-content .flow-meta{font-size:11.5px;color:var(--muted);margin:0 0 10px}@media(max-width:860px){#tab-fillfloor-content .grid-4{grid-template-columns:repeat(2,1fr)}#tab-fillfloor-content .grid-3{grid-template-columns:1fr}}@media(max-width:520px){#tab-fillfloor-content .grid-4{grid-template-columns:1fr}}@media (prefers-reduced-motion:reduce){#tab-fillfloor-content *{animation:none!important;transition:none!important}}#tab-fillfloor-content .chips{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 14px}#tab-fillfloor-content .chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;border:0;
+  margin-bottom:6px}.ffsec .skill-row:last-child{margin-bottom:0}.ffsec .skill-row .what{font-size:12.5px;color:var(--label);text-align:right;max-width:56%}.ffsec .hook{border-left:3px solid var(--accent);background:var(--surface2)}.ffsec .flowblock{margin-bottom:22px}.ffsec .flowblock:last-child{margin-bottom:0}.ffsec .flow-name{font-size:13.5px;font-weight:700;color:var(--text);margin:0 0 2px}.ffsec .flow-meta{font-size:11.5px;color:var(--muted);margin:0 0 10px}@media(max-width:860px){.ffsec .grid-4{grid-template-columns:repeat(2,1fr)}.ffsec .grid-3{grid-template-columns:1fr}}@media(max-width:520px){.ffsec .grid-4{grid-template-columns:1fr}}@media (prefers-reduced-motion:reduce){.ffsec *{animation:none!important;transition:none!important}}.ffsec .chips{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 14px}.ffsec .chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;border:0;
   border-radius:999px;font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;
-  background:transparent;color:var(--muted);transition:background .12s,color .12s}#tab-fillfloor-content .chip:hover{background:var(--surface2);color:var(--text)}#tab-fillfloor-content .chip[aria-pressed="true"]{background:var(--text);color:#fff}#tab-fillfloor-content .chip .n{font-size:11px;font-variant-numeric:tabular-nums;opacity:.62}#tab-fillfloor-content .chip[aria-pressed="true"] .n{opacity:.8}#tab-fillfloor-content .ptable{width:100%;border-collapse:collapse;min-width:0}#tab-fillfloor-content .ptable td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}#tab-fillfloor-content .ptable tr:last-child td{border-bottom:none}#tab-fillfloor-content .ptable tr[hidden]{display:none}#tab-fillfloor-content .ptable .pname{white-space:nowrap;width:1%}#tab-fillfloor-content .ptable .pstatus{text-align:right;white-space:nowrap;width:1%}#tab-fillfloor-content .ptable .pwhat{font-size:12.5px;color:var(--label);line-height:1.45}#tab-fillfloor-content .ptable .pchan{font-size:11px;color:var(--muted);white-space:nowrap;width:1%}#tab-fillfloor-content .pempty{padding:16px 12px;font-size:12.5px;color:var(--muted)}@media(max-width:560px){}#tab-fillfloor-content tr.live td.k{color:var(--accent)}#tab-fillfloor-content tr.off{opacity:.62}#tab-fillfloor-content .rt td.idx{width:30px;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}#tab-fillfloor-content .rt tfoot td{border-top:1px solid var(--border);border-bottom:none;padding-top:10px;
-  font-size:11.5px;color:var(--muted)}#tab-fillfloor-content .pill{display:inline-flex;align-items:center;font-size:10.5px;font-weight:600;padding:2px 7px;
+  background:transparent;color:var(--muted);transition:background .12s,color .12s}.ffsec .chip:hover{background:var(--surface2);color:var(--text)}.ffsec .chip[aria-pressed="true"]{background:var(--text);color:#fff}.ffsec .chip .n{font-size:11px;font-variant-numeric:tabular-nums;opacity:.62}.ffsec .chip[aria-pressed="true"] .n{opacity:.8}.ffsec .ptable{width:100%;border-collapse:collapse;min-width:0}.ffsec .ptable td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}.ffsec .ptable tr:last-child td{border-bottom:none}.ffsec .ptable tr[hidden]{display:none}.ffsec .ptable .pname{white-space:nowrap;width:1%}.ffsec .ptable .pstatus{text-align:right;white-space:nowrap;width:1%}.ffsec .ptable .pwhat{font-size:12.5px;color:var(--label);line-height:1.45}.ffsec .ptable .pchan{font-size:11px;color:var(--muted);white-space:nowrap;width:1%}.ffsec .pempty{padding:16px 12px;font-size:12.5px;color:var(--muted)}@media(max-width:560px){}.ffsec tr.live td.k{color:var(--accent)}.ffsec tr.off{opacity:.62}.ffsec .rt td.idx{width:30px;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}.ffsec .rt tfoot td{border-top:1px solid var(--border);border-bottom:none;padding-top:10px;
+  font-size:11.5px;color:var(--muted)}.ffsec .pill{display:inline-flex;align-items:center;font-size:10.5px;font-weight:600;padding:2px 7px;
   border-radius:5px;background:var(--surface2);border:1px solid var(--border);
   color:var(--label);white-space:nowrap}
 </style>
@@ -334,7 +334,15 @@
       <button onclick="showTab('email')" id="outertab-email" class="outer-tab"><span class="nav-icon">✉</span><span>Email Health</span></button>
       <button onclick="showTab('icp')" id="outertab-icp" class="outer-tab"><span class="nav-icon">⌖</span><span>ICP &amp; Targeting</span></button>
       <div class="nav-group">Campaigns</div>
-      <button onclick="showTab('fillfloor')" id="outertab-fillfloor" class="outer-tab"><span class="nav-icon">▦</span><span>PBExpo '27 Campaigns</span></button>
+      <button onclick="toggleCampaignGroup()" id="outertab-campaign" class="outer-tab"><span class="nav-icon">▦</span><span>PBExpo '27 Campaigns</span><span class="chevron">›</span></button>
+      <div class="plan-nav collapsed" id="campaign-nav" aria-label="PBExpo 2027 Campaign sections">
+        <button onclick="showTab('ffover')" id="tab-ffover">Overview</button>
+        <button onclick="showTab('ffplays')" id="tab-ffplays">Plays</button>
+        <button onclick="showTab('ffflows')" id="tab-ffflows">Flows</button>
+        <button onclick="showTab('ffsms')" id="tab-ffsms">SMS</button>
+        <button onclick="showTab('ffcal')" id="tab-ffcal">Calendar</button>
+        <button onclick="showTab('ffmeas')" id="tab-ffmeas">Measurement</button>
+      </div>
       <button onclick="showTab('adperf')" id="outertab-adperf" class="outer-tab"><span class="nav-icon">◉</span><span>Ad Performance</span></button>
       <button onclick="showTab('adbuild')" id="outertab-adbuild" class="outer-tab"><span class="nav-icon">⚙</span><span>How Ads Are Built</span></button>
       <div class="nav-group">Reference</div>
@@ -608,7 +616,7 @@
       </div>
 
       <!-- ═══ PBEXPO 2027 CAMPAIGN — ARCHIVED 2026-08-26 ═══
-           Superseded by PBExpo '27 Campaigns (#tab-fillfloor-content). Hidden from the
+           Superseded by PBExpo '27 Campaigns (.ffsec sections). Hidden from the
            sidebar and the command palette, markup kept so it can be restored. Holds the
            only copy of the Flow A–D email sequence viewer, including Flow C A/B. -->
       <div id="tab-pbexpo-content" class="hidden" style="padding:24px">
@@ -800,7 +808,7 @@
       </div>
 
       <!-- ═══ HOW ADS ARE BUILT ═══ -->
-      <div id="tab-fillfloor-content" class="hidden" style="padding:24px">
+      <div id="tab-ffover-content" class="ffsec hidden" style="padding:24px">
 
   <div class="grid-4">
     <div class="card"><div class="card-title">Days to event</div>
@@ -857,14 +865,16 @@
     </div>
   </div>
 
-  <div class="section-label">The plays &mdash; what marketing can run for registrations</div>
+  </div>
+      <div id="tab-ffplays-content" class="ffsec hidden" style="padding:24px"><div class="section-label">The plays &mdash; what marketing can run for registrations</div>
   <div class="card">
     <div class="chips" id="playchips"><button class="chip" data-f="all" aria-pressed="true">All<span class="n">9</span></button><button class="chip" data-f="live" aria-pressed="false">Live<span class="n">1</span></button><button class="chip" data-f="booked" aria-pressed="false">Booked<span class="n">3</span></button><button class="chip" data-f="needs" aria-pressed="false">Needs work<span class="n">3</span></button><button class="chip" data-f="blocked" aria-pressed="false">Blocked<span class="n">2</span></button></div>
     <table class="ptable" id="playtable"><tbody><tr data-g="live"><td class="pname"><span class="skill-cmd">paid-linkedin</span></td><td class="pwhat">Two video ads live against free registration</td><td class="pchan">Paid</td><td class="pstatus"><span class="tag tag-green">Live</span></td></tr><tr data-g="needs"><td class="pname"><span class="skill-cmd">attendee-drumbeat</span></td><td class="pwhat">Weekly email + matching social. Booked, but thin through Sep&ndash;Oct</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-yellow">Needs filling</span></td></tr><tr data-g="needs"><td class="pname"><span class="skill-cmd">past-attendee-winback</span></td><td class="pwhat">Welcome-back flow to prior registrants. Nothing scheduled</td><td class="pchan">Email flow</td><td class="pstatus"><span class="tag tag-yellow">Biggest opportunity</span></td></tr><tr data-g="needs"><td class="pname"><span class="skill-cmd">career-runway-sequences</span></td><td class="pwhat">4 sequences &middot; 16 emails &middot; 2 lists, written and waiting on a sender</td><td class="pchan">Email sequence</td><td class="pstatus"><span class="tag tag-yellow">Needs a decision</span></td></tr><tr data-g="booked"><td class="pname"><span class="skill-cmd">social-proof-logos</span></td><td class="pwhat">Confirmed buyers &amp; airlines logo list &mdash; Sep 30, Nov 18, Dec 11</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-blue">Booked</span></td></tr><tr data-g="booked"><td class="pname"><span class="skill-cmd">offer-free-badge</span></td><td class="pwhat">Free badge plus a drink ticket at the Networking Reception &mdash; Oct 21</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-blue">Booked</span></td></tr><tr data-g="booked"><td class="pname"><span class="skill-cmd">incentives</span></td><td class="pwhat">AirPod raffle Nov 7 &middot; VIP wristband Dec 9 &middot; countdown Dec 18</td><td class="pchan">Email + social</td><td class="pstatus"><span class="tag tag-blue">Booked</span></td></tr><tr data-g="blocked"><td class="pname"><span class="skill-cmd">sms-showup</span></td><td class="pwhat">Mailchimp SMS to registered contacts. Needs an opt-in field on the form</td><td class="pchan">SMS</td><td class="pstatus"><span class="tag tag-yellow">Consent first</span></td></tr><tr data-g="blocked"><td class="pname"><span class="skill-cmd">visitor-retargeting</span></td><td class="pwhat">Retarget identified site visitors. Vector is confirmed but not yet live</td><td class="pchan">Paid</td><td class="pstatus"><span class="tag tag-gray">Not yet</span></td></tr></tbody></table>
     <div class="pempty" id="playempty" hidden>No plays in this group.</div>
   </div>
 
-  <div class="section-label">The flows behind each track</div>
+  </div>
+      <div id="tab-ffflows-content" class="ffsec hidden" style="padding:24px"><div class="section-label">The flows behind each track</div>
   <div class="card" style="margin-bottom:16px">
     <h2>Track A &middot; new buyer registration drip</h2>
     <p class="card-sub">Eight emails, event-triggered, running from registration open to the show
@@ -888,6 +898,8 @@
     <p class="card-sub">Cold reach is live. The two steps that make it efficient are not</p>
     <div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>Stage</th><th>Step</th><th>Detail</th></tr></thead><tbody><tr class="live"><td class="idx">1</td><td><span class="pill">Live now</span></td><td class="k">Cold video — C &amp; H</td><td>Free-registration message on LinkedIn</td></tr><tr><td class="idx">2</td><td><span class="pill">Next</span></td><td class="k">Engaged retargeting</td><td>Video viewers 50%+ and page visitors get the drink-ticket offer</td></tr><tr class="off"><td class="idx">3</td><td><span class="pill">Blocked</span></td><td class="k">Suppress registrants</td><td>Stop paying to reach people who already signed up</td></tr><tr class="off"><td class="idx">4</td><td><span class="pill">Not yet</span></td><td class="k">Site-visitor retargeting</td><td>Vector de-anonymisation is confirmed but not live</td></tr></tbody><tfoot><tr><td></td><td class="k">4 rungs</td><td colspan="2"></td></tr></tfoot></table></div>
   </div>
+  </div>
+      <div id="tab-ffsms-content" class="ffsec hidden" style="padding:24px"><div class="section-label">SMS &mdash; two flows</div>
   <div class="card">
     <h2>SMS &middot; two flows</h2>
     <p class="card-sub">Sent to the PartsBase SMS opt-in list, dated against the live comms calendar. Flow A drives registration and suppresses anyone already registered; registering moves the contact out of A and into B</p>
@@ -913,7 +925,8 @@
     <div class="tablewrap"><table class="rt ft"><thead><tr><th></th><th>Send</th><th>Message</th><th>Length</th></tr></thead><tbody><tr><td class="idx">1</td><td class="k">A1 &middot; 21 Sep</td><td><span style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px">PartsBase: PBExpo '27 is Mar 10-11, Miami Beach. Free badge, 7,000+ aviation pros, 150+ airlines. Register: {link} Reply STOP to opt out</span></td><td class="k">145 &middot; 1 seg</td></tr><tr><td class="idx">2</td><td class="k">A2 &middot; 20 Oct</td><td><span style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px">PartsBase: 150+ airlines and operators are already confirmed for PBExpo '27. Free to attend, Mar 10-11 Miami Beach. Grab a badge: {link}</span></td><td class="k">145 &middot; 1 seg</td></tr><tr><td class="idx">3</td><td class="k">A3 &middot; 14 Dec</td><td><span style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px">PartsBase: Get PBExpo on the 2027 calendar before year end. Mar 10-11, Miami Beach, free badge: {link} Reply STOP to opt out</span></td><td class="k">133 &middot; 1 seg</td></tr><tr><td class="idx">4</td><td class="k">B1 &middot; on reg</td><td><span style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px">PartsBase: You're in for PBExpo '27, Mar 10-11 Miami Beach. We'll text your badge QR closer to the show. Details: {link}</span></td><td class="k">129 &middot; 1 seg</td></tr><tr><td class="idx">5</td><td class="k">B2 &middot; 23 Feb</td><td><span style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px">PartsBase: PBExpo opens in 2 weeks. Book meetings in the app before the floor fills up: {link}</span></td><td class="k">103 &middot; 1 seg</td></tr><tr><td class="idx">6</td><td class="k">B3 &middot; 9 Mar</td><td><span style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px">PartsBase: Doors open today, 9am, Miami Beach Convention Center. Your badge QR: {link}</span></td><td class="k">95 &middot; 1 seg</td></tr></tbody></table></div>
   </div>
 
-  <div class="section-label">Calendar &mdash; where the SMS lands</div>
+  </div>
+      <div id="tab-ffcal-content" class="ffsec hidden" style="padding:24px"><div class="section-label">Calendar &mdash; where the SMS lands</div>
   <div class="card">
     <h2>Sep&ndash;Dec 2026, weekdays only</h2>
     <p class="card-sub">Every send already on the comms calendar, with the three SMS drops in place. Named sends are the attendee-facing ones; dots are everything else that day, mostly exhibitor and PartStore traffic</p>
@@ -967,7 +980,8 @@
     </div>
   </div>
 
-  <div class="section-label">How we measure it</div>
+  </div>
+      <div id="tab-ffmeas-content" class="ffsec hidden" style="padding:24px"><div class="section-label">How we measure it</div>
   <div class="card">
     <div class="tablewrap">
       <table>
@@ -1296,7 +1310,12 @@ const TAB_CONFIG = {
   // pbexpo:    { panel: 'plan',     inner: 'pbexpo',    title: ['PBExpo 2027 Campaign', 'Attendee registration campaign plan · reg open → Mar 2027'] },
   adperf:    { panel: 'plan',     inner: 'adperf',    title: ['Ad Performance',    'LinkedIn spend, leads and cost per lead · refreshed by the daily check'] },
   adbuild:   { panel: 'plan',     inner: 'adbuild',   title: ['How Ads Are Built', 'LinkedIn ad pipeline · form to approval, and the systems in between'] },
-  fillfloor: { panel: 'plan',     inner: 'fillfloor', title: ["PBExpo '27 Campaigns", 'Registration campaign \u00b7 tracks, plays and flows for the Sep\u2013Dec window'] },
+  ffover: { panel: 'plan',     inner: 'ffover', title: ["PBExpo '27 Campaigns", 'Tracks, lead hook and the shape of the window'] },
+  ffplays: { panel: 'plan',     inner: 'ffplays', title: ["PBExpo '27 Campaigns", 'What marketing can run for registrations'] },
+  ffflows: { panel: 'plan',     inner: 'ffflows', title: ["PBExpo '27 Campaigns", 'Email drips, Career Runway sequences and the paid ladder'] },
+  ffsms: { panel: 'plan',     inner: 'ffsms', title: ["PBExpo '27 Campaigns", 'Two flows to the PartsBase opt-in list'] },
+  ffcal: { panel: 'plan',     inner: 'ffcal', title: ["PBExpo '27 Campaigns", 'Where every send lands, Sep–Dec'] },
+  ffmeas: { panel: 'plan',     inner: 'ffmeas', title: ["PBExpo '27 Campaigns", 'What we track, and what would unlock more'] },
   exec:      { panel: 'plan',     inner: 'exec',      title: ['Exec View',         'Leadership summary and 90-day GTM narrative'] },
 };
 
@@ -1309,6 +1328,12 @@ function showTab(name) {
     document.getElementById('outer-' + p)?.classList.toggle('hidden', cfg.panel !== p)
   );
   if (cfg.inner) showInnerTab(cfg.inner);
+  // The campaign sections are one group: keep its header active and list open.
+  if (typeof CAMPAIGN_TABS !== 'undefined') {
+    const inGroup = CAMPAIGN_TABS.includes(name);
+    document.getElementById('outertab-campaign')?.classList.toggle('active', inGroup);
+    if (inGroup) setCampaignGroupExpanded(true);
+  }
   document.getElementById('page-title').textContent = cfg.title[0];
   document.getElementById('page-subtitle').textContent = cfg.title[1];
 }
@@ -1317,6 +1342,28 @@ function setPlanGroupExpanded(expanded) {
   planGroupExpanded = expanded;
   document.getElementById('plan-nav').classList.toggle('collapsed', !expanded);
   document.getElementById('outertab-plan').classList.toggle('expanded', expanded);
+}
+
+let campaignGroupExpanded = false;
+const CAMPAIGN_TABS = ['ffover', 'ffplays', 'ffflows', 'ffsms', 'ffcal', 'ffmeas'];
+
+function setCampaignGroupExpanded(expanded) {
+  campaignGroupExpanded = expanded;
+  document.getElementById('campaign-nav').classList.toggle('collapsed', !expanded);
+  document.getElementById('outertab-campaign').classList.toggle('expanded', expanded);
+}
+
+function toggleCampaignGroup() {
+  // Open straight into the first section when arriving from another tab;
+  // once inside, the header just folds the list away.
+  const inGroup = CAMPAIGN_TABS.some(t =>
+    !document.getElementById('tab-' + t + '-content').classList.contains('hidden'));
+  if (inGroup) {
+    setCampaignGroupExpanded(!campaignGroupExpanded);
+  } else {
+    setCampaignGroupExpanded(true);
+    showTab('ffover');
+  }
 }
 
 function togglePlanGroup() {
@@ -1356,7 +1403,7 @@ function togglePlanGroup() {
 })();
 
 // ── Inner tabs ──
-const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild','adperf','fillfloor'];
+const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild','adperf','ffover','ffplays','ffflows','ffsms','ffcal','ffmeas'];
 function showInnerTab(name) {
   INNER_TABS.forEach(t => {
     document.getElementById('tab-' + t + '-content').classList.toggle('hidden', t !== name);
@@ -2253,7 +2300,7 @@ function cmdkSource() {
    ['milestones','Milestones','Phase targets'],      ['risks','Risk Register','Probability & impact'],
    ['stack','Tech Stack','Tools & rollout'],         ['decisions','Decision Log','What was decided, and why']]
     .forEach(([id, title, sub]) => items.push({ g:'Go to', icon:'◎', title, sub, go: jump(id) }));
-  ['resources','email','icp','fillfloor','adperf','adbuild'].forEach(k =>
+  ['resources','email','icp','ffover','adperf','adbuild'].forEach(k =>
     items.push({ g:'Go to', icon:'›', title:TAB_CONFIG[k].title[0], sub:TAB_CONFIG[k].title[1].split('·')[0].trim(), go:() => showTab(k) }));
 
   (PLAN.risks || []).forEach(r => items.push({ g:'Risks', icon:'⚑', title:r.label, sub:`${r.impact} impact`, go:() => { jump('risks')(); dtSearch('risks', r.label); document.getElementById('dt-risks-q').value = r.label; } }));
