@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-09-01T18:48:27+00:00",
+  "generated_at": "2026-09-02T15:31:22+00:00",
   "window": {
     "start": "2026-08-24",
-    "end": "2026-09-01",
-    "days": 8
+    "end": "2026-09-02",
+    "days": 9
   },
   "cpl_target": 152.0,
   "totals": {
-    "spend": 581.3,
+    "spend": 632.17,
     "registrations": 0,
     "cost_per_registration": null,
-    "impressions": 7606,
-    "clicks": 54,
-    "ctr_pct": 0.71,
-    "cpm": 76.43,
+    "impressions": 8087,
+    "clicks": 63,
+    "ctr_pct": 0.779,
+    "cpm": 78.17,
     "leads": 0,
     "cpl": null,
     "cpl_vs_target": null,
@@ -21,18 +21,18 @@
     "total_campaigns": 19
   },
   "alerts": [
-    "$581.30 spent with no registrations and no leads."
+    "$632.17 spent with no registrations and no leads."
   ],
   "campaigns": [
     {
       "name": "PBExpo 2027 Registration Open - Attendees",
       "status": "ACTIVE",
-      "spend": 581.3,
+      "spend": 632.17,
       "registrations": 0,
       "cost_per_registration": null,
-      "impressions": 7606,
-      "clicks": 54,
-      "ctr_pct": 0.71,
+      "impressions": 8087,
+      "clicks": 63,
+      "ctr_pct": 0.779,
       "leads": 0,
       "cpl": null,
       "over_target": false
@@ -43,7 +43,7 @@
       "skill": "bid-sweep",
       "risk": "AUTO",
       "campaign": "PBExpo 2027 Registration Open - Attendees",
-      "rationale": "$581.30 spent over 8d with no leads and no registrations (ceiling $150) \u2014 pause and reassess."
+      "rationale": "$632.17 spent over 9d with no leads and no registrations (ceiling $150) \u2014 pause and reassess."
     }
   ],
   "applied": []
