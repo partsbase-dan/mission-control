@@ -2170,6 +2170,21 @@ function renderAdPerformance(d) {
     : (t.ctr_pct < 0.30 ? 'below the 0.30% cold-traffic floor'
        : (t.ctr_pct > 0.55 ? 'above the 0.55% cold-traffic band' : 'within the 0.30–0.55% band'));
 
+  // PBExpo registration completes on Swapcard, where the Insight Tag cannot be installed, so
+  // LinkedIn reports 0 registrations permanently. `confirmed_registrations` is the hand-kept
+  // count from the Swapcard export. Showing only LinkedIn's figure reads a converting campaign
+  // as a total failure, so the confirmed count leads whenever LinkedIn has nothing.
+  const confirmed = t.confirmed_registrations ?? 0;
+  const offPlatformOnly = confirmed > 0 && (t.registrations ?? 0) === 0;
+  const regTitle = offPlatformOnly ? 'Registrations (confirmed)' : 'Registrations';
+  const regValue = offPlatformOnly ? confirmed : (t.registrations ?? 0);
+  const regSub = offPlatformOnly
+    ? 'counted by hand — LinkedIn reports 0 because the Insight Tag cannot go on Swapcard'
+    : 'what the attendee campaigns optimise to';
+  const costPerReg = offPlatformOnly ? t.cost_per_confirmed_registration : t.cost_per_registration;
+  const costPerRegSub = offPlatformOnly ? 'per confirmed registration · vs $2.13 in 2025'
+    : ((t.registrations ?? 0) === 0 ? 'none yet' : 'vs $2.13 in 2025');
+
   const alerts = (d.alerts || []).map(a =>
     `<div class="rag-amber" style="margin-bottom:8px">⚠️ ${a}</div>`).join('');
 
@@ -2179,7 +2194,7 @@ function renderAdPerformance(d) {
       <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${money(c.spend)}</td>
       <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${num(c.impressions)}</td>
       <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${pct(c.ctr_pct)}</td>
-      <td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border)">${c.registrations ?? 0}</td>
+      <td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border)">${c.registrations ?? 0}${(c.confirmed_registrations ?? 0) > 0 ? ` <span style="font-weight:500;color:var(--muted)">(+${c.confirmed_registrations} confirmed)</span>` : ''}</td>
       <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${money(c.cost_per_registration)}</td>
       <td style="padding:10px 14px;border-bottom:1px solid var(--border)">${c.leads ?? 0}</td>
       <td style="padding:10px 14px;font-weight:600;border-bottom:1px solid var(--border);color:${c.over_target ? 'var(--red)' : 'var(--text)'}">${money(c.cpl)}</td>
@@ -2202,8 +2217,8 @@ function renderAdPerformance(d) {
     <div class="grid-4">
       <div class="card"><div class="card-title">Spend</div><div class="kpi-value">${money(t.spend)}</div><div class="kpi-sub">${span}</div></div>
       <div class="card"><div class="card-title">Impressions</div><div class="kpi-value">${num(t.impressions)}</div><div class="kpi-sub">${num(t.clicks)} click${(t.clicks ?? 0) === 1 ? '' : 's'}</div></div>
-      <div class="card"><div class="card-title">Registrations</div><div class="kpi-value" style="color:var(--accent)">${t.registrations ?? 0}</div><div class="kpi-sub">what the attendee campaigns optimise to</div></div>
-      <div class="card"><div class="card-title">Cost per registration</div><div class="kpi-value">${money(t.cost_per_registration)}</div><div class="kpi-sub">${(t.registrations ?? 0) === 0 ? 'none yet' : 'vs $2.13 in 2025'}</div></div>
+      <div class="card"><div class="card-title">${regTitle}</div><div class="kpi-value" style="color:var(--accent)">${regValue}</div><div class="kpi-sub">${regSub}</div></div>
+      <div class="card"><div class="card-title">Cost per registration</div><div class="kpi-value">${money(costPerReg)}</div><div class="kpi-sub">${costPerRegSub}</div></div>
     </div>
     <div class="grid-4" style="margin-top:14px">
       <div class="card"><div class="card-title">CTR</div><div class="kpi-value" style="color:${ctrColour}">${pct(t.ctr_pct)}</div><div class="kpi-sub">${ctrNote}</div></div>
