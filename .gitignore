@@ -39,10 +39,13 @@
 !dashboard-state.json
 !ad-performance.json
 
-# Self-serve email template builder. Fills in and downloads a ready-to-upload
-# HTML file client-side — no backend, nothing saved server-side. The master
-# templates are the already-HubSpot-fixed campaign HTML files; fields-data.js
-# maps each form field to the element(s) it edits in that master.
+# Self-serve email template gallery + builder. The gallery shows a live scaled
+# preview of each template and hands off to the builder, which fills in and
+# downloads a ready-to-upload HTML file client-side — no backend, nothing
+# saved server-side. The master templates are the already-HubSpot-fixed
+# campaign HTML files; fields-data.js maps each form field to the element(s)
+# it edits in that master, and both pages read it directly.
+!template-gallery.html
 !template-builder.html
 !resources/
 !resources/template-builder/

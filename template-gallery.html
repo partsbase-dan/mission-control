@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email Template Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#002857;
+    --blue:#0C70E8;
+    --violet:#8b6cf6;
+    --paper:#F5F7FB;
+    --surface:#FFFFFF;
+    --ink:#26324A;
+    --ink-soft:#5B6B85;
+    --line:#DCE3EE;
+    --line-soft:#EAEFF6;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Roboto', -apple-system, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', ui-monospace, monospace;}
+
+  header.top{ background:var(--navy); color:#fff; padding:22px 24px; }
+  header.top .inner{ max-width:1080px; margin:0 auto; }
+  header.top .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.09em;
+    text-transform:uppercase; color:#8FB6EE; margin-bottom:6px;
+  }
+  header.top h1{ margin:0; font-size:24px; font-weight:700; }
+  header.top p{ margin:8px 0 0; color:#B9CDEC; font-size:14px; max-width:64ch; line-height:1.5; }
+  header.top a.skip{
+    display:inline-block; margin-top:14px; font-size:12.5px; color:#C7D9F5;
+    text-decoration:none; border-bottom:1px dotted #5C7FB0;
+  }
+  header.top a.skip:hover{ color:#fff; }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:28px 24px 80px; }
+
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:22px;
+  }
+
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    overflow:hidden; display:flex; flex-direction:column;
+    box-shadow:0 1px 2px rgba(11,37,69,.04), 0 8px 24px -14px rgba(11,37,69,.16);
+  }
+
+  .peek{
+    position:relative; height:280px; overflow:hidden; background:#EDF1F7;
+    border-bottom:1px solid var(--line);
+  }
+  .peek iframe{
+    position:absolute; top:0; left:0;
+    width:700px; height:1400px;
+    border:none;
+    transform:scale(0.43);
+    transform-origin:top left;
+    pointer-events:none;
+  }
+  .peek .fade{
+    position:absolute; left:0; right:0; bottom:0; height:56px;
+    background:linear-gradient(to bottom, rgba(237,241,247,0), rgba(237,241,247,.96));
+  }
+  .peek .expand{
+    position:absolute; right:10px; bottom:10px; z-index:2;
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase;
+    letter-spacing:.04em; background:rgba(255,255,255,.92); color:var(--ink-soft);
+    border:1px solid var(--line); padding:4px 8px; border-radius:6px; text-decoration:none;
+  }
+  .peek .expand:hover{ color:var(--blue); border-color:var(--blue); }
+
+  .body{ padding:18px 20px 20px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .body h2{ margin:0; font-size:16.5px; color:var(--navy); }
+  .body .use{ font-size:13px; color:var(--ink-soft); line-height:1.5; flex:1; }
+  .body .meta{ display:flex; gap:8px; flex-wrap:wrap; }
+  .body .meta span{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink-soft);
+    background:var(--line-soft); border:1px solid var(--line); padding:2px 7px; border-radius:6px;
+  }
+  .body a.use-btn{
+    margin-top:6px; display:flex; align-items:center; justify-content:center; gap:8px;
+    background:var(--violet); color:#fff; text-decoration:none; font-weight:700; font-size:13.5px;
+    padding:11px 16px; border-radius:9px;
+  }
+  .body a.use-btn:hover{ background:#7657E8; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="inner">
+    <div class="eyebrow">PartsBase / GTM Templates</div>
+    <h1>Email Template Gallery</h1>
+    <p>Live previews of the top of each template — pick the one that fits, then jump straight into the builder with it already selected.</p>
+    <a class="skip" href="template-builder.html">Skip straight to the builder →</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid" id="grid"></div>
+</div>
+
+<script src="resources/template-builder/fields-data.js"></script>
+<script>
+const grid = document.getElementById('grid');
+
+TEMPLATES.forEach(t => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="peek">
+      <iframe src="${t.master}" scrolling="no" tabindex="-1"></iframe>
+      <div class="fade"></div>
+      <a class="expand" href="${t.master}" target="_blank" rel="noopener">Full preview ↗</a>
+    </div>
+    <div class="body">
+      <h2>${t.name}</h2>
+      <div class="use">${t.use}</div>
+      <div class="meta"><span>${t.fields.length} fields</span></div>
+      <a class="use-btn" href="template-builder.html?template=${t.id}">Use this template →</a>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>
