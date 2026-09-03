@@ -1,14 +1,16 @@
 {
-  "generated_at": "2026-09-02T19:44:36+00:00",
+  "generated_at": "2026-09-03T14:02:56+00:00",
   "window": {
     "start": "2026-08-24",
-    "end": "2026-09-02",
-    "days": 9
+    "end": "2026-09-03",
+    "days": 10
   },
   "cpl_target": 152.0,
   "totals": {
     "spend": 632.17,
     "registrations": 0,
+    "confirmed_registrations": 1,
+    "cost_per_confirmed_registration": 632.17,
     "cost_per_registration": null,
     "impressions": 8087,
     "clicks": 63,
@@ -20,15 +22,14 @@
     "active_campaigns": 1,
     "total_campaigns": 19
   },
-  "alerts": [
-    "$632.17 spent with no registrations and no leads."
-  ],
+  "alerts": [],
   "campaigns": [
     {
       "name": "PBExpo 2027 Registration Open - Attendees",
       "status": "ACTIVE",
       "spend": 632.17,
       "registrations": 0,
+      "confirmed_registrations": 1,
       "cost_per_registration": null,
       "impressions": 8087,
       "clicks": 63,
@@ -43,7 +44,7 @@
       "skill": "bid-sweep",
       "risk": "AUTO",
       "campaign": "PBExpo 2027 Registration Open - Attendees",
-      "rationale": "$632.17 spent over 9d with no leads and no registrations (ceiling $150) \u2014 pause and reassess."
+      "rationale": "CTR 0.779% is 2.8\u00d7 baseline while fully spending (126.4%) \u2014 same delivery should cost less; lower bid 10%."
     }
   ],
   "applied": []
