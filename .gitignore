@@ -39,6 +39,21 @@
 !dashboard-state.json
 !ad-performance.json
 
+# Self-serve email template builder. Fills in and downloads a ready-to-upload
+# HTML file client-side — no backend, nothing saved server-side. The master
+# templates are the already-HubSpot-fixed campaign HTML files; fields-data.js
+# maps each form field to the element(s) it edits in that master.
+!template-builder.html
+!resources/
+!resources/template-builder/
+!resources/template-builder/fields-data.js
+!resources/template-builder/masters/
+!resources/template-builder/masters/pbexpo.html
+!resources/template-builder/masters/partstore.html
+!resources/template-builder/masters/jumbo.html
+!resources/template-builder/masters/networking.html
+!resources/template-builder/masters/amelia.html
+
 # ── This file ────────────────────────────────────────────────────────────────
 # Tracked so the protection survives a fresh clone.
 !.gitignore
