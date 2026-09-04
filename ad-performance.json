@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-03T15:24:33+00:00",
+  "generated_at": "2026-09-04T15:21:04+00:00",
   "window": {
     "start": "2026-08-24",
-    "end": "2026-09-03",
-    "days": 10
+    "end": "2026-09-04",
+    "days": 11
   },
   "cpl_target": 152.0,
   "totals": {
@@ -44,7 +44,7 @@
       "skill": "bid-sweep",
       "risk": "AUTO",
       "campaign": "PBExpo 2027 Registration Open - Attendees",
-      "rationale": "CTR 0.779% is 2.8\u00d7 baseline while fully spending (126.4%) \u2014 same delivery should cost less; lower bid 10%."
+      "rationale": "CTR 0.779% is 2.8\u00d7 baseline while fully spending (114.9%) \u2014 same delivery should cost less; lower bid 10%."
     }
   ],
   "applied": []
