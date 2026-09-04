@@ -254,6 +254,26 @@ const TEMPLATES = [
       { id: "btn-link", label: "Button link URL", type: "url", apply: [{ selector: 'a[data-button-link-id="7"]', op: "attr", attr: "href", syncRaw: true }] },
     ],
   },
+
+  {
+    id: "sales-outreach",
+    name: "PartStore Sales Outreach",
+    master: "resources/template-builder/masters/sales-outreach.html",
+    outputName: "partstore-sales-outreach.html",
+    use: "1:1 sales email — a rep sends this individually to one prospect introducing PartStore and asking for a call. Not a bulk campaign send.",
+    fields: [
+      { id: "greeting", label: "Greeting line", type: "text", hint: "The whole line, including the prospect's name.", example: "Hi Sarah,",
+        apply: [{ selector: "#tb-greeting", op: "text" }] },
+
+      { id: "pitch", label: "Pitch paragraph(s)", type: "textarea", hint: "One line per paragraph. Keep the closing line asking for a call.", example: "We've launched a modernized aviation commerce platform, PartStore, designed for fast and reliable instant purchasing. It's free to list your parts, we don't make a dollar until you do.\nIf you're looking to buy aviation parts, PartStore allows you to shop real time inventory and have a modern instant checkout experience. Without waiting on RFQ's.\nAre you free this week to jump on a call and discuss more?",
+        apply: [{ selector: "#tb-pitch", op: "html", build: (l) => l.map((p, i) => `<p class="mcePastedContent${i === l.length - 1 ? " last-child" : ""}">${esc(p)}</p>`).join("") } ] },
+
+      { id: "product-img", label: "Product image URL", type: "url", hint: "612px wide.", apply: [{ selector: 'img[data-block-id="71"]', op: "attr", attr: "src", syncRaw: true }] },
+
+      { id: "signoff-name", label: "Your name (sign-off)", type: "text", hint: "Appears under “Kind Regards,”", example: "Kevin Thomas",
+        apply: [{ selector: "#tb-signoff-name", op: "html", build: (l) => l[0] ? esc(l[0]) : "<br/>" } ] },
+    ],
+  },
 ];
 
 if (typeof module !== "undefined") module.exports = { TEMPLATES, esc };

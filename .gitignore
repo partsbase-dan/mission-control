@@ -56,6 +56,7 @@
 !resources/template-builder/masters/jumbo.html
 !resources/template-builder/masters/networking.html
 !resources/template-builder/masters/amelia.html
+!resources/template-builder/masters/sales-outreach.html
 
 # ── This file ────────────────────────────────────────────────────────────────
 # Tracked so the protection survives a fresh clone.
