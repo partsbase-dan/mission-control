@@ -1701,113 +1701,97 @@ Interested in getting involved? Happy to send over the details.
 
 → Reserve your space` },
   ]},
-  D: { name: 'Flow D · Post-reg nurture', sub: 'Registered attendees · Aug 2026 through post-event · MOCK PATH, structure only', tag: 'Placeholder', tagClass: 'tag-yellow', placeholder: true, emails: [
-    { n: 'D1', when: '+1 day', subj: `[LOCKED] Your PBExpo app, and how to get matched`, meta: `Structure locked, copy draft. Needs: app deep link.`, body: `[PLACEHOLDER COPY. Structure approved, wording not written.]
+  D: { name: 'Flow D · Post-reg nurture', sub: 'Registered attendees · Aug 2026 through post-event · draft copy, not approved', tag: 'Placeholder', tagClass: 'tag-yellow', placeholder: true, emails: [
+    { n: 'D1', when: '+1 day', subj: `[LOCKED] Your PBExpo app, and how to get matched`, meta: `Copy drafted 2026-09-04. Trigger: pbexpo_2027_registered = Yes (same moment as A9), delay 1 day. Needs: app deep link.`, body: `Hi {First},
 
-Purpose: convert a registration into an active app profile. This is the single highest-leverage step in the whole nurture, because every later beat depends on the attendee having a profile the matchmaking can read.
+You're registered for PBExpo 2027. Here's the one thing to do now that actually pays off.
 
-Beats to cover:
-• Download the app, [APP LINK NEEDED]
-• Build a profile: what {Company} is sourcing or selling
-• What happens next: matches start surfacing once the profile is complete
+Download the PBExpo app and build your profile: tell it what {Company} is sourcing or selling. That's what the AI matchmaking reads to start lining up your best-fit meetings, so the sooner it's done, the sooner matches start surfacing.
 
-Success metric: app profile completion rate.` },
-    { n: 'D2', when: '+1 week', subj: `[LOCKED] Your first matches are ready`, meta: `Structure locked. Needs: matchmaking go-live date, minimum match threshold.`, body: `[PLACEHOLDER COPY.]
+Takes about two minutes.
 
-Purpose: first proof that the core promise is real. Show actual matched companies, not a generic nudge.
+→ Download the app [APP LINK NEEDED]
 
-Beats to cover:
-• [N] attendees matched to {Company} so far
-• How to request a meeting
-• Why early requests win: the best-fit people fill their two days first
+See you in Miami,
+The PBExpo Team` },
+    { n: 'D2', when: '+1 week', subj: `[LOCKED] Your first matches are ready`, meta: `Copy drafted 2026-09-04. Trigger: +7 days from registration, gated on pbexpo_2027_matches_count >= threshold (TBD, recommend 3). Below threshold: hold and re-check every 3 to 4 days rather than sending a weak count. Needs: matchmaking go-live date, minimum match threshold.`, body: `Hi {First},
 
-Open decisions:
-• Does matchmaking run this far out from the event, or does it open closer in? If it opens later, this email moves and D3 becomes the first nurture touch.
-• Minimum match count before we send. Sending "you have 1 match" is worse than not sending.` },
-    { n: 'D3', when: '[EVENT: agenda publish]', subj: `[EVENT-GATED] The agenda is live, build your two days`, meta: `Waiting on: agenda publish date. Currently assumed Sep 2026.`, body: `[PLACEHOLDER COPY.]
+{Company} already has [N] potential matches waiting in the PBExpo app.
 
-Purpose: registered attendees never receive A5, so this carries the agenda reveal for them. Same event, different voice: they are already in, so this is about planning rather than persuading.
+The best-fit people book their two days early, so the sooner you review and request meetings, the better your schedule looks by March.
 
-Beats to cover:
-• Sessions and keynote tracks now live
-• Add sessions to your in-app schedule
-• [MAINTENANCE GAMES SCHEDULE, if confirmed by then]
+→ Open the app [APP LINK NEEDED]` },
+    { n: 'D3', when: '[EVENT: agenda publish]', subj: `[EVENT-GATED] The agenda is live, build your two days`, meta: `Copy drafted 2026-09-04. Trigger: property pbexpo_2027_agenda_published flips to Yes, not a fixed delay. Currently assumed Sep 2026. Needs: agenda publish date locked.`, body: `Hi {First},
 
-Trigger: fires on agenda publish, not on a fixed date. Needs the publish date locked before this can be scheduled.` },
-    { n: 'D4', when: '[EVENT: speaker reveal]', subj: `[EVENT-GATED] [SPEAKER NAME] is speaking at PBExpo 2027`, meta: `Waiting on: speaker lineup, confirmation dates, and whether reveals are staged or announced at once.`, body: `[PLACEHOLDER COPY. No speakers confirmed to me.]
+The PBExpo 2027 agenda is live. Keynotes, panels on the topics shaping aviation's supply chain, and [MAINTENANCE GAMES SCHEDULE, if confirmed by send date].
 
-Purpose: a mid-window re-engagement beat during the long Oct to Jan quiet stretch. Registration is in August and the event is in March, so there is roughly a five-month gap with nothing else to say. Speaker reveals are the natural filler.
+Open the app and add sessions to your two-day schedule now, before the popular ones fill.
 
-Beats to cover:
-• Who is speaking and why it matters to {segment}
-• Add the session to your schedule
+→ View the agenda [AGENDA LINK NEEDED]` },
+    { n: 'D4', when: '[EVENT: speaker reveal]', subj: `[EVENT-GATED] [SPEAKER NAME] is speaking at PBExpo 2027`, meta: `Copy drafted 2026-09-04 as a repeatable template, one send per confirmed speaker. Trigger: speaker confirmed and added to the reveal list. Recommend staged reveals over a single announcement, it is the main lever for filling the Oct to Jan quiet stretch, but each one needs a name, headshot, and one-line hook before it can go out. Needs: speaker lineup and confirmation dates.`, body: `Hi {First},
 
-Open decisions:
-• Staged reveals (one email per speaker) or a single lineup announcement? Staged gives more touches but needs more assets.
-• How many of these? This is the main lever for filling the Oct to Jan gap.` },
-    { n: 'D5', when: '[EVENT: TBD]', subj: `[EVENT-GATED] [MAINTENANCE GAMES / PAVILION DETAIL]`, meta: `Waiting on: Maintenance Games format and Operators Pavilion details.`, body: `[PLACEHOLDER COPY.]
+[SPEAKER NAME], [TITLE, COMPANY], is speaking at PBExpo 2027. [ONE LINE ON WHY IT MATTERS TO {segment}].
 
-Purpose: a second mid-window beat, and the natural place to surface the Operators Pavilion to registered operators.
+Add the session to your schedule in the app now, seats for keynote sessions fill.
 
-Beats to cover:
-• Maintenance Games format, teams, and how to watch or enter [FORMAT TBD]
-• Operators Pavilion: what it is, who it is for, and the upgrade path
-• Segment split: operators get the Pavilion angle, everyone else gets the Games
+→ Add to my schedule [AGENDA LINK NEEDED]` },
+    { n: 'D5', when: '[EVENT: TBD]', subj: `[EVENT-GATED] The Maintenance Games are back for 2027`, meta: `Copy drafted 2026-09-04. Segment branch: contacts on the Operators & airlines list get bodyB (Pavilion angle), everyone else gets the Maintenance Games angle below. Needs: Maintenance Games format and whether the Pavilion upgrade is sold post-registration or only at the point of registration (changes this from informational to transactional).`, body: `Hi {First},
 
-Open decisions:
-• Is the Pavilion upgrade sold to registered attendees post-registration, or only at the point of registration? This changes whether the email is informational or transactional.` },
-    { n: 'D6', when: 'T-6 wk', subj: `[NEEDS DATA] New since you registered: [N] exhibitors, [N] matches`, meta: `Waiting on: exhibitor data feed into HubSpot. Without it this email cannot be personalized and should be cut.`, body: `[PLACEHOLDER COPY.]
+The Maintenance Games are back at PBExpo 2027. [FORMAT: teams, how to watch or enter].
 
-Purpose: re-engage attendees who registered in August and have not opened the app since. The hook is accumulated value: the room got better while they were away.
+Come watch, or put a team in if {Company} wants the bragging rights.
 
-Beats to cover:
-• [N] exhibitors added since your registration date
-• [N] new best-fit matches waiting
-• One click back into the app
+→ See the format [DETAILS NEEDED]`, bodyB: `Hi {First},
 
-Hard dependency: this needs a live exhibitor count and a per-contact match count flowing into HubSpot. If that feed does not exist, cut this email rather than send a generic version. A vague "lots of new exhibitors" is weaker than silence.` },
-    { n: 'D7', when: 'T-4 wk', subj: `[LOCKED] Book your room before the block closes`, meta: `Structure locked. Mirrors A7 for registered attendees. Needs: hotel block link and close date.`, body: `[PLACEHOLDER COPY.]
+New for 2027: the Operators Pavilion, a dedicated space for airlines and operators to meet suppliers away from the main floor traffic.
 
-Purpose: registered attendees never receive A7, so this carries the hotel block deadline for them. Real deadline, so real urgency. This is the one nurture email with a genuine hard date.
+You're already registered. [UPGRADE PATH FOR REGISTERED ATTENDEES, pending pricing/sales decision]: Operators Pavilion access ($500), or Pavilion plus both VIP suites ($1,000).
 
-Beats to cover:
-• Room block closes [DATE NEEDED]
-• Booking link [NEEDED]
-• Travel: MIA and FLL both roughly 30 to 40 minutes out
-• Upgrade path: Operators Pavilion $500, Pavilion plus both VIP suites $1,000
+→ Learn about the Pavilion [LINK NEEDED]` },
+    { n: 'D6', when: 'T-6 wk', subj: `[NEEDS DATA] New since you registered: [N] exhibitors, [N] matches`, meta: `Copy drafted 2026-09-04, but gated on a live exhibitor/match-count feed into HubSpot (property pbexpo_2027_exhibitor_feed_live = Yes). If that feed is not live by T-6wk, skip this step entirely rather than send it with generic wording.`, body: `Hi {First},
 
-Success metric: room block bookings attributed to this send.` },
-    { n: 'D8', when: 'T-2 wk', subj: `[LOCKED] Know before you go`, meta: `Structure locked. Mirrors A8 for registered attendees.`, body: `[PLACEHOLDER COPY.]
+Since you registered, the floor has grown. [N] new exhibitors added, and {Company} has [N] new best-fit matches waiting in the app.
 
-Purpose: reduce day-of friction and drive final schedule completion.
+One click gets you back in.
 
-Beats to cover:
-• Your meeting schedule, and how many slots are still open
-• Venue, parking, badge pickup times [DETAILS NEEDED]
-• Final agenda
-• What to bring
+→ Open the app [APP LINK NEEDED]` },
+    { n: 'D7', when: 'T-4 wk', subj: `[LOCKED] Book your room before the block closes`, meta: `Copy drafted 2026-09-04. Mirrors A7 for registered attendees, who never receive A7. Trigger: fixed date, event date minus 4 weeks. Needs: hotel block link and close date.`, body: `Hi {First},
 
-Success metric: share of registrants arriving with at least [N] meetings booked. This is the number that proves the matchmaking promise held.` },
-    { n: 'D9', when: 'T-1 day', subj: `[LOCKED] Tomorrow: your PBExpo schedule`, meta: `Structure locked. Send window matters more than copy here.`, body: `[PLACEHOLDER COPY.]
+You're already in for PBExpo 2027. Here's the piece that needs action now: our discounted Miami Beach room block closes [DATE NEEDED], and rooms are limited.
 
-Purpose: day-before logistics. Short, scannable, mobile first. Most people read this on a phone in an airport.
+→ Book your room [LINK NEEDED]
 
-Beats to cover:
-• Doors open [TIME NEEDED], badge pickup at [LOCATION NEEDED]
-• Your first meeting and where it is
-• Wi-Fi, floor plan, help desk
+Getting here: MIA and FLL are both roughly 30 to 40 minutes out.
 
-Open decision: send time. Evening before, or morning of day one?` },
-    { n: 'D10', when: '+2 days post-event', subj: `[EVENT-GATED] Thanks for coming, here is what happened`, meta: `Waiting on: recap assets, 2028 date, and whether next-year registration opens at the show.`, body: `[PLACEHOLDER COPY.]
+Want more from the two days? Add Operators Pavilion access ($500), or Pavilion plus both VIP suites ($1,000), for premium networking.` },
+    { n: 'D8', when: 'T-2 wk', subj: `[LOCKED] Know before you go`, meta: `Copy drafted 2026-09-04. Mirrors A8 for registered attendees. Trigger: fixed date, event date minus 2 weeks.`, body: `Hi {First},
 
-Purpose: close the loop, capture feedback while it is fresh, and start the Flow B past-attendee pool for the next cycle. This email is what makes next year's warm list exist.
+Two weeks to PBExpo 2027. Here's where things stand:
+• Your schedule: [N] meetings booked so far. Still time to book more in the app.
+• Venue and badge pickup: [DETAILS NEEDED]
+• Final agenda is live, review it in the app.
 
-Beats to cover:
-• Recap: attendance, highlights, Maintenance Games result [ASSETS NEEDED]
-• Feedback survey [NEEDS BUILDING]
-• Save the date for 2028 [DATE NOT SET]
+→ Review my schedule [APP LINK NEEDED]` },
+    { n: 'D9', when: 'T-1 day', subj: `[LOCKED] Tomorrow: your PBExpo schedule`, meta: `Copy drafted 2026-09-04. Trigger: fixed date, day before event. Open decision: send the evening before, or morning of day one, given most of this audience reads it from an airport.`, body: `Hi {First},
 
-Downstream: everyone who receives this becomes Flow B (past-attendee re-engage) for the next cycle. Tag them here or the warm pool has to be rebuilt from scratch later.` },
+Tomorrow's the day. PBExpo 2027, Miami Beach Convention Center.
+
+Doors open [TIME NEEDED]. Badge pickup at [LOCATION NEEDED].
+
+Your first meeting: [FIRST MEETING DETAIL, if available in-app].
+
+→ Open my schedule [APP LINK NEEDED]
+
+See you there.` },
+    { n: 'D10', when: '+2 days post-event', subj: `[EVENT-GATED] Thanks for coming, here is what happened`, meta: `Copy drafted 2026-09-04. Trigger: fixed date, event end plus 2 days. On send, set pbexpo_2027_attended = Yes where check-in data exists, then add recipient to the 2028 Flow B source list, this is what builds next cycle's warm pool. Needs: recap assets, 2028 date.`, body: `Hi {First},
+
+Thanks for being part of PBExpo 2027. [RECAP: attendance, highlights, Maintenance Games result].
+
+Tell us how it went, it takes two minutes and shapes next year's show.
+
+→ Share your feedback [SURVEY LINK NEEDED]
+
+Save the date: PBExpo 2028 is [DATE NOT SET].` },
   ]},
 };
 let pbxState = { flow: 'A', step: 0 };
