@@ -28,6 +28,12 @@ const TEMPLATES = [
     master: "resources/template-builder/masters/pbexpo.html",
     outputName: "pbexpo-sponsorship-push.html",
     use: "Self-serve sponsorship push — drives PBExpo prospects to buy a sponsorship package directly, no rep required.",
+    sections: [
+      { id: "hero", label: "Hero banner & sponsorship pitch", fields: ["hero-link", "hero-img", "headline", "pitch", "btn1-text"] },
+      { id: "grid", label: "Featured opportunities grid", fields: ["sub-headline", "grid1-link", "grid1-img", "grid2-link", "grid2-img", "grid3-link", "grid3-img", "grid4-link", "grid4-img", "preview-line"] },
+      { id: "booth", label: "“Buy a booth” banner", fields: ["booth-link", "booth-img", "fine-print"] },
+      { id: "registration", label: "Registration block", fields: ["reg-headline", "reg-pitch", "reg-link", "reg-img", "reg-caveat", "sponsor-credit"] },
+    ],
     fields: [
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Where the hero banner sends people (e.g. the sponsorship product grid).",
         apply: [{ selector: 'a[data-block-id="233"]', op: "attr", attr: "href", syncRaw: true }] },

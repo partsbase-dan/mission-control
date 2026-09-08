@@ -1,12 +1,41 @@
+// Removes one optional section as a unit: the master template marks the first and last
+// element of the section with data-tb-section-start/end="<sectionId>", and every element
+// in between (any number of rows) gets removed by walking siblings, so the master file
+// only needs two markers per section regardless of how many rows it spans.
+function removeSection(doc, sectionId) {
+  const startEl = doc.querySelector(`[data-tb-section-start="${sectionId}"]`);
+  const endEl = doc.querySelector(`[data-tb-section-end="${sectionId}"]`);
+  if (!startEl) { console.warn('Section start marker not found:', sectionId); return; }
+  const toRemove = [];
+  let node = startEl;
+  while (node) {
+    toRemove.push(node);
+    if (node === endEl) break;
+    node = node.nextElementSibling;
+  }
+  toRemove.forEach(n => n.remove());
+}
+
 // Shared "fill the master template" logic, used by every builder variant so the
 // actual generation behavior can't drift between them. See fields-data.js for the
-// apply-operation contract this reads.
-function buildOutputHtml(t, masterHtml, getValue) {
+// apply-operation contract this reads. excludedSectionIds (optional) skips filling and
+// removes the DOM range for any section the user chose not to include.
+function buildOutputHtml(t, masterHtml, getValue, excludedSectionIds) {
+  excludedSectionIds = excludedSectionIds || [];
   const doc = new DOMParser().parseFromString(masterHtml, 'text/html');
+
+  excludedSectionIds.forEach(sid => removeSection(doc, sid));
+
+  const skipFieldIds = new Set();
+  (t.sections || []).forEach(s => {
+    if (excludedSectionIds.includes(s.id)) s.fields.forEach(fid => skipFieldIds.add(fid));
+  });
+
   const rawSyncs = [];
   let filledCount = 0;
 
   t.fields.forEach(f => {
+    if (skipFieldIds.has(f.id)) return; // section excluded -- already removed from the DOM
     const raw = getValue(f.id);
     if (!raw || !raw.trim()) return; // blank = leave template content unchanged
     filledCount++;

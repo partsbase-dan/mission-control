@@ -71,6 +71,18 @@
   }
   .panel-card h2{ margin:0 0 6px; font-size:18px; color:var(--navy); }
   .panel-card .use{ color:var(--ink-soft); font-size:13px; line-height:1.5; margin-bottom:16px; }
+  .panel-card + .panel-card{ margin-top:14px; }
+
+  .section-toggle{
+    display:flex; align-items:baseline; gap:8px; cursor:pointer; margin-bottom:2px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.04em;
+  }
+  .section-toggle input{ margin:0; accent-color:var(--blue); cursor:pointer; }
+  .section-toggle span:nth-of-type(1){ font-size:14px; text-transform:none; letter-spacing:0; font-family:'Roboto',sans-serif; font-weight:700; color:var(--navy); }
+  .section-toggle-hint{ color:var(--ink-soft); font-weight:400 !important; }
+  .section-fields{ margin-top:14px; }
+  .section-card.section-excluded{ background:var(--line-soft); }
+  .section-card.section-excluded .section-fields{ opacity:.4; pointer-events:none; }
 
   .field{ margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid var(--line-soft); }
   .field:last-of-type{ border-bottom:none; }
@@ -173,9 +185,9 @@
   </div>
 </div>
 
-<script src="resources/template-builder/fields-data.js?v=20260908c"></script>
-<script src="resources/template-builder/assets-data.js?v=20260908c"></script>
-<script src="resources/template-builder/generate.js?v=20260908c"></script>
+<script src="resources/template-builder/fields-data.js?v=20260908d"></script>
+<script src="resources/template-builder/assets-data.js?v=20260908d"></script>
+<script src="resources/template-builder/generate.js?v=20260908d"></script>
 <script>
 const picker = document.getElementById('picker');
 const panelsForm = document.getElementById('panels-form');
@@ -205,7 +217,28 @@ function renderPicker(t, f) {
   return `<div class="picker-strip">${thumbs}</div>`;
 }
 
+function renderField(t, f) {
+  const isUrl = f.type === 'url';
+  const isTextarea = f.type === 'textarea';
+  const hasPicker = pickerAssets(f).length > 0;
+  const placeholder = f.example ? f.example.replace(/\n/g, ' / ') : '';
+  const inputHtml = isTextarea
+    ? `<textarea id="f-${t.id}-${f.id}" placeholder="${escAttr(placeholder)}" data-field="${f.id}"></textarea>`
+    : `<input type="${isUrl ? 'url' : 'text'}" id="f-${t.id}-${f.id}" placeholder="${escAttr(placeholder)}" data-field="${f.id}"${hasPicker ? ' class="visually-hidden"' : ''}>`;
+  return `<div class="field" data-field-wrap="${f.id}">
+    <label for="f-${t.id}-${f.id}">${f.label}${(isUrl && !hasPicker) ? '<span class="url-tag">URL</span>' : ''}</label>
+    ${f.hint ? `<div class="hint">${f.hint}</div>` : ''}
+    ${renderPicker(t, f)}
+    ${inputHtml}
+  </div>`;
+}
+
+// Which sections are currently excluded, per template id.
+const excludedSections = {};
+
 TEMPLATES.forEach((t, i) => {
+  excludedSections[t.id] = new Set();
+
   const btn = document.createElement('button');
   btn.className = 'picker-btn' + (i === 0 ? ' active' : '');
   btn.dataset.id = t.id;
@@ -217,29 +250,34 @@ TEMPLATES.forEach((t, i) => {
   panel.className = 'panel' + (i === 0 ? ' active' : '');
   panel.id = 'panel-' + t.id;
 
-  const fieldsHtml = t.fields.map(f => {
-    const isUrl = f.type === 'url';
-    const isTextarea = f.type === 'textarea';
-    const hasPicker = pickerAssets(f).length > 0;
-    const placeholder = f.example ? f.example.replace(/\n/g, ' / ') : '';
-    const inputHtml = isTextarea
-      ? `<textarea id="f-${t.id}-${f.id}" placeholder="${escAttr(placeholder)}" data-field="${f.id}"></textarea>`
-      : `<input type="${isUrl ? 'url' : 'text'}" id="f-${t.id}-${f.id}" placeholder="${escAttr(placeholder)}" data-field="${f.id}"${hasPicker ? ' class="visually-hidden"' : ''}>`;
-    return `<div class="field">
-      <label for="f-${t.id}-${f.id}">${f.label}${(isUrl && !hasPicker) ? '<span class="url-tag">URL</span>' : ''}</label>
-      ${f.hint ? `<div class="hint">${f.hint}</div>` : ''}
-      ${renderPicker(t, f)}
-      ${inputHtml}
+  const sectionedFieldIds = new Set();
+  (t.sections || []).forEach(s => s.fields.forEach(fid => sectionedFieldIds.add(fid)));
+  const looseFields = t.fields.filter(f => !sectionedFieldIds.has(f.id));
+
+  const sectionCards = (t.sections || []).map(s => {
+    const fields = t.fields.filter(f => s.fields.includes(f.id));
+    return `<div class="panel-card section-card" data-section="${s.id}">
+      <label class="section-toggle">
+        <input type="checkbox" checked data-section-checkbox="${s.id}">
+        <span>${s.label}</span>
+        <span class="section-toggle-hint">Uncheck to leave this whole section out</span>
+      </label>
+      <div class="section-fields">${fields.map(f => renderField(t, f)).join('')}</div>
     </div>`;
   }).join('');
+
+  const looseCard = looseFields.length
+    ? `<div class="panel-card">${looseFields.map(f => renderField(t, f)).join('')}</div>`
+    : '';
 
   panel.innerHTML = `
     <div class="panel-card">
       <h2>${t.name}</h2>
       <div class="use">${t.use}</div>
-      <div class="note"><span>💡</span><span>Watch the preview on the right update as you type. Paste hosted image URLs (upload to HubSpot's File Manager first) — leave any field blank to keep the template's current content.</span></div>
-      ${fieldsHtml}
+      <div class="note"><span>💡</span><span>Watch the preview on the right update as you type. Paste hosted image URLs (upload to HubSpot's File Manager first) — leave any field blank to keep the template's current content.${t.sections ? ' Uncheck a section below to leave it out of the email entirely.' : ''}</span></div>
     </div>
+    ${sectionCards}
+    ${looseCard}
     <div class="actions">
       <button id="gen-${t.id}">Generate &amp; Download</button>
       <span class="status" id="status-${t.id}"></span>
@@ -260,6 +298,19 @@ TEMPLATES.forEach((t, i) => {
       btn.classList.add('selected');
     });
   });
+  panel.querySelectorAll('[data-section-checkbox]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const sid = cb.dataset.sectionCheckbox;
+      const card = cb.closest('.section-card');
+      if (cb.checked) excludedSections[t.id].delete(sid);
+      else excludedSections[t.id].add(sid);
+      card.classList.toggle('section-excluded', !cb.checked);
+      card.querySelectorAll('input, textarea, button').forEach(el => {
+        if (el !== cb) el.disabled = !cb.checked;
+      });
+      scheduleRefresh(t);
+    });
+  });
 });
 
 async function getMaster(t) {
@@ -277,7 +328,7 @@ function scheduleRefresh(t) {
 
 async function refreshPreview(t) {
   const masterHtml = await getMaster(t);
-  const { html: out } = buildOutputHtml(t, masterHtml, (id) => document.getElementById(`f-${t.id}-${id}`).value);
+  const { html: out } = buildOutputHtml(t, masterHtml, (id) => document.getElementById(`f-${t.id}-${id}`).value, [...excludedSections[t.id]]);
   previewFrame.srcdoc = out;
   previewName.textContent = t.name;
 }
@@ -304,7 +355,7 @@ async function download(t) {
 
   try {
     const masterHtml = await getMaster(t);
-    const { html: out, filledCount } = buildOutputHtml(t, masterHtml, (id) => document.getElementById(`f-${t.id}-${id}`).value);
+    const { html: out, filledCount } = buildOutputHtml(t, masterHtml, (id) => document.getElementById(`f-${t.id}-${id}`).value, [...excludedSections[t.id]]);
 
     const blob = new Blob([out], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
