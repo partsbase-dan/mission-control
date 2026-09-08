@@ -102,7 +102,7 @@
     <div class="eyebrow">PartsBase / GTM Templates</div>
     <h1>Email Template Gallery</h1>
     <p>Live previews of the top of each template — pick the one that fits, then jump straight into the builder with it already selected.</p>
-    <a class="skip" href="template-builder.html">Skip straight to the builder →</a>
+    <a class="skip" href="template-builder-preview.html">Skip straight to the builder →</a>
   </div>
 </header>
 
@@ -110,7 +110,7 @@
   <div class="grid" id="grid"></div>
 </div>
 
-<script src="resources/template-builder/fields-data.js?v=20260908b"></script>
+<script src="resources/template-builder/fields-data.js?v=20260908f"></script>
 <script>
 const grid = document.getElementById('grid');
 
@@ -127,7 +127,7 @@ TEMPLATES.forEach(t => {
       <h2>${t.name}</h2>
       <div class="use">${t.use}</div>
       <div class="meta"><span>${t.fields.length} fields</span></div>
-      <a class="use-btn" href="template-builder.html?template=${t.id}">Use this template →</a>
+      <a class="use-btn" href="template-builder-preview.html?template=${t.id}">Use this template →</a>
     </div>
   `;
   grid.appendChild(card);
