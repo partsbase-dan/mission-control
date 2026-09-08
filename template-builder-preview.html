@@ -132,6 +132,12 @@
   }
   .note b{ color:var(--amber); }
 
+  .copy-guide-link{
+    display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600;
+    color:var(--blue); text-decoration:none; margin-bottom:16px;
+  }
+  .copy-guide-link:hover{ text-decoration:underline; }
+
   .preview-col{ position:sticky; top:16px; }
   .preview-frame-wrap{
     background:var(--surface); border:1px solid var(--line); border-radius:12px;
@@ -272,6 +278,7 @@ TEMPLATES.forEach((t, i) => {
       <h2>${t.name}</h2>
       <div class="use">${t.use}</div>
       <div class="note"><span>💡</span><span>Watch the preview on the right update as you type. Paste hosted image URLs (upload to HubSpot's File Manager first) — leave any field blank to keep the template's current content.${t.sections ? ' Uncheck a section below to leave it out of the email entirely.' : ''}</span></div>
+      <a class="copy-guide-link" href="resources/template-builder/copy-guides/${t.id}-copy-guide.docx" download>📄 Prefer to draft this in Word first? Download the Copy Guide</a>
     </div>
     ${sectionCards}
     ${looseCard}

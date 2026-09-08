@@ -62,6 +62,17 @@
 !resources/template-builder/masters/amelia.html
 !resources/template-builder/masters/sales-outreach.html
 
+# Per-template Word Copy Guides, so people can draft copy before opening the
+# builder. Regenerate with `node scripts/build_template_copy_guides.js` any
+# time fields-data.js's text/textarea fields change.
+!resources/template-builder/copy-guides/
+!resources/template-builder/copy-guides/pbexpo-copy-guide.docx
+!resources/template-builder/copy-guides/partstore-copy-guide.docx
+!resources/template-builder/copy-guides/jumbo-copy-guide.docx
+!resources/template-builder/copy-guides/networking-copy-guide.docx
+!resources/template-builder/copy-guides/amelia-copy-guide.docx
+!resources/template-builder/copy-guides/sales-outreach-copy-guide.docx
+
 # ── This file ────────────────────────────────────────────────────────────────
 # Tracked so the protection survives a fresh clone.
 !.gitignore

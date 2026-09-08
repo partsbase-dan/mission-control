@@ -77,6 +77,8 @@
     letter-spacing:.04em; background:rgba(255,255,255,.92); color:var(--ink-soft);
     border:1px solid var(--line); padding:4px 8px; border-radius:6px; text-decoration:none;
   }
+  /* Visual chip stays small; ::before pads out the actual tap target to ~44px. */
+  .peek .expand::before{ content:""; position:absolute; top:-11px; right:-8px; bottom:-11px; left:-8px; }
   .peek .expand:hover{ color:var(--blue); border-color:var(--blue); }
 
   .body{ padding:18px 20px 20px; display:flex; flex-direction:column; gap:10px; flex:1; }
