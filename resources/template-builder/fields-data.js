@@ -93,6 +93,12 @@ const TEMPLATES = [
     master: "resources/template-builder/masters/partstore.html",
     outputName: "partstore-feature-launch.html",
     use: "Feature-launch announcement — explains a new PartStore capability, walks through how to activate it, and closes with a named human contact.",
+    sections: [
+      { id: "hero", label: "Headline, pitch & video", fields: ["headline", "pitch", "video-link", "video-img", "video-caption"] },
+      { id: "value", label: "Stats, problem & mid-page CTA", fields: ["stat1-value", "stat1-caption", "stat2-value", "stat2-caption", "stat3-value", "stat3-caption", "problem-headline", "problem-para1", "problem-para2", "midbtn-text", "midbtn-link", "disclaimer"] },
+      { id: "apply", label: "How to apply & closing CTA", fields: ["howto-headline", "step1", "step2", "step3", "step4", "callout", "closing-headline", "closingbtn-text", "closingbtn-link"] },
+      { id: "signoff", label: "Sign-off", fields: ["signoff-question", "signoff-photo", "signoff-name", "signoff-title", "signoff-email"] },
+    ],
     fields: [
       { id: "eyebrow", label: "Header eyebrow label", type: "text", example: "PAY-BY-INVOICE IS LIVE", apply: [{ selector: "#tb-eyebrow", op: "text" }] },
 
@@ -152,6 +158,11 @@ const TEMPLATES = [
     master: "resources/template-builder/masters/jumbo.html",
     outputName: "pb-jumbotron.html",
     use: "Urgency-driven upsell — a limited-time perk (free jumbotron ad) tied to booth tier purchases, plus a secondary registration push.",
+    sections: [
+      { id: "hero", label: "Hero banner & offer pitch", fields: ["hero-link", "hero-img", "headline", "offer-paras"] },
+      { id: "tiers", label: "Booth tier grid", fields: ["tier1-link", "tier1-img", "tier2-link", "tier2-img", "tier3-link", "tier3-img", "tier4-link", "tier4-img", "tier5-link", "tier5-img", "tier6-link", "tier6-img"] },
+      { id: "registration", label: "Registration block", fields: ["reg-headline", "reg-pitch", "register-link", "register-text", "register-caption", "fine-print", "sponsor-credit"] },
+    ],
     fields: [
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="309"]', op: "attr", attr: "href", syncRaw: true }, { selector: 'a[data-block-id="311"]', op: "attr", attr: "href", syncRaw: true }] },
       { id: "hero-img", label: "Hero CTA banner — image URL", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="309"] img', op: "attr", attr: "src", syncRaw: true }] },
@@ -199,6 +210,10 @@ const TEMPLATES = [
     master: "resources/template-builder/masters/networking.html",
     outputName: "networking-attendee-promo.html",
     use: "Attendee-facing value pitch — makes the case for registering by leaning on the in-person, face-to-face angle rather than an offer or discount.",
+    sections: [
+      { id: "pitch", label: "Hero banner, pitch & register button", fields: ["hero-link", "hero-img", "headline", "value-paras", "register-text"] },
+      { id: "video", label: "Video thumbnail", fields: ["video-link", "video-img"] },
+    ],
     fields: [
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Also applied to the Register button below, since they share a destination.",
         apply: [{ selector: 'a[data-block-id="242"]', op: "attr", attr: "href", syncRaw: true }] },
@@ -223,6 +238,12 @@ const TEMPLATES = [
     master: "resources/template-builder/masters/amelia.html",
     outputName: "amelia-ai-announcement.html",
     use: "Coming-soon product tease — introduces a not-yet-launched feature (Amelia AI search), explains the value, and sends traffic back to the core product rather than a signup form.",
+    sections: [
+      { id: "intro", label: "Hero banner & intro", fields: ["hero-link", "hero-img", "headline", "intro"] },
+      { id: "spotlight", label: "Feature spotlight", fields: ["spotlight", "spotlight-img"] },
+      { id: "benefits", label: "Why it matters", fields: ["benefits-headline", "benefits-para"] },
+      { id: "closing", label: "Closing & button", fields: ["closing-headline", "closing-para", "btn-text", "btn-link"] },
+    ],
     fields: [
       { id: "hero-link", label: "Full-width hero banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="4"]', op: "attr", attr: "href", syncRaw: true }] },
       { id: "hero-img", label: "Full-width hero banner — image URL", type: "url", pickerCategories: ["header:partsbase"], hint: "612px wide.", apply: [{ selector: 'a[data-block-id="4"] img', op: "attr", attr: "src", syncRaw: true }] },
@@ -258,6 +279,9 @@ const TEMPLATES = [
     master: "resources/template-builder/masters/sales-outreach.html",
     outputName: "partstore-sales-outreach.html",
     use: "1:1 sales email — a rep sends this individually to one prospect introducing PartStore and asking for a call. Not a bulk campaign send.",
+    sections: [
+      { id: "product-image", label: "Product image", fields: ["product-img"] },
+    ],
     fields: [
       { id: "greeting", label: "Greeting line", type: "text", hint: "The whole line, including the prospect's name.", example: "Hi Sarah,",
         apply: [{ selector: "#tb-greeting", op: "text" }] },

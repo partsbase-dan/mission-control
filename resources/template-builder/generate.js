@@ -1,19 +1,16 @@
 // Removes one optional section as a unit: the master template marks the first and last
-// element of the section with data-tb-section-start/end="<sectionId>", and every element
-// in between (any number of rows) gets removed by walking siblings, so the master file
-// only needs two markers per section regardless of how many rows it spans.
+// element of the section with data-tb-section-start/end="<sectionId>", and everything in
+// document order between them (inclusive) is deleted via Range -- so a section can span
+// any number of rows, and even cross from one top-level table into the next, as long as
+// start comes before end in the document.
 function removeSection(doc, sectionId) {
   const startEl = doc.querySelector(`[data-tb-section-start="${sectionId}"]`);
-  const endEl = doc.querySelector(`[data-tb-section-end="${sectionId}"]`);
+  const endEl = doc.querySelector(`[data-tb-section-end="${sectionId}"]`) || startEl;
   if (!startEl) { console.warn('Section start marker not found:', sectionId); return; }
-  const toRemove = [];
-  let node = startEl;
-  while (node) {
-    toRemove.push(node);
-    if (node === endEl) break;
-    node = node.nextElementSibling;
-  }
-  toRemove.forEach(n => n.remove());
+  const range = doc.createRange();
+  range.setStartBefore(startEl);
+  range.setEndAfter(endEl);
+  range.deleteContents();
 }
 
 // Shared "fill the master template" logic, used by every builder variant so the
