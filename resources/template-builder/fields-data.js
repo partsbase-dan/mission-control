@@ -29,9 +29,6 @@ const TEMPLATES = [
     outputName: "pbexpo-sponsorship-push.html",
     use: "Self-serve sponsorship push — drives PBExpo prospects to buy a sponsorship package directly, no rep required.",
     fields: [
-      { id: "header-img", label: "Top header banner — image URL", type: "url", pickerCategories: ["header:pbexpo"], hint: "Static decorative banner, not clickable. 660px wide. Paste a HubSpot-hosted image URL.",
-        apply: [{ selector: 'img[data-block-id="3"]', op: "attr", attr: "src", syncRaw: true }] },
-
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Where the hero banner sends people (e.g. the sponsorship product grid).",
         apply: [{ selector: 'a[data-block-id="233"]', op: "attr", attr: "href", syncRaw: true }] },
       { id: "hero-img", label: "Hero CTA banner — image URL", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.",
@@ -91,8 +88,6 @@ const TEMPLATES = [
     outputName: "partstore-feature-launch.html",
     use: "Feature-launch announcement — explains a new PartStore capability, walks through how to activate it, and closes with a named human contact.",
     fields: [
-      { id: "logo-img", label: "Nav logo — image URL", type: "url", hint: "122×24px.", apply: [{ selector: "#tb-logo-img", op: "attr", attr: "src" }] },
-      { id: "logo-link", label: "Nav logo — link URL", type: "url", apply: [{ selector: "#tb-logo-link", op: "attr", attr: "href" }] },
       { id: "eyebrow", label: "Header eyebrow label", type: "text", example: "PAY-BY-INVOICE IS LIVE", apply: [{ selector: "#tb-eyebrow", op: "text" }] },
 
       { id: "headline", label: "Two-line headline (one line per input line)", type: "textarea", hint: "Line 1: sets up a familiar moment. Line 2: delivers the payoff.", example: "You found the part.\nNow you have the terms.",
@@ -152,7 +147,6 @@ const TEMPLATES = [
     outputName: "pb-jumbotron.html",
     use: "Urgency-driven upsell — a limited-time perk (free jumbotron ad) tied to booth tier purchases, plus a secondary registration push.",
     fields: [
-      { id: "header-img", label: "Top header banner — image URL", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide, not clickable.", apply: [{ selector: 'img[data-block-id="3"]', op: "attr", attr: "src", syncRaw: true }] },
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="309"]', op: "attr", attr: "href", syncRaw: true }, { selector: 'a[data-block-id="311"]', op: "attr", attr: "href", syncRaw: true }] },
       { id: "hero-img", label: "Hero CTA banner — image URL", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="309"] img', op: "attr", attr: "src", syncRaw: true }] },
 
@@ -200,7 +194,6 @@ const TEMPLATES = [
     outputName: "networking-attendee-promo.html",
     use: "Attendee-facing value pitch — makes the case for registering by leaning on the in-person, face-to-face angle rather than an offer or discount.",
     fields: [
-      { id: "header-img", label: "Top header banner — image URL", type: "url", pickerCategories: ["header:pbexpo"], hint: "628px wide, not clickable.", apply: [{ selector: "#tb-header-img", op: "attr", attr: "src", syncRaw: true }] },
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Also applied to the Register button below, since they share a destination.",
         apply: [{ selector: 'a[data-block-id="242"]', op: "attr", attr: "href", syncRaw: true }] },
       { id: "hero-img", label: "Hero CTA banner — image URL", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="242"] img', op: "attr", attr: "src", syncRaw: true }] },
@@ -225,8 +218,6 @@ const TEMPLATES = [
     outputName: "amelia-ai-announcement.html",
     use: "Coming-soon product tease — introduces a not-yet-launched feature (Amelia AI search), explains the value, and sends traffic back to the core product rather than a signup form.",
     fields: [
-      { id: "logo-link", label: "Nav logo — link URL", type: "url", apply: [{ selector: 'a[data-block-id="3"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "logo-img", label: "Nav logo — image URL", type: "url", hint: "~245px wide.", apply: [{ selector: 'a[data-block-id="3"] img', op: "attr", attr: "src", syncRaw: true }] },
       { id: "hero-link", label: "Full-width hero banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="4"]', op: "attr", attr: "href", syncRaw: true }] },
       { id: "hero-img", label: "Full-width hero banner — image URL", type: "url", pickerCategories: ["header:partsbase"], hint: "612px wide.", apply: [{ selector: 'a[data-block-id="4"] img', op: "attr", attr: "src", syncRaw: true }] },
 
