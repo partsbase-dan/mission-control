@@ -47,9 +47,12 @@
 # it edits in that master, and both pages read it directly.
 !template-gallery.html
 !template-builder.html
+!template-builder-plain.html
+!template-builder-preview.html
 !resources/
 !resources/template-builder/
 !resources/template-builder/fields-data.js
+!resources/template-builder/generate.js
 !resources/template-builder/masters/
 !resources/template-builder/masters/pbexpo.html
 !resources/template-builder/masters/partstore.html

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email Template Builder — Live Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#002857;
+    --blue:#0C70E8;
+    --paper:#F5F7FB;
+    --surface:#FFFFFF;
+    --ink:#26324A;
+    --ink-soft:#5B6B85;
+    --line:#DCE3EE;
+    --line-soft:#EAEFF6;
+    --amber:#B4740E;
+    --amber-bg:#FBF1DF;
+    --good:#0E8A5F;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Roboto', -apple-system, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', ui-monospace, monospace;}
+
+  header.top{ background:var(--navy); color:#fff; padding:18px 24px; }
+  header.top .row{ max-width:1400px; margin:0 auto; display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  header.top .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.09em;
+    text-transform:uppercase; color:#8FB6EE; margin-bottom:4px;
+  }
+  header.top h1{ margin:0; font-size:21px; font-weight:700; }
+  header.top .variant-flag{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:#B9CDEC; }
+  header.top .variant-flag a{ color:#fff; }
+
+  .shell{ max-width:1400px; margin:0 auto; padding:20px 24px 40px; }
+
+  .layout{ display:grid; grid-template-columns:220px minmax(360px,1fr) minmax(380px,560px); gap:20px; align-items:start; }
+  @media (max-width:1100px){ .layout{ grid-template-columns:220px 1fr; } .preview-col{ grid-column:1 / -1; } }
+  @media (max-width:640px){ .layout{ grid-template-columns:1fr; } }
+
+  .picker{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:10px; position:sticky; top:16px;
+  }
+  .picker .picker-btn{
+    display:block; width:100%; text-align:left; border:none; background:none;
+    padding:11px 11px; border-radius:8px; cursor:pointer; font-family:inherit;
+    font-size:13.5px; color:var(--ink); margin-bottom:2px;
+  }
+  .picker .picker-btn .n{ display:block; font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+  .picker .picker-btn:hover{ background:var(--line-soft); }
+  .picker .picker-btn.active{ background:var(--navy); color:#fff; }
+  .picker .picker-btn.active .n{ color:#9DBBE8; }
+
+  .panel{ display:none; }
+  .panel.active{ display:contents; }
+
+  .form-col{}
+  .panel-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:20px 22px;
+  }
+  .panel-card h2{ margin:0 0 6px; font-size:18px; color:var(--navy); }
+  .panel-card .use{ color:var(--ink-soft); font-size:13px; line-height:1.5; margin-bottom:16px; }
+
+  .field{ margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid var(--line-soft); }
+  .field:last-of-type{ border-bottom:none; }
+  .field label{ display:block; font-weight:500; font-size:13px; margin-bottom:5px; color:var(--ink); }
+  .field .hint{ font-size:12px; color:var(--ink-soft); margin-bottom:6px; line-height:1.5; }
+  .field input[type="text"], .field input[type="url"], .field textarea{
+    width:100%; border:1px solid var(--line); border-radius:8px; padding:8px 10px;
+    font-family:inherit; font-size:13px; color:var(--ink); background:var(--paper);
+  }
+  .field input:focus, .field textarea:focus{ outline:2px solid var(--blue); outline-offset:1px; border-color:var(--blue); }
+  .field textarea{ min-height:58px; resize:vertical; line-height:1.5; }
+  .field .url-tag{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:9.5px;
+    text-transform:uppercase; letter-spacing:.04em; color:var(--blue); background:#E7F0FD;
+    padding:2px 6px; border-radius:5px; margin-left:6px; vertical-align:middle;
+  }
+
+  .actions{
+    position:sticky; bottom:0; margin-top:16px; padding:14px; background:var(--surface);
+    border:1px solid var(--line); border-radius:12px; display:flex; align-items:center; gap:12px;
+    flex-wrap:wrap;
+  }
+  .actions button{
+    appearance:none; border:none; background:var(--blue); color:#fff; font-family:inherit;
+    font-weight:700; font-size:14px; padding:11px 20px; border-radius:9px; cursor:pointer;
+  }
+  .actions button:hover{ background:#0A5FC4; }
+  .actions .status{ font-size:12.5px; color:var(--ink-soft); }
+  .actions .status.ok{ color:var(--good); }
+
+  .note{
+    display:flex; gap:10px; background:var(--amber-bg);
+    border:1px solid color-mix(in srgb, var(--amber) 35%, transparent);
+    color:var(--ink); border-radius:10px; padding:11px 13px; font-size:12px;
+    line-height:1.55; margin-bottom:16px;
+  }
+  .note b{ color:var(--amber); }
+
+  .preview-col{ position:sticky; top:16px; }
+  .preview-frame-wrap{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    overflow:hidden; display:flex; flex-direction:column;
+  }
+  .preview-head{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:10px 14px; border-bottom:1px solid var(--line); background:var(--line-soft);
+  }
+  .preview-head .label{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase;
+    letter-spacing:.05em; color:var(--ink-soft);
+  }
+  .preview-head .live-dot{
+    display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--good);
+    margin-right:6px; animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+  iframe.preview-frame{
+    width:100%; height:78vh; border:none; background:#EDF1F7;
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="row">
+    <div>
+      <div class="eyebrow">PartsBase / GTM Templates</div>
+      <h1>Email Template Builder — Live Preview</h1>
+    </div>
+    <div class="variant-flag">Comparing layouts: <a href="template-builder-plain.html">plain-language version</a> · <a href="template-builder.html">original</a></div>
+  </div>
+</header>
+
+<div class="shell">
+  <div class="layout">
+    <nav class="picker" id="picker"></nav>
+    <div id="panels-form" class="form-col"></div>
+    <div class="preview-col">
+      <div class="preview-frame-wrap">
+        <div class="preview-head">
+          <span class="label"><span class="live-dot"></span>Live preview</span>
+          <span class="label" id="preview-name"></span>
+        </div>
+        <iframe class="preview-frame" id="preview-frame"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="resources/template-builder/fields-data.js"></script>
+<script src="resources/template-builder/generate.js"></script>
+<script>
+const picker = document.getElementById('picker');
+const panelsForm = document.getElementById('panels-form');
+const previewFrame = document.getElementById('preview-frame');
+const previewName = document.getElementById('preview-name');
+
+let currentTemplate = null;
+let masterCache = {};
+let debounceTimer = null;
+
+function escAttr(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
+
+TEMPLATES.forEach((t, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'picker-btn' + (i === 0 ? ' active' : '');
+  btn.dataset.id = t.id;
+  btn.innerHTML = `${t.name}<span class="n">${t.fields.length} fields</span>`;
+  btn.addEventListener('click', () => selectTemplate(t.id));
+  picker.appendChild(btn);
+
+  const panel = document.createElement('div');
+  panel.className = 'panel' + (i === 0 ? ' active' : '');
+  panel.id = 'panel-' + t.id;
+
+  const fieldsHtml = t.fields.map(f => {
+    const isUrl = f.type === 'url';
+    const isTextarea = f.type === 'textarea';
+    const placeholder = f.example ? f.example.replace(/\n/g, ' / ') : '';
+    const inputHtml = isTextarea
+      ? `<textarea id="f-${t.id}-${f.id}" placeholder="${escAttr(placeholder)}" data-field="${f.id}"></textarea>`
+      : `<input type="${isUrl ? 'url' : 'text'}" id="f-${t.id}-${f.id}" placeholder="${escAttr(placeholder)}" data-field="${f.id}">`;
+    return `<div class="field">
+      <label for="f-${t.id}-${f.id}">${f.label}${isUrl ? '<span class="url-tag">URL</span>' : ''}</label>
+      ${f.hint ? `<div class="hint">${f.hint}</div>` : ''}
+      ${inputHtml}
+    </div>`;
+  }).join('');
+
+  panel.innerHTML = `
+    <div class="panel-card">
+      <h2>${t.name}</h2>
+      <div class="use">${t.use}</div>
+      <div class="note"><span>💡</span><span>Watch the preview on the right update as you type. Paste hosted image URLs (upload to HubSpot's File Manager first) — leave any field blank to keep the template's current content.</span></div>
+      ${fieldsHtml}
+    </div>
+    <div class="actions">
+      <button id="gen-${t.id}">Generate &amp; Download</button>
+      <span class="status" id="status-${t.id}"></span>
+    </div>
+  `;
+  panelsForm.appendChild(panel);
+
+  panel.querySelector(`#gen-${t.id}`).addEventListener('click', () => download(t));
+  panel.querySelectorAll('[data-field]').forEach(el => {
+    el.addEventListener('input', () => scheduleRefresh(t));
+  });
+});
+
+async function getMaster(t) {
+  if (masterCache[t.id]) return masterCache[t.id];
+  const res = await fetch(t.master, { cache: 'no-store' });
+  const html = await res.text();
+  masterCache[t.id] = html;
+  return html;
+}
+
+function scheduleRefresh(t) {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => refreshPreview(t), 350);
+}
+
+async function refreshPreview(t) {
+  const masterHtml = await getMaster(t);
+  const { html: out } = buildOutputHtml(t, masterHtml, (id) => document.getElementById(`f-${t.id}-${id}`).value);
+  previewFrame.srcdoc = out;
+  previewName.textContent = t.name;
+}
+
+async function selectTemplate(id) {
+  document.querySelectorAll('.picker-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + id));
+  currentTemplate = TEMPLATES.find(t => t.id === id);
+  await refreshPreview(currentTemplate);
+}
+
+// Deep link from the template gallery: ?template=<id> preselects that template.
+const requested = new URLSearchParams(location.search).get('template');
+const startId = (requested && TEMPLATES.some(t => t.id === requested)) ? requested : TEMPLATES[0].id;
+selectTemplate(startId);
+
+async function download(t) {
+  const statusEl = document.getElementById('status-' + t.id);
+  const genBtn = document.getElementById('gen-' + t.id);
+  statusEl.textContent = '';
+  statusEl.className = 'status';
+  genBtn.disabled = true;
+  genBtn.textContent = 'Generating…';
+
+  try {
+    const masterHtml = await getMaster(t);
+    const { html: out, filledCount } = buildOutputHtml(t, masterHtml, (id) => document.getElementById(`f-${t.id}-${id}`).value);
+
+    const blob = new Blob([out], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = t.outputName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+    statusEl.textContent = filledCount > 0
+      ? `Downloaded — ${filledCount} field${filledCount === 1 ? '' : 's'} updated.`
+      : 'Downloaded — no fields were filled in, so the template went out unchanged.';
+    statusEl.classList.add('ok');
+  } catch (err) {
+    console.error(err);
+    statusEl.textContent = 'Something went wrong: ' + err.message;
+  } finally {
+    genBtn.disabled = false;
+    genBtn.textContent = 'Generate & Download';
+  }
+}
+</script>
+</body>
+</html>
