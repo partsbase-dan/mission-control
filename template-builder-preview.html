@@ -121,8 +121,16 @@
     font-weight:700; font-size:14px; padding:11px 20px; border-radius:9px; cursor:pointer;
   }
   .actions button:hover{ background:#0A5FC4; }
+  .actions button.secondary{ background:none; border:1px solid var(--line); color:var(--ink-soft); font-weight:600; }
+  .actions button.secondary:hover{ background:var(--line-soft); color:var(--ink); }
   .actions .status{ font-size:12.5px; color:var(--ink-soft); }
   .actions .status.ok{ color:var(--good); }
+
+  .draft-note{
+    display:flex; gap:8px; background:var(--line-soft); color:var(--ink-soft);
+    border-radius:8px; padding:9px 12px; font-size:12px; line-height:1.5; margin-top:10px;
+  }
+  .draft-note b{ color:var(--ink); }
 
   .note{
     display:flex; gap:10px; background:var(--amber-bg);
@@ -159,6 +167,15 @@
   iframe.preview-frame{
     width:100%; height:78vh; border:none; background:#EDF1F7;
   }
+  .preview-frame-wrap.mobile{ max-width:400px; margin:0 auto; }
+
+  .preview-toggle{ display:flex; gap:2px; background:var(--surface); border:1px solid var(--line); border-radius:7px; padding:2px; }
+  .preview-toggle button{
+    appearance:none; border:none; background:none; font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft);
+    padding:4px 10px; border-radius:5px; cursor:pointer;
+  }
+  .preview-toggle button.active{ background:var(--navy); color:#fff; }
 </style>
 </head>
 <body>
@@ -180,6 +197,10 @@
       <div class="preview-frame-wrap">
         <div class="preview-head">
           <span class="label"><span class="live-dot"></span>Live preview</span>
+          <div class="preview-toggle" role="group" aria-label="Preview width">
+            <button type="button" class="active" data-mode="desktop" aria-pressed="true">Desktop</button>
+            <button type="button" data-mode="mobile" aria-pressed="false">Mobile</button>
+          </div>
           <span class="label" id="preview-name"></span>
         </div>
         <iframe class="preview-frame" id="preview-frame" title="Live preview"></iframe>
@@ -200,9 +221,31 @@ const previewName = document.getElementById('preview-name');
 let currentTemplate = null;
 let masterCache = {};
 let debounceTimer = null;
+let previewMode = 'desktop';
 
 function escAttr(s) {
   return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
+
+// Per-template drafts, so an accidental refresh doesn't lose typed copy.
+const DRAFT_PREFIX = 'tb-draft-v1-';
+
+function loadDraft(id) {
+  try {
+    const raw = localStorage.getItem(DRAFT_PREFIX + id);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+
+function saveDraft(t) {
+  try {
+    const fields = {};
+    t.fields.forEach(f => {
+      const el = document.getElementById(`f-${t.id}-${f.id}`);
+      if (el && el.value) fields[f.id] = el.value;
+    });
+    localStorage.setItem(DRAFT_PREFIX + t.id, JSON.stringify({ fields, excludedSections: [...excludedSections[t.id]] }));
+  } catch {}
 }
 
 function pickerAssets(f) {
@@ -284,12 +327,43 @@ TEMPLATES.forEach((t, i) => {
     ${looseCard}
     <div class="actions">
       <button id="gen-${t.id}">Generate &amp; Download</button>
+      <button type="button" class="secondary" id="clear-${t.id}">Clear all fields</button>
       <span class="status" id="status-${t.id}"></span>
     </div>
   `;
   panelsForm.appendChild(panel);
 
+  // Restore a saved draft, if one exists, before wiring up listeners.
+  const draft = loadDraft(t.id);
+  let restoredCount = 0;
+  if (draft) {
+    Object.entries(draft.fields || {}).forEach(([fid, val]) => {
+      const el = document.getElementById(`f-${t.id}-${fid}`);
+      if (el) { el.value = val; restoredCount++; }
+    });
+    (draft.excludedSections || []).forEach(sid => {
+      const cb = panel.querySelector(`[data-section-checkbox="${sid}"]`);
+      if (!cb) return;
+      excludedSections[t.id].add(sid);
+      cb.checked = false;
+      const card = cb.closest('.section-card');
+      card.classList.add('section-excluded');
+      card.querySelectorAll('input, textarea, button').forEach(el => { if (el !== cb) el.disabled = true; });
+    });
+    panel.querySelectorAll('.thumb').forEach(btn => {
+      const input = document.getElementById(btn.dataset.target);
+      if (input && input.value === btn.dataset.url) btn.classList.add('selected');
+    });
+  }
+  if (restoredCount > 0) {
+    const notice = document.createElement('div');
+    notice.className = 'draft-note';
+    notice.innerHTML = `<span>📝</span><span>Draft restored from your last visit (${restoredCount} field${restoredCount === 1 ? '' : 's'}). Use <b>Clear all fields</b> below to start fresh.</span>`;
+    panel.querySelector('.panel-card').appendChild(notice);
+  }
+
   panel.querySelector(`#gen-${t.id}`).addEventListener('click', () => download(t));
+  panel.querySelector(`#clear-${t.id}`).addEventListener('click', () => clearAllFields(t));
   panel.querySelectorAll('[data-field]').forEach(el => {
     el.addEventListener('input', () => scheduleRefresh(t));
   });
@@ -327,7 +401,7 @@ async function getMaster(t) {
 
 function scheduleRefresh(t) {
   clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(() => refreshPreview(t), 350);
+  debounceTimer = setTimeout(() => { refreshPreview(t); saveDraft(t); }, 350);
 }
 
 async function refreshPreview(t) {
@@ -337,6 +411,40 @@ async function refreshPreview(t) {
   previewFrame.title = t.name + ' — live preview';
   previewName.textContent = t.name;
 }
+
+function clearAllFields(t) {
+  const panel = document.getElementById('panel-' + t.id);
+  const filled = t.fields.filter(f => {
+    const el = document.getElementById(`f-${t.id}-${f.id}`);
+    return el && el.value.trim();
+  });
+  const statusEl = document.getElementById('status-' + t.id);
+  if (!filled.length) {
+    statusEl.textContent = 'Nothing to clear.';
+    statusEl.className = 'status';
+    return;
+  }
+  const ok = confirm(`Clear all ${filled.length} field${filled.length === 1 ? '' : 's'} you've filled in for "${t.name}"? This can't be undone.`);
+  if (!ok) return;
+  filled.forEach(f => { document.getElementById(`f-${t.id}-${f.id}`).value = ''; });
+  panel.querySelectorAll('.thumb.selected').forEach(b => b.classList.remove('selected'));
+  saveDraft(t);
+  refreshPreview(t);
+  statusEl.textContent = `Cleared ${filled.length} field${filled.length === 1 ? '' : 's'}.`;
+  statusEl.className = 'status';
+}
+
+document.querySelectorAll('.preview-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    previewMode = btn.dataset.mode;
+    document.querySelectorAll('.preview-toggle button').forEach(b => {
+      const active = b === btn;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', String(active));
+    });
+    document.querySelector('.preview-frame-wrap').classList.toggle('mobile', previewMode === 'mobile');
+  });
+});
 
 async function selectTemplate(id) {
   document.querySelectorAll('.picker-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
