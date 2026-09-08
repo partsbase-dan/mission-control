@@ -37,7 +37,7 @@ const TEMPLATES = [
     fields: [
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Where the hero banner sends people (e.g. the sponsorship product grid).",
         apply: [{ selector: 'a[data-block-id="233"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "hero-img", label: "Hero CTA banner — image URL", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.",
+      { id: "hero-img", label: "Hero CTA banner image", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.",
         apply: [{ selector: 'a[data-block-id="233"] img', op: "attr", attr: "src", syncRaw: true }] },
 
       { id: "headline", label: "Section headline", type: "text", hint: "One line naming what this email is selling. ~5–8 words.", example: "Sponsorship opportunities at PBExpo 2027",
@@ -53,19 +53,19 @@ const TEMPLATES = [
         apply: [{ selector: "#d254", op: "html", build: (l) => `<h2 style="line-height: 1; mso-line-height-alt: 100%; text-align: center;" class="last-child"><span style="font-size: 22px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l[0])}</span></span></h2>` } ] },
 
       { id: "grid1-link", label: "Featured image 1 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="285"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "grid1-img", label: "Featured image 1 — image URL", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: coffee station.", apply: [{ selector: 'a[data-block-id="285"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "grid1-img", label: "Featured image 1", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: coffee station.", apply: [{ selector: 'a[data-block-id="285"] img', op: "attr", attr: "src", syncRaw: true }] },
       { id: "grid2-link", label: "Featured image 2 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="303"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "grid2-img", label: "Featured image 2 — image URL", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: aisle sign.", apply: [{ selector: 'a[data-block-id="303"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "grid2-img", label: "Featured image 2", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: aisle sign.", apply: [{ selector: 'a[data-block-id="303"] img', op: "attr", attr: "src", syncRaw: true }] },
       { id: "grid3-link", label: "Featured image 3 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="304"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "grid3-img", label: "Featured image 3 — image URL", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: demo stage.", apply: [{ selector: 'a[data-block-id="304"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "grid3-img", label: "Featured image 3", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: demo stage.", apply: [{ selector: 'a[data-block-id="304"] img', op: "attr", attr: "src", syncRaw: true }] },
       { id: "grid4-link", label: "Featured image 4 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="305"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "grid4-img", label: "Featured image 4 — image URL", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: keynote main stage.", apply: [{ selector: 'a[data-block-id="305"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "grid4-img", label: "Featured image 4", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: keynote main stage.", apply: [{ selector: 'a[data-block-id="305"] img', op: "attr", attr: "src", syncRaw: true }] },
 
       { id: "preview-line", label: "“See everything” line(s)", type: "textarea", hint: "One line per paragraph. Tells the reader this is a preview and closes with a stat.", example: "That's a preview, not the full list. See every sponsorship opportunity, from $250 to $26,000.\nPBExpo 2027 is projecting 7,000+ attendees and 4,000+ companies on the floor. That's visibility in front of buyers who are already headed your way.",
         apply: [{ selector: "#d255", op: "html", build: (l) => l.map(p => `<p style="text-align: left;"><span style="color:rgb(0, 0, 0);"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(p)}</span></span></p>`).join("") } ] },
 
       { id: "booth-link", label: "“Buy a booth” banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="292"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "booth-img", label: "“Buy a booth” banner — image URL", type: "url", pickerCategories: ["registration-cta"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="292"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "booth-img", label: "“Buy a booth” banner image", type: "url", pickerCategories: ["registration-cta"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="292"] img', op: "attr", attr: "src", syncRaw: true }] },
 
       { id: "fine-print", label: "Offer fine print", type: "textarea", hint: "Legal/terms line for any bundled promo. Update the date and terms link each time.", example: "*Offer ends 8/31/2026. Gift-with-purchase, no drawing, one placement per qualifying booth.",
         apply: [{ selector: "#d230", op: "html", build: (l) => `<p style="line-height: 1; mso-line-height-alt: 100%; text-align: justify;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-size: 12px">${esc(l.join(" "))}</span></span></p>` } ] },
@@ -77,7 +77,7 @@ const TEMPLATES = [
         apply: [{ selector: "#d298", op: "html", build: (l) => l.map(p => `<p style="text-align: left;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(p)}</span></span></p>`).join("") } ] },
 
       { id: "reg-link", label: "“Register Now” banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="299"]', op: "attr", attr: "href" }] },
-      { id: "reg-img", label: "“Register Now” banner — image URL", type: "url", pickerCategories: ["registration-cta"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="299"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "reg-img", label: "“Register Now” banner image", type: "url", pickerCategories: ["registration-cta"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="299"] img', op: "attr", attr: "src", syncRaw: true }] },
 
       { id: "reg-caveat", label: "Registration caveat", type: "textarea", hint: "Clarifies who this link is for.", example: "Registration is only open to general attendees, airlines, and operators. Exhibitors do not register through this link.",
         apply: [{ selector: "#d306", op: "html", build: (l) => `<p style="line-height: 1; mso-line-height-alt: 100%; text-align: justify;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-size: 14px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l.join(" "))}</span></span></span></p>` } ] },
@@ -145,7 +145,7 @@ const TEMPLATES = [
       { id: "closingbtn-link", label: "Closing button link URL", type: "url", apply: [{ selector: "#tb-closingbtn-link", op: "attr", attr: "href" }] },
 
       { id: "signoff-question", label: "Sign-off prompt", type: "text", example: "Questions before you apply? Reply to this email and I will get you an answer.", apply: [{ selector: "#tb-signoff-question", op: "text" }] },
-      { id: "signoff-photo", label: "Sign-off headshot — image URL", type: "url", pickerCategories: ["signature"], hint: "64×64px, circular crop.", apply: [{ selector: "#tb-signoff-photo", op: "attr", attr: "src" }] },
+      { id: "signoff-photo", label: "Sign-off headshot", type: "url", pickerCategories: ["signature"], hint: "64×64px, circular crop.", apply: [{ selector: "#tb-signoff-photo", op: "attr", attr: "src" }] },
       { id: "signoff-name", label: "Sign-off name", type: "text", example: "Kevin Thomas", apply: [{ selector: "#tb-signoff-name", op: "text" }] },
       { id: "signoff-title", label: "Sign-off title", type: "text", example: "Vice President, Digital Aviation Commerce", apply: [{ selector: "#tb-signoff-title", op: "text" }] },
       { id: "signoff-email", label: "Sign-off email", type: "text", example: "kthomas@partsbase.com", apply: [{ selector: "#tb-signoff-email", op: "text" }] },
@@ -165,7 +165,7 @@ const TEMPLATES = [
     ],
     fields: [
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="309"]', op: "attr", attr: "href", syncRaw: true }, { selector: 'a[data-block-id="311"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "hero-img", label: "Hero CTA banner — image URL", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="309"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "hero-img", label: "Hero CTA banner image", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="309"] img', op: "attr", attr: "src", syncRaw: true }] },
 
       { id: "headline", label: "Headline", type: "text", example: "Book your booth. Own the spotlight.",
         apply: [{ selector: "#d220", op: "html", build: (l) => `<h1 style="line-height: 1; mso-line-height-alt: 100%; text-align: center;" class="last-child"><span style="font-size: 30px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l[0])}</span></span></h1>` } ] },
@@ -174,17 +174,17 @@ const TEMPLATES = [
         apply: [{ selector: "#d239", op: "html", build: (l) => l.map(p => `<p style="text-align: left;"><span style="color:rgb(0, 0, 0);"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(p)}</span></span></p>`).join("") } ] },
 
       { id: "tier1-link", label: "Tier 1 — link URL", type: "url", hint: "Used last time: Platinum.", apply: [{ selector: 'a[data-block-id="312"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "tier1-img", label: "Tier 1 — image URL", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="312"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "tier1-img", label: "Tier 1 image", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="312"] img', op: "attr", attr: "src", syncRaw: true }] },
       { id: "tier2-link", label: "Tier 2 — link URL", type: "url", hint: "Used last time: Silver.", apply: [{ selector: 'a[data-block-id="327"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "tier2-img", label: "Tier 2 — image URL", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="327"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "tier2-img", label: "Tier 2 image", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="327"] img', op: "attr", attr: "src", syncRaw: true }] },
       { id: "tier3-link", label: "Tier 3 — link URL", type: "url", hint: "Used last time: 10×20 bundle.", apply: [{ selector: 'a[data-block-id="331"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "tier3-img", label: "Tier 3 — image URL", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="331"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "tier3-img", label: "Tier 3 image", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="331"] img', op: "attr", attr: "src", syncRaw: true }] },
       { id: "tier4-link", label: "Tier 4 — link URL", type: "url", hint: "Used last time: Gold.", apply: [{ selector: 'a[data-block-id="320"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "tier4-img", label: "Tier 4 — image URL", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="320"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "tier4-img", label: "Tier 4 image", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="320"] img', op: "attr", attr: "src", syncRaw: true }] },
       { id: "tier5-link", label: "Tier 5 — link URL", type: "url", hint: "Used last time: Bronze.", apply: [{ selector: 'a[data-block-id="328"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "tier5-img", label: "Tier 5 — image URL", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="328"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "tier5-img", label: "Tier 5 image", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="328"] img', op: "attr", attr: "src", syncRaw: true }] },
       { id: "tier6-link", label: "Tier 6 — link URL", type: "url", hint: "Used last time: 10×10 bundle.", apply: [{ selector: 'a[data-block-id="333"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "tier6-img", label: "Tier 6 — image URL", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="333"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "tier6-img", label: "Tier 6 image", type: "url", pickerCategories: ["exhibitor-level-card", "sponsorship-card"], apply: [{ selector: 'a[data-block-id="333"] img', op: "attr", attr: "src", syncRaw: true }] },
 
       { id: "reg-headline", label: "Registration headline", type: "text", example: "Registration is Now Open",
         apply: [{ selector: "#d339", op: "html", build: (l) => `<p class="last-child" style="text-align: center; line-height: 115%;"><strong><span style="color:rgb(0, 100, 232);"><span style="font-size: 26px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l[0])}</span></span></span></strong></p>` } ] },
@@ -217,7 +217,7 @@ const TEMPLATES = [
     fields: [
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Also applied to the Register button below, since they share a destination.",
         apply: [{ selector: 'a[data-block-id="242"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "hero-img", label: "Hero CTA banner — image URL", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="242"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "hero-img", label: "Hero CTA banner image", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="242"] img', op: "attr", attr: "src", syncRaw: true }] },
 
       { id: "headline", label: "Headline", type: "text", example: "Face-to-Face Matters at PBExpo 2026",
         apply: [{ selector: "#d243", op: "html", build: (l) => `<p class="last-child" style="text-align: center;"><strong><span style="color:#0074ff;"><span style="font-size: 30px">${esc(l[0])}</span></span></strong></p>` } ] },
@@ -246,7 +246,7 @@ const TEMPLATES = [
     ],
     fields: [
       { id: "hero-link", label: "Full-width hero banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="4"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "hero-img", label: "Full-width hero banner — image URL", type: "url", pickerCategories: ["header:partsbase"], hint: "612px wide.", apply: [{ selector: 'a[data-block-id="4"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "hero-img", label: "Full-width hero banner image", type: "url", pickerCategories: ["header:partsbase"], hint: "612px wide.", apply: [{ selector: 'a[data-block-id="4"] img', op: "attr", attr: "src", syncRaw: true }] },
 
       { id: "headline", label: "Headline", type: "text", example: "Coming Soon in 2026!",
         apply: [{ selector: "#d6", op: "html", build: (l) => `<p style="line-height: 2; mso-line-height-alt: 200%; text-align: center;" class="last-child"><strong><span style="color:rgb(0, 127, 233);"><span style="font-size: 26px">${esc(l[0])}</span></span></strong></p>` } ] },
@@ -289,7 +289,7 @@ const TEMPLATES = [
       { id: "pitch", label: "Pitch paragraph(s)", type: "textarea", hint: "One line per paragraph. Keep the closing line asking for a call.", example: "We've launched a modernized aviation commerce platform, PartStore, designed for fast and reliable instant purchasing. It's free to list your parts, we don't make a dollar until you do.\nIf you're looking to buy aviation parts, PartStore allows you to shop real time inventory and have a modern instant checkout experience. Without waiting on RFQ's.\nAre you free this week to jump on a call and discuss more?",
         apply: [{ selector: "#tb-pitch", op: "html", build: (l) => l.map((p, i) => `<p class="mcePastedContent${i === l.length - 1 ? " last-child" : ""}">${esc(p)}</p>`).join("") } ] },
 
-      { id: "product-img", label: "Sales signature image URL", type: "url", pickerCategories: ["signature"], hint: "612px wide.", apply: [{ selector: 'img[data-block-id="71"]', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "product-img", label: "Sales signature image", type: "url", pickerCategories: ["signature"], hint: "612px wide.", apply: [{ selector: 'img[data-block-id="71"]', op: "attr", attr: "src", syncRaw: true }] },
 
       { id: "signoff-name", label: "Your name (sign-off)", type: "text", hint: "Appears under “Kind Regards,”", example: "Kevin Thomas",
         apply: [{ selector: "#tb-signoff-name", op: "html", build: (l) => l[0] ? esc(l[0]) : "<br/>" } ] },

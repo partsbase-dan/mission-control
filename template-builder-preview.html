@@ -17,9 +17,9 @@
     --ink-soft:#5B6B85;
     --line:#DCE3EE;
     --line-soft:#EAEFF6;
-    --amber:#B4740E;
+    --amber:#905C0B;
     --amber-bg:#FBF1DF;
-    --good:#0E8A5F;
+    --good:#0C7C55;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;height:100%;}
@@ -38,8 +38,6 @@
     text-transform:uppercase; color:#8FB6EE; margin-bottom:4px;
   }
   header.top h1{ margin:0; font-size:21px; font-weight:700; }
-  header.top .variant-flag{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:#B9CDEC; }
-  header.top .variant-flag a{ color:#fff; }
 
   .shell{ max-width:1400px; margin:0 auto; padding:20px 24px 40px; }
 
@@ -109,7 +107,7 @@
 
   .field .url-tag{
     display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:9.5px;
-    text-transform:uppercase; letter-spacing:.04em; color:var(--blue); background:#E7F0FD;
+    text-transform:uppercase; letter-spacing:.04em; color:#0A5FC5; background:#E7F0FD;
     padding:2px 6px; border-radius:5px; margin-left:6px; vertical-align:middle;
   }
 
@@ -165,7 +163,6 @@
       <div class="eyebrow">PartsBase / GTM Templates</div>
       <h1>Email Template Builder — Live Preview</h1>
     </div>
-    <div class="variant-flag">Comparing layouts: <a href="template-builder-plain.html">plain-language version</a> · <a href="template-builder.html">original</a></div>
   </div>
 </header>
 
@@ -179,15 +176,15 @@
           <span class="label"><span class="live-dot"></span>Live preview</span>
           <span class="label" id="preview-name"></span>
         </div>
-        <iframe class="preview-frame" id="preview-frame"></iframe>
+        <iframe class="preview-frame" id="preview-frame" title="Live preview"></iframe>
       </div>
     </div>
   </div>
 </div>
 
-<script src="resources/template-builder/fields-data.js?v=20260908f"></script>
-<script src="resources/template-builder/assets-data.js?v=20260908f"></script>
-<script src="resources/template-builder/generate.js?v=20260908f"></script>
+<script src="resources/template-builder/fields-data.js?v=20260908g"></script>
+<script src="resources/template-builder/assets-data.js?v=20260908g"></script>
+<script src="resources/template-builder/generate.js?v=20260908g"></script>
 <script>
 const picker = document.getElementById('picker');
 const panelsForm = document.getElementById('panels-form');
@@ -242,7 +239,7 @@ TEMPLATES.forEach((t, i) => {
   const btn = document.createElement('button');
   btn.className = 'picker-btn' + (i === 0 ? ' active' : '');
   btn.dataset.id = t.id;
-  btn.innerHTML = `${t.name}<span class="n">${t.fields.length} fields</span>`;
+  btn.innerHTML = `${t.name}<span class="n">${t.sections.length} section${t.sections.length === 1 ? '' : 's'}</span>`;
   btn.addEventListener('click', () => selectTemplate(t.id));
   picker.appendChild(btn);
 
@@ -330,6 +327,7 @@ async function refreshPreview(t) {
   const masterHtml = await getMaster(t);
   const { html: out } = buildOutputHtml(t, masterHtml, (id) => document.getElementById(`f-${t.id}-${id}`).value, [...excludedSections[t.id]]);
   previewFrame.srcdoc = out;
+  previewFrame.title = t.name + ' — live preview';
   previewName.textContent = t.name;
 }
 
