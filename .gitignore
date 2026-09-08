@@ -52,6 +52,7 @@
 !resources/
 !resources/template-builder/
 !resources/template-builder/fields-data.js
+!resources/template-builder/assets-data.js
 !resources/template-builder/generate.js
 !resources/template-builder/masters/
 !resources/template-builder/masters/pbexpo.html

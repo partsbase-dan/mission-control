@@ -82,6 +82,15 @@
   }
   .field input:focus, .field textarea:focus{ outline:2px solid var(--blue); outline-offset:1px; border-color:var(--blue); }
   .field textarea{ min-height:58px; resize:vertical; line-height:1.5; }
+  .picker-strip{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+  .thumb{
+    width:52px; height:52px; padding:0; border:2px solid var(--line); border-radius:8px;
+    background:var(--paper); cursor:pointer; overflow:hidden; flex:none;
+  }
+  .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .thumb:hover{ border-color:var(--blue); }
+  .thumb.selected{ border-color:var(--blue); box-shadow:0 0 0 2px rgba(12,112,232,.25); }
+
   .field .url-tag{
     display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:9.5px;
     text-transform:uppercase; letter-spacing:.04em; color:var(--blue); background:#E7F0FD;
@@ -161,6 +170,7 @@
 </div>
 
 <script src="resources/template-builder/fields-data.js"></script>
+<script src="resources/template-builder/assets-data.js"></script>
 <script src="resources/template-builder/generate.js"></script>
 <script>
 const picker = document.getElementById('picker');
@@ -174,6 +184,17 @@ let debounceTimer = null;
 
 function escAttr(s) {
   return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
+
+function renderPicker(t, f) {
+  if (!f.pickerCategories) return '';
+  const assets = ASSETS.filter(a => f.pickerCategories.includes(a.category));
+  if (!assets.length) return '';
+  const thumbs = assets.map(a => `
+    <button type="button" class="thumb" data-url="${escAttr(a.url)}" data-target="f-${t.id}-${f.id}" title="${escAttr(a.label)}">
+      <img src="${a.url}" alt="${escAttr(a.label)}" loading="lazy">
+    </button>`).join('');
+  return `<div class="picker-strip">${thumbs}</div>`;
 }
 
 TEMPLATES.forEach((t, i) => {
@@ -198,6 +219,7 @@ TEMPLATES.forEach((t, i) => {
     return `<div class="field">
       <label for="f-${t.id}-${f.id}">${f.label}${isUrl ? '<span class="url-tag">URL</span>' : ''}</label>
       ${f.hint ? `<div class="hint">${f.hint}</div>` : ''}
+      ${renderPicker(t, f)}
       ${inputHtml}
     </div>`;
   }).join('');
@@ -219,6 +241,15 @@ TEMPLATES.forEach((t, i) => {
   panel.querySelector(`#gen-${t.id}`).addEventListener('click', () => download(t));
   panel.querySelectorAll('[data-field]').forEach(el => {
     el.addEventListener('input', () => scheduleRefresh(t));
+  });
+  panel.querySelectorAll('.thumb').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = document.getElementById(btn.dataset.target);
+      input.value = btn.dataset.url;
+      input.dispatchEvent(new Event('input'));
+      btn.closest('.picker-strip').querySelectorAll('.thumb').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
   });
 });
 
