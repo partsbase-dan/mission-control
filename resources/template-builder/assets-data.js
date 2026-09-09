@@ -49,6 +49,15 @@ const ASSETS = [
   { category: 'sponsorship-card', label: 'VIP Hospitality Suite', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/Email%20Graphics/Sponsorship%20Cards/VIP%20Hospitality%20Suite.png' },
   { category: 'sponsorship-card', label: 'Water Station', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/Email%20Graphics/Sponsorship%20Cards/Water%20Station.png' },
   { category: 'sponsorship-card', label: 'Welcome 360 Camera', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/Email%20Graphics/Sponsorship%20Cards/Welcome%20360%20Camera.png' },
+
+  // Small brand lockup shown at the very top of an email, above the main hero image —
+  // NOT the same as the big header:* promo banners above (those are the hero graphic itself).
+  // 'light' variants are full-color, for a white/light background. 'dark' variants are white,
+  // for a dark background (e.g. PartStore 1's navy nav bar).
+  { category: 'nav-logo:light', label: 'PBExpo | Presented by PartsBase', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/PBExpo%20by%20PartsBase%20Header.png' },
+  { category: 'nav-logo:light', label: 'PartStore', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/PartStore%20Header.jpg' },
+  { category: 'nav-logo:dark', label: 'PartStore (white)', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/partstore-image-1.png' },
+  { category: 'nav-logo:dark', label: 'PBExpo (white)', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/PBExpo%20White%20Logo.png' },
 ];
 
 if (typeof module !== "undefined") module.exports = { ASSETS };

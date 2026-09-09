@@ -29,10 +29,14 @@ const TEMPLATES = [
     outputName: "networking-attendee-promo.html",
     use: "Attendee-facing value pitch — makes the case for registering by leaning on the in-person, face-to-face angle rather than an offer or discount.",
     sections: [
+      { id: "header", label: "Header logo", fields: ["header-img"] },
       { id: "pitch", label: "Hero banner, pitch & register button", fields: ["hero-link", "hero-img", "headline", "value-paras", "register-text"] },
       { id: "video", label: "Video thumbnail", fields: ["video-link", "video-img"] },
     ],
     fields: [
+      { id: "header-img", label: "Header logo", type: "url", pickerCategories: ["nav-logo:light"], hint: "628px wide. The small brand lockup at the very top — not the hero banner below it.",
+        apply: [{ selector: "#tb-header-img", op: "attr", attr: "src", syncRaw: true }] },
+
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Also applied to the Register button below, since they share a destination.",
         apply: [{ selector: 'a[data-block-id="242"]', op: "attr", attr: "href", syncRaw: true }] },
       { id: "hero-img", label: "Hero CTA banner image", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="242"] img', op: "attr", attr: "src", syncRaw: true }] },
@@ -57,12 +61,16 @@ const TEMPLATES = [
     outputName: "amelia-ai-announcement.html",
     use: "Coming-soon product tease — introduces a not-yet-launched feature (Amelia AI search), explains the value, and sends traffic back to the core product rather than a signup form.",
     sections: [
+      { id: "header", label: "Header logo", fields: ["header-img"] },
       { id: "intro", label: "Hero banner & intro", fields: ["hero-link", "hero-img", "headline", "intro"] },
       { id: "spotlight", label: "Feature spotlight", fields: ["spotlight", "spotlight-img"] },
       { id: "benefits", label: "Why it matters", fields: ["benefits-headline", "benefits-para"] },
       { id: "closing", label: "Closing & button", fields: ["closing-headline", "closing-para", "btn-text", "btn-link"] },
     ],
     fields: [
+      { id: "header-img", label: "Header logo", type: "url", pickerCategories: ["nav-logo:light"], hint: "245px wide. The small brand lockup at the very top — not the hero banner below it.",
+        apply: [{ selector: "#tb-header-img", op: "attr", attr: "src", syncRaw: true }] },
+
       { id: "hero-link", label: "Full-width hero banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="4"]', op: "attr", attr: "href", syncRaw: true }] },
       { id: "hero-img", label: "Full-width hero banner image", type: "url", pickerCategories: ["header:partsbase"], hint: "612px wide.", apply: [{ selector: 'a[data-block-id="4"] img', op: "attr", attr: "src", syncRaw: true }] },
 
@@ -98,13 +106,15 @@ const TEMPLATES = [
     outputName: "partstore-feature-launch.html",
     use: "Feature-launch announcement — explains a new PartStore capability, walks through how to activate it, and closes with a named human contact.",
     sections: [
-      { id: "header", label: "Header label", fields: ["eyebrow"] },
+      { id: "header", label: "Header logo & label", fields: ["logo-img", "eyebrow"] },
       { id: "hero", label: "Headline, pitch & video", fields: ["headline", "pitch", "video-link", "video-img", "video-caption"] },
       { id: "value", label: "Stats, problem & mid-page CTA", fields: ["stat1-value", "stat1-caption", "stat2-value", "stat2-caption", "stat3-value", "stat3-caption", "problem-headline", "problem-para1", "problem-para2", "midbtn-text", "midbtn-link", "disclaimer"] },
       { id: "apply", label: "How to apply & closing CTA", fields: ["howto-headline", "step1", "step2", "step3", "step4", "callout", "closing-headline", "closingbtn-text", "closingbtn-link"] },
       { id: "signoff", label: "Sign-off", fields: ["signoff-question", "signoff-photo", "signoff-name", "signoff-title", "signoff-email"] },
     ],
     fields: [
+      { id: "logo-img", label: "Header logo", type: "url", pickerCategories: ["nav-logo:dark"], hint: "122px wide. Sits on the navy bar, so needs a white/light version.",
+        apply: [{ selector: "#tb-logo-img", op: "attr", attr: "src" }] },
       { id: "eyebrow", label: "Header eyebrow label", type: "text", example: "PAY-BY-INVOICE IS LIVE", apply: [{ selector: "#tb-eyebrow", op: "text" }] },
 
       { id: "headline", label: "Two-line headline (one line per input line)", type: "textarea", hint: "Line 1: sets up a familiar moment. Line 2: delivers the payoff.", example: "You found the part.\nNow you have the terms.",
