@@ -98,6 +98,7 @@ const TEMPLATES = [
     outputName: "partstore-feature-launch.html",
     use: "Feature-launch announcement — explains a new PartStore capability, walks through how to activate it, and closes with a named human contact.",
     sections: [
+      { id: "header", label: "Header label", fields: ["eyebrow"] },
       { id: "hero", label: "Headline, pitch & video", fields: ["headline", "pitch", "video-link", "video-img", "video-caption"] },
       { id: "value", label: "Stats, problem & mid-page CTA", fields: ["stat1-value", "stat1-caption", "stat2-value", "stat2-caption", "stat3-value", "stat3-caption", "problem-headline", "problem-para1", "problem-para2", "midbtn-text", "midbtn-link", "disclaimer"] },
       { id: "apply", label: "How to apply & closing CTA", fields: ["howto-headline", "step1", "step2", "step3", "step4", "callout", "closing-headline", "closingbtn-text", "closingbtn-link"] },
