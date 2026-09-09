@@ -56,6 +56,7 @@ const ASSETS = [
   // for a dark background (e.g. PartStore 1's navy nav bar).
   { category: 'nav-logo:light', label: 'PBExpo | Presented by PartsBase', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/PBExpo%20by%20PartsBase%20Header.png' },
   { category: 'nav-logo:light', label: 'PartStore', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/PartStore%20Header.jpg' },
+  { category: 'nav-logo:light', label: 'PartsBase', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/PartsBase%20-%20Banner%20Logo.png' },
   { category: 'nav-logo:dark', label: 'PartStore (white)', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/partstore-image-1.png' },
   { category: 'nav-logo:dark', label: 'PBExpo (white)', url: 'https://51546776.fs1.hubspotusercontent-na1.net/hubfs/51546776/PBExpo%20White%20Logo.png' },
 ];
