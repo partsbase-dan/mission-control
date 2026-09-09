@@ -23,67 +23,71 @@ function esc(s) {
 
 const TEMPLATES = [
   {
-    id: "pbexpo",
-    name: "PBExpo 1",
-    master: "resources/template-builder/masters/pbexpo.html",
-    outputName: "pbexpo-sponsorship-push.html",
-    use: "Self-serve sponsorship push — drives PBExpo prospects to buy a sponsorship package directly, no rep required.",
+    id: "networking",
+    name: "PartsBase + PBExpo",
+    master: "resources/template-builder/masters/networking.html",
+    outputName: "networking-attendee-promo.html",
+    use: "Attendee-facing value pitch — makes the case for registering by leaning on the in-person, face-to-face angle rather than an offer or discount.",
     sections: [
-      { id: "hero", label: "Hero banner & sponsorship pitch", fields: ["hero-link", "hero-img", "headline", "pitch", "btn1-text"] },
-      { id: "grid", label: "Featured opportunities grid", fields: ["sub-headline", "grid1-link", "grid1-img", "grid2-link", "grid2-img", "grid3-link", "grid3-img", "grid4-link", "grid4-img", "preview-line"] },
-      { id: "booth", label: "“Buy a booth” banner", fields: ["booth-link", "booth-img", "fine-print"] },
-      { id: "registration", label: "Registration block", fields: ["reg-headline", "reg-pitch", "reg-link", "reg-img", "reg-caveat", "sponsor-credit"] },
+      { id: "pitch", label: "Hero banner, pitch & register button", fields: ["hero-link", "hero-img", "headline", "value-paras", "register-text"] },
+      { id: "video", label: "Video thumbnail", fields: ["video-link", "video-img"] },
     ],
     fields: [
-      { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Where the hero banner sends people (e.g. the sponsorship product grid).",
-        apply: [{ selector: 'a[data-block-id="233"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "hero-img", label: "Hero CTA banner image", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.",
-        apply: [{ selector: 'a[data-block-id="233"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Also applied to the Register button below, since they share a destination.",
+        apply: [{ selector: 'a[data-block-id="242"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "hero-img", label: "Hero CTA banner image", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="242"] img', op: "attr", attr: "src", syncRaw: true }] },
 
-      { id: "headline", label: "Section headline", type: "text", hint: "One line naming what this email is selling. ~5–8 words.", example: "Sponsorship opportunities at PBExpo 2027",
-        apply: [{ selector: "#d220", op: "html", build: (l) => `<h2 style="line-height: 1; mso-line-height-alt: 100%; text-align: center;" class="last-child"><span style="font-size: 22px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l[0])}</span></span></h2>` } ] },
+      { id: "headline", label: "Headline", type: "text", example: "Face-to-Face Matters at PBExpo 2026",
+        apply: [{ selector: "#d243", op: "html", build: (l) => `<p class="last-child" style="text-align: center;"><strong><span style="color:#0074ff;"><span style="font-size: 30px">${esc(l[0])}</span></span></strong></p>` } ] },
 
-      { id: "pitch", label: "Pitch paragraph(s)", type: "textarea", hint: "One line per paragraph. Two short lines: what the offer is, and what makes it easy.", example: "You don't have to exhibit to put your brand in front of PBExpo buyers. Sponsorship opportunities are open now, self-serve, from a $250 drink ticket to a $26,000 water station.\nBrowse every sponsorship opportunity and check out in minutes. No rep, no wait.",
-        apply: [{ selector: "#d239", op: "html", build: (l) => l.map(p => `<p style="text-align: left;"><span style="color:rgb(0, 0, 0);"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(p)}</span></span></p>`).join("") } ] },
+      { id: "value-paras", label: "Value-prop paragraphs", type: "textarea", hint: "One line per paragraph.", example: "In an industry built on trust and technical expertise, face-to-face conversations still drive the strongest outcomes. PBExpo 2026 brings the aviation and aerospace community together to support real discussions, faster decisions, and more meaningful connections that lead to ROI.\nPBExpo 2026 will welcome more than 8,000 aviation professionals and 150+ airlines from around the world. Once you register, you gain immediate access to the PBExpo App, where you can explore the floor plan, stay up to date, and schedule 1-to-1 meetings in advance.\nIf building strong connections and driving business forward are priorities this year, PBExpo 2026 is where those conversations happen.",
+        apply: [{ selector: "#d220", op: "html", build: (l) => l.map((p, i) => `<p style="text-align: justify;"${i === l.length - 1 ? ' class="last-child"' : ""}><span style="color:#000000;">${esc(p)}</span></p>`).join("") } ] },
 
-      { id: "btn1-text", label: "Primary button text", type: "text", hint: "Verb-first, matches the hero banner link.", example: "Shop Sponsorships",
-        apply: [{ selector: 'a[data-button-link-id="290"]', op: "text", syncRaw: true }] },
+      { id: "register-text", label: "Register button text", type: "text", example: "Register to Attend", apply: [{ selector: "#tb-register-btn-text", op: "text" }] },
 
-      { id: "sub-headline", label: "Sub-section headline", type: "text", hint: "Introduces the featured-items grid below it.", example: "Boost your presence at PBExpo 2027",
-        apply: [{ selector: "#d254", op: "html", build: (l) => `<h2 style="line-height: 1; mso-line-height-alt: 100%; text-align: center;" class="last-child"><span style="font-size: 22px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l[0])}</span></span></h2>` } ] },
+      { id: "video-link", label: "Video — YouTube URL", type: "url", apply: [{ selector: 'a[data-block-id="252"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "video-img", label: "Video thumbnail — image URL", type: "url", hint: "660px wide.", apply: [{ selector: 'a[data-block-id="252"] img', op: "attr", attr: "src", syncRaw: true }] },
+    ],
+  },
 
-      { id: "grid1-link", label: "Featured image 1 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="285"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "grid1-img", label: "Featured image 1", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: coffee station.", apply: [{ selector: 'a[data-block-id="285"] img', op: "attr", attr: "src", syncRaw: true }] },
-      { id: "grid2-link", label: "Featured image 2 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="303"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "grid2-img", label: "Featured image 2", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: aisle sign.", apply: [{ selector: 'a[data-block-id="303"] img', op: "attr", attr: "src", syncRaw: true }] },
-      { id: "grid3-link", label: "Featured image 3 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="304"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "grid3-img", label: "Featured image 3", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: demo stage.", apply: [{ selector: 'a[data-block-id="304"] img', op: "attr", attr: "src", syncRaw: true }] },
-      { id: "grid4-link", label: "Featured image 4 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="305"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "grid4-img", label: "Featured image 4", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: keynote main stage.", apply: [{ selector: 'a[data-block-id="305"] img', op: "attr", attr: "src", syncRaw: true }] },
+  {
+    id: "amelia",
+    name: "PartsBase 1",
+    master: "resources/template-builder/masters/amelia.html",
+    outputName: "amelia-ai-announcement.html",
+    use: "Coming-soon product tease — introduces a not-yet-launched feature (Amelia AI search), explains the value, and sends traffic back to the core product rather than a signup form.",
+    sections: [
+      { id: "intro", label: "Hero banner & intro", fields: ["hero-link", "hero-img", "headline", "intro"] },
+      { id: "spotlight", label: "Feature spotlight", fields: ["spotlight", "spotlight-img"] },
+      { id: "benefits", label: "Why it matters", fields: ["benefits-headline", "benefits-para"] },
+      { id: "closing", label: "Closing & button", fields: ["closing-headline", "closing-para", "btn-text", "btn-link"] },
+    ],
+    fields: [
+      { id: "hero-link", label: "Full-width hero banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="4"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "hero-img", label: "Full-width hero banner image", type: "url", pickerCategories: ["header:partsbase"], hint: "612px wide.", apply: [{ selector: 'a[data-block-id="4"] img', op: "attr", attr: "src", syncRaw: true }] },
 
-      { id: "preview-line", label: "“See everything” line(s)", type: "textarea", hint: "One line per paragraph. Tells the reader this is a preview and closes with a stat.", example: "That's a preview, not the full list. See every sponsorship opportunity, from $250 to $26,000.\nPBExpo 2027 is projecting 7,000+ attendees and 4,000+ companies on the floor. That's visibility in front of buyers who are already headed your way.",
-        apply: [{ selector: "#d255", op: "html", build: (l) => l.map(p => `<p style="text-align: left;"><span style="color:rgb(0, 0, 0);"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(p)}</span></span></p>`).join("") } ] },
+      { id: "headline", label: "Headline", type: "text", example: "Coming Soon in 2026!",
+        apply: [{ selector: "#d6", op: "html", build: (l) => `<p style="line-height: 2; mso-line-height-alt: 200%; text-align: center;" class="last-child"><strong><span style="color:rgb(0, 127, 233);"><span style="font-size: 26px">${esc(l[0])}</span></span></strong></p>` } ] },
 
-      { id: "booth-link", label: "“Buy a booth” banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="292"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "booth-img", label: "“Buy a booth” banner image", type: "url", pickerCategories: ["registration-cta"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="292"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "intro", label: "Intro paragraph(s)", type: "textarea", hint: "One line per paragraph.", example: "Introducing Amelia AI – the aviation industry's first AI-powered search assistant, coming to PartsBase in early 2026.\nSearch by simply describing what you need. Amelia AI handles the rest.",
+        apply: [{ selector: "#d34", op: "html", build: (l) => l.map((p, i) => `<p class="mcePastedContent${i === l.length - 1 ? " last-child" : ""}">${esc(p)}</p>`).join("") } ] },
 
-      { id: "fine-print", label: "Offer fine print", type: "textarea", hint: "Legal/terms line for any bundled promo. Update the date and terms link each time.", example: "*Offer ends 8/31/2026. Gift-with-purchase, no drawing, one placement per qualifying booth.",
-        apply: [{ selector: "#d230", op: "html", build: (l) => `<p style="line-height: 1; mso-line-height-alt: 100%; text-align: justify;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-size: 12px">${esc(l.join(" "))}</span></span></p>` } ] },
+      { id: "spotlight", label: "Feature spotlight — left column", type: "textarea", hint: "Line 1: sub-headline. Line 2: body. Line 3: example query.", example: "Search parts the way you think. Get results faster.\nKnow your part number? Perfect – search it directly like you always have. But when you need more specificity or want to search conversationally, Amelia is ready to help:\n“Show me 971808MODA – a hydraulic pump – available in the United States.”",
+        apply: [{ selector: "#d53", op: "html", build: (l) => `<p class="mcePastedContent"><strong><span style="color:#007fe9;"><span style="font-size: 22px">${esc(l[0] || "")}</span></span></strong></p><p class="mcePastedContent">${esc(l[1] || "")}</p><p class="mcePastedContent last-child"><em>${esc(l[2] || "")}</em></p>` } ] },
+      { id: "spotlight-img", label: "Feature spotlight — right column image URL", type: "url", hint: "298px wide.", apply: [{ selector: 'img[data-block-id="56"]', op: "attr", attr: "src", syncRaw: true }] },
 
-      { id: "reg-headline", label: "Registration headline", type: "text", hint: "Pivots the email from sponsorship to general registration.", example: "PBExpo keeps growing. There's more than one way to be part of it.",
-        apply: [{ selector: "#d297", op: "html", build: (l) => `<h2 style="line-height: 1; mso-line-height-alt: 100%; text-align: center;" class="last-child"><span style="font-size: 22px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l[0])}</span></span></h2>` } ] },
+      { id: "benefits-headline", label: "Benefits headline", type: "text", example: "Why Amelia AI Matters for Your Business",
+        apply: [{ selector: "#d51", op: "html", build: (l) => `<p style="text-align: center;" class="last-child"><strong><span style="color:rgb(0, 127, 233);"><span style="font-size: 24px">${esc(l[0])}</span></span></strong></p>` } ] },
+      { id: "benefits-para", label: "Benefits paragraph(s)", type: "textarea", example: "Amelia understands natural language and instantly applies the right filters – even leveraging advanced features like our Industry Class Filters for government certifications, distributor types, and more.\nSkip the navigation. Just describe what you need, and Amelia delivers precise results instantly.\nThis isn't just a new feature. It's the future of parts procurement.",
+        apply: [{ selector: "#d47", op: "html", build: (l) => l.map((p, i) => `<p class="mcePastedContent${i === l.length - 1 ? " last-child" : ""}">${esc(p)}</p>`).join("") } ] },
 
-      { id: "reg-pitch", label: "Registration pitch", type: "textarea", hint: "Registration is open, it's free, name the dates and city.", example: "Registration for PBExpo 2027 is open. It's free to attend, register today and save your seat for March 10–11, 2027 in Miami Beach.",
-        apply: [{ selector: "#d298", op: "html", build: (l) => l.map(p => `<p style="text-align: left;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(p)}</span></span></p>`).join("") } ] },
+      { id: "closing-headline", label: "Closing headline", type: "text", example: "Stay Tuned for Amelia’s Release!",
+        apply: [{ selector: "#d60", op: "html", build: (l) => `<p style="text-align: center;" class="last-child"><strong><span style="color:rgb(0, 127, 233);"><span style="font-size: 24px">${esc(l[0])}</span></span></strong></p>` } ] },
+      { id: "closing-para", label: "Closing paragraph(s)", type: "textarea", example: "Amelia is part of our ongoing commitment to innovation for the Aviation and Aerospace industry, helping you source parts faster and more efficiently. Stay tuned for Amelia’s release!\nThank you for choosing PartsBase.",
+        apply: [{ selector: "#d49", op: "html", build: (l) => l.map((p, i) => `<p class="mcePastedContent${i === l.length - 1 ? " last-child" : ""}">${esc(p)}</p>`).join("") } ] },
 
-      { id: "reg-link", label: "“Register Now” banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="299"]', op: "attr", attr: "href" }] },
-      { id: "reg-img", label: "“Register Now” banner image", type: "url", pickerCategories: ["registration-cta"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="299"] img', op: "attr", attr: "src", syncRaw: true }] },
-
-      { id: "reg-caveat", label: "Registration caveat", type: "textarea", hint: "Clarifies who this link is for.", example: "Registration is only open to general attendees, airlines, and operators. Exhibitors do not register through this link.",
-        apply: [{ selector: "#d306", op: "html", build: (l) => `<p style="line-height: 1; mso-line-height-alt: 100%; text-align: justify;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-size: 14px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l.join(" "))}</span></span></span></p>` } ] },
-
-      { id: "sponsor-credit", label: "Sponsor credit (optional — leave blank if none)", type: "text", hint: "Only if a partner is sponsoring registration this cycle.", example: "Registration sponsored by Belmont Bank & Trust Company.",
-        apply: [{ selector: "#d307", op: "html", build: (l) => l[0] ? `<p style="line-height: 1; mso-line-height-alt: 100%; text-align: justify;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-size: 12px">${esc(l[0])}</span></span></p>` : "" } ] },
+      { id: "btn-text", label: "Button text", type: "text", example: "Shop For Parts", apply: [{ selector: 'a[data-button-link-id="7"]', op: "text", syncRaw: true }] },
+      { id: "btn-link", label: "Button link URL", type: "url", apply: [{ selector: 'a[data-button-link-id="7"]', op: "attr", attr: "href", syncRaw: true }] },
     ],
   },
 
@@ -153,6 +157,71 @@ const TEMPLATES = [
   },
 
   {
+    id: "pbexpo",
+    name: "PBExpo 1",
+    master: "resources/template-builder/masters/pbexpo.html",
+    outputName: "pbexpo-sponsorship-push.html",
+    use: "Self-serve sponsorship push — drives PBExpo prospects to buy a sponsorship package directly, no rep required.",
+    sections: [
+      { id: "hero", label: "Hero banner & sponsorship pitch", fields: ["hero-link", "hero-img", "headline", "pitch", "btn1-text"] },
+      { id: "grid", label: "Featured opportunities grid", fields: ["sub-headline", "grid1-link", "grid1-img", "grid2-link", "grid2-img", "grid3-link", "grid3-img", "grid4-link", "grid4-img", "preview-line"] },
+      { id: "booth", label: "“Buy a booth” banner", fields: ["booth-link", "booth-img", "fine-print"] },
+      { id: "registration", label: "Registration block", fields: ["reg-headline", "reg-pitch", "reg-link", "reg-img", "reg-caveat", "sponsor-credit"] },
+    ],
+    fields: [
+      { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Where the hero banner sends people (e.g. the sponsorship product grid).",
+        apply: [{ selector: 'a[data-block-id="233"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "hero-img", label: "Hero CTA banner image", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.",
+        apply: [{ selector: 'a[data-block-id="233"] img', op: "attr", attr: "src", syncRaw: true }] },
+
+      { id: "headline", label: "Section headline", type: "text", hint: "One line naming what this email is selling. ~5–8 words.", example: "Sponsorship opportunities at PBExpo 2027",
+        apply: [{ selector: "#d220", op: "html", build: (l) => `<h2 style="line-height: 1; mso-line-height-alt: 100%; text-align: center;" class="last-child"><span style="font-size: 22px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l[0])}</span></span></h2>` } ] },
+
+      { id: "pitch", label: "Pitch paragraph(s)", type: "textarea", hint: "One line per paragraph. Two short lines: what the offer is, and what makes it easy.", example: "You don't have to exhibit to put your brand in front of PBExpo buyers. Sponsorship opportunities are open now, self-serve, from a $250 drink ticket to a $26,000 water station.\nBrowse every sponsorship opportunity and check out in minutes. No rep, no wait.",
+        apply: [{ selector: "#d239", op: "html", build: (l) => l.map(p => `<p style="text-align: left;"><span style="color:rgb(0, 0, 0);"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(p)}</span></span></p>`).join("") } ] },
+
+      { id: "btn1-text", label: "Primary button text", type: "text", hint: "Verb-first, matches the hero banner link.", example: "Shop Sponsorships",
+        apply: [{ selector: 'a[data-button-link-id="290"]', op: "text", syncRaw: true }] },
+
+      { id: "sub-headline", label: "Sub-section headline", type: "text", hint: "Introduces the featured-items grid below it.", example: "Boost your presence at PBExpo 2027",
+        apply: [{ selector: "#d254", op: "html", build: (l) => `<h2 style="line-height: 1; mso-line-height-alt: 100%; text-align: center;" class="last-child"><span style="font-size: 22px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l[0])}</span></span></h2>` } ] },
+
+      { id: "grid1-link", label: "Featured image 1 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="285"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "grid1-img", label: "Featured image 1", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: coffee station.", apply: [{ selector: 'a[data-block-id="285"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "grid2-link", label: "Featured image 2 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="303"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "grid2-img", label: "Featured image 2", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: aisle sign.", apply: [{ selector: 'a[data-block-id="303"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "grid3-link", label: "Featured image 3 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="304"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "grid3-img", label: "Featured image 3", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: demo stage.", apply: [{ selector: 'a[data-block-id="304"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "grid4-link", label: "Featured image 4 — link URL", type: "url", apply: [{ selector: 'a[data-block-id="305"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "grid4-img", label: "Featured image 4", type: "url", pickerCategories: ["sponsorship-card"], hint: "628px wide. Used last time: keynote main stage.", apply: [{ selector: 'a[data-block-id="305"] img', op: "attr", attr: "src", syncRaw: true }] },
+
+      { id: "preview-line", label: "“See everything” line(s)", type: "textarea", hint: "One line per paragraph. Tells the reader this is a preview and closes with a stat.", example: "That's a preview, not the full list. See every sponsorship opportunity, from $250 to $26,000.\nPBExpo 2027 is projecting 7,000+ attendees and 4,000+ companies on the floor. That's visibility in front of buyers who are already headed your way.",
+        apply: [{ selector: "#d255", op: "html", build: (l) => l.map(p => `<p style="text-align: left;"><span style="color:rgb(0, 0, 0);"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(p)}</span></span></p>`).join("") } ] },
+
+      { id: "booth-link", label: "“Buy a booth” banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="292"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "booth-img", label: "“Buy a booth” banner image", type: "url", pickerCategories: ["registration-cta"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="292"] img', op: "attr", attr: "src", syncRaw: true }] },
+
+      { id: "fine-print", label: "Offer fine print", type: "textarea", hint: "Legal/terms line for any bundled promo. Update the date and terms link each time.", example: "*Offer ends 8/31/2026. Gift-with-purchase, no drawing, one placement per qualifying booth.",
+        apply: [{ selector: "#d230", op: "html", build: (l) => `<p style="line-height: 1; mso-line-height-alt: 100%; text-align: justify;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-size: 12px">${esc(l.join(" "))}</span></span></p>` } ] },
+
+      { id: "reg-headline", label: "Registration headline", type: "text", hint: "Pivots the email from sponsorship to general registration.", example: "PBExpo keeps growing. There's more than one way to be part of it.",
+        apply: [{ selector: "#d297", op: "html", build: (l) => `<h2 style="line-height: 1; mso-line-height-alt: 100%; text-align: center;" class="last-child"><span style="font-size: 22px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l[0])}</span></span></h2>` } ] },
+
+      { id: "reg-pitch", label: "Registration pitch", type: "textarea", hint: "Registration is open, it's free, name the dates and city.", example: "Registration for PBExpo 2027 is open. It's free to attend, register today and save your seat for March 10–11, 2027 in Miami Beach.",
+        apply: [{ selector: "#d298", op: "html", build: (l) => l.map(p => `<p style="text-align: left;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(p)}</span></span></p>`).join("") } ] },
+
+      { id: "reg-link", label: "“Register Now” banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="299"]', op: "attr", attr: "href" }] },
+      { id: "reg-img", label: "“Register Now” banner image", type: "url", pickerCategories: ["registration-cta"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="299"] img', op: "attr", attr: "src", syncRaw: true }] },
+
+      { id: "reg-caveat", label: "Registration caveat", type: "textarea", hint: "Clarifies who this link is for.", example: "Registration is only open to general attendees, airlines, and operators. Exhibitors do not register through this link.",
+        apply: [{ selector: "#d306", op: "html", build: (l) => `<p style="line-height: 1; mso-line-height-alt: 100%; text-align: justify;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-size: 14px"><span style="font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif">${esc(l.join(" "))}</span></span></span></p>` } ] },
+
+      { id: "sponsor-credit", label: "Sponsor credit (optional — leave blank if none)", type: "text", hint: "Only if a partner is sponsoring registration this cycle.", example: "Registration sponsored by Belmont Bank & Trust Company.",
+        apply: [{ selector: "#d307", op: "html", build: (l) => l[0] ? `<p style="line-height: 1; mso-line-height-alt: 100%; text-align: justify;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-size: 12px">${esc(l[0])}</span></span></p>` : "" } ] },
+    ],
+  },
+
+  {
     id: "jumbo",
     name: "PBExpo 2",
     master: "resources/template-builder/masters/jumbo.html",
@@ -201,75 +270,6 @@ const TEMPLATES = [
 
       { id: "sponsor-credit", label: "Sponsor credit (optional — leave blank if none)", type: "text", example: "Registration is sponsored by Belmont Bank & Trust.",
         apply: [{ selector: "#d306", op: "html", build: (l) => l[0] ? `<p style="line-height: 1; mso-line-height-alt: 100%; text-align: justify;" class="last-child"><span style="color:rgb(0, 0, 0);"><span style="font-size: 12px">${esc(l[0])}</span></span></p>` : "" } ] },
-    ],
-  },
-
-  {
-    id: "networking",
-    name: "PartsBase + PBExpo",
-    master: "resources/template-builder/masters/networking.html",
-    outputName: "networking-attendee-promo.html",
-    use: "Attendee-facing value pitch — makes the case for registering by leaning on the in-person, face-to-face angle rather than an offer or discount.",
-    sections: [
-      { id: "pitch", label: "Hero banner, pitch & register button", fields: ["hero-link", "hero-img", "headline", "value-paras", "register-text"] },
-      { id: "video", label: "Video thumbnail", fields: ["video-link", "video-img"] },
-    ],
-    fields: [
-      { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Also applied to the Register button below, since they share a destination.",
-        apply: [{ selector: 'a[data-block-id="242"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "hero-img", label: "Hero CTA banner image", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="242"] img', op: "attr", attr: "src", syncRaw: true }] },
-
-      { id: "headline", label: "Headline", type: "text", example: "Face-to-Face Matters at PBExpo 2026",
-        apply: [{ selector: "#d243", op: "html", build: (l) => `<p class="last-child" style="text-align: center;"><strong><span style="color:#0074ff;"><span style="font-size: 30px">${esc(l[0])}</span></span></strong></p>` } ] },
-
-      { id: "value-paras", label: "Value-prop paragraphs", type: "textarea", hint: "One line per paragraph.", example: "In an industry built on trust and technical expertise, face-to-face conversations still drive the strongest outcomes. PBExpo 2026 brings the aviation and aerospace community together to support real discussions, faster decisions, and more meaningful connections that lead to ROI.\nPBExpo 2026 will welcome more than 8,000 aviation professionals and 150+ airlines from around the world. Once you register, you gain immediate access to the PBExpo App, where you can explore the floor plan, stay up to date, and schedule 1-to-1 meetings in advance.\nIf building strong connections and driving business forward are priorities this year, PBExpo 2026 is where those conversations happen.",
-        apply: [{ selector: "#d220", op: "html", build: (l) => l.map((p, i) => `<p style="text-align: justify;"${i === l.length - 1 ? ' class="last-child"' : ""}><span style="color:#000000;">${esc(p)}</span></p>`).join("") } ] },
-
-      { id: "register-text", label: "Register button text", type: "text", example: "Register to Attend", apply: [{ selector: "#tb-register-btn-text", op: "text" }] },
-
-      { id: "video-link", label: "Video — YouTube URL", type: "url", apply: [{ selector: 'a[data-block-id="252"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "video-img", label: "Video thumbnail — image URL", type: "url", hint: "660px wide.", apply: [{ selector: 'a[data-block-id="252"] img', op: "attr", attr: "src", syncRaw: true }] },
-    ],
-  },
-
-  {
-    id: "amelia",
-    name: "PartsBase 1",
-    master: "resources/template-builder/masters/amelia.html",
-    outputName: "amelia-ai-announcement.html",
-    use: "Coming-soon product tease — introduces a not-yet-launched feature (Amelia AI search), explains the value, and sends traffic back to the core product rather than a signup form.",
-    sections: [
-      { id: "intro", label: "Hero banner & intro", fields: ["hero-link", "hero-img", "headline", "intro"] },
-      { id: "spotlight", label: "Feature spotlight", fields: ["spotlight", "spotlight-img"] },
-      { id: "benefits", label: "Why it matters", fields: ["benefits-headline", "benefits-para"] },
-      { id: "closing", label: "Closing & button", fields: ["closing-headline", "closing-para", "btn-text", "btn-link"] },
-    ],
-    fields: [
-      { id: "hero-link", label: "Full-width hero banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="4"]', op: "attr", attr: "href", syncRaw: true }] },
-      { id: "hero-img", label: "Full-width hero banner image", type: "url", pickerCategories: ["header:partsbase"], hint: "612px wide.", apply: [{ selector: 'a[data-block-id="4"] img', op: "attr", attr: "src", syncRaw: true }] },
-
-      { id: "headline", label: "Headline", type: "text", example: "Coming Soon in 2026!",
-        apply: [{ selector: "#d6", op: "html", build: (l) => `<p style="line-height: 2; mso-line-height-alt: 200%; text-align: center;" class="last-child"><strong><span style="color:rgb(0, 127, 233);"><span style="font-size: 26px">${esc(l[0])}</span></span></strong></p>` } ] },
-
-      { id: "intro", label: "Intro paragraph(s)", type: "textarea", hint: "One line per paragraph.", example: "Introducing Amelia AI – the aviation industry's first AI-powered search assistant, coming to PartsBase in early 2026.\nSearch by simply describing what you need. Amelia AI handles the rest.",
-        apply: [{ selector: "#d34", op: "html", build: (l) => l.map((p, i) => `<p class="mcePastedContent${i === l.length - 1 ? " last-child" : ""}">${esc(p)}</p>`).join("") } ] },
-
-      { id: "spotlight", label: "Feature spotlight — left column", type: "textarea", hint: "Line 1: sub-headline. Line 2: body. Line 3: example query.", example: "Search parts the way you think. Get results faster.\nKnow your part number? Perfect – search it directly like you always have. But when you need more specificity or want to search conversationally, Amelia is ready to help:\n“Show me 971808MODA – a hydraulic pump – available in the United States.”",
-        apply: [{ selector: "#d53", op: "html", build: (l) => `<p class="mcePastedContent"><strong><span style="color:#007fe9;"><span style="font-size: 22px">${esc(l[0] || "")}</span></span></strong></p><p class="mcePastedContent">${esc(l[1] || "")}</p><p class="mcePastedContent last-child"><em>${esc(l[2] || "")}</em></p>` } ] },
-      { id: "spotlight-img", label: "Feature spotlight — right column image URL", type: "url", hint: "298px wide.", apply: [{ selector: 'img[data-block-id="56"]', op: "attr", attr: "src", syncRaw: true }] },
-
-      { id: "benefits-headline", label: "Benefits headline", type: "text", example: "Why Amelia AI Matters for Your Business",
-        apply: [{ selector: "#d51", op: "html", build: (l) => `<p style="text-align: center;" class="last-child"><strong><span style="color:rgb(0, 127, 233);"><span style="font-size: 24px">${esc(l[0])}</span></span></strong></p>` } ] },
-      { id: "benefits-para", label: "Benefits paragraph(s)", type: "textarea", example: "Amelia understands natural language and instantly applies the right filters – even leveraging advanced features like our Industry Class Filters for government certifications, distributor types, and more.\nSkip the navigation. Just describe what you need, and Amelia delivers precise results instantly.\nThis isn't just a new feature. It's the future of parts procurement.",
-        apply: [{ selector: "#d47", op: "html", build: (l) => l.map((p, i) => `<p class="mcePastedContent${i === l.length - 1 ? " last-child" : ""}">${esc(p)}</p>`).join("") } ] },
-
-      { id: "closing-headline", label: "Closing headline", type: "text", example: "Stay Tuned for Amelia’s Release!",
-        apply: [{ selector: "#d60", op: "html", build: (l) => `<p style="text-align: center;" class="last-child"><strong><span style="color:rgb(0, 127, 233);"><span style="font-size: 24px">${esc(l[0])}</span></span></strong></p>` } ] },
-      { id: "closing-para", label: "Closing paragraph(s)", type: "textarea", example: "Amelia is part of our ongoing commitment to innovation for the Aviation and Aerospace industry, helping you source parts faster and more efficiently. Stay tuned for Amelia’s release!\nThank you for choosing PartsBase.",
-        apply: [{ selector: "#d49", op: "html", build: (l) => l.map((p, i) => `<p class="mcePastedContent${i === l.length - 1 ? " last-child" : ""}">${esc(p)}</p>`).join("") } ] },
-
-      { id: "btn-text", label: "Button text", type: "text", example: "Shop For Parts", apply: [{ selector: 'a[data-button-link-id="7"]', op: "text", syncRaw: true }] },
-      { id: "btn-link", label: "Button link URL", type: "url", apply: [{ selector: 'a[data-button-link-id="7"]', op: "attr", attr: "href", syncRaw: true }] },
     ],
   },
 
