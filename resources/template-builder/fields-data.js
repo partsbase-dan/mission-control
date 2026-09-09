@@ -27,6 +27,7 @@ const TEMPLATES = [
     name: "PartsBase + PBExpo",
     master: "resources/template-builder/masters/networking.html",
     outputName: "networking-attendee-promo.html",
+    copyGuideUrl: "https://partsbaseinc-my.sharepoint.com/:w:/g/personal/drodgers_partsbase_com/IQA7cvPAbDCYSLW4mO3jVxYFAa-W9HQVtyoB1zRJSauJXHo?e=jYxskj",
     use: "Attendee-facing value pitch — makes the case for registering by leaning on the in-person, face-to-face angle rather than an offer or discount.",
     sections: [
       { id: "header", label: "Header logo", fields: ["header-img"] },
@@ -59,6 +60,7 @@ const TEMPLATES = [
     name: "PartsBase 1",
     master: "resources/template-builder/masters/amelia.html",
     outputName: "amelia-ai-announcement.html",
+    copyGuideUrl: "https://partsbaseinc-my.sharepoint.com/:w:/g/personal/drodgers_partsbase_com/IQB1Nj4vPvCSR7n2ptcQgjOrARCoGdOWxOFdOflBnaXVWnk?e=8NdD5o",
     use: "Coming-soon product tease — introduces a not-yet-launched feature (Amelia AI search), explains the value, and sends traffic back to the core product rather than a signup form.",
     sections: [
       { id: "header", label: "Header logo", fields: ["header-img"] },
@@ -104,6 +106,7 @@ const TEMPLATES = [
     name: "PartStore 1",
     master: "resources/template-builder/masters/partstore.html",
     outputName: "partstore-feature-launch.html",
+    copyGuideUrl: "https://partsbaseinc-my.sharepoint.com/:w:/g/personal/drodgers_partsbase_com/IQC1qoWpY9WhR4vzEI2oDS4IAUwtkr6_Vtvsd0pY4yKC0i8?e=qJBlBk",
     use: "Feature-launch announcement — explains a new PartStore capability, walks through how to activate it, and closes with a named human contact.",
     sections: [
       { id: "header", label: "Header logo & label", fields: ["logo-img", "eyebrow"] },
@@ -172,6 +175,7 @@ const TEMPLATES = [
     name: "PBExpo 1",
     master: "resources/template-builder/masters/pbexpo.html",
     outputName: "pbexpo-sponsorship-push.html",
+    copyGuideUrl: "https://partsbaseinc-my.sharepoint.com/:w:/g/personal/drodgers_partsbase_com/IQAbGTTT_71aQrrFPFXosY9wAfuqxYaBDrtEBAgzPz-B1Ek?e=1XhFuS",
     use: "Self-serve sponsorship push — drives PBExpo prospects to buy a sponsorship package directly, no rep required.",
     sections: [
       { id: "hero", label: "Hero banner & sponsorship pitch", fields: ["hero-link", "hero-img", "headline", "pitch", "btn1-text"] },
@@ -237,6 +241,7 @@ const TEMPLATES = [
     name: "PBExpo 2",
     master: "resources/template-builder/masters/jumbo.html",
     outputName: "pb-jumbotron.html",
+    copyGuideUrl: "https://partsbaseinc-my.sharepoint.com/:w:/g/personal/drodgers_partsbase_com/IQDnAPZqsHNPSbGBsGfzKC9eAeU9kUTv2mWT-fD6vpOaLiE?e=pS9uIG",
     use: "Urgency-driven upsell — a limited-time perk (free jumbotron ad) tied to booth tier purchases, plus a secondary registration push.",
     sections: [
       { id: "hero", label: "Hero banner & offer pitch", fields: ["hero-link", "hero-img", "headline", "offer-paras"] },
@@ -289,6 +294,7 @@ const TEMPLATES = [
     name: "Sales Outreach",
     master: "resources/template-builder/masters/sales-outreach.html",
     outputName: "partstore-sales-outreach.html",
+    copyGuideUrl: "https://partsbaseinc-my.sharepoint.com/:w:/g/personal/drodgers_partsbase_com/IQBu9od8Tk7oQ4R343A_rs_eAXTEok8XvxyerHsTQlUSQ2c?e=BIlihr",
     use: "1:1 sales email — a rep sends this individually to one prospect introducing PartStore and asking for a call. Not a bulk campaign send.",
     sections: [
       { id: "product-image", label: "Sales signature image", fields: ["product-img"] },

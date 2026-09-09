@@ -209,9 +209,9 @@
   </div>
 </div>
 
-<script src="resources/template-builder/fields-data.js?v=20260909c"></script>
-<script src="resources/template-builder/assets-data.js?v=20260909c"></script>
-<script src="resources/template-builder/generate.js?v=20260909c"></script>
+<script src="resources/template-builder/fields-data.js?v=20260909d"></script>
+<script src="resources/template-builder/assets-data.js?v=20260909d"></script>
+<script src="resources/template-builder/generate.js?v=20260909d"></script>
 <script>
 const picker = document.getElementById('picker');
 const panelsForm = document.getElementById('panels-form');
@@ -321,7 +321,7 @@ TEMPLATES.forEach((t, i) => {
       <h2>${t.name}</h2>
       <div class="use">${t.use}</div>
       <div class="note"><span>💡</span><span>Watch the preview on the right update as you type. Paste hosted image URLs (upload to HubSpot's File Manager first) — leave any field blank to keep the template's current content.${t.sections ? ' Uncheck a section below to leave it out of the email entirely.' : ''}</span></div>
-      <a class="copy-guide-link" href="resources/template-builder/copy-guides/${t.id}-copy-guide.docx" download>📄 Prefer to draft this in Word first? Download the Copy Guide</a>
+      <a class="copy-guide-link" href="${t.copyGuideUrl}" target="_blank" rel="noopener">📄 Prefer to draft this in Word first? Open the Copy Guide</a>
     </div>
     ${sectionCards}
     ${looseCard}
