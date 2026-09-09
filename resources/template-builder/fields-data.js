@@ -24,7 +24,7 @@ function esc(s) {
 const TEMPLATES = [
   {
     id: "pbexpo",
-    name: "PBExpo Sponsorship Push",
+    name: "PBExpo 1",
     master: "resources/template-builder/masters/pbexpo.html",
     outputName: "pbexpo-sponsorship-push.html",
     use: "Self-serve sponsorship push — drives PBExpo prospects to buy a sponsorship package directly, no rep required.",
@@ -89,7 +89,7 @@ const TEMPLATES = [
 
   {
     id: "partstore",
-    name: "PartStore Pay-by-Invoice",
+    name: "PartStore 1",
     master: "resources/template-builder/masters/partstore.html",
     outputName: "partstore-feature-launch.html",
     use: "Feature-launch announcement — explains a new PartStore capability, walks through how to activate it, and closes with a named human contact.",
@@ -154,7 +154,7 @@ const TEMPLATES = [
 
   {
     id: "jumbo",
-    name: "PB Jumbotron",
+    name: "PBExpo 2",
     master: "resources/template-builder/masters/jumbo.html",
     outputName: "pb-jumbotron.html",
     use: "Urgency-driven upsell — a limited-time perk (free jumbotron ad) tied to booth tier purchases, plus a secondary registration push.",
@@ -206,7 +206,7 @@ const TEMPLATES = [
 
   {
     id: "networking",
-    name: "Networking / Attendee Promo",
+    name: "PartsBase + PBExpo",
     master: "resources/template-builder/masters/networking.html",
     outputName: "networking-attendee-promo.html",
     use: "Attendee-facing value pitch — makes the case for registering by leaning on the in-person, face-to-face angle rather than an offer or discount.",
@@ -234,7 +234,7 @@ const TEMPLATES = [
 
   {
     id: "amelia",
-    name: "Amelia AI Announcement",
+    name: "PartsBase 1",
     master: "resources/template-builder/masters/amelia.html",
     outputName: "amelia-ai-announcement.html",
     use: "Coming-soon product tease — introduces a not-yet-launched feature (Amelia AI search), explains the value, and sends traffic back to the core product rather than a signup form.",
@@ -275,7 +275,7 @@ const TEMPLATES = [
 
   {
     id: "sales-outreach",
-    name: "PartStore Sales Outreach",
+    name: "Sales Outreach",
     master: "resources/template-builder/masters/sales-outreach.html",
     outputName: "partstore-sales-outreach.html",
     use: "1:1 sales email — a rep sends this individually to one prospect introducing PartStore and asking for a call. Not a bulk campaign send.",
