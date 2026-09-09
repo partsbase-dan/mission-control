@@ -178,12 +178,16 @@ const TEMPLATES = [
     copyGuideUrl: "https://partsbaseinc-my.sharepoint.com/:w:/g/personal/drodgers_partsbase_com/IQAbGTTT_71aQrrFPFXosY9wAfuqxYaBDrtEBAgzPz-B1Ek?e=1XhFuS",
     use: "Self-serve sponsorship push — drives PBExpo prospects to buy a sponsorship package directly, no rep required.",
     sections: [
+      { id: "header", label: "Header logo", fields: ["header-img"] },
       { id: "hero", label: "Hero banner & sponsorship pitch", fields: ["hero-link", "hero-img", "headline", "pitch", "btn1-text"] },
       { id: "grid", label: "Featured opportunities grid", fields: ["sub-headline", "grid1-link", "grid1-img", "grid2-link", "grid2-img", "grid3-link", "grid3-img", "grid4-link", "grid4-img", "preview-line"] },
       { id: "booth", label: "“Buy a booth” banner", fields: ["booth-link", "booth-img", "fine-print"] },
       { id: "registration", label: "Registration block", fields: ["reg-headline", "reg-pitch", "reg-link", "reg-img", "reg-caveat", "sponsor-credit"] },
     ],
     fields: [
+      { id: "header-img", label: "Header logo", type: "url", pickerCategories: ["nav-logo:light"], hint: "660px wide. The small brand lockup at the very top — not the hero banner below it.",
+        apply: [{ selector: "#tb-header-img", op: "attr", attr: "src", syncRaw: true }] },
+
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", hint: "Where the hero banner sends people (e.g. the sponsorship product grid).",
         apply: [{ selector: 'a[data-block-id="233"]', op: "attr", attr: "href", syncRaw: true }] },
       { id: "hero-img", label: "Hero CTA banner image", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.",
@@ -244,11 +248,15 @@ const TEMPLATES = [
     copyGuideUrl: "https://partsbaseinc-my.sharepoint.com/:w:/g/personal/drodgers_partsbase_com/IQDnAPZqsHNPSbGBsGfzKC9eAeU9kUTv2mWT-fD6vpOaLiE?e=pS9uIG",
     use: "Urgency-driven upsell — a limited-time perk (free jumbotron ad) tied to booth tier purchases, plus a secondary registration push.",
     sections: [
+      { id: "header", label: "Header logo", fields: ["header-img"] },
       { id: "hero", label: "Hero banner & offer pitch", fields: ["hero-link", "hero-img", "headline", "offer-paras"] },
       { id: "tiers", label: "Booth tier grid", fields: ["tier1-link", "tier1-img", "tier2-link", "tier2-img", "tier3-link", "tier3-img", "tier4-link", "tier4-img", "tier5-link", "tier5-img", "tier6-link", "tier6-img"] },
       { id: "registration", label: "Registration block", fields: ["reg-headline", "reg-pitch", "register-link", "register-text", "register-caption", "fine-print", "sponsor-credit"] },
     ],
     fields: [
+      { id: "header-img", label: "Header logo", type: "url", pickerCategories: ["nav-logo:light"], hint: "660px wide. The small brand lockup at the very top — not the hero banner below it.",
+        apply: [{ selector: "#tb-header-img", op: "attr", attr: "src", syncRaw: true }] },
+
       { id: "hero-link", label: "Hero CTA banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="309"]', op: "attr", attr: "href", syncRaw: true }, { selector: 'a[data-block-id="311"]', op: "attr", attr: "href", syncRaw: true }] },
       { id: "hero-img", label: "Hero CTA banner image", type: "url", pickerCategories: ["header:pbexpo"], hint: "660px wide.", apply: [{ selector: 'a[data-block-id="309"] img', op: "attr", attr: "src", syncRaw: true }] },
 
