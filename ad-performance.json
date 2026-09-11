@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-09-10T15:24:10+00:00",
+  "generated_at": "2026-09-11T15:26:21+00:00",
   "window": {
     "start": "2026-08-24",
-    "end": "2026-09-10",
-    "days": 17
+    "end": "2026-09-11",
+    "days": 18
   },
   "cpl_target": 152.0,
   "totals": {
-    "spend": 632.17,
+    "spend": 782.17,
     "registrations": 0,
     "confirmed_registrations": 1,
-    "cost_per_confirmed_registration": 632.17,
+    "cost_per_confirmed_registration": 782.17,
     "cost_per_registration": null,
-    "impressions": 8087,
-    "clicks": 63,
-    "ctr_pct": 0.779,
-    "cpm": 78.17,
+    "impressions": 11767,
+    "clicks": 90,
+    "ctr_pct": 0.765,
+    "cpm": 66.47,
     "leads": 0,
     "cpl": null,
     "cpl_vs_target": null,
@@ -27,13 +27,13 @@
     {
       "name": "PBExpo 2027 Registration Open - Attendees",
       "status": "ACTIVE",
-      "spend": 632.17,
+      "spend": 782.17,
       "registrations": 0,
       "confirmed_registrations": 1,
       "cost_per_registration": null,
-      "impressions": 8087,
-      "clicks": 63,
-      "ctr_pct": 0.779,
+      "impressions": 11767,
+      "clicks": 90,
+      "ctr_pct": 0.765,
       "leads": 0,
       "cpl": null,
       "over_target": false
