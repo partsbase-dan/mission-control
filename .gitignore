@@ -61,6 +61,7 @@
 !resources/template-builder/masters/networking.html
 !resources/template-builder/masters/amelia.html
 !resources/template-builder/masters/sales-outreach.html
+!resources/template-builder/masters/tradeshow.html
 
 # Per-template Word Copy Guides, so people can draft copy before opening the
 # builder. Regenerate with `node scripts/build_template_copy_guides.js` any
@@ -72,6 +73,7 @@
 !resources/template-builder/copy-guides/networking-copy-guide.docx
 !resources/template-builder/copy-guides/amelia-copy-guide.docx
 !resources/template-builder/copy-guides/sales-outreach-copy-guide.docx
+!resources/template-builder/copy-guides/tradeshow-copy-guide.docx
 
 # ── This file ────────────────────────────────────────────────────────────────
 # Tracked so the protection survives a fresh clone.

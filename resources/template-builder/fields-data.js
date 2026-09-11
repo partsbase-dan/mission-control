@@ -320,6 +320,56 @@ const TEMPLATES = [
         apply: [{ selector: "#tb-signoff-name", op: "html", build: (l) => l[0] ? esc(l[0]) : "<br/>" } ] },
     ],
   },
+
+  {
+    id: "tradeshow",
+    name: "Trade Show Meetup",
+    master: "resources/template-builder/masters/tradeshow.html",
+    outputName: "tradeshow-meetup.html",
+    copyGuideUrl: "resources/template-builder/copy-guides/tradeshow-copy-guide.docx",
+    use: "Trade show booth invite — tells contacts where to find PartsBase at an upcoming show and drives them to book a meeting or a demo.",
+    sections: [
+      { id: "header", label: "Header logo", fields: ["header-img"] },
+      { id: "intro", label: "Banner, headline & event details", fields: ["hero-link", "hero-img", "headline", "pitch", "event-details", "learn-more-text", "learn-more-link"] },
+      { id: "team", label: "Meet the team", fields: ["schedule-headline", "rep1-link", "rep1-img", "rep2-link", "rep2-img", "rep3-link", "rep3-img", "rep4-link", "rep4-img"] },
+      { id: "closing", label: "Closing pitch & button", fields: ["closing-pitch", "book-demo-text", "book-demo-link"] },
+    ],
+    fields: [
+      { id: "header-img", label: "Header logo", type: "url", pickerCategories: ["nav-logo:light"], hint: "612px wide. The small brand lockup at the very top — not the banner below it.",
+        apply: [{ selector: "#tb-header-img", op: "attr", attr: "src", syncRaw: true }] },
+
+      { id: "hero-link", label: "Banner — link URL", type: "url", apply: [{ selector: 'a[data-block-id="6"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "hero-img", label: "Banner image", type: "url", hint: "612px wide.", apply: [{ selector: 'a[data-block-id="6"] img', op: "attr", attr: "src", syncRaw: true }] },
+
+      { id: "headline", label: "Headline", type: "text", example: "Let's Meet at EBACE! Stop by Booth I84",
+        apply: [{ selector: "#d7", op: "html", build: (l) => `<h1 class="null last-child" style="text-align: center;"><span style="font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif">${esc(l[0])}</span></h1>` } ] },
+
+      { id: "pitch", label: "Pitch sentence", type: "text", example: "PartsBase is gearing up for EBACE 2024! Meet our PartsBase experts and learn how our solutions can contribute to the success of your business.",
+        apply: [{ selector: "#d8 p:nth-of-type(1)", op: "text" }] },
+      { id: "event-details", label: "Event dates & location (2 lines)", type: "textarea", hint: "Line 1: dates. Line 2: city/venue.", example: "May 28-30, 2024\nGeneva, Switzerland",
+        apply: [{ selector: "#d8 p.last-child", op: "html", build: (l) => `<br/> <strong>${esc(l[0] || "")}</strong><br/> <span style="color: #000000;"><span style="color:#000000;">${esc(l[1] || "")}</span></span>` } ] },
+
+      { id: "learn-more-text", label: "“Learn More” button text", type: "text", example: "Learn More", apply: [{ selector: 'a[data-button-link-id="10"]', op: "text", syncRaw: true }] },
+      { id: "learn-more-link", label: "“Learn More” button link URL", type: "url", example: "https://ebace.aero/2024/", apply: [{ selector: 'a[data-button-link-id="10"]', op: "attr", attr: "href", syncRaw: true }] },
+
+      { id: "schedule-headline", label: "“Meet the team” headline", type: "text", example: "Schedule a time to meet with our team!",
+        apply: [{ selector: "#d11", op: "html", build: (l) => `<h3 class="null last-child" style="text-align: center;"><span style="color: #007fe9; font-family: roboto, helvetica neue, helvetica, arial, sans-serif;">${esc(l[0])}</span></h3>` } ] },
+
+      { id: "rep1-link", label: "Team card 1 — link URL", type: "url", hint: "Used last time: Garcia.", apply: [{ selector: 'a[data-block-id="12"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "rep1-img", label: "Team card 1 image", type: "url", hint: "330px wide.", apply: [{ selector: 'a[data-block-id="12"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "rep2-link", label: "Team card 2 — link URL", type: "url", hint: "Used last time: Carrillo.", apply: [{ selector: 'a[data-block-id="38"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "rep2-img", label: "Team card 2 image", type: "url", hint: "330px wide.", apply: [{ selector: 'a[data-block-id="38"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "rep3-link", label: "Team card 3 — link URL", type: "url", hint: "Used last time: Meeting.", apply: [{ selector: 'a[data-block-id="37"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "rep3-img", label: "Team card 3 image", type: "url", hint: "330px wide.", apply: [{ selector: 'a[data-block-id="37"] img', op: "attr", attr: "src", syncRaw: true }] },
+      { id: "rep4-link", label: "Team card 4 — link URL", type: "url", hint: "Used last time: Schedule A Meeting.", apply: [{ selector: 'a[data-block-id="39"]', op: "attr", attr: "href", syncRaw: true }] },
+      { id: "rep4-img", label: "Team card 4 image", type: "url", hint: "330px wide.", apply: [{ selector: 'a[data-block-id="39"] img', op: "attr", attr: "src", syncRaw: true }] },
+
+      { id: "closing-pitch", label: "Closing pitch", type: "textarea", example: "PartsBase is the world's largest network of aviation parts and services. Click below to schedule a no-commitment 15-minute demo.",
+        apply: [{ selector: "#d40 p", op: "text" }] },
+      { id: "book-demo-text", label: "“Book a Demo” button text", type: "text", example: "Book a Demo", apply: [{ selector: 'a[data-button-link-id="41"]', op: "text", syncRaw: true }] },
+      { id: "book-demo-link", label: "“Book a Demo” button link URL", type: "url", apply: [{ selector: 'a[data-button-link-id="41"]', op: "attr", attr: "href", syncRaw: true }] },
+    ],
+  },
 ];
 
 if (typeof module !== "undefined") module.exports = { TEMPLATES, esc };
