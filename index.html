@@ -370,6 +370,7 @@
         <button onclick="showTab('ffover')" id="tab-ffover">Overview</button>
         <button onclick="showTab('ffplays')" id="tab-ffplays">Plays</button>
         <button onclick="showTab('ffcopy')" id="tab-ffcopy">Email &amp; SMS</button>
+        <button onclick="showTab('ffout')" id="tab-ffout">Outbound</button>
         <button onclick="showTab('ffcal')" id="tab-ffcal">Calendar</button>
         <button onclick="showTab('ffmeas')" id="tab-ffmeas">Measurement</button>
       </div>
@@ -774,17 +775,6 @@
         </div>
         </div><!-- /pbx-sub-plan -->
 
-        <div id="pbx-sub-sequences" class="hidden">
-          <div style="margin-bottom:14px">
-            <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px">Email sequences</div>
-            <div style="font-size:12px;color:var(--muted)">Pick a flow, then click a step (or use Next) to read the full email. Registration is free — the lead hook is the app's <b>AI-powered matchmaking</b> (pre-book best-fit leads); other urgency comes from agenda reveals and the hotel block. Merge fields: {First} {Company} {segment}. Anchor: reg opens Aug 18, event Mar 10–11.</div>
-          </div>
-          <div id="pbx-flow-pills" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px"></div>
-          <div id="pbx-flow-sub" style="font-size:11.5px;color:var(--muted);margin-bottom:10px"></div>
-          <div id="pbx-step-rail" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"></div>
-          <div id="pbx-email-detail" class="card"></div>
-          <div id="pbx-nav" style="display:flex;align-items:center;justify-content:center;gap:18px;margin-top:14px"></div>
-        </div><!-- /pbx-sub-sequences -->
 
         <div id="pbx-sub-strategy" class="hidden">
           <div style="margin-bottom:16px">
@@ -986,6 +976,19 @@
   </div>
 </div>
 
+      <div id="tab-ffout-content" class="ffsec hidden" style="padding:24px"><div class="section-label">Outbound &mdash; net-new executives</div>
+        <div id="pbx-sub-sequences">
+          <div style="margin-bottom:14px">
+            <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px">Net-new exec outbound</div>
+            <div style="font-size:12px;color:var(--muted)">Two emails per contact, personalised from company research. Pick a track, then click a contact to read both. Registration is free — the lead hook is the app's <b>AI-powered matchmaking</b> (pre-book best-fit leads); other urgency comes from agenda reveals and the hotel block. Merge fields: {First} {Company} {segment}. Anchor: reg opens Aug 18, event Mar 10–11.</div>
+          </div>
+          <div id="pbx-flow-pills" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px"></div>
+          <div id="pbx-flow-sub" style="font-size:11.5px;color:var(--muted);margin-bottom:10px"></div>
+          <div id="pbx-step-rail" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"></div>
+          <div id="pbx-email-detail" class="card"></div>
+          <div id="pbx-nav" style="display:flex;align-items:center;justify-content:center;gap:18px;margin-top:14px"></div>
+        </div><!-- /pbx-sub-sequences -->
+      </div><!-- /tab-ffout-content -->
       <div id="tab-ffcal-content" class="ffsec hidden" style="padding:24px"><div class="section-label">Kickoff &mdash; what starts when</div>
   <div class="card" style="margin-bottom:18px">
     <h2>Eleven launches, first one in two days</h2>
@@ -1385,6 +1388,7 @@ const TAB_CONFIG = {
   ffover: { panel: 'plan',     inner: 'ffover', title: ["PBExpo '27 Campaigns", 'Tracks, lead hook and the shape of the window'] },
   ffplays: { panel: 'plan',     inner: 'ffplays', title: ["PBExpo '27 Campaigns", 'What marketing can run for registrations, and the flows behind them'] },
   ffcopy: { panel: 'plan',     inner: 'ffcopy', title: ["PBExpo '27 Campaigns", 'Win-back, SMS, dates and every message in one place'] },
+  ffout: { panel: 'plan',     inner: 'ffout', title: ["PBExpo '27 Campaigns", 'Net-new exec outbound \u00b7 41 contacts, two emails each'] },
   ffcal: { panel: 'plan',     inner: 'ffcal', title: ["PBExpo '27 Campaigns", 'Where every send lands, Sep–Dec'] },
   ffmeas: { panel: 'plan',     inner: 'ffmeas', title: ["PBExpo '27 Campaigns", 'What we track, and what would unlock more'] },
   exec:      { panel: 'plan',     inner: 'exec',      title: ['Exec View',         'Leadership summary and 90-day GTM narrative'] },
@@ -1416,7 +1420,7 @@ function setPlanGroupExpanded(expanded) {
 }
 
 let campaignGroupExpanded = false;
-const CAMPAIGN_TABS = ['ffover', 'ffplays', 'ffcopy', 'ffcal', 'ffmeas'];
+const CAMPAIGN_TABS = ['ffover', 'ffplays', 'ffcopy', 'ffcal', 'ffmeas', 'ffout'];
 
 function setCampaignGroupExpanded(expanded) {
   campaignGroupExpanded = expanded;
@@ -1474,13 +1478,14 @@ function togglePlanGroup() {
 })();
 
 // ── Inner tabs ──
-const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild','adperf','ffover','ffplays','ffcopy','ffcal','ffmeas'];
+const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild','adperf','ffover','ffplays','ffcopy','ffcal','ffmeas','ffout'];
 function showInnerTab(name) {
   INNER_TABS.forEach(t => {
     document.getElementById('tab-' + t + '-content').classList.toggle('hidden', t !== name);
     const nav = document.getElementById('tab-' + t);
     if (nav) nav.classList.toggle('active', t === name);
   });
+  if (name === 'ffout' && typeof pbxRenderSeq === 'function') pbxRenderSeq();
 }
 
 // ── PBExpo sub-tabs (Campaign Plan / Email Sequences) ──
@@ -2692,9 +2697,9 @@ If that's worth your view I'll send both. If you just want to walk the floor, th
 Which would you like?` },
   ]},
 };
-let pbxState = { flow: 'A', step: 0 };
+let pbxState = { flow: 'E', step: 0 };
 function pbxRenderSeq() {
-  const flows = ['A', 'B', 'C', 'D', 'E', 'F'];
+  const flows = ['E', 'F'];
   document.getElementById('pbx-flow-pills').innerHTML = flows.map(f => {
     const on = f === pbxState.flow, d = PBX_SEQ[f];
     const tag = d.tag ? ` <span class="tag ${d.tagClass}">${d.tag}</span>` : '';
