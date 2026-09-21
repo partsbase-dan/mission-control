@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LinkedIn Outreach at Scale</title>
+<style>
+:root{--navy:#002857;--deep:#083460;--blue:#0c70e8;--mint:#2ed6b0;--orange:#e0420b;
+--paper:#f7f8fa;--card:#fff;--ink:#131820;--muted:#5a6472;--rule:#e3e7ec}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+font-family:Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px 80px}
+header{background:linear-gradient(135deg,var(--navy),var(--deep) 55%,#0b3f7a);color:#fff;padding:44px 0 34px}
+h1{margin:0;font-size:clamp(28px,4.4vw,42px);font-weight:900;letter-spacing:-.025em}
+.sub{margin:12px 0 0;font-size:17px;color:#c5faf2;max-width:62ch;line-height:1.5}
+.meta{margin-top:20px;font-size:12px;color:#9fc4ec;letter-spacing:.05em;text-transform:uppercase}
+.kpis{background:var(--navy);border-top:1px solid rgba(255,255,255,.12)}
+.kpis .wrap{display:flex;flex-wrap:wrap;gap:36px;padding-top:20px;padding-bottom:20px}
+.kpi b{display:block;font-size:25px;font-weight:900;letter-spacing:-.02em;color:#fff}
+.kpi span{font-size:10.5px;color:#9fc4ec;text-transform:uppercase;letter-spacing:.07em}
+h2{font-size:26px;font-weight:900;letter-spacing:-.022em;margin:52px 0 6px;color:var(--navy)}
+.lede{font-size:16px;color:var(--muted);margin:0 0 20px;max-width:70ch}
+h3{font-size:18px;font-weight:800;letter-spacing:-.012em;margin:30px 0 10px}
+p{margin:0 0 14px;max-width:74ch}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:72ch} li{margin:7px 0}
+.rule{height:1px;background:var(--rule);margin:0}
+.plain{background:#e8f1fe;border-left:4px solid var(--blue);border-radius:0 10px 10px 0;
+padding:15px 19px;margin:0 0 20px;font-size:14.5px;max-width:74ch}
+.plain b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+color:#0a5bc4;margin-bottom:5px}
+.plain p{margin:0}
+.warn{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--orange);
+border-radius:0 10px 10px 0;padding:17px 21px;margin:0 0 20px;max-width:74ch}
+.warn b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+color:#a8360c;margin-bottom:6px}
+.warn p:last-child{margin-bottom:0}
+.good{background:#e6f6ef;border-left:4px solid var(--mint);border-radius:0 10px 10px 0;
+padding:15px 19px;margin:0 0 20px;font-size:14.5px;max-width:74ch}
+.good b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+color:#1d6b46;margin-bottom:5px}
+.good p:last-child{margin:0}
+.bigstat{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 22px}
+.bigstat>div{flex:1 1 190px;background:var(--card);border:1px solid var(--rule);
+border-radius:13px;padding:17px 19px}
+.bigstat b{display:block;font-size:29px;font-weight:900;letter-spacing:-.03em;color:var(--navy);line-height:1.1}
+.bigstat span{display:block;font-size:13px;color:var(--muted);margin-top:5px}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);
+border:1px solid var(--rule);border-radius:11px;overflow:hidden;margin:0 0 22px}
+th{background:var(--navy);color:#fff;text-align:left;padding:11px 15px;
+font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+td{padding:12px 15px;border-top:1px solid var(--rule);vertical-align:top}
+td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+th.n{text-align:right}
+td b.fn{color:var(--navy)}
+.flow{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:6px 0;margin:0 0 22px}
+.fstep{display:flex;gap:16px;padding:14px 22px;border-top:1px solid var(--rule);align-items:flex-start}
+.fstep:first-child{border-top:none}
+.fnum{flex:0 0 26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;
+font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.fstep.rep .fnum{background:var(--mint);color:#083d31}
+.fbody{font-size:14.5px}
+.fbody b{display:block;font-size:14.5px}
+.fbody span{color:var(--muted)}
+.phase{background:var(--card);border:1px solid var(--rule);border-radius:14px;
+padding:20px 24px;margin:0 0 16px;border-left:5px solid var(--blue)}
+.phase.now{border-left-color:var(--mint);background:#f6fdfb}
+.phhead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.phname{font-size:18px;font-weight:900;letter-spacing:-.015em}
+.phwhen{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.phase.now .phwhen{background:var(--mint);color:#083d31;border-radius:6px;padding:4px 9px}
+.phase p{margin:9px 0 0;font-size:14.5px}
+footer{border-top:1px solid var(--rule);margin-top:50px;padding-top:20px;font-size:12.5px;color:var(--muted)}
+</style></head><body>
+
+<header><div class="wrap">
+<h1>LinkedIn Outreach at Scale</h1>
+<p class="sub">A second outbound channel, operated centrally by Marketing, that adds pipeline without adding headcount or asking the sales team to run campaigns.</p>
+<p class="meta">Dan Rodgers &middot; Director of Marketing &amp; GTM Strategy &middot; September 2026</p>
+</div></header>
+
+<div class="kpis"><div class="wrap">
+<div class="kpi"><b>5</b><span>Sales reps lending identity</span></div>
+<div class="kpi"><b>$395<span style="font-size:13px;font-weight:600">/mo</span></b><span>Total tool cost</span></div>
+<div class="kpi"><b>~500</b><span>New contacts reached weekly</span></div>
+<div class="kpi"><b>October</b><span>Live</span></div>
+</div></div>
+
+<div class="wrap">
+
+<h2>In one paragraph</h2>
+<p>We are adding LinkedIn as a second outbound channel alongside email, using a tool called HeyReach. One person in Marketing runs the campaigns centrally across five sales reps' LinkedIn profiles. The reps lend their professional identity, which is what makes the outreach credible to an aviation buyer, and receive qualified replies as handoffs. They do not build, schedule or manage anything. Total tool cost is $395 a month. It goes live in October and every touch is logged in HubSpot, so it is measurable from week one.</p>
+
+<div class="rule"></div>
+
+<h2>Why add a second channel now</h2>
+
+<p>Three reasons, in order of weight.</p>
+
+<h3>1. Email is being rebuilt, and one channel is a single point of failure</h3>
+<p>We are in the middle of repairing years of damage to our email deliverability. That work is going well, but it is deliberately slow: volume has to ramp gradually to rebuild reputation with the inbox providers. For the next quarter, email alone cannot carry outbound. A second channel that does not depend on our sending domain gives the quarter a floor.</p>
+
+<div class="good"><b>These two programmes do not interact</b>
+<p>LinkedIn does not touch our email sending domain, so nothing about this can affect the deliverability rebuild happening at the same time. The two share a contact database and nothing else. That is why this can run in October rather than waiting.</p></div>
+
+<h3>2. Our buyers are reachable there</h3>
+<p>Procurement, supply chain and maintenance leadership at MROs, distributors, airlines and defense contractors maintain active LinkedIn profiles in a way they do not maintain public email addresses. For the segments we care most about, it is often the only reliable route to a named decision maker.</p>
+
+<h3>3. It is cheap to test and cheap to stop</h3>
+<p>$395 a month, month to month, with no integration work required beyond what we are already building. If it does not produce meetings in the first quarter, we stop and we have lost very little.</p>
+
+<div class="rule"></div>
+
+<h2>Why LinkedIn outreach usually fails, and what we are doing differently</h2>
+
+<div class="plain"><b>Plain English: how these tools normally work</b>
+<p>Nearly every LinkedIn outreach tool assumes each sales rep logs in and runs their own campaigns: builds the list, writes the messages, schedules the sequence, monitors replies. It is a marketing job handed to someone paid to close deals.</p></div>
+
+<p>That model fails predictably. Reps are measured on revenue, not campaign admin, so the work gets deprioritised in week two and the campaigns quietly stop. Anyone who has rolled out a sales engagement tool has watched this happen. It is not a discipline problem, it is a job design problem.</p>
+
+<div class="warn"><b>We have already seen this here</b>
+<p>Rep-driven sequencing has been attempted at PartsBase before and did not sustain. Repeating the same structure with a different vendor would produce the same outcome.</p></div>
+
+<h3>The agency model</h3>
+
+<div class="plain"><b>Plain English: what "run it like an agency" means</b>
+<p>HeyReach lets one operator run campaigns across several LinkedIn accounts at once from a single console, with all replies landing in one shared inbox. So Marketing does the work an outside agency would do, and the reps supply only the thing an agency cannot: a real, credible professional identity in the aviation industry.</p></div>
+
+<p>This is the specific reason HeyReach was chosen over the alternatives. It is a structural fit with how we want to operate, not a feature comparison.</p>
+
+<div class="flow">
+<div class="fstep"><span class="fnum">1</span><span class="fbody"><b>Marketing builds the audience</b><span>Filtered against our ideal customer profile, from the same enriched contact data feeding HubSpot.</span></span></div>
+<div class="fstep rep"><span class="fnum">2</span><span class="fbody"><b>The rep reviews the copy</b><span>Nothing goes out under a rep's name that they have not seen and approved.</span></span></div>
+<div class="fstep"><span class="fnum">3</span><span class="fbody"><b>Marketing runs the campaign</b><span>Sent across the five profiles, within safe daily limits, monitored centrally.</span></span></div>
+<div class="fstep"><span class="fnum">4</span><span class="fbody"><b>Marketing triages every reply</b><span>Out-of-office, not interested and wrong-person replies are handled without the rep ever seeing them.</span></span></div>
+<div class="fstep rep"><span class="fnum">5</span><span class="fbody"><b>The rep receives a qualified conversation</b><span>Handed over in HubSpot with a four-hour response commitment. This is the only step that costs a rep time.</span></span></div>
+</div>
+
+<div class="rule"></div>
+
+<h2>What we are asking of the five reps</h2>
+<p class="lede">This is the part that needs leadership awareness, because it involves personal accounts.</p>
+
+<p>The outreach goes out from reps' own LinkedIn profiles. That is what makes it work, and it is also a genuine ask, so it is being handled formally rather than informally. Before anything is connected, each rep signs a written agreement covering:</p>
+
+<ul>
+<li><b>Consent and scope.</b> Explicit agreement to send on their behalf, and exactly what kind of message goes out.</li>
+<li><b>Copy approval.</b> The right to review and reject anything going out in their name.</li>
+<li><b>Privacy.</b> Who can see what in their inbox. Outreach replies arrive alongside recruiter messages and personal conversations, and this is the clause reps care about most.</li>
+<li><b>Access handling.</b> How the connection is made and that it ends when they change roles or leave.</li>
+<li><b>A clean exit.</b> Any rep can withdraw at any time and the campaign reroutes across the remaining profiles. No one is locked in.</li>
+</ul>
+
+<div class="good"><b>HR is involved before anything is signed</b>
+<p>This is a personal-account access question, not only an IT one. The policy goes through HR review first so that reps are being asked properly, and so the company is covered.</p></div>
+
+<div class="rule"></div>
+
+<h2>How much outreach this actually is</h2>
+
+<div class="plain"><b>Plain English: why there is a ceiling</b>
+<p>LinkedIn enforces limits on how many people an account can approach, and exceeding them gets the account restricted or banned. This is not a setting we can turn up. Serious outreach scales by adding accounts, not by pushing any single account harder, which is exactly why a five-profile pool matters.</p></div>
+
+<div class="bigstat">
+<div><b>20-25</b><span>New contacts per rep, per day</span></div>
+<div><b>~500</b><span>Across the pool, per week</span></div>
+<div><b>~2,000</b><span>Per month</span></div>
+</div>
+
+<p>Volume starts below these numbers and builds. Accounts are warmed before campaigns run at full rate, and the platform assigns each profile a dedicated connection and freezes any account approaching a risky threshold automatically. The intent is that no rep's personal LinkedIn account is ever put at risk, and that constraint is treated as non-negotiable rather than as a target to push against.</p>
+
+<div class="rule"></div>
+
+<h2>What it costs</h2>
+
+<table>
+<tr><th>Item</th><th>Detail</th><th class="n">Monthly</th></tr>
+<tr><td><b class="fn">HeyReach</b></td><td>$79 per connected LinkedIn profile, five profiles. Month to month.</td><td class="n">$395</td></tr>
+<tr><td>LinkedIn Sales Navigator</td><td>Not required. Campaigns run on standard and Premium accounts. Only needed for a message type we are not using at launch.</td><td class="n">$0</td></tr>
+<tr><td>Additional headcount</td><td>None. Operated within the existing Marketing function.</td><td class="n">$0</td></tr>
+<tr><td>Integration build</td><td>Uses the standard HubSpot connection. No custom development.</td><td class="n">$0</td></tr>
+</table>
+
+<p>The cost scales linearly with profiles, so adding a sixth rep is $79. There is no tier to jump and no annual commitment at this size.</p>
+
+<div class="rule"></div>
+
+<h2>How we will know if it is working</h2>
+
+<p>Every LinkedIn action is logged against the contact record in HubSpot: connection sent, connection accepted, message sent, reply received. This channel reports into the same system as everything else rather than sitting in a separate dashboard, which means it is measurable from the first week instead of being a black box we assess in six months.</p>
+
+<table>
+<tr><th>Measure</th><th>What it tells us</th></tr>
+<tr><td><b class="fn">Meetings booked per rep, per week</b></td><td>The headline number. The one we will be judged on.</td></tr>
+<tr><td>Connection acceptance rate</td><td>Whether we are targeting the right people</td></tr>
+<tr><td>Positive reply rate</td><td>Whether the message is landing</td></tr>
+<tr><td>Pipeline influenced</td><td>Commercial contribution, once deals have had time to develop</td></tr>
+</table>
+
+<p>A target for meetings per sender per week is set before launch, so the first review has something to measure against rather than a narrative.</p>
+
+<h3>First two campaigns</h3>
+<ol>
+<li><b>PBExpo 2027 exhibitor outreach.</b> The messaging is already written and reviewed, which makes this the fastest route to a live campaign with real copy.</li>
+<li><b>Supplier acquisition</b> in our highest-value segments: MROs, distributors, overhaul shops and regional airlines not currently on PartsBase.</li>
+</ol>
+<p>These run sequentially rather than at once, because the pool's weekly capacity is shared across campaigns rather than added to.</p>
+
+<div class="rule"></div>
+
+<h2>Timeline</h2>
+
+<div class="phase now">
+<div class="phhead"><span class="phname">Approvals and consent</span><span class="phwhen">Early October</span></div>
+<p>Vendor review with IT, contract, and the rep agreement through HR. These are the gating items, not the tool. Setup itself takes days.</p>
+</div>
+
+<div class="phase">
+<div class="phhead"><span class="phname">Connect and warm</span><span class="phwhen">Mid October</span></div>
+<p>Five profiles connected, warmed at low volume, HubSpot logging verified before real campaigns start.</p>
+</div>
+
+<div class="phase">
+<div class="phhead"><span class="phname">First campaign live</span><span class="phwhen">Late October</span></div>
+<p>PBExpo 2027 exhibitor outreach, running at partial volume with daily monitoring.</p>
+</div>
+
+<div class="phase">
+<div class="phhead"><span class="phname">First review</span><span class="phwhen">End of November</span></div>
+<p>Four weeks of data. Meetings booked, acceptance and reply rates, and a decision on whether to scale, adjust or stop.</p>
+</div>
+
+<div class="rule"></div>
+
+<h2>Risks, and how they are handled</h2>
+
+<table>
+<tr><th>Risk</th><th>How it is managed</th></tr>
+<tr><td>A rep's personal LinkedIn account gets restricted</td><td>Daily volume held well inside LinkedIn's limits, accounts warmed before full rate, automatic freezing before any threshold is reached. Treated as a hard constraint, not a target</td></tr>
+<tr><td>Reps are uncomfortable being the sender</td><td>Written consent, copy approval rights, clarity on inbox privacy, and the ability to withdraw at any time. HR reviews the agreement before anyone is asked</td></tr>
+<tr><td>The programme quietly stops, as rep-run sequencing did before</td><td>Marketing operates it. The only rep commitment is responding to a qualified reply, which is work they already want</td></tr>
+<tr><td>A prospect is contacted on LinkedIn and by email in the same week</td><td>Both channels read the same contact database and the same suppression rules. Customers, unsubscribes and open deals are excluded from LinkedIn campaigns</td></tr>
+<tr><td>We cannot tell whether it produced anything</td><td>Every touch logs to HubSpot against the contact record from day one, with a target set before launch</td></tr>
+<tr><td>Approvals slip and October is missed</td><td>Contracting and the consent policy are started in the first week of October, ahead of the contract, because they depend on other people's calendars rather than ours</td></tr>
+</table>
+
+<div class="rule"></div>
+
+<h2>What we get out of it</h2>
+<ul>
+<li><b>A second source of pipeline</b> that is not exposed to our email deliverability rebuild.</li>
+<li><b>Reach into accounts we cannot email</b>, where LinkedIn is the only route to a named decision maker.</li>
+<li><b>No new headcount and no new work for sales.</b> Reps receive qualified conversations and nothing else.</li>
+<li><b>A measurable channel from week one</b>, reporting into the same system as the rest of marketing.</li>
+<li><b>A cheap, reversible test.</b> $395 a month, month to month, with a clear review point at the end of November.</li>
+</ul>
+
+<div class="plain" style="margin-top:34px"><b>Companion brief</b>
+<p>The contact database this runs on is being migrated from Mailchimp to HubSpot. See <a href="move-to-hubspot.html" style="color:#0a5bc4;font-weight:700">The Move to HubSpot</a>.</p></div>
+
+<footer>HeyReach pricing, account requirements, platform limits and HubSpot integration behaviour verified against the vendor's published pricing page and help centre, September 2026.</footer>
+
+</div></body></html>
