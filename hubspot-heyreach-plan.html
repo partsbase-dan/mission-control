@@ -2,358 +2,267 @@
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HubSpot Close-Out &amp; HeyReach Launch</title>
+<title>The Move to HubSpot</title>
 <style>
 :root{--navy:#002857;--deep:#083460;--blue:#0c70e8;--mint:#2ed6b0;--orange:#e0420b;
 --paper:#f7f8fa;--card:#fff;--ink:#131820;--muted:#5a6472;--rule:#e3e7ec}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);
-font-family:Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px 80px}
-header{background:linear-gradient(135deg,var(--navy),var(--deep) 55%,#0b3f7a);
-color:#fff;padding:38px 0 30px;margin-bottom:0}
-header .wrap{padding-bottom:0}
-h1{margin:0;font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-.02em}
-.sub{margin:8px 0 0;font-size:15px;color:#c5faf2;max-width:74ch}
-.meta{margin-top:16px;font-size:12px;color:#9fc4ec;letter-spacing:.04em;text-transform:uppercase}
+font-family:Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px 80px}
+header{background:linear-gradient(135deg,var(--navy),var(--deep) 55%,#0b3f7a);color:#fff;padding:44px 0 34px}
+h1{margin:0;font-size:clamp(28px,4.4vw,42px);font-weight:900;letter-spacing:-.025em}
+.sub{margin:12px 0 0;font-size:17px;color:#c5faf2;max-width:62ch;line-height:1.5}
+.meta{margin-top:20px;font-size:12px;color:#9fc4ec;letter-spacing:.05em;text-transform:uppercase}
 .kpis{background:var(--navy);border-top:1px solid rgba(255,255,255,.12)}
-.kpis .wrap{display:flex;flex-wrap:wrap;gap:34px;padding-top:18px;padding-bottom:18px}
-.kpi b{display:block;font-size:24px;font-weight:900;letter-spacing:-.02em;color:#fff}
+.kpis .wrap{display:flex;flex-wrap:wrap;gap:36px;padding-top:20px;padding-bottom:20px}
+.kpi b{display:block;font-size:25px;font-weight:900;letter-spacing:-.02em;color:#fff}
 .kpi span{font-size:10.5px;color:#9fc4ec;text-transform:uppercase;letter-spacing:.07em}
-h2{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-color:var(--muted);margin:44px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--rule)}
-h3{font-size:19px;font-weight:900;letter-spacing:-.015em;margin:26px 0 10px}
-h4{font-size:14px;font-weight:800;margin:20px 0 8px}
-p{margin:0 0 12px}
-.toc{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 0}
-.toc a{text-decoration:none;background:var(--card);border:1px solid var(--rule);border-radius:999px;
-padding:7px 15px;font-size:13px;font-weight:600;color:var(--ink)}
-.toc a:hover{border-color:var(--blue);color:var(--blue)}
-.card{background:var(--card);border:1px solid var(--rule);border-radius:14px;
-padding:22px 26px 24px;margin-bottom:20px}
-.flag{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--orange);
-border-radius:0 10px 10px 0;padding:16px 20px;margin:0 0 18px;font-size:14px}
-.flag b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.07em;
+h2{font-size:26px;font-weight:900;letter-spacing:-.022em;margin:52px 0 6px;color:var(--navy)}
+.lede{font-size:16px;color:var(--muted);margin:0 0 20px;max-width:70ch}
+h3{font-size:18px;font-weight:800;letter-spacing:-.012em;margin:30px 0 10px}
+p{margin:0 0 14px;max-width:74ch}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:72ch} li{margin:7px 0}
+.rule{height:1px;background:var(--rule);margin:0}
+.plain{background:#e8f1fe;border-left:4px solid var(--blue);border-radius:0 10px 10px 0;
+padding:15px 19px;margin:0 0 20px;font-size:14.5px;max-width:74ch}
+.plain b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+color:#0a5bc4;margin-bottom:5px}
+.plain p{margin:0}
+.warn{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--orange);
+border-radius:0 10px 10px 0;padding:17px 21px;margin:0 0 20px;max-width:74ch}
+.warn b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
 color:#a8360c;margin-bottom:6px}
-.ok{background:#e6f6ef;border-left:3px solid var(--mint);border-radius:0 8px 8px 0;
-padding:13px 16px;font-size:13.5px;margin:0 0 18px}
-.ok b{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1d6b46}
-.info{background:#e8f1fe;border-left:3px solid var(--blue);border-radius:0 8px 8px 0;
-padding:13px 16px;font-size:13.5px;margin:0 0 18px}
-.info b{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#0a5bc4}
-.fix{background:var(--paper);border:1px dashed #c4dcfb;border-radius:9px;
-padding:12px 16px;font-size:13.5px;margin:12px 0 0}
-.fix b{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#0a5bc4}
-table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);
-border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin:0 0 18px}
-th{background:var(--navy);color:#fff;text-align:left;padding:10px 14px;
+.warn p:last-child{margin-bottom:0}
+.good{background:#e6f6ef;border-left:4px solid var(--mint);border-radius:0 10px 10px 0;
+padding:15px 19px;margin:0 0 20px;font-size:14.5px;max-width:74ch}
+.good b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+color:#1d6b46;margin-bottom:5px}
+.good p:last-child{margin:0}
+.bigstat{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 22px}
+.bigstat>div{flex:1 1 190px;background:var(--card);border:1px solid var(--rule);
+border-radius:13px;padding:17px 19px}
+.bigstat b{display:block;font-size:29px;font-weight:900;letter-spacing:-.03em;color:var(--navy);line-height:1.1}
+.bigstat b.bad{color:var(--orange)}
+.bigstat b.ok{color:#128a63}
+.bigstat span{display:block;font-size:13px;color:var(--muted);margin-top:5px}
+.bar{background:var(--card);border:1px solid var(--rule);border-radius:13px;padding:20px 22px;margin:0 0 22px}
+.track{height:26px;background:#eef2f7;border-radius:7px;overflow:hidden;display:flex;margin:12px 0 9px}
+.track i{display:block;height:100%;font-style:normal}
+.track .done{background:var(--navy);width:73.4%}
+.track .left{background:#c9d6e4;width:26.6%}
+.barlbl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);
+border:1px solid var(--rule);border-radius:11px;overflow:hidden;margin:0 0 22px}
+th{background:var(--navy);color:#fff;text-align:left;padding:11px 15px;
 font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
-td{padding:10px 14px;border-top:1px solid var(--rule);vertical-align:top}
+td{padding:12px 15px;border-top:1px solid var(--rule);vertical-align:top}
 td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
 th.n{text-align:right}
-tr.tot td{background:var(--paper);font-weight:800}
-.id{font-weight:800;color:var(--blue);white-space:nowrap}
-ul{margin:0 0 12px;padding-left:20px} li{margin:5px 0}
-.opt{display:grid;grid-template-columns:1fr;gap:12px;margin:0 0 16px}
-.opt>div{border:1px solid var(--rule);border-radius:11px;padding:14px 18px;background:var(--card)}
-.opt>div.pick{border:2px solid var(--mint);background:#f4fdfa}
-.opt h5{margin:0 0 6px;font-size:14px;font-weight:800}
-.opt .tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;
-background:var(--mint);color:#083d31;border-radius:6px;padding:3px 7px;margin-left:8px}
-pre{background:var(--navy);color:#dbe9fb;border-radius:11px;padding:18px 20px;
-font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.7;overflow-x:auto;margin:0 0 18px}
-code{background:#eef2f7;border:1px solid #d8e0ea;border-radius:4px;padding:0 4px;
-font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#31465f}
-.corr{font-size:12.5px;color:var(--muted);font-style:italic;margin:10px 0 0}
-.src{font-size:12.5px;color:var(--muted)}
-.src a{color:var(--blue)}
-.src li{margin:4px 0}
-footer{border-top:1px solid var(--rule);margin-top:44px;padding-top:18px;
-font-size:12px;color:var(--muted)}
-@media(min-width:760px){.opt{grid-template-columns:repeat(3,1fr)}}
+td b.fn{color:var(--navy)}
+.phase{background:var(--card);border:1px solid var(--rule);border-radius:14px;
+padding:20px 24px;margin:0 0 16px;border-left:5px solid var(--blue)}
+.phase.now{border-left-color:var(--mint);background:#f6fdfb}
+.phase.later{border-left-color:#c9d6e4}
+.phhead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.phname{font-size:18px;font-weight:900;letter-spacing:-.015em}
+.phwhen{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.phase.now .phwhen{background:var(--mint);color:#083d31;border-radius:6px;padding:4px 9px}
+.phase p{margin:9px 0 0;font-size:14.5px}
+.phase ul{margin:10px 0 0}
+footer{border-top:1px solid var(--rule);margin-top:50px;padding-top:20px;font-size:12.5px;color:var(--muted)}
 </style></head><body>
 
 <header><div class="wrap">
-<h1>HubSpot Close-Out &amp; HeyReach Launch</h1>
-<p class="sub">Finish the contact migration, hand the segment library to email, and stand up centrally operated LinkedIn outreach.</p>
-<p class="meta">Dan Rodgers &middot; Director of Marketing &amp; GTM Strategy &middot; Sep 22 to Oct 3, 2026</p>
+<h1>The Move to HubSpot</h1>
+<p class="sub">Why we are replacing Mailchimp, what it fixes, and how we are making sure nothing breaks on the way across.</p>
+<p class="meta">Dan Rodgers &middot; Director of Marketing &amp; GTM Strategy &middot; September 2026</p>
 </div></header>
 
 <div class="kpis"><div class="wrap">
-<div class="kpi"><b>132,160</b><span>Marketing contacts today</span></div>
-<div class="kpi"><b>~48,000</b><span>Left to import</span></div>
-<div class="kpi"><b>180,000</b><span>Target</span></div>
-<div class="kpi"><b>5</b><span>HeyReach senders</span></div>
-<div class="kpi"><b>$395<span style="font-size:13px;font-weight:600">/mo</span></b><span>HeyReach cost</span></div>
+<div class="kpi"><b>73%</b><span>Contacts migrated</span></div>
+<div class="kpi"><b>1 month</b><span>Mailchimp runs in parallel</span></div>
+<div class="kpi"><b>3</b><span>Systems becoming 1</span></div>
+<div class="kpi"><b>November</b><span>LinkedIn outreach begins</span></div>
 </div></div>
 
 <div class="wrap">
 
-<div class="toc">
-<a href="#stand">Where we stand</a>
-<a href="#a">Track A &middot; Migration</a>
-<a href="#b">Track B &middot; Segments</a>
-<a href="#c">Track C &middot; HeyReach</a>
-<a href="#d">Track D &middot; Updates</a>
-<a href="#time">Timeline</a>
-<a href="#open">Open items</a>
+<h2>In one paragraph</h2>
+<p>We are moving our contact database and all marketing email from Mailchimp into HubSpot. The migration is 73% complete and finishes in the next two weeks. Mailchimp stays switched on for one more month after that as a safety net, so if anything did not come across we find it while we still have the original. Once Mailchimp is retired, we add HeyReach in November to run LinkedIn outreach on the same contact database. The end state is one system holding our contacts, our email, and our pipeline, instead of three systems that do not talk to each other.</p>
+
+<div class="rule"></div>
+
+<h2>Why we are doing this</h2>
+<p class="lede">Three problems, all of which cost us revenue today.</p>
+
+<h3>1. Our email was not reaching inboxes</h3>
+
+<div class="plain"><b>Plain English: sender reputation</b>
+<p>Every company that sends email has a reputation score held by Gmail, Outlook and the other inbox providers. It is based mostly on how often recipients mark your mail as spam. A good reputation means your email lands in the inbox. A bad one means it goes to spam or is refused at the door, and that applies to <i>every</i> email from your domain, including invoices and renewal notices.</p></div>
+
+<div class="bigstat">
+<div><b class="bad">27-30%</b><span>Our Mailchimp spam complaint rate</span></div>
+<div><b class="ok">Under 0.1%</b><span>What inbox providers expect</span></div>
+<div><b class="bad">213,000</b><span>Dead contacts on the list</span></div>
 </div>
 
-<h2 id="stand">Where the migration stands</h2>
+<p>We were running a spam complaint rate roughly 300 times higher than the accepted threshold. That is not a marketing inconvenience, it is the reason campaigns underperformed regardless of what the message said. We were sending to a very large list where most people had stopped engaging years ago, and every send made the reputation worse.</p>
 
-<p>Portal state was read live from HubSpot (portal 51546776) on 2026-09-21, not from the July audit files.</p>
+<div class="warn"><b>What this means in practice</b>
+<p>Fixing the list is not optional and it cannot be fixed inside Mailchimp, because the damage attaches to the sending history. Moving to HubSpot with a cleaned list and a disciplined warm-up is how we rebuild deliverability. It is the single highest-value thing in this project.</p></div>
 
-<table>
-<tr><th>Measure</th><th class="n">In portal today</th><th class="n">Target</th></tr>
-<tr><td>Marketing contacts</td><td class="n">132,160</td><td class="n">~180,000</td></tr>
-<tr><td>Non-marketing CRM contacts</td><td class="n">158</td><td class="n">~45,000 (see A1)</td></tr>
-<tr><td>Companies</td><td class="n">17,471</td><td class="n">not in scope</td></tr>
-</table>
+<h3>2. Our data lives in three places that do not talk</h3>
+<p>Contacts sit in ORO. Email sits in Mailchimp. Neither connects to the other, so when a customer signs up we cannot see which marketing touch brought them in. We have been unable to answer the most basic commercial question: which of our marketing spend produces customers.</p>
+<p>After the move, HubSpot holds contacts, email and pipeline in one place. ORO continues as our leads tracker feeding downstream systems, so nothing in the existing operational flow breaks.</p>
 
-<p>Import waves: 119,306 in July, 6,916 in August, 6,094 in September. Remaining to import is roughly 48,000 marketing contacts, and that is the whole of what is left. The July 9 audit's separate CRM-only bucket is retired. Where this plan and the July 9 audit disagree, this plan is current.</p>
+<h3>3. Email was one person doing one-off sends</h3>
+<p>Today every campaign is built by hand, one at a time, with no repeatable segments and no automation. There is no way to send the right message to the right kind of customer without rebuilding the audience from scratch each time. HubSpot gives us a fixed library of audience segments that gets reused, which makes sends faster, more targeted, and far harder to get wrong.</p>
 
-<div class="ok"><b>Suppression: verified clean</b>
-<p style="margin:8px 0 0">Suppression was handled by exclusion at the source. Unsubscribed contacts were never imported. Verified by sampling 25 of the 23,545 records in the Mailchimp unsubscribe export against the portal: zero present. The 25 opt-out records in HubSpot are not a gap, because there is nothing to opt out.</p></div>
+<div class="rule"></div>
 
-<div class="flag"><b>One residual hole worth closing</b>
-<p>Those 23,545 exist nowhere in HubSpot, so the portal has no memory that they ever unsubscribed. Any future path that creates a contact, a PBExpo registration form, a Clay push, a list upload, a rep typing someone in, can re-introduce one of them with a clean marketable status and mail them. Exclusion is a one-time filter. It is not a guardrail.</p>
-<div class="fix"><b>Fix, about 30 minutes</b><p style="margin:6px 0 0">Import all 23,545 as non-marketing contacts with opt-out set to true. They do not count against the marketing tier, and HubSpot then blocks them permanently no matter how they re-enter.</p></div></div>
+<h2>What a "marketing contact" is, and why the number matters</h2>
 
-<h3>The real constraint: marketing-contact headroom</h3>
+<div class="plain"><b>Plain English: marketing contacts</b>
+<p>HubSpot charges based on how many contacts you are allowed to email, not how many records you store. A record you keep for reference is free. A record you can send marketing email to is billable. So the discipline is to be deliberate about who actually belongs on the mailable list.</p></div>
 
-<p>Assuming the contracted ceiling is 185,000, the figure the July audit worked against:</p>
-<ul>
-<li>A target of 180,000 leaves <b>5,000 of headroom</b>.</li>
-<li>Contacts are entering at roughly 6,000 to 7,000 per month (August 6,916; September 6,094 through the 21st).</li>
-<li>That is <b>under one month of runway</b> before the tier auto-upgrades and the bill steps up.</li>
-</ul>
-
-<p>Every contact in the portal is currently a marketing contact, 132,160 of 132,319. Of those, <b>45,115 are billable and not mailable</b>: 28,305 Low Priority plus 16,810 with no ICP tier assigned. Flipping those to non-marketing before finishing the import lands you at roughly 135,000 marketing after the full load, with about 50,000 of genuine headroom instead of 5,000.</p>
-
-<h3>Three data issues that shape the segment build</h3>
-<ol>
-<li><b>ICP properties came through populated and usable.</b> <code>icp_tier</code> and <code>icp_segment</code> are ready as segment inputs today. This is what keeps the Week 2 builds on schedule.</li>
-<li><b><code>icp_segment</code> is unassigned on 68,165 contacts, 51.5%.</b> Half the list cannot enter a Distributor, MRO, OEM or Airline segment until Clay runs a company to firmographics pass. That pass takes weeks, so it starts Monday regardless of everything else.</li>
-<li><b>Country is raw and OFAC was not applied.</b> 112,453 "united states" plus 2,733 "usa", plus state names and city strings, plus 10,128 blank. Russia, Belarus and Myanmar records are present as marketing contacts. No geo or GDPR logic works until this is normalized.</li>
-</ol>
-
-<p>Lifecycle stage is <code>Lead</code> on 132,318 of 132,319 records, so there is no lifecycle model yet. That is a Track B dependency, not a blocker.</p>
-
-<h2 id="a">Track A &middot; Close the migration (week of Sep 22)</h2>
+<p>We started with 231,889 raw records out of Mailchimp. Rather than move all of them and pay for the privilege, every record was classified first.</p>
 
 <table>
-<tr><th>#</th><th>Task</th><th>Verify by</th></tr>
-<tr><td class="id">A1</td><td><b>Flip the non-mailable population to non-marketing.</b> Low Priority (28,305) plus unassigned tier (16,810). Do this before the remaining import, so you are not buying tier headroom you then free up.</td><td>Marketing contact count drops to about 87,000</td></tr>
-<tr><td class="id">A2</td><td><b>Import the remaining ~48,000</b> to reach the 180,000 target.</td><td>Marketing count lands near 135,000 with A1 applied; reconcile source rows to portal count per file</td></tr>
-<tr><td class="id">A3</td><td><b>Backfill the 23,545 unsubscribes</b> as non-marketing with opt-out true. Turns source-side exclusion into a permanent portal guardrail.</td><td>Opt-out count reaches about 23,545; marketing count unchanged</td></tr>
-<tr><td class="id">A4</td><td><b>Apply the compliance hold.</b> OFAC countries to non-marketing plus a permanent suppression list. EEA and UK get a <code>gdpr_flag</code> property, flag not block.</td><td>Zero OFAC-country contacts in any marketable list</td></tr>
-<tr><td class="id">A5</td><td><b>Normalize country.</b> Build <code>country_normalized</code> from the raw field, reusing the mapping the July audit already produced.</td><td>"united states", "usa" and state names collapse to one value</td></tr>
-<tr><td class="id">A6</td><td><b>Load the send-readiness gate.</b> Create <code>send_readiness</code> and populate it. Without this, every Track B segment silently includes the 84,000 with no industry signal.</td><td>About 60,618 marked send-ready</td></tr>
-<tr><td class="id">A7</td><td><b>Confirm the contracted ceiling</b> and set a HubSpot notification at 90% of it.</td><td>Number written down, alert configured</td></tr>
-<tr><td class="id">A8</td><td><b>Kick off the Clay firmographics pass</b> on the 68,165 unassigned-segment contacts. Highest-leverage enrichment job, runs for weeks.</td><td>Clay table seeded and running, weekly write-back to <code>icp_segment</code></td></tr>
+<tr><th>What came out of the sort</th><th class="n">Records</th><th>Decision</th></tr>
+<tr><td><b class="fn">Good contacts, right kind of company</b></td><td class="n">~180,000</td><td>Migrating as marketing contacts</td></tr>
+<tr><td>Already unsubscribed from us</td><td class="n">23,545</td><td>Excluded, and blocked permanently</td></tr>
+<tr><td>Spam bots, test accounts, corrupted records</td><td class="n">667</td><td>Deleted</td></tr>
+<tr><td>Wrong kind of company or no usable signal</td><td class="n">~28,000</td><td>Kept for reference, not emailed</td></tr>
 </table>
 
-<div class="info"><b>Deliberately out of scope</b>
-<p style="margin:6px 0 0">Company-object work. 17,471 companies against 132,000 contacts means company-level properties cannot carry v1 segmentation. Build on contact properties and revisit in October. The spec already exists and will keep.</p></div>
+<p>The result is a list we can stand behind. Every address on it is a real person at a company that plausibly buys from us, and nobody who has ever asked us to stop will be contacted again.</p>
 
-<h2 id="b">Track B &middot; Segment library and handoff to Alejandra (week of Sep 29)</h2>
+<div class="good"><b>Why this matters commercially</b>
+<p>Sending less, to better-chosen people, is what rebuilds deliverability. A smaller engaged list outperforms a large dead one, and it costs less to hold.</p></div>
 
-<div class="card">
-<h3 style="margin-top:0">The operating principle</h3>
-<p>You own the segment library. Alejandra builds emails <i>against</i> saved lists and never writes filters. This is the difference between HubSpot and what Mailchimp became: list logic has one owner and an audit trail, and a builder cannot accidentally mail 135,000 people.</p>
-<p style="margin-bottom:0"><b>Enforce it with permissions, not policy.</b> Alejandra is a contractor moving from ad-hoc one-off Mailchimp sends to a platform she has not used. Give her Marketing access without list-creation or list-edit rights. The rule then holds because HubSpot enforces it, not because she remembered it. It also protects her, because she cannot cause the incident.</p>
+<div class="rule"></div>
+
+<h2>Where we are today</h2>
+
+<div class="bar">
+<div class="track"><i class="done"></i><i class="left"></i></div>
+<div class="barlbl"><span><b>132,160 contacts live in HubSpot</b></span><span>~48,000 remaining</span></div>
 </div>
 
-<div class="flag"><b>Standing risk</b>
-<p>She is a single point of failure on all email execution. Worth naming in the monthly update, and worth a second trained person by Q1.</p></div>
+<p>Three import waves have run since July. The remainder goes in over the next two weeks, alongside the work to standardise country data, apply export-control restrictions, and tag every contact by the kind of aviation business they are, which is what makes targeted sending possible.</p>
 
-<h3>Naming convention</h3>
-<p><code>[Brand] &ndash; [Layer] &ndash; [Name] &ndash; [State]</code>, for example <code>PB &ndash; Audience &ndash; MRO &ndash; Send Ready</code> and <code>GLOBAL &ndash; Suppress &ndash; Unsubscribed</code>.</p>
-
-<h3>Layer 1 &middot; Global suppressions</h3>
-<p>Attached as exclusions to <b>every</b> send.</p>
 <table>
-<tr><th>List</th><th>Source</th></tr>
-<tr><td>GLOBAL &ndash; Suppress &ndash; Unsubscribed &amp; Complained</td><td>A3 backfill</td></tr>
-<tr><td>GLOBAL &ndash; Suppress &ndash; Bounced &amp; Invalid</td><td>Native, ongoing</td></tr>
-<tr><td>GLOBAL &ndash; Suppress &ndash; Compliance Hold (OFAC)</td><td>A4</td></tr>
-<tr><td>GLOBAL &ndash; Suppress &ndash; Not Send Ready</td><td>A6</td></tr>
-<tr><td>GLOBAL &ndash; Suppress &ndash; Current Customers</td><td>Exclusion list, refreshed from Amelia</td></tr>
+<tr><th>Workstream</th><th>Status</th></tr>
+<tr><td>Contact import</td><td>73% complete, finishing by Oct 3</td></tr>
+<tr><td>Unsubscribe protection</td><td>Verified. Nobody who opted out of Mailchimp was imported</td></tr>
+<tr><td>Audience segments</td><td>Building week of Sep 29</td></tr>
+<tr><td>Data enrichment</td><td>Underway. About half the list needs its industry confirmed before it can be segmented</td></tr>
+<tr><td>Export-control and privacy holds</td><td>Applying this week</td></tr>
 </table>
 
-<h3>Layer 2 &middot; Audience segments</h3>
-<p>Live counts from the portal, 2026-09-21.</p>
+<div class="rule"></div>
+
+<h2>The safety net: one month running both systems</h2>
+<p class="lede">The main risk in any migration is discovering three weeks later that something did not come across.</p>
+
+<p>So we are not switching Mailchimp off when HubSpot goes live. <b>Mailchimp stays active through late October</b>, roughly a month of the two systems running side by side, while HubSpot takes over sending. That gives us a working original to check against for as long as it takes to be confident.</p>
+
+<h3>What we are checking during the parallel month</h3>
+<ul>
+<li>Every contact that existed in Mailchimp is accounted for in HubSpot, or was deliberately excluded with a reason.</li>
+<li>Unsubscribes and spam complaints are being honoured. Nobody who opted out gets contacted.</li>
+<li>Deliverability on the new platform is improving, measured on complaint rate and bounce rate, not on opens.</li>
+<li>Historical engagement carried across, so we can still tell an engaged customer from a dormant one.</li>
+<li>Reporting reconciles. The numbers HubSpot shows match what actually went out.</li>
+</ul>
+
+<div class="good"><b>The decommission test</b>
+<p>Mailchimp is switched off when all five of those check out and HubSpot has sent successfully for four consecutive weeks inside safe complaint thresholds. If any one of them fails, we extend rather than push ahead. The cost of another month of Mailchimp is trivial next to the cost of damaging the sending domain again.</p></div>
+
+<div class="rule"></div>
+
+<h2>What changes for each team</h2>
+
 <table>
-<tr><th>Segment</th><th class="n">Contacts</th><th>Grouping</th></tr>
-<tr><td>U.S. Defense Contractor</td><td class="n">18,699</td><td>Defense</td></tr>
-<tr><td>Airline</td><td class="n">9,469</td><td>Operator</td></tr>
-<tr><td>MRO</td><td class="n">9,271</td><td>Service</td></tr>
-<tr><td>Distributor</td><td class="n">8,440</td><td>Supply</td></tr>
-<tr><td>OEM</td><td class="n">8,270</td><td>Manufacturing</td></tr>
-<tr><td>Contract Manufacturer</td><td class="n">3,946</td><td>Manufacturing</td></tr>
-<tr><td>Charter Service</td><td class="n">2,916</td><td>Operator</td></tr>
-<tr><td>FBO/AMO</td><td class="n">1,655</td><td>Operator</td></tr>
-<tr><td>Broker</td><td class="n">1,163</td><td>Supply</td></tr>
-<tr><td>Overhaul Shop</td><td class="n">321</td><td>Service</td></tr>
-<tr class="tot"><td>Unassigned, blocked on A8</td><td class="n">68,165</td><td>Clay pass required</td></tr>
-</table>
-<p>Each audience list is cut against <code>icp_tier</code> and <code>send_readiness</code>. Everything else is imported but held.</p>
-
-<h3>Layer 3 &middot; Engagement state</h3>
-<p>Engaged, Cold, Never engaged.</p>
-<div class="flag"><b>Say this to Alejandra explicitly</b>
-<p>HubSpot has no native engagement history yet. For the first 60 days these lists run off migrated Mailchimp engagement flags, and 66.4% of the clean list never opened anything. Switch the definitions to native HubSpot engagement at the 60-day mark. Put it on the calendar so the definition does not silently rot.</p></div>
-
-<h3>Layer 4 &middot; Warm-up cohorts</h3>
-<p>New sending domain, zero reputation, and a source list whose historical complaint rate ran 27% to 30%. Non-negotiable.</p>
-<ul>
-<li>Weeks 1 and 2: Tier 3 and Tier 1, engaged, send-ready only. Start at 2,000 to 5,000 per day.</li>
-<li>Double volume every 2 to 3 sends <b>only if</b> complaint rate stays under 0.1% and bounce rate under 2%. Hold on any breach.</li>
-<li>Cold segments stay untouched for four weeks minimum.</li>
-<li>Never-engaged is a separate re-permission decision, not a warm-up cohort.</li>
-</ul>
-
-<h3>What Alejandra receives</h3>
-<ol>
-<li><b>Segment catalog.</b> One page: list name, plain-English definition, current count, intended use, who approves a send to it.</li>
-<li><b>Send request intake.</b> The spec exists already. Stand it up as a form.</li>
-<li><b>Four standing rules.</b> Request a list, never build a filter. All five global suppressions on every send. Every link carries a UTM from the registry. During warm-up, nothing sends without your sign-off.</li>
-<li><b>A 45-minute working session</b> building one real email against one real list, together. Do not hand this over as a document.</li>
-</ol>
-
-<h2 id="c">Track C &middot; HeyReach</h2>
-
-<p>The agency model is the design goal, stated plainly: <b>campaigns are operated centrally, reps contribute identity and take handoffs, not execution.</b> Every decision below gets tested against "does this keep execution off the reps' plate."</p>
-
-<div class="info"><b>Supersedes MeetAlfred</b>
-<p style="margin:6px 0 0">MeetAlfred is still listed as the Phase 2 LinkedIn tool in <code>CLAUDE.md</code> and <code>dashboard-state.json</code>. Both need updating.</p></div>
-
-<p class="src">Vendor facts in this track were verified against HeyReach's pricing page and help centre on 2026-09-21. Sources are listed at the end of the section.</p>
-
-<h3>C1 &middot; Cost, verified</h3>
-<p><b>Growth is $79 per sender per month</b>, priced per connected LinkedIn account rather than per human user. Five senders is <b>$395 per month</b>, or $316 billed annually at $63 per sender.</p>
-<p>Growth includes everything the agency model needs. No upgrade required:</p>
-<ul>
-<li>Unified inbox</li>
-<li>Unlimited campaigns and all LinkedIn actions</li>
-<li>Integrations, including Clay and HubSpot</li>
-<li>API and webhooks</li>
-<li>Workspaces and permissions</li>
-<li>MCP server</li>
-<li>100 enrichment credits per sender, 500 per month across five. Clay is the primary enrichment source, so treat these as incidental.</li>
-</ul>
-<p>The Agency tier at $999 per month for 25 senders only becomes cheaper per sender above about 13 senders. Not relevant at five.</p>
-
-<div class="ok"><b>Sales Navigator is not required</b>
-<p style="margin:8px 0 0">Free and Premium LinkedIn accounts both run HeyReach campaigns. Sales Navigator is mandatory only for the InMail action. Premium, around $80 to $99 per seat per month, buys unlimited personalized connection requests with a 300-character note plus advanced search filters. Worth having, not a prerequisite. Since lists come from Clay rather than Sales Nav search, check what the five reps already carry before budgeting anything here.</p></div>
-<p class="corr">Correction to the earlier draft: it stated Sales Navigator was required on every seat, at about $500 per month. That was wrong.</p>
-
-<h3>C2 &middot; Sender model: five rep profiles</h3>
-<p>Five reps' real LinkedIn profiles gives the best acceptance and reply rates, real people with real aviation networks. It also makes the consent and acceptable-use policy <b>mandatory</b>, and it needs to exist before procurement closes or it becomes the thing that stalls launch in week three.</p>
-<p>The policy needs to cover, in writing, signed by each rep:</p>
-<ul>
-<li>Explicit consent to send on their behalf, and what gets sent.</li>
-<li>How account access is handled, and that it ends when they leave the role.</li>
-<li>Who reads replies. This is the clause reps actually care about, because outreach replies land in their personal LinkedIn inbox next to recruiter messages and personal conversations.</li>
-<li>Their right to review sequence copy before it goes out under their name.</li>
-<li>A clean off-ramp. Any rep can withdraw and the campaign reroutes across the remaining pool.</li>
-</ul>
-<p>Loop in HR before circulating. This is personal-account access, not just an IT question.</p>
-
-<h3>C3 &middot; Capacity and account safety</h3>
-<p>HeyReach's own guidance and the LinkedIn norm both land at <b>20 to 25 connection requests per sender per day</b>. Across five senders that is <b>100 to 125 per day, roughly 500 to 625 per week</b>. Size campaign one to that number, not to the size of the list.</p>
-<div class="flag"><b>Limits are shared across campaigns, not per campaign</b>
-<p>A sender enrolled in three campaigns at a 20 per day limit delivers about 7 per campaign per day. So "one active campaign per sender at launch" is not only a safety rule. Running two campaigns on the same pool halves the throughput of each. Add concurrency only when you have enough senders to absorb the split.</p></div>
-<ul>
-<li>Warm each profile before campaign volume. Do not point a freshly connected account at a 500-person list.</li>
-<li>HeyReach assigns a dedicated non-rotating residential IP per account and auto-freezes an account approaching a risky threshold. Verify both are active per sender at setup.</li>
-</ul>
-
-<h3>C4 &middot; List source: Clay to HeyReach, never Sales Nav to HeyReach</h3>
-<p>Clay is the enrichment backbone and holds the T1 filter logic. Building lists inside HeyReach from Sales Nav searches forks the ICP definition into two places within a month. One source of truth, pushed out.</p>
-<div class="flag"><b>The requirement that will quietly break attribution if missed</b>
-<p>HeyReach only creates or updates a HubSpot contact <i>if the lead has an email address</i>. LinkedIn prospecting frequently has no email. So Clay must resolve an email for every lead before it is pushed to HeyReach, otherwise those leads run the campaign, generate replies, and log nothing to HubSpot. Make email-found a filter on the Clay export, not a nice-to-have.</p></div>
-
-<h3>C5 &middot; HubSpot integration, before campaign 1</h3>
-<p><b>Direction is one-way, HeyReach to HubSpot.</b> This is the vendor's recommendation, and community reports are that attempting two-way sync produces duplicate records within days. Do not build it two-way.</p>
-<p class="corr">Correction to the earlier draft: it said suppression should sync in both directions. It should not.</p>
-<table>
-<tr><th>Setting</th><th>Configuration</th></tr>
-<tr><td>Sync trigger</td><td>On first reply (default and recommended) or on campaign enrolment. Start with first-reply to keep the CRM clean during the pilot.</td></tr>
-<tr><td>Activity mappings</td><td>Ten event types log to the contact timeline: connection request sent, accepted and withdrawn, messages, InMails, replies, campaign enrolment and pausing, list add and remove, third-party transfers. Each carries campaign name, sender, message body and list name.</td></tr>
-<tr><td>Dedupe</td><td>Matched on email. Existing contacts are updated, not duplicated.</td></tr>
-<tr><td>Properties</td><td>Synced data lands in four groups: Attribution, Exposure, Engagement, Intent.</td></tr>
+<tr><th>Team</th><th>What changes</th><th>What is asked of them</th></tr>
+<tr><td><b class="fn">Sales</b></td><td>Contact and company records move to HubSpot. Marketing activity, emails opened, pages viewed, LinkedIn touches, becomes visible on the record. ORO continues as the leads tracker.</td><td>Nothing yet. Rep adoption is a separate, later conversation.</td></tr>
+<tr><td><b class="fn">Marketing</b></td><td>Campaigns get built against a fixed library of audience segments instead of a new list each time. Sends get faster and more targeted.</td><td>Training on the new build process, scheduled for the week of Sep 29.</td></tr>
+<tr><td><b class="fn">Finance</b></td><td>Marketing cost per customer becomes measurable by channel for the first time, once we have a clean quarter of data.</td><td>Confirmation of the contracted contact ceiling so we manage headroom rather than trip an automatic upgrade.</td></tr>
+<tr><td><b class="fn">IT</b></td><td>One vendor replaces two. HeyReach onboarding follows in November.</td><td>Standard vendor review and contract path.</td></tr>
+<tr><td><b class="fn">Leadership</b></td><td>A single monthly view of pipeline sourced and influenced, cost per acquisition by channel, and list health.</td><td>Nothing. First report lands after the parallel month closes.</td></tr>
 </table>
 
-<h4>Suppression in the other direction is not a native sync</h4>
-<p>HeyReach exclude lists are lists imported into the HeyReach workspace and selected per campaign. Three ways to feed them:</p>
-<div class="opt">
-<div class="pick"><h5>1. Manual<span class="tag">Pilot</span></h5><p style="margin:0;font-size:13.5px">Export the HubSpot suppression list, import as a HeyReach exclude list, refresh on a fixed cadence. Fine for the pilot, a standing risk afterwards.</p></div>
-<div><h5>2. OutboundSync</h5><p style="margin:0;font-size:13.5px">Third-party paid connector that pushes a HubSpot list straight into HeyReach exclusion lists. Works, adds a vendor.</p></div>
-<div class="pick"><h5>3. Build it<span class="tag">By Oct</span></h5><p style="margin:0;font-size:13.5px">HeyReach's API and MCP server are both on the Growth plan. A scheduled job that reads HubSpot suppression lists and refreshes the HeyReach exclude list keeps it in-house.</p></div>
+<div class="rule"></div>
+
+<h2>Phase 2: LinkedIn outreach, from November</h2>
+<p class="lede">Once the email foundation is stable, we add LinkedIn as a second outbound channel, run centrally.</p>
+
+<p>We are bringing in a tool called HeyReach. The reason we chose it over the alternatives is structural rather than a feature comparison.</p>
+
+<div class="plain"><b>Plain English: why this is run like an agency</b>
+<p>Most LinkedIn outreach tools assume each sales rep logs in and runs their own campaigns. That fails in practice, because reps are measured on closing, not on campaign admin, so the campaigns quietly stop. HeyReach lets one person operate campaigns centrally across several LinkedIn accounts at once. Reps lend their professional identity, which is what makes the outreach credible, and receive qualified replies as handoffs. They run nothing themselves.</p></div>
+
+<table>
+<tr><th>Item</th><th>Detail</th></tr>
+<tr><td>Cost</td><td>$79 per sender per month, five senders, <b>$395 per month total</b></td></tr>
+<tr><td>Who sends</td><td>Five sales reps' own LinkedIn profiles, with written consent and the right to review any message going out in their name</td></tr>
+<tr><td>Who operates it</td><td>Marketing, centrally. Reps receive qualified replies with a four-hour response commitment.</td></tr>
+<tr><td>Capacity</td><td>About 500 new contacts approached per week across the five accounts, within LinkedIn's safe limits</td></tr>
+<tr><td>Measured on</td><td>Meetings booked per sender per week, and pipeline influenced</td></tr>
+</table>
+
+<p>Every LinkedIn touch is logged against the contact record in HubSpot, so this channel is measurable from the first week rather than being a black box. The first two campaigns are PBExpo 2027 exhibitor outreach and supplier acquisition in our highest-value segments.</p>
+
+<div class="rule"></div>
+
+<h2>Timeline</h2>
+
+<div class="phase now">
+<div class="phhead"><span class="phname">Finish the migration</span><span class="phwhen">Now to Oct 3</span></div>
+<p>Last contacts imported. Audience segments built. Marketing trained on the new build process. First campaigns send from HubSpot.</p>
 </div>
-<p>Whichever you pick, the exclude list must carry current customers, unsubscribes, open deals, and anyone already in an active email sequence.</p>
 
-<h3>C6 &middot; The MCP server is what makes this a one-person agency</h3>
-<p>This is on the Growth plan and it is worth more to you than to anyone else on the team. HeyReach's MCP server connects an AI agent directly to the workspace, covering campaigns, leads, lists, replies and webhooks, so the daily operating work runs from a chat window instead of the dashboard: pull campaign performance, filter a list by title and industry, review and triage replies, draft responses, run sentiment on a reply set, move prospects between campaigns.</p>
-<p>That is precisely the labour that would otherwise force a coordinator hire to make the agency model work at five senders. Wire it up in week two alongside the HubSpot integration. It also gives you the API path for the suppression job in C5.</p>
+<div class="phase">
+<div class="phhead"><span class="phname">Parallel run and validation</span><span class="phwhen">Oct 6 to late Oct</span></div>
+<p>Mailchimp stays live as the reference copy. HubSpot does the sending, starting small and increasing volume only while complaint and bounce rates stay inside safe limits. The five decommission checks run against the original data.</p>
+</div>
 
-<h3>C7 &middot; The operating model</h3>
-<pre>Intake (request form)
-  -&gt; Dan builds the audience in Clay against the ICP filter (email-found required)
-  -&gt; Sequence copy drafted and approved
-  -&gt; Rep reviews copy going out under their name
-  -&gt; Campaign runs across the 5-sender pool, one campaign per sender at launch
-  -&gt; Unified inbox triaged daily (MCP-assisted)
-  -&gt; Positive reply -&gt; HubSpot contact + task to the owning rep, 4-hour SLA
-  -&gt; Rep takes the conversation from there</pre>
-<p>Reps execute nothing. That is the pitch to leadership, and it is what makes adoption work where rep-driven sequencing failed before.</p>
+<div class="phase">
+<div class="phhead"><span class="phname">Mailchimp retired</span><span class="phwhen">End of October</span></div>
+<p>Subject to all five checks passing. HubSpot becomes the only system sending marketing email.</p>
+</div>
 
-<h3>C8 &middot; First two campaigns</h3>
-<ol>
-<li><b>PBExpo 2027 exec outreach.</b> Net-new exec sequences are written and reviewed already. Fastest path to live with real copy.</li>
-<li><b>T1 supplier acquisition.</b> MRO, Distributor, Overhaul Shop, Regional Airline, not currently on PartsBase.</li>
-</ol>
-<p>At 500 to 625 connection requests per week across the pool, run these sequentially, not in parallel.</p>
+<div class="phase later">
+<div class="phhead"><span class="phname">HeyReach live</span><span class="phwhen">November</span></div>
+<p>Vendor review and contracting through IT. Rep consent agreed. Five accounts connected and warmed. First LinkedIn campaigns running and reporting into HubSpot.</p>
+</div>
 
-<h3>C9 &middot; Metrics</h3>
-<p>Connection acceptance rate, reply rate, positive reply rate, meetings booked, pipeline influenced.</p>
-<p>Set the v1 target as <b>meetings booked per sender per week</b>. It is the one number that survives a leadership conversation, and it scales cleanly as senders are added.</p>
+<div class="rule"></div>
 
-<h4>Sources</h4>
-<ul class="src">
-<li><a href="https://heyreach.io/pricing">HeyReach pricing</a>, Growth $79 per sender and tier features</li>
-<li><a href="https://sbl.so/heyreach/heyreach-pricing-breakdown/">HeyReach pricing breakdown</a>, per-sender confirmation and additional costs</li>
-<li><a href="https://help.heyreach.io/en/articles/10416374-can-i-use-a-premium-linkedin-account-with-heyreach">Premium LinkedIn accounts with HeyReach</a>, Sales Navigator required only for InMail</li>
-<li><a href="https://help.heyreach.io/en/articles/9892903-how-to-configure-my-sending-limits">Configuring sending limits</a>, daily caps and limits shared across campaigns</li>
-<li><a href="https://help.heyreach.io/en/articles/14891660-how-to-integrate-heyreach-with-hubspot">HeyReach and HubSpot integration</a>, sync direction, triggers, activity mappings, email requirement</li>
-<li><a href="https://help.heyreach.io/en/articles/10493720-how-to-add-an-exclude-list-to-my-campaign">Adding an exclude list to a campaign</a></li>
-<li><a href="https://outboundsync.com/blog/pushing-hubspot-lists-to-heyreach-exclusion-lists/">Pushing HubSpot lists to HeyReach exclusion lists</a>, third-party option</li>
-<li><a href="https://www.heyreach.io/blog/beginners-guide-heyreach-mcp">Getting started with MCP in HeyReach</a></li>
-</ul>
+<h2>Risks, and how they are handled</h2>
 
-<h2 id="d">Track D &middot; Operating as a Director</h2>
-<ol>
-<li><b>Monday five-bullet to Rodrigo, same format, different content.</b> He thinks in process and metrics. Shift from "what I built" to "what the function produced": the number that moved, what shipped, what is blocked plus the specific ask, next week's single commitment, the standing risk.</li>
-<li><b>Monthly one-pager.</b> Pipeline sourced and influenced, CAC by channel, list health (complaint, bounce, opt-out), adoption measured as reps active in HubSpot, spend against plan. This is the artifact that makes the function legible above Rodrigo.</li>
-<li><b>Fix Mission Control.</b> <code>dashboard-state.json</code> was last updated 2026-07-27 and the workstream statuses no longer match reality. A two-month-stale always-on dashboard reads worse than no dashboard.</li>
-</ol>
-
-<h2 id="time">Timeline</h2>
 <table>
-<tr><th>Track</th><th>Week of Sep 22</th><th>Week of Sep 29</th></tr>
-<tr><td><b>A</b><br>Migration</td><td>A1 flip non-mailable, A2 final import, A3 unsubscribe backfill, A4 compliance, A5 country, A6 send-readiness, A7 confirm ceiling, A8 Clay kickoff</td><td>Verify and close, spot-check counts</td></tr>
-<tr><td><b>B</b><br>Segments</td><td>Draft segment catalog, scope Alejandra's HubSpot permissions</td><td>Build Layers 1 to 4, working session with Alejandra, first warm-up send</td></tr>
-<tr><td><b>C</b><br>HeyReach</td><td>Procurement with Sergio and Omar at $395/mo for 5 senders, consent and AUP policy drafted with HR</td><td>Reps sign, accounts connected and warming, Clay to HeyReach wired with email-found filter, HubSpot one-way sync and MCP server live</td></tr>
-<tr><td><b>D</b><br>Updates</td><td>Dashboard brought current</td><td>Monday five-bullet in new format, monthly one-pager template</td></tr>
+<tr><th>Risk</th><th>How it is managed</th></tr>
+<tr><td>Something did not migrate and we only find out later</td><td>Mailchimp stays live a full month as the reference copy, with five explicit checks before it is retired</td></tr>
+<tr><td>We damage the new sending domain the way the old one was damaged</td><td>Volume starts low and only increases while complaint rate stays under 0.1%. Any breach holds the ramp. Cold segments are untouched for the first four weeks</td></tr>
+<tr><td>We exceed the contracted contact limit and trigger an automatic price increase</td><td>Roughly 45,000 low-value records are being moved off the billable list before the final import, and an alert is set at 90% of the ceiling</td></tr>
+<tr><td>Half the list cannot be segmented yet because its industry is unknown</td><td>Enrichment is already running. Those contacts are imported but held out of sends until their industry is confirmed, so we never guess at targeting</td></tr>
+<tr><td>Email execution depends on one person</td><td>Acknowledged as a single point of failure. A second trained builder is planned for Q1</td></tr>
+<tr><td>Reps are uncomfortable with LinkedIn outreach in their name</td><td>Written consent, copy review rights, and the ability to withdraw at any time. HR is involved before anything is signed</td></tr>
 </table>
 
-<h2 id="open">Open items</h2>
-<ol>
-<li><b>Confirm the contracted marketing-contact ceiling.</b> This plan assumes 185,000. If it is lower, A1 moves from prudent to urgent.</li>
-<li><b>Which of the five reps already have LinkedIn Premium?</b> Not required to run campaigns, but the 300-character connection note is worth having, and it changes nothing in the HeyReach bill.</li>
-</ol>
+<div class="rule"></div>
 
-<footer>Portal figures read live from HubSpot portal 51546776 on 2026-09-21. Vendor facts verified same day against the sources listed in Track C.</footer>
+<h2>What we get out of it</h2>
+<ul>
+<li><b>Email that arrives.</b> A clean list and a rebuilt sender reputation, so campaigns are judged on the message rather than on whether they were delivered.</li>
+<li><b>An answer to "what is marketing producing."</b> One system connecting the first touch to the closed customer, which we cannot do today at all.</li>
+<li><b>Targeting by who the customer actually is.</b> Distributors, MROs, airlines and defense contractors receive messages relevant to their business instead of one generic send.</li>
+<li><b>A second outbound channel</b> that runs without adding headcount and without adding work to the sales team.</li>
+<li><b>Three vendors becoming one platform</b>, with a clear operational owner.</li>
+</ul>
+
+<footer>Contact figures read live from HubSpot on 2026-09-21. Mailchimp complaint and list-quality figures from the May 2026 deliverability audit. HeyReach pricing and platform limits verified against the vendor's published documentation, September 2026.</footer>
 
 </div></body></html>
