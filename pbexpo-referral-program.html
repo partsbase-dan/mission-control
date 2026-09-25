@@ -75,6 +75,23 @@ td b.fn{color:var(--navy)}
 .tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
 border-radius:5px;padding:2px 7px;margin-left:6px;vertical-align:1px}
 .tag.draft{background:#ffe7d9;color:#a8360c}
+.tag.set{background:var(--mint);color:#083d31}
+.tier{flex:1 1 260px;background:var(--card);border:1px solid var(--rule);border-radius:13px;padding:18px 20px;border-top:4px solid var(--blue)}
+.tier.top{border-top-color:var(--navy)}
+.tier .who{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tier .what{font-size:19px;font-weight:900;letter-spacing:-.015em;color:var(--navy);margin:4px 0 2px}
+.tier .val{font-size:13px;font-weight:700;color:#128a63}
+.tier p{font-size:14px;color:var(--muted);margin:8px 0 0}
+.tiers{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 22px}
+.email{background:var(--card);border:1px solid var(--rule);border-radius:13px;overflow:hidden;margin:0 0 22px;max-width:680px}
+.email .hdr{background:#eef2f7;padding:13px 20px;font-size:13.5px;border-bottom:1px solid var(--rule)}
+.email .hdr div{margin:2px 0}
+.email .hdr span{display:inline-block;width:64px;color:var(--muted);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.email .body{padding:20px 24px;font-size:15px}
+.email .body p{margin:0 0 13px}
+.email .body ul{margin:0 0 13px}
+.email .btn{display:inline-block;background:var(--blue);color:#fff;font-weight:700;border-radius:7px;padding:11px 20px;margin:2px 0 8px;font-size:14.5px}
+.email .ph{background:#fff4d6;border-radius:4px;padding:0 4px;color:#7a5600;font-weight:600}
 .phase{background:var(--card);border:1px solid var(--rule);border-radius:14px;
 padding:20px 24px;margin:0 0 16px;border-left:5px solid var(--blue)}
 .phase.now{border-left-color:var(--mint);background:#f6fdfb}
@@ -129,7 +146,7 @@ table{display:block;overflow-x:auto}
 <div class="steps">
 <div class="step"><div class="num">1</div><b>Register</b><span>Confirmation email includes "Bring your team" and a personal link.</span></div>
 <div class="step"><div class="num">2</div><b>Share</b><span>Forward it to colleagues, customers, or post it on LinkedIn.</span></div>
-<div class="step"><div class="num">3</div><b>Earn</b><span>Each qualified registration through the link counts. Top referrers earn perks.</span></div>
+<div class="step"><div class="num">3</div><b>Earn</b><span>Five qualified sign-ups earns Pavilion Access. The top referrer earns VIP Access.</span></div>
 </div>
 
 <div class="rule"></div>
@@ -164,22 +181,52 @@ table{display:block;overflow-x:auto}
 <h3>Two safeguards</h3>
 <ul>
 <li><b>Links go straight to the registration form</b>, not the PBExpo homepage. Fewer pages means fewer chances to wander off.</li>
-<li><b>The "Who referred you?" field</b> already on the registration form. If the code is missing but a name is there, marketing credits the referral by hand.</li>
+<li><b>The "Who referred you?" field</b> already on the registration form. If the link was not used but the referrer's code or name is there, marketing credits the referral by hand. The email asks people to enter the code, since it matches exactly.</li>
 </ul>
 
 <div class="rule"></div>
 
-<h2>Rewards <span class="tag draft">To decide</span></h2>
-<p>Registration is free, so discounts are off the table. Rewards have to be perks or prizes.</p>
+<h2>Rewards <span class="tag set">Set</span></h2>
+<p>Registration is free, so rewards are paid registration upgrades rather than discounts.</p>
 
-<table>
-<tr><th>Idea</th><th>Notes</th></tr>
-<tr><td><b class="fn">VIP perks for referrers</b></td><td>Lounge access, priority matchmaking slots, recognition on the leaderboard. Low cost, and they matter at the show itself.</td></tr>
-<tr><td><b class="fn">Prizes for the top referrers</b></td><td>A prize promotion needs legal review. Put it through legal together with the AirPods registration draw (Nov 9–30) so both are signed off at once.</td></tr>
-</table>
+<div class="tiers">
+<div class="tier"><div class="who">5 or more sign-ups</div><div class="what">Attendee + Pavilion Access</div><div class="val">$500 value</div><p>Access to the Airline &amp; Operators Pavilion, the private meeting space for airlines, operators and suppliers.</p></div>
+<div class="tier top"><div class="who">Top referrer</div><div class="what">Attendee + VIP Access</div><div class="val">$1,000 value</div><p>Both VIP Hospitality Suites plus the Airline &amp; Operators Pavilion.</p></div>
+</div>
+
+<div class="warn"><b class="t">Needs legal review</b>
+<p>The top-referrer prize is a contest. The terms go through legal with the AirPods registration draw so both are signed off at once. They need to cover what counts as a sign-up, how a tie is settled, and the close date.</p></div>
 
 <div class="plain"><b class="t">Only qualified referrals count</b>
 <p>Last year about 14% of MRO-segment registrants were students, and airline registrants skewed toward pilots and cabin crew. Crediting only registrants with qualifying job titles keeps the program from rewarding low-value sign-ups.</p></div>
+
+<div class="rule"></div>
+
+<h2>The announcement email <span class="tag draft">Draft</span></h2>
+<p>Sent automatically to each new registrant once their code is assigned, and once as a batch to everyone already registered at launch.</p>
+
+<div class="email">
+<div class="hdr">
+<div><span>Subject</span>Bring your team to PBExpo 2027</div>
+<div><span>Preview</span>Five sign-ups gets you Pavilion Access. The top referrer gets VIP.</div>
+</div>
+<div class="body">
+<p>Hi {{contact.firstname}},</p>
+<p>Thanks for registering for PBExpo 2027. March 10–11, Miami Beach Convention Center.</p>
+<p>Most people don't come to PBExpo alone, so we're making it worth bringing others. Below is your personal referral link and code. When a colleague, customer or contact registers with them, the sign-up counts toward yours.</p>
+<p><span class="btn">Share my link</span><br><b>Your referral code:</b> {{contact.referral_code}}</p>
+<p><b>What you can earn</b></p>
+<ul>
+<li><b>5 or more sign-ups:</b> a free upgrade to Attendee + Pavilion Access ($500 value). You get into the Airline &amp; Operators Pavilion, the private meeting space for airlines, operators and suppliers.</li>
+<li><b>Top referrer:</b> Attendee + VIP Access ($1,000 value). That's both VIP Hospitality Suites plus the Pavilion.</li>
+</ul>
+<p><b>One thing to pass on when you share it:</b> they need to register through your link. If they leave and come back later, they should click your link again. Otherwise the sign-up won't count toward yours. If they forget, they can enter your code in the "Who referred you?" field on the registration form.</p>
+<p>Referrals count through <span class="ph">[CLOSE DATE]</span>. <span class="ph">[Full terms]</span></p>
+</div>
+</div>
+
+<div class="plain"><b class="t">Where the link points</b>
+<p>The button goes straight to the Launchpad registration page with the code attached: <code>…/register?_mc={{contact.referral_code}}</code>. Not the landing.partsbase.com page, which would drop the code unless it passes it on.</p></div>
 
 <div class="rule"></div>
 
@@ -191,8 +238,8 @@ table{display:block;overflow-x:auto}
 </div>
 
 <div class="phase">
-<div class="phhead"><span class="phname">Rewards and legal sign-off</span><span class="phwhen">November</span></div>
-<p>Pick the rewards. Legal reviews the referral terms alongside the AirPods draw. The AirPods promotion runs Nov 9–30 on its own so the two campaigns don't compete.</p>
+<div class="phhead"><span class="phname">Legal sign-off</span><span class="phwhen">November</span></div>
+<p>Legal reviews the referral terms alongside the AirPods draw. The AirPods promotion runs Nov 9–30 on its own so the two campaigns don't compete.</p>
 </div>
 
 <div class="phase">
@@ -207,9 +254,8 @@ table{display:block;overflow-x:auto}
 
 <div class="rule"></div>
 
-<h2>Decisions for today</h2>
+<h2>Decision for today</h2>
 <ol>
-<li><b>Rewards.</b> Which perks, and whether we add prizes for the top referrers.</li>
 <li><b>What counts as qualified.</b> Which job titles earn credit.</li>
 </ol>
 
