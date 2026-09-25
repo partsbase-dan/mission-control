@@ -131,7 +131,7 @@ table{display:block;overflow-x:auto}
 <p>Registration runs on Launchpad by Swapcard. No Swapcard product offers attendee referrals. Their "referral program" is for organizers referring other organizers. We looked at buying a dedicated tool and at building our own, and found a third option: a Launchpad feature we already have does the tracking.</p>
 
 <div class="good"><b class="t">The answer</b>
-<p><b>Launchpad Marketing Codes.</b> A code in the registration link (<code>?_mc=REF-00417</code>) is saved on the registrant's record. We give every registrant their own code, so every referral is traceable back to the person who shared it.</p></div>
+<p><b>Launchpad Marketing Codes.</b> A code in the registration link (<code>?_mc=REF00417</code>) is saved on the registrant's record. We give every registrant their own code, so every referral is traceable back to the person who shared it.</p></div>
 
 <div class="bigstat">
 <div><b class="ok">✓</b><span>Code appears in Launchpad's Marketing Code report</span></div>
@@ -154,11 +154,11 @@ table{display:block;overflow-x:auto}
 <h2>How it works behind the scenes</h2>
 
 <div class="flow">
-<div class="node"><span class="sys lp">Launchpad</span><div><b>Load 10,000 codes once</b><span><code>REF-00001</code> to <code>REF-10000</code>, imported from one CSV. They belong to nobody yet. Unused codes are cleared after the show.</span></div></div>
+<div class="node"><span class="sys lp">Launchpad</span><div><b>Load 10,000 codes once</b><span><code>REF00001</code> to <code>REF10000</code>, imported from one CSV. They belong to nobody yet. Unused codes are cleared after the show.</span></div></div>
 <div class="arrow"></div>
 <div class="node"><span class="sys lp">Launchpad</span><div><b>Someone registers</b><span>If they came through a referral link, their record carries the referrer's code.</span></div></div>
 <div class="arrow"></div>
-<div class="node"><span class="sys zp">Zapier</span><div><b>Hand out the next code</b><span>A counter gives the new registrant the next unused code, e.g. registrant 417 gets <code>REF-00417</code>.</span></div></div>
+<div class="node"><span class="sys zp">Zapier</span><div><b>Hand out the next code</b><span>A counter gives the new registrant the next unused code, e.g. registrant 417 gets <code>REF00417</code>.</span></div></div>
 <div class="arrow"></div>
 <div class="node"><span class="sys hs">HubSpot</span><div><b>Credit the referrer</b><span>A workflow finds the contact who owns that code, links the two records and adds one to that person's referral count, but only if the new registrant has a qualifying job title.</span></div></div>
 <div class="arrow"></div>
