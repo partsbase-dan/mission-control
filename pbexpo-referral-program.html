@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PBExpo Referral Program</title>
+<style>
+:root{--navy:#002857;--deep:#083460;--blue:#0c70e8;--mint:#2ed6b0;--orange:#e0420b;
+--paper:#f7f8fa;--card:#fff;--ink:#131820;--muted:#5a6472;--rule:#e3e7ec}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+font-family:Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px 80px}
+header{background:linear-gradient(135deg,var(--navy),var(--deep) 55%,#0b3f7a);color:#fff;padding:44px 0 34px}
+h1{margin:0;font-size:clamp(28px,4.4vw,42px);font-weight:900;letter-spacing:-.025em}
+.sub{margin:12px 0 0;font-size:17px;color:#c5faf2;max-width:62ch;line-height:1.5}
+.meta{margin-top:20px;font-size:12px;color:#9fc4ec;letter-spacing:.05em;text-transform:uppercase}
+.kpis{background:var(--navy);border-top:1px solid rgba(255,255,255,.12)}
+.kpis .wrap{display:flex;flex-wrap:wrap;gap:36px;padding-top:20px;padding-bottom:20px}
+.kpi b{display:block;font-size:25px;font-weight:900;letter-spacing:-.02em;color:#fff}
+.kpi span{font-size:10.5px;color:#9fc4ec;text-transform:uppercase;letter-spacing:.07em}
+h2{font-size:26px;font-weight:900;letter-spacing:-.022em;margin:52px 0 6px;color:var(--navy)}
+.lede{font-size:16px;color:var(--muted);margin:0 0 20px;max-width:70ch}
+h3{font-size:18px;font-weight:800;letter-spacing:-.012em;margin:30px 0 10px}
+p{margin:0 0 14px;max-width:74ch}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:72ch} li{margin:7px 0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:#eef2f7;
+border-radius:5px;padding:1px 6px;color:var(--navy);word-break:break-all}
+.rule{height:1px;background:var(--rule);margin:0}
+.plain{background:#e8f1fe;border-left:4px solid var(--blue);border-radius:0 10px 10px 0;
+padding:15px 19px;margin:0 0 20px;font-size:14.5px;max-width:74ch}
+.plain b.t{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+color:#0a5bc4;margin-bottom:5px}
+.plain p{margin:0}
+.warn{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--orange);
+border-radius:0 10px 10px 0;padding:17px 21px;margin:0 0 20px;max-width:74ch}
+.warn b.t{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+color:#a8360c;margin-bottom:6px}
+.warn p:last-child{margin-bottom:0}
+.good{background:#e6f6ef;border-left:4px solid var(--mint);border-radius:0 10px 10px 0;
+padding:15px 19px;margin:0 0 20px;font-size:14.5px;max-width:74ch}
+.good b.t{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+color:#1d6b46;margin-bottom:5px}
+.good p:last-child{margin:0}
+.quote{background:var(--card);border:1px dashed #9fb3c9;border-radius:11px;padding:16px 20px;
+margin:0 0 20px;max-width:74ch;font-size:15.5px;color:var(--navy);font-weight:500}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 22px}
+.step{background:var(--card);border:1px solid var(--rule);border-radius:13px;padding:18px 19px}
+.step .num{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;
+font-weight:900;font-size:14px;align-items:center;justify-content:center;margin-bottom:8px}
+.step b{display:block;font-size:15.5px;margin-bottom:4px}
+.step span{font-size:14px;color:var(--muted)}
+.flow{display:flex;flex-direction:column;gap:0;margin:0 0 22px}
+.node{display:grid;grid-template-columns:120px 1fr;gap:16px;background:var(--card);border:1px solid var(--rule);
+border-radius:12px;padding:15px 18px;align-items:start}
+.node .sys{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;border-radius:6px;
+padding:4px 8px;text-align:center;align-self:start}
+.sys.lp{background:#e8f1fe;color:#0a5bc4}
+.sys.zp{background:#fff1e9;color:#a8360c}
+.sys.hs{background:#e6f6ef;color:#1d6b46}
+.node b{display:block;font-size:15px}
+.node span{font-size:14px;color:var(--muted)}
+.arrow{height:22px;margin-left:78px;border-left:2px solid #c9d6e4}
+.bigstat{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 22px}
+.bigstat>div{flex:1 1 190px;background:var(--card);border:1px solid var(--rule);
+border-radius:13px;padding:17px 19px}
+.bigstat b{display:block;font-size:29px;font-weight:900;letter-spacing:-.03em;color:var(--navy);line-height:1.1}
+.bigstat b.ok{color:#128a63}
+.bigstat span{display:block;font-size:13px;color:var(--muted);margin-top:5px}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);
+border:1px solid var(--rule);border-radius:11px;overflow:hidden;margin:0 0 22px}
+th{background:var(--navy);color:#fff;text-align:left;padding:11px 15px;
+font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+td{padding:12px 15px;border-top:1px solid var(--rule);vertical-align:top}
+td.n{white-space:nowrap;font-weight:700}
+td b.fn{color:var(--navy)}
+tr.pick td{background:#f6fdfb}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+border-radius:5px;padding:2px 7px;margin-left:6px;vertical-align:1px}
+.tag.go{background:var(--mint);color:#083d31}
+.tag.draft{background:#ffe7d9;color:#a8360c}
+.phase{background:var(--card);border:1px solid var(--rule);border-radius:14px;
+padding:20px 24px;margin:0 0 16px;border-left:5px solid var(--blue)}
+.phase.now{border-left-color:var(--mint);background:#f6fdfb}
+.phase.later{border-left-color:#c9d6e4}
+.phhead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.phname{font-size:18px;font-weight:900;letter-spacing:-.015em}
+.phwhen{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.phase.now .phwhen{background:var(--mint);color:#083d31;border-radius:6px;padding:4px 9px}
+.phase p{margin:9px 0 0;font-size:14.5px}
+footer{border-top:1px solid var(--rule);margin-top:50px;padding-top:20px;font-size:12.5px;color:var(--muted)}
+@media (max-width:720px){
+.steps{grid-template-columns:1fr}
+.node{grid-template-columns:1fr;gap:8px}
+.node .sys{justify-self:start}
+.arrow{margin-left:30px}
+table{display:block;overflow-x:auto}
+.kpis .wrap{gap:22px}
+}
+</style></head><body>
+
+<header><div class="wrap">
+<h1>PBExpo Referral Program</h1>
+<p class="sub">Every registrant gets a personal link. Colleagues who register through it are credited to them, and the top referrers earn perks. Built on tools we already pay for.</p>
+<div class="meta">Proposal · PBExpo 2027 · Miami Beach, March 10–11, 2027</div>
+</div></header>
+
+<div class="kpis"><div class="wrap">
+<div class="kpi"><b>$0</b><span>New software</span></div>
+<div class="kpi"><b>10,000</b><span>Codes pre-loaded</span></div>
+<div class="kpi"><b>3 of 3</b><span>Tracking tests passed</span></div>
+<div class="kpi"><b>January</b><span>Proposed launch</span></div>
+</div></div>
+
+<div class="wrap">
+
+<h2>The problem</h2>
+<p>Registration runs on Launchpad by Swapcard. No Swapcard product offers attendee referrals. Their "referral program" is for organizers referring other organizers. We looked at buying a dedicated tool and at building our own, and found a third option: a Launchpad feature we already have does the tracking.</p>
+
+<div class="good"><b class="t">The answer</b>
+<p><b>Launchpad Marketing Codes.</b> A code in the registration link (<code>?_mc=REF-00417</code>) is saved on the registrant's record. We give every registrant their own code, so every referral is traceable back to the person who shared it.</p></div>
+
+<div class="bigstat">
+<div><b class="ok">✓</b><span>Code appears in Launchpad's Marketing Code report</span></div>
+<div><b class="ok">✓</b><span>Code appears in the registrant export</span></div>
+<div><b class="ok">✓</b><span>Code comes through Zapier, so HubSpot gets it automatically</span></div>
+</div>
+
+<div class="rule"></div>
+
+<h2>What the attendee sees</h2>
+
+<div class="steps">
+<div class="step"><div class="num">1</div><b>Register</b><span>Confirmation email includes "Bring your team" and a personal link.</span></div>
+<div class="step"><div class="num">2</div><b>Share</b><span>Forward it to colleagues, customers, or post it on LinkedIn.</span></div>
+<div class="step"><div class="num">3</div><b>Earn</b><span>Each qualified registration through the link counts. Top referrers earn perks.</span></div>
+</div>
+
+<div class="rule"></div>
+
+<h2>How it works behind the scenes</h2>
+
+<div class="flow">
+<div class="node"><span class="sys lp">Launchpad</span><div><b>Load 10,000 codes once</b><span><code>REF-00001</code> to <code>REF-10000</code>, imported from one CSV. They belong to nobody yet. Unused codes are cleared after the show.</span></div></div>
+<div class="arrow"></div>
+<div class="node"><span class="sys lp">Launchpad</span><div><b>Someone registers</b><span>If they came through a referral link, their record carries the referrer's code.</span></div></div>
+<div class="arrow"></div>
+<div class="node"><span class="sys zp">Zapier</span><div><b>Hand out the next code</b><span>A counter gives the new registrant the next unused code, e.g. registrant 417 gets <code>REF-00417</code>. Both codes go to HubSpot: their own and the one they registered with.</span></div></div>
+<div class="arrow"></div>
+<div class="node"><span class="sys hs">HubSpot</span><div><b>Credit the referrer</b><span>A workflow finds the contact who owns that code, links the two records and adds one to that person's referral count, but only if the new registrant has a qualifying job title.</span></div></div>
+<div class="arrow"></div>
+<div class="node"><span class="sys hs">HubSpot</span><div><b>Send the link and keep score</b><span>The new registrant gets their own link by email. A report sorted by referral count is the leaderboard.</span></div></div>
+</div>
+
+<div class="plain"><b class="t">Why pre-load the codes</b>
+<p>Launchpad has to recognize a code before anyone uses it. Loading them all up front means nobody creates codes by hand as registrations come in. Each person still gets a code of their own.</p></div>
+
+<div class="rule"></div>
+
+<h2>The one catch</h2>
+
+<div class="warn"><b class="t">Tested: the code does not persist</b>
+<p>If someone clicks a referral link, leaves, and comes back to register later without the link, the referral is lost. So the promotion has to tell people to register through the link itself.</p></div>
+
+<h3>Wording for every share message and landing page</h3>
+<div class="quote">Register using your colleague's link, not the homepage. If you leave and come back later, click the link again so they get credit.</div>
+
+<h3>Two safeguards</h3>
+<ul>
+<li><b>Links go straight to the registration form</b>, not the PBExpo homepage. Fewer pages means fewer chances to wander off.</li>
+<li><b>An optional "Who referred you?" field</b> on the form. If the code is missing but a name is there, marketing credits the referral by hand.</li>
+</ul>
+
+<div class="rule"></div>
+
+<h2>Rewards <span class="tag draft">To decide</span></h2>
+<p>Registration is free, so discounts are off the table. Rewards have to be perks or prizes.</p>
+
+<table>
+<tr><th>Idea</th><th>Notes</th></tr>
+<tr><td><b class="fn">VIP perks for referrers</b></td><td>Lounge access, priority matchmaking slots, recognition on the leaderboard. Low cost, and they matter at the show itself.</td></tr>
+<tr><td><b class="fn">Prizes for the top referrers</b></td><td>A prize promotion needs legal review. Put it through legal together with the AirPods registration draw (Nov 9–30) so both are signed off at once.</td></tr>
+<tr><td><b class="fn">Exhibitors as referrers</b></td><td>Exhibitors invite their own customers with the same kind of link. It brings in buyers, which is exactly what exhibitors pay for, and becomes a selling point for booth sales.</td></tr>
+</table>
+
+<div class="plain"><b class="t">Only qualified referrals count</b>
+<p>Last year about 14% of MRO-segment registrants were students, and airline registrants skewed toward pilots and cabin crew. Crediting only registrants with qualifying job titles keeps the program from rewarding low-value sign-ups.</p></div>
+
+<div class="rule"></div>
+
+<h2>Options we considered</h2>
+
+<table>
+<tr><th>Option</th><th>Cost</th><th>Verdict</th></tr>
+<tr class="pick"><td><b class="fn">Launchpad codes + Zapier + HubSpot</b><span class="tag go">Chosen</span></td><td class="n">Tools we already pay for</td><td>Tracking tested and working. We build the leaderboard ourselves.</td></tr>
+<tr><td><b class="fn">Snöball</b></td><td class="n">$5,497 per event</td><td>The only tool with a documented Swapcard integration, leaderboard and rewards. Fallback if our build hits a wall.</td></tr>
+<tr><td><b class="fn">Gleanin</b></td><td class="n">$459–$1,773 / mo</td><td>Social share cards. No Swapcard sync, no leaderboard found.</td></tr>
+<tr><td><b class="fn">GrowSurf, ReferralHero, KickoffLabs</b></td><td class="n">$69–$399 / mo</td><td>General referral tools. They would need the same Launchpad codes to track anything, so they add cost without solving the hard part.</td></tr>
+<tr><td><b class="fn">Custom software</b></td><td class="n">Build time</td><td>Same limitation: tracking still depends on Launchpad. Not needed.</td></tr>
+<tr><td><b class="fn">Switch registration platforms</b></td><td class="n">Migration</td><td>Bizzabo, Cvent, Eventbrite and Hubilo either lack attendee referrals or reward with ticket refunds, which mean nothing for a free show.</td></tr>
+</table>
+
+<div class="rule"></div>
+
+<h2>Timeline <span class="tag draft">Proposed</span></h2>
+
+<div class="phase now">
+<div class="phhead"><span class="phname">Build and test</span><span class="phwhen">October</span></div>
+<p>Import codes. Build the Zap and the HubSpot properties and workflows. Run an end-to-end test with internal registrations.</p>
+</div>
+
+<div class="phase">
+<div class="phhead"><span class="phname">Rewards and legal sign-off</span><span class="phwhen">November</span></div>
+<p>Pick the rewards. Legal reviews the referral terms alongside the AirPods draw. The AirPods promotion runs Nov 9–30 on its own so the two campaigns don't compete.</p>
+</div>
+
+<div class="phase">
+<div class="phhead"><span class="phname">Launch</span><span class="phwhen">January</span></div>
+<p>Email every existing registrant their link. New registrants get theirs automatically. Exhibitor invite links go out with booth confirmations.</p>
+</div>
+
+<div class="phase later">
+<div class="phhead"><span class="phname">Show</span><span class="phwhen">March 10–11</span></div>
+<p>Leaderboard closes shortly before the show. Top referrers are recognized onsite.</p>
+</div>
+
+<div class="rule"></div>
+
+<h2>Decisions for today</h2>
+<ol>
+<li><b>Rewards.</b> Which perks, and whether we add prizes for the top referrers.</li>
+<li><b>What counts as qualified.</b> Which job titles earn credit.</li>
+<li><b>Exhibitor links.</b> In from launch, or phase two.</li>
+<li><b>Owner.</b> Who runs the leaderboard and handles the manual "Who referred you?" credits.</li>
+</ol>
+
+<div class="plain"><b class="t">One technical check left</b>
+<p>Confirm Zapier's counter (Storage by Zapier) works on our plan. It is what guarantees no two people get the same code. If it doesn't, codes can be assigned from the Swapcard person ID instead, with a weekly import.</p></div>
+
+<footer>Vendor pricing and capabilities from vendor sites and help centers, checked September 2026. Marketing Code tracking tested in Launchpad by Dan Rodgers, September 2026.</footer>
+
+</div></body></html>

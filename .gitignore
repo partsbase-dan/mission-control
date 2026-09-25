@@ -83,3 +83,6 @@
 # ── This file ────────────────────────────────────────────────────────────────
 # Tracked so the protection survives a fresh clone.
 !.gitignore
+
+# PBExpo 2027 referral program proposal. Self-contained, no scripts, no contact rows.
+!pbexpo-referral-program.html
