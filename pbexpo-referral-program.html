@@ -71,12 +71,9 @@ border:1px solid var(--rule);border-radius:11px;overflow:hidden;margin:0 0 22px}
 th{background:var(--navy);color:#fff;text-align:left;padding:11px 15px;
 font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
 td{padding:12px 15px;border-top:1px solid var(--rule);vertical-align:top}
-td.n{white-space:nowrap;font-weight:700}
 td b.fn{color:var(--navy)}
-tr.pick td{background:#f6fdfb}
 .tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
 border-radius:5px;padding:2px 7px;margin-left:6px;vertical-align:1px}
-.tag.go{background:var(--mint);color:#083d31}
 .tag.draft{background:#ffe7d9;color:#a8360c}
 .phase{background:var(--card);border:1px solid var(--rule);border-radius:14px;
 padding:20px 24px;margin:0 0 16px;border-left:5px solid var(--blue)}
@@ -101,7 +98,7 @@ table{display:block;overflow-x:auto}
 <header><div class="wrap">
 <h1>PBExpo Referral Program</h1>
 <p class="sub">Every registrant gets a personal link. Colleagues who register through it are credited to them, and the top referrers earn perks. Built on tools we already pay for.</p>
-<div class="meta">Proposal · PBExpo 2027 · Miami Beach, March 10–11, 2027</div>
+<div class="meta">Proposal · Owner: Dan Rodgers · PBExpo 2027 · Miami Beach, March 10–11, 2027</div>
 </div></header>
 
 <div class="kpis"><div class="wrap">
@@ -179,25 +176,10 @@ table{display:block;overflow-x:auto}
 <tr><th>Idea</th><th>Notes</th></tr>
 <tr><td><b class="fn">VIP perks for referrers</b></td><td>Lounge access, priority matchmaking slots, recognition on the leaderboard. Low cost, and they matter at the show itself.</td></tr>
 <tr><td><b class="fn">Prizes for the top referrers</b></td><td>A prize promotion needs legal review. Put it through legal together with the AirPods registration draw (Nov 9–30) so both are signed off at once.</td></tr>
-<tr><td><b class="fn">Exhibitors as referrers</b></td><td>Exhibitors invite their own customers with the same kind of link. It brings in buyers, which is exactly what exhibitors pay for, and becomes a selling point for booth sales.</td></tr>
 </table>
 
 <div class="plain"><b class="t">Only qualified referrals count</b>
 <p>Last year about 14% of MRO-segment registrants were students, and airline registrants skewed toward pilots and cabin crew. Crediting only registrants with qualifying job titles keeps the program from rewarding low-value sign-ups.</p></div>
-
-<div class="rule"></div>
-
-<h2>Options we considered</h2>
-
-<table>
-<tr><th>Option</th><th>Cost</th><th>Verdict</th></tr>
-<tr class="pick"><td><b class="fn">Launchpad codes + Zapier + HubSpot</b><span class="tag go">Chosen</span></td><td class="n">Tools we already pay for</td><td>Tracking tested and working. We build the leaderboard ourselves.</td></tr>
-<tr><td><b class="fn">Snöball</b></td><td class="n">$5,497 per event</td><td>The only tool with a documented Swapcard integration, leaderboard and rewards. Fallback if our build hits a wall.</td></tr>
-<tr><td><b class="fn">Gleanin</b></td><td class="n">$459–$1,773 / mo</td><td>Social share cards. No Swapcard sync, no leaderboard found.</td></tr>
-<tr><td><b class="fn">GrowSurf, ReferralHero, KickoffLabs</b></td><td class="n">$69–$399 / mo</td><td>General referral tools. They would need the same Launchpad codes to track anything, so they add cost without solving the hard part.</td></tr>
-<tr><td><b class="fn">Custom software</b></td><td class="n">Build time</td><td>Same limitation: tracking still depends on Launchpad. Not needed.</td></tr>
-<tr><td><b class="fn">Switch registration platforms</b></td><td class="n">Migration</td><td>Bizzabo, Cvent, Eventbrite and Hubilo either lack attendee referrals or reward with ticket refunds, which mean nothing for a free show.</td></tr>
-</table>
 
 <div class="rule"></div>
 
@@ -215,7 +197,7 @@ table{display:block;overflow-x:auto}
 
 <div class="phase">
 <div class="phhead"><span class="phname">Launch</span><span class="phwhen">January</span></div>
-<p>Email every existing registrant their link. New registrants get theirs automatically. Exhibitor invite links go out with booth confirmations.</p>
+<p>Email every existing registrant their link. New registrants get theirs automatically.</p>
 </div>
 
 <div class="phase later">
@@ -229,13 +211,11 @@ table{display:block;overflow-x:auto}
 <ol>
 <li><b>Rewards.</b> Which perks, and whether we add prizes for the top referrers.</li>
 <li><b>What counts as qualified.</b> Which job titles earn credit.</li>
-<li><b>Exhibitor links.</b> In from launch, or phase two.</li>
-<li><b>Owner.</b> Who runs the leaderboard and handles the manual "Who referred you?" credits.</li>
 </ol>
 
 <div class="plain"><b class="t">One technical check left</b>
 <p>Confirm Zapier's counter (Storage by Zapier) works on our plan. It is what guarantees no two people get the same code. If it doesn't, codes can be assigned from the Swapcard person ID instead, with a weekly import.</p></div>
 
-<footer>Vendor pricing and capabilities from vendor sites and help centers, checked September 2026. Marketing Code tracking tested in Launchpad by Dan Rodgers, September 2026.</footer>
+<footer>Swapcard capabilities from Swapcard help centers, checked September 2026. Marketing Code tracking tested in Launchpad by Dan Rodgers, September 2026.</footer>
 
 </div></body></html>
