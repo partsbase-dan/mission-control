@@ -25,6 +25,10 @@
 # is tracked. Regenerate with scripts/build_creative_gallery.py.
 !creative-gallery.html
 
+# HeyReach LinkedIn sequences — PBExpo booth + PBLocator. Self-contained, no
+# scripts. Copy, step mechanics and verified product facts only, no contact rows.
+!heyreach-sequences.html
+
 # C-suite change briefs. Self-contained, no scripts. Counts and vendor facts
 # only, no contact rows. Two pages so each can be shared on its own.
 !move-to-hubspot.html
