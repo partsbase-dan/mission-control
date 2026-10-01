@@ -90,88 +90,52 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
 @media(max-width:700px){.seqhead{flex-direction:column}.nums{gap:16px}.nums div{text-align:left}}
 </style><style>
 .step .dot{font-size:12px}
-.step.cond .dot{background:#8a94a3}
 .pill{background:#eef2f7}
-.seq h3{color:var(--ink)}
-.lead ul{margin:0;padding-left:20px}
-.lead li{margin:5px 0}
-.lead a{color:var(--blue)}
+.seq{padding-bottom:30px}
+.toc{margin-top:28px}
 </style>
 </head><body>
 <header><div class="wrap">
 <h1>HeyReach LinkedIn Sequences</h1>
-<p class="sub">Two LinkedIn sequences run centrally through HeyReach across five sales rep profiles. PBExpo sells booth space to the supply side. PBLocator sells sourcing access to the buy side. They are different audiences with opposite suppression rules, so they run as separate campaigns on separate lists.</p>
-<div class="meta">PBExpo 2027 &middot; March 10&ndash;11, 2027 &middot; Miami Beach &middot; 5 senders &middot; ~500 connection requests per week across the pool</div>
+<p class="sub">Two LinkedIn sequences, run centrally by Marketing across five sales rep profiles.</p>
+<div class="meta">PBExpo 2027 &middot; March 10&ndash;11, 2027 &middot; Miami Beach</div>
 </div></header>
 <div class="wrap">
 
-<div class="note"><b>Reps: this is the copy that goes out under your name.</b> Nothing on this page sends until you have read it. If a line does not sound like you, say so and it gets changed before launch. That was the commitment and it stands.
-<ul><li>You are not running these campaigns. Marketing operates them end to end.</li><li>Every reply is triaged before it reaches you. Out-of-office, not interested and wrong-person never land on your desk.</li><li>A qualified conversation arrives as a HubSpot task with a four-hour response window. That is the only step that costs you time.</li><li>You can withdraw at any point and the campaign reroutes across the remaining profiles.</li></ul></div>
-
-<div class="rules"><b>Four design decisions worth knowing before you read the copy</b><ul><li><b>The connection request carries no note.</b> LinkedIn caps personalised notes on free accounts at roughly three to five a month, so a note-bearing sequence stops dead after three sends. Bare requests also accept better, 55&ndash;68% against 28&ndash;45% for generic notes. The personalisation moves into the first message, where it has 300+ characters instead of 200.</li><li><b><span class="tk">If connected</span> is step one on both.</b> Reps are already connected to a meaningful share of these people, especially past PBExpo registrants. Without the branch they receive a redundant request and drop out of the campaign.</li><li><b>Suppression is inverted between the two.</b> Existing PartsBase customers are excluded from PBLocator because they already have access, and included in PBExpo because supply-side customers are the warmest booth prospects in the file.</li><li><b>Capacity is shared, not added.</b> Five senders at 20&ndash;25 requests a day is 500&ndash;625 a week across the pool, split across whatever is running. PBExpo runs first and PBLocator follows it.</li></ul></div>
-
-<h2>HeyReach mechanics</h2>
-<p class="lead">Verified against HeyReach&#x27;s help centre, September 2026. Step names below match the product exactly, so the sequence can be built from this page without translation.</p>
-<div class="tw"><table>
-<tr><th>Element</th><th>What the product does</th></tr>
-<tr><td>Warm-up actions</td><td>View Profile, Follow Profile, Like Post. Capped at 40 per day per sender, shared across all three</td></tr>
-<tr><td>Connecting actions</td><td>Send Connection Request (note 200 characters free, 300 Premium), Send Message, Send InMail</td></tr>
-<tr><td>Conditions</td><td><code>If connected</code>, and <code>Open profile check</code> which needs Sales Navigator</td></tr>
-<tr><td>Minimum delay</td><td>3 hours between actions. Conditions may run with no delay as a first step</td></tr>
-<tr><td>Variables</td><td><code>{FIRST_NAME}</code>, <code>{COMPANY}</code>, plus custom columns imported with the list. Every message takes a fallback used when a variable fails to load</td></tr>
-<tr><td>A/B testing</td><td>Supported on Send Message and Send InMail</td></tr>
-<tr><td>Multichannel</td><td>Find Email step hands off to the email tools</td></tr>
-</table></div>
-<div class="note"><b>No InMail at launch.</b> InMail requires Sales Navigator on the sending account, which we are not buying. Revisit only if acceptance rates come in low. Everything on this page runs on a standard or Premium LinkedIn account.</div>
-
-<h2>Sequences</h2>
-<div class="toc"><a href="#a">A &middot; PBExpo booth sales</a><a href="#b">B &middot; PBLocator</a><a href="#launch">Before launch</a></div>
+<div class="toc"><a href="#a">A &middot; PBExpo booth sales</a><a href="#b">B &middot; PBLocator</a></div>
 
 <section class="seq" id="a">
 <div class="seqhead">
   <div>
     <div class="seqname"><span class="tier">A</span>PBExpo booth sales</div>
-    <p class="who">Supply side. Tier A economic buyers (President, CEO, Owner, GM) and Tier B champions (Sales, BD, Marketing Director) at MROs, Suppliers &amp; Distributors, Brokers, Technology providers and OEMs.</p>
+    <p class="who">Supply side. Owners, Presidents and GMs, plus Sales and BD Directors, at MROs, suppliers, distributors, brokers and OEMs.</p>
   </div>
   <div class="nums">
     <div><b>8</b><span>steps</span></div>
     <div><b>20</b><span>days</span></div>
-    <div><b>2</b><span>A/B openers</span></div>
   </div>
 </div>
-<div class="motion"><b>Motion.</b> Goal of the first message is a reply gauging interest, not a booked meeting. Runs first, ahead of PBLocator, because pool capacity is shared.</div>
-<div class="rationale"><b>Why this copy.</b> These people sell into aviation through primes, distributors and supplier portals, which means the thing that differentiates them does not travel to the buyer. A trade show floor is unusually good at exactly that problem, so the copy leads with the floor rather than with the booth. Price is deliberately absent until they ask: a 10&times;10 starts at $5,000 and that number closes a cold conversation rather than opening one.</div>
 
 <div class="steps">
-<div class="step"><div class="stephead"><span class="dot">?</span><span class="daylbl">Step 1 &middot; no delay</span><span class="pill">condition &middot; If connected</span></div>
-<div class="subjb">Already connected goes straight to step 4. Everyone else continues to step 2.</div></div>
+<div class="step"><div class="stephead"><span class="dot">?</span><span class="daylbl">Day 0</span><span class="pill">If already connected, skip to step 4</span></div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">&#9673;</span><span class="daylbl">Step 2 &middot; no delay</span><span class="pill linkedin">View Profile</span></div>
-<div class="subjb">Lifts acceptance. Counts against the 40 per day warm-up cap.</div></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">&#9673;</span><span class="daylbl">Day 0</span><span class="pill linkedin">View profile</span></div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">+</span><span class="daylbl">Step 3 &middot; +1 day</span><span class="pill linkedin">Send Connection Request</span></div>
-<div class="subjb">No note. See the design decisions above.</div></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">+</span><span class="daylbl">Day 1</span><span class="pill linkedin">Connection request</span></div>
+<div class="subjb">Sent without a note.</div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Step 4 &middot; +1 day</span><span class="pill linkedin">Send Message &middot; opener</span></div>
-<div class="subj">Variant A &mdash; floor first</div>
-<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; the buyers walking the PBExpo floor in March are the ones sourcing what <span class="tk">{COMPANY}</span> sells. Airlines, MROs and procurement teams, two days, one room in Miami Beach.</p><p>I handle exhibit space. We&#x27;re laying out the 2027 floor now.</p><p>Want me to send the booth map before the good spots go?</p></div>
-<div class="variant"><b>Fallback</b><p><span class="tk">{COMPANY}</span> falls back to &quot;your team&quot;.</p></div>
-<div class="subj" style="margin-top:16px">Variant B &mdash; hook first</div>
-<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; <span class="tk open">{HOOK}</span>, which is exactly the kind of thing that travels better across a booth than through a supplier portal.</p><p>PBExpo is in Miami Beach March 10-11. I handle the exhibit space and we&#x27;re laying out the floor now.</p><p>Worth a look at the booth map?</p></div>
-<div class="variant"><b>The hook column</b><p><span class="tk open">{HOOK}</span> is a Claude-generated clause from Clay, one per contact, lowercase and with no trailing full stop. Example: &quot;Braddock&#x27;s Jacksonville plant holds a NADCAP Merit rating&quot;. Fallback: &quot;you sell into aviation through primes and distributors&quot;. Variant B beats A when the hooks are good and loses badly when they are generic. Read fifty before launch.</p></div></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Day 2</span><span class="pill linkedin">Message 1</span></div>
+<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; the buyers walking the PBExpo floor in March are the ones sourcing what <span class="tk">{COMPANY}</span> sells. Airlines, MROs and procurement teams, two days, one room in Miami Beach.</p><p>I handle exhibit space. We&#x27;re laying out the 2027 floor now.</p><p>Want me to send the booth map before the good spots go?</p></div></div>
 
-<div class="step call"><div class="stephead"><span class="dot">@</span><span class="daylbl">Step 5 &middot; +1 hour</span><span class="pill call">Find Email</span></div>
-<div class="subjb">HeyReach only creates or updates a HubSpot contact when the lead has an email address. This is the second chance at that link for anyone Clay could not resolve, and it costs an enrichment credit rather than a campaign slot.</div></div>
+<div class="step call"><div class="stephead"><span class="dot">@</span><span class="daylbl">Day 2</span><span class="pill call">Find email, log to HubSpot</span></div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Step 6 &middot; +4 days</span><span class="pill linkedin">Send Message &middot; proof</span></div>
-<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; one number that usually decides it: about <span class="tk open">86%</span> of the people registered are decision-makers, and they&#x27;re there to source.</p><p>That&#x27;s a different floor than a general aerospace show, where you spend two days talking to other exhibitors.</p><p>Happy to send the map and what&#x27;s left.</p></div>
-<div class="variant"><b>Confirm or cut</b><p>The <span class="tk open">86%</span> figure is a PBExpo marketing claim and is flagged unaudited in the ICP market-fit review. Either confirm it internally or delete the first paragraph and open on the second, which stands on its own.</p></div></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Day 6</span><span class="pill linkedin">Message 2</span></div>
+<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; one number that usually decides it: about <span class="tk open">86%</span> of the people registered are decision-makers, and they&#x27;re there to source.</p><p>That&#x27;s a different floor than a general aerospace show, where you spend two days talking to other exhibitors.</p><p>Happy to send the map and what&#x27;s left.</p></div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Step 7 &middot; +6 days</span><span class="pill linkedin">Send Message &middot; routing</span></div>
-<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; is the trade show calendar yours, or does someone else own it at <span class="tk">{COMPANY}</span>?</p><p>If it&#x27;s not you, a name is all I need and I&#x27;ll stop filling your inbox.</p></div>
-<div class="variant"><b>Fallback</b><p><span class="tk">{COMPANY}</span> falls back to &quot;your end&quot;.</p></div></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Day 12</span><span class="pill linkedin">Message 3</span></div>
+<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; is the trade show calendar yours, or does someone else own it at <span class="tk">{COMPANY}</span>?</p><p>If it&#x27;s not you, a name is all I need and I&#x27;ll stop filling your inbox.</p></div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Step 8 &middot; +8 days</span><span class="pill linkedin">Send Message &middot; close</span></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Day 20</span><span class="pill linkedin">Message 4</span></div>
 <div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; last one from me.</p><p>If exhibiting in March becomes a priority, reply here and I&#x27;ll send the current map and pricing. Space gets held in the order people ask.</p><p>Good luck with the rest of the year.</p></div></div>
 </div>
 </section>
@@ -180,81 +144,36 @@ padding:1px 5px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
 <div class="seqhead">
   <div>
     <div class="seqname"><span class="tier">B</span>PBLocator</div>
-    <p class="who">Buy side. Procurement, Purchasing, Supply Chain, Materials and Stores managers, plus repair station leads, at MROs, airlines, operators, charter companies and FBOs.</p>
+    <p class="who">Buy side. Procurement, purchasing, supply chain, materials and stores managers at MROs, airlines, operators, charter companies and FBOs.</p>
   </div>
   <div class="nums">
     <div><b>8</b><span>steps</span></div>
-    <div><b>21</b><span>days</span></div>
-    <div><b>2</b><span>A/B openers</span></div>
+    <div><b>20</b><span>days</span></div>
   </div>
 </div>
-<div class="motion"><b>Motion.</b> Goal of the first message is a reply, or a clean &quot;we&#x27;re covered&quot; so the contact can be closed out. Runs after PBExpo.</div>
-<div class="rationale"><b>Why this copy.</b> The strongest asset here is the offer shape, not the feature list: $300 one time, 60 days, no subscription and nothing to cancel. That is below the threshold where most procurement people need approval, which makes it a decision rather than a process. So the copy leads on the sourcing problem, holds the price until the third message, and gives an explicit way out in every opener &mdash; on a programme approaching 2,000 people a month, a fast no is a good outcome.</div>
 
 <div class="steps">
-<div class="step"><div class="stephead"><span class="dot">?</span><span class="daylbl">Step 1 &middot; no delay</span><span class="pill">condition &middot; If connected</span></div>
-<div class="subjb">Already connected goes straight to step 4.</div></div>
+<div class="step"><div class="stephead"><span class="dot">?</span><span class="daylbl">Day 0</span><span class="pill">If already connected, skip to step 4</span></div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">&#9673;</span><span class="daylbl">Step 2 &middot; no delay</span><span class="pill linkedin">View Profile</span></div>
-<div class="subjb">Counts against the 40 per day warm-up cap.</div></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">&#9673;</span><span class="daylbl">Day 0</span><span class="pill linkedin">View profile</span></div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">+</span><span class="daylbl">Step 3 &middot; +1 day</span><span class="pill linkedin">Send Connection Request</span></div>
-<div class="subjb">No note.</div></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">+</span><span class="daylbl">Day 1</span><span class="pill linkedin">Connection request</span></div>
+<div class="subjb">Sent without a note.</div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Step 4 &middot; +1 day</span><span class="pill linkedin">Send Message &middot; problem</span></div>
-<div class="subj">Variant A &mdash; the hard-to-find part</div>
-<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; when a part isn&#x27;t in the usual channels, how long does it take your team to find who actually has it?</p><p>PartsBase runs PBLocator. 90 million parts, chat straight with the sellers, and what the part has been going for.</p><p>Worth a look, or is sourcing already covered?</p></div>
-<div class="subj" style="margin-top:16px">Variant B &mdash; AOG</div>
-<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; AOG at 4pm on a Friday is where most sourcing setups show their limits.</p><p>PBLocator is what PartsBase built for that. 90 million parts, real-time chat with the people holding them, no phone tree.</p><p>Useful, or do you have that covered?</p></div>
-<div class="variant"><b>Variant B targeting</b><p>Use B for operators, airlines, charter and repair stations, where AOG is a lived weekly problem. Use A for distributors and buyers whose pain is coverage rather than speed.</p></div></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Day 2</span><span class="pill linkedin">Message 1</span></div>
+<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; when a part isn&#x27;t in the usual channels, how long does it take your team to find who actually has it?</p><p>PartsBase runs PBLocator. 90 million parts, chat straight with the sellers, and what the part has been going for.</p><p>Worth a look, or is sourcing already covered?</p></div></div>
 
-<div class="step call"><div class="stephead"><span class="dot">@</span><span class="daylbl">Step 5 &middot; +1 hour</span><span class="pill call">Find Email</span></div>
-<div class="subjb">Same reason as sequence A. No email means no HubSpot record and no attribution.</div></div>
+<div class="step call"><div class="stephead"><span class="dot">@</span><span class="daylbl">Day 2</span><span class="pill call">Find email, log to HubSpot</span></div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Step 6 &middot; +4 days</span><span class="pill linkedin">Send Message &middot; pricing angle</span></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Day 6</span><span class="pill linkedin">Message 2</span></div>
 <div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; the other half of it is knowing whether a quote is fair.</p><p>Most tools tell you who has the part. Fewer tell you what it&#x27;s been trading at, or ping you when something you&#x27;re watching moves.</p><p>Want me to send over how that part works?</p></div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Step 7 &middot; +7 days</span><span class="pill linkedin">Send Message &middot; the offer</span></div>
-<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; to be concrete about it: $300, one time, 60 days. No subscription and nothing to cancel.</p><p>That&#x27;s 200 searches and 100 RFQs, which is enough to find out whether it earns a place in how you source.</p><p>Want the link?</p></div>
-<div class="variant"><b>Verified offer</b><p>$300 one time for 60 days of access to 90 million+ parts, including 200 Part/MRO search tokens, 100 Quick RFQ tokens, real-time chat with suppliers, market pricing and PartsWatch pricing alerts. Taken from the live membership page, October 2026. Re-check before launch if pricing moves.</p></div></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Day 13</span><span class="pill linkedin">Message 3</span></div>
+<div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; to be concrete about it: $300, one time, 60 days. No subscription and nothing to cancel.</p><p>That&#x27;s 200 searches and 100 RFQs, which is enough to find out whether it earns a place in how you source.</p><p>Want the link?</p></div></div>
 
-<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Step 8 &middot; +7 days</span><span class="pill linkedin">Send Message &middot; close</span></div>
+<div class="step linkedin"><div class="stephead"><span class="dot">&#9679;</span><span class="daylbl">Day 20</span><span class="pill linkedin">Message 4</span></div>
 <div class="ebody"><p><span class="tk">{FIRST_NAME}</span> &mdash; I&#x27;ll stop here.</p><p>If a hard-to-find part turns into a problem, PBLocator is worth remembering and you know where I am.</p><p>Good luck with the rest of the year.</p></div></div>
 </div>
 </section>
-
-<h2 id="launch">Before launch</h2>
-
-<p class="lead">Lists come from Clay, never from a Sales Navigator search inside HeyReach. That keeps the ICP definition in one place. Email-found must be a filter on the export, because a lead with no email address generates replies that never reach HubSpot.</p>
-
-<h3 style="font-size:14px;font-weight:800;margin:22px 0 10px">Suppression, per campaign</h3>
-<div class="tw"><table>
-<tr><th>Audience</th><th>PBExpo</th><th>PBLocator</th></tr>
-<tr><td>Current PartsBase customers</td><td><b>Include</b> &mdash; warmest booth prospects in the file</td><td><b>Exclude</b> &mdash; they already have access</td></tr>
-<tr><td>Unsubscribed or complained</td><td>Exclude</td><td>Exclude</td></tr>
-<tr><td>Open deals</td><td>Exclude</td><td>Exclude</td></tr>
-<tr><td>In an active email sequence</td><td>Exclude</td><td>Exclude</td></tr>
-<tr><td>Anti-persona (pilots, flight attendants, students)</td><td>Exclude</td><td>Exclude</td></tr>
-</table></div>
-
-<h3 style="font-size:14px;font-weight:800;margin:26px 0 10px">Checklist</h3>
-<div class="note"><ul>
-<li>Rep name and signature set on each sending profile. No rep invented.</li><li>The <span class="tk open">{HOOK}</span> column generated and spot-checked. Read fifty. A bad hook is worse than no hook.</li><li>Fallbacks filled on every variable. A failed variable mid-message is the most visible automation tell there is.</li><li>The <span class="tk open">86%</span> decision-maker claim confirmed or cut.</li><li>A target set for meetings booked per sender per week, so the first review has something to measure against.</li><li>Warm-up actions counted against the 40 per day cap, shared across View Profile, Follow and Like.</li><li>All five reps have read their copy and signed the consent agreement.</li>
-</ul></div>
-
-<div class="rules"><b>What to watch in week one</b><ul><li><b>Acceptance rate tells you whether the targeting is right.</b> Healthy is 40% and up on a bare request to a relevant audience.</li><li><b>Reply rate tells you whether the message is right.</b> If acceptance is healthy and replies are flat, the problem is step 4, not the list.</li><li><b>Watch per sender, not just in aggregate.</b> One profile performing far below the others usually means a cold account that needed more warming, not bad copy.</li></ul></div>
-
-<h2>Sources</h2>
-<div class="lead"><ul>
-<li><a href="https://www.partsbase.com/becomeaMember">PartsBase membership and pricing</a> &mdash; PBLocator offer and product lineup</li>
-<li><a href="https://help.heyreach.io/en/articles/10493916-what-kind-of-action-steps-can-be-used-in-heyreach-sequence">HeyReach sequence action steps</a> &mdash; actions, conditions, delays, limits</li>
-<li><a href="https://help.heyreach.io/en/articles/9879182-how-to-import-and-use-custom-variables">HeyReach custom variables</a> &mdash; variables and fallbacks</li>
-<li><a href="https://help.heyreach.io/en/articles/14891660-how-to-integrate-heyreach-with-hubspot">HeyReach and HubSpot integration</a> &mdash; email requirement for contact sync</li>
-<li><a href="https://wingflow.ai/blog/linkedin-connection-limits">LinkedIn connection request limits 2026</a> &mdash; note caps on free accounts</li>
-<li><a href="https://www.reactin.io/blog/linkedin-connection-request-with-or-without-note">Connection requests with and without a note</a> &mdash; acceptance and reply data</li>
-<li>Internal: <code>resources/icp-review/PBExpo-ICP-Market-Fit-Review.md</code>, <code>resources/pbexpo-icp-brief.md</code></li>
-</ul></div>
-
-<footer style="border-top:1px solid var(--rule);margin-top:44px;padding-top:18px;font-size:12px;color:var(--muted)">Product facts read live from partsbase.com, October 2026. HeyReach mechanics verified against the vendor help centre, September 2026. Copy built with the cold-email skill against the rep voice in netnew-exec-sequence-V5.</footer>
 
 </div></body></html>
