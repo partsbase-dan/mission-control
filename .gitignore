@@ -91,3 +91,10 @@
 # PBExpo 2027 referral program proposal. Self-contained, no scripts, no contact rows.
 !pbexpo-referral-program.html
 !pbexpo-referral-terms.html
+
+# Company sign-in (PartsBase Microsoft account) in front of the whole site.
+# Added by the pb-dashboards protect-dashboard skill.
+!netlify.toml
+!netlify/
+!netlify/edge-functions/
+!netlify/edge-functions/pb-auth.js
