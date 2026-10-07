@@ -4,288 +4,103 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PBExpo Referral Program</title>
 <style>
-:root{--navy:#002857;--deep:#083460;--blue:#0c70e8;--mint:#2ed6b0;--orange:#e0420b;
---paper:#f7f8fa;--card:#fff;--ink:#131820;--muted:#5a6472;--rule:#e3e7ec}
+:root{--navy:#002857;--blue:#0c70e8;--ink:#1d2530;--muted:#5f6b7a;--rule:#e2e6eb;--soft:#f5f7f9}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);
-font-family:Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
-.wrap{max-width:980px;margin:0 auto;padding:0 24px 80px}
-header{background:linear-gradient(135deg,var(--navy),var(--deep) 55%,#0b3f7a);color:#fff;padding:44px 0 34px}
-h1{margin:0;font-size:clamp(28px,4.4vw,42px);font-weight:900;letter-spacing:-.025em}
-.sub{margin:12px 0 0;font-size:17px;color:#c5faf2;max-width:62ch;line-height:1.5}
-.meta{margin-top:20px;font-size:12px;color:#9fc4ec;letter-spacing:.05em;text-transform:uppercase}
-.kpis{background:var(--navy);border-top:1px solid rgba(255,255,255,.12)}
-.kpis .wrap{display:flex;flex-wrap:wrap;gap:36px;padding-top:20px;padding-bottom:20px}
-.kpi b{display:block;font-size:25px;font-weight:900;letter-spacing:-.02em;color:#fff}
-.kpi span{font-size:10.5px;color:#9fc4ec;text-transform:uppercase;letter-spacing:.07em}
-h2{font-size:26px;font-weight:900;letter-spacing:-.022em;margin:52px 0 6px;color:var(--navy)}
-.lede{font-size:16px;color:var(--muted);margin:0 0 20px;max-width:70ch}
-h3{font-size:18px;font-weight:800;letter-spacing:-.012em;margin:30px 0 10px}
-p{margin:0 0 14px;max-width:74ch}
-ul,ol{margin:0 0 14px;padding-left:22px;max-width:72ch} li{margin:7px 0}
-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:#eef2f7;
-border-radius:5px;padding:1px 6px;color:var(--navy);word-break:break-all}
-.rule{height:1px;background:var(--rule);margin:0}
-.plain{background:#e8f1fe;border-left:4px solid var(--blue);border-radius:0 10px 10px 0;
-padding:15px 19px;margin:0 0 20px;font-size:14.5px;max-width:74ch}
-.plain b.t{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
-color:#0a5bc4;margin-bottom:5px}
-.plain p{margin:0}
-.warn{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--orange);
-border-radius:0 10px 10px 0;padding:17px 21px;margin:0 0 20px;max-width:74ch}
-.warn b.t{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
-color:#a8360c;margin-bottom:6px}
-.warn p:last-child{margin-bottom:0}
-.good{background:#e6f6ef;border-left:4px solid var(--mint);border-radius:0 10px 10px 0;
-padding:15px 19px;margin:0 0 20px;font-size:14.5px;max-width:74ch}
-.good b.t{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
-color:#1d6b46;margin-bottom:5px}
-.good p:last-child{margin:0}
-.quote{background:var(--card);border:1px dashed #9fb3c9;border-radius:11px;padding:16px 20px;
-margin:0 0 20px;max-width:74ch;font-size:15.5px;color:var(--navy);font-weight:500}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 22px}
-.step{background:var(--card);border:1px solid var(--rule);border-radius:13px;padding:18px 19px}
-.step .num{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;
-font-weight:900;font-size:14px;align-items:center;justify-content:center;margin-bottom:8px}
-.step b{display:block;font-size:15.5px;margin-bottom:4px}
-.step span{font-size:14px;color:var(--muted)}
-.flow{display:flex;flex-direction:column;gap:0;margin:0 0 22px}
-.node{display:grid;grid-template-columns:120px 1fr;gap:16px;background:var(--card);border:1px solid var(--rule);
-border-radius:12px;padding:15px 18px;align-items:start}
-.node .sys{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;border-radius:6px;
-padding:4px 8px;text-align:center;align-self:start}
-.sys.lp{background:#e8f1fe;color:#0a5bc4}
-.sys.zp{background:#fff1e9;color:#a8360c}
-.sys.hs{background:#e6f6ef;color:#1d6b46}
-.node b{display:block;font-size:15px}
-.node span{font-size:14px;color:var(--muted)}
-.arrow{height:22px;margin-left:78px;border-left:2px solid #c9d6e4}
-.bigstat{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 22px}
-.bigstat>div{flex:1 1 190px;background:var(--card);border:1px solid var(--rule);
-border-radius:13px;padding:17px 19px}
-.bigstat b{display:block;font-size:29px;font-weight:900;letter-spacing:-.03em;color:var(--navy);line-height:1.1}
-.bigstat b.ok{color:#128a63}
-.bigstat span{display:block;font-size:13px;color:var(--muted);margin-top:5px}
-table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);
-border:1px solid var(--rule);border-radius:11px;overflow:hidden;margin:0 0 22px}
-th{background:var(--navy);color:#fff;text-align:left;padding:11px 15px;
-font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
-td{padding:12px 15px;border-top:1px solid var(--rule);vertical-align:top}
-td b.fn{color:var(--navy)}
-td.n{white-space:nowrap;font-weight:700}
-.tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
-border-radius:5px;padding:2px 7px;margin-left:6px;vertical-align:1px}
-.tag.draft{background:#ffe7d9;color:#a8360c}
-.tag.set{background:var(--mint);color:#083d31}
-.tier{flex:1 1 260px;background:var(--card);border:1px solid var(--rule);border-radius:13px;padding:18px 20px;border-top:4px solid var(--blue)}
-.tier.top{border-top-color:var(--navy)}
-.tier .who{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
-.tier .what{font-size:19px;font-weight:900;letter-spacing:-.015em;color:var(--navy);margin:4px 0 2px}
-.tier .val{font-size:13px;font-weight:700;color:#128a63}
-.tier p{font-size:14px;color:var(--muted);margin:8px 0 0}
-.tiers{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 22px}
-.email{background:var(--card);border:1px solid var(--rule);border-radius:13px;overflow:hidden;margin:0 0 22px;max-width:680px}
-.email .hdr{background:#eef2f7;padding:13px 20px;font-size:13.5px;border-bottom:1px solid var(--rule)}
-.email .hdr div{margin:2px 0}
-.email .hdr span{display:inline-block;width:64px;color:var(--muted);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
-.email .body{padding:20px 24px;font-size:15px}
-.email .body p{margin:0 0 13px}
-.email .body ul{margin:0 0 13px}
-.email .btn{display:inline-block;background:var(--blue);color:#fff;font-weight:700;border-radius:7px;padding:11px 20px;margin:2px 0 8px;font-size:14.5px}
-.email .ph{background:#fff4d6;border-radius:4px;padding:0 4px;color:#7a5600;font-weight:600}
-.phase{background:var(--card);border:1px solid var(--rule);border-radius:14px;
-padding:20px 24px;margin:0 0 16px;border-left:5px solid var(--blue)}
-.phase.now{border-left-color:var(--mint);background:#f6fdfb}
-.phase.later{border-left-color:#c9d6e4}
-.phhead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-.phname{font-size:18px;font-weight:900;letter-spacing:-.015em}
-.phwhen{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.phase.now .phwhen{background:var(--mint);color:#083d31;border-radius:6px;padding:4px 9px}
-.phase p{margin:9px 0 0;font-size:14.5px}
-footer{border-top:1px solid var(--rule);margin-top:50px;padding-top:20px;font-size:12.5px;color:var(--muted)}
-@media (max-width:720px){
-.steps{grid-template-columns:1fr}
-.node{grid-template-columns:1fr;gap:8px}
-.node .sys{justify-self:start}
-.arrow{margin-left:30px}
-table{display:block;overflow-x:auto}
-.kpis .wrap{gap:22px}
-}
+body{margin:0;background:#fff;color:var(--ink);
+font-family:Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:760px;margin:0 auto;padding:48px 20px 72px}
+h1{margin:0;font-size:30px;font-weight:800;color:var(--navy);letter-spacing:-.01em}
+.meta{margin:6px 0 28px;color:var(--muted);font-size:14px}
+h2{font-size:20px;font-weight:800;color:var(--navy);margin:40px 0 10px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px;padding-left:22px} li{margin:6px 0}
+a{color:var(--blue)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:var(--soft);padding:1px 5px;border-radius:4px;word-break:break-all}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:4px 0 16px}
+th{text-align:left;font-size:13px;color:var(--muted);font-weight:600;border-bottom:2px solid var(--rule);padding:8px 10px 8px 0}
+td{border-bottom:1px solid var(--rule);padding:9px 10px 9px 0;vertical-align:top}
+td:last-child,th:last-child{padding-right:0}
+.note{border-left:3px solid var(--blue);padding:2px 0 2px 14px;margin:0 0 16px}
+.email{border:1px solid var(--rule);border-radius:6px;padding:18px 20px;font-size:15px;background:var(--soft)}
+.email p{margin:0 0 11px}
+.email .head{color:var(--muted);font-size:13.5px;border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:14px}
+.foot{margin-top:44px;padding-top:14px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted)}
+@media (max-width:600px){.wrap{padding-top:32px} h1{font-size:25px} table{font-size:14px}}
 </style></head><body>
-
-<header><div class="wrap">
-<h1>PBExpo Referral Program</h1>
-<p class="sub">Every registrant gets a personal link. Colleagues who register through it are credited to them, and the top referrer each month wins a wristband upgrade. Built on tools we already pay for.</p>
-<div class="meta">Launches November 2, 2026 · Owner: Dan Rodgers · PBExpo 2027 · Miami Beach, March 10–11, 2027</div>
-</div></header>
-
-<div class="kpis"><div class="wrap">
-<div class="kpi"><b>$0</b><span>New software</span></div>
-<div class="kpi"><b>10,000</b><span>Codes pre-loaded</span></div>
-<div class="kpi"><b>3 of 3</b><span>Tracking tests passed</span></div>
-<div class="kpi"><b>Nov 2</b><span>Launch</span></div>
-<div class="kpi"><b>5</b><span>Winners</span></div>
-</div></div>
-
 <div class="wrap">
 
-<h2>The problem</h2>
-<p>Registration runs on Launchpad by Swapcard. No Swapcard product offers attendee referrals. Their "referral program" is for organizers referring other organizers. We looked at buying a dedicated tool and at building our own, and found a third option: a Launchpad feature we already have does the tracking.</p>
+<h1>PBExpo referral program</h1>
+<div class="meta">Dan Rodgers · Launches Monday, Nov 2 · Last updated Oct 7</div>
 
-<div class="good"><b class="t">The answer</b>
-<p><b>Launchpad Marketing Codes.</b> A code in the registration link (<code>?_mc=REF00417</code>) is saved on the registrant's record. We give every registrant their own code, so every referral is traceable back to the person who shared it.</p></div>
+<p>Every registrant gets their own referral link. When someone registers through it, that registration counts for them. The top referrer each month from November to February wins a Pavilion wristband, and whoever brings in the most people overall wins VIP.</p>
 
-<div class="bigstat">
-<div><b class="ok">✓</b><span>Code appears in Launchpad's Marketing Code report</span></div>
-<div><b class="ok">✓</b><span>Code appears in the registrant export</span></div>
-<div><b class="ok">✓</b><span>Code comes through Zapier, so HubSpot gets it automatically</span></div>
-</div>
+<p>Swapcard doesn't offer attendee referrals in any of its products, so we're not buying anything new. It runs on Launchpad's marketing codes, which we already have. I tested it in September: the code shows up in the Marketing Code report, in the registrant export, and in the Zapier data.</p>
 
-<div class="rule"></div>
-
-<h2>What the attendee sees</h2>
-
-<div class="steps">
-<div class="step"><div class="num">1</div><b>Register</b><span>Confirmation email includes "Bring your team" and a personal link.</span></div>
-<div class="step"><div class="num">2</div><b>Share</b><span>Forward it to colleagues, customers, or post it on LinkedIn.</span></div>
-<div class="step"><div class="num">3</div><b>Earn</b><span>Top referrer each month, Nov to Feb, wins a Pavilion wristband. Top referrer overall wins VIP.</span></div>
-</div>
-
-<div class="rule"></div>
-
-<h2>How it works behind the scenes</h2>
-
-<div class="flow">
-<div class="node"><span class="sys lp">Launchpad</span><div><b>Load 10,000 codes once</b><span><code>REF00001</code> to <code>REF10000</code>, imported from one CSV. They belong to nobody yet. Unused codes are cleared after the show.</span></div></div>
-<div class="arrow"></div>
-<div class="node"><span class="sys lp">Launchpad</span><div><b>Someone registers</b><span>If they came through a referral link, Launchpad saves the referrer's code on their registration and adds one to that code's count.</span></div></div>
-<div class="arrow"></div>
-<div class="node"><span class="sys zp">Zapier</span><div><b>Hand out the next code</b><span>A counter gives the new registrant the next unused code, e.g. registrant 417 gets <code>REF00417</code>. The Zapier table marks it used with their email, so we always know who owns each code.</span></div></div>
-<div class="arrow"></div>
-<div class="node"><span class="sys hs">HubSpot</span><div><b>Send their link</b><span>Zapier writes the code to the registrant's HubSpot contact, and a workflow emails them their personal link and code.</span></div></div>
-<div class="arrow"></div>
-<div class="node"><span class="sys lp">Launchpad</span><div><b>Keep score</b><span>The Marketing Code report counts confirmed registrations for every code. Sorted by <b>#&nbsp;Confirmed</b>, it is the leaderboard.</span></div></div>
-</div>
-
-<div class="plain"><b class="t">Why pre-load the codes</b>
-<p>Launchpad has to recognize a code before anyone uses it. Loading them all up front means nobody creates codes by hand as registrations come in. Each person still gets a code of their own.</p></div>
-
-<div class="rule"></div>
-
-<h2>The one catch</h2>
-
-<div class="warn"><b class="t">Tested: the code does not persist</b>
-<p>If someone clicks a referral link, leaves, and comes back to register later without the link, the referral is lost. So the promotion has to tell people to register through the link itself.</p></div>
-
-<h3>Wording for every share message and landing page</h3>
-<div class="quote">Register using your colleague's link, not the homepage. If you leave and come back later, click the link again so they get credit.</div>
-
-<h3>Two safeguards</h3>
-<ul>
-<li><b>Links go straight to the registration form</b>, not the PBExpo homepage. Fewer pages means fewer chances to wander off.</li>
-<li><b>The "Who referred you?" field</b> already on the registration form. If the link was not used but the referrer's code or name is there, marketing credits the referral by hand. The email asks people to enter the code, since it matches exactly.</li>
-</ul>
-
-<div class="rule"></div>
-
-<h2>Rewards <span class="tag set">Set</span></h2>
-<p>Registration is free, so rewards are paid registration upgrades rather than discounts. Agreed with Cassandra on October 7.</p>
-
-<div class="tiers">
-<div class="tier"><div class="who">Top referrer each month · Nov, Dec, Jan, Feb</div><div class="what">Pavilion wristband</div><div class="val">$500 value · 4 winners</div><p>Access to the Airline &amp; Operators Pavilion, the private meeting space for airlines, operators and suppliers.</p></div>
-<div class="tier top"><div class="who">Top referrer overall · Nov 2 to Feb 26</div><div class="what">VIP wristband</div><div class="val">$1,000 value · 1 winner</div><p>Both VIP Hospitality Suites plus the Airline &amp; Operators Pavilion.</p></div>
-</div>
-
-<ul>
-<li><b>One monthly win per person.</b> If a month's leader already won, that month goes to the next person, so four different people win.</li>
-<li><b>A monthly winner can still win overall.</b> The VIP wristband replaces their Pavilion one.</li>
-</ul>
-
-<div class="plain"><b class="t">Terms</b>
-<p>Full rules are Section 15 of the PBExpo terms. Team summary: <a href="pbexpo-referral-terms.html" style="color:#0a5bc4;font-weight:700">Referral Challenge Terms</a>.</p></div>
-
-<div class="rule"></div>
-
-<h2>Monthly winner workflow</h2>
-<p>Runs five times. Each run takes about 30 minutes.</p>
-
+<h2>Prizes</h2>
 <table>
-<tr><th>Prize</th><th>Counts referrals from</th><th>Winner picked by</th></tr>
-<tr><td><b class="fn">November</b> · Pavilion</td><td>Nov 2–30, 2026</td><td class="n">Mon, Dec 7</td></tr>
-<tr><td><b class="fn">December</b> · Pavilion</td><td>Dec 1–31, 2026</td><td class="n">Fri, Jan 8</td></tr>
-<tr><td><b class="fn">January</b> · Pavilion</td><td>Jan 1–31, 2027</td><td class="n">Fri, Feb 5</td></tr>
-<tr><td><b class="fn">February</b> · Pavilion</td><td>Feb 1–26, 2027</td><td class="n">Mon, Mar 1</td></tr>
-<tr><td><b class="fn">Overall</b> · VIP</td><td>Nov 2, 2026 – Feb 26, 2027</td><td class="n">Mon, Mar 1</td></tr>
+<tr><th>Prize</th><th>Who wins</th><th>Value</th></tr>
+<tr><td>Pavilion wristband</td><td>Top referrer in November, December, January and February (one each)</td><td>$500</td></tr>
+<tr><td>VIP wristband</td><td>Most referrals overall, Nov 2 to Feb 26</td><td>$1,000</td></tr>
 </table>
+<p>Nobody wins more than one monthly prize. If a past winner tops the list again, the prize goes to the next person. A monthly winner can still win overall, and the VIP wristband just replaces their Pavilion one. Cassandra and I agreed this on Oct 7.</p>
 
-<div class="flow">
-<div class="node"><span class="sys lp">Launchpad</span><div><b>1. Export the Marketing Code report</b><span>On the last day of the month. The report counts from launch, so subtract last month's export to get this month's count per code, highest first.</span></div></div>
-<div class="arrow"></div>
-<div class="node"><span class="sys lp">Launchpad</span><div><b>2. Check the top three codes</b><span>In the registrant export, filter by each code. Remove personal emails, "Student" Professional Levels, duplicates, self-referrals and anyone registered outside the month. Add any hand credits from "Who referred you?". Look up each code's owner in the Zapier table, skip previous monthly winners, and re-rank.</span></div></div>
-<div class="arrow"></div>
-<div class="node"><span class="sys hs">Email</span><div><b>3. Notify the winner</b><span>Within 5 business days of the month ending. They have 7 days to reply, or until March 8 for the February and overall prizes. No reply, next person on the list.</span></div></div>
-<div class="arrow"></div>
-<div class="node"><span class="sys lp">Launchpad</span><div><b>4. Upgrade their registration</b><span>Add the Pavilion or VIP upgrade to the winner's badge, and mark the win against their code in the Zapier table.</span></div></div>
-<div class="arrow"></div>
-<div class="node"><span class="sys zp">Promote</span><div><b>5. Announce and restart</b><span>Announce the winner only with their OK. Remind registrants the new month's count starts from zero.</span></div></div>
-</div>
+<h2>How it works</h2>
+<ol>
+<li>We load 10,000 codes into Launchpad up front (<code>REF00001</code> to <code>REF10000</code>). Launchpad only accepts codes it already knows, so this saves anyone creating them by hand.</li>
+<li>When someone registers, Zapier gives them the next unused code and logs it against their email in the Zapier table.</li>
+<li>Zapier also writes the code to their HubSpot contact, and HubSpot emails them their link: <code>…/register?_mc=REF00417</code></li>
+<li>When someone registers through that link, Launchpad saves the code on the new registration and adds one to that code's count.</li>
+<li>The Marketing Code report, sorted by # Confirmed, is the leaderboard. The Zapier table tells us who owns each code.</li>
+</ol>
 
-<div class="warn"><b class="t">The February and overall prizes are tight</b>
-<p>The challenge closes Friday, February 26 and the show opens March 10. Both final winners are picked Monday, March 1, and must reply by March 8 so the upgrades are on their badges before the show.</p></div>
+<h2>The catch</h2>
+<p>The code only sticks if they register in the same visit. If someone clicks a link, leaves, and comes back later through the homepage, the referral is lost. I tested this and it's how Launchpad works, so we deal with it in the copy:</p>
+<p class="note">Register using your colleague's link, not the homepage. If you leave and come back later, click the link again so they get credit.</p>
+<p>Two things help. The links go straight to the registration form, not the PBExpo homepage. And the "Who referred you?" field is already on the form, so if someone forgets, they can type the code in and we credit it by hand.</p>
 
-<div class="rule"></div>
+<h2>Picking winners</h2>
+<table>
+<tr><th>Prize</th><th>Counts registrations from</th><th>Pick by</th></tr>
+<tr><td>November</td><td>Nov 2–30</td><td>Mon, Dec 7</td></tr>
+<tr><td>December</td><td>Dec 1–31</td><td>Fri, Jan 8</td></tr>
+<tr><td>January</td><td>Jan 1–31</td><td>Fri, Feb 5</td></tr>
+<tr><td>February</td><td>Feb 1–26</td><td>Mon, Mar 1</td></tr>
+<tr><td>Overall (VIP)</td><td>Nov 2 – Feb 26</td><td>Mon, Mar 1</td></tr>
+</table>
+<p>Each round takes about half an hour:</p>
+<ol>
+<li>Export the Marketing Code report on the last day of the month. It's a running total, so subtract last month's export to get this month's numbers.</li>
+<li>For the top three codes, check their registrations in the registrant export. Take out Gmail and other personal emails, students, duplicates, self-referrals, and anything outside the month. Add any hand credits from "Who referred you?".</li>
+<li>Look up who owns the winning code in the Zapier table. Skip anyone who's already won a month.</li>
+<li>Email the winner within five business days. They have seven days to reply. If they don't, it goes to the next person.</li>
+<li>Add the upgrade to their badge in Launchpad and mark the win in the Zapier table. Only announce them publicly if they're OK with it.</li>
+</ol>
+<p>February is tight. The challenge closes Friday, Feb 26 and the show opens March 10, so the last two winners get picked on March 1 and have to reply by March 8.</p>
 
-<h2>The announcement email <span class="tag draft">Draft</span></h2>
-<p>Sent automatically to each new registrant once their code is assigned, and once as a batch to everyone already registered at launch.</p>
-
+<h2>Launch email</h2>
+<p>Goes to everyone registered on Monday, Nov 2, the day after the October VIP giveaway closes. After that, every new registrant gets it automatically once they have a code. Tracking it in ClickUp as <a href="https://app.clickup.com/t/86bcbx3mk">PBX-EM 297</a>.</p>
 <div class="email">
-<div class="hdr">
-<div><span>Subject</span>Bring your team to PBExpo 2027</div>
-<div><span>Preview</span>Win a Pavilion wristband every month. The top referrer overall gets VIP.</div>
-</div>
-<div class="body">
+<div class="head">Subject: Bring your team to PBExpo 2027<br>Preview: Win a Pavilion wristband every month. The top referrer overall gets VIP.</div>
 <p>Hi {{contact.firstname}},</p>
 <p>Thanks for registering for PBExpo 2027. March 10–11, Miami Beach Convention Center.</p>
-<p>Most people don't come to PBExpo alone, so we're making it worth bringing others. Below is your personal referral link and code. When a colleague, customer or contact registers with them, the sign-up counts toward yours.</p>
+<p>Most people don't come to PBExpo alone, so we're making it worth bringing others. You now have your own referral link. Anyone who registers through it counts as your referral.</p>
 <p><b>Your link:</b> …/register?_mc={{contact.pbexpo_2027_referral_code}}<br><b>Your code:</b> {{contact.pbexpo_2027_referral_code}}</p>
 <p><b>What you can earn</b></p>
 <ul>
 <li><b>Top referrer each month:</b> a Pavilion wristband ($500 value) for November, December, January and February. That gets you into the Airline &amp; Operators Pavilion, the private meeting space for airlines, operators and suppliers.</li>
 <li><b>Top referrer overall:</b> the VIP wristband ($1,000 value). That's both VIP Hospitality Suites plus the Pavilion.</li>
-<li><b>Use a work email.</b> Sign-ups with Gmail, Yahoo, Outlook.com or other personal addresses don't count.</li>
 </ul>
-<p><b>One thing to pass on when you share it:</b> they need to register through your link. If they leave and come back later, they should click your link again. Otherwise the sign-up won't count toward yours. If they forget, they can enter your code in the "Who referred you?" field on the registration form.</p>
-<p>Referrals count through February 26, 2027. Full terms</p>
-</div>
-</div>
-
-<div class="plain"><b class="t">Where the link points</b>
-<p>The link goes straight to the Launchpad registration page with the code attached: <code>…/register?_mc={{contact.pbexpo_2027_referral_code}}</code>. Not the landing.partsbase.com page, which would drop the code unless it passes it on.</p></div>
-
-<div class="rule"></div>
-
-<h2>Timeline</h2>
-
-<div class="phase now">
-<div class="phhead"><span class="phname">Launch</span><span class="phwhen">Mon, Nov 2</span></div>
-<p>Announcement email to every registrant with their link and code. New registrants get theirs automatically. Goes out the day after the October VIP Wristband Giveaway closes, and the November prize starts the same day.</p>
+<p><b>Two things to tell people when you share it:</b> register through your link (if they leave and come back, click it again, or type your code into "Who referred you?"), and use a work email. Gmail, Yahoo and other personal addresses don't count.</p>
+<p>November's prize is up for grabs starting today. Referrals count through February 26, 2027. Full terms</p>
+<p>See you in Miami,<br>Mike</p>
 </div>
 
-<div class="phase">
-<div class="phhead"><span class="phname">Monthly winners</span><span class="phwhen">Dec 7 · Jan 8 · Feb 5</span></div>
-<p>November, December and January Pavilion winners picked and notified. Counts restart each month.</p>
-</div>
+<h2>Links</h2>
+<ul>
+<li><a href="pbexpo-referral-terms.html">Terms summary for the team</a></li>
+<li><a href="https://51546776.hs-sites.com/pbexpo-terms-and-conditions">Official rules</a> (Section 15 of the PBExpo terms)</li>
+</ul>
 
-<div class="phase">
-<div class="phhead"><span class="phname">Final winners</span><span class="phwhen">Mon, Mar 1</span></div>
-<p>February Pavilion winner and the overall VIP winner picked. Replies due March 8.</p>
-</div>
-
-<div class="phase later">
-<div class="phhead"><span class="phname">Show</span><span class="phwhen">March 10–11</span></div>
-<p>All five winners collect their wristbands onsite.</p>
-</div>
-
-<footer>Swapcard capabilities from Swapcard help centers, checked September 2026. Marketing Code tracking tested in Launchpad by Dan Rodgers, September 2026.</footer>
+<div class="foot">Questions to Dan.</div>
 
 </div></body></html>
