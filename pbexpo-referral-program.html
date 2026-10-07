@@ -158,13 +158,13 @@ table{display:block;overflow-x:auto}
 <div class="flow">
 <div class="node"><span class="sys lp">Launchpad</span><div><b>Load 10,000 codes once</b><span><code>REF00001</code> to <code>REF10000</code>, imported from one CSV. They belong to nobody yet. Unused codes are cleared after the show.</span></div></div>
 <div class="arrow"></div>
-<div class="node"><span class="sys lp">Launchpad</span><div><b>Someone registers</b><span>If they came through a referral link, their record carries the referrer's code.</span></div></div>
+<div class="node"><span class="sys lp">Launchpad</span><div><b>Someone registers</b><span>If they came through a referral link, Launchpad saves the referrer's code on their registration and adds one to that code's count.</span></div></div>
 <div class="arrow"></div>
-<div class="node"><span class="sys zp">Zapier</span><div><b>Hand out the next code</b><span>A counter gives the new registrant the next unused code, e.g. registrant 417 gets <code>REF00417</code>.</span></div></div>
+<div class="node"><span class="sys zp">Zapier</span><div><b>Hand out the next code</b><span>A counter gives the new registrant the next unused code, e.g. registrant 417 gets <code>REF00417</code>. The Zapier table marks it used with their email, so we always know who owns each code.</span></div></div>
 <div class="arrow"></div>
-<div class="node"><span class="sys hs">HubSpot</span><div><b>Credit the referrer</b><span>A workflow finds the contact who owns that code, links the two records and adds one to that person's referral count, but only if the new registrant has a qualifying job title.</span></div></div>
+<div class="node"><span class="sys hs">HubSpot</span><div><b>Send their link</b><span>Zapier writes the code to the registrant's HubSpot contact, and a workflow emails them their personal link and code.</span></div></div>
 <div class="arrow"></div>
-<div class="node"><span class="sys hs">HubSpot</span><div><b>Send the link and keep score</b><span>The new registrant gets their own link by email. A report of qualifying referrals by referrer, filtered by month, picks each winner.</span></div></div>
+<div class="node"><span class="sys lp">Launchpad</span><div><b>Keep score</b><span>The Marketing Code report counts confirmed registrations for every code. Sorted by <b>#&nbsp;Confirmed</b>, it is the leaderboard.</span></div></div>
 </div>
 
 <div class="plain"><b class="t">Why pre-load the codes</b>
@@ -220,13 +220,13 @@ table{display:block;overflow-x:auto}
 </table>
 
 <div class="flow">
-<div class="node"><span class="sys hs">HubSpot</span><div><b>1. Pull the month's ranking</b><span>Report of qualifying referrals registered in the month, grouped by referrer, highest first.</span></div></div>
+<div class="node"><span class="sys lp">Launchpad</span><div><b>1. Export the Marketing Code report</b><span>On the last day of the month. The report counts from launch, so subtract last month's export to get this month's count per code, highest first.</span></div></div>
 <div class="arrow"></div>
-<div class="node"><span class="sys hs">HubSpot</span><div><b>2. Check the top three</b><span>Remove any referral with a personal email, a "Student" Professional Level, a duplicate or a self-referral. Skip anyone who already won a monthly prize. Re-rank.</span></div></div>
+<div class="node"><span class="sys lp">Launchpad</span><div><b>2. Check the top three codes</b><span>In the registrant export, filter by each code. Remove personal emails, "Student" Professional Levels, duplicates, self-referrals and anyone registered outside the month. Add any hand credits from "Who referred you?". Look up each code's owner in the Zapier table, skip previous monthly winners, and re-rank.</span></div></div>
 <div class="arrow"></div>
 <div class="node"><span class="sys hs">Email</span><div><b>3. Notify the winner</b><span>Within 5 business days of the month ending. They have 7 days to reply, or until March 8 for the February and overall prizes. No reply, next person on the list.</span></div></div>
 <div class="arrow"></div>
-<div class="node"><span class="sys lp">Launchpad</span><div><b>4. Upgrade their registration</b><span>Add the Pavilion or VIP upgrade to the winner's badge, and record the win on their HubSpot contact.</span></div></div>
+<div class="node"><span class="sys lp">Launchpad</span><div><b>4. Upgrade their registration</b><span>Add the Pavilion or VIP upgrade to the winner's badge, and mark the win against their code in the Zapier table.</span></div></div>
 <div class="arrow"></div>
 <div class="node"><span class="sys zp">Promote</span><div><b>5. Announce and restart</b><span>Announce the winner only with their OK. Remind registrants the new month's count starts from zero.</span></div></div>
 </div>
