@@ -72,6 +72,7 @@ th{background:var(--navy);color:#fff;text-align:left;padding:11px 15px;
 font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
 td{padding:12px 15px;border-top:1px solid var(--rule);vertical-align:top}
 td b.fn{color:var(--navy)}
+td.n{white-space:nowrap;font-weight:700}
 .tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
 border-radius:5px;padding:2px 7px;margin-left:6px;vertical-align:1px}
 .tag.draft{background:#ffe7d9;color:#a8360c}
@@ -114,15 +115,16 @@ table{display:block;overflow-x:auto}
 
 <header><div class="wrap">
 <h1>PBExpo Referral Program</h1>
-<p class="sub">Every registrant gets a personal link. Colleagues who register through it are credited to them, and the top referrers earn perks. Built on tools we already pay for.</p>
-<div class="meta">Proposal · Owner: Dan Rodgers · PBExpo 2027 · Miami Beach, March 10–11, 2027</div>
+<p class="sub">Every registrant gets a personal link. Colleagues who register through it are credited to them, and the top referrer each month wins a wristband upgrade. Built on tools we already pay for.</p>
+<div class="meta">Launches October 8, 2026 · Owner: Dan Rodgers · PBExpo 2027 · Miami Beach, March 10–11, 2027</div>
 </div></header>
 
 <div class="kpis"><div class="wrap">
 <div class="kpi"><b>$0</b><span>New software</span></div>
 <div class="kpi"><b>10,000</b><span>Codes pre-loaded</span></div>
 <div class="kpi"><b>3 of 3</b><span>Tracking tests passed</span></div>
-<div class="kpi"><b>January</b><span>Proposed launch</span></div>
+<div class="kpi"><b>Oct 8</b><span>Launch</span></div>
+<div class="kpi"><b>5</b><span>Winners</span></div>
 </div></div>
 
 <div class="wrap">
@@ -146,7 +148,7 @@ table{display:block;overflow-x:auto}
 <div class="steps">
 <div class="step"><div class="num">1</div><b>Register</b><span>Confirmation email includes "Bring your team" and a personal link.</span></div>
 <div class="step"><div class="num">2</div><b>Share</b><span>Forward it to colleagues, customers, or post it on LinkedIn.</span></div>
-<div class="step"><div class="num">3</div><b>Earn</b><span>The top 5 referrers earn a Pavilion wristband. The #1 referrer earns the VIP wristband.</span></div>
+<div class="step"><div class="num">3</div><b>Earn</b><span>Top referrer each month, Nov to Feb, wins a Pavilion wristband. Top referrer overall wins VIP.</span></div>
 </div>
 
 <div class="rule"></div>
@@ -162,7 +164,7 @@ table{display:block;overflow-x:auto}
 <div class="arrow"></div>
 <div class="node"><span class="sys hs">HubSpot</span><div><b>Credit the referrer</b><span>A workflow finds the contact who owns that code, links the two records and adds one to that person's referral count, but only if the new registrant has a qualifying job title.</span></div></div>
 <div class="arrow"></div>
-<div class="node"><span class="sys hs">HubSpot</span><div><b>Send the link and keep score</b><span>The new registrant gets their own link by email. A report sorted by referral count is the leaderboard.</span></div></div>
+<div class="node"><span class="sys hs">HubSpot</span><div><b>Send the link and keep score</b><span>The new registrant gets their own link by email. A report of qualifying referrals by referrer, filtered by month, picks each winner.</span></div></div>
 </div>
 
 <div class="plain"><b class="t">Why pre-load the codes</b>
@@ -187,15 +189,50 @@ table{display:block;overflow-x:auto}
 <div class="rule"></div>
 
 <h2>Rewards <span class="tag set">Set</span></h2>
-<p>Registration is free, so rewards are paid registration upgrades rather than discounts.</p>
+<p>Registration is free, so rewards are paid registration upgrades rather than discounts. Agreed with Cassandra on October 7.</p>
 
 <div class="tiers">
-<div class="tier"><div class="who">Referrers #2 to #5</div><div class="what">Pavilion wristband</div><div class="val">$500 value</div><p>Access to the Airline &amp; Operators Pavilion, the private meeting space for airlines, operators and suppliers.</p></div>
-<div class="tier top"><div class="who">Referrer #1</div><div class="what">VIP wristband</div><div class="val">$1,000 value</div><p>Both VIP Hospitality Suites plus the Airline &amp; Operators Pavilion.</p></div>
+<div class="tier"><div class="who">Top referrer each month · Nov, Dec, Jan, Feb</div><div class="what">Pavilion wristband</div><div class="val">$500 value · 4 winners</div><p>Access to the Airline &amp; Operators Pavilion, the private meeting space for airlines, operators and suppliers.</p></div>
+<div class="tier top"><div class="who">Top referrer overall · Oct 8 to Feb 26</div><div class="what">VIP wristband</div><div class="val">$1,000 value · 1 winner</div><p>Both VIP Hospitality Suites plus the Airline &amp; Operators Pavilion.</p></div>
 </div>
 
-<div class="warn"><b class="t">Needs legal review</b>
-<p>Every prize is now decided by leaderboard rank, so the whole program is a contest. The terms go through legal with the AirPods registration draw so both are signed off at once. Drafted terms: <a href="pbexpo-referral-terms.html" style="color:#a8360c;font-weight:700">Referral Challenge Terms</a>.</p></div>
+<ul>
+<li><b>October counts toward the overall prize only.</b> The first monthly prize is for November.</li>
+<li><b>One monthly win per person.</b> If a month's leader already won, that month goes to the next person, so four different people win.</li>
+<li><b>A monthly winner can still win overall.</b> The VIP wristband replaces their Pavilion one.</li>
+</ul>
+
+<div class="plain"><b class="t">Terms</b>
+<p>Full rules are Section 15 of the PBExpo terms. Team summary: <a href="pbexpo-referral-terms.html" style="color:#0a5bc4;font-weight:700">Referral Challenge Terms</a>.</p></div>
+
+<div class="rule"></div>
+
+<h2>Monthly winner workflow</h2>
+<p>Runs five times. Each run takes about 30 minutes.</p>
+
+<table>
+<tr><th>Prize</th><th>Counts referrals from</th><th>Winner picked by</th></tr>
+<tr><td><b class="fn">November</b> · Pavilion</td><td>Nov 1–30, 2026</td><td class="n">Mon, Dec 7</td></tr>
+<tr><td><b class="fn">December</b> · Pavilion</td><td>Dec 1–31, 2026</td><td class="n">Fri, Jan 8</td></tr>
+<tr><td><b class="fn">January</b> · Pavilion</td><td>Jan 1–31, 2027</td><td class="n">Fri, Feb 5</td></tr>
+<tr><td><b class="fn">February</b> · Pavilion</td><td>Feb 1–26, 2027</td><td class="n">Mon, Mar 1</td></tr>
+<tr><td><b class="fn">Overall</b> · VIP</td><td>Oct 8, 2026 – Feb 26, 2027</td><td class="n">Mon, Mar 1</td></tr>
+</table>
+
+<div class="flow">
+<div class="node"><span class="sys hs">HubSpot</span><div><b>1. Pull the month's ranking</b><span>Report of qualifying referrals registered in the month, grouped by referrer, highest first.</span></div></div>
+<div class="arrow"></div>
+<div class="node"><span class="sys hs">HubSpot</span><div><b>2. Check the top three</b><span>Remove any referral with a personal email, a "Student" Professional Level, a duplicate or a self-referral. Skip anyone who already won a monthly prize. Re-rank.</span></div></div>
+<div class="arrow"></div>
+<div class="node"><span class="sys hs">Email</span><div><b>3. Notify the winner</b><span>Within 5 business days of the month ending. They have 7 days to reply, or until March 8 for the February and overall prizes. No reply, next person on the list.</span></div></div>
+<div class="arrow"></div>
+<div class="node"><span class="sys lp">Launchpad</span><div><b>4. Upgrade their registration</b><span>Add the Pavilion or VIP upgrade to the winner's badge, and record the win on their HubSpot contact.</span></div></div>
+<div class="arrow"></div>
+<div class="node"><span class="sys zp">Promote</span><div><b>5. Announce and restart</b><span>Announce the winner only with their OK. Remind registrants the new month's count starts from zero.</span></div></div>
+</div>
+
+<div class="warn"><b class="t">The February and overall prizes are tight</b>
+<p>The challenge closes Friday, February 26 and the show opens March 10. Both final winners are picked Monday, March 1, and must reply by March 8 so the upgrades are on their badges before the show.</p></div>
 
 <div class="rule"></div>
 
@@ -205,48 +242,49 @@ table{display:block;overflow-x:auto}
 <div class="email">
 <div class="hdr">
 <div><span>Subject</span>Bring your team to PBExpo 2027</div>
-<div><span>Preview</span>The top 5 referrers get a Pavilion wristband. Number one gets VIP.</div>
+<div><span>Preview</span>Win a Pavilion wristband every month. The top referrer overall gets VIP.</div>
 </div>
 <div class="body">
 <p>Hi {{contact.firstname}},</p>
 <p>Thanks for registering for PBExpo 2027. March 10–11, Miami Beach Convention Center.</p>
 <p>Most people don't come to PBExpo alone, so we're making it worth bringing others. Below is your personal referral link and code. When a colleague, customer or contact registers with them, the sign-up counts toward yours.</p>
-<p><span class="btn">Share my link</span><br><b>Your referral code:</b> {{contact.referral_code}}</p>
+<p><b>Your link:</b> …/register?_mc={{contact.pbexpo_2027_referral_code}}<br><b>Your code:</b> {{contact.pbexpo_2027_referral_code}}</p>
 <p><b>What you can earn</b></p>
 <ul>
-<li><b>Top 5 referrers:</b> a Pavilion wristband ($500 value). You get into the Airline &amp; Operators Pavilion, the private meeting space for airlines, operators and suppliers.</li>
-<li><b>Number one referrer:</b> the VIP wristband instead ($1,000 value). That's both VIP Hospitality Suites plus the Pavilion.</li>
+<li><b>Top referrer each month:</b> a Pavilion wristband ($500 value) for November, December, January and February. That gets you into the Airline &amp; Operators Pavilion, the private meeting space for airlines, operators and suppliers.</li>
+<li><b>Top referrer overall:</b> the VIP wristband ($1,000 value). That's both VIP Hospitality Suites plus the Pavilion.</li>
+<li><b>Use a work email.</b> Sign-ups with Gmail, Yahoo, Outlook.com or other personal addresses don't count.</li>
 </ul>
 <p><b>One thing to pass on when you share it:</b> they need to register through your link. If they leave and come back later, they should click your link again. Otherwise the sign-up won't count toward yours. If they forget, they can enter your code in the "Who referred you?" field on the registration form.</p>
-<p>Referrals count through <span class="ph">[CLOSE DATE]</span>. <span class="ph">[Full terms]</span></p>
+<p>Referrals count through February 26, 2027. Full terms</p>
 </div>
 </div>
 
 <div class="plain"><b class="t">Where the link points</b>
-<p>The button goes straight to the Launchpad registration page with the code attached: <code>…/register?_mc={{contact.referral_code}}</code>. Not the landing.partsbase.com page, which would drop the code unless it passes it on.</p></div>
+<p>The link goes straight to the Launchpad registration page with the code attached: <code>…/register?_mc={{contact.pbexpo_2027_referral_code}}</code>. Not the landing.partsbase.com page, which would drop the code unless it passes it on.</p></div>
 
 <div class="rule"></div>
 
-<h2>Timeline <span class="tag draft">Proposed</span></h2>
+<h2>Timeline</h2>
 
 <div class="phase now">
-<div class="phhead"><span class="phname">Build and test</span><span class="phwhen">October</span></div>
-<p>Import codes. Build the Zap and the HubSpot properties and workflows. Run an end-to-end test with internal registrations.</p>
+<div class="phhead"><span class="phname">Launch</span><span class="phwhen">Thu, Oct 8</span></div>
+<p>Announcement email to every registrant with their link and code. New registrants get theirs automatically. October referrals count toward the overall prize.</p>
 </div>
 
 <div class="phase">
-<div class="phhead"><span class="phname">Legal sign-off</span><span class="phwhen">November</span></div>
-<p>Legal reviews the referral terms alongside the AirPods draw. The AirPods promotion runs Nov 9–30 on its own so the two campaigns don't compete.</p>
+<div class="phhead"><span class="phname">Monthly winners</span><span class="phwhen">Dec 7 · Jan 8 · Feb 5</span></div>
+<p>November, December and January Pavilion winners picked and notified. Counts restart each month.</p>
 </div>
 
 <div class="phase">
-<div class="phhead"><span class="phname">Launch</span><span class="phwhen">January</span></div>
-<p>Email every existing registrant their link. New registrants get theirs automatically.</p>
+<div class="phhead"><span class="phname">Final winners</span><span class="phwhen">Mon, Mar 1</span></div>
+<p>February Pavilion winner and the overall VIP winner picked. Replies due March 8.</p>
 </div>
 
 <div class="phase later">
 <div class="phhead"><span class="phname">Show</span><span class="phwhen">March 10–11</span></div>
-<p>Leaderboard closes shortly before the show. The top 5 pick up their wristbands onsite.</p>
+<p>All five winners collect their wristbands onsite.</p>
 </div>
 
 <footer>Swapcard capabilities from Swapcard help centers, checked September 2026. Marketing Code tracking tested in Launchpad by Dan Rodgers, September 2026.</footer>
