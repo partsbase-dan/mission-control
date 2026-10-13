@@ -92,6 +92,9 @@
 !pbexpo-referral-program.html
 !pbexpo-referral-terms.html
 
+# Team guide: building segments in HubSpot. Self-contained, screenshots inlined, no contact rows.
+!hubspot-segments-guide.html
+
 # Company sign-in (PartsBase Microsoft account) in front of the whole site.
 # Added by the pb-dashboards protect-dashboard skill.
 !netlify.toml
