@@ -364,6 +364,7 @@
       <button onclick="showTab('resources')" id="outertab-resources" class="outer-tab"><span class="nav-icon">📚</span><span>Resources</span></button>
       <button onclick="showTab('email')" id="outertab-email" class="outer-tab"><span class="nav-icon">✉</span><span>Email Health</span></button>
       <button onclick="showTab('icp')" id="outertab-icp" class="outer-tab"><span class="nav-icon">⌖</span><span>ICP &amp; Targeting</span></button>
+      <button onclick="showTab('salesws')" id="outertab-salesws" class="outer-tab"><span class="nav-icon">◫</span><span>Sales Workshops</span></button>
       <div class="nav-group">Campaigns</div>
       <button onclick="toggleCampaignGroup()" id="outertab-campaign" class="outer-tab"><span class="nav-icon">▦</span><span>PBExpo '27 Campaigns</span><span class="chevron">›</span></button>
       <div class="plan-nav collapsed" id="campaign-nav" aria-label="PBExpo 2027 Campaign sections">
@@ -384,7 +385,6 @@
       <a href="heyreach-sequences.html" target="_blank" rel="noopener" id="outertab-hrseq" class="outer-tab" style="text-decoration:none"><span class="nav-icon">▤</span><span>HeyReach Sequences</span><span class="chevron">↗</span></a>
       <a href="pbexpo-referral-program.html" target="_blank" rel="noopener" id="outertab-pbxref" class="outer-tab" style="text-decoration:none"><span class="nav-icon">✦</span><span>PBExpo Referral Program</span><span class="chevron">↗</span></a>
       <a href="hubspot-segments-guide.html" target="_blank" rel="noopener" id="outertab-hsseg" class="outer-tab" style="text-decoration:none"><span class="nav-icon">◧</span><span>Building Segments in HubSpot</span><span class="chevron">↗</span></a>
-      <a href="sales-workshops.html" target="_blank" rel="noopener" id="outertab-salesws" class="outer-tab" style="text-decoration:none"><span class="nav-icon">◫</span><span>Sales Workshops</span><span class="chevron">↗</span></a>
       <div class="sidebar-footer">
         <div style="font-size:11px;color:#5f626b;margin-top:18px;">Dan Rodgers · MarTech</div>
       </div>
@@ -842,6 +842,53 @@
       </div>
 
       <!-- ═══ HOW ADS ARE BUILT ═══ -->
+      <!-- Sales Workshops. Source: Sales Workshops Pre-Read, Oct 16 2026. Update the
+           Date and Summary sent columns as sessions happen. Standalone copy: sales-workshops.html -->
+      <div id="tab-salesws-content" class="ffsec hidden" style="padding:24px">
+  <div class="page-head"><h1>Sales Workshops</h1><p class="page-sub">Five working sessions, one per product group, where Sales teaches Marketing who buys, what slows deals down and what would help them sell. What we hear sets Marketing's priorities. Rodrigo, Robert and Dan attend all five. Invites go out after the intro roundtable.</p></div>
+
+  <div class="section-label">Schedule</div>
+  <div class="card"><div class="tablewrap"><table class="rt ft"><thead><tr><th>Workshop</th><th>Sales attendees</th><th>Date</th><th>Summary sent</th></tr></thead><tbody>
+    <tr><td class="k">PB Locator</td><td>Karly, David S., Casie R.</td><td>To be confirmed</td><td>Not yet</td></tr>
+    <tr><td class="k">PartStore</td><td>Kevin</td><td>To be confirmed</td><td>Not yet</td></tr>
+    <tr><td class="k">Integration (API)</td><td>Kevin, Karly, David S., Casie R.</td><td>To be confirmed</td><td>Not yet</td></tr>
+    <tr><td class="k">PB Labs</td><td>Kevin, Edin C.</td><td>To be confirmed</td><td>Not yet</td></tr>
+    <tr><td class="k">PB Government Data</td><td>Kevin, Karly, David S.</td><td>To be confirmed</td><td>Not yet</td></tr>
+  </tbody></table></div></div>
+
+  <div class="section-label">What Marketing owes</div>
+  <div class="card"><ol style="margin:0;padding-left:20px;font-size:13px;line-height:1.7;color:var(--label)">
+    <li>After each workshop, a written summary to attendees within two business days: what we heard, what we'll do, what we won't.</li>
+    <li>Every request logged with an owner and a status.</li>
+    <li>After all five, one list ranked by revenue impact and effort, reviewed with Rodrigo and Robert, then shared with Sales.</li>
+    <li>Requests that belong to another team passed to the right owner, with Rodrigo's help.</li>
+  </ol></div>
+
+  <div class="section-label">Format &middot; 45 minutes</div>
+  <div class="card" style="font-size:13px;line-height:1.7;color:var(--label)">
+    5 min frame &middot; 25 min discussion &middot; 10 min rank the asks &middot; 5 min next steps.<br>
+    Sales brings recent wins and losses, common objections, the buyers they talk to most, the assets they use today, and their top request with what it would change in a deal. Off-topic items go on the findings list.
+  </div>
+
+  <div class="section-label">Asked at every workshop</div>
+  <div class="card"><ol style="margin:0;padding-left:20px;font-size:13px;line-height:1.7;color:var(--label)">
+    <li>Who buys this, and who decides? Two or three recent examples.</li>
+    <li>Why do customers buy, and why do they say no?</li>
+    <li>Where do deals slow down or stall?</li>
+    <li>Which leads from Marketing have been good, and which weren't?</li>
+    <li>What should Marketing do first, and what would it change in a deal?</li>
+  </ol></div>
+
+  <div class="section-label">Workshop guides</div>
+  <div class="card"><div class="tablewrap"><table class="rt ft"><thead><tr><th>Workshop</th><th>What we want to learn</th><th>Outcome</th></tr></thead><tbody>
+    <tr><td class="k">PB Locator</td><td>Which customer types get the most value and how they find it; what prospects compare it to; which proof points would help close</td><td>Ranked audience segments + top three asks</td></tr>
+    <tr><td class="k">PartStore</td><td>Ideal customer vs who actually signs up; where people drop off between interest and a live store; which segments to prioritise in outbound and email</td><td>Agreed ideal-customer description + top three asks</td></tr>
+    <tr><td class="k">Integration (API)</td><td>Whether buyers are technical, commercial or both; questions Sales can't answer without engineering; docs, demos or case studies that would shorten the cycle</td><td>Content and enablement gaps + whether the API needs its own campaign</td></tr>
+    <tr><td class="k">PB Labs</td><td>How Sales describes it in one sentence; who the early adopters are and why they tried it; its stage and what we can share publicly</td><td>Positioning draft, early-adopter profile + top three asks</td></tr>
+    <tr><td class="k">PB Government Data</td><td>Who the target buyers are and how they're found; compliance, procurement or messaging limits; lists, events and channels already in use</td><td>Target-buyer profile, messaging constraints + top three asks</td></tr>
+  </tbody></table></div></div>
+      </div>
+
       <div id="tab-ffover-content" class="ffsec hidden" style="padding:24px">
 
   <div class="grid-4">
@@ -1397,6 +1444,7 @@ const TAB_CONFIG = {
   ffout: { panel: 'plan',     inner: 'ffout', title: ["PBExpo '27 Campaigns", 'Net-new exec outbound \u00b7 38 contacts, two emails each'] },
   ffcal: { panel: 'plan',     inner: 'ffcal', title: ["PBExpo '27 Campaigns", 'Where every send lands, Sep–Dec'] },
   ffmeas: { panel: 'plan',     inner: 'ffmeas', title: ["PBExpo '27 Campaigns", 'What we track, and what would unlock more'] },
+  salesws:   { panel: 'plan',     inner: 'salesws',   title: ['Sales Workshops',   'Five product-group sessions with Sales · dates to be confirmed'] },
   exec:      { panel: 'plan',     inner: 'exec',      title: ['Exec View',         'Leadership summary and 90-day GTM narrative'] },
 };
 
@@ -1484,7 +1532,7 @@ function togglePlanGroup() {
 })();
 
 // ── Inner tabs ──
-const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild','adperf','ffover','ffplays','ffcopy','ffcal','ffmeas','ffout'];
+const INNER_TABS = ['overview','sprints','milestones','risks','stack','email','icp','decisions','exec','resources','pbexpo','adbuild','adperf','ffover','ffplays','ffcopy','ffcal','ffmeas','ffout','salesws'];
 function showInnerTab(name) {
   INNER_TABS.forEach(t => {
     document.getElementById('tab-' + t + '-content').classList.toggle('hidden', t !== name);
@@ -3219,7 +3267,7 @@ function cmdkSource() {
    ['milestones','Milestones','Phase targets'],      ['risks','Risk Register','Probability & impact'],
    ['stack','Tech Stack','Tools & rollout'],         ['decisions','Decision Log','What was decided, and why']]
     .forEach(([id, title, sub]) => items.push({ g:'Go to', icon:'◎', title, sub, go: jump(id) }));
-  ['resources','email','icp','ffover','adperf','adbuild'].forEach(k =>
+  ['resources','email','icp','salesws','ffover','adperf','adbuild'].forEach(k =>
     items.push({ g:'Go to', icon:'›', title:TAB_CONFIG[k].title[0], sub:TAB_CONFIG[k].title[1].split('·')[0].trim(), go:() => showTab(k) }));
 
   (PLAN.risks || []).forEach(r => items.push({ g:'Risks', icon:'⚑', title:r.label, sub:`${r.impact} impact`, go:() => { jump('risks')(); dtSearch('risks', r.label); document.getElementById('dt-risks-q').value = r.label; } }));

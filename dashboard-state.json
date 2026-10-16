@@ -20,7 +20,8 @@
     "linkedinads": "blue",
     "emailcampaigns": "red",
     "attribution": "none",
-    "health": "none"
+    "health": "none",
+    "salesws": "blue"
   },
   "milestones": {
     "m1": true,
@@ -92,6 +93,11 @@
         "id": "health",
         "label": "Customer Health Scoring",
         "detail": "Churn signals · 6,695-account base · active ARPA confirmed $459.99/mo · NDR ~96.5% (WATCH) · expansion MRR target: >$9.7K/mo to offset churn · HubSpot upgrade trigger = NDR fix"
+      },
+      {
+        "id": "salesws",
+        "label": "Sales Workshops",
+        "detail": "Five product-group sessions with Sales (PB Locator, PartStore, API, PB Labs, Gov Data) · dates TBC after intro roundtable · summary within 2 business days of each"
       }
     ],
     "sprints": [
