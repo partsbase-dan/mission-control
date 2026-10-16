@@ -97,7 +97,7 @@
       {
         "id": "salesws",
         "label": "Sales Workshops",
-        "detail": "Five product-group sessions with Sales (PB Locator, PartStore, API, PB Labs, Gov Data) · dates TBC after intro roundtable · summary within 2 business days of each"
+        "detail": "Five product-group sessions with Sales (PB Locator, PartStore, Integration (API), PB Labs, PB Government Data) · asks ranked by revenue impact feed H1 2027 priorities · dates TBC after intro roundtable"
       }
     ],
     "sprints": [
