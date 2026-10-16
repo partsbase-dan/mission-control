@@ -101,3 +101,7 @@
 !netlify/
 !netlify/edge-functions/
 !netlify/edge-functions/pb-auth.js
+
+# Sales Workshops tracker: five product-group sessions with Sales. Plain doc,
+# no scripts, names of internal attendees only.
+!sales-workshops.html
