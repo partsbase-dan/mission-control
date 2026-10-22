@@ -105,9 +105,3 @@
 # Sales Workshops tracker: five product-group sessions with Sales. Plain doc,
 # no scripts, names of internal attendees only.
 !sales-workshops.html
-
-# PBExpo 2027 registration tracker. Self-contained page: registration counts, plan and UTM
-# channel totals only, no names, emails or contact rows. Built from the Swapcard export by
-# GTM-Strategy/dashboards/pbexpo-registration (see its RUNBOOK.md); copy the refreshed
-# dist/PBExpo_2027_Dashboard.html here as pbexpo-registration.html to update it.
-!pbexpo-registration.html
