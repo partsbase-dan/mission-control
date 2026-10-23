@@ -1,0 +1,860 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PBExpo 2027 Registration Tracker</title>
+<style>
+  /* PBExpo 2027 Brand Style Guide: navy 000039, dark blue 02007F, bright blue 0064E8, sky blue 00C4E8, yellow E8DB00,
+     orange E8A800, dark orange E84700. Roboto throughout. Gradients are the guide's background gradients and are used
+     in the header band and one headline card. Everything else is flat: thin borders, small radius, no shadows. */
+  :root{
+  color-scheme:light;
+  --navy:#000039; --dblue:#02007F; --bblue:#0064E8; --sky:#00C4E8; --yellow:#E8DB00; --orange:#E8A800; --dorange:#E84700;
+  --grad-hero:linear-gradient(115deg,#000039 0%,#02007F 52%,#0064E8 100%);
+  --grad-sky:linear-gradient(135deg,#0064E8 0%,#00C4E8 100%);
+  --plane:#f4f5f7; --surface:#ffffff; --surface-2:#fafafa;
+  --ink:#000039; --ink-2:#414651; --muted:#6b7280;
+  --line:#e9eaeb; --line-2:#d5d7da; --baseline:#a4a7ae;
+  --accent:#0064E8; --accent-2:#00C4E8;
+  --y25:#E8A800; --y26:#0064E8; --fore:#02007F;
+  --band:rgba(0,100,232,.12);
+  --actual:#E84700;
+  --good:#0064E8; --warn:#E84700; --crit:#E84700;
+  --radius:6px;
+}
+*{box-sizing:border-box}
+body{background:var(--plane);color:var(--ink-2);font:14px/1.5 Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{color:var(--ink);font-family:Roboto,Arial,sans-serif}
+.tnum{font-variant-numeric:tabular-nums}
+a{color:var(--accent)}
+.hrule{display:none}
+
+/* header band and view tabs */
+.topbar{background:var(--grad-hero);color:#fff}
+.topbar-in{max-width:1180px;margin:0 auto;padding:22px 24px 0;display:flex;flex-direction:column;gap:14px}
+.topbar .eyebrow-s{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+.topbar h1{font-size:26px;font-weight:700;line-height:1.2;margin:3px 0 0;color:#fff}
+.topbar .fresh{font-size:12px;color:rgba(255,255,255,.78);margin-top:6px}
+.topbar .fresh b{font-weight:500;color:#fff}
+.tabs{display:flex;gap:2px}
+.tabs button{border:0;border-bottom:3px solid transparent;background:none;padding:9px 16px;font:500 13px Roboto,Arial,sans-serif;color:var(--ink-2);cursor:pointer;border-radius:0}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--ink);font-weight:700;border-bottom-color:var(--accent)}
+.topbar .tabs{margin-left:-16px}
+.topbar .tabs button{color:rgba(255,255,255,.78)}
+.topbar .tabs button:hover{color:#fff}
+.topbar .tabs button[aria-selected="true"]{color:#fff;border-bottom-color:#fff}
+.typebar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:#fff;border-bottom:1px solid var(--line-2)}
+.typebar-in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.key-lbl{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 24px 64px}
+.wrap,.topbar-in,.typebar-in{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.topbar .tabs{margin-left:-16px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(max-width:700px){.typebar .key-lbl{display:none}.typebar-in{overflow-x:auto}th,td{padding:8px 8px}.panel{padding:16px 14px}}
+
+/* headline numbers */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.kpis.k4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1000px){.kpis,.kpis.k4{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.kpis,.kpis.k4{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--radius);padding:14px 16px;min-height:104px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.kpi .lab{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kpi .val{font-size:28px;font-weight:700;line-height:1.1;color:var(--ink);margin-top:4px}
+.kpi .val.sm{font-size:18px;line-height:1.25;margin-top:6px}
+.kpi .note{font-size:12px;color:var(--ink-2);margin-top:auto;padding-top:8px;overflow-wrap:anywhere}
+.kpi.hero{background:var(--grad-hero);border-color:transparent}
+.kpi.hero .lab{color:rgba(255,255,255,.78)}
+.kpi.hero .val{color:#fff}
+.kpi.hero .note,.kpi.hero .chip{color:rgba(255,255,255,.92)}
+.chip{display:inline-block;font-size:12px;font-weight:500;color:var(--ink-2)}
+.chip i{font-style:normal;font-weight:700;margin-right:2px}
+.chip.up i{color:var(--accent)}
+.chip.dn i,.chip.warn i{color:var(--dorange)}
+.kpi.hero .chip.up i{color:var(--sky)}
+.kpi.hero .chip.dn i{color:#ffb089}
+.kpi .note .chip+.chip{margin-left:10px}
+.dot{width:8px;height:8px;border-radius:2px;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:2px 20px;margin-top:12px;font-size:13px;color:var(--ink-2)}
+#breakdown + .panel{margin-top:16px}
+.chips .c{font-weight:400}
+.chips .c b{color:var(--ink);font-weight:700}
+
+/* panels */
+.panel{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--radius);padding:18px 20px;margin-top:16px;min-width:0}
+.panel h2{font-size:15px;font-weight:700;letter-spacing:0;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.panel .desc{color:var(--ink-2);font-size:13px;margin:0 0 14px;max-width:80ch}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.cols2>.panel{margin-top:0}
+@media(max-width:900px){.cols2{grid-template-columns:1fr}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.mini-h{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 9px}
+.legend,.chanleg{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 12px;font-size:12px;color:var(--ink-2)}
+.legend span,.chanleg span{display:inline-flex;align-items:center;gap:7px}
+.swatch{width:16px;height:3px;border-radius:1px;display:inline-block}
+.swatch.dash{background:none;border-top:2px dashed var(--fore);height:0}
+.band-sw{width:16px;height:10px;border-radius:2px;background:linear-gradient(180deg,rgba(0,100,232,.28),rgba(0,196,232,.1));display:inline-block}
+.chartbox{width:100%;overflow-x:auto}
+svg{display:block;width:100%;height:auto}
+.take{color:var(--ink-2);font-size:13px;margin:12px 0 0}
+.take b{color:var(--ink)}
+.tag{font-size:11px;font-weight:500;color:var(--muted);border:1px solid var(--line-2);border-radius:3px;padding:1px 6px;margin-left:6px;vertical-align:1px}
+.tip{position:fixed;pointer-events:none;z-index:20;background:var(--navy);color:#fff;font-size:12px;padding:8px 10px;border-radius:4px;opacity:0;transition:opacity .1s;max-width:240px;line-height:1.45}
+.tip b{color:#fff}
+.tip .r{display:flex;justify-content:space-between;gap:14px}
+.note-box{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;color:var(--ink-2);font-size:13px}
+.note-box b{color:var(--ink)}
+
+/* small stat blocks, tables, bars */
+.statgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:900px){.statgrid{grid-template-columns:repeat(2,1fr)}}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+@media(max-width:600px){.statrow{grid-template-columns:1fr}}
+.stat{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px}
+.stat .v{font-size:24px;font-weight:700;color:var(--ink);line-height:1.1}
+.stat .l{font-size:12px;color:var(--ink-2);margin-top:6px;line-height:1.35}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px 12px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+thead th{font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--surface-2);border-bottom:1px solid var(--line-2)}
+tbody tr{border-bottom:1px solid var(--line)}
+tbody tr.now{background:var(--surface-2);font-weight:500}
+tbody td.actual{color:var(--muted)}
+.hbars{display:flex;flex-direction:column;gap:8px}
+.hbar{display:grid;grid-template-columns:116px 1fr 56px;align-items:center;gap:10px;font-size:12.5px}
+.hbar .lb{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar .tk{height:10px;background:var(--plane);border-radius:2px;overflow:hidden}
+.hbar .fl{height:100%;border-radius:2px;background:var(--accent)}
+.hbar .vl{text-align:right;color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+
+/* controls */
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}
+.toolbar .tabs{margin-left:-16px}
+.btn{display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:4px;font:500 13px Roboto,Arial,sans-serif;border:1px solid var(--accent);background:#fff;color:var(--accent);cursor:pointer}
+.btn:hover{background:var(--accent);color:#fff}
+.fchips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.fchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-2);background:#fff;border-radius:4px;padding:4px 10px;font:500 12px Roboto,Arial,sans-serif;color:var(--ink-2);cursor:pointer}
+.fchip b{font-weight:700;font-variant-numeric:tabular-nums}
+.fchip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.csvout{width:100%;margin:0 0 12px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--ink);background:var(--surface-2);border:1px solid var(--line-2);border-radius:var(--radius);padding:10px}
+details.disc>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.disc>summary::-webkit-details-marker{display:none}
+details.disc>summary h2{margin:0;padding:0;border:0;flex:0 0 auto}
+details.disc>summary::after{content:'';margin-left:auto;width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .15s}
+details.disc[open]>summary::after{transform:rotate(-135deg)}
+details.disc[open]>summary{margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+details.how{margin-top:24px}
+details.how>summary{cursor:pointer;font-weight:500;font-size:13px;color:var(--ink-2)}
+.foot{color:var(--muted);font-size:12px;margin-top:10px;line-height:1.6}
+
+/* campaign table */
+#campTbl{min-width:640px}
+#campTbl td,#campTbl th{vertical-align:middle}
+#campTbl td:nth-child(2),#campTbl th:nth-child(2){text-align:left}
+#campTbl .nm{display:flex;align-items:flex-start;gap:6px;text-align:left}
+#campTbl .nm .t{min-width:200px;overflow-wrap:break-word}
+#campTbl button.xp{all:unset;cursor:pointer;width:18px;height:18px;flex:none;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);border-radius:3px;font-size:14px;line-height:1}
+#campTbl button.xp:hover{background:var(--plane);color:var(--ink)}
+#campTbl button.xp:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#campTbl tr.camp.untag .t{color:var(--ink-2);font-style:italic}
+#campTbl tr.sub td{padding:2px 12px 10px 36px;text-align:left;color:var(--ink-2);font-size:12.5px;border-bottom:1px solid var(--line)}
+#campTbl tr.sub .cl{display:grid;grid-template-columns:1fr auto;gap:2px 18px;max-width:420px}
+#campTbl tr.sub .cl b{color:var(--ink);font-variant-numeric:tabular-nums;text-align:right}
+#campTbl .sh{display:inline-flex;align-items:center;gap:8px;justify-content:flex-end;min-width:90px}
+#campTbl .sh i{display:inline-block;height:6px;border-radius:2px;background:var(--accent);opacity:.8}
+#campTbl .ch{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+#typeTbl .ch{display:inline-flex;align-items:center;gap:6px}
+
+/* search, sparklines, checkpoints, highlights, tactics */
+.topbar-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.srch{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:4px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font:500 13px Roboto,Arial,sans-serif;cursor:pointer}
+.srch:hover{background:rgba(255,255,255,.16)}
+kbd{font:500 11px Roboto,Arial,sans-serif;border:1px solid rgba(255,255,255,.4);border-radius:3px;padding:0 5px;line-height:18px}
+.cmdk{position:fixed;inset:0;z-index:40;background:rgba(0,0,57,.45);display:flex;justify-content:center;align-items:flex-start;padding:max(10vh,env(safe-area-inset-top,0px)) 16px 16px}
+.cmdk[hidden]{display:none}
+.cmdk-box{width:100%;max-width:560px;background:#fff;border-radius:var(--radius);border:1px solid var(--line-2);overflow:hidden}
+.cmdk-box input{width:100%;border:0;border-bottom:1px solid var(--line-2);padding:14px 16px;font:400 15px Roboto,Arial,sans-serif;color:var(--ink);outline:none}
+.cmdk-box ul{list-style:none;margin:0;padding:6px;max-height:52vh;overflow:auto}
+.cmdk-box li{display:flex;justify-content:space-between;gap:12px;padding:8px 10px;border-radius:4px;font-size:13px;color:var(--ink-2);cursor:pointer}
+.cmdk-box li small{color:var(--muted);font-size:11px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.cmdk-box li[aria-selected="true"]{background:var(--navy);color:#fff}
+.cmdk-box li[aria-selected="true"] small{color:rgba(255,255,255,.75)}
+.cmdk-empty{padding:14px 12px;color:var(--muted);font-size:13px}
+.spark{display:block;width:100%;height:24px;margin-top:6px}
+.spark polyline{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.spark circle{fill:var(--accent)}
+.kpi.hero .spark polyline{stroke:#fff}
+.kpi.hero .spark circle{fill:var(--sky)}
+.steps{display:flex;gap:0;overflow-x:auto;padding-bottom:4px}
+.step{flex:1 1 0;min-width:112px;position:relative;padding:0 6px 0 0}
+.step::before{content:'';position:absolute;top:9px;left:20px;right:0;height:2px;background:var(--line-2)}
+.step:last-child::before{display:none}
+.step.met::before{background:var(--accent)}
+.step .nd{position:relative;z-index:1;width:20px;height:20px;border-radius:50%;border:2px solid var(--line-2);background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--muted)}
+.step.met .nd{background:var(--accent);border-color:var(--accent);color:#fff}
+.step.miss .nd{background:#fff;border-color:var(--dorange);color:var(--dorange)}
+.step.next .nd{border-color:var(--navy);color:var(--navy)}
+.step .dt{margin-top:8px;font-size:12px;font-weight:700;color:var(--ink)}
+.step .tg{font-size:12px;color:var(--ink-2)}
+.step .st{font-size:11px;color:var(--muted);margin-top:2px}
+.step.miss .st{color:var(--dorange);font-weight:500}
+.step.met .st{color:var(--accent);font-weight:500}
+.rec{border:1px solid var(--line-2);border-radius:var(--radius);padding:16px 18px;margin-top:12px;background:#fff}
+.rec h3{margin:0;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.rec .conf{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.rec .pips{display:inline-flex;gap:3px}
+.rec .pips i{width:18px;height:6px;border-radius:2px;background:var(--line-2)}
+.rec .pips i.on{background:var(--accent)}
+.rec p{margin:8px 0 0;font-size:13px;color:var(--ink-2);max-width:90ch}
+.rec p b{color:var(--ink)}
+.rec .imp{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px 24px;font-size:12px;color:var(--ink-2)}
+.rec .imp div b{display:block;font-size:18px;color:var(--ink);font-weight:700}
+.rec details{margin-top:10px}
+.rec details summary{cursor:pointer;font-size:12px;font-weight:500;color:var(--ink-2)}
+.rec details ul{margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--ink-2)}
+#ledger td:nth-child(n+3),#ledger th:nth-child(n+3){text-align:right}
+#ledger td:first-child{min-width:190px}
+#ledger tr.part td{color:var(--muted)}
+#ledger .nt{color:var(--muted);font-size:12px}
+.calkey{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--ink-2);margin:0 0 10px}
+.calkey span{display:inline-flex;align-items:center;gap:6px}
+.defs td:first-child{font-weight:500;color:var(--ink);white-space:nowrap;vertical-align:top}
+.defs td{text-align:left;vertical-align:top;font-size:12.5px}
+@media(max-width:700px){.topbar-top{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+
+<header class="topbar"><div class="topbar-in">
+  <div class="topbar-top"><div class="brand"><div class="eyebrow-s">PBExpo 2027</div><h1>Registration tracker</h1><div class="fresh" id="fresh"></div></div><button class="srch" id="cmdkBtn" type="button" aria-haspopup="dialog">Search <kbd>&#8984;K</kbd></button></div>
+  <div class="tabs pages" id="pages" role="tablist"><button role="tab" data-page="pace" aria-selected="true">Pace and forecast</button><button role="tab" data-page="sources" aria-selected="false">Sources</button><button role="tab" data-page="tactics" aria-selected="false">Tactics</button></div>
+</div></header>
+<div class="typebar" id="typeBar"><div class="typebar-in"><span class="key-lbl">View</span><div class="tabs" id="tabs" role="tablist"><button role="tab" data-tab="all">All registrations</button><button role="tab" data-tab="a">Attendees</button><button role="tab" data-tab="e">Exhibitor staff</button></div></div></div>
+<div class="wrap">
+<div id="page1">
+  <hr class="hrule">
+  <div class="kpis" id="kpis"></div>
+  <div id="breakdown" class="chips"></div>
+
+  <div class="panel">
+    <h2>2027 Forecast</h2>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--y25)"></i>Plan to <b class="tgt" style="font-weight:inherit">8,000</b></span>
+      <span><i class="swatch dash"></i>Prior-year pattern</span>
+      <span id="rngKey"><i class="band-sw"></i>Range: current pace to prior-year pattern</span>
+      <span><i class="swatch" style="background:none;border-top:2px dotted var(--muted);height:0"></i>Original curve</span>
+      <span><i class="dot" style="background:var(--actual)"></i>Actual</span>
+    </div>
+    <div class="chartbox"><svg id="traj" viewBox="0 0 760 360" role="img" aria-label="Forecast trajectory"></svg></div>
+    <p class="sr" id="trajHelp">Focus the chart and use the left and right arrow keys to read plan and prior-year values week by week.</p>
+  </div>
+
+  <div class="panel" data-show="all a" id="hlPanel">
+    <h2>Highlights</h2>
+    <div class="statgrid" id="highlights" style="grid-template-columns:repeat(3,1fr)"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Plan checkpoints <span class="tag">cumulative target</span></h2>
+    <div class="steps" id="steps"></div>
+  </div>
+
+
+  <div class="cols2">
+  <div class="panel">
+    <h2>Same point, prior shows <span class="tag" id="sameTag"></span></h2>
+    <div class="chartbox"><table id="same"><thead><tr><th>Segment</th><th>PB2025</th><th>PB2026</th><th>PB2027</th><th>vs prior avg</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="panel">
+    <h2>Signals</h2>
+    <div class="statgrid" id="signals" style="grid-template-columns:repeat(3,1fr)"></div>
+  </div>
+  </div>
+
+
+  <div class="panel">
+    <h2>Registration is heavily back-loaded</h2>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--y25)"></i>PB2025</span>
+      <span><i class="swatch" style="background:var(--y26)"></i>PB2026</span>
+      <span><i class="dot" style="background:var(--actual)"></i>PB2027</span>
+    </div>
+    <div class="chartbox"><svg id="pacing" viewBox="0 0 760 360" role="img" aria-label="Pacing curve"></svg></div>
+  </div>
+
+  <div class="panel">
+    <h2>Pace vs the curve &mdash; weekly adds</h2>
+    <div class="statrow" id="paceStats"></div>
+    <div class="chartbox"><svg id="momentum" viewBox="0 0 760 300" role="img" aria-label="Weekly registrations vs target"></svg></div>
+    <div class="legend" style="margin-top:8px">
+      <span><i class="swatch" style="background:var(--accent);height:11px;border-radius:2px"></i>Actual adds</span>
+      <span><i class="swatch" style="background:none;border-top:2px dashed var(--y25);height:0"></i>Plan to <b class="tgt" style="font-weight:inherit">8,000</b></span>
+    </div>
+  </div>
+
+  <div class="panel" data-show="all">
+    <h2>Attendees vs exhibitor staff</h2>
+    <div class="statrow" id="segStats"></div>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--accent);height:11px;border-radius:2px"></i>Attendees</span>
+      <span><i class="swatch" style="background:var(--y25);height:11px;border-radius:2px"></i>Exhibitor staff</span>
+    </div>
+    <div class="chartbox"><svg id="segWeekly" viewBox="0 0 760 260" role="img" aria-label="Weekly registrations by audience"></svg></div>
+    <p class="take" id="segTake"></p>
+  </div>
+
+
+  <div class="cols2">
+  <div class="panel" data-show="all a">
+    <h2>Who&rsquo;s registering <span class="tag" id="whoTag">attendees only</span></h2>
+    <div class="two">
+      <div>
+        <div class="mini-h">New vs returning</div>
+        <div id="segsplit"></div>
+        <div class="mini-h" style="margin-top:18px">Top industries</div>
+        <div class="hbars" id="industries"></div>
+      </div>
+      <div>
+        <div class="mini-h">How they found us</div>
+        <div class="hbars" id="channels"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" data-show="all a" id="whoPanel2">
+    <h2>Seniority and geography <span class="tag" id="geoTag">attendees only</span></h2>
+    <div class="two">
+      <div>
+        <div class="mini-h">Professional level</div>
+        <div class="hbars" id="levels"></div>
+      </div>
+      <div>
+        <div class="mini-h" id="geoHead">Top states</div>
+        <div class="hbars" id="states"></div>
+        <div class="mini-h" style="margin-top:18px">Top countries</div>
+        <div class="hbars" id="countries"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="panel" data-show="all e">
+    <h2>Exhibitor &amp; sponsor pipeline</h2>
+    <div class="statgrid" id="exhstats"></div>
+  </div>
+
+  <div class="panel" data-show="none" hidden>
+    <h2>Exhibitor registrations vs badges sold</h2>
+    <div class="statrow" id="exStats" style="grid-template-columns:repeat(4,1fr)"></div>
+    <div class="mini-h">Badges registered</div>
+    <div id="exBar"></div>
+    <div class="two" style="margin-top:22px">
+      <div>
+        <div class="mini-h">Coverage by tier</div>
+        <table id="exTiers"><thead><tr><th>Tier</th><th>Companies</th><th>With staff in</th><th>Coverage</th><th>Badges</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div>
+        <div class="mini-h">Most staff registered so far</div>
+        <div class="hbars" id="exTop"></div>
+      </div>
+    </div>
+    <div class="mini-h" style="margin-top:22px">Platinum &amp; Gold exhibitors with no staff registered yet</div>
+    <div class="chips" id="exPrem0" style="margin-top:4px"></div>
+    <p class="take" id="exTake"></p>
+  </div>
+
+
+  <details class="panel disc">
+    <summary><h2>Weekly pace vs target</h2><span class="tag">week by week</span></summary>
+    <div class="chartbox"><table id="track"><thead><tr>
+      <th>Week of</th><th>Wks out</th><th class="q">Attendee quota</th><th class="q">Exhibitor quota</th><th>Target add</th><th>Actual add</th><th>Target</th><th>Actual</th>
+    </tr></thead><tbody></tbody></table></div>
+  </details>
+
+  <details class="how"><summary>How this is calculated</summary><div id="trace"></div><p class="foot" id="foot1"></p></details>
+  <details class="how"><summary>Definitions and sources</summary><table class="defs" id="defs"><tbody></tbody></table></details>
+</div>
+<div id="page2" hidden>
+  <hr class="hrule">
+  <div class="mini-h" style="margin:0 0 10px">Showing: <span id="p2who" style="color:var(--ink)"></span></div>
+  <div class="kpis k4" id="p2kpis"></div>
+  <p class="desc" id="p2desc" style="margin-top:14px"></p>
+
+  <div class="panel" style="margin-top:28px">
+    <h2>Registrations by channel, week by week</h2>
+    <div class="chanleg" id="chanLeg"></div>
+    <div class="chartbox"><svg id="chanWeekly" viewBox="0 0 760 290" role="img" aria-label="Weekly registrations by channel"></svg></div>
+  </div>
+
+  <div class="panel">
+    <h2>This week vs last week</h2>
+    <div class="two" id="p2Two"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Campaigns and links</h2>
+    <p class="desc">Ranked by registrations, from each registration link&rsquo;s UTM campaign and content tags. Select a row to see which link in the email or page drove them.</p>
+    <div class="toolbar">
+      <div class="tabs" id="winTabs" role="tablist"><button role="tab" data-win="all" aria-selected="true">All time</button><button role="tab" data-win="4w" aria-selected="false">Last 4 weeks</button></div>
+      <button class="btn" id="csvBtn" type="button">Copy as CSV</button>
+    </div>
+    <textarea id="csvOut" class="csvout" rows="6" readonly hidden aria-label="Campaign table as CSV"></textarea>
+    <div class="fchips" id="chanFilter" role="group" aria-label="Filter campaigns by channel"></div>
+    <div class="chartbox"><table id="campTbl"><thead><tr><th>Campaign</th><th>Channel</th><th>Regs</th><th>Share</th><th>First</th><th>Last</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="panel">
+    <div class="two">
+      <div>
+        <h2>By channel <span class="tag" id="chanWin">all time</span></h2>
+        <div class="hbars" id="chanBars"></div>
+      </div>
+      <div>
+        <h2>Untracked: what they told us <span class="tag">self-reported</span></h2>
+        <div class="hbars" id="selfBars"></div>
+        <p class="take" style="margin-top:12px">Free-text answers to &ldquo;How did you hear about PBExpo?&rdquo;, grouped by keyword. These registrations carry no UTM, so this is the only signal on where they came from.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Registration type by channel</h2>
+    <div class="note-box" id="typeNote"></div>
+  </div>
+
+  <details class="how"><summary>How channels are grouped</summary><p class="foot" id="p2foot"></p></details>
+</div>
+<div id="page3" hidden>
+  <div class="mini-h" style="margin:0 0 10px">What it takes to close the gap <span class="tag" id="tacAsOf"></span></div>
+  <div class="kpis k4" id="tacKpis"></div>
+  <p class="desc" id="tacLead" style="margin-top:14px"></p>
+
+  <div class="panel">
+    <h2>What the sends produced <span class="tag">HubSpot and UTM</span></h2>
+    <p class="desc">Delivery stats come from HubSpot; opens and clicks exclude bots. Registrations are those whose link carried the send's campaign tag. The last two columns compare all registrations in the 48 hours from the send with a typical 48 hours. * Sent today, so partial.</p>
+    <div class="chartbox"><table id="ledger"><thead><tr><th>Send</th><th>Date</th><th>Delivered</th><th>Human open</th><th>Human click</th><th>Tagged regs</th><th>Per 1,000</th><th>All regs, 48h</th><th>Typical 48h</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="panel">
+    <h2>What the calendar can deliver <span class="tag">ClickUp</span></h2>
+    <div class="calkey" id="calKey"></div>
+    <div class="chartbox"><svg id="calSvg" viewBox="0 0 760 300" role="img" aria-label="Emails scheduled by week against the plan's weekly need"></svg></div>
+    <p class="take" id="calTake"></p>
+  </div>
+
+  <div class="panel">
+    <h2>Recommendations <span class="tag">draft for review</span></h2>
+    <p class="desc">Each carries its evidence, a range where it can be sized, and how far to trust it.</p>
+    <div id="recs"></div>
+  </div>
+
+  <details class="how"><summary>What this does not tell us</summary><ul id="tacAssume" class="foot" style="padding-left:18px"></ul></details>
+</div>
+</div>
+
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Search the tracker"><div class="cmdk-box"><input id="cmdkIn" type="text" placeholder="Search views, sections, channels, campaigns, states" autocomplete="off" aria-label="Search"><ul id="cmdkList" role="listbox"></ul></div></div>
+<div class="tip" id="tip"></div>
+
+<script id="FC" type="application/json">{"S":{"asOf":"Oct 22, 2026","cur":478,"target":8000,"TA":6445,"TE":1555,"planNow":571,"rebaseLabel":"Oct 1","excluded":5,"lastReg":"Oct 22, 7:51 PM","prior":6203,"pace":5461,"uA":1.46,"uE":0.89,"uT":1.3,"r4":0.87,"a27":235,"origNow":930,"same25":826,"same26":647,"sameA25":761,"sameA26":558,"sameE25":65,"sameE26":89,"tot25":6581,"tot26":6326,"a25":4937,"a26":4473,"e25":1644,"e26":1853,"yoy":-3.9,"daysToShow":139,"l4":49,"by12":24,"openedLabel":"Aug 19","spikes":"Aug 19, Sep 29","throughLabel":"Oct 22","next4End":"Nov 21","hasSeg":true,"foot":"History from the PBExpo 2025 (6,581 tickets, show Feb 26, 2025) and PBExpo 2026 (6,326 tickets, show Mar 10, 2026; 2 test records excluded) registration databases, aligned on days before show day one and blended PB2025 (60%) / PB2026 (40%). The plan is fixed at the Oct 1 re-base (303 registered) and scales the remaining blended history &mdash; attendees &times;1.46, exhibitor staff &times;0.89 &mdash; to land at 6,445 + 1,555 = 8,000. Exhibitor staff target = 500-exhibitor goal &times; 3.1 staff per exhibiting company. Weekly quotas are smoothed over 3 weeks (final 2 show weeks unsmoothed). The prior-year and current-pace scenarios start from the count on Oct 22, 2026; current pace applies the last-4-weeks ratio (0.87&times;) to the remaining history. 2027 registrations from the Swapcard UTM export, Oct 22, 2026; the last day in the export may be partial. 5 test records (Swapcard platform tests and test accounts) are excluded. Treat the range, not the point, as the answer &mdash; the reliable read comes Dec&ndash;Jan.","curA":389,"curE":89},"rows":[{"wk":30,"date":"Aug 12","iso":"2026-08-12","p25":0.0,"p26":3.8,"orig":121,"plan":null,"prior":null,"pace":null},{"wk":29,"date":"Aug 19","iso":"2026-08-19","p25":0.0,"p26":4.0,"orig":128,"plan":null,"prior":null,"pace":null},{"wk":28,"date":"Aug 26","iso":"2026-08-26","p25":1.8,"p26":4.4,"orig":229,"plan":null,"prior":null,"pace":null},{"wk":27,"date":"Sep 02","iso":"2026-09-02","p25":2.8,"p26":4.7,"orig":282,"plan":null,"prior":null,"pace":null},{"wk":26,"date":"Sep 09","iso":"2026-09-09","p25":3.9,"p26":5.2,"orig":353,"plan":null,"prior":null,"pace":null},{"wk":25,"date":"Sep 16","iso":"2026-09-16","p25":5.4,"p26":6.5,"orig":465,"plan":null,"prior":null,"pace":null},{"wk":24,"date":"Sep 23","iso":"2026-09-23","p25":7.1,"p26":6.9,"orig":561,"plan":null,"prior":null,"pace":null},{"wk":23,"date":"Sep 30","iso":"2026-09-30","p25":8.8,"p26":7.7,"orig":666,"plan":null,"prior":null,"pace":null},{"wk":22,"date":"Oct 07","iso":"2026-10-07","p25":9.6,"p26":8.3,"orig":728,"plan":null,"prior":null,"pace":null},{"wk":21,"date":"Oct 14","iso":"2026-10-14","p25":11.2,"p26":9.1,"orig":830,"plan":459,"prior":397,"pace":407},{"wk":20,"date":"Oct 21","iso":"2026-10-21","p25":12.2,"p26":9.9,"orig":904,"plan":542,"prior":457,"pace":460},{"wk":19,"date":"Oct 28","iso":"2026-10-28","p25":13.3,"p26":10.9,"orig":987,"plan":635,"prior":524,"pace":518},{"wk":18,"date":"Nov 04","iso":"2026-11-04","p25":13.9,"p26":12.3,"orig":1061,"plan":717,"prior":584,"pace":570},{"wk":17,"date":"Nov 11","iso":"2026-11-11","p25":15.5,"p26":13.7,"orig":1181,"plan":855,"prior":681,"pace":655},{"wk":16,"date":"Nov 18","iso":"2026-11-18","p25":17.1,"p26":15.3,"orig":1309,"plan":997,"prior":785,"pace":745},{"wk":15,"date":"Nov 25","iso":"2026-11-25","p25":18.3,"p26":17.5,"orig":1439,"plan":1130,"prior":890,"pace":836},{"wk":14,"date":"Dec 02","iso":"2026-12-02","p25":20.6,"p26":18.7,"orig":1590,"plan":1295,"prior":1013,"pace":943},{"wk":13,"date":"Dec 09","iso":"2026-12-09","p25":23.4,"p26":19.9,"orig":1762,"plan":1487,"prior":1153,"pace":1065},{"wk":12,"date":"Dec 16","iso":"2026-12-16","p25":25.6,"p26":21.6,"orig":1917,"plan":1642,"prior":1278,"pace":1175},{"wk":11,"date":"Dec 23","iso":"2026-12-23","p25":28.4,"p26":23.5,"orig":2117,"plan":1838,"prior":1441,"pace":1316},{"wk":10,"date":"Dec 30","iso":"2026-12-30","p25":31.3,"p26":24.6,"orig":2292,"plan":2017,"prior":1584,"pace":1441},{"wk":9,"date":"Jan 06","iso":"2027-01-06","p25":32.7,"p26":27.1,"orig":2433,"plan":2167,"prior":1698,"pace":1540},{"wk":8,"date":"Jan 13","iso":"2027-01-13","p25":33.7,"p26":30.4,"orig":2591,"plan":2328,"prior":1824,"pace":1650},{"wk":7,"date":"Jan 20","iso":"2027-01-20","p25":36.8,"p26":34.0,"orig":2851,"plan":2599,"prior":2034,"pace":1832},{"wk":6,"date":"Jan 27","iso":"2027-01-27","p25":42.0,"p26":38.3,"orig":3243,"plan":3027,"prior":2353,"pace":2110},{"wk":5,"date":"Feb 03","iso":"2027-02-03","p25":46.6,"p26":43.9,"orig":3642,"plan":3434,"prior":2675,"pace":2390},{"wk":4,"date":"Feb 10","iso":"2027-02-10","p25":51.6,"p26":50.4,"orig":4090,"plan":3907,"prior":3037,"pace":2705},{"wk":3,"date":"Feb 17","iso":"2027-02-17","p25":56.0,"p26":56.8,"orig":4509,"plan":4346,"prior":3375,"pace":2999},{"wk":2,"date":"Feb 24","iso":"2027-02-24","p25":62.0,"p26":64.2,"orig":5031,"plan":4891,"prior":3796,"pace":3366},{"wk":1,"date":"Mar 03","iso":"2027-03-03","p25":72.3,"p26":73.2,"orig":5815,"plan":5696,"prior":4432,"pace":3920},{"wk":0,"date":"Mar 10","iso":"2027-03-10","p25":100.0,"p26":100.0,"orig":8000,"plan":8000,"prior":6203,"pace":5461}],"weeks":[{"ws":"2026-08-16","label":"Aug 16","wksOut":29,"tgtAdd":67,"tgtA":63,"tgtE":4,"actAdd":41,"actCum":41,"current":false,"ended":true,"tgtCum":null},{"ws":"2026-08-23","label":"Aug 23","wksOut":28,"tgtAdd":76,"tgtA":71,"tgtE":5,"actAdd":12,"actCum":53,"current":false,"ended":true,"tgtCum":null},{"ws":"2026-08-30","label":"Aug 30","wksOut":27,"tgtAdd":118,"tgtA":112,"tgtE":5,"actAdd":51,"actCum":104,"current":false,"ended":true,"tgtCum":null},{"ws":"2026-09-06","label":"Sep 6","wksOut":26,"tgtAdd":97,"tgtA":93,"tgtE":4,"actAdd":40,"actCum":144,"current":false,"ended":true,"tgtCum":null},{"ws":"2026-09-13","label":"Sep 13","wksOut":25,"tgtAdd":112,"tgtA":108,"tgtE":4,"actAdd":63,"actCum":207,"current":false,"ended":true,"tgtCum":null},{"ws":"2026-09-20","label":"Sep 20","wksOut":24,"tgtAdd":100,"tgtA":96,"tgtE":4,"actAdd":46,"actCum":253,"current":false,"ended":true,"tgtCum":null},{"ws":"2026-09-27","label":"Sep 27","wksOut":23,"tgtAdd":104,"tgtA":98,"tgtE":7,"actAdd":97,"actCum":350,"current":false,"ended":true,"tgtCum":317},{"ws":"2026-10-04","label":"Oct 4","wksOut":22,"tgtAdd":97,"tgtA":90,"tgtE":7,"actAdd":48,"actCum":398,"current":false,"ended":true,"tgtCum":414},{"ws":"2026-10-11","label":"Oct 11","wksOut":21,"tgtAdd":93,"tgtA":84,"tgtE":9,"actAdd":46,"actCum":444,"current":false,"ended":true,"tgtCum":507},{"ws":"2026-10-18","label":"Oct 18","wksOut":20,"tgtAdd":94,"tgtA":86,"tgtE":8,"actAdd":34,"actCum":478,"current":true,"ended":false,"tgtCum":601},{"ws":"2026-10-25","label":"Oct 25","wksOut":19,"tgtAdd":98,"tgtA":90,"tgtE":8,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":699},{"ws":"2026-11-01","label":"Nov 1","wksOut":18,"tgtAdd":109,"tgtA":101,"tgtE":8,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":808},{"ws":"2026-11-08","label":"Nov 8","wksOut":17,"tgtAdd":131,"tgtA":114,"tgtE":17,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":939},{"ws":"2026-11-15","label":"Nov 15","wksOut":16,"tgtAdd":124,"tgtA":105,"tgtE":19,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":1063},{"ws":"2026-11-22","label":"Nov 22","wksOut":15,"tgtAdd":155,"tgtA":129,"tgtE":25,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":1218},{"ws":"2026-11-29","label":"Nov 29","wksOut":14,"tgtAdd":174,"tgtA":148,"tgtE":26,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":1392},{"ws":"2026-12-06","label":"Dec 6","wksOut":13,"tgtAdd":179,"tgtA":146,"tgtE":33,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":1571},{"ws":"2026-12-13","label":"Dec 13","wksOut":12,"tgtAdd":168,"tgtA":125,"tgtE":42,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":1739},{"ws":"2026-12-20","label":"Dec 20","wksOut":11,"tgtAdd":165,"tgtA":118,"tgtE":46,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":1904},{"ws":"2026-12-27","label":"Dec 27","wksOut":10,"tgtAdd":178,"tgtA":132,"tgtE":46,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":2082},{"ws":"2027-01-03","label":"Jan 3","wksOut":9,"tgtAdd":172,"tgtA":131,"tgtE":41,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":2254},{"ws":"2027-01-10","label":"Jan 10","wksOut":8,"tgtAdd":231,"tgtA":186,"tgtE":45,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":2485},{"ws":"2027-01-17","label":"Jan 17","wksOut":7,"tgtAdd":325,"tgtA":264,"tgtE":61,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":2810},{"ws":"2027-01-24","label":"Jan 24","wksOut":6,"tgtAdd":414,"tgtA":334,"tgtE":80,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":3224},{"ws":"2027-01-31","label":"Jan 31","wksOut":5,"tgtAdd":438,"tgtA":348,"tgtE":91,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":3662},{"ws":"2027-02-07","label":"Feb 7","wksOut":4,"tgtAdd":461,"tgtA":369,"tgtE":92,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":4123},{"ws":"2027-02-14","label":"Feb 14","wksOut":3,"tgtAdd":508,"tgtA":409,"tgtE":99,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":4631},{"ws":"2027-02-21","label":"Feb 21","wksOut":2,"tgtAdd":543,"tgtA":442,"tgtE":101,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":5174},{"ws":"2027-02-28","label":"Feb 28","wksOut":1,"tgtAdd":1021,"tgtA":787,"tgtE":234,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":6195},{"ws":"2027-03-07","label":"Mar 7","wksOut":0,"tgtAdd":1806,"tgtA":1449,"tgtE":357,"actAdd":null,"actCum":null,"current":false,"ended":false,"tgtCum":8000}]}</script>
+<script id="ACT" type="application/json">{"actual":[{"iso":"2026-08-19","wks":29.0,"cum":27},{"iso":"2026-08-20","wks":28.9,"cum":36},{"iso":"2026-08-21","wks":28.7,"cum":41},{"iso":"2026-08-22","wks":28.6,"cum":41},{"iso":"2026-08-23","wks":28.4,"cum":43},{"iso":"2026-08-24","wks":28.3,"cum":45},{"iso":"2026-08-25","wks":28.1,"cum":50},{"iso":"2026-08-26","wks":28.0,"cum":52},{"iso":"2026-08-27","wks":27.9,"cum":53},{"iso":"2026-08-28","wks":27.7,"cum":53},{"iso":"2026-08-29","wks":27.6,"cum":53},{"iso":"2026-08-30","wks":27.4,"cum":53},{"iso":"2026-08-31","wks":27.3,"cum":56},{"iso":"2026-09-01","wks":27.1,"cum":58},{"iso":"2026-09-02","wks":27.0,"cum":74},{"iso":"2026-09-03","wks":26.9,"cum":93},{"iso":"2026-09-04","wks":26.7,"cum":102},{"iso":"2026-09-05","wks":26.6,"cum":104},{"iso":"2026-09-06","wks":26.4,"cum":106},{"iso":"2026-09-07","wks":26.3,"cum":107},{"iso":"2026-09-08","wks":26.1,"cum":133},{"iso":"2026-09-09","wks":26.0,"cum":142},{"iso":"2026-09-10","wks":25.9,"cum":144},{"iso":"2026-09-11","wks":25.7,"cum":144},{"iso":"2026-09-12","wks":25.6,"cum":144},{"iso":"2026-09-13","wks":25.4,"cum":145},{"iso":"2026-09-14","wks":25.3,"cum":161},{"iso":"2026-09-15","wks":25.1,"cum":166},{"iso":"2026-09-16","wks":25.0,"cum":173},{"iso":"2026-09-17","wks":24.9,"cum":194},{"iso":"2026-09-18","wks":24.7,"cum":205},{"iso":"2026-09-19","wks":24.6,"cum":207},{"iso":"2026-09-20","wks":24.4,"cum":215},{"iso":"2026-09-21","wks":24.3,"cum":223},{"iso":"2026-09-22","wks":24.1,"cum":234},{"iso":"2026-09-23","wks":24.0,"cum":236},{"iso":"2026-09-24","wks":23.9,"cum":243},{"iso":"2026-09-25","wks":23.7,"cum":251},{"iso":"2026-09-26","wks":23.6,"cum":253},{"iso":"2026-09-27","wks":23.4,"cum":254},{"iso":"2026-09-28","wks":23.3,"cum":262},{"iso":"2026-09-29","wks":23.1,"cum":295},{"iso":"2026-09-30","wks":23.0,"cum":315},{"iso":"2026-10-01","wks":22.9,"cum":327},{"iso":"2026-10-02","wks":22.7,"cum":347},{"iso":"2026-10-03","wks":22.6,"cum":350},{"iso":"2026-10-04","wks":22.4,"cum":351},{"iso":"2026-10-05","wks":22.3,"cum":361},{"iso":"2026-10-06","wks":22.1,"cum":374},{"iso":"2026-10-07","wks":22.0,"cum":379},{"iso":"2026-10-08","wks":21.9,"cum":394},{"iso":"2026-10-09","wks":21.7,"cum":397},{"iso":"2026-10-10","wks":21.6,"cum":398},{"iso":"2026-10-11","wks":21.4,"cum":398},{"iso":"2026-10-12","wks":21.3,"cum":407},{"iso":"2026-10-13","wks":21.1,"cum":411},{"iso":"2026-10-14","wks":21.0,"cum":420},{"iso":"2026-10-15","wks":20.9,"cum":437},{"iso":"2026-10-16","wks":20.7,"cum":442},{"iso":"2026-10-17","wks":20.6,"cum":444},{"iso":"2026-10-18","wks":20.4,"cum":444},{"iso":"2026-10-19","wks":20.3,"cum":447},{"iso":"2026-10-20","wks":20.1,"cum":458},{"iso":"2026-10-21","wks":20.0,"cum":467},{"iso":"2026-10-22","wks":19.9,"cum":478}],"breakdown":[["General attendees",324],["Airline personnel",54],["PartsBase staff",7],["Student / VIP",4],["Exhibitor staff",89]]}</script>
+<script id="SEG" type="application/json">{"a":{"S":{"cur":389,"target":6445,"u":1.46,"r":0.81,"planNow":494,"prior":4461,"same25":761,"same26":558,"tot25":4937,"tot26":4473,"origNow":918,"yoy":-9.4,"l4":47,"by12":27,"a27":191},"rows":[{"wk":30,"date":"Aug 12","iso":"2026-08-12","p25":0.0,"p26":4.7,"orig":120,"plan":null,"prior":null},{"wk":29,"date":"Aug 19","iso":"2026-08-19","p25":0.0,"p26":4.9,"orig":126,"plan":null,"prior":null},{"wk":28,"date":"Aug 26","iso":"2026-08-26","p25":2.2,"p26":5.4,"orig":225,"plan":null,"prior":null},{"wk":27,"date":"Sep 02","iso":"2026-09-02","p25":3.4,"p26":5.8,"orig":280,"plan":null,"prior":null},{"wk":26,"date":"Sep 09","iso":"2026-09-09","p25":4.7,"p26":6.6,"orig":350,"plan":null,"prior":null},{"wk":25,"date":"Sep 16","iso":"2026-09-16","p25":6.5,"p26":8.3,"orig":465,"plan":null,"prior":null},{"wk":24,"date":"Sep 23","iso":"2026-09-23","p25":8.6,"p26":8.9,"orig":563,"plan":null,"prior":null},{"wk":23,"date":"Sep 30","iso":"2026-09-30","p25":10.8,"p26":9.9,"orig":673,"plan":null,"prior":null},{"wk":22,"date":"Oct 07","iso":"2026-10-07","p25":11.9,"p26":10.4,"orig":726,"plan":null,"prior":null},{"wk":21,"date":"Oct 14","iso":"2026-10-14","p25":13.8,"p26":11.2,"orig":824,"plan":392,"prior":319},{"wk":20,"date":"Oct 21","iso":"2026-10-21","p25":14.9,"p26":12.2,"orig":892,"plan":466,"prior":370},{"wk":19,"date":"Oct 28","iso":"2026-10-28","p25":16.3,"p26":13.3,"orig":972,"plan":553,"prior":429},{"wk":18,"date":"Nov 04","iso":"2026-11-04","p25":16.9,"p26":15.1,"orig":1040,"plan":624,"prior":478},{"wk":17,"date":"Nov 11","iso":"2026-11-11","p25":18.7,"p26":17.1,"orig":1164,"plan":757,"prior":569},{"wk":16,"date":"Nov 18","iso":"2026-11-18","p25":20.6,"p26":18.9,"orig":1282,"plan":885,"prior":656},{"wk":15,"date":"Nov 25","iso":"2026-11-25","p25":22.0,"p26":20.3,"orig":1375,"plan":985,"prior":725},{"wk":14,"date":"Dec 02","iso":"2026-12-02","p25":24.6,"p26":21.5,"orig":1505,"plan":1127,"prior":822},{"wk":13,"date":"Dec 09","iso":"2026-12-09","p25":27.8,"p26":22.8,"orig":1662,"plan":1299,"prior":940},{"wk":12,"date":"Dec 16","iso":"2026-12-16","p25":29.8,"p26":23.7,"orig":1760,"plan":1407,"prior":1014},{"wk":11,"date":"Dec 23","iso":"2026-12-23","p25":31.9,"p26":25.2,"orig":1883,"plan":1540,"prior":1105},{"wk":10,"date":"Dec 30","iso":"2026-12-30","p25":34.2,"p26":26.3,"orig":2001,"plan":1669,"prior":1193},{"wk":9,"date":"Jan 06","iso":"2027-01-06","p25":35.6,"p26":28.7,"orig":2119,"plan":1795,"prior":1279},{"wk":8,"date":"Jan 13","iso":"2027-01-13","p25":36.5,"p26":32.0,"orig":2237,"plan":1918,"prior":1364},{"wk":7,"date":"Jan 20","iso":"2027-01-20","p25":39.5,"p26":35.3,"orig":2437,"plan":2133,"prior":1511},{"wk":6,"date":"Jan 27","iso":"2027-01-27","p25":45.3,"p26":39.8,"orig":2777,"plan":2501,"prior":1762},{"wk":5,"date":"Feb 03","iso":"2027-02-03","p25":49.5,"p26":44.5,"orig":3063,"plan":2809,"prior":1973},{"wk":4,"date":"Feb 10","iso":"2027-02-10","p25":54.5,"p26":51.0,"orig":3422,"plan":3193,"prior":2236},{"wk":3,"date":"Feb 17","iso":"2027-02-17","p25":58.8,"p26":57.3,"orig":3751,"plan":3544,"prior":2476},{"wk":2,"date":"Feb 24","iso":"2027-02-24","p25":64.8,"p26":64.0,"orig":4156,"plan":3979,"prior":2774},{"wk":1,"date":"Mar 03","iso":"2027-03-03","p25":73.4,"p26":73.1,"orig":4721,"plan":4588,"prior":3190},{"wk":0,"date":"Mar 10","iso":"2027-03-10","p25":100.0,"p26":100.0,"orig":6445,"plan":6445,"prior":4461}],"weeks":[{"ws":"2026-08-16","label":"Aug 16","wksOut":29,"actAdd":35,"current":false,"ended":true,"tgtAdd":63,"tgtCum":null,"actCum":35},{"ws":"2026-08-23","label":"Aug 23","wksOut":28,"actAdd":9,"current":false,"ended":true,"tgtAdd":71,"tgtCum":null,"actCum":44},{"ws":"2026-08-30","label":"Aug 30","wksOut":27,"actAdd":49,"current":false,"ended":true,"tgtAdd":112,"tgtCum":null,"actCum":93},{"ws":"2026-09-06","label":"Sep 6","wksOut":26,"actAdd":40,"current":false,"ended":true,"tgtAdd":93,"tgtCum":null,"actCum":133},{"ws":"2026-09-13","label":"Sep 13","wksOut":25,"actAdd":41,"current":false,"ended":true,"tgtAdd":108,"tgtCum":null,"actCum":174},{"ws":"2026-09-20","label":"Sep 20","wksOut":24,"actAdd":31,"current":false,"ended":true,"tgtAdd":96,"tgtCum":null,"actCum":205},{"ws":"2026-09-27","label":"Sep 27","wksOut":23,"actAdd":78,"current":false,"ended":true,"tgtAdd":98,"tgtCum":265,"actCum":283},{"ws":"2026-10-04","label":"Oct 4","wksOut":22,"actAdd":38,"current":false,"ended":true,"tgtAdd":90,"tgtCum":355,"actCum":321},{"ws":"2026-10-11","label":"Oct 11","wksOut":21,"actAdd":39,"current":false,"ended":true,"tgtAdd":84,"tgtCum":439,"actCum":360},{"ws":"2026-10-18","label":"Oct 18","wksOut":20,"actAdd":29,"current":true,"ended":false,"tgtAdd":86,"tgtCum":525,"actCum":389},{"ws":"2026-10-25","label":"Oct 25","wksOut":19,"actAdd":null,"current":false,"ended":false,"tgtAdd":90,"tgtCum":615,"actCum":null},{"ws":"2026-11-01","label":"Nov 1","wksOut":18,"actAdd":null,"current":false,"ended":false,"tgtAdd":101,"tgtCum":716,"actCum":null},{"ws":"2026-11-08","label":"Nov 8","wksOut":17,"actAdd":null,"current":false,"ended":false,"tgtAdd":114,"tgtCum":830,"actCum":null},{"ws":"2026-11-15","label":"Nov 15","wksOut":16,"actAdd":null,"current":false,"ended":false,"tgtAdd":105,"tgtCum":935,"actCum":null},{"ws":"2026-11-22","label":"Nov 22","wksOut":15,"actAdd":null,"current":false,"ended":false,"tgtAdd":129,"tgtCum":1064,"actCum":null},{"ws":"2026-11-29","label":"Nov 29","wksOut":14,"actAdd":null,"current":false,"ended":false,"tgtAdd":148,"tgtCum":1212,"actCum":null},{"ws":"2026-12-06","label":"Dec 6","wksOut":13,"actAdd":null,"current":false,"ended":false,"tgtAdd":146,"tgtCum":1358,"actCum":null},{"ws":"2026-12-13","label":"Dec 13","wksOut":12,"actAdd":null,"current":false,"ended":false,"tgtAdd":125,"tgtCum":1483,"actCum":null},{"ws":"2026-12-20","label":"Dec 20","wksOut":11,"actAdd":null,"current":false,"ended":false,"tgtAdd":118,"tgtCum":1601,"actCum":null},{"ws":"2026-12-27","label":"Dec 27","wksOut":10,"actAdd":null,"current":false,"ended":false,"tgtAdd":132,"tgtCum":1733,"actCum":null},{"ws":"2027-01-03","label":"Jan 3","wksOut":9,"actAdd":null,"current":false,"ended":false,"tgtAdd":131,"tgtCum":1864,"actCum":null},{"ws":"2027-01-10","label":"Jan 10","wksOut":8,"actAdd":null,"current":false,"ended":false,"tgtAdd":186,"tgtCum":2050,"actCum":null},{"ws":"2027-01-17","label":"Jan 17","wksOut":7,"actAdd":null,"current":false,"ended":false,"tgtAdd":264,"tgtCum":2314,"actCum":null},{"ws":"2027-01-24","label":"Jan 24","wksOut":6,"actAdd":null,"current":false,"ended":false,"tgtAdd":334,"tgtCum":2648,"actCum":null},{"ws":"2027-01-31","label":"Jan 31","wksOut":5,"actAdd":null,"current":false,"ended":false,"tgtAdd":348,"tgtCum":2996,"actCum":null},{"ws":"2027-02-07","label":"Feb 7","wksOut":4,"actAdd":null,"current":false,"ended":false,"tgtAdd":369,"tgtCum":3365,"actCum":null},{"ws":"2027-02-14","label":"Feb 14","wksOut":3,"actAdd":null,"current":false,"ended":false,"tgtAdd":409,"tgtCum":3774,"actCum":null},{"ws":"2027-02-21","label":"Feb 21","wksOut":2,"actAdd":null,"current":false,"ended":false,"tgtAdd":442,"tgtCum":4216,"actCum":null},{"ws":"2027-02-28","label":"Feb 28","wksOut":1,"actAdd":null,"current":false,"ended":false,"tgtAdd":787,"tgtCum":5003,"actCum":null},{"ws":"2027-03-07","label":"Mar 7","wksOut":0,"actAdd":null,"current":false,"ended":false,"tgtAdd":1449,"tgtCum":6445,"actCum":null}],"actual":[{"iso":"2026-08-22","wks":28.6,"cum":35},{"iso":"2026-08-29","wks":27.6,"cum":44},{"iso":"2026-09-05","wks":26.6,"cum":93},{"iso":"2026-09-12","wks":25.6,"cum":133},{"iso":"2026-09-19","wks":24.6,"cum":174},{"iso":"2026-09-26","wks":23.6,"cum":205},{"iso":"2026-10-03","wks":22.6,"cum":283},{"iso":"2026-10-10","wks":21.6,"cum":321},{"iso":"2026-10-17","wks":20.6,"cum":360},{"iso":"2026-10-22","wks":19.9,"cum":389}]},"e":{"S":{"cur":89,"target":1555,"u":0.89,"r":1.33,"planNow":78,"prior":1742,"same25":65,"same26":89,"tot25":1644,"tot26":1853,"origNow":67,"yoy":12.7,"l4":55,"by12":14,"a27":44},"rows":[{"wk":30,"date":"Aug 12","iso":"2026-08-12","p25":0.0,"p26":1.7,"orig":10,"plan":null,"prior":null},{"wk":29,"date":"Aug 19","iso":"2026-08-19","p25":0.0,"p26":1.8,"orig":11,"plan":null,"prior":null},{"wk":28,"date":"Aug 26","iso":"2026-08-26","p25":0.7,"p26":2.0,"orig":19,"plan":null,"prior":null},{"wk":27,"date":"Sep 02","iso":"2026-09-02","p25":0.9,"p26":2.1,"orig":21,"plan":null,"prior":null},{"wk":26,"date":"Sep 09","iso":"2026-09-09","p25":1.4,"p26":2.1,"orig":26,"plan":null,"prior":null},{"wk":25,"date":"Sep 16","iso":"2026-09-16","p25":2.0,"p26":2.1,"orig":32,"plan":null,"prior":null},{"wk":24,"date":"Sep 23","iso":"2026-09-23","p25":2.4,"p26":2.2,"orig":36,"plan":null,"prior":null},{"wk":23,"date":"Sep 30","iso":"2026-09-30","p25":2.5,"p26":2.4,"orig":38,"plan":null,"prior":null},{"wk":22,"date":"Oct 07","iso":"2026-10-07","p25":2.9,"p26":3.3,"orig":48,"plan":null,"prior":null},{"wk":21,"date":"Oct 14","iso":"2026-10-14","p25":3.5,"p26":3.8,"orig":57,"plan":67,"prior":78},{"wk":20,"date":"Oct 21","iso":"2026-10-21","p25":4.0,"p26":4.5,"orig":65,"plan":76,"prior":87},{"wk":19,"date":"Oct 28","iso":"2026-10-28","p25":4.3,"p26":5.1,"orig":72,"plan":83,"prior":95},{"wk":18,"date":"Nov 04","iso":"2026-11-04","p25":5.1,"p26":5.6,"orig":82,"plan":93,"prior":106},{"wk":17,"date":"Nov 11","iso":"2026-11-11","p25":5.7,"p26":5.7,"orig":88,"plan":98,"prior":112},{"wk":16,"date":"Nov 18","iso":"2026-11-18","p25":6.6,"p26":6.5,"orig":102,"plan":113,"prior":128},{"wk":15,"date":"Nov 25","iso":"2026-11-25","p25":7.2,"p26":10.7,"orig":134,"plan":145,"prior":165},{"wk":14,"date":"Dec 02","iso":"2026-12-02","p25":8.8,"p26":12.1,"orig":157,"plan":169,"prior":191},{"wk":13,"date":"Dec 09","iso":"2026-12-09","p25":10.3,"p26":13.1,"orig":177,"plan":188,"prior":213},{"wk":12,"date":"Dec 16","iso":"2026-12-16","p25":13.0,"p26":16.5,"orig":224,"plan":235,"prior":265},{"wk":11,"date":"Dec 23","iso":"2026-12-23","p25":17.9,"p26":19.5,"orig":289,"plan":299,"prior":336},{"wk":10,"date":"Dec 30","iso":"2026-12-30","p25":22.8,"p26":20.5,"orig":340,"plan":348,"prior":391},{"wk":9,"date":"Jan 06","iso":"2027-01-06","p25":23.7,"p26":23.0,"orig":364,"plan":372,"prior":419},{"wk":8,"date":"Jan 13","iso":"2027-01-13","p25":25.3,"p26":26.6,"orig":401,"plan":410,"prior":461},{"wk":7,"date":"Jan 20","iso":"2027-01-20","p25":28.5,"p26":30.8,"orig":457,"plan":466,"prior":524},{"wk":6,"date":"Jan 27","iso":"2027-01-27","p25":32.4,"p26":34.6,"orig":517,"plan":526,"prior":590},{"wk":5,"date":"Feb 03","iso":"2027-02-03","p25":38.0,"p26":42.2,"orig":617,"plan":625,"prior":702},{"wk":4,"date":"Feb 10","iso":"2027-02-10","p25":43.0,"p26":48.9,"orig":705,"plan":714,"prior":801},{"wk":3,"date":"Feb 17","iso":"2027-02-17","p25":47.7,"p26":55.7,"orig":792,"plan":801,"prior":899},{"wk":2,"date":"Feb 24","iso":"2027-02-24","p25":53.8,"p26":64.5,"orig":903,"plan":912,"prior":1023},{"wk":1,"date":"Mar 03","iso":"2027-03-03","p25":69.3,"p26":73.4,"orig":1103,"plan":1108,"prior":1242},{"wk":0,"date":"Mar 10","iso":"2027-03-10","p25":100.0,"p26":100.0,"orig":1555,"plan":1555,"prior":1742}],"weeks":[{"ws":"2026-08-16","label":"Aug 16","wksOut":29,"actAdd":6,"current":false,"ended":true,"tgtAdd":4,"tgtCum":null,"actCum":6},{"ws":"2026-08-23","label":"Aug 23","wksOut":28,"actAdd":3,"current":false,"ended":true,"tgtAdd":5,"tgtCum":null,"actCum":9},{"ws":"2026-08-30","label":"Aug 30","wksOut":27,"actAdd":2,"current":false,"ended":true,"tgtAdd":5,"tgtCum":null,"actCum":11},{"ws":"2026-09-06","label":"Sep 6","wksOut":26,"actAdd":0,"current":false,"ended":true,"tgtAdd":4,"tgtCum":null,"actCum":11},{"ws":"2026-09-13","label":"Sep 13","wksOut":25,"actAdd":22,"current":false,"ended":true,"tgtAdd":4,"tgtCum":null,"actCum":33},{"ws":"2026-09-20","label":"Sep 20","wksOut":24,"actAdd":15,"current":false,"ended":true,"tgtAdd":4,"tgtCum":null,"actCum":48},{"ws":"2026-09-27","label":"Sep 27","wksOut":23,"actAdd":19,"current":false,"ended":true,"tgtAdd":7,"tgtCum":52,"actCum":67},{"ws":"2026-10-04","label":"Oct 4","wksOut":22,"actAdd":10,"current":false,"ended":true,"tgtAdd":7,"tgtCum":59,"actCum":77},{"ws":"2026-10-11","label":"Oct 11","wksOut":21,"actAdd":7,"current":false,"ended":true,"tgtAdd":9,"tgtCum":68,"actCum":84},{"ws":"2026-10-18","label":"Oct 18","wksOut":20,"actAdd":5,"current":true,"ended":false,"tgtAdd":8,"tgtCum":76,"actCum":89},{"ws":"2026-10-25","label":"Oct 25","wksOut":19,"actAdd":null,"current":false,"ended":false,"tgtAdd":8,"tgtCum":84,"actCum":null},{"ws":"2026-11-01","label":"Nov 1","wksOut":18,"actAdd":null,"current":false,"ended":false,"tgtAdd":8,"tgtCum":92,"actCum":null},{"ws":"2026-11-08","label":"Nov 8","wksOut":17,"actAdd":null,"current":false,"ended":false,"tgtAdd":17,"tgtCum":109,"actCum":null},{"ws":"2026-11-15","label":"Nov 15","wksOut":16,"actAdd":null,"current":false,"ended":false,"tgtAdd":19,"tgtCum":128,"actCum":null},{"ws":"2026-11-22","label":"Nov 22","wksOut":15,"actAdd":null,"current":false,"ended":false,"tgtAdd":25,"tgtCum":153,"actCum":null},{"ws":"2026-11-29","label":"Nov 29","wksOut":14,"actAdd":null,"current":false,"ended":false,"tgtAdd":26,"tgtCum":179,"actCum":null},{"ws":"2026-12-06","label":"Dec 6","wksOut":13,"actAdd":null,"current":false,"ended":false,"tgtAdd":33,"tgtCum":212,"actCum":null},{"ws":"2026-12-13","label":"Dec 13","wksOut":12,"actAdd":null,"current":false,"ended":false,"tgtAdd":42,"tgtCum":254,"actCum":null},{"ws":"2026-12-20","label":"Dec 20","wksOut":11,"actAdd":null,"current":false,"ended":false,"tgtAdd":46,"tgtCum":300,"actCum":null},{"ws":"2026-12-27","label":"Dec 27","wksOut":10,"actAdd":null,"current":false,"ended":false,"tgtAdd":46,"tgtCum":346,"actCum":null},{"ws":"2027-01-03","label":"Jan 3","wksOut":9,"actAdd":null,"current":false,"ended":false,"tgtAdd":41,"tgtCum":387,"actCum":null},{"ws":"2027-01-10","label":"Jan 10","wksOut":8,"actAdd":null,"current":false,"ended":false,"tgtAdd":45,"tgtCum":432,"actCum":null},{"ws":"2027-01-17","label":"Jan 17","wksOut":7,"actAdd":null,"current":false,"ended":false,"tgtAdd":61,"tgtCum":493,"actCum":null},{"ws":"2027-01-24","label":"Jan 24","wksOut":6,"actAdd":null,"current":false,"ended":false,"tgtAdd":80,"tgtCum":573,"actCum":null},{"ws":"2027-01-31","label":"Jan 31","wksOut":5,"actAdd":null,"current":false,"ended":false,"tgtAdd":91,"tgtCum":664,"actCum":null},{"ws":"2027-02-07","label":"Feb 7","wksOut":4,"actAdd":null,"current":false,"ended":false,"tgtAdd":92,"tgtCum":756,"actCum":null},{"ws":"2027-02-14","label":"Feb 14","wksOut":3,"actAdd":null,"current":false,"ended":false,"tgtAdd":99,"tgtCum":855,"actCum":null},{"ws":"2027-02-21","label":"Feb 21","wksOut":2,"actAdd":null,"current":false,"ended":false,"tgtAdd":101,"tgtCum":956,"actCum":null},{"ws":"2027-02-28","label":"Feb 28","wksOut":1,"actAdd":null,"current":false,"ended":false,"tgtAdd":234,"tgtCum":1190,"actCum":null},{"ws":"2027-03-07","label":"Mar 7","wksOut":0,"actAdd":null,"current":false,"ended":false,"tgtAdd":357,"tgtCum":1555,"actCum":null}],"actual":[{"iso":"2026-08-22","wks":28.6,"cum":6},{"iso":"2026-08-29","wks":27.6,"cum":9},{"iso":"2026-09-05","wks":26.6,"cum":11},{"iso":"2026-09-12","wks":25.6,"cum":11},{"iso":"2026-09-19","wks":24.6,"cum":33},{"iso":"2026-09-26","wks":23.6,"cum":48},{"iso":"2026-10-03","wks":22.6,"cum":67},{"iso":"2026-10-10","wks":21.6,"cum":77},{"iso":"2026-10-17","wks":20.6,"cum":84},{"iso":"2026-10-22","wks":19.9,"cum":89}]}}</script>
+<script id="EXTRA" type="application/json">{"scope":"attendees","newret":{"New":201,"Returning":188},"industry":{"Supplier/Distributor":53,"Broker":51,"MRO/Overhaul Shop":50,"Manufacturer":37,"Airline/Regional Airline":33,"Maintenance":26},"channel":{"Email":100,"Search / online":47,"PartsBase / sales":40,"Referral / invite":30,"Past attendee":24,"Social / LinkedIn":18,"Employer / exhibitor":9,"Other / unclear":121},"level":{"Manager":115,"VP/Director":98,"C-Suite/President/Owner":86,"Professional":77,"Entry-Level":11,"Student":2},"geo":{"countries":{"United States of America":329,"Canada":6,"India":6,"Brazil":5,"South Africa":4,"Nigeria":3},"states":{"Florida":193,"Texas":27,"California":20,"New York":7,"South Carolina":6,"Illinois":6,"Washington":6,"North Carolina":5},"us":330,"known":389},"highlights":[{"v":"47%","l":"of attendees are VP, director or C-suite","d":"184 of 389, by professional level"},{"v":"85%","l":"of attendees are in the US","d":"58% of those in Florida; 29 other countries"},{"v":"52%","l":"of attendees are first-timers","d":"188 are returning"},{"v":"379","l":"distinct companies registered","d":"16 companies have 3 or more people"},{"v":"78%","l":"of send-tagged registrations land within a day of the send","d":"188 registrations with a dated campaign tag"},{"v":"2.0x","l":"today's weekly pace needed to follow the plan","d":"plan ~116 a week vs ~59 over the last 4 weeks"}],"x2":{"seg":{"a":389,"e":89,"weekly":[{"label":"Aug 16","a":35,"e":6},{"label":"Aug 23","a":9,"e":3},{"label":"Aug 30","a":49,"e":2},{"label":"Sep 6","a":40,"e":0},{"label":"Sep 13","a":41,"e":22},{"label":"Sep 20","a":31,"e":15},{"label":"Sep 27","a":78,"e":19},{"label":"Oct 4","a":38,"e":10},{"label":"Oct 11","a":39,"e":7},{"label":"Oct 18","a":29,"e":5}]}}}</script>
+<script id="ATTR" type="application/json">{"asOf":"Oct 22, 2026","total":478,"untracked":198,"untrackedPct":41.4,"channels":["Email · HubSpot","Email · Mailchimp (legacy)","SMS","Website & landing pages","LinkedIn / social","AI referral","Referral / other","Untracked (no UTM)"],"channelTotals":{"Email · HubSpot":60,"Email · Mailchimp (legacy)":117,"SMS":5,"Website & landing pages":82,"LinkedIn / social":9,"AI referral":5,"Referral / other":2,"Untracked (no UTM)":198},"weekly":[{"iso":"2026-08-16","label":"Aug 16","n":41,"counts":{"Email · HubSpot":0,"Email · Mailchimp (legacy)":28,"SMS":0,"Website & landing pages":0,"LinkedIn / social":0,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":13}},{"iso":"2026-08-23","label":"Aug 23","n":12,"counts":{"Email · HubSpot":0,"Email · Mailchimp (legacy)":3,"SMS":0,"Website & landing pages":0,"LinkedIn / social":0,"AI referral":0,"Referral / other":1,"Untracked (no UTM)":8}},{"iso":"2026-08-30","label":"Aug 30","n":51,"counts":{"Email · HubSpot":15,"Email · Mailchimp (legacy)":12,"SMS":0,"Website & landing pages":0,"LinkedIn / social":2,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":22}},{"iso":"2026-09-06","label":"Sep 6","n":40,"counts":{"Email · HubSpot":3,"Email · Mailchimp (legacy)":25,"SMS":0,"Website & landing pages":0,"LinkedIn / social":0,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":12}},{"iso":"2026-09-13","label":"Sep 13","n":63,"counts":{"Email · HubSpot":1,"Email · Mailchimp (legacy)":6,"SMS":5,"Website & landing pages":0,"LinkedIn / social":6,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":45}},{"iso":"2026-09-20","label":"Sep 20","n":46,"counts":{"Email · HubSpot":1,"Email · Mailchimp (legacy)":10,"SMS":0,"Website & landing pages":6,"LinkedIn / social":1,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":28}},{"iso":"2026-09-27","label":"Sep 27","n":97,"counts":{"Email · HubSpot":0,"Email · Mailchimp (legacy)":30,"SMS":0,"Website & landing pages":30,"LinkedIn / social":0,"AI referral":1,"Referral / other":0,"Untracked (no UTM)":36}},{"iso":"2026-10-04","label":"Oct 4","n":48,"counts":{"Email · HubSpot":11,"Email · Mailchimp (legacy)":3,"SMS":0,"Website & landing pages":19,"LinkedIn / social":0,"AI referral":1,"Referral / other":0,"Untracked (no UTM)":14}},{"iso":"2026-10-11","label":"Oct 11","n":46,"counts":{"Email · HubSpot":16,"Email · Mailchimp (legacy)":0,"SMS":0,"Website & landing pages":17,"LinkedIn / social":0,"AI referral":1,"Referral / other":0,"Untracked (no UTM)":12}},{"iso":"2026-10-18","label":"Oct 18","n":34,"counts":{"Email · HubSpot":13,"Email · Mailchimp (legacy)":0,"SMS":0,"Website & landing pages":10,"LinkedIn / social":0,"AI referral":2,"Referral / other":1,"Untracked (no UTM)":8}}],"campaigns":[{"campaign":"2026-08-18-registration-is-open-general","channel":"Email · Mailchimp (legacy)","n":30,"pct":6.3,"first":"2026-08-19","last":"2026-09-28","byWeek":{"2026-08-16":26,"2026-08-23":3,"2026-09-27":1},"content":[{"name":"button1","n":30,"byWeek":{"2026-08-16":26,"2026-08-23":3,"2026-09-27":1}}]},{"campaign":"2026-09-08-registration","channel":"Email · Mailchimp (legacy)","n":29,"pct":6.1,"first":"2026-09-08","last":"2026-09-30","byWeek":{"2026-09-06":24,"2026-09-13":2,"2026-09-20":1,"2026-09-27":2},"content":[{"name":"attendee","n":22,"byWeek":{"2026-09-06":18,"2026-09-13":1,"2026-09-20":1,"2026-09-27":2}},{"name":"airline-operator","n":7,"byWeek":{"2026-09-06":6,"2026-09-13":1}}]},{"campaign":"2026-09-29-pbexpo-general-registration","channel":"Email · Mailchimp (legacy)","n":27,"pct":5.6,"first":"2026-09-29","last":"2026-10-06","byWeek":{"2026-09-27":25,"2026-10-04":2},"content":[{"name":"attendee","n":23,"byWeek":{"2026-09-27":21,"2026-10-04":2}},{"name":"airline-operator","n":4,"byWeek":{"2026-09-27":4}}]},{"campaign":"2026-09-3-registration","channel":"Email · HubSpot","n":21,"pct":4.4,"first":"2026-09-03","last":"2026-10-06","byWeek":{"2026-08-30":15,"2026-09-06":3,"2026-09-13":1,"2026-10-04":2},"content":[{"name":"mainlinka","n":12,"byWeek":{"2026-08-30":9,"2026-09-06":2,"2026-10-04":1}},{"name":"mainlinkb","n":8,"byWeek":{"2026-08-30":5,"2026-09-06":1,"2026-09-13":1,"2026-10-04":1}},{"name":"footer","n":1,"byWeek":{"2026-08-30":1}}]},{"campaign":"2026-10-15-pbexpo-vipwristband-registration","channel":"Email · HubSpot","n":20,"pct":4.2,"first":"2026-10-15","last":"2026-10-22","byWeek":{"2026-10-11":16,"2026-10-18":4},"content":[{"name":"attendee","n":17,"byWeek":{"2026-10-11":14,"2026-10-18":3}},{"name":"airline-operator","n":3,"byWeek":{"2026-10-11":2,"2026-10-18":1}}]},{"campaign":"2026-09-1-registration","channel":"Email · Mailchimp (legacy)","n":12,"pct":2.5,"first":"2026-09-02","last":"2026-09-10","byWeek":{"2026-08-30":11,"2026-09-06":1},"content":[{"name":"button","n":11,"byWeek":{"2026-08-30":10,"2026-09-06":1}},{"name":"header","n":1,"byWeek":{"2026-08-30":1}}]},{"campaign":"2026-10-22-pbexpo-vipwristband-registration","channel":"Email · HubSpot","n":9,"pct":1.9,"first":"2026-10-22","last":"2026-10-22","byWeek":{"2026-10-18":9},"content":[{"name":"attendee","n":7,"byWeek":{"2026-10-18":7}},{"name":"airline-operator","n":2,"byWeek":{"2026-10-18":2}}]},{"campaign":"2026-09-14-pbexpo-registration","channel":"LinkedIn / social","n":7,"pct":1.5,"first":"2026-09-14","last":"2026-09-20","byWeek":{"2026-09-13":6,"2026-09-20":1},"content":[{"name":"attendee","n":6,"byWeek":{"2026-09-13":5,"2026-09-20":1}},{"name":"airline-operator","n":1,"byWeek":{"2026-09-13":1}}]},{"campaign":"2026-09-22-pbexpo-general-registration","channel":"Email · Mailchimp (legacy)","n":7,"pct":1.5,"first":"2026-09-22","last":"2026-09-24","byWeek":{"2026-09-20":7},"content":[{"name":"attendee","n":6,"byWeek":{"2026-09-20":6}},{"name":"airline-operator","n":1,"byWeek":{"2026-09-20":1}}]},{"campaign":"2026-09-14-registration","channel":"SMS","n":5,"pct":1.0,"first":"2026-09-14","last":"2026-09-14","byWeek":{"2026-09-13":5},"content":[{"name":"attendee","n":5,"byWeek":{"2026-09-13":5}}]},{"campaign":"2026-10-06-pbexpo-vipwristband-registration","channel":"Email · HubSpot","n":5,"pct":1.0,"first":"2026-10-06","last":"2026-10-07","byWeek":{"2026-10-04":5},"content":[{"name":"attendee","n":5,"byWeek":{"2026-10-04":5}}]},{"campaign":"2026-09-17-pbexpo-registration","channel":"Email · Mailchimp (legacy)","n":4,"pct":0.8,"first":"2026-09-17","last":"2026-09-23","byWeek":{"2026-09-13":2,"2026-09-20":2},"content":[{"name":"attendee","n":4,"byWeek":{"2026-09-13":2,"2026-09-20":2}}]},{"campaign":"2026-10-08-pbexpo-whoscoming","channel":"Email · HubSpot","n":4,"pct":0.8,"first":"2026-10-08","last":"2026-10-08","byWeek":{"2026-10-04":4},"content":[{"name":"attendee","n":2,"byWeek":{"2026-10-04":2}},{"name":"airline-operator","n":1,"byWeek":{"2026-10-04":1}},{"name":"nav-attendee","n":1,"byWeek":{"2026-10-04":1}}]},{"campaign":"2026-08-18-registration-is-open-airlines","channel":"Email · Mailchimp (legacy)","n":2,"pct":0.4,"first":"2026-08-19","last":"2026-08-20","byWeek":{"2026-08-16":2},"content":[{"name":"button1","n":2,"byWeek":{"2026-08-16":2}}]},{"campaign":"2026-09-11-pbexpo-sponsorship-sale","channel":"Email · Mailchimp (legacy)","n":2,"pct":0.4,"first":"2026-09-13","last":"2026-09-14","byWeek":{"2026-09-13":2},"content":[{"name":"attendee","n":2,"byWeek":{"2026-09-13":2}}]},{"campaign":"2026-09-1registration","channel":"LinkedIn / social","n":2,"pct":0.4,"first":"2026-09-02","last":"2026-09-04","byWeek":{"2026-08-30":2},"content":[{"name":"registertoattend","n":2,"byWeek":{"2026-08-30":2}}]},{"campaign":"2026-10-01-pbexpo-golf-registration","channel":"Email · Mailchimp (legacy)","n":2,"pct":0.4,"first":"2026-10-01","last":"2026-10-10","byWeek":{"2026-09-27":1,"2026-10-04":1},"content":[{"name":"attendee","n":2,"byWeek":{"2026-09-27":1,"2026-10-04":1}}]},{"campaign":"2026-08-jumbotron","channel":"Email · Mailchimp (legacy)","n":1,"pct":0.2,"first":"2026-08-31","last":"2026-08-31","byWeek":{"2026-08-30":1},"content":[{"name":"230_registernow","n":1,"byWeek":{"2026-08-30":1}}]},{"campaign":"2026-09-15-newreg","channel":"Email · HubSpot","n":1,"pct":0.2,"first":"2026-09-22","last":"2026-09-22","byWeek":{"2026-09-20":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-09-20":1}}]},{"campaign":"2026-09-24-pbexpo-panel-speakers-attendees","channel":"Email · Mailchimp (legacy)","n":1,"pct":0.2,"first":"2026-10-02","last":"2026-10-02","byWeek":{"2026-09-27":1},"content":[{"name":"hero-attendee","n":1,"byWeek":{"2026-09-27":1}}]},{"campaign":"evergreen-pbexpo-registration","channel":"Referral / other","n":1,"pct":0.2,"first":"2026-08-25","last":"2026-08-25","byWeek":{"2026-08-23":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-08-23":1}}]},{"campaign":"pbexpo","channel":"Website & landing pages","n":1,"pct":0.2,"first":"2026-09-25","last":"2026-09-25","byWeek":{"2026-09-20":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-09-20":1}}]},{"campaign":"pbexpo-2027-registration","channel":"Referral / other","n":1,"pct":0.2,"first":"2026-10-21","last":"2026-10-21","byWeek":{"2026-10-18":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-10-18":1}}]},{"campaign":"(no campaign)","channel":"Mixed","n":284,"pct":59.4,"first":"2026-08-19","last":"2026-10-22","byWeek":{"2026-08-16":13,"2026-08-23":8,"2026-08-30":22,"2026-09-06":12,"2026-09-13":45,"2026-09-20":33,"2026-09-27":67,"2026-10-04":34,"2026-10-11":30,"2026-10-18":20},"content":[{"name":"(none)","n":184,"byWeek":{"2026-08-16":13,"2026-08-23":8,"2026-08-30":22,"2026-09-06":12,"2026-09-13":40,"2026-09-20":20,"2026-09-27":33,"2026-10-04":15,"2026-10-11":12,"2026-10-18":9}},{"name":"attendee","n":37,"byWeek":{"2026-09-20":3,"2026-09-27":20,"2026-10-04":7,"2026-10-11":4,"2026-10-18":3}},{"name":"hero-attendee","n":37,"byWeek":{"2026-09-13":3,"2026-09-20":7,"2026-09-27":7,"2026-10-04":8,"2026-10-11":8,"2026-10-18":4}},{"name":"nav-attendee","n":11,"byWeek":{"2026-09-13":1,"2026-09-20":2,"2026-09-27":3,"2026-10-04":2,"2026-10-11":3}},{"name":"hero-airline-operator","n":10,"byWeek":{"2026-09-13":1,"2026-09-20":1,"2026-09-27":1,"2026-10-04":2,"2026-10-11":2,"2026-10-18":3}},{"name":"airline-operator","n":4,"byWeek":{"2026-09-27":2,"2026-10-11":1,"2026-10-18":1}},{"name":"nav-airline-operator","n":1,"byWeek":{"2026-09-27":1}}]}],"selfReported":{"n":198,"cats":[["Other / unclear",77],["Search / online",27],["PartsBase / sales",22],["Past attendee",19],["Referral / invite",19],["Email",18],["Employer / exhibitor",9],["Social / LinkedIn",7]]},"tw":{"camps":[["2026-10-22-pbexpo-vipwristband-registration",9],["2026-10-15-pbexpo-vipwristband-registration",4],["pbexpo-2027-registration",1]],"label":"This week","range":"Oct 18 – 22","n":34,"pie":[["Email · HubSpot",13],["Email · Mailchimp (legacy)",0],["SMS",0],["Website & landing pages",10],["LinkedIn / social",0],["AI referral",2],["Referral / other",1],["Untracked (no UTM)",8]]},"lw":{"camps":[["2026-10-15-pbexpo-vipwristband-registration",16]],"label":"Last week","range":"Oct 11 – 17","n":46,"pie":[["Email · HubSpot",16],["Email · Mailchimp (legacy)",0],["SMS",0],["Website & landing pages",17],["LinkedIn / social",0],["AI referral",1],["Referral / other",0],["Untracked (no UTM)",12]]},"unmapped":[],"types":{"all":{"asOf":"Oct 22, 2026","total":478,"untracked":198,"untrackedPct":41.4,"channels":["Email · HubSpot","Email · Mailchimp (legacy)","SMS","Website & landing pages","LinkedIn / social","AI referral","Referral / other","Untracked (no UTM)"],"channelTotals":{"Email · HubSpot":60,"Email · Mailchimp (legacy)":117,"SMS":5,"Website & landing pages":82,"LinkedIn / social":9,"AI referral":5,"Referral / other":2,"Untracked (no UTM)":198},"weekly":[{"iso":"2026-08-16","label":"Aug 16","n":41,"counts":{"Email · HubSpot":0,"Email · Mailchimp (legacy)":28,"SMS":0,"Website & landing pages":0,"LinkedIn / social":0,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":13}},{"iso":"2026-08-23","label":"Aug 23","n":12,"counts":{"Email · HubSpot":0,"Email · Mailchimp (legacy)":3,"SMS":0,"Website & landing pages":0,"LinkedIn / social":0,"AI referral":0,"Referral / other":1,"Untracked (no UTM)":8}},{"iso":"2026-08-30","label":"Aug 30","n":51,"counts":{"Email · HubSpot":15,"Email · Mailchimp (legacy)":12,"SMS":0,"Website & landing pages":0,"LinkedIn / social":2,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":22}},{"iso":"2026-09-06","label":"Sep 6","n":40,"counts":{"Email · HubSpot":3,"Email · Mailchimp (legacy)":25,"SMS":0,"Website & landing pages":0,"LinkedIn / social":0,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":12}},{"iso":"2026-09-13","label":"Sep 13","n":63,"counts":{"Email · HubSpot":1,"Email · Mailchimp (legacy)":6,"SMS":5,"Website & landing pages":0,"LinkedIn / social":6,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":45}},{"iso":"2026-09-20","label":"Sep 20","n":46,"counts":{"Email · HubSpot":1,"Email · Mailchimp (legacy)":10,"SMS":0,"Website & landing pages":6,"LinkedIn / social":1,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":28}},{"iso":"2026-09-27","label":"Sep 27","n":97,"counts":{"Email · HubSpot":0,"Email · Mailchimp (legacy)":30,"SMS":0,"Website & landing pages":30,"LinkedIn / social":0,"AI referral":1,"Referral / other":0,"Untracked (no UTM)":36}},{"iso":"2026-10-04","label":"Oct 4","n":48,"counts":{"Email · HubSpot":11,"Email · Mailchimp (legacy)":3,"SMS":0,"Website & landing pages":19,"LinkedIn / social":0,"AI referral":1,"Referral / other":0,"Untracked (no UTM)":14}},{"iso":"2026-10-11","label":"Oct 11","n":46,"counts":{"Email · HubSpot":16,"Email · Mailchimp (legacy)":0,"SMS":0,"Website & landing pages":17,"LinkedIn / social":0,"AI referral":1,"Referral / other":0,"Untracked (no UTM)":12}},{"iso":"2026-10-18","label":"Oct 18","n":34,"counts":{"Email · HubSpot":13,"Email · Mailchimp (legacy)":0,"SMS":0,"Website & landing pages":10,"LinkedIn / social":0,"AI referral":2,"Referral / other":1,"Untracked (no UTM)":8}}],"campaigns":[{"campaign":"2026-08-18-registration-is-open-general","channel":"Email · Mailchimp (legacy)","n":30,"pct":6.3,"first":"2026-08-19","last":"2026-09-28","byWeek":{"2026-08-16":26,"2026-08-23":3,"2026-09-27":1},"content":[{"name":"button1","n":30,"byWeek":{"2026-08-16":26,"2026-08-23":3,"2026-09-27":1}}]},{"campaign":"2026-09-08-registration","channel":"Email · Mailchimp (legacy)","n":29,"pct":6.1,"first":"2026-09-08","last":"2026-09-30","byWeek":{"2026-09-06":24,"2026-09-13":2,"2026-09-20":1,"2026-09-27":2},"content":[{"name":"attendee","n":22,"byWeek":{"2026-09-06":18,"2026-09-13":1,"2026-09-20":1,"2026-09-27":2}},{"name":"airline-operator","n":7,"byWeek":{"2026-09-06":6,"2026-09-13":1}}]},{"campaign":"2026-09-29-pbexpo-general-registration","channel":"Email · Mailchimp (legacy)","n":27,"pct":5.6,"first":"2026-09-29","last":"2026-10-06","byWeek":{"2026-09-27":25,"2026-10-04":2},"content":[{"name":"attendee","n":23,"byWeek":{"2026-09-27":21,"2026-10-04":2}},{"name":"airline-operator","n":4,"byWeek":{"2026-09-27":4}}]},{"campaign":"2026-09-3-registration","channel":"Email · HubSpot","n":21,"pct":4.4,"first":"2026-09-03","last":"2026-10-06","byWeek":{"2026-08-30":15,"2026-09-06":3,"2026-09-13":1,"2026-10-04":2},"content":[{"name":"mainlinka","n":12,"byWeek":{"2026-08-30":9,"2026-09-06":2,"2026-10-04":1}},{"name":"mainlinkb","n":8,"byWeek":{"2026-08-30":5,"2026-09-06":1,"2026-09-13":1,"2026-10-04":1}},{"name":"footer","n":1,"byWeek":{"2026-08-30":1}}]},{"campaign":"2026-10-15-pbexpo-vipwristband-registration","channel":"Email · HubSpot","n":20,"pct":4.2,"first":"2026-10-15","last":"2026-10-22","byWeek":{"2026-10-11":16,"2026-10-18":4},"content":[{"name":"attendee","n":17,"byWeek":{"2026-10-11":14,"2026-10-18":3}},{"name":"airline-operator","n":3,"byWeek":{"2026-10-11":2,"2026-10-18":1}}]},{"campaign":"2026-09-1-registration","channel":"Email · Mailchimp (legacy)","n":12,"pct":2.5,"first":"2026-09-02","last":"2026-09-10","byWeek":{"2026-08-30":11,"2026-09-06":1},"content":[{"name":"button","n":11,"byWeek":{"2026-08-30":10,"2026-09-06":1}},{"name":"header","n":1,"byWeek":{"2026-08-30":1}}]},{"campaign":"2026-10-22-pbexpo-vipwristband-registration","channel":"Email · HubSpot","n":9,"pct":1.9,"first":"2026-10-22","last":"2026-10-22","byWeek":{"2026-10-18":9},"content":[{"name":"attendee","n":7,"byWeek":{"2026-10-18":7}},{"name":"airline-operator","n":2,"byWeek":{"2026-10-18":2}}]},{"campaign":"2026-09-14-pbexpo-registration","channel":"LinkedIn / social","n":7,"pct":1.5,"first":"2026-09-14","last":"2026-09-20","byWeek":{"2026-09-13":6,"2026-09-20":1},"content":[{"name":"attendee","n":6,"byWeek":{"2026-09-13":5,"2026-09-20":1}},{"name":"airline-operator","n":1,"byWeek":{"2026-09-13":1}}]},{"campaign":"2026-09-22-pbexpo-general-registration","channel":"Email · Mailchimp (legacy)","n":7,"pct":1.5,"first":"2026-09-22","last":"2026-09-24","byWeek":{"2026-09-20":7},"content":[{"name":"attendee","n":6,"byWeek":{"2026-09-20":6}},{"name":"airline-operator","n":1,"byWeek":{"2026-09-20":1}}]},{"campaign":"2026-09-14-registration","channel":"SMS","n":5,"pct":1.0,"first":"2026-09-14","last":"2026-09-14","byWeek":{"2026-09-13":5},"content":[{"name":"attendee","n":5,"byWeek":{"2026-09-13":5}}]},{"campaign":"2026-10-06-pbexpo-vipwristband-registration","channel":"Email · HubSpot","n":5,"pct":1.0,"first":"2026-10-06","last":"2026-10-07","byWeek":{"2026-10-04":5},"content":[{"name":"attendee","n":5,"byWeek":{"2026-10-04":5}}]},{"campaign":"2026-09-17-pbexpo-registration","channel":"Email · Mailchimp (legacy)","n":4,"pct":0.8,"first":"2026-09-17","last":"2026-09-23","byWeek":{"2026-09-13":2,"2026-09-20":2},"content":[{"name":"attendee","n":4,"byWeek":{"2026-09-13":2,"2026-09-20":2}}]},{"campaign":"2026-10-08-pbexpo-whoscoming","channel":"Email · HubSpot","n":4,"pct":0.8,"first":"2026-10-08","last":"2026-10-08","byWeek":{"2026-10-04":4},"content":[{"name":"attendee","n":2,"byWeek":{"2026-10-04":2}},{"name":"airline-operator","n":1,"byWeek":{"2026-10-04":1}},{"name":"nav-attendee","n":1,"byWeek":{"2026-10-04":1}}]},{"campaign":"2026-08-18-registration-is-open-airlines","channel":"Email · Mailchimp (legacy)","n":2,"pct":0.4,"first":"2026-08-19","last":"2026-08-20","byWeek":{"2026-08-16":2},"content":[{"name":"button1","n":2,"byWeek":{"2026-08-16":2}}]},{"campaign":"2026-09-11-pbexpo-sponsorship-sale","channel":"Email · Mailchimp (legacy)","n":2,"pct":0.4,"first":"2026-09-13","last":"2026-09-14","byWeek":{"2026-09-13":2},"content":[{"name":"attendee","n":2,"byWeek":{"2026-09-13":2}}]},{"campaign":"2026-09-1registration","channel":"LinkedIn / social","n":2,"pct":0.4,"first":"2026-09-02","last":"2026-09-04","byWeek":{"2026-08-30":2},"content":[{"name":"registertoattend","n":2,"byWeek":{"2026-08-30":2}}]},{"campaign":"2026-10-01-pbexpo-golf-registration","channel":"Email · Mailchimp (legacy)","n":2,"pct":0.4,"first":"2026-10-01","last":"2026-10-10","byWeek":{"2026-09-27":1,"2026-10-04":1},"content":[{"name":"attendee","n":2,"byWeek":{"2026-09-27":1,"2026-10-04":1}}]},{"campaign":"2026-08-jumbotron","channel":"Email · Mailchimp (legacy)","n":1,"pct":0.2,"first":"2026-08-31","last":"2026-08-31","byWeek":{"2026-08-30":1},"content":[{"name":"230_registernow","n":1,"byWeek":{"2026-08-30":1}}]},{"campaign":"2026-09-15-newreg","channel":"Email · HubSpot","n":1,"pct":0.2,"first":"2026-09-22","last":"2026-09-22","byWeek":{"2026-09-20":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-09-20":1}}]},{"campaign":"2026-09-24-pbexpo-panel-speakers-attendees","channel":"Email · Mailchimp (legacy)","n":1,"pct":0.2,"first":"2026-10-02","last":"2026-10-02","byWeek":{"2026-09-27":1},"content":[{"name":"hero-attendee","n":1,"byWeek":{"2026-09-27":1}}]},{"campaign":"evergreen-pbexpo-registration","channel":"Referral / other","n":1,"pct":0.2,"first":"2026-08-25","last":"2026-08-25","byWeek":{"2026-08-23":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-08-23":1}}]},{"campaign":"pbexpo","channel":"Website & landing pages","n":1,"pct":0.2,"first":"2026-09-25","last":"2026-09-25","byWeek":{"2026-09-20":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-09-20":1}}]},{"campaign":"pbexpo-2027-registration","channel":"Referral / other","n":1,"pct":0.2,"first":"2026-10-21","last":"2026-10-21","byWeek":{"2026-10-18":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-10-18":1}}]},{"campaign":"(no campaign)","channel":"Mixed","n":284,"pct":59.4,"first":"2026-08-19","last":"2026-10-22","byWeek":{"2026-08-16":13,"2026-08-23":8,"2026-08-30":22,"2026-09-06":12,"2026-09-13":45,"2026-09-20":33,"2026-09-27":67,"2026-10-04":34,"2026-10-11":30,"2026-10-18":20},"content":[{"name":"(none)","n":184,"byWeek":{"2026-08-16":13,"2026-08-23":8,"2026-08-30":22,"2026-09-06":12,"2026-09-13":40,"2026-09-20":20,"2026-09-27":33,"2026-10-04":15,"2026-10-11":12,"2026-10-18":9}},{"name":"attendee","n":37,"byWeek":{"2026-09-20":3,"2026-09-27":20,"2026-10-04":7,"2026-10-11":4,"2026-10-18":3}},{"name":"hero-attendee","n":37,"byWeek":{"2026-09-13":3,"2026-09-20":7,"2026-09-27":7,"2026-10-04":8,"2026-10-11":8,"2026-10-18":4}},{"name":"nav-attendee","n":11,"byWeek":{"2026-09-13":1,"2026-09-20":2,"2026-09-27":3,"2026-10-04":2,"2026-10-11":3}},{"name":"hero-airline-operator","n":10,"byWeek":{"2026-09-13":1,"2026-09-20":1,"2026-09-27":1,"2026-10-04":2,"2026-10-11":2,"2026-10-18":3}},{"name":"airline-operator","n":4,"byWeek":{"2026-09-27":2,"2026-10-11":1,"2026-10-18":1}},{"name":"nav-airline-operator","n":1,"byWeek":{"2026-09-27":1}}]}],"selfReported":{"n":198,"cats":[["Other / unclear",77],["Search / online",27],["PartsBase / sales",22],["Past attendee",19],["Referral / invite",19],["Email",18],["Employer / exhibitor",9],["Social / LinkedIn",7]]},"tw":{"camps":[["2026-10-22-pbexpo-vipwristband-registration",9],["2026-10-15-pbexpo-vipwristband-registration",4],["pbexpo-2027-registration",1]],"label":"This week","range":"Oct 18 – 22","n":34,"pie":[["Email · HubSpot",13],["Email · Mailchimp (legacy)",0],["SMS",0],["Website & landing pages",10],["LinkedIn / social",0],["AI referral",2],["Referral / other",1],["Untracked (no UTM)",8]]},"lw":{"camps":[["2026-10-15-pbexpo-vipwristband-registration",16]],"label":"Last week","range":"Oct 11 – 17","n":46,"pie":[["Email · HubSpot",16],["Email · Mailchimp (legacy)",0],["SMS",0],["Website & landing pages",17],["LinkedIn / social",0],["AI referral",1],["Referral / other",0],["Untracked (no UTM)",12]]},"unmapped":[]},"a":{"asOf":"Oct 22, 2026","total":389,"untracked":110,"untrackedPct":28.3,"channels":["Email · HubSpot","Email · Mailchimp (legacy)","SMS","Website & landing pages","LinkedIn / social","AI referral","Referral / other","Untracked (no UTM)"],"channelTotals":{"Email · HubSpot":60,"Email · Mailchimp (legacy)":116,"SMS":5,"Website & landing pages":82,"LinkedIn / social":9,"AI referral":5,"Referral / other":2,"Untracked (no UTM)":110},"weekly":[{"iso":"2026-08-16","label":"Aug 16","n":35,"counts":{"Email · HubSpot":0,"Email · Mailchimp (legacy)":28,"SMS":0,"Website & landing pages":0,"LinkedIn / social":0,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":7}},{"iso":"2026-08-23","label":"Aug 23","n":9,"counts":{"Email · HubSpot":0,"Email · Mailchimp (legacy)":3,"SMS":0,"Website & landing pages":0,"LinkedIn / social":0,"AI referral":0,"Referral / other":1,"Untracked (no UTM)":5}},{"iso":"2026-08-30","label":"Aug 30","n":49,"counts":{"Email · HubSpot":15,"Email · Mailchimp (legacy)":11,"SMS":0,"Website & landing pages":0,"LinkedIn / social":2,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":21}},{"iso":"2026-09-06","label":"Sep 6","n":40,"counts":{"Email · HubSpot":3,"Email · Mailchimp (legacy)":25,"SMS":0,"Website & landing pages":0,"LinkedIn / social":0,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":12}},{"iso":"2026-09-13","label":"Sep 13","n":41,"counts":{"Email · HubSpot":1,"Email · Mailchimp (legacy)":6,"SMS":5,"Website & landing pages":0,"LinkedIn / social":6,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":23}},{"iso":"2026-09-20","label":"Sep 20","n":31,"counts":{"Email · HubSpot":1,"Email · Mailchimp (legacy)":10,"SMS":0,"Website & landing pages":6,"LinkedIn / social":1,"AI referral":0,"Referral / other":0,"Untracked (no UTM)":13}},{"iso":"2026-09-27","label":"Sep 27","n":78,"counts":{"Email · HubSpot":0,"Email · Mailchimp (legacy)":30,"SMS":0,"Website & landing pages":30,"LinkedIn / social":0,"AI referral":1,"Referral / other":0,"Untracked (no UTM)":17}},{"iso":"2026-10-04","label":"Oct 4","n":38,"counts":{"Email · HubSpot":11,"Email · Mailchimp (legacy)":3,"SMS":0,"Website & landing pages":19,"LinkedIn / social":0,"AI referral":1,"Referral / other":0,"Untracked (no UTM)":4}},{"iso":"2026-10-11","label":"Oct 11","n":39,"counts":{"Email · HubSpot":16,"Email · Mailchimp (legacy)":0,"SMS":0,"Website & landing pages":17,"LinkedIn / social":0,"AI referral":1,"Referral / other":0,"Untracked (no UTM)":5}},{"iso":"2026-10-18","label":"Oct 18","n":29,"counts":{"Email · HubSpot":13,"Email · Mailchimp (legacy)":0,"SMS":0,"Website & landing pages":10,"LinkedIn / social":0,"AI referral":2,"Referral / other":1,"Untracked (no UTM)":3}}],"campaigns":[{"campaign":"2026-08-18-registration-is-open-general","channel":"Email · Mailchimp (legacy)","n":30,"pct":7.7,"first":"2026-08-19","last":"2026-09-28","byWeek":{"2026-08-16":26,"2026-08-23":3,"2026-09-27":1},"content":[{"name":"button1","n":30,"byWeek":{"2026-08-16":26,"2026-08-23":3,"2026-09-27":1}}]},{"campaign":"2026-09-08-registration","channel":"Email · Mailchimp (legacy)","n":29,"pct":7.5,"first":"2026-09-08","last":"2026-09-30","byWeek":{"2026-09-06":24,"2026-09-13":2,"2026-09-20":1,"2026-09-27":2},"content":[{"name":"attendee","n":22,"byWeek":{"2026-09-06":18,"2026-09-13":1,"2026-09-20":1,"2026-09-27":2}},{"name":"airline-operator","n":7,"byWeek":{"2026-09-06":6,"2026-09-13":1}}]},{"campaign":"2026-09-29-pbexpo-general-registration","channel":"Email · Mailchimp (legacy)","n":27,"pct":6.9,"first":"2026-09-29","last":"2026-10-06","byWeek":{"2026-09-27":25,"2026-10-04":2},"content":[{"name":"attendee","n":23,"byWeek":{"2026-09-27":21,"2026-10-04":2}},{"name":"airline-operator","n":4,"byWeek":{"2026-09-27":4}}]},{"campaign":"2026-09-3-registration","channel":"Email · HubSpot","n":21,"pct":5.4,"first":"2026-09-03","last":"2026-10-06","byWeek":{"2026-08-30":15,"2026-09-06":3,"2026-09-13":1,"2026-10-04":2},"content":[{"name":"mainlinka","n":12,"byWeek":{"2026-08-30":9,"2026-09-06":2,"2026-10-04":1}},{"name":"mainlinkb","n":8,"byWeek":{"2026-08-30":5,"2026-09-06":1,"2026-09-13":1,"2026-10-04":1}},{"name":"footer","n":1,"byWeek":{"2026-08-30":1}}]},{"campaign":"2026-10-15-pbexpo-vipwristband-registration","channel":"Email · HubSpot","n":20,"pct":5.1,"first":"2026-10-15","last":"2026-10-22","byWeek":{"2026-10-11":16,"2026-10-18":4},"content":[{"name":"attendee","n":17,"byWeek":{"2026-10-11":14,"2026-10-18":3}},{"name":"airline-operator","n":3,"byWeek":{"2026-10-11":2,"2026-10-18":1}}]},{"campaign":"2026-09-1-registration","channel":"Email · Mailchimp (legacy)","n":12,"pct":3.1,"first":"2026-09-02","last":"2026-09-10","byWeek":{"2026-08-30":11,"2026-09-06":1},"content":[{"name":"button","n":11,"byWeek":{"2026-08-30":10,"2026-09-06":1}},{"name":"header","n":1,"byWeek":{"2026-08-30":1}}]},{"campaign":"2026-10-22-pbexpo-vipwristband-registration","channel":"Email · HubSpot","n":9,"pct":2.3,"first":"2026-10-22","last":"2026-10-22","byWeek":{"2026-10-18":9},"content":[{"name":"attendee","n":7,"byWeek":{"2026-10-18":7}},{"name":"airline-operator","n":2,"byWeek":{"2026-10-18":2}}]},{"campaign":"2026-09-14-pbexpo-registration","channel":"LinkedIn / social","n":7,"pct":1.8,"first":"2026-09-14","last":"2026-09-20","byWeek":{"2026-09-13":6,"2026-09-20":1},"content":[{"name":"attendee","n":6,"byWeek":{"2026-09-13":5,"2026-09-20":1}},{"name":"airline-operator","n":1,"byWeek":{"2026-09-13":1}}]},{"campaign":"2026-09-22-pbexpo-general-registration","channel":"Email · Mailchimp (legacy)","n":7,"pct":1.8,"first":"2026-09-22","last":"2026-09-24","byWeek":{"2026-09-20":7},"content":[{"name":"attendee","n":6,"byWeek":{"2026-09-20":6}},{"name":"airline-operator","n":1,"byWeek":{"2026-09-20":1}}]},{"campaign":"2026-09-14-registration","channel":"SMS","n":5,"pct":1.3,"first":"2026-09-14","last":"2026-09-14","byWeek":{"2026-09-13":5},"content":[{"name":"attendee","n":5,"byWeek":{"2026-09-13":5}}]},{"campaign":"2026-10-06-pbexpo-vipwristband-registration","channel":"Email · HubSpot","n":5,"pct":1.3,"first":"2026-10-06","last":"2026-10-07","byWeek":{"2026-10-04":5},"content":[{"name":"attendee","n":5,"byWeek":{"2026-10-04":5}}]},{"campaign":"2026-09-17-pbexpo-registration","channel":"Email · Mailchimp (legacy)","n":4,"pct":1.0,"first":"2026-09-17","last":"2026-09-23","byWeek":{"2026-09-13":2,"2026-09-20":2},"content":[{"name":"attendee","n":4,"byWeek":{"2026-09-13":2,"2026-09-20":2}}]},{"campaign":"2026-10-08-pbexpo-whoscoming","channel":"Email · HubSpot","n":4,"pct":1.0,"first":"2026-10-08","last":"2026-10-08","byWeek":{"2026-10-04":4},"content":[{"name":"attendee","n":2,"byWeek":{"2026-10-04":2}},{"name":"airline-operator","n":1,"byWeek":{"2026-10-04":1}},{"name":"nav-attendee","n":1,"byWeek":{"2026-10-04":1}}]},{"campaign":"2026-08-18-registration-is-open-airlines","channel":"Email · Mailchimp (legacy)","n":2,"pct":0.5,"first":"2026-08-19","last":"2026-08-20","byWeek":{"2026-08-16":2},"content":[{"name":"button1","n":2,"byWeek":{"2026-08-16":2}}]},{"campaign":"2026-09-11-pbexpo-sponsorship-sale","channel":"Email · Mailchimp (legacy)","n":2,"pct":0.5,"first":"2026-09-13","last":"2026-09-14","byWeek":{"2026-09-13":2},"content":[{"name":"attendee","n":2,"byWeek":{"2026-09-13":2}}]},{"campaign":"2026-09-1registration","channel":"LinkedIn / social","n":2,"pct":0.5,"first":"2026-09-02","last":"2026-09-04","byWeek":{"2026-08-30":2},"content":[{"name":"registertoattend","n":2,"byWeek":{"2026-08-30":2}}]},{"campaign":"2026-10-01-pbexpo-golf-registration","channel":"Email · Mailchimp (legacy)","n":2,"pct":0.5,"first":"2026-10-01","last":"2026-10-10","byWeek":{"2026-09-27":1,"2026-10-04":1},"content":[{"name":"attendee","n":2,"byWeek":{"2026-09-27":1,"2026-10-04":1}}]},{"campaign":"2026-09-15-newreg","channel":"Email · HubSpot","n":1,"pct":0.3,"first":"2026-09-22","last":"2026-09-22","byWeek":{"2026-09-20":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-09-20":1}}]},{"campaign":"2026-09-24-pbexpo-panel-speakers-attendees","channel":"Email · Mailchimp (legacy)","n":1,"pct":0.3,"first":"2026-10-02","last":"2026-10-02","byWeek":{"2026-09-27":1},"content":[{"name":"hero-attendee","n":1,"byWeek":{"2026-09-27":1}}]},{"campaign":"evergreen-pbexpo-registration","channel":"Referral / other","n":1,"pct":0.3,"first":"2026-08-25","last":"2026-08-25","byWeek":{"2026-08-23":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-08-23":1}}]},{"campaign":"pbexpo","channel":"Website & landing pages","n":1,"pct":0.3,"first":"2026-09-25","last":"2026-09-25","byWeek":{"2026-09-20":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-09-20":1}}]},{"campaign":"pbexpo-2027-registration","channel":"Referral / other","n":1,"pct":0.3,"first":"2026-10-21","last":"2026-10-21","byWeek":{"2026-10-18":1},"content":[{"name":"attendee","n":1,"byWeek":{"2026-10-18":1}}]},{"campaign":"(no campaign)","channel":"Mixed","n":196,"pct":50.4,"first":"2026-08-19","last":"2026-10-22","byWeek":{"2026-08-16":7,"2026-08-23":5,"2026-08-30":21,"2026-09-06":12,"2026-09-13":23,"2026-09-20":18,"2026-09-27":48,"2026-10-04":24,"2026-10-11":23,"2026-10-18":15},"content":[{"name":"(none)","n":97,"byWeek":{"2026-08-16":7,"2026-08-23":5,"2026-08-30":21,"2026-09-06":12,"2026-09-13":18,"2026-09-20":6,"2026-09-27":14,"2026-10-04":5,"2026-10-11":5,"2026-10-18":4}},{"name":"attendee","n":37,"byWeek":{"2026-09-20":3,"2026-09-27":20,"2026-10-04":7,"2026-10-11":4,"2026-10-18":3}},{"name":"hero-attendee","n":37,"byWeek":{"2026-09-13":3,"2026-09-20":7,"2026-09-27":7,"2026-10-04":8,"2026-10-11":8,"2026-10-18":4}},{"name":"nav-attendee","n":11,"byWeek":{"2026-09-13":1,"2026-09-20":2,"2026-09-27":3,"2026-10-04":2,"2026-10-11":3}},{"name":"hero-airline-operator","n":9,"byWeek":{"2026-09-13":1,"2026-09-27":1,"2026-10-04":2,"2026-10-11":2,"2026-10-18":3}},{"name":"airline-operator","n":4,"byWeek":{"2026-09-27":2,"2026-10-11":1,"2026-10-18":1}},{"name":"nav-airline-operator","n":1,"byWeek":{"2026-09-27":1}}]}],"selfReported":{"n":110,"cats":[["Other / unclear",34],["PartsBase / sales",18],["Search / online",18],["Email",16],["Referral / invite",13],["Past attendee",6],["Social / LinkedIn",3],["Employer / exhibitor",2]]},"tw":{"camps":[["2026-10-22-pbexpo-vipwristband-registration",9],["2026-10-15-pbexpo-vipwristband-registration",4],["pbexpo-2027-registration",1]],"label":"This week","range":"Oct 18 – 22","n":29,"pie":[["Email · HubSpot",13],["Email · Mailchimp (legacy)",0],["SMS",0],["Website & landing pages",10],["LinkedIn / social",0],["AI referral",2],["Referral / other",1],["Untracked (no UTM)",3]]},"lw":{"camps":[["2026-10-15-pbexpo-vipwristband-registration",16]],"label":"Last week","range":"Oct 11 – 17","n":39,"pie":[["Email · HubSpot",16],["Email · Mailchimp (legacy)",0],["SMS",0],["Website & landing pages",17],["LinkedIn / social",0],["AI referral",1],["Referral / other",0],["Untracked (no UTM)",5]]},"unmapped":[]},"e":{"asOf":"Oct 22, 2026","total":89,"untracked":88,"untrackedPct":98.9,"channels":["Email · Mailchimp (legacy)","Untracked (no UTM)"],"channelTotals":{"Email · Mailchimp (legacy)":1,"Untracked (no UTM)":88},"weekly":[{"iso":"2026-08-16","label":"Aug 16","n":6,"counts":{"Email · Mailchimp (legacy)":0,"Untracked (no UTM)":6}},{"iso":"2026-08-23","label":"Aug 23","n":3,"counts":{"Email · Mailchimp (legacy)":0,"Untracked (no UTM)":3}},{"iso":"2026-08-30","label":"Aug 30","n":2,"counts":{"Email · Mailchimp (legacy)":1,"Untracked (no UTM)":1}},{"iso":"2026-09-06","label":"Sep 6","n":0,"counts":{"Email · Mailchimp (legacy)":0,"Untracked (no UTM)":0}},{"iso":"2026-09-13","label":"Sep 13","n":22,"counts":{"Email · Mailchimp (legacy)":0,"Untracked (no UTM)":22}},{"iso":"2026-09-20","label":"Sep 20","n":15,"counts":{"Email · Mailchimp (legacy)":0,"Untracked (no UTM)":15}},{"iso":"2026-09-27","label":"Sep 27","n":19,"counts":{"Email · Mailchimp (legacy)":0,"Untracked (no UTM)":19}},{"iso":"2026-10-04","label":"Oct 4","n":10,"counts":{"Email · Mailchimp (legacy)":0,"Untracked (no UTM)":10}},{"iso":"2026-10-11","label":"Oct 11","n":7,"counts":{"Email · Mailchimp (legacy)":0,"Untracked (no UTM)":7}},{"iso":"2026-10-18","label":"Oct 18","n":5,"counts":{"Email · Mailchimp (legacy)":0,"Untracked (no UTM)":5}}],"campaigns":[{"campaign":"2026-08-jumbotron","channel":"Email · Mailchimp (legacy)","n":1,"pct":1.1,"first":"2026-08-31","last":"2026-08-31","byWeek":{"2026-08-30":1},"content":[{"name":"230_registernow","n":1,"byWeek":{"2026-08-30":1}}]},{"campaign":"(no campaign)","channel":"Mixed","n":88,"pct":98.9,"first":"2026-08-20","last":"2026-10-21","byWeek":{"2026-08-16":6,"2026-08-23":3,"2026-08-30":1,"2026-09-13":22,"2026-09-20":15,"2026-09-27":19,"2026-10-04":10,"2026-10-11":7,"2026-10-18":5},"content":[{"name":"(none)","n":87,"byWeek":{"2026-08-16":6,"2026-08-23":3,"2026-08-30":1,"2026-09-13":22,"2026-09-20":14,"2026-09-27":19,"2026-10-04":10,"2026-10-11":7,"2026-10-18":5}},{"name":"hero-airline-operator","n":1,"byWeek":{"2026-09-20":1}}]}],"selfReported":{"n":88,"cats":[["Other / unclear",43],["Past attendee",13],["Search / online",9],["Employer / exhibitor",7],["Referral / invite",6],["Social / LinkedIn",4],["PartsBase / sales",4],["Email",2]]},"tw":{"camps":[],"label":"This week","range":"Oct 18 – 22","n":5,"pie":[["Email · HubSpot",0],["Email · Mailchimp (legacy)",0],["SMS",0],["Website & landing pages",0],["LinkedIn / social",0],["AI referral",0],["Referral / other",0],["Untracked (no UTM)",5]]},"lw":{"camps":[],"label":"Last week","range":"Oct 11 – 17","n":7,"pie":[["Email · HubSpot",0],["Email · Mailchimp (legacy)",0],["SMS",0],["Website & landing pages",0],["LinkedIn / social",0],["AI referral",0],["Referral / other",0],["Untracked (no UTM)",7]]},"unmapped":[]}}}</script>
+<script id="TAC" type="application/json">{}</script>
+
+<script>
+(function(){
+const F=JSON.parse(document.getElementById('FC').textContent),A=JSON.parse(document.getElementById('ACT').textContent),E=JSON.parse(document.getElementById('EXTRA').textContent),SG=JSON.parse(document.getElementById('SEG').textContent);
+const X2=E.x2,tip=document.getElementById('tip');
+const fmt=n=>Math.round(n).toLocaleString('en-US'),pct=(a,b)=>b?Math.round(a/b*100):0,escH=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const NS='http://www.w3.org/2000/svg';
+const cv=v=>getComputedStyle(document.body).getPropertyValue(v).trim();
+function el(p,n,a,t){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;if(p)p.appendChild(e);return e;}
+function showTip(h,e){tip.innerHTML=h;tip.style.opacity=1;let x=e.clientX+14,y=e.clientY+14;if(x+tip.offsetWidth>innerWidth-8)x=e.clientX-tip.offsetWidth-14;if(y+tip.offsetHeight>innerHeight-8)y=e.clientY-tip.offsetHeight-14;tip.style.left=x+'px';tip.style.top=y+'px';}
+function hideTip(){tip.style.opacity=0;}
+const stats=(id,t)=>{document.getElementById(id).innerHTML=t.map(s=>'<div class="stat"><div class="v"'+(s.c?' style="color:'+s.c+'"':'')+'>'+s.v+'</div><div class="l">'+s.l+'</div></div>').join('');};
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let kpiAnimated=false;
+function countUp(el){const to=+el.dataset.n,pre=el.dataset.pre||'';if(RM||!isFinite(to)||!kpiAnimated){el.textContent=pre+fmt(to);return;}const t0=performance.now(),dur=450,from=to*.8;(function f(t){const p=Math.min(1,(t-t0)/dur);el.textContent=pre+fmt(from+(to-from)*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f);})(t0);}
+function sparkSvg(a){a=a.filter(v=>v!=null&&isFinite(v));if(a.length<2)return '';const mn=Math.min.apply(null,a),mx=Math.max.apply(null,a),r=mx-mn||1,pts=a.map((v,i)=>[(i/(a.length-1)*96+2).toFixed(1),(22-(v-mn)/r*20).toFixed(1)]);return '<svg class="spark" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><polyline points="'+pts.map(p=>p.join(',')).join(' ')+'"/><circle cx="'+pts[pts.length-1][0]+'" cy="'+pts[pts.length-1][1]+'" r="2"/></svg>';}
+const pct7=(()=>{const act=A.actual,last=act[act.length-1];const t=new Date(last.iso+'T00:00:00');t.setDate(t.getDate()-7);let p=act[0];for(const x of act){if(new Date(x.iso+'T00:00:00')<=t)p=x;}return Math.round((last.cum-p.cum)/p.cum*100);})();
+const BRK=A.breakdown;
+const HAS=!!(SG&&SG.a&&SG.e);
+
+// --- per-tab datasets ---
+const T={
+ all:{name:'All',S:{cur:F.S.cur,target:F.S.target,prior:F.S.prior,yoy:F.S.yoy,tot25:F.S.tot25,tot26:F.S.tot26,planNow:F.S.planNow},rows:F.rows,weeks:F.weeks,actual:A.actual,
+  chips:BRK,same:HAS?['a','e','t']:['t'],yMax:8000,ticks:[0,2000,4000,6000,8000],
+  signals:[{v:F.S.l4+'%',l:'books in the final 4 weeks'},{v:'~'+F.S.by12+'%',l:'in by 12 weeks out (mid-Dec)'},{v:'+'+pct7+'%',l:'registrations vs 7 days ago',c:'var(--good)'}]},};
+if(HAS){T.a={name:'Attendees',S:SG.a.S,rows:SG.a.rows,weeks:SG.a.weeks,actual:SG.a.actual,chips:BRK.filter(b=>b[0]!=='Exhibitor staff'),same:['a'],yMax:7000,ticks:[0,2000,4000,6000]};
+T.e={name:'Exhibitors',S:SG.e.S,rows:SG.e.rows,weeks:SG.e.weeks,actual:SG.e.actual,chips:BRK.filter(b=>b[0]==='Exhibitor staff').concat(X2&&X2.exh2?[['/ '+X2.exh2.booths+' booths with staff registered',X2.exh2.covered]]:[]),same:['e'],yMax:2000,ticks:[0,500,1000,1500,2000]};}
+if(HAS)['a','e'].forEach(k=>{const s=T[k].S,wk=T[k].weeks,ci=wk.findIndex(w=>w.current);
+ T[k].signals=[{v:s.l4+'%',l:'books in the final 4 weeks'},{v:'~'+s.by12+'%',l:'in by 12 weeks out (mid-Dec)'},{v:'+'+wk[ci].actAdd,l:'registrations so far this week',c:'var(--good)'}];});
+const SAME={a:['Attendees',F.S.sameA25,F.S.sameA26,F.S.curA],e:['Exhibitor staff',F.S.sameE25,F.S.sameE26,F.S.curE],t:['Total',F.S.same25,F.S.same26,F.S.cur]};
+
+// --- chart geometry (same as before) ---
+const W=760,H=360,M={t:18,r:22,b:56,l:52};
+const iw=W-M.l-M.r,ih=H-M.t-M.b,wkMax=30;
+const X=wk=>M.l+(wkMax-wk)/wkMax*iw;
+function path(p){return p.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ');}
+function axis(svg,R,yMax,yLab,ticks){
+ ticks.forEach(t=>{const y=M.t+ih-(t/yMax)*ih;el(svg,'line',{x1:M.l,y1:y,x2:W-M.r,y2:y,stroke:'var(--line)','stroke-width':1});el(svg,'text',{x:M.l-9,y:y+4,'text-anchor':'end',fill:'var(--muted)','font-size':11,'font-family':'Roboto, Arial, sans-serif'},yLab(t));});
+ el(svg,'line',{x1:M.l,y1:M.t+ih,x2:W-M.r,y2:M.t+ih,stroke:'var(--baseline)','stroke-width':1.5});
+ [30,24,18,12,8,6,4,2,0].forEach(wk=>{const x=X(wk),row=R.find(r=>r.wk===wk);
+  el(svg,'line',{x1:x,y1:M.t+ih,x2:x,y2:M.t+ih+5,stroke:'var(--baseline)','stroke-width':1});
+  el(svg,'text',{x:x,y:M.t+ih+19,'text-anchor':'middle',fill:'var(--muted)','font-size':10.5,'font-family':'Roboto, Arial, sans-serif'},wk+'w');
+  el(svg,'text',{x:x,y:M.t+ih+32,'text-anchor':'middle',fill:'var(--muted)','font-size':9.5,'font-family':'Roboto, Arial, sans-serif',opacity:.8},row?row.date:'');});
+ el(svg,'text',{x:M.l+iw/2,y:H-4,'text-anchor':'middle',fill:'var(--ink-2)','font-size':11,'font-weight':600,'font-family':'Roboto, Arial, sans-serif','letter-spacing':'.05em'},'WEEKS BEFORE SHOW');}
+function surge(svg,lbl){const x4=X(4);el(svg,'line',{x1:x4,y1:M.t,x2:x4,y2:M.t+ih,stroke:'var(--line-2)','stroke-width':1,'stroke-dasharray':'3 3'});
+ el(svg,'text',{x:x4-6,y:M.t+13,fill:'var(--muted)','font-size':10.5,'text-anchor':'end','font-family':'Roboto, Arial, sans-serif'},lbl);}
+const kfmt=t=>t===0?'0':(t%1000===0?t/1000+'k':(t/1000).toFixed(1)+'k');
+
+function render(key){
+ const D=T[key],S=D.S,R=D.rows,WK=D.weeks,act=D.actual,last=act[act.length-1],tg=fmt(S.target);
+ const ci=WK.findIndex(w=>w.current),next4=WK.slice(ci+1,ci+5),need4=Math.round(next4.reduce((s,w)=>s+w.tgtAdd,0)/next4.length);
+ document.querySelectorAll('[data-show]').forEach(p=>{p.hidden=!p.dataset.show.split(' ').includes(key);});
+ document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===key?'true':'false'));
+ document.querySelectorAll('.tgt').forEach(x=>x.textContent=tg);
+ document.getElementById('sameTag').textContent=fmt(F.S.daysToShow)+' days out';
+ // KPIs
+ const kpis=[{lab:'Target',val:tg,n:S.target,note:{all:'team goal for the show',a:'8,000 goal minus exhibitor staff',e:'500-exhibitor goal &times; 3.1 staff each'}[key]},
+  {lab:'Registered',val:fmt(S.cur),n:S.cur,spark:WK.filter(w=>w.actCum!=null).map(w=>w.actCum),hero:1,note:(key==='all'?'<span class="chip up"><i>&#9650;</i> '+pct7+'% vs 7d</span>':'<span class="chip up"><i>&#9650;</i> '+WK[ci].actAdd+' this week</span>')+(S.planNow!=null?(()=>{const d=S.cur-S.planNow;return '<span class="chip '+(d>=0?'up':'dn')+'"><i>'+(d>=0?'&#9650;':'&#9660;')+'</i> '+fmt(Math.abs(d))+(d>=0?' ahead of':' behind')+' plan</span>';})():'')},
+  {lab:'Gap to target',val:fmt(S.target-S.cur),n:S.target-S.cur,spark:WK.filter(w=>w.actCum!=null).map(w=>S.target-w.actCum),note:'still to go',warn:1},
+  {lab:'Need / week',val:'~'+need4,n:need4,pre:'~',spark:WK.slice(ci,ci+9).map(w=>w.tgtAdd),note:'next 4 weeks, ramps later'},
+  {lab:'Days to show',val:F.S.daysToShow,n:F.S.daysToShow,note:'Mar 10, 2027'}];
+ document.getElementById('kpis').innerHTML=kpis.map(k=>'<div class="kpi'+(k.hero?' hero':'')+'"><div class="lab">'+k.lab+'</div><div class="val tnum"'+(k.n!=null?' data-n="'+k.n+'"'+(k.pre?' data-pre="'+k.pre+'"':''):'')+(k.warn?' style="color:var(--warn)"':'')+'>'+k.val+'</div><div class="note">'+k.note+(k.spark?sparkSvg(k.spark):'')+'</div></div>').join('');document.querySelectorAll('#kpis .val[data-n]').forEach(countUp);kpiAnimated=true;
+ (function(){const host=document.getElementById('steps'),fut=WK.filter(w=>w.tgtCum!=null&&!w.ended),nowT=S.planNow!=null?S.planNow:(WK[ci].tgtCum||0);if(!fut.length){host.parentNode.hidden=true;return;}host.parentNode.hidden=false;
+  const idx=[...new Set([1,2,3,4,5,6].map(k=>Math.round(k*(fut.length-1)/6)))].filter(i=>i>0),pick=[null].concat(idx.map(i=>fut[i]));
+  const lbl=w=>{const d=new Date(w.ws+'T12:00:00');d.setDate(d.getDate()+6);return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});};
+  host.innerHTML=pick.map((w,i)=>{if(!w){const d=S.cur-nowT,ok=d>=0;return '<div class="step '+(ok?'met':'miss')+'"><div class="nd">'+(ok?'&#10003;':'!')+'</div><div class="dt">Today</div><div class="tg">plan '+fmt(nowT)+'</div><div class="st">'+fmt(S.cur)+' registered, '+fmt(Math.abs(d))+(ok?' ahead':' behind')+'</div></div>';}
+   const away=Math.round((new Date(w.ws+'T12:00:00')-new Date(WK[ci].ws+'T12:00:00'))/6048e5);
+   return '<div class="step'+(i===1?' next':'')+'"><div class="nd">'+i+'</div><div class="dt">'+lbl(w)+'</div><div class="tg">target '+fmt(w.tgtCum)+'</div><div class="st">in '+away+' week'+(away===1?'':'s')+'</div></div>';}).join('');})();
+ document.getElementById('breakdown').innerHTML=D.chips.map(b=>'<span class="c"><b>'+b[1]+'</b> '+escH(b[0])+'</span>').join('')+(key!=='e'?'<span class="c">Opened <b>'+escH(F.S.openedLabel)+'</b></span>'+(F.S.spikes?'<span class="c">Peak days <b>'+escH(F.S.spikes)+'</b></span>':''):'');
+ // trajectory
+ (function(){const svg=document.getElementById('traj');svg.innerHTML='';const yMax=D.yMax,Y=v=>M.t+ih-(v/yMax)*ih;
+  axis(svg,R,yMax,kfmt,D.ticks);surge(svg,'~'+(key==='all'?F.S.l4:S.l4)+'% books after here');
+  const fut=R.filter(r=>r.plan!=null&&r.wk<last.wks),s0=[X(last.wks),Y(S.cur)];
+  const hasRange=fut.length>0&&fut.every(r=>r.pace!=null);document.getElementById('rngKey').hidden=!hasRange;
+  if(hasRange){const hi=fut.map(r=>[X(r.wk),Y(Math.max(r.prior,r.pace))]),lo=fut.map(r=>[X(r.wk),Y(Math.min(r.prior,r.pace))]).reverse();const defs=el(svg,'defs',{}),gr=el(defs,'linearGradient',{id:'gBand',x1:0,y1:0,x2:0,y2:1});el(gr,'stop',{offset:'0%','stop-color':'#0064E8','stop-opacity':.30});el(gr,'stop',{offset:'100%','stop-color':'#00C4E8','stop-opacity':.08});el(svg,'path',{d:path([s0].concat(hi).concat(lo))+'Z',fill:'url(#gBand)',stroke:'none'});}
+  el(svg,'path',{d:path(R.map(r=>[X(r.wk),Y(r.orig)])),fill:'none',stroke:'var(--muted)','stroke-width':1.6,'stroke-dasharray':'2 4',opacity:.7});
+  el(svg,'path',{d:path([s0].concat(fut.map(r=>[X(r.wk),Y(r.prior)]))),fill:'none',stroke:'var(--fore)','stroke-width':2.4,'stroke-dasharray':'6 5','stroke-linejoin':'round'});
+  el(svg,'path',{d:path([s0].concat(fut.map(r=>[X(r.wk),Y(r.plan)]))),fill:'none',stroke:'var(--y25)','stroke-width':2.6,'stroke-linejoin':'round','stroke-linecap':'round'});
+  [['plan','var(--y25)',' target'],['prior','var(--fore)',''],['pace','var(--muted)','']].forEach(([k,c,suf])=>{if(fut[fut.length-1][k]==null)return;const v=fut[fut.length-1][k];
+   el(svg,'text',{x:X(0)-8,y:Y(v)+(k==='plan'?14:k==='pace'?14:4),fill:c,'font-size':11,'font-weight':700,'text-anchor':'end','font-family':'Roboto, Arial, sans-serif'},fmt(v)+suf);});
+  el(svg,'path',{d:path(act.map(a=>[X(a.wks),Y(a.cum)])),fill:'none',stroke:'var(--actual)','stroke-width':2.8,'stroke-linecap':'round','stroke-linejoin':'round'});
+  el(svg,'circle',{cx:s0[0],cy:s0[1],r:5,fill:'var(--actual)',stroke:'var(--surface)','stroke-width':2});
+  el(svg,'text',{x:s0[0]+9,y:s0[1]-8,fill:'var(--actual)','font-size':11,'font-weight':600,'font-family':'Roboto, Arial, sans-serif'},S.cur+' now');
+  const cross=el(svg,'line',{y1:M.t,y2:M.t+ih,stroke:'var(--ink-2)','stroke-width':1,'stroke-dasharray':'3 3',opacity:0,'pointer-events':'none'}),dots=el(svg,'g',{'pointer-events':'none'});
+  const tipFor=r=>'<b>'+r.date+'</b> &middot; '+r.wk+'w'+(r.plan!=null?'<div class="r"><span>Plan</span><b>'+fmt(r.plan)+'</b></div><div class="r"><span>Prior-year pattern</span><b>'+fmt(r.prior)+'</b></div>'+(r.pace!=null?'<div class="r"><span>Current pace</span><b>'+fmt(r.pace)+'</b></div>':''):'')+'<div class="r"><span>Original curve</span><b>'+fmt(r.orig)+'</b></div>';
+  const show=(r,e)=>{const x=X(r.wk);cross.setAttribute('x1',x);cross.setAttribute('x2',x);cross.setAttribute('opacity',1);dots.innerHTML='';[['plan','var(--y25)'],['prior','var(--fore)']].forEach(([k,c])=>{if(r[k]!=null)el(dots,'circle',{cx:x,cy:Y(r[k]),r:4,fill:c,stroke:'#fff','stroke-width':1.5});});showTip(tipFor(r),e);};
+  const clear=()=>{cross.setAttribute('opacity',0);dots.innerHTML='';hideTip();};
+  let cur=-1;
+  R.forEach((r,i)=>{const x=X(r.wk);const hit=el(svg,'rect',{x:x-iw/wkMax/2,y:M.t,width:iw/wkMax,height:ih,fill:'transparent'});hit.addEventListener('mousemove',e=>{cur=i;show(r,e);});});
+  svg.onmouseleave=clear;svg.onblur=clear;svg.setAttribute('tabindex','0');svg.setAttribute('aria-describedby','trajHelp');
+  svg.onkeydown=ev=>{if(ev.key==='Escape'){clear();return;}if(ev.key!=='ArrowLeft'&&ev.key!=='ArrowRight')return;ev.preventDefault();
+   cur=cur<0?Math.max(0,R.findIndex(r=>r.wk<=last.wks)):Math.max(0,Math.min(R.length-1,cur+(ev.key==='ArrowRight'?1:-1)));const r=R[cur],bb=svg.getBoundingClientRect();show(r,{clientX:bb.left+X(r.wk)/W*bb.width,clientY:bb.top+bb.height*.3});};
+ })();
+ // same point
+ document.querySelector('#same tbody').innerHTML=D.same.map(k=>{const r=SAME[k],avg=.6*r[1]+.4*r[2],d=Math.round((r[3]/avg-1)*100);
+  return '<tr'+(k==='t'?' style="font-weight:600"':'')+'><td>'+r[0]+'</td><td class="tnum">'+fmt(r[1])+'</td><td class="tnum">'+fmt(r[2])+'</td><td class="tnum">'+fmt(r[3])+'</td><td class="tnum" style="color:'+(d>=0?'var(--good)':'var(--crit)')+';font-weight:600">'+(d>=0?'+':'')+d+'%</td></tr>';}).join('');
+ // pacing
+ (function(){const svg=document.getElementById('pacing');svg.innerHTML='';const yMax=100,Y=v=>M.t+ih-(v/yMax)*ih;
+  axis(svg,R,yMax,t=>t+'%',[0,25,50,75,100]);surge(svg,'~'+(key==='all'?F.S.l4:S.l4)+'% books after here');
+  el(svg,'path',{d:path(R.map(r=>[X(r.wk),Y(r.p26)])),fill:'none',stroke:'var(--y26)','stroke-width':2.4,'stroke-linejoin':'round','stroke-linecap':'round'});
+  el(svg,'path',{d:path(R.filter(r=>r.p25>0).map(r=>[X(r.wk),Y(r.p25)])),fill:'none',stroke:'var(--y25)','stroke-width':2.4,'stroke-linejoin':'round','stroke-linecap':'round'});
+  [[S.tot25,'var(--y25)',-8],[S.tot26,'var(--y26)',8]].forEach(([v,c,dy])=>{
+   el(svg,'text',{x:X(0)-8,y:Y(100)+dy+4,'text-anchor':'end',fill:c,'font-size':11,'font-weight':700,'font-family':'Roboto, Arial, sans-serif'},fmt(v));});
+  el(svg,'path',{d:path(act.map(a=>[X(a.wks),Y(a.cum/S.target*100)])),fill:'none',stroke:'var(--actual)','stroke-width':2.8,'stroke-linecap':'round','stroke-linejoin':'round'});
+  el(svg,'circle',{cx:X(last.wks),cy:Y(S.cur/S.target*100),r:5,fill:'var(--actual)',stroke:'var(--surface)','stroke-width':2});
+  el(svg,'text',{x:X(last.wks)+9,y:Y(S.cur/S.target*100)-8,fill:'var(--actual)','font-size':11,'font-weight':600,'font-family':'Roboto, Arial, sans-serif'},fmt(S.cur));
+  R.forEach(r=>{const x=X(r.wk);const hit=el(svg,'rect',{x:x-iw/wkMax/2,y:M.t,width:iw/wkMax,height:ih,fill:'transparent'});
+   hit.addEventListener('mousemove',e=>showTip('<b>'+r.date+'</b> &middot; '+r.wk+'w<div class="r"><span style="color:var(--y25)">PB2025</span><b>'+r.p25+'%</b></div><div class="r"><span style="color:var(--y26)">PB2026</span><b>'+r.p26+'%</b></div>',e));
+   hit.addEventListener('mouseleave',hideTip);});})();
+ // momentum
+ (function(){const svg=document.getElementById('momentum');svg.innerHTML='';const s=Math.max(0,ci-4),win=WK.slice(s,s+8);
+  const W=760,H=300,M={t:18,r:14,b:46,l:42},iw=W-M.l-M.r,ih=H-M.t-M.b;
+  let yMax=Math.max(...win.map(w=>Math.max(w.tgtAdd||0,(w.actAdd!=null?w.actAdd:0))));yMax=Math.max(30,Math.ceil(yMax*1.18/10)*10);
+  const Y=v=>M.t+ih-(v/yMax)*ih,bw=iw/win.length;
+  [0,.25,.5,.75,1].map(f=>Math.round(yMax*f)).forEach(tv=>{const y=Y(tv);el(svg,'line',{x1:M.l,y1:y,x2:W-M.r,y2:y,stroke:cv('--line'),'stroke-width':1});el(svg,'text',{x:M.l-8,y:y+4,'text-anchor':'end',fill:cv('--muted'),'font-size':10.5,'font-family':'Roboto, Arial, sans-serif'},tv);});
+  win.forEach((w,i)=>{const cx=M.l+i*bw+bw/2;if(w.actAdd!=null&&w.actAdd>0){const h=(w.actAdd/yMax)*ih,bwid=Math.min(32,bw*0.5);
+   el(svg,'rect',{x:cx-bwid/2,y:Y(w.actAdd),width:bwid,height:h,rx:4,fill:cv('--accent')});
+   el(svg,'text',{x:cx,y:Y(w.actAdd)-5,'text-anchor':'middle',fill:cv('--accent'),'font-size':11,'font-weight':700,'font-family':'Roboto, Arial, sans-serif'},w.actAdd);}});
+  const pts=win.map((w,i)=>[M.l+i*bw+bw/2,Y(w.tgtAdd)]);
+  el(svg,'path',{d:pts.map((p,i)=>(i?'L':'M')+p[0]+' '+p[1]).join(' '),fill:'none',stroke:cv('--y25'),'stroke-width':2.2,'stroke-dasharray':'5 4'});
+  pts.forEach(p=>el(svg,'circle',{cx:p[0],cy:p[1],r:3,fill:cv('--y25')}));
+  win.forEach((w,i)=>{const p=pts[i];const near=(w.actAdd!=null&&w.actAdd>0&&Math.abs(w.tgtAdd-w.actAdd)<yMax*0.14);const dy=near?15:-9;
+   el(svg,'text',{x:p[0],y:p[1]+dy,'text-anchor':'middle',fill:cv('--y25'),'font-size':10.5,'font-weight':700,'font-family':'Roboto, Arial, sans-serif'},w.tgtAdd);});
+  win.forEach((w,i)=>{const cx=M.l+i*bw+bw/2;
+   el(svg,'text',{x:cx,y:M.t+ih+18,'text-anchor':'middle',fill:cv('--muted'),'font-size':10.5,'font-family':'Roboto, Arial, sans-serif'},w.wksOut+'w');
+   el(svg,'text',{x:cx,y:M.t+ih+31,'text-anchor':'middle',fill:cv('--muted'),'font-size':9.5,opacity:.85,'font-family':'Roboto, Arial, sans-serif'},w.label);});
+  const lw=WK[ci-1],tw=WK[ci];
+  stats('paceStats',[{v:'+'+lw.actAdd,l:'added last week (plan wanted ~'+lw.tgtAdd+')',c:lw.actAdd>=lw.tgtAdd?'var(--good)':'var(--crit)'},{v:'+'+tw.actAdd,l:'so far this week, through '+escH(F.S.throughLabel)+' (plan ~'+tw.tgtAdd+')'},{v:'~'+need4+'/wk',l:'plan quota next 4 weeks (thru '+escH(F.S.next4End)+'), ramps later',c:'var(--warn)'}]);})();
+ // signals
+ stats('signals',D.signals);
+ // table
+ const split=key==='all'&&WK.some(w=>w.tgtA!=null);document.querySelectorAll('#track .q').forEach(th=>th.hidden=!split);
+ const tb=document.querySelector('#track tbody');tb.innerHTML='';
+ WK.forEach(w=>{const tr=document.createElement('tr');if(w.current)tr.className='now';
+  const aCol=(w.actAdd==null)?'var(--muted)':(w.current?'var(--ink)':(w.actAdd>=w.tgtAdd?'var(--good)':'var(--crit)'));
+  tr.innerHTML='<td>'+w.label+'</td><td class="tnum">'+w.wksOut+'</td>'+(split?'<td class="tnum" style="color:var(--muted)">'+w.tgtA+'</td><td class="tnum" style="color:var(--muted)">'+w.tgtE+'</td>':'')+'<td class="tnum" style="color:var(--muted)">+'+fmt(w.tgtAdd)+'</td><td class="tnum" style="color:'+aCol+';font-weight:600">'+(w.actAdd==null?'&ndash;':'+'+w.actAdd)+'</td><td class="tnum">'+(w.tgtCum==null?'&ndash;':fmt(w.tgtCum))+'</td><td class="tnum actual">'+(w.actCum==null?'&ndash;':fmt(w.actCum))+'</td>';
+  tb.appendChild(tr);});
+ try{localStorage.setItem('pbx27tab',key);}catch(e){}
+}
+document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>render(b.dataset.tab)));
+let start='all';try{const s=localStorage.getItem('pbx27tab');if(s&&T[s])start=s;}catch(e){}
+const hm={attendees:'a',exhibitors:'e',all:'all'}[location.hash.slice(1)];if(hm)start=hm;
+
+// --- static panels ---
+function hbars(id,obj,opt){opt=opt||{};const host=document.getElementById(id);if(!host)return;
+ const es=Object.entries(obj).filter(e=>e[0]!=='Not specified');const max=Math.max(...es.map(e=>e[1]));const tot=es.reduce((s,e)=>s+e[1],0);
+ host.innerHTML=es.map(([k,v])=>{const p=Math.round(v/max*100),sh=Math.round(v/tot*100);
+  return '<div class="hbar"><div class="lb">'+escH(k)+'</div><div class="tk"><div class="fl" style="width:'+p+'%'+(opt.color?';background:'+opt.color:'')+'"></div></div><div class="vl">'+v+(opt.showPct?' <span style="color:var(--muted);font-weight:400">'+sh+'%</span>':'')+'</div></div>';}).join('');}
+hbars('industries',E.industry,{});hbars('channels',E.channel,{showPct:true});
+(function(){const p=document.getElementById('whoPanel2');if(!E.level&&!E.geo){p.remove();return;}
+ if(E.level)hbars('levels',E.level,{showPct:true});else document.getElementById('levels').closest('div').remove();
+ if(E.geo){hbars('states',E.geo.states,{});hbars('countries',E.geo.countries,{showPct:true});document.getElementById('geoHead').textContent='Top states ('+Math.round(E.geo.us/E.geo.known*100)+'% of registrants are in the US)';}
+ document.getElementById('geoTag').textContent=E.scope==='all'?'all registrants':'attendees only';})();
+document.getElementById('whoTag').textContent=E.scope==='all'?'all registrants':'attendees only';document.getElementById('foot1').innerHTML=F.S.foot;
+(function(){const hp=document.getElementById('hlPanel');if(!E.highlights||!E.highlights.length){if(hp)hp.remove();}else stats('highlights',E.highlights.map(h=>({v:h.v,l:escH(h.l)+'<br><span style="color:var(--muted)">'+escH(h.d)+'</span>'})));
+ const S=F.S,rem=S.prior-S.cur;document.getElementById('trace').innerHTML='<ul class="foot" style="padding-left:18px;margin:10px 0 0"><li><b>Prior-year pattern, '+fmt(S.prior)+':</b> '+fmt(S.cur)+' registered on '+escH(S.asOf)+' plus '+fmt(rem)+' still expected from the 60/40 blend of the 2025 and 2026 shows after '+S.daysToShow+' days out.</li><li><b>Current pace, '+fmt(S.pace)+':</b> the same remaining history scaled by '+S.r4+', the share of the blended pattern the last 4 weeks delivered ('+S.a27+' added).</li><li><b>Plan, '+fmt(S.target)+':</b> the remaining history scaled by '+S.uA+' for attendees and '+S.uE+' for exhibitor staff, fixed at the '+escH(S.rebaseLabel)+' re-base so you can see how far ahead or behind it you are.</li></ul>';
+ const rows=[['Registered','Swapcard registrations through '+S.asOf+', excluding '+S.excluded+' test records.','Swapcard Registration-by-UTM export, last registration '+S.lastReg],['Plan to '+fmt(S.target),'Fixed target path from the '+S.rebaseLabel+' re-base, split attendee-side '+fmt(S.TA)+' and exhibitor staff '+fmt(S.TE)+'.','config/plan.json; 2025 and 2026 ticket databases'],['Prior-year pattern','Registered today plus the blended remaining history of the two prior shows.','2025 and 2026 registration databases'],['Current pace','As the prior-year pattern, scaled by the last-4-weeks ratio.','Swapcard export; 2025 and 2026 databases'],['Attendee-side','General, airline, PartsBase staff, student and VIP registrations.','Swapcard Ticket Type and Attendee Type'],['Exhibitor staff','Registrations on an Exhibitor ticket.','Swapcard Ticket Type'],['Untracked','Registrations with no UTM source or medium.','Swapcard UTM columns']];
+ document.querySelector('#defs tbody').innerHTML=rows.map(r=>'<tr><td>'+escH(r[0])+'</td><td>'+escH(r[1])+'</td><td style="color:var(--muted)">'+escH(r[2])+'</td></tr>').join('');})();
+document.getElementById('fresh').innerHTML='Swapcard export &middot; last registration <b>'+escH(F.S.lastReg)+'</b> &middot; <b>'+fmt(F.S.cur)+'</b> registered &middot; plan re-based <b>'+escH(F.S.rebaseLabel)+'</b> &middot; '+fmt(F.S.excluded)+' test records excluded';
+(function(){const nw=E.newret.New,rt=E.newret.Returning,tot=nw+rt;
+ document.getElementById('segsplit').innerHTML='<div style="display:flex;height:36px;border-radius:8px;overflow:hidden;border:1px solid var(--line-2)">'+
+  '<div style="width:'+(rt/tot*100)+'%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">Returning '+rt+'</div>'+
+  '<div style="width:'+(nw/tot*100)+'%;background:var(--accent-2);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">New '+nw+'</div></div>';})();
+(function(){const x=E.exh;if(!x)return;stats('exhstats',[{v:fmt(x.confirmed),l:'exhibitors confirmed'},{v:'$'+x.boothTotalM+'M',l:'booth revenue booked'},{v:'$'+x.paidM+'M',l:'collected to date'},{v:x.renewalPct+'%',l:'are renewals',c:'var(--good)'},{v:fmt(x.pending),l:'in open pipeline'}]);})();
+(function(){if(!(X2&&X2.seg)){['segStats','exhstats','exStats'].forEach(id=>{const e=document.getElementById(id),p=e&&e.closest('.panel');if(p)p.remove();});return;}const Sg=X2.seg,ex=X2.exh2;if(!E.exh){const eh=document.getElementById('exhstats'),pp=eh&&eh.closest('.panel');if(pp)pp.remove();}
+ stats('segStats',[{v:fmt(Sg.a),l:'attendees (general, airline, PartsBase staff, student, VIP)'},{v:fmt(Sg.e),l:'exhibitor staff',c:'var(--y25)'},{v:pct(Sg.e,Sg.a+Sg.e)+'%',l:'of registrations are exhibitor staff'}]);
+ (function(){const s=document.getElementById('segWeekly'),W=760,H=260,M={t:22,r:14,b:40,l:42},iw=W-M.l-M.r,ih=H-M.t-M.b,wk=Sg.weekly,n=wk.length;
+  const mx=Math.ceil(Math.max(...wk.map(w=>w.a+w.e))*1.18/10)*10,Y=v=>M.t+ih-v/mx*ih,bw=Math.min(46,iw/n*.55);
+  [0,.25,.5,.75,1].map(f=>Math.round(mx*f)).forEach(t=>{el(s,'line',{x1:M.l,x2:W-M.r,y1:Y(t),y2:Y(t),stroke:cv('--line')});el(s,'text',{x:M.l-8,y:Y(t)+4,'text-anchor':'end',fill:cv('--muted'),'font-size':10.5},t);});
+  wk.forEach((w,i)=>{const cx=M.l+(i+.5)*iw/n;
+   el(s,'rect',{x:cx-bw/2,y:Y(w.a),width:bw,height:Y(0)-Y(w.a),rx:3,fill:cv('--accent')});
+   if(w.e)el(s,'rect',{x:cx-bw/2,y:Y(w.a+w.e),width:bw,height:Y(w.a)-Y(w.a+w.e),rx:3,fill:cv('--y25')});
+   el(s,'text',{x:cx,y:Y(w.a+w.e)-6,'text-anchor':'middle',fill:cv('--ink'),'font-size':11,'font-weight':700},w.a+w.e);
+   el(s,'text',{x:cx,y:M.t+ih+18,'text-anchor':'middle',fill:cv('--muted'),'font-size':10.5},'Wk of '+w.label+(i===n-1?'*':''));});})();
+ const pk=Sg.weekly.reduce((m,w)=>w.e>m.e?w:m,Sg.weekly[0]);document.getElementById('segTake').innerHTML='Exhibitor staff arrived mostly the week of <b>'+pk.label+'</b> (+'+pk.e+'). Attendee adds track the email sends. *Current week through '+escH(F.S.throughLabel)+'.';
+ if(ex){const prem=ex.tiers.filter(t=>t[0]==='Platinum'||t[0]==='Gold').reduce((a,t)=>a+t[1],0);
+ stats('exStats',[{v:fmt(ex.regs),l:'exhibitor staff registered',c:'var(--y25)'},{v:'~'+fmt(ex.badges),l:'exhibitor badges sold'},{v:pct(ex.regs,ex.badges)+'%',l:'of badges registered',c:'var(--warn)'},{v:ex.covered+' / '+ex.booths,l:'booth companies with staff registered'}]);
+ document.getElementById('exBar').innerHTML='<div style="display:flex;height:36px;border-radius:8px;overflow:hidden;border:1px solid var(--line-2);font-size:13px;font-weight:700;background:var(--surface-2)">'+
+  '<div style="width:'+Math.max(6,pct(ex.regs,ex.badges))+'%;background:var(--y25);color:#fff;display:flex;align-items:center;justify-content:center">'+ex.regs+'</div>'+
+  '<div style="flex:1;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;color:var(--ink-2)">'+fmt(ex.badges-ex.regs)+' badges still to register</div></div>';
+ document.querySelector('#exTiers tbody').innerHTML=ex.tiers.map(t=>'<tr><td>'+t[0]+'</td><td class="tnum">'+t[1]+'</td><td class="tnum">'+t[2]+'</td><td class="tnum" style="font-weight:600">'+pct(t[2],t[1])+'%</td><td class="tnum">'+t[3]+'</td></tr>').join('');
+ const tmax=Math.max(...ex.top.map(t=>t[1]));
+ document.getElementById('exTop').innerHTML=ex.top.map(t=>'<div class="hbar"><div class="lb" title="'+t[0]+'">'+t[0]+'</div><div class="tk"><div class="fl" style="width:'+(t[1]/tmax*100)+'%;background:var(--y25)"></div></div><div class="vl">'+t[1]+'</div></div>').join('');
+ document.getElementById('exPrem0').innerHTML=ex.prem0.map(p=>'<span class="c">'+p[0]+' <b style="color:'+(p[1]==='Platinum'?'var(--navy)':'var(--dblue)')+'">'+p[1]+'</b></span>').join('');
+ document.getElementById('exTake').innerHTML='<b>'+ex.prem0.length+' of '+prem+' Platinum and Gold exhibitors have no staff registered yet</b> &mdash; the highest-value accounts and the clearest outreach list. Registrations are matched to booth companies by email domain, then company name; '+ex.unmatched+' could not be matched. The ~900 figure works out to about 3 badges per booth.';}
+})();
+// --- Page 3: tactics ---
+(function(){
+ const T=JSON.parse(document.getElementById('TAC').textContent),P3=document.getElementById('page3');
+ if(!T||!T.gap){const b=document.querySelector('#pages button[data-page="tactics"]');if(b)b.remove();if(P3)P3.remove();return;}
+ const G=T.gap,O=T.observed,e=escH;
+ const mdy=iso=>new Date(iso+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'});
+ const TC={'Registration push':'#0064E8','Exhibitor spotlight':'#00C4E8','Exhibitor and sponsor':'#02007F','Attendee value':'#E8A800','Referral':'#E84700','Show logistics':'#a4a7ae','Other':'#d5d7da'};
+ const perWk=Math.round(G.gapToPrior/Math.max(G.weeksLeft,1));
+ document.getElementById('tacAsOf').textContent='as of '+T.asOf;
+ // headline numbers
+ const K=[{lab:'Gap to '+fmt(G.target)+' on the prior-year pattern',val:fmt(G.gapToPrior),hero:1,note:'we land at '+fmt(G.priorLanding)+'; at the current pace '+fmt(G.paceLanding)}];
+ if(G.attendeeGap!=null){K.push({lab:'Attendee-side gap',val:fmt(G.attendeeGap),note:'lands at '+fmt(G.attendeeLanding)+' against a target of '+fmt(G.attendeeTarget),warn:1});
+  K.push({lab:'Exhibitor staff',val:'+'+fmt(G.exhibitorAhead),note:'lands at '+fmt(G.exhibitorLanding)+' against a target of '+fmt(G.exhibitorTarget)});}
+ if(O.needPerSend)K.push({lab:'Needed per registration email, next 4 weeks',val:'~'+fmt(O.needPerSend),note:'plan ~'+fmt(G.quota4)+' registrations over '+O.regEmails4+' emails (to '+e(G.next4End)+'). Completed broad sends brought a median '+(O.blastRegsMedian==null?'n/a':Math.round(O.blastRegsMedian))+' tagged.'});
+ document.getElementById('tacKpis').innerHTML=K.map(k=>'<div class="kpi'+(k.hero?' hero':'')+'"><div class="lab">'+k.lab+'</div><div class="val tnum"'+(k.warn?' style="color:var(--warn)"':'')+'>'+k.val+'</div><div class="note">'+k.note+'</div></div>').join('');
+ document.getElementById('tacLead').innerHTML='Closing the gap to '+fmt(G.target)+' needs about <b>'+fmt(G.gapToPrior)+'</b> registrations beyond the prior-year pattern over the <b>'+G.weeksLeft+'</b> weeks left, roughly <b>'+fmt(perWk)+' a week</b> on top of what the pattern already brings.'+(G.attendeeGap!=null?' All of it is attendee-side: exhibitor staff are ahead of their target.':'');
+
+ // send ledger
+ document.querySelector('#ledger tbody').innerHTML=T.ledger.map(r=>{
+  const tag=r.regs==null?'<span class="nt">link not tagged</span>':fmt(r.regs)+(r.partial?'*':'');
+  return '<tr'+(r.partial?' class="part"':'')+'><td>'+e(r.label)+(r.partial?' <span class="nt">(sent today, partial)</span>':'')+'</td><td class="tnum">'+mdy(r.date)+'</td><td class="tnum">'+fmt(r.delivered)+'</td><td class="tnum">'+r.openPct+'%</td><td class="tnum">'+r.clickPct+'%</td><td class="tnum" style="font-weight:600">'+tag+'</td><td class="tnum">'+(r.regsPer1k==null?'&ndash;':r.regsPer1k)+'</td><td class="tnum">'+r.regs48+'</td><td class="tnum" style="color:var(--muted)">'+r.typical48+'</td></tr>';}).join('');
+
+ // calendar against need
+ const W=T.weeks.slice(0,16),svg=document.getElementById('calSvg');svg.innerHTML='';
+ const themes=Object.keys(TC).filter(t=>W.some(w=>w.email[t]));
+ document.getElementById('calKey').innerHTML=themes.map(t=>'<span><i class="dot" style="background:'+TC[t]+'"></i>'+e(t)+'</span>').join('')+'<span><i class="swatch dash" style="border-top-color:var(--ink)"></i>Plan: registrations needed per week (right axis)</span>';
+ const w0=760,h0=300,m={t:18,r:46,b:40,l:36},iw=w0-m.l-m.r,ih=h0-m.t-m.b,n=W.length;
+ const sm=Math.max(4,Math.max.apply(null,W.map(w=>Object.keys(w.email).reduce((s,k)=>s+w.email[k],0)))+1),qm=Math.ceil(Math.max.apply(null,W.map(w=>w.quota))*1.1/100)*100;
+ const Y=v=>m.t+ih-v/sm*ih,YQ=v=>m.t+ih-v/qm*ih,bw=Math.min(26,iw/n*.6);
+ for(let i=0;i<=4;i++){const v=Math.round(sm*i/4),y=Y(sm*i/4);el(svg,'line',{x1:m.l,x2:w0-m.r,y1:y,y2:y,stroke:cv('--line')});el(svg,'text',{x:m.l-6,y:y+4,'text-anchor':'end',fill:cv('--muted'),'font-size':10.5},v);
+  el(svg,'text',{x:w0-m.r+6,y:y+4,fill:cv('--muted'),'font-size':10.5},Math.round(qm*i/4));}
+ W.forEach((w,i)=>{const cx=m.l+(i+.5)*iw/n;let acc=0;
+  const tipH='<b>Week of '+e(w.label)+'</b><div class="r"><span>Plan needs</span><b>'+w.quota+'</b></div>'+Object.keys(w.email).map(k=>'<div class="r"><span><i class="dot" style="background:'+(TC[k]||'#ccc')+';margin-right:6px"></i>'+e(k)+' emails</span><b>'+w.email[k]+'</b></div>').join('')+(Object.keys(w.social).length?'<div class="r"><span>Social posts</span><b>'+Object.keys(w.social).reduce((s,k)=>s+w.social[k],0)+'</b></div>':'');
+  Object.keys(TC).forEach(k=>{const v=w.email[k]||0;if(!v)return;const y1=Y(acc+v),y0=Y(acc),r=el(svg,'rect',{x:cx-bw/2,y:y1,width:bw,height:Math.max(1,y0-y1-1),fill:TC[k]});r.addEventListener('mousemove',ev=>showTip(tipH,ev));r.addEventListener('mouseleave',hideTip);acc+=v;});
+  if(i%2===0)el(svg,'text',{x:cx,y:m.t+ih+16,'text-anchor':'middle',fill:cv('--muted'),'font-size':10},w.label);});
+ el(svg,'path',{d:W.map((w,i)=>(i?'L':'M')+(m.l+(i+.5)*iw/n).toFixed(1)+' '+YQ(w.quota).toFixed(1)).join(' '),fill:'none',stroke:cv('--ink'),'stroke-width':2,'stroke-dasharray':'5 4'});
+ el(svg,'text',{x:m.l,y:h0-4,fill:cv('--muted'),'font-size':10},'Next 16 weeks. Left axis: emails scheduled that week (ClickUp). Weeks start Sunday.');
+ const ce=T.calendar.email,cs=T.calendar.social,sum=o=>Object.keys(o).reduce((s,k)=>s+o[k],0);
+ document.getElementById('calTake').innerHTML='Still on the calendar: <b>'+T.calendar.emailTotal+' emails</b> ('+(ce['Registration push']||0)+' registration pushes, '+(ce['Exhibitor spotlight']||0)+' exhibitor spotlights, '+(sum(ce)-(ce['Registration push']||0)-(ce['Exhibitor spotlight']||0))+' other) and <b>'+T.calendar.socialTotal+' social posts</b> ('+(cs['Registration push']||0)+' registration, '+(cs['Exhibitor spotlight']||0)+' exhibitor spotlight). Schedule pulled from ClickUp '+e(T.pulled.clickup)+'.';
+
+ // recommendations
+ const lab=['','Low','Medium','High'];
+ document.getElementById('recs').innerHTML=T.recommendations.map(r=>{
+  const imp=r.impact?'<div class="imp">'+['low','base','high'].map(k=>'<div><b>'+fmt(r.impact[k])+'</b>'+k+'</div>').join('')+'<div style="max-width:42ch"><b style="font-size:13px">'+e(r.impact.unit)+'</b>'+e(r.impact.basis)+'</div></div>':'<div class="imp"><div style="color:var(--muted)">Not sized: no data to size it from.</div></div>';
+  return '<div class="rec"><h3><span>'+e(r.title)+'</span><span class="conf">Confidence <span class="pips" role="img" aria-label="'+lab[r.confidence]+' confidence">'+[1,2,3].map(i=>'<i class="'+(i<=r.confidence?'on':'')+'"></i>').join('')+'</span> '+lab[r.confidence]+'</span></h3>'+
+   '<p><b>Evidence.</b> '+e(r.evidence)+'</p><p><b>Next step.</b> '+e(r.action)+'</p>'+imp+
+   '<p style="font-size:12px;color:var(--muted)">'+e(r.confidenceWhy)+'</p>'+(r.assumptions&&r.assumptions.length?'<details><summary>Assumptions</summary><ul>'+r.assumptions.map(a=>'<li>'+e(a)+'</li>').join('')+'</ul></details>':'')+'</div>';}).join('');
+ document.getElementById('tacAssume').innerHTML=T.assumptions.map(a=>'<li>'+e(a)+'</li>').join('')+'<li>HubSpot stats pulled '+e(T.pulled.hubspot)+'.</li>';
+})();
+// --- Page 2: where registrations come from ---
+(function(){
+ const ATTR=JSON.parse(document.getElementById('ATTR').textContent),TYPES=ATTR.types||null,NC='(no campaign)',UT='Untracked (no UTM)';
+ const COL={'Email · HubSpot':'--sky','Email · Mailchimp (legacy)':'--bblue','SMS':'--orange','Website & landing pages':'--dblue','LinkedIn / social':'--dorange','AI referral':'--yellow','Referral / other':'--muted','Untracked (no UTM)':'#d5d7da','Mixed':'#d5d7da','Unmapped':'--crit'};
+ const textOn=c=>{const m=c.replace('#','').match(/.{2}/g).map(h=>parseInt(h,16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*m[0]+.7152*m[1]+.0722*m[2]>.3?cv('--navy'):'#fff';};
+ const col=k=>{const c=COL[k]||'--muted';return c.charAt(0)==='-'?cv(c):c;};
+ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const mdy=iso=>{const m=iso.match(/^(\d{4})-(\d{2})-(\d{2})/);return new Date(+m[1],m[2]-1,+m[3]).toLocaleDateString('en-US',{month:'short',day:'numeric'});};
+ const send=c=>/^\d{4}-\d{1,2}-\d{1,2}/.test(c)?mdy(c.replace(/^(\d{4})-(\d{1,2})-(\d{1,2}).*/,(m,y,mo,d)=>y+'-'+('0'+mo).slice(-2)+'-'+('0'+d).slice(-2)))+' send':c;
+ const sum=o=>Object.keys(o).reduce((s,k)=>s+o[k],0);
+ const WHO={all:'All registrations',a:'Attendee-side registrations',e:'Exhibitor staff registrations'};
+ const DESC={
+  all:'All registrations in the Swapcard export, by the tracked source of the registration link (UTM). Exhibitor staff register through the exhibitor portal and carry no UTM, so they sit inside &ldquo;Untracked&rdquo; and make it look bigger than it is for attendees. Use the Attendees tab for the attendee read.',
+  a:'Attendee-side registrations (general, airline, PartsBase staff, student and VIP) by the tracked source of the registration link (UTM). Exhibitor staff are left out.',
+  e:'Exhibitor staff register through the exhibitor portal, so almost none carry a UTM. This view is here for completeness; the attendee view is the one to steer by.'};
+ let AT=ATTR,win='all',chan='all',last4=[];const open={};
+ const inWin=(byWeek,w)=>w==='all'?sum(byWeek):last4.reduce((s,i)=>s+(byWeek[i]||0),0);
+
+ // campaign table, channel and self-reported bars (listeners attach once; they read the current AT)
+ const rowsFor=()=>AT.campaigns.map((c,i)=>({c,i,n:inWin(c.byWeek,win)})).filter(r=>r.n>0&&(chan==='all'||r.c.channel===chan)).sort((a,b)=>(a.c.campaign===NC)-(b.c.campaign===NC)||b.n-a.n);
+ function renderCamps(){const R=rowsFor(),tot=R.reduce((s,r)=>s+r.n,0)||1,mx=Math.max.apply(null,R.map(r=>r.n).concat([1]));
+  document.querySelector('#campTbl tbody').innerHTML=R.map(r=>{const c=r.c,un=c.campaign===NC,o=!!open[r.i];
+   const content=c.content.map(k=>({n:k.name,v:inWin(k.byWeek,win)})).filter(k=>k.v>0);
+   return '<tr class="camp'+(un?' untag':'')+'"><td><div class="nm"><button class="xp" type="button" data-i="'+r.i+'" aria-expanded="'+o+'" aria-label="Show links for '+esc(c.campaign)+'">'+(o?'&#9662;':'&#9656;')+'</button><span class="t">'+esc(un?'No campaign tag':c.campaign)+'</span></div></td>'+
+    '<td><span class="ch"><i class="dot" style="background:'+col(c.channel)+'"></i>'+esc(c.channel)+'</span></td><td class="tnum" style="font-weight:600">'+r.n+'</td>'+
+    '<td class="tnum"><span class="sh">'+(r.n/tot<.005?'<1':Math.round(r.n/tot*100))+'%<i style="width:'+Math.round(r.n/mx*44)+'px"></i></span></td><td class="tnum">'+mdy(c.first)+'</td><td class="tnum">'+mdy(c.last)+'</td></tr>'+
+    '<tr class="sub"'+(o?'':' hidden')+'><td colspan="6"><div class="cl">'+content.map(k=>'<span>'+esc(k.n==='(none)'?'no content tag':k.n)+'</span><b>'+k.v+'</b>').join('')+'</div></td></tr>';}).join('')||'<tr><td colspan="6" style="text-align:center;color:var(--muted)">No registrations in this window.</td></tr>';}
+ const bars=(id,rows,colorFn)=>{const mx=Math.max.apply(null,rows.map(r=>r[1]).concat([1])),tot=rows.reduce((s,r)=>s+r[1],0)||1;
+  document.getElementById(id).innerHTML=rows.map(([k,v])=>'<div class="hbar" style="grid-template-columns:150px 1fr 70px"><div class="lb" title="'+esc(k)+'">'+esc(k)+'</div><div class="tk"><div class="fl" style="width:'+Math.round(v/mx*100)+'%;background:'+colorFn(k)+'"></div></div><div class="vl">'+v+' <span style="color:var(--muted);font-weight:400">'+pct(v,tot)+'%</span></div></div>').join('')||'<div style="color:var(--muted);font-size:13px">Nothing to show.</div>';};
+ function renderFilter(){const all=AT.campaigns.map(c=>({c,n:inWin(c.byWeek,win)})).filter(r=>r.n>0),by={};all.forEach(r=>{by[r.c.channel]=(by[r.c.channel]||0)+r.n;});
+  if(chan!=='all'&&!by[chan])chan='all';
+  const chip=(k,lab,n)=>'<button type="button" class="fchip" data-ch="'+esc(k)+'" aria-pressed="'+(chan===k)+'">'+(k==='all'?'':'<i class="dot" style="background:'+col(k)+'"></i>')+esc(lab)+' <b>'+n+'</b></button>';
+  document.getElementById('chanFilter').innerHTML=chip('all','All channels',all.reduce((s,r)=>s+r.n,0))+Object.keys(by).sort((a,b)=>by[b]-by[a]).map(k=>chip(k,k==='Mixed'?'No campaign tag':k,by[k])).join('');}
+ function renderChannels(){const t=win==='all'?AT.channelTotals:AT.weekly.slice(-4).reduce((m,w)=>{Object.keys(w.counts).forEach(k=>m[k]=(m[k]||0)+w.counts[k]);return m;},{});
+  bars('chanBars',AT.channels.map(c=>[c,t[c]||0]).filter(r=>r[1]>0),col);document.getElementById('chanWin').textContent=win==='all'?'all time':'last 4 weeks';}
+ document.querySelector('#campTbl tbody').addEventListener('click',e=>{const b=e.target.closest('button.xp');if(!b)return;open[b.dataset.i]=!open[b.dataset.i];renderCamps();const nb=document.querySelector('#campTbl button.xp[data-i="'+b.dataset.i+'"]');if(nb)nb.focus();});
+ document.getElementById('winTabs').addEventListener('click',e=>{const b=e.target.closest('button[data-win]');if(!b)return;win=b.dataset.win;
+  document.querySelectorAll('#winTabs button').forEach(x=>x.setAttribute('aria-selected',x===b?'true':'false'));renderFilter();renderCamps();renderChannels();});
+ document.getElementById('chanFilter').addEventListener('click',e=>{const b=e.target.closest('button[data-ch]');if(!b)return;chan=b.dataset.ch===chan?'all':b.dataset.ch;renderFilter();renderCamps();});
+ document.getElementById('csvBtn').addEventListener('click',()=>{const q=s=>'"'+String(s).replace(/"/g,'""')+'"',L=[['campaign','content','channel','registrations'].join(',')];
+  rowsFor().forEach(r=>{r.c.content.forEach(k=>{const v=inWin(k.byWeek,win);if(v)L.push([q(r.c.campaign),q(k.name),q(r.c.channel),v].join(','));});});
+  const csv=L.join('\n'),btn=document.getElementById('csvBtn'),box=document.getElementById('csvOut'),done=()=>{btn.textContent='Copied';setTimeout(()=>{btn.textContent='Copy as CSV';},1800);};
+  const fallback=()=>{box.hidden=false;box.value=csv;box.focus();box.select();btn.textContent='Select and copy below';};
+  try{navigator.clipboard.writeText(csv).then(done,fallback);}catch(e){fallback();}});
+
+ // everything that depends on the registration-type tab
+ function draw(key){
+  AT=(TYPES&&TYPES[key])||ATTR;last4=AT.weekly.slice(-4).map(w=>w.iso);
+  const tracked=AT.total-AT.untracked,tw=AT.tw,lw=AT.lw;
+  const tc=tw.pie.filter(p=>p[0]!==UT&&p[1]>0).sort((a,b)=>b[1]-a[1])[0],tk=tw.camps[0];
+  const K=[{lab:'Tracked',val:fmt(tracked),note:'of '+fmt(AT.total)+' registered have a UTM source',hero:1},
+   {lab:'Untracked',val:AT.untrackedPct+'%',note:fmt(AT.untracked)+' with no UTM source',warn:1},
+   {lab:'Top channel &middot; this week',val:tc?tc[0]:'&ndash;',note:tc?tc[1]+' registrations, '+pct(tc[1],tw.n)+'% of the week':'no tracked registrations yet',sm:1},
+   {lab:'Top campaign &middot; this week',val:tk?esc(send(tk[0])):'&ndash;',note:tk?tk[1]+' registrations &middot; '+esc(tk[0]):'none tagged yet',sm:1}];
+  document.getElementById('p2kpis').innerHTML=K.map(k=>'<div class="kpi'+(k.hero?' hero':'')+'"><div class="lab">'+k.lab+'</div><div class="val tnum'+(k.sm?' sm':'')+'"'+(k.warn?' style="color:var(--warn)"':'')+'>'+k.val+'</div><div class="note">'+k.note+'</div></div>').join('');
+  document.getElementById('p2desc').innerHTML=TYPES?DESC[key]:DESC.all;
+  document.getElementById('p2who').textContent=(TYPES?WHO[key]:WHO.all);
+
+  // weekly stacked bars
+  const chTot=AT.channelTotals,chans=AT.channels.filter(c=>chTot[c]>0);
+  document.getElementById('chanLeg').innerHTML=chans.map(c=>'<span><i class="dot" style="background:'+col(c)+'"></i>'+esc(c)+'</span>').join('');
+  (function(){const s=document.getElementById('chanWeekly');s.innerHTML='';const wk=AT.weekly,n=wk.length,W=760,H=290,M={t:22,r:14,b:42,l:42},iw=W-M.l-M.r,ih=H-M.t-M.b;
+   const mx=Math.max(10,Math.ceil(Math.max.apply(null,wk.map(w=>w.n))*1.15/10)*10),Y=v=>M.t+ih-v/mx*ih,bw=Math.min(46,iw/n*.6),step=Math.ceil(n/12);
+   [0,.25,.5,.75,1].map(f=>Math.round(mx*f)).forEach(t=>{el(s,'line',{x1:M.l,x2:W-M.r,y1:Y(t),y2:Y(t),stroke:cv('--line')});el(s,'text',{x:M.l-8,y:Y(t)+4,'text-anchor':'end',fill:cv('--muted'),'font-size':10.5},t);});
+   wk.forEach((w,i)=>{const cx=M.l+(i+.5)*iw/n;let acc=0;
+    const tipHtml='<b>Week of '+w.label+'</b> &middot; '+w.n+' registrations'+chans.filter(c=>w.counts[c]).map(c=>'<div class="r"><span><i class="dot" style="background:'+col(c)+';margin-right:6px"></i>'+esc(c)+'</span><b>'+w.counts[c]+'</b></div>').join('');
+    chans.forEach(c=>{const v=w.counts[c]||0;if(!v)return;const y1=Y(acc+v),y0=Y(acc);
+     const r=el(s,'rect',{x:cx-bw/2,y:y1,width:bw,height:Math.max(1,y0-y1),fill:col(c),stroke:'#fff','stroke-width':1});
+     r.addEventListener('mousemove',e=>showTip(tipHtml,e));r.addEventListener('mouseleave',hideTip);acc+=v;});
+    el(s,'text',{x:cx,y:Y(w.n)-6,'text-anchor':'middle',fill:cv('--ink'),'font-size':11,'font-weight':700},w.n);
+    if(i%step===0||i===n-1)el(s,'text',{x:cx,y:M.t+ih+18,'text-anchor':'middle',fill:cv('--muted'),'font-size':10.5},w.label+(i===n-1?'*':''));});
+   el(s,'text',{x:M.l,y:H-4,fill:cv('--muted'),'font-size':10},'Weeks start Sunday. *Current week, still open.');})();
+
+  // this week vs last week donuts
+  const two=document.getElementById('p2Two');two.innerHTML='';
+  [tw,lw].forEach(w=>{const P=w.pie.filter(p=>p[1]>0),tot=w.n,box=document.createElement('div');two.appendChild(box);
+   box.innerHTML='<div class="mini-h">'+w.label+' &middot; '+w.range+'</div>';
+   if(!tot){box.innerHTML+='<div style="color:var(--muted);font-size:13px">No registrations in this window.</div>';return;}
+   const s=document.createElementNS(NS,'svg');s.setAttribute('viewBox','0 0 260 260');s.style.maxWidth='240px';s.style.margin='0 auto 12px';s.setAttribute('role','img');s.setAttribute('aria-label',w.label+' registrations by channel');box.appendChild(s);
+   const cx=130,cy=130,Ro=118,ri=72;let a0=-Math.PI/2;
+   P.forEach(([l,v])=>{const a1=a0+(P.length===1?.9999:v/tot)*2*Math.PI,lg=a1-a0>Math.PI?1:0,p=(rr,a)=>[cx+rr*Math.cos(a),cy+rr*Math.sin(a)];
+    const[x0,y0]=p(Ro,a0),[x1,y1]=p(Ro,a1),[x2,y2]=p(ri,a1),[x3,y3]=p(ri,a0);
+    const sl=el(s,'path',{d:'M'+x0+','+y0+' A'+Ro+','+Ro+' 0 '+lg+' 1 '+x1+','+y1+' L'+x2+','+y2+' A'+ri+','+ri+' 0 '+lg+' 0 '+x3+','+y3+'Z',fill:col(l),stroke:'#fff','stroke-width':2});
+    sl.addEventListener('mousemove',e=>showTip('<b>'+esc(l)+'</b><div class="r"><span>'+w.label+' ('+w.range+')</span></div><div class="r"><span>Registrations</span><b>'+v+'</b></div><div class="r"><span>Share</span><b>'+pct(v,tot)+'%</b></div>',e));
+    sl.addEventListener('mouseleave',hideTip);
+    if(v/tot>.07){const[lx,ly]=p((Ro+ri)/2,(a0+a1)/2);el(s,'text',{x:lx,y:ly+5,'text-anchor':'middle','font-size':13,'font-weight':700,fill:textOn(col(l))},pct(v,tot)+'%');}
+    a0=a1;});
+   el(s,'text',{x:cx,y:cy+4,'text-anchor':'middle','font-size':30,'font-weight':600,'font-family':'Roboto, Arial, sans-serif',fill:cv('--ink')},tot);
+   el(s,'text',{x:cx,y:cy+24,'text-anchor':'middle','font-size':12,fill:cv('--ink-2')},'registrations');
+   const lg=document.createElement('div');lg.className='hbars';box.appendChild(lg);
+   lg.innerHTML=P.map(([l,v])=>'<div class="hbar" style="grid-template-columns:14px 1fr 70px"><i class="dot" style="width:11px;height:11px;background:'+col(l)+'"></i><div class="lb">'+esc(l)+'</div><div class="vl">'+v+' <span style="color:var(--muted);font-weight:400">'+pct(v,tot)+'%</span></div></div>').join('')+
+    (w.camps.length?'<div style="font-size:12.5px;color:var(--ink-2);margin-top:6px">Top send: <b>'+esc(send(w.camps[0][0]))+'</b> ('+w.camps[0][1]+')</div>':'');});
+
+  renderFilter();renderCamps();renderChannels();bars('selfBars',AT.selfReported.cats,()=>cv('--accent'));
+ }
+
+ // registration type by channel (needs the type split)
+ (function(){const box=document.getElementById('typeNote'),panel=box.closest('.panel');
+  if(!TYPES){box.innerHTML='<b>Waiting on registration type.</b> The Swapcard export used for this refresh has no registration-type column, so attendees and exhibitor staff can&rsquo;t be separated.';return;}
+  const A=TYPES.a,E=TYPES.e,rows=ATTR.channels.map(c=>({c,a:A.channelTotals[c]||0,e:E.channelTotals[c]||0})).filter(r=>r.a+r.e>0);
+  box.className='';box.innerHTML='<table id="typeTbl"><thead><tr><th>Channel</th><th>Attendee-side</th><th>Share</th><th>Exhibitor staff</th><th>Share</th></tr></thead><tbody>'+
+   rows.map(r=>'<tr><td><span class="ch"><i class="dot" style="background:'+col(r.c)+'"></i>'+esc(r.c)+'</span></td><td class="tnum">'+r.a+'</td><td class="tnum">'+pct(r.a,A.total)+'%</td><td class="tnum">'+r.e+'</td><td class="tnum">'+pct(r.e,E.total)+'%</td></tr>').join('')+
+   '<tr style="font-weight:600"><td>Total</td><td class="tnum">'+A.total+'</td><td></td><td class="tnum">'+E.total+'</td><td></td></tr></tbody></table>'+
+   '<p class="take">Exhibitor staff are '+pct(E.untracked,E.total)+'% untracked against '+pct(A.untracked,A.total)+'% of attendee-side registrations, which is why the attendee view is the one to steer by.</p>';})();
+
+ document.getElementById('p2foot').textContent='Source: Swapcard Registration-by-UTM export, '+ATTR.asOf+'. Channels are grouped from the UTM source and medium (mapping in config/utm_map.csv); self-reported answers are grouped by keyword (config/howheard_map.csv). Test and internal records are excluded. Mailchimp is shown as legacy: email now runs on HubSpot, but older links still carry the Mailchimp tag.';
+
+ // follow the page-wide type tabs
+ document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>draw(b.dataset.tab)));
+ draw(TYPES&&TYPES[start]?start:'all');
+
+ // page switch
+ const P1=document.getElementById('page1'),P2=document.getElementById('page2'),P3=document.getElementById('page3');
+ const pageFromHash=()=>({'#sources':'sources','#tactics':'tactics'})[location.hash]||'pace';
+ function setPage(p){if(p==='tactics'&&!P3)p='pace';P1.hidden=p!=='pace';P2.hidden=p!=='sources';if(P3)P3.hidden=p!=='tactics';document.getElementById('typeBar').hidden=!HAS||p==='tactics';
+  document.querySelectorAll('#pages button').forEach(b=>b.setAttribute('aria-selected',b.dataset.page===p?'true':'false'));
+  try{history.replaceState(null,'',p==='pace'?location.pathname+location.search:'#'+p);}catch(e){}window.scrollTo(0,0);}
+ document.querySelectorAll('#pages button').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
+ setPage(pageFromHash());
+ window.addEventListener('hashchange',()=>setPage(pageFromHash()));
+})();
+// --- search (command palette) ---
+(function(){
+ const box=document.getElementById('cmdk'),inp=document.getElementById('cmdkIn'),ul=document.getElementById('cmdkList'),btn=document.getElementById('cmdkBtn');
+ let items=[],shown=[],sel=0,opener=null;
+ const go=p=>()=>{const b=document.querySelector('#pages button[data-page="'+p+'"]');if(b)b.click();};
+ const see=el=>()=>{if(!el)return;const d=el.closest('details');if(d)d.open=true;el.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});};
+ function build(){
+  items=[{g:'Go to',t:'Pace and forecast',f:go('pace')},{g:'Go to',t:'Sources',f:go('sources')}];
+  if(document.querySelector('#pages button[data-page="tactics"]'))items.push({g:'Go to',t:'Tactics',f:go('tactics')});
+  if(HAS)[['all','All registrations'],['a','Attendees'],['e','Exhibitor staff']].forEach(k=>items.push({g:'View',t:k[1],f:()=>{document.querySelector('#tabs button[data-tab="'+k[0]+'"]').click();}}));
+  document.querySelectorAll('#page1 .panel h2,#page1 details.disc summary h2').forEach(h=>{if(h.closest('[hidden]'))return;items.push({g:'Pace section',t:h.textContent.replace(/\s+/g,' ').trim(),f:()=>{go('pace')();see(h)();}});});
+  const A=JSON.parse(document.getElementById('ATTR').textContent);
+  (A.channels||[]).forEach(c=>items.push({g:'Channel',t:c,f:()=>{go('sources')();const b=[...document.querySelectorAll('#chanFilter button')].find(x=>x.textContent.indexOf(c)===0);if(b)b.click();see(document.getElementById('campTbl'))();}}));
+  (A.campaigns||[]).filter(c=>c.campaign!=='(no campaign)').forEach(c=>items.push({g:'Campaign',t:c.campaign,f:()=>{go('sources')();const r=[...document.querySelectorAll('#campTbl tr.camp .t')].find(x=>x.textContent===c.campaign);see(r||document.getElementById('campTbl'))();}}));
+  if(E.geo)Object.keys(E.geo.states).forEach(s=>items.push({g:'State',t:s+' ('+E.geo.states[s]+')',f:()=>{go('pace')();see(document.getElementById('states'))();}}));
+  const T=JSON.parse(document.getElementById('TAC').textContent);
+  ((T&&T.recommendations)||[]).forEach(r=>items.push({g:'Recommendation',t:r.title,f:()=>{go('tactics')();const h=[...document.querySelectorAll('#recs h3 span:first-child')].find(x=>x.textContent===r.title);see(h)();}}));
+  ((T&&T.ledger)||[]).forEach(r=>items.push({g:'Send',t:r.label,f:()=>{go('tactics')();see(document.getElementById('ledger'))();}}));
+ }
+ function draw(){const q=inp.value.trim().toLowerCase(),toks=q.split(/\s+/).filter(Boolean);
+  shown=items.map(i=>({i,s:toks.length?toks.reduce((a,t)=>{const k=(i.t+' '+i.g).toLowerCase().indexOf(t);return a<0||k<0?-1:a+k;},0):0})).filter(x=>x.s>=0).sort((a,b)=>a.s-b.s).slice(0,40).map(x=>x.i);
+  sel=Math.min(sel,Math.max(0,shown.length-1));
+  ul.innerHTML=shown.length?shown.map((i,n)=>'<li role="option" id="cmdk-'+n+'" aria-selected="'+(n===sel)+'" data-n="'+n+'"><span>'+escH(i.t)+'</span><small>'+escH(i.g)+'</small></li>').join(''):'<li class="cmdk-empty">Nothing matches.</li>';
+  inp.setAttribute('aria-activedescendant',shown.length?'cmdk-'+sel:'');const a=ul.querySelector('[aria-selected="true"]');if(a)a.scrollIntoView({block:'nearest'});}
+ function open(){opener=document.activeElement;build();inp.value='';sel=0;box.hidden=false;draw();inp.focus();}
+ function close(){box.hidden=true;if(opener&&opener.focus)opener.focus();}
+ function run(n){const i=shown[n];if(!i)return;close();setTimeout(i.f,0);}
+ btn.addEventListener('click',open);
+ document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();box.hidden?open():close();return;}
+  if(box.hidden)return;if(e.key==='Escape'){e.preventDefault();close();}else if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(shown.length-1,sel+1);draw();}else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(0,sel-1);draw();}else if(e.key==='Enter'){e.preventDefault();run(sel);}});
+ inp.addEventListener('input',()=>{sel=0;draw();});
+ ul.addEventListener('click',e=>{const li=e.target.closest('li[data-n]');if(li)run(+li.dataset.n);});
+ box.addEventListener('mousedown',e=>{if(e.target===box)close();});
+})();
+render(start);
+})();
+</script>
+
+</body></html>
