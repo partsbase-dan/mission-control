@@ -276,7 +276,8 @@ const SAMPLE = {
 };
 
 /* ---------- state ---------- */
-const state = { view:(["plan","tasks","sprint"].includes(params.get("view"))?params.get("view"):"lead"), sprint:null, data:null, moves:{}, locked:false, fPerson:"all", fBU:"all" };
+const state = { view:(["plan","tasks","sprint"].includes(params.get("view"))?params.get("view"):"lead"), sprint:null, data:null, moves:{}, locked:false, fPerson:"all", fBU:"all", incDue:params.get("incdue")==="1" };
+const sprintTasks = (d, k) => (d.tasks[k]||[]).concat(state.incDue ? ((d.dueOnly||{})[k]||[]) : []);
 const money = n => "$" + Math.round(n).toLocaleString("en-US");
 
 async function load(){
@@ -295,7 +296,7 @@ function compute(){
   const people = d.people;
   const ids = people.map(p=>p.id);
   const ooo = (d.ooo && d.ooo[sp]) || {};
-  let tasks = (d.tasks[sp]||[]).map(P.normalizeTask).filter(t=>state.moves[t.id]!=="defer");
+  let tasks = sprintTasks(d, sp).map(P.normalizeTask).filter(t=>state.moves[t.id]!=="defer");
   tasks = tasks.map(t=>{
     if(state.moves[t.id]==="swap" && t.assignees.length===1){ const other = ids.find(i=>i!==t.assignees[0]); return {...t, assignees:[other]}; }
     return t;
@@ -336,7 +337,7 @@ function render(){
   const overPeople = c.per.filter(x=>x.fit.overByH>0.05).length;
   const open = Math.max(0, c.avail - c.planned);
   const nOver = c.per.reduce((a,x)=>a+x.fit.over.length,0);
-  const raw = (d.tasks[state.sprint]||[]).map(P.normalizeTask);
+  const raw = sprintTasks(d, state.sprint).map(P.normalizeTask);
   const cost = P.costSummary(raw, d.people);
   const buRows = Object.entries(cost.byBU).sort((a,b)=>b[1].plannedCost-a[1].plannedCost);
   const covPct = c.cov.tasks ? Math.round(c.cov.withEstimate/c.cov.tasks*100) : 0;
@@ -400,8 +401,9 @@ function render(){
   renderSprint(c, raw, cost, d, sp);
   $("#tiles").hidden = state.view==="sprint";
   const dueOnly = ((d.dueOnly||{})[state.sprint]||[]).map(P.normalizeTask);
-  $("#dueNote").innerHTML = (dueOnly.length && state.view!=="lead") ? `<div class="duenote" role="note"><b>Due in ${esc(sp.label)} but not in the sprint list (${dueOnly.length}). Not counted above.</b><span>Pull these into the sprint in ClickUp, or change the due date.</span><ul>${dueOnly.map(t=>`<li><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.name)}</a> <span>· ${esc(t.assignees.map(a=>(d.people.find(p=>p.id===a)||{}).name||"").filter(Boolean).join(", ")||"Unassigned")}</span></li>`).join("")}</ul></div>` : "";
-  if(state.view==="lead" && dueOnly.length) $("#answerNote").textContent += ` ${dueOnly.length} more task${dueOnly.length===1?" is":"s are"} due this sprint but not in the sprint list, and ${dueOnly.length===1?"isn't":"aren't"} counted.`;
+  const dueEst = dueOnly.filter(t=>t.estMs!=null);
+  const dueH = dueEst.reduce((a,t)=>a+t.estMs/HR,0);
+  $("#dueNote").innerHTML = dueOnly.length ? `<div class="duenote" role="note"><b>${dueOnly.length} task${dueOnly.length===1?"":"s"} due in ${esc(sp.label)} but not in the sprint list. ${state.incDue?"Counted in the totals.":"Not counted in the totals."}</b><span>${dueEst.length} ha${dueEst.length===1?"s":"ve"} an estimate: ${h1(dueH)}h, ${money(dueH*cost.rate)}. Pull them into the sprint in ClickUp, or change the due date.</span> <button class="btn" id="incDue" style="margin-left:8px">${state.incDue?"Stop counting them":"Count them in the totals"}</button>${state.view==="lead"?"":`<ul>${dueOnly.map(t=>`<li><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.name)}</a> <span>· ${esc(t.assignees.map(a=>(d.people.find(p=>p.id===a)||{}).name||"").filter(Boolean).join(", ")||"Unassigned")}${t.estMs!=null?" · "+h1(t.estMs/HR)+"h":" · no estimate"}</span></li>`).join("")}</ul>`}</div>` : "";
   $("#leadView").hidden = state.view!=="lead"; $("#planView").hidden = state.view!=="plan"; $("#taskView").hidden = state.view!=="tasks"; $("#sprintView").hidden = state.view!=="sprint";
   $("#vLead").setAttribute("aria-pressed", state.view==="lead"); $("#vPlan").setAttribute("aria-pressed", state.view==="plan"); $("#vTasks").setAttribute("aria-pressed", state.view==="tasks"); $("#vSprint").setAttribute("aria-pressed", state.view==="sprint");
 }
@@ -471,6 +473,7 @@ document.addEventListener("click", e=>{
   else if(b.id==="vPlan"){ state.view="plan"; render(); }
   else if(b.id==="vTasks"){ state.view="tasks"; render(); }
   else if(b.id==="vSprint"){ state.view="sprint"; render(); }
+  else if(b.id==="incDue"){ state.incDue=!state.incDue; render(); }
   else if(b.dataset.mv){ state.moves[b.dataset.id]=b.dataset.mv; render(); }
   else if(b.id==="reset"){ state.moves={}; render(); }
   else if(b.id==="lock"){ $("#lockNote").textContent = state.data && state.data.sample ? "Sample data: nothing was saved." : "Saving is not connected yet."; }
