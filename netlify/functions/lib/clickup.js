@@ -46,6 +46,39 @@ function slimTask(t) {
   };
 }
 
+const hasBU = (t) => { const f = (t.custom_fields || []).find((x) => x.name === 'Business Unit'); return !!f && f.value != null && f.value !== ''; };
+
+// A task with no Business Unit takes its parent's (walking up, parent fetched if it is not in
+// the feed); a parent with none takes its subtasks' when they all agree. Marked in bu_from.
+async function inheritBU(groups, token, fetchImpl) {
+  const all = groups.flat();
+  const byId = new Map(all.map((t) => [t.id, t]));
+  const fetched = new Map();
+  const want = [...new Set(all.filter((t) => !hasBU(t) && t.parent && !byId.has(t.parent)).map((t) => t.parent))];
+  for (let i = 0; i < want.length; i += 5) {
+    await Promise.all(want.slice(i, i + 5).map(async (id) => {
+      try { fetched.set(id, slimTask(await getJson(`${API}/task/${id}`, token, fetchImpl))); } catch (e) { fetched.set(id, null); }
+    }));
+  }
+  const look = (id) => byId.get(id) || fetched.get(id) || null;
+  for (const t of all) {
+    if (hasBU(t)) continue;
+    let p = t.parent;
+    for (let hops = 0; p && hops < 3; hops++) {
+      const pt = look(p);
+      if (!pt) break;
+      if (hasBU(pt)) { t.custom_fields = pt.custom_fields; t.bu_from = 'parent'; break; }
+      p = pt.parent;
+    }
+  }
+  for (const t of all) {
+    if (hasBU(t)) continue;
+    const kids = all.filter((c) => c.parent === t.id && hasBU(c));
+    const vals = new Set(kids.map((c) => JSON.stringify(c.custom_fields[0].value)));
+    if (kids.length && vals.size === 1) { t.custom_fields = kids[0].custom_fields; t.bu_from = 'subtasks'; }
+  }
+}
+
 async function listSprintLists(token, fetchImpl, year) {
   const body = await getJson(`${API}/folder/${SPRINTS_FOLDER_ID}/list`, token, fetchImpl);
   return (body.lists || []).map((l) => ({ id: String(l.id), ...parseSprintName(l.name, year) }))
@@ -108,6 +141,7 @@ async function buildPayload({ token, fetchImpl = fetch, now = new Date(), people
     const due = await fetchDueTasks(TASKS_LIST_ID, token, fetchImpl, s, people.map((p) => p.id));
     dueOnly[String(s.num)] = due.filter((t) => !known.has(t.id) && !OPEN_RE.test(t.status || ''));
   }
+  await inheritBU([...Object.values(tasks), ...Object.values(dueOnly)], token, fetchImpl);
   return {
     sample: false, syncedAt: now.getTime(), people,
     sprints: sprints.map((s) => ({ key: String(s.num), label: `Sprint ${s.num}`, start: s.start, end: s.end, note: s.note })),

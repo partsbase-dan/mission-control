@@ -46,6 +46,7 @@ function normalizeTask(raw) {
     spentMs: numOrNull(raw.time_spent),
     assignees: (raw.assignees || []).map((a) => String(a.id)),
     bu: buValue(raw),
+    buFrom: raw.bu_from || null,
     priority: typeof pr === 'string' ? pr.toLowerCase() : null,
     due: numOrNull(raw.due_date),
     parentId: raw.parent || null,
