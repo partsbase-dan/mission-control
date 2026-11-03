@@ -88,6 +88,8 @@
   .note{color:var(--muted);font-size:12.5px;margin:12px 0 0}
   .empty{color:var(--muted);padding:6px 0 2px}
   footer{color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.6;max-width:880px}
+  .duenote{background:#fff;border-radius:var(--radius);box-shadow:var(--card);padding:18px 24px;margin-bottom:20px;font-size:14px;border-left:4px solid var(--blue)}
+  .duenote b{display:block;color:var(--navy);margin-bottom:2px} .duenote ul{margin:8px 0 0;padding-left:18px;columns:2} .duenote li{margin:3px 0;break-inside:avoid} .duenote a{color:var(--navy)} .duenote span{color:var(--muted)}
   .tbl.wide{overflow-x:auto}
   .tbl.wide th,.tbl.wide td{padding-left:10px;padding-right:10px}.tbl.wide th:first-child,.tbl.wide td:first-child{padding-left:26px;min-width:280px}.tbl.wide th:last-child,.tbl.wide td:last-child{padding-right:26px;white-space:nowrap}
   label{font-size:13px;color:var(--muted)} select{font:inherit;color:var(--navy);margin-left:6px;padding:6px 10px;border:1px solid var(--pale);border-radius:9px;background:#fff}
@@ -143,6 +145,8 @@
       <div class="tbl" id="top"></div>
     </section>
   </div>
+
+  <div id="dueNote"></div>
 
   <div id="planView" hidden>
     <section class="card" aria-labelledby="h-prep">
@@ -349,6 +353,9 @@ function render(){
   $("#fit").innerHTML = rows.length ? `<table><thead><tr><th>Item</th><th>Person</th><th>Priority</th><th class="r">Hours</th><th></th></tr></thead><tbody>${rows.map(({t,who})=>`<tr><td>${esc(t.name)}</td><td>${esc(who.name)}</td><td>${esc(t.priority||"not set")}</td><td class="r">${h1(t.estH)}h</td><td class="r">${t.shared?"":`<button class="btn" data-mv="swap" data-id="${esc(t.id)}">Give to other</button> `}<button class="btn" data-mv="defer" data-id="${esc(t.id)}">Defer</button></td></tr>`).join("")}</tbody></table>`
     : '<p class="empty">Everything fits.</p>';
   renderTasks(raw, d, cost.rate);
+  const dueOnly = ((d.dueOnly||{})[state.sprint]||[]).map(P.normalizeTask);
+  $("#dueNote").innerHTML = (dueOnly.length && state.view!=="lead") ? `<div class="duenote" role="note"><b>Due in ${esc(sp.label)} but not in the sprint list (${dueOnly.length}). Not counted above.</b><span>Pull these into the sprint in ClickUp, or change the due date.</span><ul>${dueOnly.map(t=>`<li><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.name)}</a> <span>· ${esc(t.assignees.map(a=>(d.people.find(p=>p.id===a)||{}).name||"").filter(Boolean).join(", ")||"Unassigned")}</span></li>`).join("")}</ul></div>` : "";
+  if(state.view==="lead" && dueOnly.length) $("#answerNote").textContent += ` ${dueOnly.length} more task${dueOnly.length===1?" is":"s are"} due this sprint but not in the sprint list, and ${dueOnly.length===1?"isn't":"aren't"} counted.`;
   $("#leadView").hidden = state.view!=="lead"; $("#planView").hidden = state.view!=="plan"; $("#taskView").hidden = state.view!=="tasks";
   $("#vLead").setAttribute("aria-pressed", state.view==="lead"); $("#vPlan").setAttribute("aria-pressed", state.view==="plan"); $("#vTasks").setAttribute("aria-pressed", state.view==="tasks");
 }

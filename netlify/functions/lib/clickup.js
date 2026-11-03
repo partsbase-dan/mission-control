@@ -94,16 +94,24 @@ async function buildPayload({ token, fetchImpl = fetch, now = new Date(), people
   const lists = await listSprintLists(token, fetchImpl, now.getUTCFullYear());
   const sprints = pickSprints(lists, now);
   const tasks = {};
+  // Same rule as the original dashboard: work due this sprint but not in the sprint list is
+  // flagged, not counted. Work already in one of the two earlier sprint lists was built ahead.
+  const cache = {};
+  const listTasks = async (l) => cache[l.id] || (cache[l.id] = await fetchSprintTasks(l.id, token, fetchImpl));
+  const dueOnly = {};
+  const OPEN_RE = /done|complete|closed|cancel/i;
   for (const s of sprints) {
-    const inList = await fetchSprintTasks(s.id, token, fetchImpl);
+    const inList = await listTasks(s);
+    tasks[String(s.num)] = inList;
+    const known = new Set(inList.map((t) => t.id));
+    for (const l of lists.filter((x) => x.num < s.num && x.num >= s.num - 2)) (await listTasks(l)).forEach((t) => known.add(t.id));
     const due = await fetchDueTasks(TASKS_LIST_ID, token, fetchImpl, s, people.map((p) => p.id));
-    const seen = new Set(inList.map((t) => t.id));
-    tasks[String(s.num)] = inList.concat(due.filter((t) => !seen.has(t.id)));
+    dueOnly[String(s.num)] = due.filter((t) => !known.has(t.id) && !OPEN_RE.test(t.status || ''));
   }
   return {
     sample: false, syncedAt: now.getTime(), people,
     sprints: sprints.map((s) => ({ key: String(s.num), label: `Sprint ${s.num}`, start: s.start, end: s.end, note: s.note })),
-    ooo: {}, tasks, history: [],
+    ooo: {}, tasks, dueOnly, history: [],
   };
 }
 
