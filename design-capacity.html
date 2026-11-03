@@ -4,82 +4,98 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Design capacity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#eef0f4; --surface:#fff; --surface2:#f5f6f8; --border:#e3e5e9;
-    --accent:#0C70E8; --accent-soft:#dbeafe; --text:#002857; --muted:#717680; --label:#535862;
-    --red:#b42318; --red-bg:#fef3f2; --green:#027a48; --amber:#b54708; --amber-bg:#fffaeb;
-    --shadow:0 1px 2px rgba(0,40,87,.06),0 8px 24px rgba(0,40,87,.06);
+    --navy:#002857; --blue:#007FE9; --pale:#CEE2F4; --track:#EAF2FC; --ink:#333333; --muted:#647089; --line:#E3ECF7;
+    --red:#B4231A; --red-bg:#FDECEA; --green:#0E7A4E; --green-bg:#E7F6EF; --amber:#8A4B08; --amber-bg:#FFF4DC;
+    --card:0 12px 26px rgba(0,40,87,.09); --radius:16px;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.5 "Avenir Next LT Pro",-apple-system,"Segoe UI",Roboto,sans-serif}
-  .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 56px}
-  header{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
-  h1{font-size:26px;line-height:1.2;margin:0 0 4px;font-weight:600}
-  .sub{color:var(--label);margin:0;font-size:14px}
-  .ctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-  .seg{display:inline-flex;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:3px}
-  .seg button{border:0;background:transparent;font:inherit;font-weight:500;color:var(--label);padding:7px 14px;border-radius:8px;cursor:pointer}
-  .seg button[aria-pressed="true"]{background:var(--text);color:#fff}
-  .seg button:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  .banner{background:var(--amber-bg);border:1px solid #fedf89;color:var(--amber);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:14px}
-  .answer{background:var(--text);color:#fff;border-radius:14px;padding:22px 26px;margin-bottom:16px;box-shadow:var(--shadow)}
-  .answer p{margin:0;font-size:20px;line-height:1.35;font-weight:500;max-width:860px}
-  .answer small{display:block;margin-top:8px;color:#b9d3f7;font-size:13px}
-  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
-  .tile,.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
-  .tile{padding:16px 18px}
-  .tile .k{font-size:13px;color:var(--label);font-weight:500}
-  .tile .v{font-size:32px;font-weight:600;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+  html{background:#FCFEFF}
+  body{margin:0;color:var(--ink);font:400 15px/1.55 Roboto,"Segoe UI",Arial,sans-serif;min-height:100vh;
+    background:
+      radial-gradient(ellipse 58% 42% at 0% 0%, #DAEAFE 0, rgba(218,234,254,0) 100%),
+      radial-gradient(ellipse 52% 38% at 100% 0%, #EDF5FF 0, rgba(237,245,255,0) 100%),
+      radial-gradient(ellipse 55% 40% at 0% 100%, #DBFBF4 0, rgba(219,251,244,0) 100%),
+      radial-gradient(ellipse 55% 40% at 100% 100%, #D4E8FF 0, rgba(212,232,255,0) 100%), #FCFEFF;
+    background-attachment:fixed}
+  .tab{display:inline-block;background:var(--blue);color:#fff;font-weight:700;font-size:11px;letter-spacing:.17em;text-transform:uppercase;
+    padding:9px 34px 9px 22px;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%);margin-left:-20px}
+  .wrap{max-width:1120px;margin:0 auto;padding:24px 20px 56px}
+  header{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between;margin:14px 0 22px}
+  h1{font-size:36px;line-height:1.08;letter-spacing:-.016em;margin:14px 0 6px;font-weight:900;color:var(--navy)}
+  .sub{color:var(--muted);margin:0;font-size:14px}
+  .ctl{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .seg{display:inline-flex;background:#fff;border-radius:12px;padding:4px;box-shadow:var(--card)}
+  .seg button{border:0;background:transparent;font:inherit;font-weight:500;color:var(--muted);padding:8px 16px;border-radius:9px;cursor:pointer}
+  .seg button[aria-pressed="true"]{background:var(--navy);color:#fff;font-weight:700}
+  .seg button:focus-visible,.btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .banner{background:var(--amber-bg);color:var(--amber);border-radius:12px;padding:11px 16px;margin-bottom:18px;font-size:14px;box-shadow:var(--card)}
+  .answer{background:linear-gradient(135deg,#003C74,#002857);color:#fff;border-radius:var(--radius);padding:26px 30px;margin-bottom:20px;box-shadow:0 16px 32px rgba(0,127,233,.13)}
+  .answer p{margin:0;font-size:22px;line-height:1.35;font-weight:700;max-width:880px}
+  .answer small{display:block;margin-top:10px;color:#B9D3F7;font-size:13px}
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:20px}
+  .tile,.card{background:#fff;border-radius:var(--radius);box-shadow:var(--card)}
+  .tile{padding:20px 22px}
+  .tile .k,.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+  .tile .v{font-size:44px;font-weight:900;line-height:1.1;margin:8px 0 4px;color:var(--blue);font-variant-numeric:tabular-nums}
   .tile .n{font-size:13px;color:var(--muted)}
-  .status{display:inline-flex;gap:6px;align-items:center;font-size:13px;font-weight:600;padding:2px 9px;border-radius:99px}
-  .status.over{background:var(--red-bg);color:var(--red)} .status.ok{background:#ecfdf3;color:var(--green)}
-  .card{padding:20px 22px;margin-bottom:16px}
-  .card h2{font-size:17px;margin:0 0 2px;font-weight:600}
-  .card .h2sub{color:var(--muted);font-size:13px;margin:0 0 14px}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .status{display:inline-flex;gap:6px;align-items:center;font-size:13px;font-weight:700;padding:2px 10px;border-radius:99px}
+  .status.over{background:var(--red-bg);color:var(--red)} .status.ok{background:var(--green-bg);color:var(--green)}
+  .card{padding:24px 26px;margin-bottom:20px}
+  .card h2{font-size:17px;margin:4px 0 2px;font-weight:900;color:var(--navy)}
+  .card .h2sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   .grid2>.card{margin-bottom:0}
-  .brow{display:grid;grid-template-columns:150px 1fr 64px;gap:12px;align-items:center;padding:6px 0}
-  .brow .nm{font-weight:500}
-  .bar{height:14px;background:var(--surface2);border-radius:0 7px 7px 0}
-  .bar i{display:block;height:100%;background:var(--accent);border-radius:0 7px 7px 0}
-  .num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
-  .person{padding:14px 0;border-top:1px solid var(--border)} .person:first-of-type{border-top:0;padding-top:0}
+  .brow{display:grid;grid-template-columns:150px 1fr 60px;gap:14px;align-items:center;padding:7px 0}
+  .brow .nm{font-weight:500;color:var(--navy)}
+  .bar{height:14px;background:var(--track);border-radius:7px}
+  .bar i{display:block;height:100%;background:var(--blue);border-radius:7px}
+  .num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--navy)}
+  .person{padding:16px 0;border-top:1px solid var(--line)} .person:first-of-type{border-top:0;padding-top:0}
   .ph{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .ph b{font-size:16px}
-  .cap{position:relative;height:26px;margin:10px 0 4px;background:var(--surface2);border-radius:6px}
-  .cap .p{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:6px 0 0 6px}
-  .cap .c{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,#9db4d6 0 4px,#dfe8f5 4px 8px)}
-  .cap .a{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--red)}
-  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--label);margin-top:6px}
-  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+  .ph b{font-size:16px;color:var(--navy)}
+  .cap{position:relative;height:26px;margin:12px 0 6px;background:var(--track);border-radius:7px}
+  .cap .p{position:absolute;left:0;top:0;bottom:0;background:var(--navy);border-radius:7px 0 0 7px}
+  .cap .c{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,#9DB4D6 0 4px,#DFE8F5 4px 8px)}
+  .cap .a{position:absolute;top:-5px;bottom:-5px;width:3px;background:var(--red);border-radius:2px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:8px}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+  .tbl{margin:0 -26px -24px;overflow:hidden;border-radius:0 0 var(--radius) var(--radius)}
   table{width:100%;border-collapse:collapse;font-size:14px}
-  th{text-align:left;font-weight:600;color:var(--label);font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--border)}
-  td{padding:9px 10px;border-bottom:1px solid var(--surface3,#eef0f3);vertical-align:top}
+  th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);padding:10px 26px;border-bottom:1px solid var(--line)}
+  td{padding:11px 26px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink)}
+  tr:last-child td{border-bottom:0}
+  .tbl .empty{padding:2px 26px 22px}
   th.r,td.r{text-align:right;font-variant-numeric:tabular-nums}
-  .btn{border:1px solid var(--border);background:var(--surface);font:inherit;font-size:13px;font-weight:500;color:var(--text);padding:4px 10px;border-radius:8px;cursor:pointer}
-  .btn:hover{border-color:var(--accent);color:var(--accent)}
-  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;padding:8px 16px}
-  .prep{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-  .prep div{background:var(--surface2);border-radius:10px;padding:12px 14px}
-  .prep b{font-size:22px;display:block;font-variant-numeric:tabular-nums}
-  .prep span{font-size:13px;color:var(--label)}
-  .trend{display:flex;align-items:flex-end;gap:14px;height:170px;border-bottom:1px solid var(--border);position:relative;padding-top:10px}
-  .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative}
-  .col .b{width:100%;max-width:64px;background:var(--accent);border-radius:6px 6px 0 0}
+  .btn{border:1px solid var(--pale);background:#fff;font:inherit;font-size:13px;font-weight:700;color:var(--navy);padding:5px 12px;border-radius:9px;cursor:pointer}
+  .btn:hover{border-color:var(--blue);color:var(--blue)}
+  .btn.primary{background:var(--blue);border-color:var(--blue);color:#fff;padding:9px 18px}
+  .prep{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .prep div{background:var(--track);border-radius:12px;padding:14px 16px}
+  .prep b{font-size:28px;font-weight:900;color:var(--navy);display:block;line-height:1.2;font-variant-numeric:tabular-nums}
+  .prep span{font-size:13px;color:var(--muted)}
+  .trend{position:relative;display:flex;align-items:flex-end;gap:16px;height:190px;border-bottom:1px solid var(--line)}
+  .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative;z-index:1}
+  .col .b{width:100%;max-width:64px;background:var(--blue);border-radius:7px 7px 0 0}
   .col .b.over{background:var(--red)}
-  .col .l{position:absolute;bottom:calc(var(--h) + 4px);font-size:12px;font-weight:600}
-  .xl{display:flex;gap:14px;margin-top:6px} .xl span{flex:1;text-align:center;font-size:12.5px;color:var(--label)}
+  .col .l{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px}
+  .ref{position:absolute;left:0;right:0;border-top:2px dashed rgba(0,40,87,.35);z-index:2;pointer-events:none}
+  .ref span{position:absolute;left:0;top:-20px;font-size:11px;color:var(--muted);background:#fff;padding:0 4px}
+  .xl{display:flex;gap:16px;margin-top:8px} .xl span{flex:1;text-align:center;font-size:12.5px;color:var(--muted)}
   .note{color:var(--muted);font-size:12.5px;margin:12px 0 0}
-  .empty{color:var(--muted);padding:14px 0}
-  footer{color:var(--muted);font-size:12.5px;margin-top:22px;line-height:1.6}
+  .empty{color:var(--muted);padding:6px 0 2px}
+  footer{color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.6;max-width:880px}
   [hidden]{display:none!important}
-  @media(max-width:860px){.tiles,.prep{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.brow{grid-template-columns:110px 1fr 56px}}
-  @media(max-width:480px){.tiles,.prep{grid-template-columns:1fr}}
+  @media(max-width:860px){.tiles,.prep{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.brow{grid-template-columns:110px 1fr 56px}h1{font-size:30px}}
+  @media(max-width:480px){.tiles,.prep{grid-template-columns:1fr}.tbl{overflow-x:auto}}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <span class="tab">Marketing · Design</span>
   <header>
     <div>
       <h1>Design capacity</h1>
@@ -101,41 +117,47 @@
   <div id="leadView">
     <div class="grid2">
       <section class="card" aria-labelledby="h-bu">
+        <span class="eyebrow">Demand</span>
         <h2 id="h-bu">Where design time is planned</h2>
         <p class="h2sub">Planned hours by business unit, this sprint</p>
         <div id="bu"></div>
       </section>
       <section class="card" aria-labelledby="h-tr">
+        <span class="eyebrow">Trend</span>
         <h2 id="h-tr">Planned load, recent sprints</h2>
-        <p class="h2sub">Planned hours as a share of available hours. Red = over capacity.</p>
+        <p class="h2sub">Planned hours as a share of available hours. Red means over capacity.</p>
         <div id="trend"></div>
         <p class="note" id="trendNote"></p>
       </section>
     </div>
-    <section class="card" style="margin-top:16px" aria-labelledby="h-top">
+    <section class="card" style="margin-top:20px" aria-labelledby="h-top">
+      <span class="eyebrow">Detail</span>
       <h2 id="h-top">Largest planned items</h2>
       <p class="h2sub">By estimated hours. Team total, no individual breakdown.</p>
-      <div id="top"></div>
+      <div class="tbl" id="top"></div>
     </section>
   </div>
 
   <div id="planView" hidden>
     <section class="card" aria-labelledby="h-prep">
+      <span class="eyebrow">Step 1</span>
       <h2 id="h-prep">Before planning</h2>
       <p class="h2sub">Fix these in ClickUp first. They change the numbers below.</p>
       <div class="prep" id="prep"></div>
     </section>
     <section class="card" aria-labelledby="h-cap">
+      <span class="eyebrow">Step 2</span>
       <h2 id="h-cap">Capacity by person</h2>
       <p class="h2sub">Planned against available hours (40 per person, minus 8 per out-of-office day). Carryover is shown but not counted.</p>
       <div id="people"></div>
-      <div class="legend"><span><i style="background:var(--text)"></i>Planned</span><span><i style="background:repeating-linear-gradient(135deg,#9db4d6 0 3px,#dfe8f5 3px 6px)"></i>Carryover (not counted)</span><span><i style="background:var(--red)"></i>Available hours</span></div>
+      <div class="legend"><span><i style="background:var(--navy)"></i>Planned</span><span><i style="background:repeating-linear-gradient(135deg,#9DB4D6 0 3px,#DFE8F5 3px 6px)"></i>Carryover (not counted)</span><span><i style="background:var(--red)"></i>Available hours</span></div>
     </section>
     <section class="card" aria-labelledby="h-fit">
+      <span class="eyebrow">Step 3</span>
       <h2 id="h-fit">Doesn't fit</h2>
       <p class="h2sub">Taken in priority order, then due date. The first item that doesn't fit and everything after it is deferred. Moves here are a what-if and never change ClickUp.</p>
-      <div id="fit"></div>
-      <p style="margin:14px 0 0"><button class="btn" id="reset">Reset what-ifs</button> <button class="btn primary" id="lock" title="Saves this plan as a snapshot (editors only)">Lock plan</button> <span class="note" id="lockNote"></span></p>
+      <div class="tbl" id="fit"></div>
+      <p style="margin:34px 0 0"><button class="btn" id="reset">Reset what-ifs</button> <button class="btn primary" id="lock" title="Saves this plan as a snapshot (editors only)">Lock plan</button> <span class="note" id="lockNote"></span></p>
     </section>
   </div>
 
@@ -190,15 +212,16 @@ const SAMPLE = {
 };
 
 /* ---------- state ---------- */
-const state = { view:"lead", sprint:null, data:null, moves:{}, locked:false };
+const state = { view:(params.get("view")==="plan"?"plan":"lead"), sprint:null, data:null, moves:{}, locked:false };
 
 async function load(){
+  if(window.DESIGN_DATA){ state.data=window.DESIGN_DATA; return; }          // local snapshot from scripts/pull-snapshot.js
   if(params.get("demo")==="1"){ state.data=SAMPLE; return; }
   try{
     const r = await fetch("/.netlify/functions/design-plan",{cache:"no-store",credentials:"same-origin"});
     if(!r.ok) throw new Error(r.status);
     state.data = await r.json();
-  }catch(e){ state.data = SAMPLE; }   // until the live ClickUp feed is connected
+  }catch(e){ state.data = SAMPLE; }   // feed not configured or unreachable
 }
 
 /* ---------- compute ---------- */
@@ -255,7 +278,7 @@ function render(){
   const covPct = c.cov.tasks ? Math.round(c.cov.withEstimate/c.cov.tasks*100) : 0;
   $("#tiles").innerHTML = [
     ["Capacity load", `${load}%`, `${h1(c.planned)}h planned of ${h1(c.avail)}h available`],
-    [over>0.05?"Over capacity":"Open capacity", `${h1(over>0.05?over:open)}h`, over>0.05?statusPill(over)+(open>0.05?` <span class="n">${h1(open)}h open elsewhere</span>`:""):statusPill(0)],
+    [over>0.05?"Over capacity":"Open capacity", `${h1(over>0.05?over:open)}h`, over>0.05?statusPill(over)+(open>0.05?`<div class="n" style="margin-top:6px">${h1(open)}h open on other people</div>`:""):statusPill(0)],
     ["Items that don't fit", String(c.per.reduce((a,x)=>a+x.fit.over.length,0)), overPeople?`${overPeople} of ${c.per.length} people over`:"Everyone fits"],
     ["Estimate coverage", `${covPct}%`, `${c.cov.withEstimate} of ${c.cov.tasks} tasks · ${c.cov.withoutBU} without a business unit`]
   ].map(([k,v,n])=>`<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="n">${n}</div></div>`).join("");
@@ -268,10 +291,10 @@ function render(){
 
   // Trend (history comes from locked plans; sample data shows the layout)
   const hist = (d.history||[]);
-  $("#trend").innerHTML = hist.length ? `<div class="trend">${hist.map(x=>{const r=x.planned/x.avail; const hgt=Math.min(100,r*80);
-      return `<div class="col" title="Sprint ${esc(x.label)}: ${x.planned}h planned of ${x.avail}h"><div class="b ${r>1?"over":""}" style="height:${hgt}%"></div><div class="l" style="--h:${hgt*1.5}px">${Math.round(r*100)}%${r>1?" ▲":""}</div></div>`;}).join("")}</div>
+  $("#trend").innerHTML = hist.length ? `<div class="trend"><div class="ref" style="bottom:${150/1.5}px"></div>${hist.map(x=>{const r=x.planned/x.avail;
+      return `<div class="col" title="Sprint ${esc(x.label)}: ${x.planned}h planned of ${x.avail}h"><div class="l">${Math.round(r*100)}%${r>1?" ▲":""}</div><div class="b ${r>1?"over":""}" style="height:${Math.min(r/1.5,1)*150}px"></div></div>`;}).join("")}</div>
       <div class="xl">${hist.map(x=>`<span>S${esc(x.label)}</span>`).join("")}</div>` : '<p class="empty">History starts once weekly plans are locked.</p>';
-  $("#trendNote").textContent = hist.length ? "Each bar is planned hours ÷ available hours for that sprint. ▲ marks over capacity." : "";
+  $("#trendNote").textContent = hist.length ? "Each bar is planned hours ÷ available hours for that sprint. The dashed line is 100% of available hours. ▲ marks over capacity." : "";
 
   // Largest items, team only
   const top = c.tasks.filter(t=>!P.isStale(t) && !P.isCarry(t) && t.estMs!=null).sort((a,b)=>b.estMs-a.estMs).slice(0,6);

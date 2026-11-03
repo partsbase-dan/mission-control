@@ -101,6 +101,11 @@
 !netlify/
 !netlify/edge-functions/
 !netlify/edge-functions/pb-auth.js
+# Design dashboard data feed (reads ClickUp with CLICKUP_API_KEY from Netlify env; no data or secrets here).
+!netlify/functions/
+!netlify/functions/design-plan.js
+!netlify/functions/lib/
+!netlify/functions/lib/clickup.js
 
 # Sales Workshops tracker: five product-group sessions with Sales. Plain doc,
 # no scripts, names of internal attendees only.
