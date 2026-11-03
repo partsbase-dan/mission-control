@@ -5,6 +5,7 @@
 
 const API = 'https://api.clickup.com/api/v2';
 const SPRINTS_FOLDER_ID = '90147243351';         // Marketing space > Sprints folder
+const TASKS_LIST_ID = '901413474231';            // Marketing space > Task Management > Projects & Tasks
 const PEOPLE = [{ id: '82441284', name: 'Holly' }, { id: '88306362', name: 'Jackie' }];
 const SPRINT_RE = /sprint\s*(\d+)\s*\((\d{1,2})\/(\d{1,2})\s*-\s*(\d{1,2})\/(\d{1,2})\)/i;
 const DAY = 864e5;
@@ -63,6 +64,22 @@ async function fetchSprintTasks(listId, token, fetchImpl) {
   return out;
 }
 
+// Work for our people that is due inside the sprint but lives outside the sprint list (the
+// original dashboard reads these too). Assignee-filtered, so email builds etc. stay out.
+async function fetchDueTasks(listId, token, fetchImpl, sprint, peopleIds) {
+  const gt = Date.parse(sprint.start + 'T00:00:00Z') - 1;
+  const lt = Date.parse(sprint.end + 'T00:00:00Z') + DAY;
+  const who = peopleIds.map((id) => `assignees[]=${id}`).join('&');
+  const out = [];
+  for (let page = 0; page < 20; page++) {
+    const url = `${API}/list/${listId}/task?${who}&due_date_gt=${gt}&due_date_lt=${lt}&include_closed=true&subtasks=true&include_timl=true&page=${page}`;
+    const body = await getJson(url, token, fetchImpl);
+    for (const t of body.tasks || []) out.push(slimTask(t));
+    if (body.last_page || (body.tasks || []).length < 100) break;
+  }
+  return out;
+}
+
 // Current sprint and the next one, by today's date.
 function pickSprints(lists, now) {
   const today = ymd(now);
@@ -77,7 +94,12 @@ async function buildPayload({ token, fetchImpl = fetch, now = new Date(), people
   const lists = await listSprintLists(token, fetchImpl, now.getUTCFullYear());
   const sprints = pickSprints(lists, now);
   const tasks = {};
-  for (const s of sprints) tasks[String(s.num)] = await fetchSprintTasks(s.id, token, fetchImpl);
+  for (const s of sprints) {
+    const inList = await fetchSprintTasks(s.id, token, fetchImpl);
+    const due = await fetchDueTasks(TASKS_LIST_ID, token, fetchImpl, s, people.map((p) => p.id));
+    const seen = new Set(inList.map((t) => t.id));
+    tasks[String(s.num)] = inList.concat(due.filter((t) => !seen.has(t.id)));
+  }
   return {
     sample: false, syncedAt: now.getTime(), people,
     sprints: sprints.map((s) => ({ key: String(s.num), label: `Sprint ${s.num}`, start: s.start, end: s.end, note: s.note })),
@@ -85,4 +107,4 @@ async function buildPayload({ token, fetchImpl = fetch, now = new Date(), people
   };
 }
 
-module.exports = { PEOPLE, SPRINT_RE, parseSprintName, slimTask, fetchSprintTasks, pickSprints, buildPayload };
+module.exports = { PEOPLE, SPRINT_RE, parseSprintName, slimTask, fetchSprintTasks, fetchDueTasks, pickSprints, buildPayload };
