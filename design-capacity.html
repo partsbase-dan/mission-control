@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design capacity</title>
+<style>
+  :root{
+    --bg:#eef0f4; --surface:#fff; --surface2:#f5f6f8; --border:#e3e5e9;
+    --accent:#0C70E8; --accent-soft:#dbeafe; --text:#002857; --muted:#717680; --label:#535862;
+    --red:#b42318; --red-bg:#fef3f2; --green:#027a48; --amber:#b54708; --amber-bg:#fffaeb;
+    --shadow:0 1px 2px rgba(0,40,87,.06),0 8px 24px rgba(0,40,87,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.5 "Avenir Next LT Pro",-apple-system,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 56px}
+  header{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+  h1{font-size:26px;line-height:1.2;margin:0 0 4px;font-weight:600}
+  .sub{color:var(--label);margin:0;font-size:14px}
+  .ctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .seg{display:inline-flex;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:3px}
+  .seg button{border:0;background:transparent;font:inherit;font-weight:500;color:var(--label);padding:7px 14px;border-radius:8px;cursor:pointer}
+  .seg button[aria-pressed="true"]{background:var(--text);color:#fff}
+  .seg button:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .banner{background:var(--amber-bg);border:1px solid #fedf89;color:var(--amber);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:14px}
+  .answer{background:var(--text);color:#fff;border-radius:14px;padding:22px 26px;margin-bottom:16px;box-shadow:var(--shadow)}
+  .answer p{margin:0;font-size:20px;line-height:1.35;font-weight:500;max-width:860px}
+  .answer small{display:block;margin-top:8px;color:#b9d3f7;font-size:13px}
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+  .tile,.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+  .tile{padding:16px 18px}
+  .tile .k{font-size:13px;color:var(--label);font-weight:500}
+  .tile .v{font-size:32px;font-weight:600;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+  .tile .n{font-size:13px;color:var(--muted)}
+  .status{display:inline-flex;gap:6px;align-items:center;font-size:13px;font-weight:600;padding:2px 9px;border-radius:99px}
+  .status.over{background:var(--red-bg);color:var(--red)} .status.ok{background:#ecfdf3;color:var(--green)}
+  .card{padding:20px 22px;margin-bottom:16px}
+  .card h2{font-size:17px;margin:0 0 2px;font-weight:600}
+  .card .h2sub{color:var(--muted);font-size:13px;margin:0 0 14px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid2>.card{margin-bottom:0}
+  .brow{display:grid;grid-template-columns:150px 1fr 64px;gap:12px;align-items:center;padding:6px 0}
+  .brow .nm{font-weight:500}
+  .bar{height:14px;background:var(--surface2);border-radius:0 7px 7px 0}
+  .bar i{display:block;height:100%;background:var(--accent);border-radius:0 7px 7px 0}
+  .num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  .person{padding:14px 0;border-top:1px solid var(--border)} .person:first-of-type{border-top:0;padding-top:0}
+  .ph{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .ph b{font-size:16px}
+  .cap{position:relative;height:26px;margin:10px 0 4px;background:var(--surface2);border-radius:6px}
+  .cap .p{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:6px 0 0 6px}
+  .cap .c{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,#9db4d6 0 4px,#dfe8f5 4px 8px)}
+  .cap .a{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--red)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--label);margin-top:6px}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{text-align:left;font-weight:600;color:var(--label);font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--border)}
+  td{padding:9px 10px;border-bottom:1px solid var(--surface3,#eef0f3);vertical-align:top}
+  th.r,td.r{text-align:right;font-variant-numeric:tabular-nums}
+  .btn{border:1px solid var(--border);background:var(--surface);font:inherit;font-size:13px;font-weight:500;color:var(--text);padding:4px 10px;border-radius:8px;cursor:pointer}
+  .btn:hover{border-color:var(--accent);color:var(--accent)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;padding:8px 16px}
+  .prep{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .prep div{background:var(--surface2);border-radius:10px;padding:12px 14px}
+  .prep b{font-size:22px;display:block;font-variant-numeric:tabular-nums}
+  .prep span{font-size:13px;color:var(--label)}
+  .trend{display:flex;align-items:flex-end;gap:14px;height:170px;border-bottom:1px solid var(--border);position:relative;padding-top:10px}
+  .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative}
+  .col .b{width:100%;max-width:64px;background:var(--accent);border-radius:6px 6px 0 0}
+  .col .b.over{background:var(--red)}
+  .col .l{position:absolute;bottom:calc(var(--h) + 4px);font-size:12px;font-weight:600}
+  .xl{display:flex;gap:14px;margin-top:6px} .xl span{flex:1;text-align:center;font-size:12.5px;color:var(--label)}
+  .note{color:var(--muted);font-size:12.5px;margin:12px 0 0}
+  .empty{color:var(--muted);padding:14px 0}
+  footer{color:var(--muted);font-size:12.5px;margin-top:22px;line-height:1.6}
+  [hidden]{display:none!important}
+  @media(max-width:860px){.tiles,.prep{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.brow{grid-template-columns:110px 1fr 56px}}
+  @media(max-width:480px){.tiles,.prep{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Design capacity</h1>
+      <p class="sub" id="range">&nbsp;</p>
+    </div>
+    <div class="ctl">
+      <div class="seg" role="group" aria-label="Sprint" id="sprints"></div>
+      <div class="seg" role="group" aria-label="View">
+        <button id="vLead" aria-pressed="true">Leadership</button>
+        <button id="vPlan" aria-pressed="false">Planning</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="banner"></div>
+  <div class="answer"><p id="answer"></p><small id="answerNote"></small></div>
+  <div class="tiles" id="tiles"></div>
+
+  <div id="leadView">
+    <div class="grid2">
+      <section class="card" aria-labelledby="h-bu">
+        <h2 id="h-bu">Where design time is planned</h2>
+        <p class="h2sub">Planned hours by business unit, this sprint</p>
+        <div id="bu"></div>
+      </section>
+      <section class="card" aria-labelledby="h-tr">
+        <h2 id="h-tr">Planned load, recent sprints</h2>
+        <p class="h2sub">Planned hours as a share of available hours. Red = over capacity.</p>
+        <div id="trend"></div>
+        <p class="note" id="trendNote"></p>
+      </section>
+    </div>
+    <section class="card" style="margin-top:16px" aria-labelledby="h-top">
+      <h2 id="h-top">Largest planned items</h2>
+      <p class="h2sub">By estimated hours. Team total, no individual breakdown.</p>
+      <div id="top"></div>
+    </section>
+  </div>
+
+  <div id="planView" hidden>
+    <section class="card" aria-labelledby="h-prep">
+      <h2 id="h-prep">Before planning</h2>
+      <p class="h2sub">Fix these in ClickUp first. They change the numbers below.</p>
+      <div class="prep" id="prep"></div>
+    </section>
+    <section class="card" aria-labelledby="h-cap">
+      <h2 id="h-cap">Capacity by person</h2>
+      <p class="h2sub">Planned against available hours (40 per person, minus 8 per out-of-office day). Carryover is shown but not counted.</p>
+      <div id="people"></div>
+      <div class="legend"><span><i style="background:var(--text)"></i>Planned</span><span><i style="background:repeating-linear-gradient(135deg,#9db4d6 0 3px,#dfe8f5 3px 6px)"></i>Carryover (not counted)</span><span><i style="background:var(--red)"></i>Available hours</span></div>
+    </section>
+    <section class="card" aria-labelledby="h-fit">
+      <h2 id="h-fit">Doesn't fit</h2>
+      <p class="h2sub">Taken in priority order, then due date. The first item that doesn't fit and everything after it is deferred. Moves here are a what-if and never change ClickUp.</p>
+      <div id="fit"></div>
+      <p style="margin:14px 0 0"><button class="btn" id="reset">Reset what-ifs</button> <button class="btn primary" id="lock" title="Saves this plan as a snapshot (editors only)">Lock plan</button> <span class="note" id="lockNote"></span></p>
+    </section>
+  </div>
+
+  <footer>
+    Source: ClickUp time estimates, assignees and Business Unit on each sprint's task list. Planned hours exclude carryover (time already logged before the sprint) and tasks waiting on a third party. Shared tasks split evenly. Estimates are only as complete as the coverage shown above.
+  </footer>
+</div>
+
+<script src="design-capacity.js"></script>
+<script>
+(function(){
+"use strict";
+const P = window.Planning;
+const params = new URLSearchParams(location.search);
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const h1 = n => (Math.round(n*10)/10).toString();
+const HR = 3600000;
+
+/* ---------- sample data (synthetic; shown only with ?demo=1 or when live data is unavailable) ---------- */
+const mk = (id, name, est, who, bu, o={}) => ({id, name, status:o.status||"backlog", time_estimate: est==null?null:est*HR,
+  time_spent: o.spent==null?null:o.spent*HR, assignees: who.map(i=>({id:i})), priority: o.pr?{priority:o.pr}:null,
+  due_date: o.due||null, custom_fields: bu?[{name:"Business Unit",type:"drop_down",value:{name:bu}}]:[]});
+const SAMPLE = {
+  sample:true, syncedAt:Date.now(),
+  people:[{id:"1",name:"Designer A"},{id:"2",name:"Designer B"}],
+  sprints:[{key:"54",label:"Sprint 54",start:"2026-11-02",end:"2026-11-08",note:"Current"},{key:"55",label:"Sprint 55",start:"2026-11-09",end:"2026-11-15",note:"Next"}],
+  ooo:{"55":{"2":1}},
+  tasks:{
+    "55":[
+      mk("a","Exhibitor kit: booth signage set",10,[1],"PBExpo",{pr:"urgent",due:1}),
+      mk("b","Registration email headers (3 sends)",6,[1],"PBExpo",{pr:"high",due:2}),
+      mk("c","Weekly PBExpo deliverables",8,[1,2],"PBExpo",{pr:"high",due:3}),
+      mk("d","Sales one-pager: Government Data",7,[2],"PartsBase",{pr:"high",due:4}),
+      mk("e","PartStore seller banner set",9,[2],"PartStore",{pr:"normal",due:5}),
+      mk("f","Meetings and ops",6.5,[1],"Team Ops",{pr:"normal"}),
+      mk("g","Meetings and ops",6.5,[2],"Team Ops",{pr:"normal"}),
+      mk("h","Tradeshow post-show social set",5,[2],"Tradeshow",{pr:"normal",due:6}),
+      mk("i","Customer ad: sponsor spotlight",6,[2],"Customer Advertising",{pr:"low",due:7}),
+      mk("j","Carryover: video edit, runway content",5,[1],"PBExpo",{spent:2,pr:"normal"}),
+      mk("k","Business cards (new hires)",null,[2],"Team Ops"),
+      mk("l","Web banner refresh",4,[],"PartsBase",{pr:"low"}),
+      mk("m","Vendor creative review",3,[2],"PartsBase",{status:"Waiting on 3rd party"})
+    ],
+    "54":[
+      mk("a","Exhibitor kit: booth signage set",10,[1],"PBExpo"), mk("b","Registration emails",12,[1],"PBExpo"),
+      mk("c","Sales one-pager",9,[2],"PartsBase"), mk("d","PartStore banners",14,[2],"PartStore"),
+      mk("e","Meetings and ops",6.5,[1],"Team Ops"), mk("f","Meetings and ops",6.5,[2],"Team Ops")
+    ]
+  },
+  history:[{label:"49",planned:71,avail:80},{label:"50",planned:86,avail:80},{label:"51",planned:94,avail:72},{label:"52",planned:78,avail:80},{label:"53",planned:88,avail:64}]
+};
+
+/* ---------- state ---------- */
+const state = { view:"lead", sprint:null, data:null, moves:{}, locked:false };
+
+async function load(){
+  if(params.get("demo")==="1"){ state.data=SAMPLE; return; }
+  try{
+    const r = await fetch("/.netlify/functions/design-plan",{cache:"no-store",credentials:"same-origin"});
+    if(!r.ok) throw new Error(r.status);
+    state.data = await r.json();
+  }catch(e){ state.data = SAMPLE; }   // until the live ClickUp feed is connected
+}
+
+/* ---------- compute ---------- */
+function compute(){
+  const d = state.data, sp = state.sprint;
+  const people = d.people;
+  const ids = people.map(p=>p.id);
+  const ooo = (d.ooo && d.ooo[sp]) || {};
+  let tasks = (d.tasks[sp]||[]).map(P.normalizeTask).filter(t=>state.moves[t.id]!=="defer");
+  tasks = tasks.map(t=>{
+    if(state.moves[t.id]==="swap" && t.assignees.length===1){ const other = ids.find(i=>i!==t.assignees[0]); return {...t, assignees:[other]}; }
+    return t;
+  });
+  const sum = P.summarisePlan(tasks, people);
+  const per = people.map(p=>{
+    const avail = P.availableHours(ooo[p.id]);
+    const mine = tasks.filter(t=>t.assignees.includes(p.id) && !P.isStale(t) && !P.isCarry(t) && P.ownEst(t,ids)!=null)
+      .map(t=>({...t, estH: P.ownEst(t,ids)/HR/t.assignees.length, shared:t.assignees.length>1}));
+    const fit = P.planFit(mine, avail);
+    const s = sum.byPerson[p.id];
+    return {p, avail, planned:s.plannedH, carry:s.carryH, fit, ooo:Number(ooo[p.id]||0)};
+  });
+  const planned = per.reduce((a,x)=>a+x.planned,0) + sum.unassignedH;
+  const avail = per.reduce((a,x)=>a+x.avail,0);
+  return {tasks, sum, per, planned, avail, cov:P.coverage(tasks, ids), ids};
+}
+
+/* ---------- render ---------- */
+function statusPill(over){ return over>0.05
+  ? `<span class="status over">▲ Over by ${h1(over)}h</span>` : `<span class="status ok">✓ Fits</span>`; }
+
+function render(){
+  const d = state.data;
+  if(!d){
+    $("#answer").textContent = "Live data is not available right now.";
+    $("#answerNote").textContent = "Sign in again, or try later. Nothing is shown rather than showing old numbers.";
+    $("#tiles").innerHTML=""; $("#leadView").hidden=true; $("#planView").hidden=true; return;
+  }
+  $("#banner").innerHTML = d.sample ? '<div class="banner" role="status"><b>SAMPLE DATA, not real numbers.</b> The live ClickUp feed is not connected yet. Do not quote anything on this page.</div>' : "";
+  const sp = d.sprints.find(s=>s.key===state.sprint);
+  $("#range").textContent = `${sp.label}, ${sp.start} to ${sp.end} · ${sp.note}`;
+  $("#sprints").innerHTML = d.sprints.map(s=>`<button data-k="${esc(s.key)}" aria-pressed="${s.key===state.sprint}">${esc(s.label)}</button>`).join("");
+  const c = compute();
+  const load = c.avail ? Math.round(c.planned/c.avail*100) : 0;
+  // Over capacity is measured per person: a team total can show spare hours while one person is overloaded.
+  const over = c.per.reduce((a,x)=>a+x.fit.overByH,0);
+  const overPeople = c.per.filter(x=>x.fit.overByH>0.05).length;
+  const open = Math.max(0, c.avail - c.planned);
+  const nOver = c.per.reduce((a,x)=>a+x.fit.over.length,0);
+  $("#answer").textContent = over>0.05
+    ? `${sp.label} is planned at ${load}% of available design hours, but ${overPeople} of ${c.per.length} people ${overPeople===1?"is":"are"} over capacity by ${h1(over)} hours, and ${nOver===1?"1 item doesn't":nOver+" items don't"} fit.`
+    : `${sp.label} is planned at ${load}% of available design hours, with ${h1(open)} hours open.`;
+  $("#answerNote").textContent = `Based on ${c.cov.withEstimate} of ${c.cov.tasks} tasks with an estimate. Carryover and tasks waiting on a third party are not counted.`;
+  const covPct = c.cov.tasks ? Math.round(c.cov.withEstimate/c.cov.tasks*100) : 0;
+  $("#tiles").innerHTML = [
+    ["Capacity load", `${load}%`, `${h1(c.planned)}h planned of ${h1(c.avail)}h available`],
+    [over>0.05?"Over capacity":"Open capacity", `${h1(over>0.05?over:open)}h`, over>0.05?statusPill(over)+(open>0.05?` <span class="n">${h1(open)}h open elsewhere</span>`:""):statusPill(0)],
+    ["Items that don't fit", String(c.per.reduce((a,x)=>a+x.fit.over.length,0)), overPeople?`${overPeople} of ${c.per.length} people over`:"Everyone fits"],
+    ["Estimate coverage", `${covPct}%`, `${c.cov.withEstimate} of ${c.cov.tasks} tasks · ${c.cov.withoutBU} without a business unit`]
+  ].map(([k,v,n])=>`<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="n">${n}</div></div>`).join("");
+
+  // Business unit rows
+  const bu = Object.entries(c.sum.byBU).sort((a,b)=>b[1]-a[1]);
+  const mx = Math.max(1, ...bu.map(x=>x[1]));
+  $("#bu").innerHTML = bu.length ? bu.map(([n,h])=>`<div class="brow"><div class="nm">${esc(n)}</div><div class="bar" role="img" aria-label="${esc(n)} ${h1(h)} hours"><i style="width:${h/mx*100}%"></i></div><div class="num">${h1(h)}h</div></div>`).join("")
+    : '<p class="empty">Nothing estimated for this sprint yet.</p>';
+
+  // Trend (history comes from locked plans; sample data shows the layout)
+  const hist = (d.history||[]);
+  $("#trend").innerHTML = hist.length ? `<div class="trend">${hist.map(x=>{const r=x.planned/x.avail; const hgt=Math.min(100,r*80);
+      return `<div class="col" title="Sprint ${esc(x.label)}: ${x.planned}h planned of ${x.avail}h"><div class="b ${r>1?"over":""}" style="height:${hgt}%"></div><div class="l" style="--h:${hgt*1.5}px">${Math.round(r*100)}%${r>1?" ▲":""}</div></div>`;}).join("")}</div>
+      <div class="xl">${hist.map(x=>`<span>S${esc(x.label)}</span>`).join("")}</div>` : '<p class="empty">History starts once weekly plans are locked.</p>';
+  $("#trendNote").textContent = hist.length ? "Each bar is planned hours ÷ available hours for that sprint. ▲ marks over capacity." : "";
+
+  // Largest items, team only
+  const top = c.tasks.filter(t=>!P.isStale(t) && !P.isCarry(t) && t.estMs!=null).sort((a,b)=>b.estMs-a.estMs).slice(0,6);
+  $("#top").innerHTML = top.length ? `<table><thead><tr><th>Item</th><th>Business unit</th><th class="r">Hours</th></tr></thead><tbody>${top.map(t=>`<tr><td>${esc(t.name)}</td><td>${esc(t.bu||"No business unit set")}</td><td class="r">${h1(t.estMs/HR)}h</td></tr>`).join("")}</tbody></table>` : '<p class="empty">No estimates yet.</p>';
+
+  // Planning view
+  $("#prep").innerHTML = [
+    [c.sum.noEstimate.length,"tasks with no estimate"],[c.sum.carryover.length,"carryover items"],
+    [c.sum.stale.length,"waiting on a third party"],[h1(c.sum.unassignedH)+"h","planned but unassigned"]
+  ].map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join("");
+  $("#people").innerHTML = c.per.map(x=>{
+    const sc = Math.max(x.avail, x.planned + x.carry, 1);
+    return `<div class="person"><div class="ph"><b>${esc(x.p.name)}</b><span>${h1(x.planned)}h planned of ${h1(x.avail)}h ${x.ooo?`(${x.ooo} out-of-office day${x.ooo===1?"":"s"})`:""} ${statusPill(x.fit.overByH)}</span></div>
+      <div class="cap" role="img" aria-label="${esc(x.p.name)}: ${h1(x.planned)} planned, ${h1(x.carry)} carryover, ${h1(x.avail)} available"><div class="p" style="width:${x.planned/sc*100}%"></div><div class="c" style="left:${x.planned/sc*100}%;width:${x.carry/sc*100}%"></div><div class="a" style="left:${x.avail/sc*100}%"></div></div>
+      <span class="note">${h1(x.carry)}h carryover not counted</span></div>`;
+  }).join("");
+  const rows = c.per.flatMap(x=>x.fit.over.map(t=>({t,who:x.p})));
+  $("#fit").innerHTML = rows.length ? `<table><thead><tr><th>Item</th><th>Person</th><th>Priority</th><th class="r">Hours</th><th></th></tr></thead><tbody>${rows.map(({t,who})=>`<tr><td>${esc(t.name)}</td><td>${esc(who.name)}</td><td>${esc(t.priority||"not set")}</td><td class="r">${h1(t.estH)}h</td><td class="r">${t.shared?"":`<button class="btn" data-mv="swap" data-id="${esc(t.id)}">Give to other</button> `}<button class="btn" data-mv="defer" data-id="${esc(t.id)}">Defer</button></td></tr>`).join("")}</tbody></table>`
+    : '<p class="empty">Everything fits.</p>';
+  $("#leadView").hidden = state.view!=="lead"; $("#planView").hidden = state.view!=="plan";
+  $("#vLead").setAttribute("aria-pressed", state.view==="lead"); $("#vPlan").setAttribute("aria-pressed", state.view==="plan");
+}
+
+/* ---------- events ---------- */
+document.addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  if(b.dataset.k){ state.sprint=b.dataset.k; state.moves={}; render(); }
+  else if(b.id==="vLead"){ state.view="lead"; render(); }
+  else if(b.id==="vPlan"){ state.view="plan"; render(); }
+  else if(b.dataset.mv){ state.moves[b.dataset.id]=b.dataset.mv; render(); }
+  else if(b.id==="reset"){ state.moves={}; render(); }
+  else if(b.id==="lock"){ $("#lockNote").textContent = state.data && state.data.sample ? "Sample data: nothing was saved." : "Saving is not connected yet."; }
+});
+
+(async function boot(){
+  await load();
+  if(state.data){ state.sprint = (state.data.sprints.find(s=>s.note==="Next")||state.data.sprints[0]).key; }
+  render();
+})();
+})();
+</script>
+</body>
+</html>

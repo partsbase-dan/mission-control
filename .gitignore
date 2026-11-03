@@ -111,3 +111,8 @@
 # UTM channel totals only, no names, emails or contact rows, and no Tactics view. Refresh it with
 # the Mission Control copy that refresh.py writes (dist/*.mission-control.html), not the full page.
 !pbexpo-registration.html
+
+# Design capacity dashboard (Plan and Leadership views). Sample data until the ClickUp
+# feed is connected; no customer or personal data. Behind pb-auth sign-in.
+!design-capacity.html
+!design-capacity.js
