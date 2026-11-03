@@ -90,6 +90,24 @@
   footer{color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.6;max-width:880px}
   .duenote{background:#fff;border-radius:var(--radius);box-shadow:var(--card);padding:18px 24px;margin-bottom:20px;font-size:14px;border-left:4px solid var(--blue)}
   .duenote b{display:block;color:var(--navy);margin-bottom:2px} .duenote ul{margin:8px 0 0;padding-left:18px;columns:2} .duenote li{margin:3px 0;break-inside:avoid} .duenote a{color:var(--navy)} .duenote span{color:var(--muted)}
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-radius:var(--radius);box-shadow:var(--card);margin-bottom:20px}
+  .strip div{padding:20px 24px;border-left:1px solid var(--line)} .strip div:first-child{border-left:0}
+  .strip b{display:block;font-size:30px;font-weight:900;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.15} .strip span{font-size:13px;color:var(--muted)}
+  .pr{display:grid;grid-template-columns:210px 1fr;gap:26px;padding:20px 0;border-top:1px solid var(--line)} .pr:first-of-type{border-top:0;padding-top:4px}
+  .pr .big{font-size:40px;font-weight:900;color:var(--blue);line-height:1.1;margin:6px 0 2px;font-variant-numeric:tabular-nums} .pr .big small{font-size:14px;font-weight:700;color:var(--muted)}
+  .pr .nm2{font-size:18px;font-weight:900;color:var(--navy)}
+  .bl{font-size:12px;color:var(--muted);margin:8px 0 3px}
+  .track{position:relative;height:24px;background:var(--track);border-radius:7px}
+  .track i{position:absolute;left:0;top:0;bottom:0;background:var(--navy);border-radius:7px} .track i.t{background:var(--blue)} .track i.o{background:var(--red)}
+  .track u{position:absolute;top:-4px;bottom:-4px;width:0;border-left:2px dashed var(--navy);text-decoration:none}
+  .axis{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:4px}
+  .money{display:flex;gap:26px;flex-wrap:wrap;margin-top:10px;font-size:13.5px;color:var(--muted)} .money b{color:var(--navy);margin-left:4px;font-variant-numeric:tabular-nums}
+  .arow{display:grid;grid-template-columns:150px 1fr 56px 70px 52px;gap:12px;align-items:center;padding:8px 0}
+  .arow .nm{font-weight:500;color:var(--navy)} .arow .nm div{font-size:12px;color:var(--muted);font-weight:400}
+  .stack{display:flex;height:14px;background:var(--track);border-radius:7px;overflow:hidden} .stack i{display:block;height:100%}
+  .small-n{font-size:44px;font-weight:900;color:var(--blue);line-height:1.1;margin:2px 0}
+  .srow{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line);font-size:14px;color:var(--navy)} .srow b{font-variant-numeric:tabular-nums}
+  @media(max-width:860px){.strip{grid-template-columns:1fr 1fr}.strip div:nth-child(3){border-left:0}.pr{grid-template-columns:1fr}.arow{grid-template-columns:110px 1fr 50px 60px 44px}}
   .tbl.wide{overflow-x:auto}
   .tbl.wide th,.tbl.wide td{padding-left:10px;padding-right:10px}.tbl.wide th:first-child,.tbl.wide td:first-child{padding-left:26px;min-width:280px}.tbl.wide th:last-child,.tbl.wide td:last-child{padding-right:26px;white-space:nowrap}
   label{font-size:13px;color:var(--muted)} select{font:inherit;color:var(--navy);margin-left:6px;padding:6px 10px;border:1px solid var(--pale);border-radius:9px;background:#fff}
@@ -112,6 +130,7 @@
       <div class="seg" role="group" aria-label="Sprint" id="sprints"></div>
       <div class="seg" role="group" aria-label="View">
         <button id="vLead" aria-pressed="true">Leadership</button>
+        <button id="vSprint" aria-pressed="false">Sprint</button>
         <button id="vPlan" aria-pressed="false">Planning</button>
         <button id="vTasks" aria-pressed="false">Tasks</button>
       </div>
@@ -144,6 +163,31 @@
       <p class="h2sub">By estimated cost. Team total, no individual breakdown.</p>
       <div class="tbl" id="top"></div>
     </section>
+  </div>
+
+  <div id="sprintView" hidden>
+    <section class="card" aria-labelledby="h-ps">
+      <span class="eyebrow">Each person</span>
+      <h2 id="h-ps">Each person's sprint</h2>
+      <p class="h2sub">Planned hours from ClickUp time estimates, and time tracked so far on those tasks.</p>
+      <div id="persons"></div>
+      <div class="legend"><span><i style="background:var(--navy)"></i>Planned</span><span><i style="background:var(--blue)"></i>Tracked</span><span><i style="background:var(--red)"></i>Over available hours</span><span><i style="background:#fff;border:2px dashed var(--navy);width:0;height:12px;border-radius:0"></i>Available through today</span></div>
+    </section>
+    <div class="strip" id="strip"></div>
+    <div class="grid2">
+      <section class="card" aria-labelledby="h-al">
+        <span class="eyebrow">Allocation</span>
+        <h2 id="h-al">Allocation by business unit</h2>
+        <p class="h2sub">Planned hours and cost, with hours tracked so far. Business unit comes from ClickUp.</p>
+        <div id="alloc"></div>
+      </section>
+      <section class="card" aria-labelledby="h-sm">
+        <span class="eyebrow">Quick work</span>
+        <h2 id="h-sm">Small requests</h2>
+        <p class="h2sub">Business cards and backgrounds. Each one is quick; together they add up.</p>
+        <div id="small"></div>
+      </section>
+    </div>
   </div>
 
   <div id="dueNote"></div>
@@ -232,7 +276,7 @@ const SAMPLE = {
 };
 
 /* ---------- state ---------- */
-const state = { view:(["plan","tasks"].includes(params.get("view"))?params.get("view"):"lead"), sprint:null, data:null, moves:{}, locked:false, fPerson:"all", fBU:"all" };
+const state = { view:(["plan","tasks","sprint"].includes(params.get("view"))?params.get("view"):"lead"), sprint:null, data:null, moves:{}, locked:false, fPerson:"all", fBU:"all" };
 const money = n => "$" + Math.round(n).toLocaleString("en-US");
 
 async function load(){
@@ -353,11 +397,49 @@ function render(){
   $("#fit").innerHTML = rows.length ? `<table><thead><tr><th>Item</th><th>Person</th><th>Priority</th><th class="r">Hours</th><th></th></tr></thead><tbody>${rows.map(({t,who})=>`<tr><td>${esc(t.name)}</td><td>${esc(who.name)}</td><td>${esc(t.priority||"not set")}</td><td class="r">${h1(t.estH)}h</td><td class="r">${t.shared?"":`<button class="btn" data-mv="swap" data-id="${esc(t.id)}">Give to other</button> `}<button class="btn" data-mv="defer" data-id="${esc(t.id)}">Defer</button></td></tr>`).join("")}</tbody></table>`
     : '<p class="empty">Everything fits.</p>';
   renderTasks(raw, d, cost.rate);
+  renderSprint(c, raw, cost, d, sp);
+  $("#tiles").hidden = state.view==="sprint";
   const dueOnly = ((d.dueOnly||{})[state.sprint]||[]).map(P.normalizeTask);
   $("#dueNote").innerHTML = (dueOnly.length && state.view!=="lead") ? `<div class="duenote" role="note"><b>Due in ${esc(sp.label)} but not in the sprint list (${dueOnly.length}). Not counted above.</b><span>Pull these into the sprint in ClickUp, or change the due date.</span><ul>${dueOnly.map(t=>`<li><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.name)}</a> <span>· ${esc(t.assignees.map(a=>(d.people.find(p=>p.id===a)||{}).name||"").filter(Boolean).join(", ")||"Unassigned")}</span></li>`).join("")}</ul></div>` : "";
   if(state.view==="lead" && dueOnly.length) $("#answerNote").textContent += ` ${dueOnly.length} more task${dueOnly.length===1?" is":"s are"} due this sprint but not in the sprint list, and ${dueOnly.length===1?"isn't":"aren't"} counted.`;
-  $("#leadView").hidden = state.view!=="lead"; $("#planView").hidden = state.view!=="plan"; $("#taskView").hidden = state.view!=="tasks";
-  $("#vLead").setAttribute("aria-pressed", state.view==="lead"); $("#vPlan").setAttribute("aria-pressed", state.view==="plan"); $("#vTasks").setAttribute("aria-pressed", state.view==="tasks");
+  $("#leadView").hidden = state.view!=="lead"; $("#planView").hidden = state.view!=="plan"; $("#taskView").hidden = state.view!=="tasks"; $("#sprintView").hidden = state.view!=="sprint";
+  $("#vLead").setAttribute("aria-pressed", state.view==="lead"); $("#vPlan").setAttribute("aria-pressed", state.view==="plan"); $("#vTasks").setAttribute("aria-pressed", state.view==="tasks"); $("#vSprint").setAttribute("aria-pressed", state.view==="sprint");
+}
+
+function renderSprint(c, raw, cost, d, sp){
+  const rate = cost.rate, today = params.get("today") || new Date().toLocaleDateString("en-CA");
+  const ooo = (d.ooo && d.ooo[state.sprint]) || {};
+  const pr = c.per.map(x=>{
+    const tracked = raw.reduce((a,t)=> a + (t.assignees.includes(x.p.id) ? (t.spentMs||0)/HR/t.assignees.length : 0), 0);
+    const soFar = P.availableSoFar(sp.start, sp.end, today, ooo[x.p.id]);
+    return {...x, tracked, soFar};
+  });
+  const planned = pr.reduce((a,x)=>a+x.planned,0), avail = pr.reduce((a,x)=>a+x.avail,0), tracked = pr.reduce((a,x)=>a+x.tracked,0);
+  $("#persons").innerHTML = pr.map(x=>{
+    const sc = Math.max(x.avail, x.planned, x.tracked, 1), pc = v=>Math.min(v/sc*100,100);
+    const over = x.planned > x.avail + 0.05;
+    return `<div class="pr"><div><div class="nm2">${esc(x.p.name)}</div><div class="big">${h1(x.planned)}h <small>planned of ${h1(x.avail)}h</small></div>
+      <div class="n note" style="margin:0">${h1(x.tracked)}h tracked of the ${h1(x.soFar)}h available so far</div>${over?`<div style="margin-top:8px">${statusPill(x.planned-x.avail)}</div>`:""}</div>
+      <div><div class="bl">Planned</div><div class="track" role="img" aria-label="${esc(x.p.name)} planned ${h1(x.planned)} of ${h1(x.avail)} hours"><i class="${over?"o":""}" style="width:${pc(x.planned)}%"></i></div>
+      <div class="bl">Tracked</div><div class="track" role="img" aria-label="${esc(x.p.name)} tracked ${h1(x.tracked)} hours"><i class="t" style="width:${pc(x.tracked)}%"></i><u style="left:${pc(x.soFar)}%"></u></div>
+      <div class="axis"><span>0h</span><span>${h1(sc/2)}h</span><span>${h1(sc)}h</span></div>
+      <div class="money"><span>Planned cost<b>${money(x.planned*rate)}</b></span><span>Actual cost<b>${money(x.tracked*rate)}</b></span><span>Untracked so far<b>${h1(Math.max(0,x.soFar-x.tracked))}h</b></span></div></div></div>`;
+  }).join("");
+  $("#strip").innerHTML = [[`${h1(planned)}h`,`Planned, of ${h1(avail)}h available`],[money(planned*rate),"Planned cost"],[`${h1(tracked)}h`,"Tracked so far"],[money(tracked*rate),"Actual cost"]]
+    .map(([v,l])=>`<div><b>${v}</b><span>${l}</span></div>`).join("");
+  // Allocation by business unit, split by person
+  const shades = ["#002857","#007FE9","#6AA9E9","#9DB4D6"];
+  const names = Object.keys(c.sum.byBU);
+  const rows = names.map(n=>({n, by:pr.map(x=>x.planned>=0 ? (c.sum.byPerson[x.p.id].byBU[n]||0) : 0), tr:(cost.byBU[n]||{}).trackedH||0})).map(r=>({...r, h:r.by.reduce((a,v)=>a+v,0)})).sort((a,b)=>b.h-a.h);
+  const mx = Math.max(1, ...rows.map(r=>r.h));
+  $("#alloc").innerHTML = rows.length ? rows.map(r=>`<div class="arow"><div class="nm">${esc(r.n)}<div>${pr.map((x,i)=>`${esc(x.p.name)} ${h1(r.by[i])}h`).join(", ")}</div></div>
+      <div class="stack" style="width:${r.h/mx*100}%;min-width:6px" role="img" aria-label="${esc(r.n)} ${h1(r.h)} hours">${r.by.map((v,i)=>`<i style="width:${r.h?v/r.h*100:0}%;background:${shades[i%4]}"></i>`).join("")}</div>
+      <div class="num">${h1(r.h)}h</div><div class="num">${money(r.h*rate)}</div><div class="num" style="font-weight:500;color:var(--muted)">${h1(r.tr)}h</div></div>`).join("")
+      + `<div class="legend">${pr.map((x,i)=>`<span><i style="background:${shades[i%4]}"></i>${esc(x.p.name)}</span>`).join("")}<span>Columns: planned hours, planned cost, tracked so far</span></div>`
+    : '<p class="empty">Nothing estimated for this sprint yet.</p>';
+  const sm = P.smallRequests(raw, rate);
+  $("#small").innerHTML = `<div class="small-n">${sm.count}</div><div class="n note" style="margin:0 0 12px">${sm.count?`requests this sprint, ${sm.handled} handled · ${h1(sm.estH)}h estimated (${money(sm.estCost)})`:"No business card or background requests this sprint"}</div>`
+    + ["Business cards","Backgrounds"].map(k=>{const r=sm.types[k]||{count:0,handled:0};return `<div class="srow"><span>${k}</span><b>${r.handled} of ${r.count} handled</b></div>`;}).join("");
 }
 
 function renderTasks(raw, d, rate){
@@ -388,6 +470,7 @@ document.addEventListener("click", e=>{
   else if(b.id==="vLead"){ state.view="lead"; render(); }
   else if(b.id==="vPlan"){ state.view="plan"; render(); }
   else if(b.id==="vTasks"){ state.view="tasks"; render(); }
+  else if(b.id==="vSprint"){ state.view="sprint"; render(); }
   else if(b.dataset.mv){ state.moves[b.dataset.id]=b.dataset.mv; render(); }
   else if(b.id==="reset"){ state.moves={}; render(); }
   else if(b.id==="lock"){ $("#lockNote").textContent = state.data && state.data.sample ? "Sample data: nothing was saved." : "Saving is not connected yet."; }

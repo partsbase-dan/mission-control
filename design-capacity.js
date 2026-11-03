@@ -128,6 +128,40 @@ function costSummary(tasks, people, rate = RATE_PER_HOUR) {
 
 const isOverEstimate = (t) => t.estMs > 0 && t.spentMs > t.estMs * OVER_EST_TOLERANCE;
 
+// Hours each person has had available so far in the sprint: 8 per weekday from the sprint start
+// through today (inclusive), less 8 per out-of-office day. A future sprint has had none; a past
+// one has had the full week. Dates are YYYY-MM-DD.
+function availableSoFar(startYmd, endYmd, todayYmd, oooDays = 0) {
+  let days = 0;
+  const t0 = Date.parse(startYmd + 'T00:00:00Z');
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(t0 + i * 864e5);
+    const ymd = d.toISOString().slice(0, 10);
+    if (ymd > todayYmd || ymd > endYmd) break;
+    const wd = d.getUTCDay();
+    if (wd >= 1 && wd <= 5) days++;
+  }
+  return Math.max(0, (days - Number(oooDays || 0)) * OOO_DAY_HOURS);
+}
+
+// Small, quick requests found by task name (there is no field for them): count, how many are
+// finished, and the estimated hours.
+const SMALL_TYPES = [['Business cards', /business\s*cards?/i], ['Backgrounds', /background\s*request|new\s*background/i]];
+const DONE_RE = /done|complete|closed/i;
+function smallRequests(tasks, rate = RATE_PER_HOUR) {
+  const out = { types: {}, count: 0, handled: 0, estH: 0, estCost: 0 };
+  for (const t of tasks) {
+    const hit = SMALL_TYPES.find(([, re]) => re.test(t.name));
+    if (!hit) continue;
+    const row = out.types[hit[0]] || (out.types[hit[0]] = { count: 0, handled: 0, estH: 0 });
+    const h = t.estMs ? H(t.estMs) : 0;
+    row.count++; out.count++; row.estH += h; out.estH += h;
+    if (DONE_RE.test(t.status || '')) { row.handled++; out.handled++; }
+  }
+  out.estCost = out.estH * rate;
+  return out;
+}
+
 // Order for the doesn't-fit list: ClickUp priority, then earliest due date, then name.
 function byPriority(a, b) {
   const pa = PRIORITY_RANK[a.priority] || 5;
@@ -183,7 +217,7 @@ function lockSnapshot(summary, people, meta) {
 
 const api = {
   HOUR_MS, WEEK_HOURS, OOO_DAY_HOURS, availableHours, buValue, normalizeTask, isStale,
-  ownEst, isCarry, summarisePlan, costSummary, isOverEstimate, RATE_PER_HOUR, byPriority, planFit, coverage, lockSnapshot,
+  ownEst, isCarry, summarisePlan, costSummary, isOverEstimate, availableSoFar, smallRequests, RATE_PER_HOUR, byPriority, planFit, coverage, lockSnapshot,
 };
 // Same file runs in Node (functions, tests) and in the browser (the page).
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
