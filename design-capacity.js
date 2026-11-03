@@ -9,6 +9,9 @@ const OOO_DAY_HOURS = 8;
 const CARRY_THRESHOLD_MS = 60000;           // more than a minute logged before the sprint = carryover
 const STALE_RE = /waiting on (3rd|third) party/i;
 const BU_FIELD = 'Business Unit';
+// Internal time value, not cash. Rate taken from the original dashboard; Finance has not confirmed it.
+const RATE_PER_HOUR = 53;
+const OVER_EST_TOLERANCE = 1.1;             // tracked more than 10% above the estimate is flagged
 const PRIORITY_RANK = { urgent: 1, high: 2, normal: 3, low: 4 };
 
 const H = (ms) => ms / HOUR_MS;
@@ -100,6 +103,30 @@ function summarisePlan(tasks, people, opts = {}) {
   return out;
 }
 
+// Money view for the team. Planned = every estimate on our people's or unassigned tasks, except
+// waiting-on-3rd-party. Carryover is not removed: without per-sprint time entries the feed can't
+// tell carryover from work started this sprint, and dropping started work would understate cost. Tracked = time already on the task, all
+// dates, for tasks assigned to our people or unassigned. Hours and dollars by business unit.
+function costSummary(tasks, people, rate = RATE_PER_HOUR) {
+  const ids = people.map((p) => p.id);
+  const out = { rate, plannedH: 0, trackedH: 0, overEstimate: 0, byBU: {} };
+  for (const t of tasks) {
+    if (isStale(t) || !(!t.assignees.length || t.assignees.some((a) => ids.includes(a)))) continue;
+    const bu = t.bu || 'No business unit set';
+    const row = out.byBU[bu] || (out.byBU[bu] = { plannedH: 0, trackedH: 0 });
+    const est = ownEst(t, ids);
+    if (est != null) { out.plannedH += H(est); row.plannedH += H(est); }
+    if (t.spentMs > 0) { out.trackedH += H(t.spentMs); row.trackedH += H(t.spentMs); }
+    if (isOverEstimate(t)) out.overEstimate++;
+  }
+  out.plannedCost = out.plannedH * rate;
+  out.trackedCost = out.trackedH * rate;
+  for (const r of Object.values(out.byBU)) { r.plannedCost = r.plannedH * rate; r.trackedCost = r.trackedH * rate; }
+  return out;
+}
+
+const isOverEstimate = (t) => t.estMs > 0 && t.spentMs > t.estMs * OVER_EST_TOLERANCE;
+
 // Order for the doesn't-fit list: ClickUp priority, then earliest due date, then name.
 function byPriority(a, b) {
   const pa = PRIORITY_RANK[a.priority] || 5;
@@ -155,7 +182,7 @@ function lockSnapshot(summary, people, meta) {
 
 const api = {
   HOUR_MS, WEEK_HOURS, OOO_DAY_HOURS, availableHours, buValue, normalizeTask, isStale,
-  ownEst, isCarry, summarisePlan, byPriority, planFit, coverage, lockSnapshot,
+  ownEst, isCarry, summarisePlan, costSummary, isOverEstimate, RATE_PER_HOUR, byPriority, planFit, coverage, lockSnapshot,
 };
 // Same file runs in Node (functions, tests) and in the browser (the page).
 if (typeof module !== 'undefined' && module.exports) module.exports = api;

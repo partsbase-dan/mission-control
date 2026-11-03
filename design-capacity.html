@@ -88,6 +88,11 @@
   .note{color:var(--muted);font-size:12.5px;margin:12px 0 0}
   .empty{color:var(--muted);padding:6px 0 2px}
   footer{color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.6;max-width:880px}
+  .tbl.wide{overflow-x:auto}
+  .tbl.wide th,.tbl.wide td{padding-left:10px;padding-right:10px}.tbl.wide th:first-child,.tbl.wide td:first-child{padding-left:26px;min-width:280px}.tbl.wide th:last-child,.tbl.wide td:last-child{padding-right:26px;white-space:nowrap}
+  label{font-size:13px;color:var(--muted)} select{font:inherit;color:var(--navy);margin-left:6px;padding:6px 10px;border:1px solid var(--pale);border-radius:9px;background:#fff}
+  td a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--pale)} td a:hover{color:var(--blue)}
+  tr.tot td{font-weight:700;color:var(--navy);background:var(--track)}
   [hidden]{display:none!important}
   @media(max-width:860px){.tiles,.prep{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.brow{grid-template-columns:110px 1fr 56px}h1{font-size:30px}}
   @media(max-width:480px){.tiles,.prep{grid-template-columns:1fr}.tbl{overflow-x:auto}}
@@ -106,6 +111,7 @@
       <div class="seg" role="group" aria-label="View">
         <button id="vLead" aria-pressed="true">Leadership</button>
         <button id="vPlan" aria-pressed="false">Planning</button>
+        <button id="vTasks" aria-pressed="false">Tasks</button>
       </div>
     </div>
   </header>
@@ -117,9 +123,9 @@
   <div id="leadView">
     <div class="grid2">
       <section class="card" aria-labelledby="h-bu">
-        <span class="eyebrow">Demand</span>
-        <h2 id="h-bu">Where design time is planned</h2>
-        <p class="h2sub">Planned hours by business unit, this sprint</p>
+        <span class="eyebrow">Cost</span>
+        <h2 id="h-bu">Where design cost is planned</h2>
+        <p class="h2sub">Estimated hours × the hourly rate, by business unit, this sprint</p>
         <div id="bu"></div>
       </section>
       <section class="card" aria-labelledby="h-tr">
@@ -132,8 +138,8 @@
     </div>
     <section class="card" style="margin-top:20px" aria-labelledby="h-top">
       <span class="eyebrow">Detail</span>
-      <h2 id="h-top">Largest planned items</h2>
-      <p class="h2sub">By estimated hours. Team total, no individual breakdown.</p>
+      <h2 id="h-top">Largest items by cost</h2>
+      <p class="h2sub">By estimated cost. Team total, no individual breakdown.</p>
       <div class="tbl" id="top"></div>
     </section>
   </div>
@@ -161,8 +167,18 @@
     </section>
   </div>
 
+  <div id="taskView" hidden>
+    <section class="card" aria-labelledby="h-all">
+      <span class="eyebrow">Every task</span>
+      <h2 id="h-all">All tasks in the sprint list</h2>
+      <p class="h2sub">Estimate and tracked time are read from each ClickUp task. Tracked is all time logged on the task to date, not only this sprint.</p>
+      <p class="ctl" style="margin:0 0 14px"><label>Person <select id="fPerson"></select></label> <label>Business unit <select id="fBU"></select></label></p>
+      <div class="tbl wide" id="tasks"></div>
+    </section>
+  </div>
+
   <footer>
-    Source: ClickUp time estimates, assignees and Business Unit on each sprint's task list. Planned hours exclude carryover (time already logged before the sprint) and tasks waiting on a third party. Shared tasks split evenly. Estimates are only as complete as the coverage shown above.
+    Source: ClickUp time estimates, tracked time, assignees and Business Unit on each sprint's task list. Cost is hours × $53 an hour, the rate used in the original design dashboard; it is internal time value, not cash spent, and Finance has not confirmed the rate. Capacity hours exclude carryover (time already logged before the sprint) and tasks waiting on a third party. Shared tasks split evenly. Estimates are only as complete as the coverage shown above.
   </footer>
 </div>
 
@@ -212,7 +228,8 @@ const SAMPLE = {
 };
 
 /* ---------- state ---------- */
-const state = { view:(params.get("view")==="plan"?"plan":"lead"), sprint:null, data:null, moves:{}, locked:false };
+const state = { view:(["plan","tasks"].includes(params.get("view"))?params.get("view"):"lead"), sprint:null, data:null, moves:{}, locked:false, fPerson:"all", fBU:"all" };
+const money = n => "$" + Math.round(n).toLocaleString("en-US");
 
 async function load(){
   if(window.DESIGN_DATA){ state.data=window.DESIGN_DATA; return; }          // local snapshot from scripts/pull-snapshot.js
@@ -271,22 +288,39 @@ function render(){
   const overPeople = c.per.filter(x=>x.fit.overByH>0.05).length;
   const open = Math.max(0, c.avail - c.planned);
   const nOver = c.per.reduce((a,x)=>a+x.fit.over.length,0);
-  $("#answer").textContent = over>0.05
-    ? `${sp.label} is planned at ${load}% of available design hours, but ${overPeople} of ${c.per.length} people ${overPeople===1?"is":"are"} over capacity by ${h1(over)} hours, and ${nOver===1?"1 item doesn't":nOver+" items don't"} fit.`
-    : `${sp.label} is planned at ${load}% of available design hours, with ${h1(open)} hours open.`;
-  $("#answerNote").textContent = `Based on ${c.cov.withEstimate} of ${c.cov.tasks} tasks with an estimate. Carryover and tasks waiting on a third party are not counted.`;
+  const raw = (d.tasks[state.sprint]||[]).map(P.normalizeTask);
+  const cost = P.costSummary(raw, d.people);
+  const buRows = Object.entries(cost.byBU).sort((a,b)=>b[1].plannedCost-a[1].plannedCost);
   const covPct = c.cov.tasks ? Math.round(c.cov.withEstimate/c.cov.tasks*100) : 0;
-  $("#tiles").innerHTML = [
+  const covNote = `Based on ${c.cov.withEstimate} of ${c.cov.tasks} tasks with an estimate, so planned cost is a floor.`;
+  const capTiles = [
     ["Capacity load", `${load}%`, `${h1(c.planned)}h planned of ${h1(c.avail)}h available`],
     [over>0.05?"Over capacity":"Open capacity", `${h1(over>0.05?over:open)}h`, over>0.05?statusPill(over)+(open>0.05?`<div class="n" style="margin-top:6px">${h1(open)}h open on other people</div>`:""):statusPill(0)],
-    ["Items that don't fit", String(c.per.reduce((a,x)=>a+x.fit.over.length,0)), overPeople?`${overPeople} of ${c.per.length} people over`:"Everyone fits"],
-    ["Estimate coverage", `${covPct}%`, `${c.cov.withEstimate} of ${c.cov.tasks} tasks · ${c.cov.withoutBU} without a business unit`]
-  ].map(([k,v,n])=>`<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="n">${n}</div></div>`).join("");
+    ["Items that don't fit", String(nOver), overPeople?`${overPeople} of ${c.per.length} people over`:"Everyone fits"],
+    ["Estimate coverage", `${covPct}%`, `${c.cov.withEstimate} of ${c.cov.tasks} tasks · ${c.cov.withoutBU} without a business unit`]];
+  if(state.view==="plan"){
+    $("#answer").textContent = over>0.05
+      ? `${sp.label} is planned at ${load}% of available design hours, but ${overPeople} of ${c.per.length} people ${overPeople===1?"is":"are"} over capacity by ${h1(over)} hours, and ${nOver===1?"1 item doesn't":nOver+" items don't"} fit.`
+      : `${sp.label} is planned at ${load}% of available design hours, with ${h1(open)} hours open.`;
+    $("#answerNote").textContent = `Based on ${c.cov.withEstimate} of ${c.cov.tasks} tasks with an estimate. Carryover and tasks waiting on a third party are not counted.`;
+    $("#tiles").innerHTML = capTiles.map(([k,v,n])=>`<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="n">${n}</div></div>`).join("");
+  } else {
+    const big = buRows[0];
+    $("#answer").textContent = cost.plannedH>0
+      ? `${sp.label} has ${money(cost.plannedCost)} of design work planned (${h1(cost.plannedH)} hours at $${cost.rate} an hour)${big?`, and ${big[0]} is the largest share at ${money(big[1].plannedCost)}`:""}.`
+      : `${sp.label} has no estimated design work yet.`;
+    $("#answerNote").textContent = `${covNote} Cost is internal time value at $${cost.rate} an hour, not cash spent. Rate to be confirmed with Finance.`;
+    $("#tiles").innerHTML = [
+      ["Planned design cost", money(cost.plannedCost), `${h1(cost.plannedH)}h estimated × $${cost.rate}/hr`],
+      ["Tracked so far", money(cost.trackedCost), `${h1(cost.trackedH)}h logged on these tasks, all dates`],
+      ["Largest business unit", big?esc(big[0]):"None", big?`${money(big[1].plannedCost)} · ${Math.round(big[1].plannedCost/Math.max(cost.plannedCost,1)*100)}% of planned`:"Nothing estimated"],
+      ["Estimate coverage", `${covPct}%`, `${c.cov.withEstimate} of ${c.cov.tasks} tasks · ${c.cov.withoutBU} without a business unit`]
+    ].map(([k,v,n])=>`<div class="tile"><div class="k">${k}</div><div class="v"${v.length>9?' style="font-size:30px;padding:6px 0"':""}>${v}</div><div class="n">${n}</div></div>`).join("");
+  }
 
-  // Business unit rows
-  const bu = Object.entries(c.sum.byBU).sort((a,b)=>b[1]-a[1]);
-  const mx = Math.max(1, ...bu.map(x=>x[1]));
-  $("#bu").innerHTML = bu.length ? bu.map(([n,h])=>`<div class="brow"><div class="nm">${esc(n)}</div><div class="bar" role="img" aria-label="${esc(n)} ${h1(h)} hours"><i style="width:${h/mx*100}%"></i></div><div class="num">${h1(h)}h</div></div>`).join("")
+  // Business unit rows: planned cost, tracked cost underneath
+  const mx = Math.max(1, ...buRows.map(x=>x[1].plannedCost));
+  $("#bu").innerHTML = buRows.length ? buRows.map(([n,r])=>`<div class="brow"><div class="nm">${esc(n)}<div class="note" style="margin:0">${h1(r.plannedH)}h · ${money(r.trackedCost)} tracked</div></div><div class="bar" role="img" aria-label="${esc(n)} ${money(r.plannedCost)} planned"><i style="width:${r.plannedCost/mx*100}%"></i></div><div class="num">${money(r.plannedCost)}</div></div>`).join("")
     : '<p class="empty">Nothing estimated for this sprint yet.</p>';
 
   // Trend (history comes from locked plans; sample data shows the layout)
@@ -296,9 +330,9 @@ function render(){
       <div class="xl">${hist.map(x=>`<span>S${esc(x.label)}</span>`).join("")}</div>` : '<p class="empty">History starts once weekly plans are locked.</p>';
   $("#trendNote").textContent = hist.length ? "Each bar is planned hours ÷ available hours for that sprint. The dashed line is 100% of available hours. ▲ marks over capacity." : "";
 
-  // Largest items, team only
-  const top = c.tasks.filter(t=>!P.isStale(t) && !P.isCarry(t) && t.estMs!=null).sort((a,b)=>b.estMs-a.estMs).slice(0,6);
-  $("#top").innerHTML = top.length ? `<table><thead><tr><th>Item</th><th>Business unit</th><th class="r">Hours</th></tr></thead><tbody>${top.map(t=>`<tr><td>${esc(t.name)}</td><td>${esc(t.bu||"No business unit set")}</td><td class="r">${h1(t.estMs/HR)}h</td></tr>`).join("")}</tbody></table>` : '<p class="empty">No estimates yet.</p>';
+  // Largest items by cost, team only
+  const top = raw.filter(t=>!P.isStale(t) && t.estMs!=null && (!t.assignees.length || t.assignees.some(a=>c.ids.includes(a)))).sort((a,b)=>b.estMs-a.estMs).slice(0,8);
+  $("#top").innerHTML = top.length ? `<table><thead><tr><th>Item</th><th>Business unit</th><th class="r">Hours</th><th class="r">Cost</th></tr></thead><tbody>${top.map(t=>`<tr><td>${esc(t.name)}</td><td>${esc(t.bu||"No business unit set")}</td><td class="r">${h1(t.estMs/HR)}h</td><td class="r">${money(t.estMs/HR*cost.rate)}</td></tr>`).join("")}</tbody></table>` : '<p class="empty">No estimates yet.</p>';
 
   // Planning view
   $("#prep").innerHTML = [
@@ -314,16 +348,39 @@ function render(){
   const rows = c.per.flatMap(x=>x.fit.over.map(t=>({t,who:x.p})));
   $("#fit").innerHTML = rows.length ? `<table><thead><tr><th>Item</th><th>Person</th><th>Priority</th><th class="r">Hours</th><th></th></tr></thead><tbody>${rows.map(({t,who})=>`<tr><td>${esc(t.name)}</td><td>${esc(who.name)}</td><td>${esc(t.priority||"not set")}</td><td class="r">${h1(t.estH)}h</td><td class="r">${t.shared?"":`<button class="btn" data-mv="swap" data-id="${esc(t.id)}">Give to other</button> `}<button class="btn" data-mv="defer" data-id="${esc(t.id)}">Defer</button></td></tr>`).join("")}</tbody></table>`
     : '<p class="empty">Everything fits.</p>';
-  $("#leadView").hidden = state.view!=="lead"; $("#planView").hidden = state.view!=="plan";
-  $("#vLead").setAttribute("aria-pressed", state.view==="lead"); $("#vPlan").setAttribute("aria-pressed", state.view==="plan");
+  renderTasks(raw, d, cost.rate);
+  $("#leadView").hidden = state.view!=="lead"; $("#planView").hidden = state.view!=="plan"; $("#taskView").hidden = state.view!=="tasks";
+  $("#vLead").setAttribute("aria-pressed", state.view==="lead"); $("#vPlan").setAttribute("aria-pressed", state.view==="plan"); $("#vTasks").setAttribute("aria-pressed", state.view==="tasks");
+}
+
+function renderTasks(raw, d, rate){
+  const name = id => (d.people.find(p=>p.id===id)||{}).name || "Other";
+  const bus = [...new Set(raw.map(t=>t.bu||"No business unit set"))].sort();
+  const opt = (v,l,sel) => `<option value="${esc(v)}"${sel?" selected":""}>${esc(l)}</option>`;
+  $("#fPerson").innerHTML = opt("all","Everyone",state.fPerson==="all")+d.people.map(p=>opt(p.id,p.name,state.fPerson===p.id)).join("")+opt("none","Unassigned",state.fPerson==="none");
+  $("#fBU").innerHTML = opt("all","All",state.fBU==="all")+bus.map(b=>opt(b,b,state.fBU===b)).join("");
+  const rows = raw.filter(t=>{
+    const mine = t.assignees.some(a=>d.people.some(p=>p.id===a)) || !t.assignees.length;
+    if(!mine) return false;
+    if(state.fPerson==="none" ? t.assignees.length : state.fPerson!=="all" && !t.assignees.includes(state.fPerson)) return false;
+    return state.fBU==="all" || (t.bu||"No business unit set")===state.fBU;
+  }).sort((a,b)=>(b.estMs||0)-(a.estMs||0)||(b.spentMs||0)-(a.spentMs||0));
+  const sumE = rows.reduce((a,t)=>a+(P.isStale(t)?0:(t.estMs||0)),0), sumS = rows.reduce((a,t)=>a+(t.spentMs||0),0);
+  const flag = t => P.isStale(t) ? "Waiting on 3rd party" : P.isOverEstimate(t) ? '<span class="status over">▲ Over estimate</span>' : t.estMs==null ? "No estimate" : "";
+  $("#tasks").innerHTML = rows.length ? `<table><thead><tr><th>Task</th><th>Person</th><th>Business unit</th><th>Status</th><th class="r">Estimate</th><th class="r">Tracked</th><th class="r">Est. cost</th><th class="r">Tracked cost</th><th></th></tr></thead><tbody>${rows.map(t=>`<tr><td><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.name)}</a></td><td>${t.assignees.length?esc(t.assignees.map(name).join(", ")):"Unassigned"}</td><td>${esc(t.bu||"No business unit set")}</td><td>${esc(t.status)}</td><td class="r">${t.estMs==null?"–":h1(t.estMs/HR)+"h"}</td><td class="r">${t.spentMs?h1(t.spentMs/HR)+"h":"–"}</td><td class="r">${t.estMs==null||P.isStale(t)?"–":money(t.estMs/HR*rate)}</td><td class="r">${t.spentMs?money(t.spentMs/HR*rate):"–"}</td><td>${flag(t)}</td></tr>`).join("")}<tr class="tot"><td colspan="4">${rows.length} tasks</td><td class="r">${h1(sumE/HR)}h</td><td class="r">${h1(sumS/HR)}h</td><td class="r">${money(sumE/HR*rate)}</td><td class="r">${money(sumS/HR*rate)}</td><td></td></tr></tbody></table>` : '<p class="empty">No tasks match.</p>';
 }
 
 /* ---------- events ---------- */
+document.addEventListener("change", e=>{
+  if(e.target.id==="fPerson"){ state.fPerson=e.target.value; render(); }
+  else if(e.target.id==="fBU"){ state.fBU=e.target.value; render(); }
+});
 document.addEventListener("click", e=>{
   const b = e.target.closest("button"); if(!b) return;
   if(b.dataset.k){ state.sprint=b.dataset.k; state.moves={}; render(); }
   else if(b.id==="vLead"){ state.view="lead"; render(); }
   else if(b.id==="vPlan"){ state.view="plan"; render(); }
+  else if(b.id==="vTasks"){ state.view="tasks"; render(); }
   else if(b.dataset.mv){ state.moves[b.dataset.id]=b.dataset.mv; render(); }
   else if(b.id==="reset"){ state.moves={}; render(); }
   else if(b.id==="lock"){ $("#lockNote").textContent = state.data && state.data.sample ? "Sample data: nothing was saved." : "Saving is not connected yet."; }
