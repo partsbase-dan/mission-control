@@ -27,7 +27,7 @@ function buValue(task) {
   if (!f || f.value == null || f.value === '') return null;
   if (typeof f.value === 'object') return f.value.name || null;
   const opts = (f.type_config && f.type_config.options) || [];
-  const o = opts.find((x) => x.id === f.value || x.orderindex === Number(f.value));
+  const o = opts.find((x) => x.id === f.value || String(x.orderindex) === String(f.value));
   return o ? o.name : null;
 }
 

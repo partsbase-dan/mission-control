@@ -388,7 +388,7 @@ document.addEventListener("click", e=>{
 
 (async function boot(){
   await load();
-  if(state.data){ state.sprint = (state.data.sprints.find(s=>s.note==="Next")||state.data.sprints[0]).key; }
+  if(state.data){ state.sprint = (state.data.sprints.find(s=>s.note==="Current")||state.data.sprints[0]).key; }
   render();
 })();
 })();
