@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTM Priority Runway</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#002857; --blue:#007FE9; --pale:#CEE2F4; --track:#EAF2FC; --ink:#333333; --muted:#647089; --line:#E3ECF7;
+    --surface:#fff; --page:#FCFEFF; --head:#002857;
+    --red:#B4231A; --red-bg:#FDECEA; --green:#0E7A4E; --green-bg:#E7F6EF; --amber:#8A4B08; --amber-bg:#FFF4DC;
+    --card:0 12px 26px rgba(0,40,87,.09); --radius:16px;
+    --bloom1:#DAEAFE; --bloom2:#EDF5FF; --bloom3:#DBFBF4; --bloom4:#D4E8FF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --navy:#CEE2F4; --head:#E6F0FB; --blue:#4FA8F5; --pale:#2B4468; --track:#1B2B45; --ink:#DCE5F2; --muted:#9AAAC4; --line:#23364F;
+      --surface:#112038; --page:#0A1424;
+      --red:#FF8A80; --red-bg:#3B1A1A; --green:#5FD3A0; --green-bg:#12301F; --amber:#F3C26B; --amber-bg:#3A2C10;
+      --card:0 12px 26px rgba(0,0,0,.35);
+      --bloom1:#0F2342; --bloom2:#0C1A31; --bloom3:#0C2A2A; --bloom4:#10294A;
+    }
+  }
+  *{box-sizing:border-box}
+  html{background:var(--page)}
+  body{margin:0;color:var(--ink);font:400 14px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;min-height:100vh;background:var(--page);-webkit-font-smoothing:antialiased}
+
+  .tab{display:inline-block;background:var(--blue);color:#fff;font-weight:700;font-size:11px;letter-spacing:.17em;text-transform:uppercase;
+    padding:9px 34px 9px 22px;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%);margin-left:-20px}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 56px}
+  header{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between;margin:14px 0 22px}
+  h1{font-size:36px;line-height:1.08;letter-spacing:-.016em;margin:14px 0 6px;font-weight:900;color:var(--head)}
+  .sub{color:var(--muted);margin:0;font-size:14px}
+  .sync{display:inline-flex;gap:6px;align-items:center;font-size:12.5px;font-weight:700;padding:3px 11px;border-radius:99px;background:var(--green-bg);color:var(--green)}
+  .sync.stale{background:var(--amber-bg);color:var(--amber)}
+  .banner{border-radius:12px;padding:11px 16px;margin-bottom:14px;font-size:14px;box-shadow:var(--card);background:var(--amber-bg);color:var(--amber)}
+  .banner.red{background:var(--red-bg);color:var(--red)}
+  .banner b{font-weight:700}
+  .banner ul{margin:6px 0 0;padding-left:20px}
+  .answer{background:linear-gradient(135deg,#003C74,#002857);color:#fff;border-radius:var(--radius);padding:26px 30px;margin:18px 0 20px;box-shadow:0 16px 32px rgba(0,127,233,.13)}
+  .answer p{margin:0;font-size:22px;line-height:1.35;font-weight:700;max-width:920px}
+  .answer small{display:block;margin-top:10px;color:#B9D3F7;font-size:13px}
+  .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));background:var(--surface);border-radius:var(--radius);box-shadow:var(--card);margin-bottom:20px;overflow:hidden}
+  .strip a{padding:18px 20px;border-left:1px solid var(--line);color:inherit;text-decoration:none;display:block}
+  .strip a:first-child{border-left:0}
+  .strip a:hover,.strip a:focus-visible{background:var(--track);outline:none}
+  .strip .k{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+  .strip b{display:block;font-size:32px;font-weight:900;color:var(--head);font-variant-numeric:tabular-nums;line-height:1.15;margin-top:4px}
+  .strip b.bad{color:var(--red)}
+  .strip span{font-size:12.5px;color:var(--muted);display:block;line-height:1.35}
+  .seg{display:inline-flex;flex-wrap:wrap;background:var(--surface);border-radius:12px;padding:4px;box-shadow:var(--card);margin-bottom:20px}
+  .seg button{border:0;background:transparent;font:inherit;font-weight:500;color:var(--muted);padding:8px 16px;border-radius:9px;cursor:pointer}
+  .seg button[aria-pressed="true"]{background:var(--navy);color:var(--page);font-weight:700}
+  button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--card);padding:24px 26px;margin-bottom:20px}
+  .card h2{font-size:17px;margin:4px 0 2px;font-weight:900;color:var(--head)}
+  .h2sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .task{background:var(--surface);border-radius:var(--radius);box-shadow:var(--card);padding:18px 20px;display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--blue)}
+  .task.conf{border-top-color:var(--red)}
+  .task.prop{border-top-style:dashed}
+  .th{display:flex;gap:12px;align-items:flex-start}
+  .rank{font-size:28px;font-weight:900;color:var(--blue);line-height:1;min-width:34px;font-variant-numeric:tabular-nums}
+  .tt{font-weight:700;color:var(--head);font-size:15.5px;line-height:1.3}
+  .tid{font-size:11.5px;color:var(--muted);font-weight:500;letter-spacing:.04em}
+  .score{margin-left:auto;text-align:right;font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted);white-space:nowrap}
+  .score b{display:block;font-size:20px;color:var(--head);font-weight:900}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{display:inline-flex;gap:5px;align-items:center;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--track);color:var(--head);white-space:nowrap}
+  .chip.red{background:var(--red-bg);color:var(--red)} .chip.green{background:var(--green-bg);color:var(--green)} .chip.amber{background:var(--amber-bg);color:var(--amber)}
+  .chip.blue{background:var(--blue);color:#fff}
+  .dates{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+  .dates b{color:var(--head);font-weight:700}
+  .prop-d{border-bottom:1px dashed var(--muted);cursor:help}
+  .need{font-size:13px;background:var(--track);border-radius:10px;padding:8px 12px;color:var(--ink)}
+  .need b{color:var(--head)}
+  .warn{font-size:13px;color:var(--red);background:var(--red-bg);border-radius:10px;padding:8px 12px}
+  .edit{display:flex;gap:10px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:10px;font-size:12.5px;color:var(--muted)}
+  .edit label{display:inline-flex;gap:5px;align-items:center}
+  select,input[type=text]{font:inherit;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--pale);border-radius:8px;padding:3px 6px}
+  input[type=text]{width:120px}
+  .btn{border:1px solid var(--pale);background:var(--surface);font:inherit;font-size:13px;font-weight:700;color:var(--head);padding:6px 14px;border-radius:9px;cursor:pointer}
+  .btn:hover{border-color:var(--blue);color:var(--blue)}
+  .rows .r{display:grid;grid-template-columns:34px 1fr auto auto;gap:14px;align-items:center;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+  .rows .r:first-child{border-top:0}
+  .rows .n{font-weight:900;color:var(--blue);font-variant-numeric:tabular-nums}
+  .tbl{overflow-x:auto;margin:0 -26px -24px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);padding:10px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  th:first-child,td:first-child{padding-left:26px} th:last-child,td:last-child{padding-right:26px}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+  .filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .gantt-g{margin-bottom:26px}
+  .gantt-g:last-child{margin-bottom:0}
+  .gh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline;margin-bottom:8px}
+  .gh b{color:var(--head);font-size:15px}
+  .g{display:grid;grid-template-columns:minmax(150px,26%) 1fr;gap:14px;align-items:center;padding:5px 0;font-size:13px}
+  .g .lab{color:var(--head);font-weight:500;line-height:1.3}
+  .g .lab small{display:block;color:var(--muted);font-weight:400}
+  .lane{position:relative;height:22px;background:var(--track);border-radius:6px}
+  .bar{position:absolute;top:3px;bottom:3px;border-radius:5px;background:var(--navy)}
+  .bar.pred{background:var(--blue)}
+  .bar.bad{background:repeating-linear-gradient(135deg,var(--red) 0 5px,var(--red-bg) 5px 10px);border:1px solid var(--red)}
+  .bar.prop{opacity:.75;background-image:repeating-linear-gradient(90deg,transparent 0 6px,rgba(255,255,255,.35) 6px 8px)}
+  .gate{position:absolute;top:-4px;bottom:-4px;border-left:2px dashed var(--red);z-index:2}
+  .gate span{position:absolute;top:-17px;left:3px;font-size:11px;color:var(--red);font-weight:700;white-space:nowrap}
+  .axis{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin:2px 0 0 calc(26% + 14px)}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:14px}
+  .legend i{display:inline-block;width:14px;height:10px;border-radius:3px;vertical-align:-1px;margin-right:6px}
+  .brow{display:grid;grid-template-columns:150px 1fr 120px;gap:14px;align-items:center;padding:8px 0;font-size:14px}
+  .stack{display:flex;height:16px;background:var(--track);border-radius:8px;overflow:hidden}
+  .stack i{display:block;height:100%}
+  .note{color:var(--muted);font-size:12.5px;margin:12px 0 0}
+  footer{color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.6;max-width:900px}
+  .empty{color:var(--muted)}
+  @media(max-width:860px){.grid2{grid-template-columns:1fr}.brow{grid-template-columns:100px 1fr 90px}.g{grid-template-columns:1fr}.axis{margin-left:0}h1{font-size:28px}.answer p{font-size:18px}}
+  :root{--page:#F6F7F9;--surface:#fff;--line:#E6E8EC;--field:#F1F3F6;--hover:#F6F8FB;--card:0 0 0 1px #E6E8EC,0 1px 2px rgba(16,24,40,.04)}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#18191B;--surface:#212225;--line:#2E3035;--field:#2A2C30;--hover:#27292D;--card:0 0 0 1px #2E3035,0 1px 2px rgba(0,0,0,.3);--ink:#E8EAED;--muted:#9AA0AA;--head:#F2F4F7;--track:#2A2C30}}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+  /* priority list */
+  .lw{background:var(--surface);border-radius:14px;box-shadow:var(--card);overflow:hidden}
+  .lbar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line)}
+  .fc{display:inline-flex;gap:6px;align-items:center;height:28px;padding:0 10px;border:0;border-radius:99px;background:transparent;color:var(--muted);font:500 12.5px Inter,sans-serif;cursor:pointer}
+  .fc:hover{background:var(--hover)} .fc[aria-pressed="true"]{background:var(--field);color:var(--head);box-shadow:0 0 0 1px var(--line)}
+  .fc em{font-style:normal;font-size:11px;padding:0 5px;border-radius:4px;background:var(--field);color:var(--muted)}
+  .fc i{width:7px;height:7px;border-radius:50%}
+  #q{margin-left:auto;width:200px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--field);padding:0 10px;font:13px Inter,sans-serif;color:var(--ink)}
+  .scroll{overflow-x:auto}
+  .lt{min-width:1190px}
+  .lr{display:grid;grid-template-columns:46px 84px minmax(260px,1fr) 128px 132px 62px 62px 40px 138px 86px;gap:10px;align-items:center;padding:0 14px;min-height:52px;border-bottom:1px solid var(--line)}
+  .lr.h{min-height:34px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--page);position:sticky;top:0;z-index:3}
+  .lr.h button{all:unset;cursor:pointer} .lr.h button:hover{color:var(--head)}
+  .lr.b:hover{background:var(--hover)}
+  .gh2{display:flex;gap:10px;align-items:baseline;padding:14px 14px 8px;background:var(--surface);border-bottom:1px solid var(--line);cursor:default}
+  .gh2 b{font-size:13px;color:var(--head)} .gh2 span{font-size:12.5px;color:var(--muted)} .gh2 .tg{margin-left:auto;cursor:pointer;color:var(--blue);font-size:12.5px;font-weight:500}
+  .rk{font:500 15px "JetBrains Mono",monospace;color:var(--head);text-align:center}
+  .pp{display:inline-flex;align-items:center;justify-content:center;height:22px;padding:0 9px;border-radius:6px;font-size:12px;font-weight:600}
+  .pp.Now{background:var(--blue);color:#fff} .pp.Next{background:rgba(240,154,47,.18);color:#C77A12} .pp.Later{background:var(--field);color:var(--muted)} .pp.Blocked{background:var(--red-bg);color:var(--red)} .pp.Done{background:var(--green-bg);color:var(--green)}
+  .tc{min-width:0;cursor:pointer;padding:8px 0}
+  .tc .t1{font-weight:600;color:var(--head);font-size:13.5px;line-height:1.3}
+  .tc .t2{font-size:12px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;align-items:center}
+  .sbar{height:3px;border-radius:2px;background:var(--field);margin-top:5px;max-width:160px} .sbar i{display:block;height:100%;border-radius:2px;background:var(--blue)}
+  .lr select,.lr input[type=text],.lr input[type=date]{width:100%;height:28px;border-radius:7px;border:1px solid transparent;background:transparent;font:500 12.5px Inter,sans-serif;color:var(--ink);padding:0 6px}
+  .lr select:hover,.lr input:hover{border-color:var(--line);background:var(--field)}
+  .lr select.st{font-weight:600;border-radius:6px;padding:0 6px}
+  .st.s-In-progress{background:rgba(0,127,233,.16);color:var(--blue)} .st.s-Blocked{background:var(--red-bg);color:var(--red)} .st.s-Complete,.st.s-Phase-1-done{background:var(--green-bg);color:var(--green)} .st.s-Queued{background:var(--amber-bg);color:var(--amber)} .st.s-Not-started{background:var(--field);color:var(--muted)} .st.s-Undefined{background:var(--amber-bg);color:var(--amber)}
+  .lr input.un{border:1px dashed var(--line);color:var(--muted)} .lr input.un::placeholder{color:var(--muted)} .lr input.un.hot{border-color:var(--red)} .lr input.un.hot::placeholder{color:var(--red)}
+  .cdot{width:10px;height:10px;border-radius:50%;margin:auto;display:block}
+  .cdot.green{background:var(--green)} .cdot.amber{background:#E5A300} .cdot.red{background:var(--red)}
+  .dd{display:flex;flex-direction:column;gap:1px} .dd small{font-size:11px;color:var(--muted);padding-left:6px}
+  .sc{font:500 13px "JetBrains Mono",monospace;text-align:right;color:var(--head)}
+  .dt{padding:6px 14px 16px 70px;background:var(--hover);border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;font-size:13px}
+  .dt .warn,.dt .need{grid-column:1/-1}
+  .dt label{display:flex;gap:8px;align-items:center;color:var(--muted)} .dt label input,.dt label select{width:auto;border-color:var(--line);background:var(--surface)}
+  .fl{display:inline-flex;gap:3px;align-items:center;font-size:11.5px;font-weight:600;padding:1px 7px;border-radius:5px;background:var(--field);color:var(--muted)} .fl.r{background:var(--red-bg);color:var(--red)} .fl.a{background:var(--amber-bg);color:var(--amber)}
+  .nores{padding:28px;text-align:center;color:var(--muted)}
+  .answer{background:none;color:var(--head);box-shadow:none;padding:0;margin:4px 0 16px}
+  .answer p{font-size:17px;font-weight:600;max-width:none} .answer small{color:var(--muted)}
+  .strip b{font-size:24px} .strip a{padding:12px 16px}
+  .strip .k{letter-spacing:.06em;font-weight:600}
+  .banner{box-shadow:none;font-size:13px;padding:9px 14px;margin-bottom:8px;border-radius:10px}
+  h1{font-size:26px;font-weight:700;letter-spacing:-.01em}
+  .tab{display:none}
+  .seg{box-shadow:var(--card);border-radius:10px} .seg button{font-size:13px;padding:6px 14px;border-radius:7px}
+  .card,.strip{box-shadow:var(--card);border-radius:14px}
+  .wrap{max-width:1320px}
+  .strip span{display:none} .strip a{padding:10px 14px} .strip b{font-size:22px;margin-top:2px}
+  .answer{margin:2px 0 12px} .answer small{display:none}
+  .strip{margin-bottom:14px} .seg{margin-bottom:12px}
+  header{margin:6px 0 10px} .sub{font-size:12.5px}
+  #banners{margin-top:16px}
+
+
+  .ins{background:var(--surface);border-radius:14px;box-shadow:var(--card);padding:14px 18px 16px;margin-bottom:14px}
+  .ins .ih{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--head);font-size:13.5px}
+  .ins .ih em{font-style:normal;color:var(--muted);font-weight:500}
+  .ins .nav{margin-left:auto;display:flex;gap:2px}
+  .ins .pg{display:flex;align-items:center;gap:2px}
+  .ins .pg em{min-width:44px;text-align:center}
+  .ib{all:unset;cursor:pointer;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;color:var(--muted)} .ib:hover{background:var(--field);color:var(--head)}
+  .ins p{margin:8px 0 10px;font-size:14.5px;line-height:1.5;color:var(--ink);max-width:860px}
+  .neg{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--red)} .pos{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--green)}
+  .dotp{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:0;margin-right:4px}
+  .pillb{all:unset;cursor:pointer;display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:99px;background:var(--field);box-shadow:0 0 0 1px var(--line);font:500 13px Inter,sans-serif;color:var(--head);margin-right:8px}
+  .pillb:hover{background:var(--hover)} .pillb.pri{background:var(--blue);color:#fff;box-shadow:none}
+  .df{border-radius:12px;box-shadow:0 0 0 1px var(--line);overflow:hidden;margin:6px 0 8px;max-width:960px}
+  .df .dh{display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--line);font-weight:600;color:var(--head);font-size:13px} .df .dh span{font-weight:400;color:var(--muted);font-size:12.5px}
+  .df .dr{display:grid;grid-template-columns:64px 1fr 170px 44px 26px;gap:12px;align-items:center;padding:8px 14px;border-bottom:1px solid var(--line);cursor:pointer;font-size:13px}
+  .df .dr.on{background:rgba(229,72,77,.12)} .df .dr.on .dn{color:var(--red)}
+  .df .dr .mono{white-space:nowrap;font-size:12px} .dfb{max-height:250px;overflow-y:auto} .df .dr .dn{font-weight:500;color:var(--head)}
+  .df .arrow{font-size:12.5px;color:var(--muted)} .df .arrow s{color:var(--red)} .df .arrow b{color:var(--green);font-weight:600}
+  .ck{width:20px;height:20px;border-radius:5px;border:1.5px solid var(--line);display:grid;place-items:center;color:#fff;font-size:13px}
+  .on .ck{background:var(--red);border-color:var(--red)}
+  .df .dfoot{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;font-size:12.5px;color:var(--muted)}
+  .btnp{all:unset;cursor:pointer;height:32px;padding:0 16px;border-radius:99px;background:var(--blue);color:#fff;font:600 13px Inter,sans-serif;display:inline-flex;align-items:center}
+  .btnp[disabled]{opacity:.45;cursor:default}
+  .ask{background:var(--surface);border-radius:14px;box-shadow:var(--card);padding:16px 18px;max-width:520px;margin-top:18px}
+  .ask h3{margin:0 0 10px;font-size:15px;color:var(--head);font-weight:600}
+  .ask .op{display:flex;gap:10px;align-items:center;padding:7px 4px;cursor:pointer;border-radius:8px;color:var(--ink)} .ask .op:hover{background:var(--hover)}
+  .ask .rd{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--muted);display:grid;place-items:center} .ask .op.sel .rd{border-color:var(--blue)} .ask .op.sel .rd::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue)}
+  .ask .af{display:flex;align-items:center;gap:8px;margin-top:12px;color:var(--muted);font-size:12.5px} .ask .af .sp{margin-left:auto;display:flex;gap:8px}
+  .ask .sk{all:unset;cursor:pointer;height:32px;padding:0 14px;border-radius:99px;background:var(--field);color:var(--head);font:600 13px Inter,sans-serif;display:inline-flex;align-items:center}
+  .card.dots{background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:16px 16px}
+  .gantt-g{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--line);padding:14px 16px}
+
+  .lr{grid-template-columns:24px 56px minmax(260px,1fr) 150px 132px 62px 62px 40px 120px 70px}
+  .lt{min-width:1130px}
+  .lr input[type=checkbox]{width:16px;height:16px;margin:0;accent-color:var(--blue);cursor:pointer}
+  .lr.sel{background:rgba(0,127,233,.08)}
+  .stc{display:flex;align-items:center;gap:6px} .stc select{flex:1;min-width:0}
+  .stc svg{flex:none}
+  .bulk{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 14px;background:rgba(0,127,233,.1);border-bottom:1px solid var(--line);font-size:13px;color:var(--head)}
+  .bulk input,.bulk select{height:28px;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:13px Inter,sans-serif;padding:0 8px}
+  .bulk .pillb{height:28px;margin:0}
+  .think{grid-column:1/-1;border-radius:12px;box-shadow:0 0 0 1px var(--line);background:var(--surface);padding:10px 14px;max-width:760px}
+  .think .tt0{display:flex;gap:8px;align-items:center;font-weight:600;color:var(--head);font-size:13px;margin-bottom:6px}
+  .think .tt0 span{font-weight:400;color:var(--muted)}
+  .stp{display:grid;grid-template-columns:18px 118px auto 1fr;gap:10px;align-items:center;padding:5px 0;font-size:13px}
+  .stp .ic{color:var(--muted);text-align:center}
+  .stp .lb{color:var(--head);font-weight:500}
+  .stp .ch{font-family:"JetBrains Mono",monospace;font-size:12.5px;background:var(--field);padding:2px 8px;border-radius:6px;color:var(--head);white-space:nowrap}
+  .stp .why{color:var(--muted);font-size:12.5px}
+  .stp.tot{border-top:1px solid var(--line);margin-top:4px;padding-top:9px} .stp.tot .ch{background:var(--blue);color:#fff;font-weight:600}
+  .gap{font-size:12.5px;color:var(--muted);margin-top:6px}
+  #pal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-start;justify-content:center;padding-top:14vh;z-index:50}
+  #pal.on{display:flex}
+  #pal .bx{width:min(620px,92vw);background:var(--surface);border-radius:14px;box-shadow:0 0 0 1px var(--line),0 24px 60px rgba(0,0,0,.4);overflow:hidden}
+  #pal input{width:100%;height:48px;border:0;border-bottom:1px solid var(--line);background:transparent;padding:0 16px;font:15px Inter,sans-serif;color:var(--ink);outline:none}
+  #pal .res{max-height:340px;overflow-y:auto;padding:6px}
+  #pal .it{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13.5px;color:var(--head)}
+  #pal .it.on{background:var(--field)} #pal .it .mono{font-size:11.5px;color:var(--muted);min-width:56px} #pal .it .rn{margin-left:auto;font:500 12px "JetBrains Mono",monospace;color:var(--muted)}
+  #pal .ft{padding:8px 14px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+  #pal .em{padding:22px;text-align:center;color:var(--muted)}
+  @keyframes fl{0%{background:rgba(0,127,233,.28)}100%{background:transparent}}
+  .lr.flash{animation:fl 1.6s ease-out}
+
+  .strip{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+  .strip span{display:block;font-size:12px;line-height:1.4;color:var(--muted);margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .strip a{padding:12px 16px} .strip b.pos{color:var(--green)}
+  .mini{height:5px;border-radius:3px;background:var(--field);margin-top:6px} .mini i{display:block;height:100%;border-radius:3px;background:var(--green)}
+  .fl.b{background:rgba(0,127,233,.14);color:var(--blue)} .fl.a{background:var(--amber-bg);color:var(--amber)}
+  .lr input.un.hot{border-color:var(--blue)} .lr input.un.hot::placeholder{color:var(--blue)}
+  .cdot.red{background:var(--muted)}
+  .bar.bad{background:repeating-linear-gradient(135deg,#E5A300 0 5px,var(--amber-bg) 5px 10px);border:1px solid #E5A300}
+  .gate{border-left-color:var(--blue)} .gate span{color:var(--blue)}
+  .df .dr.on{background:rgba(0,127,233,.1)} .df .dr.on .dn{color:var(--head)} .df .arrow s{color:var(--muted)} .on .ck{background:var(--blue);border-color:var(--blue)}
+  .chiprow{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 4px}
+  .tchip{font-size:12.5px;font-weight:500;padding:3px 10px;border-radius:7px;background:var(--green-bg);color:var(--green)}
+  .st.s-Blocked{background:var(--amber-bg);color:var(--amber)} .pp.Blocked{background:var(--amber-bg);color:var(--amber)}
+
+  .strip{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .strip a{padding:16px 20px} .strip b{font-size:30px} .strip span{margin-top:6px}
+  .ins.open .ih .hd{display:none}
+  .ih .hd{font-weight:500;color:var(--ink);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:6px}
+  .ib.wide{width:auto;padding:0 10px;font:500 12.5px Inter,sans-serif}
+  .lt.noscore{min-width:920px}
+  .lt.noscore .lr{grid-template-columns:24px 56px minmax(260px,1fr) 150px 132px 120px 70px}
+  .lt.noscore .lr>div:nth-child(6),.lt.noscore .lr>div:nth-child(7),.lt.noscore .lr>div:nth-child(8){display:none}
+  .lnk{font-size:12.5px;font-weight:500;color:var(--blue);text-decoration:none;margin-right:12px} .lnk:hover{text-decoration:underline}
+  details summary{font-size:12.5px;color:var(--muted)} footer details p{margin:6px 0}
+  .lr{min-height:56px}
+  .gh2{padding:18px 14px 8px}
+  .lbar{padding:12px 14px}
+
+  :root{--ipbg:#E3F0FD;--ipfg:#0A4F99;--solid:#0068C4}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ipbg:#16324F;--ipfg:#8CC8FF;--solid:#1A6FC9}}
+  :root{--muted:#58627A}
+  /* contrast */
+  .st.s-In-progress,.fl.b{background:var(--ipbg);color:var(--ipfg)}
+  .strip .k,.eyebrow,.gh2 .tg,.lnk,th{color:var(--ipfg)}
+  /* priority first */
+  .rk{font:700 20px "JetBrains Mono",monospace;color:var(--head);text-align:center}
+  .sc{font:600 14px "JetBrains Mono",monospace;color:var(--head)}
+  .lr input.un{border:1px solid transparent;background:transparent;color:var(--muted)} .lr input.un::placeholder{color:var(--muted)}
+  .tc .t1{all:unset;display:block;cursor:pointer;font:600 13.5px/1.3 Inter,sans-serif;color:var(--head)}
+  .tc .t1:hover{text-decoration:underline} .tc .t1:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px}
+  .dd{position:relative} .dd small{display:none}
+  .dtx{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;gap:6px;align-items:center;height:28px;padding:0 8px;border-radius:8px;font:500 12.5px Inter,sans-serif;color:var(--ink);white-space:nowrap}
+  .dtx:hover{background:var(--field)} .dtx:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .pdot{width:6px;height:6px;border-radius:50%;background:#E5A300;display:inline-block}
+  .dhid{position:absolute;left:0;top:0;opacity:0;pointer-events:none;width:1px;height:1px}
+  .cbw{display:grid;place-items:center;width:24px;height:24px;cursor:pointer} .lr input[type=checkbox]{width:18px;height:18px}
+  .lr{min-height:56px}
+  /* one top card */
+  header{align-items:center}
+  .sub{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .top{background:var(--surface);border-radius:14px;box-shadow:var(--card);margin-bottom:14px;overflow:hidden}
+  .top .strip{box-shadow:none;border-radius:0;margin:0;background:transparent;display:flex;flex-wrap:wrap}
+  .top .strip a{flex:1 1 180px;display:flex;align-items:baseline;gap:10px;padding:12px 18px}
+  .top .strip .k{white-space:nowrap} .top .strip b{font-size:22px;margin:0} .top .strip span{display:none}
+  .tn{font-style:normal;font-size:12px;color:var(--muted);white-space:nowrap}
+  .top .ins{box-shadow:none;border-radius:0;margin:0;border-top:1px solid var(--line);background:transparent;padding:10px 18px 12px}
+  /* three buttons, two radii */
+  .btn,.pillb,.sk{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;background:var(--surface);box-shadow:0 0 0 1px var(--line);font:500 13px Inter,sans-serif;color:var(--head);margin-right:6px}
+  .btn:hover,.pillb:hover,.sk:hover{background:var(--hover)}
+  .btnp,.pillb.pri{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;background:var(--solid);color:#fff;box-shadow:none;font:600 13px Inter,sans-serif;margin-right:6px}
+  .btnp[disabled]{opacity:.45;cursor:default}
+  .btn:focus-visible,.pillb:focus-visible,.sk:focus-visible,.btnp:focus-visible,.ib:focus-visible,.fc:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .fc,.ib{border-radius:8px}
+  .lr select,.lr input[type=text],#q,.bulk input,.bulk select{border-radius:8px}
+  .fl,.chip,.sync,.tchip{border-radius:6px}
+  .seg{border-radius:12px} .seg button{border-radius:8px}
+  .df,.think,.need,.warn{border-radius:12px}
+  .ck{border-radius:6px}
+
+  /* manual priority order */
+  .lt{min-width:880px}
+  .lt .lr{grid-template-columns:30px 24px 52px minmax(260px,1fr) 150px 132px 120px;gap:8px}
+  .lt .lr>.gpc{display:flex;justify-content:center}
+  .grip{all:unset;box-sizing:border-box;width:26px;height:32px;display:grid;place-items:center;border-radius:7px;color:var(--muted);cursor:grab;touch-action:none;opacity:.55}
+  .lr.b:hover .grip,.grip:focus-visible,.grip:hover{opacity:1;background:var(--field);color:var(--head)}
+  .grip:focus-visible{box-shadow:0 0 0 2px var(--blue)} .grip:active{cursor:grabbing}
+  .rkb{all:unset;box-sizing:border-box;min-width:36px;height:30px;line-height:30px;text-align:center;border-radius:8px;cursor:text;font:800 17px Inter,sans-serif;color:var(--head);font-variant-numeric:tabular-nums}
+  .rkb:hover{background:var(--field);box-shadow:0 0 0 1px var(--line)} .rkb:focus-visible{box-shadow:0 0 0 2px var(--blue)}
+  .rkin{width:48px;height:30px;border-radius:8px;border:1px solid var(--blue);background:var(--surface);color:var(--head);font:700 15px Inter,sans-serif;text-align:center;padding:0}
+  .lr.drag{position:relative;z-index:30;background:var(--surface);box-shadow:0 14px 34px rgba(0,0,0,.28),0 0 0 1px var(--blue);border-radius:10px;cursor:grabbing}
+  .lr.drag .grip{opacity:1;color:var(--blue)}
+  body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
+  #dropline{position:fixed;height:3px;background:var(--blue);border-radius:2px;pointer-events:none;z-index:40;display:none}
+  #dropline::before{content:"";position:absolute;left:-4px;top:-3px;width:9px;height:9px;border-radius:50%;background:var(--blue)}
+  #toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--navy);color:var(--page);border-radius:12px;padding:10px 16px;font:500 13.5px Inter,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.3);z-index:60;transition:opacity .15s,transform .15s;max-width:min(560px,92vw);display:flex;gap:14px;align-items:center}
+  #toast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+  #toast button{all:unset;cursor:pointer;font-weight:700;text-decoration:underline}
+  .fc.hint{cursor:default;color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){#toast{transition:none}}
+
+  /* selection: custom checkbox + floating action bar */
+  .cbw{position:relative}
+  .cbw input[type=checkbox]{position:absolute;inset:0;width:100%!important;height:100%!important;margin:0;opacity:0;cursor:pointer;z-index:1}
+  .cbx{width:18px;height:18px;border-radius:6px;box-shadow:inset 0 0 0 1.5px var(--muted);display:grid;place-items:center;color:transparent;transition:background .12s,box-shadow .12s}
+  .cbx .ck2{display:none}
+  .cbw:hover .cbx{box-shadow:inset 0 0 0 1.5px var(--blue)}
+  .cbw input:checked+.cbx,.cbw input:indeterminate+.cbx{background:var(--solid);box-shadow:none;color:#fff}
+  .cbw input:indeterminate+.cbx .ck1{display:none} .cbw input:indeterminate+.cbx .ck2{display:block}
+  .cbw input:focus-visible+.cbx{outline:2px solid var(--blue);outline-offset:2px}
+  #bulkbar{position:fixed;left:50%;bottom:20px;transform:translate(-50%,16px);opacity:0;pointer-events:none;z-index:50;display:flex;align-items:center;gap:10px;padding:8px 10px 8px 8px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 18px 44px rgba(0,0,0,.34);max-width:94vw;flex-wrap:wrap;transition:opacity .15s,transform .15s}
+  #bulkbar.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+  #bulkbar .bx0{all:unset;box-sizing:border-box;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;cursor:pointer;color:var(--muted)} #bulkbar .bx0:hover{background:var(--field);color:var(--head)}
+  #bulkbar .bn{font:500 13.5px Inter,sans-serif;color:var(--muted);white-space:nowrap} #bulkbar .bn b{color:var(--head);font-weight:700}
+  #bulkbar .bsep{width:1px;height:20px;background:var(--line)}
+  #bulkbar .bf{display:flex;align-items:center;gap:6px;height:32px;padding:0 10px;border-radius:10px;background:var(--field);box-shadow:0 0 0 1px var(--line);color:var(--muted)}
+  #bulkbar .bf:focus-within{box-shadow:0 0 0 2px var(--blue)}
+  #bulkbar .bf input{all:unset;width:130px;font:500 13px Inter,sans-serif;color:var(--head)} #bulkbar .bf input::placeholder{color:var(--muted)}
+  #bulkbar .bgo,#bulkbar .bsel{all:unset;box-sizing:border-box;height:32px;padding:0 14px;border-radius:10px;font:600 13px Inter,sans-serif;cursor:pointer;display:inline-flex;align-items:center}
+  #bulkbar .bgo{background:var(--solid);color:#fff} #bulkbar .bgo:hover{filter:brightness(1.1)}
+  #bulkbar .bsel{background:var(--field);box-shadow:0 0 0 1px var(--line);color:var(--head);padding-right:10px} #bulkbar .bsel:hover{background:var(--hover)}
+  #bulkbar button:focus-visible,#bulkbar select:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  body.hasbulk #toast{bottom:84px}
+  body.hasbulk footer{padding-bottom:90px}
+  .lr.sel{background:rgba(0,127,233,.07)}
+  @media (prefers-reduced-motion:reduce){#bulkbar{transition:none}}
+
+  /* task detail card */
+  .dc{padding:12px 20px 20px 78px;background:var(--hover);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+  .dch{display:flex;gap:16px;align-items:flex-start;justify-content:space-between}
+  .dcid{color:var(--muted);font-size:11.5px;margin-bottom:3px} .dct{font:700 16px/1.35 Inter,sans-serif;color:var(--head);max-width:760px} .dcf{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+  .dcp{display:flex;align-items:center;gap:8px;flex:none}
+  .pchip{font:700 12px Inter,sans-serif;padding:5px 10px;border-radius:99px;background:var(--ipbg);color:var(--ipfg)} .pchip.Next{background:rgba(240,154,47,.18);color:var(--amber)} .pchip.Later{background:var(--field);color:var(--muted)}
+  .mv{display:inline-flex;border-radius:9px;box-shadow:0 0 0 1px var(--line);background:var(--surface);overflow:hidden}
+  .mv button{all:unset;box-sizing:border-box;width:30px;height:30px;display:grid;place-items:center;cursor:pointer;color:var(--ink);font-size:14px} .mv button+button{border-left:1px solid var(--line)}
+  .mv button:hover:not(:disabled){background:var(--field);color:var(--head)} .mv button:disabled{opacity:.35;cursor:default} .mv button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+  .dcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+  .dcs{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+  .dcs h4{margin:0;font:700 11px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .fd{display:flex;flex-direction:column;gap:5px;min-width:0} .fl2{font:600 12px Inter,sans-serif;color:var(--muted)} .fl2 em{font-style:normal;background:var(--field);border-radius:99px;padding:0 7px;margin-left:4px;color:var(--head)}
+  .fh{font-size:12px;color:var(--muted)}
+  .dc .fd input,.dc .fd select{width:100%;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--field);color:var(--head);font:500 13.5px Inter,sans-serif;padding:0 10px;box-sizing:border-box}
+  .dc .fd input:hover,.dc .fd select:hover{border-color:var(--muted)} .dc .fd input:focus,.dc .fd select:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:transparent}
+  .cg{display:flex;flex-direction:column;gap:7px} .cns{display:flex;flex-direction:column;gap:6px}
+  .cn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:9px;background:var(--field);font:500 12.5px Inter,sans-serif;color:var(--ink);min-width:0}
+  button.cn:hover{box-shadow:0 0 0 1px var(--blue)} .cn:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+  .cn svg{flex:none;width:14px;height:14px} .cn b{font:600 11.5px "JetBrains Mono",monospace;color:var(--head);flex:none} .cn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .none{font-size:13px;color:var(--muted)}
+  .dnote{border-radius:12px;background:var(--surface);box-shadow:0 0 0 1px var(--line);padding:12px 16px;display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--ink);max-width:980px}
+  .dnote b{font:700 11px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)} .dnote.amb{box-shadow:inset 3px 0 0 #F09A2F,0 0 0 1px var(--line)} .dnote.amb b{color:var(--amber)}
+  @media (max-width:760px){.dc{padding-left:16px}.dch{flex-direction:column}}
+
+  /* right-side drawer */
+  #drawer{position:fixed;top:0;right:0;bottom:0;width:440px;max-width:100vw;background:var(--surface);box-shadow:-1px 0 0 var(--line),-18px 0 44px rgba(0,0,0,.28);z-index:55;display:flex;flex-direction:column;transform:translateX(104%);transition:transform .2s ease;visibility:hidden}
+  #drawer.on{transform:none;visibility:visible}
+  .dwh{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 12px 20px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px;flex:none}
+  .dwa{display:flex;gap:4px}
+  .dwa button{all:unset;box-sizing:border-box;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;cursor:pointer;color:var(--ink);font-size:15px}
+  .dwa button:hover:not(:disabled){background:var(--field);color:var(--head)} .dwa button:disabled{opacity:.3;cursor:default} .dwa button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+  .dwb{flex:1;overflow:auto;padding:18px 20px 28px;display:flex;flex-direction:column;gap:14px}
+  .dwb .dct{font:700 18px/1.35 Inter,sans-serif;color:var(--head)}
+  .dprow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .dwb .dcg{grid-template-columns:1fr} .dwb .dcs{background:var(--hover)} .dwb .dnote{background:var(--hover);max-width:none}
+  .dwb .dcp{display:flex} .dwb .dcg{display:grid}
+  .lr.b.on{background:rgba(0,127,233,.07);box-shadow:inset 3px 0 0 var(--blue)}
+  @media (min-width:1180px){body.hasdrawer{padding-right:440px} body.hasdrawer #bulkbar,body.hasdrawer #toast{left:calc(50% - 220px)}}
+  @media (prefers-reduced-motion:reduce){#drawer{transition:none}}
+
+  :root{color-scheme:light} @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark}} :root[data-theme="dark"]{color-scheme:dark}
+  .fd input,.fd select{width:100%;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--field);color:var(--head);font:500 13.5px Inter,sans-serif;padding:0 10px;box-sizing:border-box}
+  .fd input:hover,.fd select:hover{border-color:var(--muted)} .fd input:focus,.fd select:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:transparent}
+  .dcs h4 .src{margin-left:8px;font:600 11px Inter,sans-serif;letter-spacing:0;text-transform:none;background:var(--field);color:var(--muted);border-radius:99px;padding:2px 8px}
+  .nt{width:100%;box-sizing:border-box;min-height:92px;max-height:320px;resize:vertical;border-radius:10px;border:1px solid var(--line);background:var(--field);color:var(--head);font:400 13.5px/1.5 Inter,sans-serif;padding:10px 12px}
+  .nt:hover{border-color:var(--muted)} .nt:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:transparent} .nt::placeholder{color:var(--muted)}
+  .ntf{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted)}
+  .dcs.doc p{margin:0;font-size:13px;line-height:1.5;color:var(--ink)}
+  .prog{height:6px;border-radius:99px;background:var(--field);overflow:hidden} .prog i{display:block;height:100%;background:var(--green);border-radius:99px;transition:width .2s}
+  .sl{display:flex;flex-direction:column;gap:4px}
+  .sr{display:flex;align-items:center;gap:8px;border-radius:9px;padding:2px 2px 2px 0} .sr:hover{background:var(--field)}
+  .sr .stin{all:unset;box-sizing:border-box;flex:1;min-width:0;height:30px;padding:0 6px;border-radius:7px;font:500 13.5px Inter,sans-serif;color:var(--head)}
+  .sr .stin:focus{box-shadow:0 0 0 2px var(--blue);background:var(--surface)} .sr.d .stin{color:var(--muted);text-decoration:line-through}
+  .sx{all:unset;box-sizing:border-box;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;cursor:pointer;color:var(--muted);font-size:17px;opacity:0} .sr:hover .sx,.sx:focus-visible{opacity:1} .sx:hover{background:var(--surface);color:var(--head)} .sx:focus-visible{outline:2px solid var(--blue)}
+  .sadd{display:flex;gap:8px} .sadd input{flex:1;min-width:0;height:34px;border-radius:9px;border:1px dashed var(--line);background:transparent;color:var(--head);font:500 13.5px Inter,sans-serif;padding:0 10px} .sadd input:focus{outline:2px solid var(--blue);outline-offset:1px;border-style:solid} .sadd .pillb{margin:0;height:34px;border-radius:9px}
+  .sadd input[aria-invalid="true"]{border-color:#F09A2F}
+  .seedb{all:unset;cursor:pointer;font:600 12.5px Inter,sans-serif;color:var(--blue)} .seedb:hover{text-decoration:underline} .seedb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .lks{display:flex;flex-wrap:wrap;gap:6px}
+  .lk{display:inline-flex;align-items:center;border-radius:99px;background:var(--field);box-shadow:0 0 0 1px var(--line);font:500 12.5px Inter,sans-serif;max-width:100%}
+  .lk a{display:inline-flex;align-items:center;gap:6px;padding:5px 4px 5px 10px;color:var(--head);text-decoration:none;overflow:hidden;white-space:nowrap;text-overflow:ellipsis} .lk a:hover{text-decoration:underline} .lk a:focus-visible,.lk button:focus-visible{outline:2px solid var(--blue);border-radius:99px}
+  .lk button{all:unset;width:22px;height:22px;margin-right:3px;border-radius:99px;display:grid;place-items:center;cursor:pointer;color:var(--muted)} .lk button:hover{background:var(--surface);color:var(--head)}
+  @media (prefers-reduced-motion:reduce){.prog i{transition:none}}
+
+  .cnw{display:flex;align-items:center;gap:4px} .cnw .cn{flex:1;min-width:0}
+  .cnx{all:unset;box-sizing:border-box;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;cursor:pointer;color:var(--muted);font-size:17px;flex:none} .cnx:hover{background:var(--field);color:var(--head)} .cnx:focus-visible{outline:2px solid var(--blue)}
+  .msb{all:unset;cursor:pointer;align-self:flex-start;font:600 12.5px Inter,sans-serif;color:var(--blue);padding:3px 0} .msb:hover{text-decoration:underline} .msb:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px}
+  .msp{border-radius:12px;box-shadow:0 0 0 1px var(--line);background:var(--surface);overflow:hidden;margin-top:2px}
+  .msp #msq{width:100%;box-sizing:border-box;height:36px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--head);font:500 13px Inter,sans-serif;padding:0 12px} .msp #msq:focus{outline:2px solid var(--blue);outline-offset:-2px}
+  .msl{max-height:240px;overflow:auto;padding:4px}
+  .msr{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:8px;cursor:pointer;font:500 13px Inter,sans-serif;color:var(--ink)} .msr:hover{background:var(--field)} .msr.dis{opacity:.5;cursor:default}
+  .msr b{font:600 11.5px "JetBrains Mono",monospace;color:var(--head);flex:none} .msr .msn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .msr em{font-style:normal;font-size:11px;color:var(--muted)} .msr svg{flex:none}
+  .msf{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)} .msf .pillb{margin:0;height:28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="tab">GTM Priority Runway</span>
+  <header>
+    <div>
+      <h1>GTM priority runway</h1>
+      <p class="sub" id="sub"></p>
+    </div>
+    <div class="seg" id="seg" role="group" aria-label="Views"></div>
+  </header>
+  <div class="top"><nav class="strip" id="strip" aria-label="Headline numbers"></nav><div id="insights"></div></div>
+  <main id="view"></main>
+  <div id="asks"></div>
+  <div id="pal" role="dialog" aria-modal="true" aria-label="Jump to a task"><div class="bx"><input id="palq" type="text" placeholder="Jump to a task, owner or status" autocomplete="off"><div class="res" id="palres"></div><div class="ft">&#8593;&#8595; move &middot; &#8629; open &middot; esc close</div></div></div>
+  <div id="banners"></div>
+  <aside id="drawer" aria-label="Task details"></aside><div id="bulkbar" role="region" aria-label="Bulk actions"></div><div id="dropline"></div><div id="toast" role="status" aria-live="polite"></div>
+  <footer id="foot"></footer>
+</div>
+
+<script>
+// Runway model: merges the seed with the overlay, derives status, dates, conflicts and score.
+// Plain functions, no DOM. Inlined into runway.html by build.js and required by tests.
+(function (root) {
+  var DAY = 86400000;
+  function d(s) { return s ? Date.parse(s + 'T00:00:00Z') : null; }
+  function iso(t) { return t == null ? null : new Date(t).toISOString().slice(0, 10); }
+  function days(a, b) { return Math.round((a - b) / DAY); }
+
+  var CONF_W = { green: 1.0, amber: 0.7, red: 0.4 };
+
+  function urgencyFor(t, today) {
+    if (t.recurring) return 2.0;
+    var f = null;
+    if (t.hard_deadline) {
+      var hd = days(d(t.hard_deadline), today);
+      if (hd <= 30) f = 3.0;
+    }
+    var u;
+    if (t.delivery_eff == null) u = 0.8;
+    else {
+      var n = days(d(t.delivery_eff), today);
+      u = n <= 14 ? 3.0 : n <= 30 ? 2.0 : n <= 60 ? 1.5 : 1.0;
+    }
+    return f != null ? Math.max(f, u) : u;
+  }
+
+  function build(seed, overlay, today, overrides) {
+    overrides = overrides || {};
+    var tasks = seed.tasks.concat(overlay.added_tasks || []).map(function (s) {
+      var t = JSON.parse(JSON.stringify(s));
+      var o = overrides[t.id] || {};
+      if (overlay.title_overrides && overlay.title_overrides[t.id]) { t.task_source = t.task; t.task = overlay.title_overrides[t.id]; }
+      // user edits to dates and blocker replace the doc values
+      if (o.start) t.start_actual = o.start;
+      if (o.delivery) t.delivery_actual = o.delivery;
+      if (o.blocker_type !== undefined && o.blocker_type !== '') t.blocker_type = o.blocker_type === 'none' ? null : o.blocker_type;
+      var sc = overlay.scores[t.id] || [null, null];
+      t.impact = sc[0]; t.effort = sc[1];
+      // dependencies are set by hand in the page (overrides[id].depends_on); nothing is inferred
+      t.depends_on = ((overrides[t.id] && overrides[t.id].depends_on) || []).filter(function (x) { return x !== t.id; });
+      var so = overlay.status_override[t.id];
+      // status: Done rows are Complete unless overridden; shells are Undefined; a Need-* blocker blocks.
+      var st = t.status_raw === 'Done' ? 'Complete' : t.status_raw || (t.is_shell ? 'Undefined' : 'Not started');
+      if (so) { st = so.status; if (so.blocker_type) t.blocker_type = so.blocker_type; t.status_note = so.why; }
+      if (st === 'Not started' && t.blocker_type && !o.status) st = 'Blocked';
+      if (o.status) st = o.status;
+      t.status = st;
+      // dates: tab 1 wins, tab 2 proposal only fills a blank
+      t.start_eff = t.start_actual || t.start_proposed || null;
+      t.start_src = t.start_actual ? 'tab1' : t.start_proposed ? 'proposed' : null;
+      t.delivery_eff = t.delivery_actual || t.delivery_proposed || null;
+      t.delivery_src = t.delivery_actual ? 'tab1' : t.delivery_proposed ? 'proposed' : null;
+      // an In progress task with no actual start is already underway: it starts today, and a later proposal is a conflict
+      t.start_conflict = false;
+      if (t.status === 'In progress' && !t.start_actual) {
+        if (t.start_proposed && d(t.start_proposed) > today) t.start_conflict = true;
+        t.start_eff = iso(today); t.start_src = 'underway';
+      }
+      t.confidence = t.delivery_src === 'tab1' ? 'green' : t.delivery_src === 'proposed' ? 'amber' : 'red';
+      t.done_future = t.status === 'Complete' && t.delivery_actual && d(t.delivery_actual) > today;
+      t.proposed = !!t.proposed;
+      var ov = overrides[t.id];
+      if (ov) ['impact', 'effort', 'confidence', 'owner'].forEach(function (k) { if (ov[k] != null && ov[k] !== '') t[k] = ov[k]; });
+      return t;
+    });
+
+    var byId = {}; tasks.forEach(function (t) { byId[t.id] = t; });
+
+    // transitive downstream: tasks that can be reached by following "depends on me"
+    var kids = {}; tasks.forEach(function (t) { t.depends_on.forEach(function (p) { (kids[p] = kids[p] || []).push(t.id); }); });
+    function reach(id, seen) { (kids[id] || []).forEach(function (k) { if (!seen[k]) { seen[k] = 1; reach(k, seen); } }); return seen; }
+
+    tasks.forEach(function (t) {
+      t.downstream = Object.keys(reach(t.id, {}));
+      t.downstream_count = t.downstream.length;
+      t.conflicts = [];
+      t.depends_on.forEach(function (p) {
+        var pt = byId[p];
+        if (!pt || pt.status === 'Complete') return;
+        if (t.start_eff && pt.delivery_eff && d(t.start_eff) < d(pt.delivery_eff)) {
+          t.conflicts.push({ pred: p, starts: t.start_eff, pred_delivers: pt.delivery_eff, start_src: t.start_src });
+        }
+      });
+      t.unowned = !t.owner && t.status !== 'Complete' && t.status !== 'Undefined';
+      t.overdue_start = (t.status === 'Not started' || t.status === 'Blocked') && t.start_actual && d(t.start_actual) < today;
+      t.urgency = urgencyFor(t, today);
+      var rankable = t.impact != null && t.effort != null && ['Complete', 'Phase 1 done', 'Undefined'].indexOf(t.status) < 0 && !t.is_shell;
+      t.score = rankable ? (t.impact * CONF_W[t.confidence] * t.urgency) / t.effort + 2 * t.downstream_count : null;
+    });
+
+    // buckets: Now = top N by score, not blocked; Next = following 12; Later = rest
+    var limit = Number(overrides._limit) || overlay.wip_limit || 8;
+    // order: Dan's saved order (drag and drop) wins; anything not in it follows by suggested score
+    var ord = overrides._order || [], oi = {}; ord.forEach(function (id, i) { oi[id] = i; });
+    var ranked = tasks.filter(function (t) { return t.score != null; }).sort(function (a, b) {
+      var ia = oi[a.id] != null ? oi[a.id] : 1e6, ib = oi[b.id] != null ? oi[b.id] : 1e6;
+      return ia !== ib ? ia - ib : b.score - a.score;
+    });
+    var open = ranked.filter(function (t) { return t.status !== 'Blocked' && t.status !== 'Queued'; });
+    open.forEach(function (t, i) { t.bucket = i < limit ? 'Now' : i < limit + 12 ? 'Next' : 'Later'; t.rank = i + 1; });
+    ranked.filter(function (t) { return t.status === 'Blocked'; }).forEach(function (t) { t.bucket = 'Blocked'; });
+    ranked.filter(function (t) { return t.status === 'Queued'; }).forEach(function (t) { t.bucket = 'Queued'; });
+    tasks.forEach(function (t) {
+      if (t.score == null) t.bucket = t.status === 'Undefined' ? 'Undefined' : 'Archive';
+    });
+
+    var inprog = tasks.filter(function (t) { return t.status === 'In progress'; });
+    var pause = inprog.slice().sort(function (a, b) { return (b.rank || 999) - (a.rank || 999); });
+    var cpm = tasks.filter(function (t) { return t.conflicts.length; });
+
+    return {
+      order: ranked.map(function (t) { return t.id; }), manual: ord.length > 0,
+      today: iso(today), tasks: tasks, byId: byId, limit: limit,
+      wip: inprog.length, wip_over: Math.max(0, inprog.length - limit),
+      pause_candidates: pause.slice(0, Math.max(0, inprog.length - limit)),
+      conflicts: cpm
+    };
+  }
+
+  var api = { build: build, d: d, iso: iso, days: days, CONF_W: CONF_W };
+  if (typeof module !== 'undefined') module.exports = api; else root.RunwayModel = api;
+})(typeof window !== 'undefined' ? window : this);
+
+</script>
+<script>
+var SEED = {"generated":"2026-11-06","source":"Claude Doc \"GTM Priority Runway\" (artifact 7UfiZLvcPYjWHkrprxeSxj), tab 1 table + tab 2 \"Checklist plan\"","pb_expo_dates":["2027-03-10","2027-03-11"],"tasks":[{"id":"DGN-01","source_row":1,"task":"LinkedIn: PartsBase page","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":"High","is_shell":false,"recurring":true,"cadence":"2 posts per day","posts_per_week":"10","start_actual":"2026-11-02","start_was_tbd":false,"delivery_actual":null,"delivery_raw":"Ongoing, end date TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":"Starting 11/9 When thought content is generated","start_proposed":"2026-11-02","delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-02","source_row":2,"task":"LinkedIn: PB Expo page","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":"High","is_shell":false,"recurring":true,"cadence":"1 post per day","posts_per_week":"5","start_actual":"2026-11-02","start_was_tbd":false,"delivery_actual":null,"delivery_raw":"Ongoing, end date TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-02","delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-01","source_row":3,"task":"PBexpo: Kevin Book","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":null,"legacy_priority":"High","is_shell":true,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-03","source_row":4,"task":"Smartlead","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":null,"legacy_priority":"High","is_shell":true,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-02","source_row":5,"task":"PB Expo email list: build and enhance","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":"High","is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-02","start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":"Have base, start on 11/9","start_proposed":"2026-11-16","delivery_proposed":"2026-12-11","missing_per_checklist_tab":"Verification, the shared suppression list, region tiers, and job titles; send Florida first","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DAT-01","source_row":6,"task":"Oro: clean up and enrich PartsBase customer list","workstream":"Data Foundation","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":"High","is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":true,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":"GTM or ORO team?","start_proposed":"2026-11-02","delivery_proposed":"2026-11-27","missing_per_checklist_tab":"Field standards, an owner, a refresh cadence, and a sync plan with HubSpot","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-03","source_row":7,"task":"PB Expo booth prospects: event planner lists (aviation and technology)","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":"High","is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-02","start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":"Have base, start on 11/9","start_proposed":"2026-11-09","delivery_proposed":"2026-12-04","missing_per_checklist_tab":"A dated three-touch sequence, reply routing, and A/B tests","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-04","source_row":8,"task":"International email list: locator opportunities","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-10-26","start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":"Original Enrichment provided to Casie. Can Expand","start_proposed":"2027-01-04","delivery_proposed":"2027-02-12","missing_per_checklist_tab":"A consent record, a preference center, and legal sign-off","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-05","source_row":9,"task":"LinkedIn groups: target groups and posting strategy","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-05","start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":"Plan started on 11/5. Will share html of finding","start_proposed":"2026-11-09","delivery_proposed":"2026-11-27","missing_per_checklist_tab":"The group shortlist, posting frequency, and each group's promotion rules","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"RET-01","source_row":10,"task":"Retention: monthly customer communication","workstream":"Retention","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":"High","is_shell":false,"recurring":false,"cadence":"1 email per month","posts_per_week":null,"start_actual":null,"start_was_tbd":true,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-16","delivery_proposed":"2026-12-11","missing_per_checklist_tab":"A fixed template and send day, and the community-by-the-numbers data","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"RET-02","source_row":11,"task":"Retention: Data backed customer signal communication (health of account)","workstream":"Retention","workstream_basis":"guess - confirm with Dan","status_raw":null,"legacy_priority":null,"is_shell":true,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"RET-03","source_row":12,"task":"Retention: welcome email for new PartsBase members","workstream":"Retention","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":"Need Dev","notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-16","delivery_proposed":"2026-12-04","missing_per_checklist_tab":"The 30/60/90-day onboarding series after it","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"RET-04","source_row":13,"task":"Retention: renewal thank-you email","workstream":"Retention","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":"Need Dev","notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-16","delivery_proposed":"2026-12-04","missing_per_checklist_tab":"Pre-renewal touches (see added task)","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"RET-05","source_row":14,"task":"Win-back list: demos in the last 60 months with no signup","workstream":"Retention","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":"Need Dev","notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-16","delivery_proposed":"2026-12-04","missing_per_checklist_tab":"A sequence, an offer, and an owner (see added task)","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"RET-06","source_row":15,"task":"Win-back list: former customers who did not renew","workstream":"Retention","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":"Need Dev","notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-16","delivery_proposed":"2026-12-04","missing_per_checklist_tab":"A sequence, an offer, and an owner (see added task)","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"ADV-01","source_row":16,"task":"Advertising: review products and banner availability","workstream":"Advertising","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":true,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-02","delivery_proposed":"2026-11-13","missing_per_checklist_tab":"Packaging, pricing, and an Expo booth bundle (see added task)","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-06","source_row":17,"task":"Non-aviation prospect list: companies that could use government data","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"Have base after roundtable with team","gtm_notes":null,"start_proposed":"2027-01-11","delivery_proposed":"2027-02-19","missing_per_checklist_tab":"15-20 buyer interviews to validate demand before building the list","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-07","source_row":18,"task":"LinkedIn: monitor organic posts and choose posts to promote","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":true,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"This is in process today fro PBExpo. Can expand to other Units.","gtm_notes":null,"start_proposed":"2026-12-01","delivery_proposed":null,"missing_per_checklist_tab":"CRM audiences, a budget, and conversion tracking (ongoing, weekly)","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"ADV-02","source_row":19,"task":"Geofencing: trade show plan and 60 to 90 day test","workstream":"Advertising","workstream_basis":"guess - confirm with Dan","status_raw":"Done","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"Did our original test with NBAA, had lower CPM than normal promos. Can expand to shows we do not attend.","gtm_notes":null,"start_proposed":"2026-11-16","delivery_proposed":"2026-12-10","missing_per_checklist_tab":"Venue shortlist, creative, and a pass or fail rule; a 90-day test must start by Dec 10","hard_deadline":"2026-12-10","owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-04","source_row":20,"task":"PB Expo: automated booth buyer welcome email","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"This occurs via SwapCard. Not official \"marketing\" comm","gtm_notes":null,"start_proposed":"2026-11-09","delivery_proposed":"2026-11-20","missing_per_checklist_tab":"Next steps and a named contact","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-08","source_row":21,"task":"SEO strategy: paid and organic (PB Expo and PartsBase)","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":true,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-16","delivery_proposed":"2026-12-18","missing_per_checklist_tab":"A part-page audit and coverage of the Expo site","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-09","source_row":22,"task":"AI search strategy (PB Expo and PartsBase)","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":true,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-23","delivery_proposed":"2026-12-18","missing_per_checklist_tab":"A monthly prompt set, structured data, and a citation check","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-10","source_row":23,"task":"Lead funnel: analyze the part number search to lead form path","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":true,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-02","delivery_proposed":"2026-12-04","missing_per_checklist_tab":"Seller response and lead outcome, not just the form","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-11","source_row":24,"task":"Lead form: A/B testing and conversion optimization","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":true,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-12-07","delivery_proposed":"2027-01-29","missing_per_checklist_tab":"A test plan drawn from the funnel analysis and Hotjar findings","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-05","source_row":25,"task":"PB Expo: attendee spotlight content (headshots and airline logos)","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"Email is slated for 11/19 & 12/8","gtm_notes":null,"start_proposed":"2027-01-11","delivery_proposed":"2027-02-26","missing_per_checklist_tab":"A daily live-content plan","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"SOC-01","source_row":26,"task":"Social proof: rep process to collect headshots, logos and testimonials","workstream":"Social Proof","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":true,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-16","delivery_proposed":"2026-12-04","missing_per_checklist_tab":"Release and permission forms","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"SOC-02","source_row":27,"task":"Social proof: target list of customers and individuals for testimonials","workstream":"Social Proof","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":true,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-11-16","delivery_proposed":"2026-12-04","missing_per_checklist_tab":"A publication cadence and an approval workflow","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-12","source_row":28,"task":"Referral program: Locator, Parts Store and PB Expo","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"In progress for PBExpo","gtm_notes":null,"start_proposed":"2027-01-04","delivery_proposed":"2027-02-12","missing_per_checklist_tab":"Incentive design and tracking","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-13","source_row":29,"task":"Conversion: Hotjar review of demo form and site abandonment","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"Access to HotJar and first pass to be completed by end of Nov.","gtm_notes":null,"start_proposed":"2026-11-02","delivery_proposed":"2026-11-20","missing_per_checklist_tab":"A review cadence and a fix backlog","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-14","source_row":30,"task":"Visitor identification: evaluate RB2B and Vector on Locator and other pages","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"Will pull official data for weights of contribution from each platform","gtm_notes":null,"start_proposed":"2026-11-16","delivery_proposed":"2026-12-18","missing_per_checklist_tab":"Routing rules, a follow-up SLA, success criteria, and a privacy review","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-15","source_row":31,"task":"Email outreach agency service for SMB and middle market companies","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"Will utilize SmartLead","gtm_notes":null,"start_proposed":"2027-03-15","delivery_proposed":null,"missing_per_checklist_tab":"A capacity plan; proposed after the Expo so it does not compete for the same people","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-06","source_row":32,"task":"PB Expo: registration abandonment and form review","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Done","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"Statistics we cannot measure today","gtm_notes":null,"start_proposed":"2026-11-09","delivery_proposed":"2026-11-27","missing_per_checklist_tab":"A numeric target and weekly pacing","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-07","source_row":33,"task":"PB Expo: panelist and keynote speaker outreach email","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Done","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"List provided to Cassandra to start her outreach on specific seats for each panel. Emails are already scheduled for those not identified to apply","gtm_notes":null,"start_proposed":"2026-11-02","delivery_proposed":"2026-11-20","missing_per_checklist_tab":"Tracks, a confirm-by date, and a promo kit","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-08","source_row":34,"task":"PB Expo: Career Runway marketing and headshot magnet","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":true,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":"2026-12-07","delivery_proposed":"2027-02-12","missing_per_checklist_tab":"Partners such as WAI, PAMA and ATEC, and permission forms","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-16","source_row":35,"task":"LinkedIn: HeyReach status update","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"First campaign completed with a 30% acceptance rate. We will be utitilzing PBExpo teams login starting 11/16 to promote.","gtm_notes":null,"start_proposed":"2026-11-02","delivery_proposed":"2026-11-06","missing_per_checklist_tab":"Sequences, daily limits, and target lists","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-17","source_row":36,"task":"LinkedIn: PartsBase ambassador program and Social HP","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":null,"delivery_raw":"TBD","blocker_type":null,"notes_from_start_col":"Campaign is set to start 11/16","gtm_notes":null,"start_proposed":"2027-01-04","delivery_proposed":"2027-02-12","missing_per_checklist_tab":"Criteria and a content toolkit","hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DAT-02","source_row":37,"task":"Email: authenticate the sending domain (SPF, DKIM, DMARC), set up a separate outbound domain, and warm it up","workstream":"Data Foundation","workstream_basis":"guess - confirm with Dan","status_raw":"Done","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":null,"start_was_tbd":false,"delivery_actual":"2026-11-24","delivery_raw":null,"blocker_type":null,"notes_from_start_col":"mkt.partsbase.com utilized today. Can go through other reports as needed.","gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DAT-03","source_row":38,"task":"Email: verify addresses and keep one shared suppression list across every list","workstream":"Data Foundation","workstream_basis":"guess - confirm with Dan","status_raw":"Done","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-10-01","start_was_tbd":false,"delivery_actual":"2026-11-20","delivery_raw":null,"blocker_type":null,"notes_from_start_col":"Started with HS","gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DAT-04","source_row":39,"task":"Data: adopt one segment schema (role, region tier, product interest, lifecycle) in Oro and HubSpot","workstream":"Data Foundation","workstream_basis":"guess - confirm with Dan","status_raw":"Done","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-10-01","start_was_tbd":false,"delivery_actual":"2026-11-20","delivery_raw":null,"blocker_type":null,"notes_from_start_col":"Started with HS","gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-09","source_row":40,"task":"PB Expo: booth sales prospectus, pricing deadlines and past-exhibitor priority (close the 150-booth gap, 350 of 500 sold)","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-02","start_was_tbd":false,"delivery_actual":"2026-11-13","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-10","source_row":41,"task":"PB Expo: registration goal and weekly pacing report by region tier","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Done","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-02","start_was_tbd":false,"delivery_actual":"2026-11-13","delivery_raw":null,"blocker_type":null,"notes_from_start_col":"https://partsbase-gtm-dashboard.netlify.app/pbexpo-registration","gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-11","source_row":42,"task":"PB Expo: email calendar from save-the-date through post-show","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Done","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-09","start_was_tbd":false,"delivery_actual":"2026-11-20","delivery_raw":null,"blocker_type":null,"notes_from_start_col":"https://pbmarketing-comms.netlify.app/","gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-12","source_row":43,"task":"PB Expo: exhibitor co-marketing kit with a tracked registration link per exhibitor","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-16","start_was_tbd":false,"delivery_actual":"2026-12-11","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-13","source_row":44,"task":"PB Expo: speaker program with tracks, a confirm-by date and a speaker promo kit","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-16","start_was_tbd":false,"delivery_actual":"2026-12-18","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-14","source_row":45,"task":"PB Expo: sponsorship packages (lounge, app, Career Runway, badges, signage)","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-16","start_was_tbd":false,"delivery_actual":"2026-12-11","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-15","source_row":46,"task":"PB Expo: association and media partner program (three tiers, one-page agreement, outreach)","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-09","start_was_tbd":false,"delivery_actual":"2026-12-18","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-16","source_row":47,"task":"PB Expo: pre-book meetings promotion for the meeting lounge and app","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2027-01-11","start_was_tbd":false,"delivery_actual":"2027-02-05","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-17","source_row":48,"task":"PB Expo: on-site lead capture and same-day sync to the CRM","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2027-01-04","start_was_tbd":false,"delivery_actual":"2027-02-12","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-18","source_row":49,"task":"PB Expo: post-show plan ready: 48-hour follow-up, survey, and early rebooking offer","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2027-02-01","start_was_tbd":false,"delivery_actual":"2027-03-05","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"PBX-19","source_row":50,"task":"PB Expo: press plan and a live \"community by the numbers\" page","workstream":"PB Expo","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-30","start_was_tbd":false,"delivery_actual":"2027-01-15","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DAT-05","source_row":51,"task":"Measurement: weekly dashboard, UTM standard, and source capture on every form","workstream":"Data Foundation","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-10-19","start_was_tbd":false,"delivery_actual":"2026-12-04","delivery_raw":null,"blocker_type":null,"notes_from_start_col":"Started with move to HS. Will continue in bi-weekly marketing meetings.","gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-18","source_row":52,"task":"Sales alignment: lead definitions, follow-up SLAs and lead routing rules","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"In progress","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-10-26","start_was_tbd":false,"delivery_actual":"2026-11-24","delivery_raw":null,"blocker_type":null,"notes_from_start_col":"Started with Sales round table. PartStore is completed due to Kevin's prioritization.","gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"DGN-19","source_row":53,"task":"Seller recruitment: weekly review of zero-result part searches","workstream":"Demand Gen","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":true,"cadence":"Weekly","posts_per_week":null,"start_actual":"2026-11-16","start_was_tbd":false,"delivery_actual":null,"delivery_raw":"Ongoing","blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"ADV-03","source_row":54,"task":"Paid media: paid search and retargeting for PB Expo and the Locator, with test thresholds","workstream":"Advertising","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-12-01","start_was_tbd":false,"delivery_actual":"2026-12-18","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"RET-07","source_row":55,"task":"Retention: renewal touch calendar at 120, 90, 60 and 30 days before renewal","workstream":"Retention","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-12-01","start_was_tbd":false,"delivery_actual":"2027-01-15","delivery_raw":null,"blocker_type":"Need Dev","notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"RET-08","source_row":56,"task":"Win-back: outreach sequences with an offer, cadence and owner for both win-back lists","workstream":"Retention","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-12-01","start_was_tbd":false,"delivery_actual":"2027-01-15","delivery_raw":null,"blocker_type":"Need Dev","notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"ADV-04","source_row":57,"task":"Advertising: package ad products and banners for sale, with an Expo booth bundle","workstream":"Advertising","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-16","start_was_tbd":false,"delivery_actual":"2026-12-11","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null},{"id":"CMP-01","source_row":58,"task":"Privacy: cookie and tracking consent setup, and review of visitor identification and retargeting","workstream":"Compliance","workstream_basis":"guess - confirm with Dan","status_raw":"Not started","legacy_priority":null,"is_shell":false,"recurring":false,"cadence":null,"posts_per_week":null,"start_actual":"2026-11-16","start_was_tbd":false,"delivery_actual":"2026-12-18","delivery_raw":null,"blocker_type":null,"notes_from_start_col":null,"gtm_notes":null,"start_proposed":null,"delivery_proposed":null,"missing_per_checklist_tab":null,"hard_deadline":null,"owner":null,"impact":null,"effort":null,"confidence":null,"depends_on":[],"success_metric":null}]};
+var OVERLAY = {"_note":"AGENT PROPOSALS, not Dan's judgment (handoff D5). impact/effort are 1-5. Confidence is derived from date source unless overridden here. Edit in the page; overrides are kept in the browser and exportable. Status, blocker and edges follow handoff v2 sections 3 and 6.","wip_limit":8,"scores":{"DGN-01":[3,2],"DGN-02":[4,2],"PBX-02":[5,3],"DAT-01":[5,4],"PBX-03":[4,3],"DGN-04":[2,4],"DGN-05":[2,2],"RET-01":[3,2],"RET-03":[3,3],"RET-04":[3,2],"RET-05":[3,3],"RET-06":[4,3],"ADV-01":[2,1],"DGN-06":[2,5],"DGN-07":[3,2],"ADV-02":[4,3],"PBX-04":[2,1],"DGN-08":[3,4],"DGN-09":[3,3],"DGN-10":[4,3],"DGN-11":[3,4],"PBX-05":[3,3],"SOC-01":[3,2],"SOC-02":[3,2],"DGN-12":[4,4],"DGN-13":[3,2],"DGN-14":[3,3],"DGN-15":[2,4],"PBX-06":[4,3],"PBX-08":[4,3],"DGN-16":[3,2],"DGN-17":[3,3],"DAT-05":[4,3],"DGN-18":[4,3],"DGN-19":[3,1],"ADV-03":[4,3],"RET-07":[3,3],"RET-08":[4,3],"ADV-04":[3,3],"CMP-01":[4,2],"PBX-09":[5,2],"PBX-12":[4,3],"PBX-13":[4,3],"PBX-14":[4,3],"PBX-15":[3,3],"PBX-16":[3,2],"PBX-17":[4,3],"PBX-18":[3,3],"PBX-19":[3,3],"DGN-20":[4,2]},"status_override":{"PBX-06":{"status":"Blocked","blocker_type":"Need Data","why":"Note says 'Statistics we cannot measure today', so Done is not accurate (handoff finding 8)."},"ADV-02":{"status":"Phase 1 done","why":"NBAA test finished; note says it can expand to shows we do not attend (handoff finding 8)."}},"depends_on":{},"added_tasks":[{"id":"DGN-20","source_row":null,"task":"LinkedIn: content calendar (two-week batch, named owner and approver)","workstream":"Demand Gen","workstream_basis":"proposed addition, needs Dan's OK","status_raw":"Not started","is_shell":false,"recurring":false,"cadence":null,"start_actual":null,"delivery_actual":null,"start_proposed":"2026-11-06","delivery_proposed":"2026-11-13","blocker_type":null,"hard_deadline":null,"owner":null,"depends_on":[],"proposed":true,"notes":"Handoff v2 section 6, sequencing error 2: both LinkedIn page tasks are In progress, but the GTM note says posting starts 11/9 'when thought content is generated'. 15 posts per week has no content owner."}],"title_overrides":{"PBX-09":"PB Expo: booth sales prospectus, pricing deadlines and past-exhibitor priority"}};
+var EXPO = '2027-03-10';
+var STORE = 'pb-runway-overrides-v1';
+var M = window.RunwayModel;
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function loadOv(){try{return JSON.parse(localStorage.getItem(STORE)||'{}');}catch(e){return {};}}
+function saveOv(o){try{localStorage.setItem(STORE,JSON.stringify(o));}catch(e){}}
+var ov = loadOv();
+var qs = new URLSearchParams(location.search);
+var TODAY = M.d(/^\d{4}-\d\d-\d\d$/.test(qs.get('asof')||'') ? qs.get('asof') : new Date().toISOString().slice(0,10));
+var model, view = 'now', flt = null;
+
+function fmt(s){ if(!s) return 'No date'; var t=new Date(s+'T00:00:00Z'); return t.toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'}) + (t.getUTCFullYear()!==new Date(TODAY).getUTCFullYear()?' '+t.getUTCFullYear():''); }
+function dateHtml(v,src){
+  if(!v) return '<b>No date</b>';
+  if(src==='proposed') return '<b class="prop-d" title="Proposed on the Checklist plan tab, not a committed date">'+fmt(v)+'</b> proposed';
+  if(src==='underway') return '<b>Underway</b>';
+  return '<b>'+fmt(v)+'</b>';
+}
+function ownerHtml(t){ return t.owner ? '<span class="chip">'+esc(t.owner)+'</span>' : '<span class="chip">Add owner</span>'; }
+function statusChip(t){
+  var c = {'In progress':'blue','Blocked':'red','Complete':'green','Phase 1 done':'green','Undefined':'amber'}[t.status]||'';
+  return '<span class="chip '+c+'">'+esc(t.status)+(t.blocker_type?' &middot; '+esc(t.blocker_type):'')+'</span>';
+}
+function flags(t){
+  var f=[];
+  if(t.conflicts.length) f.push('<span class="chip red">&#9888; Starts before '+t.conflicts.map(function(c){return esc(c.pred);}).join(', ')+' finishes</span>');
+  if(t.overdue_start) f.push('<span class="chip red">&#9201; Start date passed</span>');
+  if(t.start_conflict) f.push('<span class="chip amber">Start date differs on Checklist tab</span>');
+  if(t.done_future) f.push('<span class="chip amber">Marked Done, delivery date is later</span>');
+  if(t.recurring) f.push('<span class="chip">&#8635; Recurring'+(t.cadence?' &middot; '+esc(t.cadence):'')+'</span>');
+  if(t.proposed) f.push('<span class="chip amber">Proposed addition</span>');
+  if(t.hard_deadline) f.push('<span class="chip red">Hard deadline '+fmt(t.hard_deadline)+'</span>');
+  return f.join('');
+}
+function sel(id,k,val,opts){
+  return '<select data-id="'+id+'" data-k="'+k+'" aria-label="'+k+'">'+opts.map(function(o){return '<option value="'+o+'"'+(String(o)===String(val)?' selected':'')+'>'+o+'</option>';}).join('')+'</select>';
+}
+function editRow(t){
+  var one=[1,2,3,4,5];
+  return '<div class="edit"><label>Impact '+sel(t.id,'impact',t.impact,one)+'</label><label>Effort '+sel(t.id,'effort',t.effort,one)+'</label>'+
+    '<label>Confidence '+sel(t.id,'confidence',t.confidence,['green','amber','red'])+'</label>'+
+    '<label>Owner <input type="text" data-id="'+t.id+'" data-k="owner" value="'+esc(t.owner||'')+'" placeholder="One name"></label></div>';
+}
+function card(t){
+  var need = t.missing_per_checklist_tab ? '<div class="need"><b>Not ready until:</b> '+esc(t.missing_per_checklist_tab)+'.</div>' : '';
+  var warn = t.conflicts.length ? '<div class="warn">'+t.conflicts.map(function(c){return esc(t.id)+' starts '+fmt(c.starts)+' ('+(c.start_src==='underway'?'already underway':'planned')+'), but '+esc(c.pred)+' ('+esc(model.byId[c.pred].task.split(':')[0])+') delivers '+fmt(c.pred_delivers)+'.';}).join('<br>')+'</div>' : '';
+  var notes = [t.notes_from_start_col,t.gtm_notes].filter(Boolean).map(esc).join(' &middot; ');
+  return '<article class="task'+(t.conflicts.length?' conf':'')+(t.proposed?' prop':'')+'">'+
+    '<div class="th"><div class="rank">'+(t.rank||'')+'</div><div><div class="tid">'+esc(t.id)+' &middot; '+esc(t.workstream)+'</div><div class="tt">'+esc(t.task)+'</div></div>'+
+    '<div class="score"><b>'+(t.score==null?'-':t.score.toFixed(1))+'</b>score</div></div>'+
+    '<div class="chips">'+statusChip(t)+ownerHtml(t)+(t.downstream_count?'<span class="chip">Unblocks '+t.downstream_count+'</span>':'')+flags(t)+'</div>'+
+    '<div class="dates"><span>Start '+dateHtml(t.start_eff,t.start_src)+'</span><span>Delivery '+dateHtml(t.delivery_eff,t.delivery_src)+'</span></div>'+
+    warn+need+(notes?'<div class="note" style="margin:0">'+notes+'</div>':'')+editRow(t)+'</article>';
+}
+
+/* ---------- views ---------- */
+function isReady(t){return t.status==='Not started'&&!t.blocker_type&&!t.is_shell&&!t.proposed&&t.score!=null&&!t.conflicts.length&&t.depends_on.every(function(p){var x=model.byId[p];return !x||x.status==='Complete';});}
+var sel={}, lastVisible=[]; var canDrag=true, sortKey='rank', sortDir=1, q='', openId=null, collapsed={Later:true,Done:true};
+var STATUSES=['Not started','In progress','Queued','Blocked','Phase 1 done','Complete'];
+var WANT=['DAT-01','PBX-09','CMP-01','PBX-02','PBX-03'];
+var BLOCKERS=['none','Need Dev','Need Legal','Need Budget','Need Decision','Need Data','Need Vendor'];
+var LF={
+  all:['All open',function(t){return t.bucket!=='Archive'&&t.bucket!=='Undefined';}],
+  Now:['Now',function(t){return t.bucket==='Now';}],
+  Next:['Next',function(t){return t.bucket==='Next';}],
+  Later:['Later',function(t){return groupOf(t)==='Later';}],
+  expected:['Your expected five',function(t){return WANT.indexOf(t.id)>=0;}],
+  Blocked:['Blocked',function(t){return t.bucket==='Blocked';}],
+  inprogress:['In progress',function(t){return t.status==='In progress';}],
+  ready:['Ready to start',isReady],
+  unowned:['Needs an owner',function(t){return t.unowned;}],
+  conflicts:['Waiting on a gate',function(t){return t.conflicts.length>0;}],
+  overdue:['Ready to kick off',function(t){return t.overdue_start;}],
+  done:['Done',function(t){return t.bucket==='Archive';}],
+  everything:['Everything',function(){return true;}]
+};
+var DOT={Now:'var(--blue)',Next:'#F09A2F',Later:'#9AA0AA',Blocked:'#F09A2F',inprogress:'var(--blue)',ready:'var(--green)',unowned:'#9AA0AA',conflicts:'#F09A2F',overdue:'var(--blue)',done:'var(--green)'};
+function groupOf(t){return t.bucket==='Queued'?'Later':['Now','Next','Later','Blocked'].indexOf(t.bucket)>=0?t.bucket:'Done';}
+function optHtml(list,val){return list.map(function(o){return '<option'+(o===val?' selected':'')+'>'+o+'</option>';}).join('');}
+function numSel(id,k,val){return '<select data-id="'+id+'" data-k="'+k+'" aria-label="'+k+'" title="'+k+' 1 to 5">'+[1,2,3,4,5].map(function(n){return '<option'+(n===val?' selected':'')+'>'+n+'</option>';}).join('')+'</select>';}
+function stIcon(st){
+  var c={'Complete':'var(--green)','Phase 1 done':'var(--green)','In progress':'var(--blue)','Blocked':'#F09A2F','Queued':'#E5A300'}[st]||'var(--muted)';
+  var inner='';
+  if(st==='Complete'||st==='Phase 1 done') return '<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="'+c+'"/><path d="M5 9.3l2.7 2.7L13 6.6" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  if(st==='In progress') inner='<circle cx="9" cy="9" r="7" fill="none" stroke="'+c+'" stroke-opacity=".25" stroke-width="2"/><circle cx="9" cy="9" r="7" fill="none" stroke="'+c+'" stroke-width="2" stroke-dasharray="26 44" stroke-linecap="round" transform="rotate(-90 9 9)"/>';
+  else if(st==='Blocked') inner='<circle cx="9" cy="9" r="8" fill="none" stroke="'+c+'" stroke-width="1.8"/><path d="M5.5 9h7" stroke="'+c+'" stroke-width="1.8" stroke-linecap="round"/>';
+  else if(st==='Queued') inner='<circle cx="9" cy="9" r="8" fill="none" stroke="'+c+'" stroke-width="1.8"/><path d="M7 6.5v5M11 6.5v5" stroke="'+c+'" stroke-width="1.8" stroke-linecap="round"/>';
+  else inner='<circle cx="9" cy="9" r="8" fill="none" stroke="'+c+'" stroke-width="1.6" stroke-dasharray="2.4 2.4"/>';
+  return '<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">'+inner+'</svg>';
+}
+function thinkHtml(t){
+  if(t.rank==null) return '<div class="think"><div class="tt0">Not in the order <span>'+esc(t.status==='Undefined'?'Empty row':t.status==='Blocked'?'Blocked: it joins the order when the blocker clears':t.status==='Queued'?'Queued: sequenced behind the Now list':t.status+' tasks are not ranked')+'</span></div></div>';
+  var st=function(lb,v,why){return '<div class="stp"><span class="lb">'+lb+'</span><span class="ch">'+v+'</span><span class="why">'+why+'</span></div>';};
+  var g=t.bucket;
+  return '<div class="think"><div class="tt0">Priority #'+t.rank+' <span>'+(g==='Now'?'In your Now '+model.limit:g==='Next'?'Next up':'Later')+(model.manual?'':' &middot; suggested starting order')+'</span></div>'+
+    st('Unblocks',t.downstream_count,t.downstream_count?t.downstream.map(esc).join(', '):'Nothing waits on it')+
+    st('Waits on',t.depends_on.length,t.depends_on.length?t.depends_on.map(esc).join(', '):'Nothing')+
+    '<div class="gap">'+(model.manual?'Drag the handle, or focus it and press the up and down arrows, to change the order.':'This is a suggested starting order from impact, effort and dates. Drag any task to set your own.')+'</div></div>';
+}
+
+function stepsOf(id){return (ov[id]&&ov[id].steps)||[];}
+function linksOf(id){return (ov[id]&&ov[id].links)||[];}
+function notesCard(t){
+  var v=(ov[t.id]&&ov[t.id].notes)||'';
+  return '<section class="dcs"><h4>Notes</h4><textarea class="nt" data-note="'+t.id+'" rows="4" placeholder="Add context, decisions or next steps" aria-label="Notes for '+esc(t.id)+'">'+esc(v)+'</textarea><div class="ntf"><span id="ntc">'+v.length+' characters</span><span id="nts">Saved in this browser</span></div></section>';
+}
+function stepsCard(t){
+  var st=stepsOf(t.id), done=st.filter(function(x){return x.d;}).length, pct=st.length?Math.round(done/st.length*100):0;
+  var seed=t.missing_per_checklist_tab&&!st.length?t.missing_per_checklist_tab.split(/,\s*(?:and\s+)?|\s+and\s+/).map(function(x){return x.trim();}).filter(Boolean):[];
+  var ck='<svg viewBox="0 0 14 14" width="14" height="14"><path class="ck1" d="M3 7.3l2.6 2.6L11 4.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  return '<section class="dcs"><h4>Steps'+(st.length?' <span class="src">'+done+' of '+st.length+(done===st.length?' &middot; all done':' done')+'</span>':'')+'</h4>'+
+    (st.length?'<div class="prog" role="progressbar" aria-valuenow="'+pct+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+pct+'%"></i></div>':'')+
+    '<div class="sl">'+st.map(function(x,i){return '<div class="sr'+(x.d?' d':'')+'"><label class="cbw"><input type="checkbox" data-stepck="'+i+'" data-tid="'+t.id+'"'+(x.d?' checked':'')+' aria-label="Done: '+esc(x.t)+'"><span class="cbx" aria-hidden="true">'+ck+'</span></label><input class="stin" type="text" data-stepin="'+i+'" data-tid="'+t.id+'" value="'+esc(x.t)+'" aria-label="Step '+(i+1)+'"><button class="sx" data-stepdel="'+i+'" data-tid="'+t.id+'" aria-label="Remove step" title="Remove">&times;</button></div>';}).join('')+'</div>'+
+    '<div class="sadd"><input id="stnew" type="text" data-tid="'+t.id+'" placeholder="Add a step" autocomplete="off" aria-label="New step"><button class="pillb" data-stepadd="'+t.id+'">Add</button></div>'+
+    (seed.length?'<button class="seedb" data-stepseed="'+t.id+'">+ Add the '+seed.length+' prerequisites from the doc as steps</button>':'')+'</section>';
+}
+function linksCard(t){
+  var ls=linksOf(t.id);
+  return '<section class="dcs"><h4>Links</h4><div class="lks">'+(ls.length?ls.map(function(x,i){var host=x.u.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,''); return '<span class="lk"><a href="'+esc(x.u)+'" target="_blank" rel="noopener noreferrer" title="'+esc(x.u)+'"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M5 2H2.5A.5.5 0 002 2.5v7a.5.5 0 00.5.5h7a.5.5 0 00.5-.5V7M7 2h3v3M10 2L5.5 6.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'+esc(host.length>34?host.slice(0,32)+'...':host)+'</a><button data-linkdel="'+i+'" data-tid="'+t.id+'" aria-label="Remove link" title="Remove">&times;</button></span>';}).join(''):'<span class="none">ClickUp task, doc or dashboard for this work.</span>')+'</div>'+
+    '<div class="sadd"><input id="lknew" type="text" data-tid="'+t.id+'" placeholder="Paste a link" autocomplete="off" aria-label="New link"><button class="pillb" data-linkadd="'+t.id+'">Add</button></div></section>';
+}
+
+var msOpen=null, msQ='';
+function directKids(id){return model.tasks.filter(function(x){return x.depends_on.indexOf(id)>=0;});}
+function ancestorsOf(id,seen){seen=seen||{}; (model.byId[id].depends_on||[]).forEach(function(p){if(model.byId[p]&&!seen[p]){seen[p]=1; ancestorsOf(p,seen);}}); return seen;}
+function connChip(id){var x=model.byId[id]; if(!x) return '<span class="cn">'+esc(id)+'</span>'; return '<button class="cn" data-go="'+esc(id)+'" title="'+esc(x.task)+'">'+stIcon(x.status)+'<b>'+esc(id)+'</b><span>'+esc(shortName(x))+'</span></button>';}
+function connPart(t,mode){
+  var sel=mode==='up'?t.depends_on.slice():directKids(t.id).map(function(x){return x.id;});
+  var open=msOpen&&msOpen.id===t.id&&msOpen.mode===mode;
+  var label=mode==='up'?'Waits on':'Unblocks', hint=mode==='up'?'Tasks that need to finish before this one can start.':'Tasks that cannot start until this one finishes.';
+  var h='<div class="cg"><span class="fl2">'+label+(sel.length?' <em>'+sel.length+'</em>':'')+'</span><div class="cns">'+
+    (sel.length?sel.map(function(id){return '<div class="cnw">'+connChip(id)+'<button class="cnx" data-msdel="'+id+'" data-tid="'+t.id+'" data-mode="'+mode+'" aria-label="Remove '+esc(id)+' from '+label+'" title="Remove">&times;</button></div>';}).join(''):'<span class="none">'+hint+'</span>')+
+    '</div><button class="msb" data-msopen="'+mode+'" aria-expanded="'+!!open+'">'+(open?'Close list':(sel.length?'Edit '+label.toLowerCase():'Choose tasks'))+'</button>';
+  if(open){
+    var anc=mode==='down'?ancestorsOf(t.id):null, term=msQ.trim().toLowerCase();
+    var cand=model.tasks.filter(function(c){return c.id!==t.id&&c.status!=='Undefined'&&(['Complete','Phase 1 done'].indexOf(c.status)<0||sel.indexOf(c.id)>=0);})
+      .filter(function(c){return !term||(c.id+' '+c.task+' '+c.workstream).toLowerCase().indexOf(term)>=0;})
+      .sort(function(a,b){return (a.rank||999)-(b.rank||999);});
+    var ck='<svg viewBox="0 0 14 14" width="14" height="14"><path class="ck1" d="M3 7.3l2.6 2.6L11 4.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    h+='<div class="msp"><input id="msq" type="search" placeholder="Search tasks by name, ID or workstream" value="'+esc(msQ)+'" autocomplete="off" aria-label="Search tasks"><div class="msl" role="group" aria-label="'+label+'">'+
+      (cand.length?cand.map(function(c){
+        var loop=mode==='up'?t.downstream.indexOf(c.id)>=0:!!anc[c.id], on=sel.indexOf(c.id)>=0;
+        return '<label class="msr'+(loop?' dis':'')+'"><span class="cbw"><input type="checkbox" data-msck="'+c.id+'" data-tid="'+t.id+'" data-mode="'+mode+'"'+(on?' checked':'')+(loop&&!on?' disabled':'')+'><span class="cbx" aria-hidden="true">'+ck+'</span></span>'+stIcon(c.status)+'<b>'+esc(c.id)+'</b><span class="msn">'+esc(shortName(c))+'</span>'+(loop&&!on?'<em>would loop</em>':'')+'</label>';}).join(''):'<div class="none" style="padding:10px">No task matches.</div>')+
+      '</div><div class="msf"><span>'+sel.length+' selected</span><button class="pillb pri" data-msopen="'+mode+'">Done</button></div></div>';
+  }
+  return h+'</div>';
+}
+function connCard(t){return '<section class="dcs"><h4>Connections <span class="src">You set these</span></h4>'+connPart(t,'up')+connPart(t,'down')+'</section>';}
+function detailHtml(t){
+  var h='';
+    var fld=function(l,inner,hint){return '<label class="fd"><span class="fl2">'+l+'</span>'+inner+(hint?'<span class="fh">'+hint+'</span>':'')+'</label>';};
+    var chip=function(id){var x=model.byId[id]; if(!x) return '<span class="cn">'+esc(id)+'</span>'; return '<button class="cn" data-go="'+esc(id)+'" title="'+esc(x.task)+'">'+stIcon(x.status)+'<b>'+esc(id)+'</b><span>'+esc(shortName(x))+'</span></button>';};
+    var warn=t.conflicts.length?'<div class="dnote amb"><b>Worth lining up</b>'+t.conflicts.map(function(c){return '<span>Planned to start '+fmt(c.starts)+(c.start_src==='underway'?' (already underway)':'')+', ahead of '+esc(shortName(model.byId[c.pred]))+' ('+esc(c.pred)+'), which lands '+fmt(c.pred_delivers)+'. Move one date and they line up.</span>';}).join('')+'</div>':'';
+    var need=t.missing_per_checklist_tab?'<div class="dnote"><b>Ready to start once</b><span>'+esc(t.missing_per_checklist_tab)+'.</span></div>':'';
+    var notes=[t.notes_from_start_col,t.gtm_notes,t.status_note].filter(Boolean).map(esc).join(' &middot; ');
+    var rf=(t.overdue_start?'<span class="fl b">Ready to kick off</span>':'')+(t.recurring?'<span class="fl">&#8635; Recurring'+(t.cadence?' &middot; '+esc(t.cadence):'')+'</span>':'');
+    var pri=t.rank!=null?'<div class="dcp"><span class="pchip '+t.bucket+'">#'+t.rank+' &middot; '+t.bucket+'</span><span class="mv"><button data-mv="top" data-id2="'+t.id+'" title="Move to the top" aria-label="Move to top"'+(t.rank===1?' disabled':'')+'>&#10514;</button><button data-mv="up" data-id2="'+t.id+'" title="Move up one" aria-label="Move up one"'+(t.rank===1?' disabled':'')+'>&#8593;</button><button data-mv="down" data-id2="'+t.id+'" title="Move down one" aria-label="Move down one">&#8595;</button></span></div>':'';
+    var dsrc=t.delivery_src==='proposed'?'<span class="fl a">Proposed</span>':t.delivery_src==='tab1'?'<span class="fl">On the main table</span>':'';
+    var kids=t.downstream.length?t.downstream.map(chip).join(''):'<span class="none">Nothing waits on this yet.</span>';
+    var deps=t.depends_on.length?t.depends_on.map(chip).join(''):'<span class="none">Nothing. It can start any time.</span>';
+    return '<div class="dct">'+esc(t.task)+'</div>'+(rf?'<div class="dcf">'+rf+'</div>':'')+(pri?'<div class="dprow"><span class="fl2">Priority</span>'+pri+'</div>':'')+
+      warn+need+
+      '<div class="dcg">'+
+        '<section class="dcs"><h4>Ownership</h4>'+
+          fld('Owner','<input type="text" data-id="'+t.id+'" data-k="owner" value="'+esc(t.owner||'')+'" placeholder="Add an owner">')+
+          fld('Status','<select data-id="'+t.id+'" data-k="status">'+optHtml(STATUSES.concat(t.status==='Undefined'?['Undefined']:[]),t.status)+'</select>')+
+          fld('Blocker','<select data-id="'+t.id+'" data-k="blocker_type">'+optHtml(BLOCKERS,t.blocker_type||'none')+'</select>')+
+        '</section>'+
+        '<section class="dcs"><h4>Schedule</h4>'+
+          fld('Start','<input type="date" data-id="'+t.id+'" data-k="start" value="'+(t.start_actual||(t.start_src==='proposed'?t.start_eff:'')||'')+'">',t.start_src==='underway'?'Already underway':'')+
+          fld('Delivery','<input type="date" data-id="'+t.id+'" data-k="delivery" value="'+(t.delivery_eff||'')+'">',dsrc)+
+        '</section>'+
+        connCard(t)+
+        notesCard(t)+stepsCard(t)+linksCard(t)+
+        (notes?'<section class="dcs doc"><h4>From the doc <span class="src">Runway doc</span></h4><p>'+notes+'</p><div class="ntf"><span>'+notes.replace(/&[a-z]+;/g,'.').length+' characters &middot; read only</span></div></section>':'')+
+      '</div>'+
+    '';
+}
+function lrow(t){
+  var g=groupOf(t), ex=openId===t.id;
+  var pill='<span class="pp '+(t.status==='Queued'?'Next':g)+'">'+(t.status==='Queued'?'Queued':g==='Done'?(t.status==='Undefined'?'Empty':'Done'):g)+'</span>';
+  var meta=[esc(t.id),esc(t.workstream)];
+  var fl='';
+  if(t.proposed) fl+='<span class="fl a">Proposed</span>';
+  if(t.downstream_count) fl+='<span class="fl">Unblocks '+t.downstream_count+'</span>';
+  var sx=stepsOf(t.id); if(sx.length) fl+='<span class="fl" title="Steps done">&#10003; '+sx.filter(function(x){return x.d;}).length+'/'+sx.length+'</span>';
+  if(ov[t.id]&&ov[t.id].notes) fl+='<span class="fl" title="Has notes">&#9998; Notes</span>';
+  lastVisible.push(t.id);
+  var gp=(t.rank!=null&&canDrag)?'<button class="grip" data-grip="'+t.id+'" aria-label="Reorder '+esc(t.id)+', priority '+t.rank+'. Drag, or press up and down arrows." title="Drag to reorder"><svg width="12" height="16" viewBox="0 0 12 16" aria-hidden="true" fill="currentColor"><circle cx="3" cy="3" r="1.4"/><circle cx="9" cy="3" r="1.4"/><circle cx="3" cy="8" r="1.4"/><circle cx="9" cy="8" r="1.4"/><circle cx="3" cy="13" r="1.4"/><circle cx="9" cy="13" r="1.4"/></svg></button>':'';
+  var h='<div class="lr b'+(sel[t.id]?' sel':'')+(ex?' on':'')+'" data-row="'+t.id+'">'+
+    '<div class="gpc">'+gp+'</div>'+
+    '<div><label class="cbw"><input type="checkbox" data-sel="'+t.id+'"'+(sel[t.id]?' checked':'')+' aria-label="Select '+esc(t.id)+'"><span class="cbx" aria-hidden="true"><svg viewBox="0 0 14 14" width="14" height="14"><path class="ck1" d="M3 7.3l2.6 2.6L11 4.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label></div>'+
+    '<div class="rk">'+(t.rank!=null&&canDrag?'<button class="rkb" data-rankedit="'+t.id+'" title="Type a new priority number">'+t.rank+'</button>':(t.rank||''))+'</div>'+
+    '<div class="tc" data-toggle="'+t.id+'"><button class="t1" data-toggle="'+t.id+'" aria-expanded="'+ex+'">'+esc(t.task)+'</button><div class="t2"><span class="mono">'+meta.join(' &middot; ')+'</span>'+fl+'</div>'+'</div>'+
+    '<div class="stc">'+stIcon(t.status)+'<select class="st s-'+esc(t.status).replace(/ /g,'-')+'" data-id="'+t.id+'" data-k="status" aria-label="Status">'+optHtml(STATUSES.concat(t.status==='Undefined'?['Undefined']:[]),t.status)+'</select></div>'+
+    '<div><input type="text" data-id="'+t.id+'" data-k="owner" value="'+esc(t.owner||'')+'" placeholder="'+(t.unowned?'Add owner':'Owner')+'" class="'+(t.unowned?'un':'')+'" aria-label="Owner"></div>'+
+    '<div class="dd"><button class="dtx" data-datefor="'+t.id+'" aria-label="Delivery date '+(t.delivery_eff?fmt(t.delivery_eff):'none')+(t.delivery_src==='proposed'?', proposed':'')+'. Press to change.">'+(t.delivery_eff?fmt(t.delivery_eff):(t.recurring?'Ongoing':'Add date'))+(t.delivery_src==='proposed'?'<i class="pdot" title="Proposed date, not committed"></i>':'')+'</button><input type="date" class="dhid" tabindex="-1" aria-hidden="true" data-id="'+t.id+'" data-k="delivery" value="'+(t.delivery_eff||'')+'"></div></div>';
+  return h;
+}
+function vList(){
+  var f=LF[flt]||LF.all, term=q.trim().toLowerCase();
+  var l=model.tasks.filter(f[1]).filter(function(t){return !term||(t.task+' '+t.id+' '+t.workstream+' '+(t.owner||'')).toLowerCase().indexOf(term)>=0;});
+  canDrag=!term&&sortKey==='rank'&&sortDir===1;
+  var keyf={rank:function(t){return t.rank||999;},task:function(t){return t.task.toLowerCase();},status:function(t){return t.status;},owner:function(t){return (t.owner||'~').toLowerCase();},delivery:function(t){return t.delivery_eff||'9999';}}[sortKey];
+  var PRIMARY=['all','Now','Next','Later','ready','unowned'];
+  var chips=Object.keys(LF).filter(function(k){return k==='expected'?flt==='expected':(showMore||PRIMARY.indexOf(k)>=0||k===flt);}).map(function(k){var n=model.tasks.filter(LF[k][1]).length;return '<button class="fc" data-flt="'+k+'" aria-pressed="'+((flt||'all')===k)+'">'+(DOT[k]?'<i style="background:'+DOT[k]+'"></i>':'')+LF[k][0]+'<em>'+n+'</em></button>';}).join('')+'<button class="fc" data-more="1">'+(showMore?'Fewer filters':'More filters')+'</button>';
+  var head=function(k,lab){return '<button data-sort="'+k+'">'+lab+(sortKey===k?(sortDir>0?' &#8593;':' &#8595;'):'')+'</button>';};
+  lastVisible=[];
+  var nsel=Object.keys(sel).filter(function(k){return sel[k];}).length;
+  var bulk='';
+  var out='<div class="lw"><div class="lbar">'+chips+(ov._order&&ov._order.length?'<button class="fc" data-resetorder="1" style="margin-left:auto" title="Go back to the suggested starting order">Order: yours <em>Reset</em></button>':'<span class="fc hint" style="margin-left:auto">Drag &#8942;&#8942; to set priority</span>')+'<button class="fc" data-pal="1" title="Jump to any task">Jump to <em>&#8984;K</em></button><input id="q" type="search" placeholder="Filter" value="'+esc(q)+'" aria-label="Filter tasks" style="margin-left:0;width:150px"></div>'+bulk+'<div class="scroll"><div class="lt">'+
+    '<div class="lr h"><div></div><div><label class="cbw"><input type="checkbox" id="selall" data-selall="1" aria-label="Select all visible tasks"><span class="cbx" aria-hidden="true"><svg viewBox="0 0 14 14" width="14" height="14"><path class="ck1" d="M3 7.3l2.6 2.6L11 4.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path class="ck2" d="M3.5 7h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></label></div><div>'+head('rank','#')+'</div><div>'+head('task','Task')+'</div><div>'+head('status','Status')+'</div><div>'+head('owner','Owner')+'</div><div>'+head('delivery','Delivery')+'</div></div>';
+  var blurb={Now:'Do these first. Your top '+model.limit+'; drag a task in and the last one moves to Next.',Next:'Queue. Ranks '+(model.limit+1)+' to '+(model.limit+12)+'.',Later:'Later, in your order.',Blocked:'Ready to move up once the blocker clears.',Done:'Complete, phase 1 done, or empty rows. Not ranked.'};
+  var any=false;
+  ['Now','Next','Later','Blocked','Done'].forEach(function(g){
+    var rows=l.filter(function(t){return groupOf(t)===g;}).sort(function(a,b){var x=keyf(a),y=keyf(b);return (x<y?-1:x>y?1:0)*sortDir;});
+    if(!rows.length) return; any=true;
+    var col=collapsed[g]&&!term&&flt==null;
+    out+='<div class="gh2"><b>'+(g==='Done'?'Done and empty':g)+'</b><span>'+rows.length+' &middot; '+blurb[g]+'</span><span class="tg" data-collapse="'+g+'">'+(col?'Show':'Hide')+'</span></div>';
+    if(!col) out+=rows.map(function(t){return lrow(t);}).join('');
+  });
+  if(!any) out+='<div class="nores">Nothing matches.</div>';
+  return out+'</div></div></div><p class="note">Drag the handle to set priority, or click a number and type a new one. With the keyboard, focus a handle and press the up or down arrow. Click a task for dates and blockers. Your order and edits stay in this browser; Copy changes sends them back.</p>';
+}
+
+var asksOpen=false, showScoring=false, showMore=false; var insIdx=0, askIdx=0, pauseOff={}, diffOpen=false;
+function shortName(t){var x=t.task.replace(/^[^:]+:\s*/,'').split(/[,(]/)[0].trim(); return x.length>52?x.slice(0,50)+'...':x;}
+var FIVE={'DAT-01':'Oro cleanup','PBX-09':'booth prospectus','CMP-01':'Privacy setup','PBX-02':'PB Expo email list','PBX-03':'event planner lists'};
+function insightList(){
+  var T=model.tasks, out=[];
+  var done=T.filter(function(t){return t.status==='Complete'||t.status==='Phase 1 done';});
+  if(done.length) out.push({k:'wins',html:'<p><span class="dotp" style="background:var(--green)"></span><b>'+done.length+' deliverables are done</b>, and the email foundation is in place.</p><div class="chiprow">'+done.map(function(t){return '<span class="tchip">&#10003; '+esc(shortName(t))+'</span>';}).join('')+'</div><p style="margin-top:10px">Early results from the doc: the first HeyReach campaign reached a <span class="pos">30% acceptance rate</span>, and the NBAA geofencing test ran at a lower CPM than normal promotions.</p><button class="pillb" data-flt="done">See what shipped</button>'});
+  var byPred={}; model.conflicts.forEach(function(t){t.conflicts.forEach(function(c){(byPred[c.pred]=byPred[c.pred]||[]).push(t);});});
+  var top=Object.keys(byPred).filter(function(k){return model.byId[k].status!=='Complete';}).sort(function(a,b){return model.byId[b].downstream_count-model.byId[a].downstream_count;})[0];
+  if(top){var g=model.byId[top], l=byPred[top];
+    out.push({k:'gate',html:'<p><span class="dotp" style="background:var(--blue)"></span>The <b>'+esc(FIVE[g.id]||g.task.split(':')[0])+'</b> ('+esc(g.id)+') is the keystone: when it lands on <b>'+fmt(g.delivery_eff)+'</b> it opens <b>'+g.downstream_count+'</b> tasks. <span class="pos">'+l.length+' are already lined up</span> to begin, and the two Expo lists have a base in hand per the doc, so the work keeps moving.'+(g.owner?'':' Naming an owner would lock in the date.')+'</p><button class="pillb pri" data-flt="conflicts">Show the '+model.conflicts.length+' tasks that build on a gate</button>'});}
+  if(model.wip_over>0){
+    var c=model.pause_candidates;
+    out.push({k:'wip',html:'<p><span class="dotp" style="background:var(--blue)"></span><b>'+model.wip+' efforts are underway at once</b>, which shows how much the team is carrying. Lining up the top '+model.limit+' first would land the Expo work sooner, with '+model.wip_over+' sequenced right behind them. Nothing changes until you apply.</p>'+
+      (diffOpen?'<div class="df"><div class="dh">Proposed sequencing<span>Click rows to toggle</span></div><div class="dfb">':'<button class="pillb pri" data-difftoggle="1">Review the '+c.length+' to sequence next</button>')+
+      (diffOpen?c.map(function(t){var on=!pauseOff[t.id];return '<div class="dr'+(on?' on':'')+'" data-pause="'+t.id+'"><span class="mono" style="color:var(--muted)">'+esc(t.id)+'</span><span class="dn">'+esc(t.task)+'</span><span class="arrow"><s>In progress</s> &rarr; <b>Queued</b></span><span></span><span class="ck">'+(on?'&#10003;':'')+'</span></div>';}).join('')+
+      '</div><div class="dfoot"><span>'+c.filter(function(t){return !pauseOff[t.id];}).length+' to queue &middot; lowest priority first</span><button class="btnp" data-applypause="1"'+(c.every(function(t){return pauseOff[t.id];})?' disabled':'')+'>Apply '+c.filter(function(t){return !pauseOff[t.id];}).length+' changes</button></div></div><button class="pillb" data-difftoggle="1" style="margin-top:6px">Close</button>':'')});
+  } else out.push({k:'wip',html:'<p><span class="dotp" style="background:var(--green)"></span><b>Focus is set.</b> '+model.wip+' efforts are underway, within the limit of '+model.limit+'.</p>'});
+  var have=WANT.filter(function(w){return model.byId[w].bucket==='Now';}), miss=WANT.filter(function(w){return model.byId[w].bucket!=='Now';});
+  out.push({k:'cal',html:'<p><span class="dotp" style="background:var(--green)"></span><b><span class="pos">'+have.length+' of your 5</span> priorities are already in the Now '+model.limit+'</b>: '+have.map(function(i){return FIVE[i];}).join(', ')+'.'+(miss.length?' '+miss.map(function(i){return FIVE[i];}).join(' and ')+' sit at '+miss.map(function(i){return '#'+model.byId[i].rank;}).join(' and ')+' because their own dates are in December. Drag them up to bring them in.':'')+'</p>'+(miss.length?'<button class="pillb" data-flt="expected">Show the five</button>':'')});
+  return out;
+}
+var insOpen=false;
+function insightsHtml(){
+  var l=insightList(); if(!l.length) return '';
+  insIdx=((insIdx%l.length)+l.length)%l.length;
+  var cur=l[insIdx], head=cur.html.split('</p>')[0].replace(/<[^>]+>/g,'').split(/\.\s/)[0].replace(/\.$/,'')+'.';
+  return '<div class="ins'+(insOpen?' open':'')+'"><div class="ih"><span>Insights</span><div class="pg"><button class="ib" data-ins="-1" aria-label="Previous insight">&#8249;</button><em aria-live="polite">'+(insIdx+1)+' of '+l.length+'</em><button class="ib" data-ins="1" aria-label="Next insight">&#8250;</button></div>'+(insOpen?'':'<span class="hd">'+esc(head)+'</span>')+'<div class="nav"><button class="ib wide" data-insopen="1">'+(insOpen?'Hide':'Details')+'</button></div></div>'+(insOpen?cur.html:'')+'</div>';
+}
+var ASKS=[
+  {k:'limit',q:'How many tasks should be in progress at once?',opts:['6','8','10'],note:'Sets the work-in-progress limit (D8).'},
+  {k:'shells',q:'What should happen to the three empty rows (PB Expo: Kevin Book, Smartlead, data-backed retention signal)?',opts:['I will define them','Delete them','Fold into existing work'],note:'D4. Recorded only.'},
+  {k:'winback',q:'What window should the win-back "demos with no signup" list use?',opts:['60 days','6 months','60 months, as written'],note:'D7. Recorded only.'}
+];
+function asksHtml(){
+  var ans=ov._answers||{}, done=ASKS.filter(function(a){return ans[a.k]!=null;}).length;
+  if(view!=='now') return '';
+  if(!asksOpen) return done<ASKS.length?'<div style="margin-top:14px"><button class="pillb" data-asksopen="1">'+(ASKS.length-done)+' questions for you</button></div>':'';
+  if(askIdx>=ASKS.length) return '<div class="ask"><h3>'+done+' of '+ASKS.length+' answered</h3><div class="af">Use Copy changes below to send them back. <span class="sp"><button class="sk" data-ask="hide">Hide</button><button class="sk" data-ask="reset">Review again</button></span></div></div>';
+  var a=ASKS[askIdx], cur=ans[a.k]!=null?String(ans[a.k]):(a.k==='limit'?String(model.limit):null);
+  return '<div class="ask"><h3>'+esc(a.q)+'</h3>'+a.opts.map(function(o){return '<div class="op'+(cur===o?' sel':'')+'" data-askopt="'+esc(o)+'"><span class="rd"></span>'+esc(o)+'</div>';}).join('')+
+    '<div class="af"><span>'+(askIdx+1)+' / '+ASKS.length+'</span><span>'+esc(a.note)+'</span><span class="sp"><button class="sk" data-ask="hide">Hide</button><button class="sk" data-ask="skip">Skip</button><button class="btnp" data-ask="next"'+(cur==null?' disabled':'')+'>Continue</button></span></div></div>';
+}
+function vNowOld(){
+  var now=model.tasks.filter(function(t){return t.bucket==='Now';}).sort(function(a,b){return a.rank-b.rank;});
+  var next=model.tasks.filter(function(t){return t.bucket==='Next';}).sort(function(a,b){return a.rank-b.rank;});
+  var later=model.tasks.filter(function(t){return t.bucket==='Later';}).length;
+  var h='<div class="grid2">'+now.map(card).join('')+'</div>';
+  h+='<section class="card" style="margin-top:20px"><div class="eyebrow">Next</div><h2>Ranks '+(model.limit+1)+' to '+(model.limit+next.length)+'</h2><p class="h2sub">'+later+' more are ranked Later. Change a score on any card and the order recalculates.</p><div class="rows">'+
+    next.map(function(t){return '<div class="r"><span class="n">'+t.rank+'</span><span><b>'+esc(t.task)+'</b><br><span class="tid">'+esc(t.id)+' &middot; '+esc(t.workstream)+'</span></span><span>'+statusChip(t)+'</span><span class="n">'+t.score.toFixed(1)+'</span></div>';}).join('')+'</div></section>';
+  return h;
+}
+
+function span(t){ // a lane position for a task
+  return {s:t.start_eff?M.d(t.start_eff):null, e:t.delivery_eff?M.d(t.delivery_eff):null};
+}
+var WS_ORDER=['PB Expo','Demand Gen','Retention','Data Foundation','Advertising','Social Proof','Compliance'];
+function vStreams(){
+  var open=function(t){return ['Complete','Phase 1 done','Undefined'].indexOf(t.status)<0;};
+  var tot=model.tasks.filter(open).length;
+  var h='<section class="card"><div class="eyebrow">Workstreams</div><h2>Where the open work sits</h2><p class="h2sub">'+tot+' open tasks. Workstream is a guess from the task title and is awaiting your confirmation (D9).</p>';
+  WS_ORDER.forEach(function(w){
+    var l=model.tasks.filter(function(t){return t.workstream===w;}), o=l.filter(open), ip=o.filter(function(t){return t.status==='In progress';}), bl=o.filter(function(t){return t.status==='Blocked';}), done=l.length-o.length;
+    var sh=function(n){return (n/Math.max(1,l.length)*100).toFixed(1)+'%';};
+    h+='<div class="brow"><div><b style="color:var(--head)">'+w+'</b><div class="tid">'+o.length+' open of '+l.length+'</div></div><div class="stack" role="img" aria-label="'+ip.length+' in progress, '+bl.length+' waiting, '+(o.length-ip.length-bl.length)+' not started, '+done+' done"><i style="width:'+sh(done)+';background:var(--green)"></i><i style="width:'+sh(ip.length)+';background:var(--blue)"></i><i style="width:'+sh(bl.length)+';background:#F09A2F"></i><i style="width:'+sh(o.length-ip.length-bl.length)+';background:var(--pale)"></i></div><div class="tid">'+ip.length+' going &middot; '+bl.length+' waiting</div></div>';
+  });
+  return h+'<div class="legend"><span><i style="background:var(--green)"></i>Done</span><span><i style="background:var(--blue)"></i>In progress</span><span><i style="background:#F09A2F"></i>Blocked</span><span><i style="background:var(--pale)"></i>Not started</span></div></section>';
+}
+var FILTERS={
+  all:['All tasks',function(){return true;}],
+  inprogress:['In progress',function(t){return t.status==='In progress';}],
+  overdue:['Start date passed',function(t){return t.overdue_start;}],
+  unowned:['Unassigned',function(t){return t.unowned;}],
+  conflicts:['Starts before its gate',function(t){return t.conflicts.length>0;}],
+  done:['Done or phase 1',function(t){return t.status==='Complete'||t.status==='Phase 1 done';}]
+};
+function vAll(){
+  var f=FILTERS[flt]||FILTERS.all, l=model.tasks.filter(f[1]);
+  var h='<section class="card"><div class="eyebrow">All tasks</div><h2>'+f[0]+': '+l.length+'</h2><div class="filters">'+Object.keys(FILTERS).map(function(k){return '<button class="btn" data-flt="'+k+'"'+((flt||'all')===k?' style="background:var(--navy);color:var(--page)"':'')+'>'+FILTERS[k][0]+'</button>';}).join('')+'</div><div class="tbl"><table><thead><tr><th>ID</th><th>Task</th><th>Workstream</th><th>Status</th><th>Owner</th><th>Start</th><th>Delivery</th><th>Rank</th><th>Score</th></tr></thead><tbody>'+
+    l.map(function(t){return '<tr><td>'+esc(t.id)+'</td><td>'+esc(t.task)+'<div class="chips" style="margin-top:4px">'+flags(t)+'</div></td><td>'+esc(t.workstream)+'</td><td>'+statusChip(t)+'</td><td>'+ownerHtml(t)+'</td><td>'+dateHtml(t.start_eff,t.start_src)+'</td><td>'+dateHtml(t.delivery_eff,t.delivery_src)+'</td><td class="num">'+(t.rank||t.bucket)+'</td><td class="num">'+(t.score==null?'-':t.score.toFixed(1))+'</td></tr>';}).join('')+'</tbody></table></div></section>';
+  return h;
+}
+var VIEWS={now:['Priority list',vList],streams:['Workstreams',vStreams]};
+
+/* ---------- chrome ---------- */
+function render(){
+  model=M.build(SEED,OVERLAY,TODAY,ov);
+  var T=model.tasks, byId=model.byId;
+  var daysExpo=M.days(M.d(EXPO),TODAY);
+    var done=T.filter(function(t){return t.status==='Complete'||t.status==='Phase 1 done';});
+  var cnt=function(list){var o={};list.forEach(function(t){o[t.workstream]=(o[t.workstream]||0)+1;});return Object.keys(o).sort(function(x,y){return o[y]-o[x];}).map(function(w){return {w:w,n:o[w]};});};
+  var doneWs=cnt(done), ipList=T.filter(function(t){return t.status==='In progress';}), ipWs=cnt(ipList);
+  var ready=T.filter(isReady).sort(function(x,y){return (x.rank||999)-(y.rank||999);});
+  var gate=T.filter(function(t){return t.status!=='Complete'&&t.status!=='Phase 1 done';}).sort(function(x,y){return y.downstream_count-x.downstream_count;})[0];
+  var gateName=gate?(FIVE[gate.id]||gate.task.split(':')[0]):'';
+  var synced=M.days(TODAY,M.d(SEED.generated)), stale=synced>3;
+  document.getElementById('sub').innerHTML='Runway doc, read-only &middot; As of '+fmt(M.iso(TODAY))+' &middot; <span class="sync'+(stale?' stale':'')+'">Synced '+fmt(SEED.generated)+' ('+(synced<=0?'today':synced+' day'+(synced>1?'s':'')+' ago')+')</span> &middot; <span class="fl a" title="Dependency edges and the starting order are proposals until you set them">'+(model.manual?'Your order':'Suggested order')+'</span> &middot; <a class="lnk" href="pbexpo-registration.html">PB Expo registration dashboard &rarr;</a>';
+  var tile=function(k,v,n,link,cls,extra){return '<a href="#'+link+'" title="'+esc(n)+'"><div class="k">'+k+'</div><b'+(cls?' class="'+cls+'"':'')+'>'+v+'</b>'+(extra?'<em class="tn">'+extra+'</em>':'')+'<span>'+n+'</span></a>';};
+  document.getElementById('strip').innerHTML=
+    tile('Delivered',done.length,doneWs.map(function(x){return x.n+' '+x.w;}).join(', '),'now?done','pos')+
+    tile('Underway',ipList.length,'Across '+ipWs.length+' workstreams, most in '+(ipWs[0]?ipWs[0].w+' ('+ipWs[0].n+')':'none')+'.','now?inprogress')+
+    tile('Ready to start',ready.length,ready.length?'No blockers. Top priority: '+ready[0].id+', '+(ready[0].task.split(':')[0])+'.':'Everything waiting has a dependency.','now?ready','',ready.filter(function(t){return t.bucket==='Now';}).length+' in Now')+
+    (gate&&gate.downstream_count>0?tile('One finish unlocks',gate.downstream_count,'The '+gateName+' ('+gate.id+') lands '+fmt(gate.delivery_eff)+' and opens '+gate.downstream_count+' tasks.','now?conflicts'):tile('Linked work',T.filter(function(t){return t.depends_on.length;}).length,'Open a task and choose what it waits on. Links show up here.','now'));
+  document.getElementById('insights').innerHTML=insightsHtml();
+  document.getElementById('asks').innerHTML=asksHtml();
+  document.getElementById('seg').innerHTML=Object.keys(VIEWS).map(function(k){return '<button data-view="'+k+'" aria-pressed="'+(view===k)+'">'+VIEWS[k][0]+'</button>';}).join('');
+  document.getElementById('view').innerHTML=VIEWS[view][1]();
+  syncSelAll(); bulkBar(); drawerRender();
+  document.getElementById('foot').innerHTML='<details><summary style="cursor:pointer">How the order works</summary><p>The list is your priority order: position 1 is the top. The first '+model.limit+' are Now, the next 12 are Next, the rest are Later. The starting order was suggested from impact, effort, dates and what each task unblocks; once you drag, your order replaces it. Tab 1 dates win over proposals.</p></details><p><button class="btn" id="copyOv">Copy changes</button> <button class="btn" id="resetOv">Reset my changes</button> <span id="ovMsg"></span></p>';
+}
+function route(){
+  var h=location.hash.replace('#',''), p=h.split('?');
+  if(VIEWS[p[0]]){ view=p[0]; flt=p[1]||null; }
+}
+document.addEventListener('click',function(e){
+  var v=e.target.closest('[data-view]'); if(v){view=v.dataset.view; flt=null; history.replaceState(null,'','#'+view); render(); return;}
+  var f=e.target.closest('[data-flt]'); if(f){flt=f.dataset.flt==='all'?null:f.dataset.flt; view='now'; history.replaceState(null,'','#now'+(flt?'?'+flt:'')); render(); return;}
+  if(e.target.closest('[data-difftoggle]')){diffOpen=!diffOpen; render(); return;}
+  if(e.target.closest('[data-insopen]')){insOpen=!insOpen; render(); return;}
+  if(e.target.closest('[data-asksopen]')){asksOpen=true; render(); return;}
+  if(e.target.closest('[data-scoring]')){showScoring=!showScoring; render(); return;}
+  if(e.target.closest('[data-more]')){showMore=!showMore; render(); return;}
+  var dfor=e.target.closest('[data-datefor]'); if(dfor){var di=dfor.parentElement.querySelector('.dhid'); if(di.showPicker){try{di.showPicker();}catch(x){di.focus();}}else{di.focus();di.click();} return;}
+  var ii=e.target.closest('[data-ins]'); if(ii){insIdx+=Number(ii.dataset.ins); render(); return;}
+  var pz=e.target.closest('[data-pause]'); if(pz){var pid=pz.dataset.pause; pauseOff[pid]=!pauseOff[pid]; render(); return;}
+  if(e.target.closest('[data-applypause]')){model.pause_candidates.forEach(function(t){if(!pauseOff[t.id]){ov[t.id]=ov[t.id]||{};ov[t.id].status='Queued';}}); pauseOff={}; saveOv(ov); render(); return;}
+  var ao=e.target.closest('[data-askopt]'); if(ao){var A=ASKS[askIdx]; ov._answers=ov._answers||{}; ov._answers[A.k]=ao.dataset.askopt; if(A.k==='limit') ov._limit=Number(ao.dataset.askopt); saveOv(ov); render(); return;}
+  var ak=e.target.closest('[data-ask]'); if(ak){var w=ak.dataset.ask; if(w==='reset') askIdx=0; else if(w==='hide') asksOpen=false; else askIdx++; render(); return;}
+  var so=e.target.closest('[data-sort]'); if(so){var k=so.dataset.sort; if(sortKey===k) sortDir=-sortDir; else {sortKey=k; sortDir=1;} render(); return;}
+  var tg=e.target.closest('[data-toggle]'); if(tg){var id=tg.dataset.toggle; openId=(openId===id?null:id); var y0=window.scrollY; render(); window.scrollTo(0,y0); if(openId){var cb=document.querySelector('[data-closedw]'); if(cb) cb.focus({preventScroll:true});} else {var tb=document.querySelector('button.t1[data-toggle="'+id+'"]'); if(tb) tb.focus({preventScroll:true});} return;}
+  var cl=e.target.closest('[data-collapse]'); if(cl){var g=cl.dataset.collapse; collapsed[g]=!collapsed[g]; render(); return;}
+  if(e.target.id==='copyOv'){var s=JSON.stringify(ov,null,1); (navigator.clipboard?navigator.clipboard.writeText(s):Promise.reject()).then(function(){document.getElementById('ovMsg').textContent='Copied '+Object.keys(ov).length+' changed task(s).';},function(){document.getElementById('ovMsg').textContent='Copy blocked by the browser; open the console and read localStorage.';});}
+  if(e.target.id==='resetOv'){ov={};saveOv(ov);render();}
+});
+document.addEventListener('change',function(e){
+  var el=e.target; if(!el.dataset||!el.dataset.id) return;
+  var id=el.dataset.id,k=el.dataset.k,val=el.value;
+  if(k==='impact'||k==='effort') val=Number(val);
+  if(k==='status'&&!val) return;
+  ov[id]=ov[id]||{}; ov[id][k]=val; saveOv(ov); var y=window.scrollY; render(); window.scrollTo(0,y);
+});
+document.addEventListener('input',function(e){ if(e.target.id!=='q') return; q=e.target.value; render(); var el=document.getElementById('q'); el.focus(); el.setSelectionRange(q.length,q.length); });
+
+/* ---- selection + bulk ---- */
+function keepScroll(fn){var y=window.scrollY; fn(); render(); window.scrollTo(0,y);}
+document.addEventListener('change',function(e){
+  var el=e.target;
+  if(el.dataset&&el.dataset.sel){keepScroll(function(){sel[el.dataset.sel]=el.checked;});}
+  else if(el.dataset&&el.dataset.selall){keepScroll(function(){lastVisible.forEach(function(id){sel[id]=el.checked;});});}
+},true);
+function bulkApply(w,val){
+  var ids=Object.keys(sel).filter(function(k){return sel[k];}); if(!ids.length||!val) return;
+  keepScroll(function(){ids.forEach(function(id){ov[id]=ov[id]||{}; ov[id][w]=val;}); saveOv(ov); sel={};});
+  toast(w==='owner'?ids.length+' task'+(ids.length>1?'s':'')+' assigned to <b>'+esc(val)+'</b>.':ids.length+' task'+(ids.length>1?'s':'')+' set to <b>'+esc(val)+'</b>.');
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-bulk]'); if(!b) return;
+  var w=b.dataset.bulk;
+  if(w==='clear'){keepScroll(function(){sel={};});return;}
+  if(w==='owner') bulkApply('owner',document.getElementById('bo').value.trim());
+});
+document.addEventListener('change',function(e){ if(e.target.id==='bs'&&e.target.value) bulkApply('status',e.target.value); });
+document.addEventListener('keydown',function(e){
+  if(e.target.id==='bo'&&e.key==='Enter'){e.preventDefault(); bulkApply('owner',e.target.value.trim());}
+  else if(e.key==='Escape'&&Object.keys(sel).some(function(k){return sel[k];})&&!document.getElementById('pal').classList.contains('on')&&!drag){keepScroll(function(){sel={};});}
+  else if(e.key==='Escape'&&openId&&!document.getElementById('pal').classList.contains('on')&&!drag){var id=openId; openId=null; var y=window.scrollY; render(); window.scrollTo(0,y); var tb=document.querySelector('button.t1[data-toggle="'+id+'"]'); if(tb) tb.focus({preventScroll:true});}
+});
+function bulkBar(){
+  var host=document.getElementById('bulkbar'), ids=Object.keys(sel).filter(function(k){return sel[k];}), n=ids.length;
+  var keep=document.getElementById('bo'), tv=keep?keep.value:'', hadFocus=keep&&document.activeElement===keep;
+  document.body.classList.toggle('hasbulk',n>0);
+  if(!n){host.innerHTML=''; host.classList.remove('on'); return;}
+  host.classList.add('on');
+  host.innerHTML='<button class="bx0" data-bulk="clear" aria-label="Clear selection" title="Clear selection (Esc)"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>'+
+   '<span class="bn"><b>'+n+'</b> selected</span><i class="bsep"></i>'+
+   '<label class="bf"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="4.5" r="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 12c.5-2.3 2.4-3.4 4.5-3.4s4 1.1 4.5 3.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input id="bo" type="text" placeholder="Assign owner" autocomplete="off" aria-label="Owner for selected tasks"></label>'+
+   '<button class="bgo" data-bulk="owner">Assign</button><i class="bsep"></i>'+
+   '<select id="bs" class="bsel" aria-label="Set status for selected tasks"><option value="">Set status</option>'+STATUSES.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+  var bo=document.getElementById('bo'); bo.value=tv; if(hadFocus){bo.focus(); bo.setSelectionRange(tv.length,tv.length);}
+}
+function syncSelAll(){
+  var h=document.getElementById('selall'); if(!h) return;
+  var n=lastVisible.length, c=lastVisible.filter(function(id){return sel[id];}).length;
+  h.checked=n>0&&c===n; h.indeterminate=c>0&&c<n;
+}
+/* ---- jump to (command search) ---- */
+var palSel=0, palRes=[], palPrev=null;
+function palRender(){
+  var qv=document.getElementById('palq').value.trim().toLowerCase();
+  palRes=model.tasks.filter(function(t){return !qv||(t.task+' '+t.id+' '+t.workstream+' '+(t.owner||'')+' '+t.status).toLowerCase().indexOf(qv)>=0;}).sort(function(a,b){return (a.rank||999)-(b.rank||999);}).slice(0,9);
+  palSel=Math.min(palSel,Math.max(0,palRes.length-1));
+  document.getElementById('palres').innerHTML=palRes.length?palRes.map(function(t,i){return '<div class="it'+(i===palSel?' on':'')+'" data-go="'+t.id+'">'+stIcon(t.status)+'<span class="mono">'+esc(t.id)+'</span><span>'+esc(t.task.length>70?t.task.slice(0,68)+'...':t.task)+'</span><span class="rn">'+(t.rank?'#'+t.rank:esc(t.status))+'</span></div>';}).join(''):'<div class="em">No task matches.</div>';
+}
+function palOpen(){palPrev=document.activeElement; document.getElementById('pal').classList.add('on'); var i=document.getElementById('palq'); i.value=''; palSel=0; palRender(); i.focus();}
+function palClose(){document.getElementById('pal').classList.remove('on'); if(palPrev&&palPrev.focus&&document.contains(palPrev)) palPrev.focus();}
+function goTask(id){
+  var t=model.byId[id]; if(!t) return; palClose();
+  view='now'; flt=null; q=''; collapsed[groupOf(t)]=false; openId=id; history.replaceState(null,'','#now'); render();
+  var el=document.querySelector('[data-row="'+id+'"]'); if(el){el.scrollIntoView({block:'center'}); el.classList.add('flash');}
+}
+document.addEventListener('keydown',function(e){
+  var pal=document.getElementById('pal');
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault(); pal.classList.contains('on')?palClose():palOpen(); return;}
+  if(!pal.classList.contains('on')) return;
+  if(e.key==='Tab'){e.preventDefault(); document.getElementById('palq').focus();}
+  else if(e.key==='Escape') palClose();
+  else if(e.key==='ArrowDown'){e.preventDefault(); palSel=Math.min(palSel+1,palRes.length-1); palRender();}
+  else if(e.key==='ArrowUp'){e.preventDefault(); palSel=Math.max(palSel-1,0); palRender();}
+  else if(e.key==='Enter'&&palRes[palSel]){e.preventDefault(); goTask(palRes[palSel].id);}
+});
+document.addEventListener('click',function(e){
+  if(e.target.closest('[data-pal]')){palOpen(); return;}
+  var g=e.target.closest('[data-go]'); if(g){goTask(g.dataset.go); return;}
+  if(e.target.id==='pal') palClose();
+});
+document.addEventListener('input',function(e){ if(e.target.id==='palq'){palSel=0; palRender();} });
+window.addEventListener('hashchange',function(){route();render();});
+
+/* ---- manual priority order: drag, keyboard, type a number ---- */
+var toastT=null, undoOrder=null;
+function toast(msg,undo){var t=document.getElementById('toast'); t.innerHTML='<span>'+msg+'</span>'+(undo?'<button data-undoorder="1">Undo</button>':''); t.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove('on');},6000);}
+function openIds(){return model.order.filter(function(id){return model.byId[id].rank!=null;});}
+function moveTask(id,idx){ // idx = new 0-based position among open tasks
+  var full=model.order.slice(), op=openIds(); if(op.indexOf(id)<0) return;
+  var before=model.byId[id].bucket, prevOrder=ov._order?ov._order.slice():null;
+  full.splice(full.indexOf(id),1);
+  var rest=full.filter(function(x){return model.byId[x].rank!=null;});
+  idx=Math.max(0,Math.min(rest.length,idx));
+  if(idx>=rest.length) full.push(id); else full.splice(full.indexOf(rest[idx]),0,id);
+  ov._order=full; saveOv(ov); undoOrder=prevOrder;
+  var y=window.scrollY; render(); window.scrollTo(0,y);
+  var t=model.byId[id], msg='<b>'+esc(shortName(t))+'</b> is now #'+t.rank;
+  if(t.bucket!==before){
+    msg+=t.bucket==='Now'?' and in Now.':' and in '+t.bucket+'.';
+    var d=model.tasks.filter(function(x){return x.rank===(t.bucket==='Now'?model.limit+1:before==='Now'?model.limit:0);})[0];
+    if(d&&d.id!==id) msg+=' '+esc(shortName(d))+(t.bucket==='Now'?' moves to Next.':' moves up to Now.');
+  }
+  toast(msg,true);
+  return t;
+}
+document.addEventListener('click',function(e){
+  if(e.target.closest('[data-undoorder]')){ if(undoOrder) ov._order=undoOrder; else delete ov._order; undoOrder=null; saveOv(ov); document.getElementById('toast').classList.remove('on'); var y=window.scrollY; render(); window.scrollTo(0,y); return; }
+  if(e.target.closest('[data-resetorder]')){ undoOrder=ov._order.slice(); delete ov._order; saveOv(ov); render(); toast('Back to the suggested order.',true); return; }
+  var rb=e.target.closest('[data-rankedit]'); if(rb){
+    var id=rb.dataset.rankedit, host=rb.parentElement, n=openIds().length;
+    host.innerHTML='<input class="rkin" type="number" min="1" max="'+n+'" value="'+model.byId[id].rank+'" aria-label="New priority number for '+esc(id)+'">';
+    var inp=host.firstChild; inp.focus(); inp.select(); var done=false;
+    var fin=function(commit){ if(done) return; done=true; var v=parseInt(inp.value,10); if(commit&&v>=1&&v!==model.byId[id].rank) moveTask(id,Math.min(v,n)-1); else render(); };
+    inp.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ev.preventDefault();fin(true);} else if(ev.key==='Escape'){fin(false);} });
+    inp.addEventListener('blur',function(){fin(true);});
+    return;
+  }
+},true);
+document.addEventListener('keydown',function(e){
+  var gr=e.target.closest&&e.target.closest('[data-grip]'); if(!gr) return;
+  var id=gr.dataset.grip, t=model.byId[id], k=e.key;
+  if(k!=='ArrowUp'&&k!=='ArrowDown'&&k!=='Home'&&k!=='End') return;
+  e.preventDefault();
+  var to=k==='ArrowUp'?t.rank-2:k==='ArrowDown'?t.rank:k==='Home'?0:openIds().length;
+  if(to<0||to>openIds().length) return;
+  moveTask(id,to);
+  var g=document.querySelector('[data-grip="'+id+'"]'); if(g) g.focus();
+});
+var drag=null;
+document.addEventListener('pointerdown',function(e){
+  var gr=e.target.closest&&e.target.closest('[data-grip]'); if(!gr||e.button>0) return;
+  var row=gr.closest('.lr'); drag={id:gr.dataset.grip,row:row,gr:gr,y0:e.clientY,s0:window.scrollY,on:false,ref:null,after:false,py:e.clientY};
+  try{gr.setPointerCapture(e.pointerId);}catch(x){}
+});
+function dragTick(){
+  if(!drag||!drag.on) return;
+  var vh=window.innerHeight, y=drag.py;
+  if(y<70) window.scrollBy(0,-12); else if(y>vh-70) window.scrollBy(0,12);
+  dragUpdate(); requestAnimationFrame(dragTick);
+}
+function dragUpdate(){
+  var d=drag; d.row.style.transform='translateY('+((d.py-d.y0)+(window.scrollY-d.s0))+'px)';
+  var rows=[].slice.call(document.querySelectorAll('.lr.b[data-row]')).filter(function(r){return r!==d.row&&r.querySelector('[data-grip]');});
+  var ref=null, after=false, line=document.getElementById('dropline'), box=d.row.closest('.lt').getBoundingClientRect();
+  for(var i=0;i<rows.length;i++){var b=rows[i].getBoundingClientRect(); if(d.py<b.top+b.height/2){ref=rows[i];break;}}
+  var yy;
+  if(ref){yy=ref.getBoundingClientRect().top;}
+  else if(rows.length){ref=rows[rows.length-1]; after=true; yy=ref.getBoundingClientRect().bottom;}
+  d.ref=ref?ref.dataset.row:null; d.after=after;
+  line.style.display=ref?'block':'none'; if(ref){line.style.top=(yy-1)+'px'; line.style.left=box.left+'px'; line.style.width=box.width+'px';}
+}
+document.addEventListener('pointermove',function(e){
+  if(!drag) return; drag.py=e.clientY;
+  if(!drag.on){ if(Math.abs(e.clientY-drag.y0)<4) return; drag.on=true; drag.row.classList.add('drag'); document.body.classList.add('dragging'); requestAnimationFrame(dragTick); }
+  dragUpdate();
+});
+function dragEnd(commit){
+  if(!drag) return; var d=drag; drag=null;
+  document.body.classList.remove('dragging'); document.getElementById('dropline').style.display='none'; d.row.classList.remove('drag'); d.row.style.transform='';
+  if(!d.on||!commit||!d.ref||d.ref===d.id) return;
+  var op=openIds().filter(function(x){return x!==d.id;}), ri=op.indexOf(d.ref); if(ri<0) return;
+  moveTask(d.id,d.after?ri+1:ri);
+  var g=document.querySelector('[data-grip="'+d.id+'"]'); if(g) g.focus({preventScroll:true});
+}
+document.addEventListener('pointerup',function(){dragEnd(true);});
+document.addEventListener('pointercancel',function(){dragEnd(false);});
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&drag) dragEnd(false); });
+
+
+document.addEventListener('click',function(e){
+  var m=e.target.closest('[data-mv]'); if(!m||m.disabled) return;
+  var id=m.dataset.id2, t=model.byId[id], w=m.dataset.mv;
+  moveTask(id,w==='top'?0:w==='up'?t.rank-2:t.rank);
+  var again=document.querySelector('[data-mv="'+w+'"][data-id2="'+id+'"]'); if(again&&!again.disabled) again.focus({preventScroll:true});
+},true);
+
+/* ---- right-side detail drawer ---- */
+function drawerRender(){
+  if(msOpen&&msOpen.id!==openId) msOpen=null;
+  var d=document.getElementById('drawer'), t=openId&&model.byId[openId];
+  var keep=d.querySelector('.dwb'), st=keep?keep.scrollTop:0;
+  if(!t){d.classList.remove('on'); d.innerHTML=''; document.body.classList.remove('hasdrawer'); return;}
+  var i=lastVisible.indexOf(t.id);
+  d.setAttribute('role','dialog'); d.setAttribute('aria-modal','false'); d.setAttribute('aria-label','Details for '+t.id);
+  d.innerHTML='<div class="dwh"><span class="mono">'+esc(t.id)+' &middot; '+esc(t.workstream)+'</span><div class="dwa"><button data-nav="-1" aria-label="Previous task" title="Previous task"'+(i<=0?' disabled':'')+'>&#8593;</button><button data-nav="1" aria-label="Next task" title="Next task"'+(i<0||i>=lastVisible.length-1?' disabled':'')+'>&#8595;</button><button data-closedw="1" aria-label="Close details" title="Close (Esc)"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div><div class="dwb">'+detailHtml(t)+'</div>';
+  d.classList.add('on'); document.body.classList.add('hasdrawer');
+  d.querySelector('.dwb').scrollTop=st;
+}
+document.addEventListener('click',function(e){
+  if(e.target.closest('[data-closedw]')){var id=openId; openId=null; var y=window.scrollY; render(); window.scrollTo(0,y); var tb=document.querySelector('button.t1[data-toggle="'+id+'"]'); if(tb) tb.focus({preventScroll:true}); return;}
+  var n=e.target.closest('[data-nav]'); if(n&&!n.disabled){var i=lastVisible.indexOf(openId)+Number(n.dataset.nav); if(i>=0&&i<lastVisible.length){openId=lastVisible[i]; render(); var r=document.querySelector('[data-row="'+openId+'"]'); if(r) r.scrollIntoView({block:'nearest'}); var nb=document.querySelector('[data-nav="'+n.dataset.nav+'"]'); if(nb&&!nb.disabled) nb.focus({preventScroll:true});}}
+},true);
+
+/* ---- notes, steps, links (all saved in this browser, exported by Copy changes) ---- */
+function ovSet(id,k,v){ov[id]=ov[id]||{}; ov[id][k]=v; saveOv(ov);}
+function reDrawer(focusSel){var y=window.scrollY; render(); window.scrollTo(0,y); if(focusSel){var f=document.querySelector(focusSel); if(f) f.focus({preventScroll:true});}}
+var noteT=null;
+document.addEventListener('input',function(e){
+  var n=e.target; if(!n.dataset||!n.dataset.note) return;
+  n.style.height='auto'; n.style.height=Math.min(n.scrollHeight,320)+'px';
+  var c=document.getElementById('ntc'), st=document.getElementById('nts'); if(c) c.textContent=n.value.length+' characters'; if(st) st.textContent='Saving...';
+  clearTimeout(noteT); noteT=setTimeout(function(){ovSet(n.dataset.note,'notes',n.value); if(st) st.textContent='Saved in this browser';},300);
+});
+document.addEventListener('focusout',function(e){var n=e.target; if(n.dataset&&n.dataset.note){clearTimeout(noteT); ovSet(n.dataset.note,'notes',n.value); var st=document.getElementById('nts'); if(st) st.textContent='Saved in this browser'; }});
+document.addEventListener('change',function(e){
+  var el=e.target; if(!el.dataset) return;
+  if(el.dataset.stepck!=null){var a=stepsOf(el.dataset.tid).slice(); a[el.dataset.stepck]={t:a[el.dataset.stepck].t,d:el.checked}; ovSet(el.dataset.tid,'steps',a); reDrawer(); }
+  else if(el.dataset.stepin!=null){var a2=stepsOf(el.dataset.tid).slice(), i=Number(el.dataset.stepin), v=el.value.trim(); if(v) a2[i]={t:v,d:a2[i].d}; else a2.splice(i,1); ovSet(el.dataset.tid,'steps',a2); reDrawer();}
+},true);
+function addStep(id){var inp=document.getElementById('stnew'), v=inp.value.trim(); if(!v) return; ovSet(id,'steps',stepsOf(id).concat([{t:v,d:false}])); reDrawer('#stnew');}
+function addLink(id){var inp=document.getElementById('lknew'), v=inp.value.trim(); if(!v) return; if(!/^https?:\/\//i.test(v)) v='https://'+v; try{var u=new URL(v); if(u.protocol!=='http:'&&u.protocol!=='https:') throw 0; v=u.href;}catch(x){inp.setAttribute('aria-invalid','true'); inp.title='That does not look like a link'; return;} ovSet(id,'links',linksOf(id).concat([{u:v}])); reDrawer('#lknew');}
+document.addEventListener('click',function(e){
+  var el=e.target.closest('[data-stepadd],[data-stepdel],[data-stepseed],[data-linkadd],[data-linkdel]'); if(!el) return;
+  var d=el.dataset;
+  if(d.stepadd) addStep(d.stepadd);
+  else if(d.stepdel!=null){var a=stepsOf(d.tid).slice(); a.splice(Number(d.stepdel),1); ovSet(d.tid,'steps',a); reDrawer();}
+  else if(d.stepseed){var t=model.byId[d.stepseed]; var items=t.missing_per_checklist_tab.split(/,\s*(?:and\s+)?|\s+and\s+/).map(function(x){return x.trim();}).filter(Boolean); ovSet(d.stepseed,'steps',items.map(function(x){return {t:x.charAt(0).toUpperCase()+x.slice(1),d:false};})); reDrawer();}
+  else if(d.linkadd) addLink(d.linkadd);
+  else if(d.linkdel!=null){var l=linksOf(d.tid).slice(); l.splice(Number(d.linkdel),1); ovSet(d.tid,'links',l); reDrawer();}
+},true);
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Enter') return; var t=e.target;
+  if(t.id==='stnew'){e.preventDefault(); addStep(t.dataset.tid);} else if(t.id==='lknew'){e.preventDefault(); addLink(t.dataset.tid);}
+  else if(t.dataset&&t.dataset.stepin!=null){e.preventDefault(); t.blur();}
+});
+
+/* ---- connections: multi-select pickers ---- */
+function setEdge(child,parent,on){var cur=(model.byId[child].depends_on||[]).slice(), i=cur.indexOf(parent); if(on&&i<0) cur.push(parent); else if(!on&&i>=0) cur.splice(i,1); ovSet(child,'depends_on',cur);}
+function edgeToggle(tid,mode,other,on){ if(mode==='up') setEdge(tid,other,on); else setEdge(other,tid,on); }
+document.addEventListener('click',function(e){
+  var o=e.target.closest('[data-msopen]'); if(o){var m=o.dataset.msopen; msOpen=(msOpen&&msOpen.id===openId&&msOpen.mode===m)?null:{id:openId,mode:m}; msQ=''; drawerRender(); if(msOpen){var q=document.getElementById('msq'); if(q) q.focus({preventScroll:true});} else {var b=document.querySelector('[data-msopen="'+m+'"]'); if(b) b.focus({preventScroll:true});} return;}
+  var d=e.target.closest('[data-msdel]'); if(d){edgeToggle(d.dataset.tid,d.dataset.mode,d.dataset.msdel,false); reDrawer(); toast('Connection removed.'); return;}
+},true);
+document.addEventListener('change',function(e){
+  var c=e.target; if(!c.dataset||!c.dataset.msck) return;
+  edgeToggle(c.dataset.tid,c.dataset.mode,c.dataset.msck,c.checked);
+  reDrawer('[data-msck="'+c.dataset.msck+'"][data-mode="'+c.dataset.mode+'"]');
+},true);
+document.addEventListener('input',function(e){
+  if(e.target.id!=='msq') return; msQ=e.target.value; drawerRender(); var q=document.getElementById('msq'); q.focus({preventScroll:true}); q.setSelectionRange(msQ.length,msQ.length);
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&msOpen){e.stopImmediatePropagation(); var m=msOpen.mode; msOpen=null; drawerRender(); var b=document.querySelector('[data-msopen="'+m+'"]'); if(b) b.focus({preventScroll:true});}
+},true);
+route(); render();
+</script>
+</body>
+</html>

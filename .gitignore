@@ -121,3 +121,6 @@
 # feed is connected; no customer or personal data. Behind pb-auth sign-in.
 !design-capacity.html
 !design-capacity.js
+
+# GTM Priority Runway (built from GTM-Strategy/dashboards/runway, behind pb-auth)
+!runway.html
