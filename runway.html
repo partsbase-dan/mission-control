@@ -387,7 +387,9 @@
   .dwa button{all:unset;box-sizing:border-box;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;cursor:pointer;color:var(--ink);font-size:15px}
   .dwa button:hover:not(:disabled){background:var(--field);color:var(--head)} .dwa button:disabled{opacity:.3;cursor:default} .dwa button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
   .dwb{flex:1;overflow:auto;padding:18px 20px 28px;display:flex;flex-direction:column;gap:14px}
-  .dwb .dct{font:700 18px/1.35 Inter,sans-serif;color:var(--head)}
+  .dti{flex:none;min-height:30px;display:block;width:100%;box-sizing:border-box;resize:none;overflow:hidden;background:transparent;border:1px solid transparent;border-radius:8px;padding:5px 8px;margin:-5px -8px 0;font-family:inherit;transition:border-color .15s,background .15s} .dti:hover{border-color:var(--line)} .dti:focus{outline:none;border-color:var(--accent,#0064E8);background:var(--surface,#fff);box-shadow:0 0 0 3px rgba(0,100,232,.15)}
+  .ttf{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px;color:var(--muted);font-size:11.5px} .ttf .seedb{margin:0}
+  .dwb .dct{font:700 18px/1.35 Inter,sans-serif;color:var(--head)} .dwb .dti{width:calc(100% + 16px)}
   .dprow{display:flex;align-items:center;justify-content:space-between;gap:10px}
   .dwb .dcg{grid-template-columns:1fr} .dwb .dcs{background:var(--hover)} .dwb .dnote{background:var(--hover);max-width:none}
   .dwb .dcp{display:flex} .dwb .dcg{display:grid}
@@ -482,6 +484,8 @@
       var o = overrides[t.id] || {};
       if (overlay.title_overrides && overlay.title_overrides[t.id]) { t.task_source = t.task; t.task = overlay.title_overrides[t.id]; }
       // user edits to dates and blocker replace the doc values
+      // a title you typed replaces the doc title everywhere; the original is kept in task_source
+      if (o.title && o.title.trim()) { if (!t.task_source) t.task_source = t.task; t.task = o.title.trim(); }
       if (o.start) t.start_actual = o.start;
       if (o.delivery) t.delivery_actual = o.delivery;
       if (o.blocker_type !== undefined && o.blocker_type !== '') t.blocker_type = o.blocker_type === 'none' ? null : o.blocker_type;
@@ -737,7 +741,7 @@ function detailHtml(t){
     var dsrc=t.delivery_src==='proposed'?'<span class="fl a">Proposed</span>':t.delivery_src==='tab1'?'<span class="fl">On the main table</span>':'';
     var kids=t.downstream.length?t.downstream.map(chip).join(''):'<span class="none">Nothing waits on this yet.</span>';
     var deps=t.depends_on.length?t.depends_on.map(chip).join(''):'<span class="none">Nothing. It can start any time.</span>';
-    return '<div class="dct">'+esc(t.task)+'</div>'+(rf?'<div class="dcf">'+rf+'</div>':'')+(pri?'<div class="dprow"><span class="fl2">Priority</span>'+pri+'</div>':'')+
+    return '<textarea class="dct dti" rows="1" data-title="'+t.id+'" maxlength="200" aria-label="Task name" spellcheck="true">'+esc(t.task)+'</textarea>'+(ov[t.id]&&ov[t.id].title&&t.task_source&&t.task_source!==t.task?'<div class="ttf"><span>Original: '+esc(t.task_source)+'</span><button class="seedb" data-titlereset="'+t.id+'">Restore original</button></div>':'')+(rf?'<div class="dcf">'+rf+'</div>':'')+(pri?'<div class="dprow"><span class="fl2">Priority</span>'+pri+'</div>':'')+
       warn+need+
       '<div class="dcg">'+
         '<section class="dcs"><h4>Ownership</h4>'+
@@ -1124,12 +1128,20 @@ function drawerRender(){
   d.innerHTML='<div class="dwh"><span class="mono">'+esc(t.id)+' &middot; '+esc(t.workstream)+'</span><div class="dwa"><button data-nav="-1" aria-label="Previous task" title="Previous task"'+(i<=0?' disabled':'')+'>&#8593;</button><button data-nav="1" aria-label="Next task" title="Next task"'+(i<0||i>=lastVisible.length-1?' disabled':'')+'>&#8595;</button><button data-closedw="1" aria-label="Close details" title="Close (Esc)"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div><div class="dwb">'+detailHtml(t)+'</div>';
   d.classList.add('on'); document.body.classList.add('hasdrawer');
   d.querySelector('.dwb').scrollTop=st;
+  var ti=d.querySelector('.dti'); if(ti) fitTitle(ti);
 }
 document.addEventListener('click',function(e){
   if(e.target.closest('[data-closedw]')){var id=openId; openId=null; var y=window.scrollY; render(); window.scrollTo(0,y); var tb=document.querySelector('button.t1[data-toggle="'+id+'"]'); if(tb) tb.focus({preventScroll:true}); return;}
   var n=e.target.closest('[data-nav]'); if(n&&!n.disabled){var i=lastVisible.indexOf(openId)+Number(n.dataset.nav); if(i>=0&&i<lastVisible.length){openId=lastVisible[i]; render(); var r=document.querySelector('[data-row="'+openId+'"]'); if(r) r.scrollIntoView({block:'nearest'}); var nb=document.querySelector('[data-nav="'+n.dataset.nav+'"]'); if(nb&&!nb.disabled) nb.focus({preventScroll:true});}}
 },true);
 
+/* ---- editable task name ---- */
+function fitTitle(el){el.style.height='auto'; el.style.height=el.scrollHeight+'px';}
+function saveTitle(el){var id=el.dataset.title, v=el.value.replace(/\s+/g,' ').trim(), cur=model.byId[id]; if(!cur) return; var base=cur.task_source||cur.task; if(!v||v===base){ if(ov[id]) delete ov[id].title; saveOv(ov);} else if(v!==cur.task){ ovSet(id,'title',v); } else return; var y=window.scrollY; render(); window.scrollTo(0,y); toast('Name updated.',false);}
+document.addEventListener('input',function(e){var n=e.target; if(n.dataset&&n.dataset.title!=null) fitTitle(n);});
+document.addEventListener('keydown',function(e){var n=e.target; if(!n.dataset||n.dataset.title==null) return; if(e.key==='Enter'){e.preventDefault(); n.blur();} else if(e.key==='Escape'){e.stopPropagation(); n.value=model.byId[n.dataset.title].task; n.blur();}},true);
+document.addEventListener('focusout',function(e){var n=e.target; if(n.dataset&&n.dataset.title!=null) saveTitle(n);});
+document.addEventListener('click',function(e){var b=e.target.closest('[data-titlereset]'); if(!b) return; var id=b.dataset.titlereset; if(ov[id]) delete ov[id].title; saveOv(ov); var y=window.scrollY; render(); window.scrollTo(0,y); toast('Original name restored.',false);},true);
 /* ---- notes, steps, links (all saved in this browser, exported by Copy changes) ---- */
 function ovSet(id,k,v){ov[id]=ov[id]||{}; ov[id][k]=v; saveOv(ov);}
 function reDrawer(focusSel){var y=window.scrollY; render(); window.scrollTo(0,y); if(focusSel){var f=document.querySelector(focusSel); if(f) f.focus({preventScroll:true});}}
