@@ -406,6 +406,15 @@
   #dp .dpq{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)} #dp .dpq button{all:unset;box-sizing:border-box;cursor:pointer;height:28px;padding:0 10px;border-radius:999px;background:var(--field);font:500 12px Inter,sans-serif;color:var(--ink)} #dp .dpq button:hover{background:var(--hover)} #dp .dpq button:focus-visible{outline:2px solid var(--blue)} #dp .dpq .clr{margin-left:auto;background:transparent;color:var(--muted)}
   #dp .dpx{margin-top:8px;font:500 11.5px Inter,sans-serif;color:var(--muted);display:flex;gap:6px;align-items:center} #dp .dpx i{width:6px;height:6px;border-radius:50%;background:#F5A524;display:inline-block}
   @media (prefers-reduced-motion:reduce){#dp{transition:none}}
+  /* add task dialog */
+  .addb{font-weight:600;color:var(--blue)}
+  #nt{position:fixed;inset:0;z-index:95;display:none;align-items:center;justify-content:center;background:rgba(8,10,14,.5);padding:16px} #nt.on{display:flex}
+  #nt .bx{width:min(440px,100%);background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 24px 64px rgba(0,0,0,.4)}
+  #nt h3{margin:0 0 14px;font:700 16px Inter,sans-serif;color:var(--head)} #nt label{display:block;margin-bottom:12px} #nt label>span{display:block;font:600 11px Inter,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  #nt input,#nt select{box-sizing:border-box;width:100%;height:38px;border-radius:10px;border:1px solid transparent;background:var(--field);color:var(--ink);padding:0 12px;font:500 13.5px Inter,sans-serif} #nt input:focus,#nt select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 22%,transparent)}
+  #nt .ntb{display:flex;gap:8px;justify-content:flex-end;margin-top:6px} #nt .ntb button{all:unset;box-sizing:border-box;cursor:pointer;height:36px;padding:0 16px;border-radius:10px;font:600 13px Inter,sans-serif;background:var(--field);color:var(--ink)} #nt .ntb .go{background:var(--solid);color:#fff} #nt .ntb .go:disabled{opacity:.45;cursor:default} #nt .ntb button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  #nt .err{color:var(--muted);font:500 12px Inter,sans-serif;min-height:16px;margin:-4px 0 8px}
+  .delb{all:unset;box-sizing:border-box;cursor:pointer;margin:6px 20px 24px;padding:8px 12px;border-radius:10px;font:500 12.5px Inter,sans-serif;color:var(--muted);border:1px solid var(--line);text-align:center} .delb:hover{color:var(--ink);background:var(--field)}
   #drawer{position:fixed;top:0;right:0;bottom:0;width:440px;max-width:100vw;background:var(--surface);box-shadow:-1px 0 0 var(--line),-18px 0 44px rgba(0,0,0,.28);z-index:55;display:flex;flex-direction:column;transform:translateX(104%);transition:transform .2s ease;visibility:hidden}
   #drawer.on{transform:none;visibility:visible}
   .dwh{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 12px 20px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px;flex:none}
@@ -505,7 +514,13 @@
 
   function build(seed, overlay, today, overrides) {
     overrides = overrides || {};
-    var tasks = seed.tasks.concat(overlay.added_tasks || []).map(function (s) {
+    // tasks you add in the page live in overrides._added and are built like the doc's rows
+    var mine = (overrides._added || []).map(function (a) {
+      return { id: a.id, source_row: null, task: a.task, workstream: a.workstream, workstream_basis: 'added by you', status_raw: 'Not started',
+        is_shell: false, recurring: false, cadence: null, start_actual: null, delivery_actual: null, start_proposed: null, delivery_proposed: null,
+        blocker_type: null, hard_deadline: null, owner: a.owner || null, depends_on: [], proposed: false, user_added: true, notes: '' };
+    });
+    var tasks = seed.tasks.concat(overlay.added_tasks || []).concat(mine).map(function (s) {
       var t = JSON.parse(JSON.stringify(s));
       var o = overrides[t.id] || {};
       if (overlay.title_overrides && overlay.title_overrides[t.id]) { t.task_source = t.task; t.task = overlay.title_overrides[t.id]; }
@@ -515,7 +530,7 @@
       if (o.start === 'none') { t.start_actual = null; t.start_proposed = null; } else if (o.start) t.start_actual = o.start;
       if (o.delivery === 'none') { t.delivery_actual = null; t.delivery_proposed = null; } else if (o.delivery) t.delivery_actual = o.delivery;
       if (o.blocker_type !== undefined && o.blocker_type !== '') t.blocker_type = o.blocker_type === 'none' ? null : o.blocker_type;
-      var sc = overlay.scores[t.id] || [null, null];
+      var sc = overlay.scores[t.id] || (t.user_added ? [3, 3] : [null, null]);
       t.impact = sc[0]; t.effort = sc[1];
       // dependencies are set by hand in the page (overrides[id].depends_on); nothing is inferred
       t.depends_on = ((overrides[t.id] && overrides[t.id].depends_on) || []).filter(function (x) { return x !== t.id; });
@@ -783,6 +798,7 @@ function detailHtml(t){
         notesCard(t)+stepsCard(t)+linksCard(t)+
         (notes?'<section class="dcs doc"><h4>From the doc <span class="src">Runway doc</span></h4><p>'+notes+'</p><div class="ntf"><span>'+notes.replace(/&[a-z]+;/g,'.').length+' characters &middot; read only</span></div></section>':'')+
       '</div>'+
+    (t.user_added?'<button class="delb" data-deltask="'+t.id+'">Delete this task</button>':'')+
     '';
 }
 function lrow(t){
@@ -817,7 +833,7 @@ function vList(){
   lastVisible=[];
   var nsel=Object.keys(sel).filter(function(k){return sel[k];}).length;
   var bulk='';
-  var out='<div class="lw"><div class="lbar">'+chips+(ov._order&&ov._order.length?'<button class="fc" data-resetorder="1" style="margin-left:auto" title="Go back to the suggested starting order">Order: yours <em>Reset</em></button>':'<span class="fc hint" style="margin-left:auto">Drag &#8942;&#8942; to set priority</span>')+'<button class="fc" data-pal="1" title="Jump to any task">Jump to <em>&#8984;K</em></button><input id="q" type="search" placeholder="Filter" value="'+esc(q)+'" aria-label="Filter tasks" style="margin-left:0;width:150px"></div>'+bulk+'<div class="scroll"><div class="lt">'+
+  var out='<div class="lw"><div class="lbar">'+chips+(ov._order&&ov._order.length?'<button class="fc" data-resetorder="1" style="margin-left:auto" title="Go back to the suggested starting order">Order: yours <em>Reset</em></button>':'<span class="fc hint" style="margin-left:auto">Drag &#8942;&#8942; to set priority</span>')+'<button class="fc addb" data-addtask="1" title="Add a task to the runway">+ Add task</button><button class="fc" data-pal="1" title="Jump to any task">Jump to <em>&#8984;K</em></button><input id="q" type="search" placeholder="Filter" value="'+esc(q)+'" aria-label="Filter tasks" style="margin-left:0;width:150px"></div>'+bulk+'<div class="scroll"><div class="lt">'+
     '<div class="lr h"><div></div><div><label class="cbw"><input type="checkbox" id="selall" data-selall="1" aria-label="Select all visible tasks"><span class="cbx" aria-hidden="true"><svg viewBox="0 0 14 14" width="14" height="14"><path class="ck1" d="M3 7.3l2.6 2.6L11 4.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path class="ck2" d="M3.5 7h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></label></div><div>'+head('rank','#')+'</div><div>'+head('task','Task')+'</div><div>'+head('status','Status')+'</div><div>'+head('owner','Owner')+'</div><div>'+head('delivery','Delivery')+'</div></div>';
   var blurb={Now:'Do these first. Your top '+model.limit+'; drag a task in and the last one moves to Next.',Next:'Queue. Ranks '+(model.limit+1)+' to '+(model.limit+12)+'.',Later:'Later, in your order.',Blocked:'Ready to move up once the blocker clears.',Done:'Complete, phase 1 done, or empty rows. Not ranked.'};
   var any=false;
@@ -1252,6 +1268,53 @@ document.addEventListener('keydown',function(e){
 },true);
 window.addEventListener('resize',function(){ if(dp) dpPlace(); });
 document.addEventListener('scroll',function(e){ if(dp&&!dpEl.contains(e.target)) dpPlace(); },true);
+/* ---- add a task ---- */
+var ntEl=null, ntFrom=null;
+function ntBuild(){
+  var ws=[]; model.tasks.forEach(function(t){ if(t.workstream&&ws.indexOf(t.workstream)<0) ws.push(t.workstream); });
+  ntEl=document.createElement('div'); ntEl.id='nt';
+  ntEl.innerHTML='<div class="bx" role="dialog" aria-modal="true" aria-labelledby="nth"><h3 id="nth">Add a task</h3>'+
+    '<label><span>Task name</span><input id="ntn" type="text" maxlength="200" autocomplete="off" placeholder="e.g. Webinar: Q1 buyer education series"></label>'+
+    '<label><span>Workstream</span><select id="ntw">'+ws.map(function(w){return '<option>'+esc(w)+'</option>';}).join('')+'</select></label>'+
+    '<label><span>Owner (optional)</span><input id="nto" type="text" maxlength="80" autocomplete="off" placeholder="Add an owner"></label>'+
+    '<label><span>Where should it start?</span><select id="ntp"><option value="top">Top of the list</option><option value="next" selected>First in Next</option><option value="end">Bottom of the list</option></select></label>'+
+    '<div class="err" id="nte" aria-live="polite"></div><div class="ntb"><button type="button" data-ntcancel="1">Cancel</button><button type="button" class="go" data-ntgo="1">Add task</button></div></div>';
+  document.body.appendChild(ntEl);
+}
+function ntOpen(from){ if(!ntEl) ntBuild(); ntFrom=from||null; document.getElementById('ntn').value=''; document.getElementById('nto').value=''; document.getElementById('nte').textContent=''; ntEl.classList.add('on'); document.getElementById('ntn').focus(); }
+function ntClose(){ if(!ntEl) return; ntEl.classList.remove('on'); if(ntFrom&&document.contains(ntFrom)) ntFrom.focus({preventScroll:true}); }
+function ntSubmit(){
+  var name=document.getElementById('ntn').value.replace(/\s+/g,' ').trim(), err=document.getElementById('nte');
+  if(!name){err.textContent='Give the task a name first.'; document.getElementById('ntn').focus(); return;}
+  var dup=model.tasks.filter(function(t){return t.task.toLowerCase()===name.toLowerCase();})[0];
+  if(dup&&!ntEl.dataset.dupok){err.textContent='A task called this already exists ('+dup.id+'). Press Add task again to add it anyway.'; ntEl.dataset.dupok='1'; return;}
+  delete ntEl.dataset.dupok;
+  var n=(ov._added||[]).reduce(function(m,a){return Math.max(m,Number(String(a.id).replace(/\D/g,''))||0);},0)+1, id='NEW-'+n, pos=document.getElementById('ntp').value;
+  ov._added=(ov._added||[]).concat([{id:id,task:name,workstream:document.getElementById('ntw').value,owner:document.getElementById('nto').value.trim()}]); saveOv(ov);
+  ntClose(); filter_reset_for_new(); render();
+  var idx=pos==='top'?0:pos==='next'?model.limit:9999; moveTask(id,idx);
+  collapsed[model.byId[id].bucket]=false; openId=id; render(); var r=document.querySelector('[data-row="'+id+'"]'); if(r) r.scrollIntoView({block:'center'});
+  toast('<b>'+esc(name)+'</b> added as '+id+'.',false);
+}
+function filter_reset_for_new(){ flt=null; q=''; sortKey='rank'; sortDir=1; if(view!=='now') view='now'; }
+function delTask(id){
+  if(!confirm('Delete this task? This only removes tasks you added.')) return;
+  ov._added=(ov._added||[]).filter(function(a){return a.id!==id;}); delete ov[id]; if(ov._order) ov._order=ov._order.filter(function(x){return x!==id;});
+  Object.keys(ov).forEach(function(k){ if(ov[k]&&ov[k].depends_on) ov[k].depends_on=ov[k].depends_on.filter(function(x){return x!==id;}); });
+  saveOv(ov); openId=null; render(); toast('Task deleted.',false);
+}
+document.addEventListener('click',function(e){
+  var t=e.target;
+  if(t.closest('[data-addtask]')){ntOpen(t.closest('[data-addtask]')); return;}
+  if(!ntEl||!ntEl.classList.contains('on')){ var d=t.closest('[data-deltask]'); if(d) delTask(d.dataset.deltask); return; }
+  if(t.closest('[data-ntcancel]')||t===ntEl) ntClose(); else if(t.closest('[data-ntgo]')) ntSubmit();
+},true);
+document.addEventListener('keydown',function(e){
+  if(!ntEl||!ntEl.classList.contains('on')) return;
+  if(e.key==='Escape'){e.stopImmediatePropagation(); e.preventDefault(); ntClose();}
+  else if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.preventDefault(); ntSubmit();}
+  else if(e.key==='Tab'){var f=[].slice.call(ntEl.querySelectorAll('input,select,button')), i=f.indexOf(document.activeElement); if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus();} else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus();}}
+},true);
 /* ---- notes, steps, links (all saved in this browser, exported by Copy changes) ---- */
 function ovSet(id,k,v){ov[id]=ov[id]||{}; ov[id][k]=v; saveOv(ov);}
 function reDrawer(focusSel){var y=window.scrollY; render(); window.scrollTo(0,y); if(focusSel){var f=document.querySelector(focusSel); if(f) f.focus({preventScroll:true});}}
