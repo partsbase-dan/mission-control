@@ -1,0 +1,8 @@
+{
+  "name": "mission-control",
+  "private": true,
+  "description": "Deploy-only repo. This file exists so Netlify installs the one dependency the runway-state function needs.",
+  "dependencies": {
+    "@netlify/blobs": "10.0.0"
+  }
+}

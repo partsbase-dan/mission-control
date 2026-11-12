@@ -415,6 +415,9 @@
   #nt .ntb{display:flex;gap:8px;justify-content:flex-end;margin-top:6px} #nt .ntb button{all:unset;box-sizing:border-box;cursor:pointer;height:36px;padding:0 16px;border-radius:10px;font:600 13px Inter,sans-serif;background:var(--field);color:var(--ink)} #nt .ntb .go{background:var(--solid);color:#fff} #nt .ntb .go:disabled{opacity:.45;cursor:default} #nt .ntb button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   #nt .err{color:var(--muted);font:500 12px Inter,sans-serif;min-height:16px;margin:-4px 0 8px}
   .delb{all:unset;box-sizing:border-box;cursor:pointer;margin:6px 20px 24px;padding:8px 12px;border-radius:10px;font:500 12.5px Inter,sans-serif;color:var(--muted);border:1px solid var(--line);text-align:center} .delb:hover{color:var(--ink);background:var(--field)}
+  #syncchip{position:fixed;left:14px;bottom:14px;z-index:40;display:flex;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font:600 11.5px Inter,sans-serif;color:var(--muted);box-shadow:0 2px 8px rgba(0,0,0,.18);pointer-events:auto;cursor:default}
+  #syncchip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--muted)} #syncchip.live::before{background:#3FCF8E} #syncchip.live.busy::before{background:#F5A524} #syncchip.err{color:#F5A524} #syncchip.err::before{background:#F5A524}
+  body.hasbulk #syncchip{bottom:84px}
   #drawer{position:fixed;top:0;right:0;bottom:0;width:440px;max-width:100vw;background:var(--surface);box-shadow:-1px 0 0 var(--line),-18px 0 44px rgba(0,0,0,.28);z-index:55;display:flex;flex-direction:column;transform:translateX(104%);transition:transform .2s ease;visibility:hidden}
   #drawer.on{transform:none;visibility:visible}
   .dwh{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 12px 20px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px;flex:none}
@@ -627,7 +630,7 @@ var M = window.RunwayModel;
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function loadOv(){try{return JSON.parse(localStorage.getItem(STORE)||'{}');}catch(e){return {};}}
-function saveOv(o){try{localStorage.setItem(STORE,JSON.stringify(o));}catch(e){}}
+function saveOv(o){try{localStorage.setItem(STORE,JSON.stringify(o));}catch(e){} if(typeof syncSoon==='function') syncSoon();}
 var ov = loadOv();
 var qs = new URLSearchParams(location.search);
 var TODAY = M.d(/^\d{4}-\d\d-\d\d$/.test(qs.get('asof')||'') ? qs.get('asof') : new Date().toISOString().slice(0,10));
@@ -726,7 +729,7 @@ function stepsOf(id){return (ov[id]&&ov[id].steps)||[];}
 function linksOf(id){return (ov[id]&&ov[id].links)||[];}
 function notesCard(t){
   var v=(ov[t.id]&&ov[t.id].notes)||'';
-  return '<section class="dcs"><h4>Notes</h4><textarea class="nt" data-note="'+t.id+'" rows="4" placeholder="Add context, decisions or next steps" aria-label="Notes for '+esc(t.id)+'">'+esc(v)+'</textarea><div class="ntf"><span id="ntc">'+v.length+' characters</span><span id="nts">Saved in this browser</span></div></section>';
+  return '<section class="dcs"><h4>Notes</h4><textarea class="nt" data-note="'+t.id+'" rows="4" placeholder="Add context, decisions or next steps" aria-label="Notes for '+esc(t.id)+'">'+esc(v)+'</textarea><div class="ntf"><span id="ntc">'+v.length+' characters</span><span id="nts">'+noteStatus(t.id)+'</span></div></section>';
 }
 function stepsCard(t){
   var st=stepsOf(t.id), done=st.filter(function(x){return x.d;}).length, pct=st.length?Math.round(done/st.length*100):0;
@@ -956,7 +959,7 @@ function render(){
   document.getElementById('seg').innerHTML=Object.keys(VIEWS).map(function(k){return '<button data-view="'+k+'" aria-pressed="'+(view===k)+'">'+VIEWS[k][0]+'</button>';}).join('');
   document.getElementById('view').innerHTML=VIEWS[view][1]();
   syncSelAll(); bulkBar(); drawerRender();
-  document.getElementById('foot').innerHTML='<details><summary style="cursor:pointer">How the order works</summary><p>The list is your priority order: position 1 is the top. The first '+model.limit+' are Now, the next 12 are Next, the rest are Later. The starting order was suggested from impact, effort, dates and what each task unblocks; once you drag, your order replaces it. Tab 1 dates win over proposals.</p></details><p><button class="btn" id="copyOv">Copy changes</button> <button class="btn" id="resetOv">Reset my changes</button> <span id="ovMsg"></span></p>';
+  document.getElementById('foot').innerHTML='<details><summary style="cursor:pointer">How the order works</summary><p>The list is your priority order: position 1 is the top. The first '+model.limit+' are Now, the next 12 are Next, the rest are Later. The starting order was suggested from impact, effort, dates and what each task unblocks; once you drag, your order replaces it. Tab 1 dates win over proposals.</p></details><p><button class="btn" id="copyOv">Copy changes</button> '+(sync.mode==='off'?'<button class="btn" id="resetOv">Reset my changes</button> ':'')+'<span id="ovMsg"></span></p>';
 }
 function route(){
   var h=location.hash.replace('#',''), p=h.split('?');
@@ -1289,8 +1292,8 @@ function ntSubmit(){
   var dup=model.tasks.filter(function(t){return t.task.toLowerCase()===name.toLowerCase();})[0];
   if(dup&&!ntEl.dataset.dupok){err.textContent='A task called this already exists ('+dup.id+'). Press Add task again to add it anyway.'; ntEl.dataset.dupok='1'; return;}
   delete ntEl.dataset.dupok;
-  var n=(ov._added||[]).reduce(function(m,a){return Math.max(m,Number(String(a.id).replace(/\D/g,''))||0);},0)+1, id='NEW-'+n, pos=document.getElementById('ntp').value;
-  ov._added=(ov._added||[]).concat([{id:id,task:name,workstream:document.getElementById('ntw').value,owner:document.getElementById('nto').value.trim()}]); saveOv(ov);
+  var id='NEW-'+(Date.now().toString(36).slice(-4)+Math.random().toString(36).slice(2,4)).toUpperCase(), pos=document.getElementById('ntp').value;
+  ov._added=(ov._added||[]).concat([{id:id,task:name,workstream:document.getElementById('ntw').value,owner:document.getElementById('nto').value.trim(),ts:Date.now()}]); saveOv(ov);
   ntClose(); filter_reset_for_new(); render();
   var idx=pos==='top'?0:pos==='next'?model.limit:9999; moveTask(id,idx);
   collapsed[model.byId[id].bucket]=false; openId=id; render(); var r=document.querySelector('[data-row="'+id+'"]'); if(r) r.scrollIntoView({block:'center'});
@@ -1323,9 +1326,9 @@ document.addEventListener('input',function(e){
   var n=e.target; if(!n.dataset||!n.dataset.note) return;
   n.style.height='auto'; n.style.height=Math.min(n.scrollHeight,320)+'px';
   var c=document.getElementById('ntc'), st=document.getElementById('nts'); if(c) c.textContent=n.value.length+' characters'; if(st) st.textContent='Saving...';
-  clearTimeout(noteT); noteT=setTimeout(function(){ovSet(n.dataset.note,'notes',n.value); if(st) st.textContent='Saved in this browser';},300);
+  clearTimeout(noteT); noteT=setTimeout(function(){ovSet(n.dataset.note,'notes',n.value); if(st) st.textContent=noteStatus(n.dataset.note);},300);
 });
-document.addEventListener('focusout',function(e){var n=e.target; if(n.dataset&&n.dataset.note){clearTimeout(noteT); ovSet(n.dataset.note,'notes',n.value); var st=document.getElementById('nts'); if(st) st.textContent='Saved in this browser'; }});
+document.addEventListener('focusout',function(e){var n=e.target; if(n.dataset&&n.dataset.note){clearTimeout(noteT); ovSet(n.dataset.note,'notes',n.value); var st=document.getElementById('nts'); if(st) st.textContent=noteStatus(n.dataset.note); }});
 document.addEventListener('change',function(e){
   var el=e.target; if(!el.dataset) return;
   if(el.dataset.stepck!=null){var a=stepsOf(el.dataset.tid).slice(); a[el.dataset.stepck]={t:a[el.dataset.stepck].t,d:el.checked}; ovSet(el.dataset.tid,'steps',a); reDrawer(); }
@@ -1366,7 +1369,92 @@ document.addEventListener('input',function(e){
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'&&msOpen){e.stopImmediatePropagation(); var m=msOpen.mode; msOpen=null; drawerRender(); var b=document.querySelector('[data-msopen="'+m+'"]'); if(b) b.focus({preventScroll:true});}
 },true);
+/* ---- shared edits: every change saves for the whole team (see netlify/functions/runway-state.mjs) ---- */
+var API='/api/runway', SYNCKEY='pb-runway-synced-v1';
+var sync={mode:'init',rev:-1,last:null,meta:{},busy:false,again:false,timer:null,at:null,fails:0};
+(function(){try{var j=JSON.parse(localStorage.getItem(SYNCKEY)||'null'); if(j&&j.last){sync.last=j.last; sync.rev=j.rev;}}catch(e){}})();
+function same(a,b){return JSON.stringify(a)===JSON.stringify(b);}
+function flat(o){
+  var f={};
+  Object.keys(o||{}).forEach(function(k){
+    var v=o[k];
+    if(k==='_order'||k==='_limit'||k==='_answers'){ if(v!==undefined&&v!==null) f['G/'+k]=v; }
+    else if(k==='_added'){ (v||[]).forEach(function(a){ f['T/'+a.id+'/_added']={task:a.task,workstream:a.workstream,owner:a.owner||'',ts:a.ts||0}; }); }
+    else if(k.charAt(0)!=='_'&&v&&typeof v==='object'){ Object.keys(v).forEach(function(key){ if(v[key]!==undefined) f['T/'+k+'/'+key]=v[key]; }); }
+  });
+  return f;
+}
+function unflat(f){
+  var o={}, added=[];
+  Object.keys(f).forEach(function(p){
+    var v=f[p]; if(v===null||v===undefined) return; var s=p.split('/');
+    if(s[0]==='G') o[s[1]]=v;
+    else if(s[2]==='_added') added.push({id:s[1],task:v.task,workstream:v.workstream,owner:v.owner||'',ts:v.ts||0});
+    else (o[s[1]]=o[s[1]]||{})[s[2]]=v;
+  });
+  if(added.length){added.sort(function(a,b){return a.ts-b.ts||(a.id<b.id?-1:1);}); o._added=added;}
+  return o;
+}
+function diff(cur,base){
+  var ch=[]; Object.keys(cur).forEach(function(p){ if(!same(cur[p],base[p])) ch.push({p:p,v:cur[p]}); });
+  Object.keys(base).forEach(function(p){ if(!(p in cur)) ch.push({p:p,v:null}); });
+  return ch;
+}
+function whoWhen(p){var m=sync.meta[p]; if(!m||!m.by) return ''; var d=new Date(m.at); return ' &middot; last edit by '+esc(m.by)+(isNaN(d)?'':', '+d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}));}
+function noteStatus(id){ return sync.mode==='live'?'Saved for everyone'+whoWhen('T/'+id+'/notes'):sync.mode==='off'?'Saved on this device only':'Saved here, syncing when online'; }
+var chipEl=null;
+function chip(){
+  if(!chipEl){chipEl=document.createElement('div'); chipEl.id='syncchip'; chipEl.setAttribute('role','status'); document.body.appendChild(chipEl);}
+  var m=sync.mode, t=sync.busy&&m==='live'?'Saving...':m==='live'?'Live':m==='off'?'This device only':m==='err'?'Offline':'';
+  chipEl.className=m+(sync.busy?' busy':''); chipEl.textContent=t; chipEl.style.display=t?'':'none';
+  chipEl.title=m==='live'?'Edits save for everyone who opens this page. Last sync '+(sync.at?sync.at.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'now')+'.':m==='off'?'This copy is not connected to the shared dashboard, so edits stay in this browser.':m==='err'?'Could not reach the shared dashboard. Your edits are kept here and will sync when it is back.':'';
+}
+function uiBusy(){var a=document.activeElement; return (a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)&&a.id!=='selall'&&a.type!=='checkbox')||dp||(ntEl&&ntEl.classList.contains('on'))||drag;}
+function safeRender(n){ if(uiBusy()){ sync.stale=true; if((n||0)<25) setTimeout(function(){safeRender((n||0)+1);},1200); return; } sync.stale=false; var y=window.scrollY; render(); window.scrollTo(0,y); }
+function syncSoon(){ if(sync.mode==='off') return; clearTimeout(sync.timer); sync.timer=setTimeout(syncNow,700); }
+function syncNow(){
+  if(sync.mode==='off') return;
+  if(sync.busy){sync.again=true; return;}
+  sync.busy=true; chip();
+  var sent=flat(ov), first=sync.last===null, changes=first?[]:diff(sent,sync.last);
+  var req=changes.length?fetch(API,{method:'POST',credentials:'same-origin',headers:{'content-type':'application/json','x-runway-client':'1'},body:JSON.stringify({changes:changes})}):fetch(API+(first?'':'?rev='+sync.rev),{credentials:'same-origin'});
+  req.then(function(r){
+    if(r.status===404){ sync.mode='off'; throw 'off'; }
+    var ct=r.headers.get('content-type')||''; if(!r.ok||ct.indexOf('json')<0) throw 'bad';
+    return r.json();
+  }).then(function(body){
+    var wasMode=sync.mode; sync.mode='live'; sync.fails=0; sync.at=new Date();
+    // the shared copy went backwards (reset or restored from an older state): keep what is here and put it back
+    if(!first&&body.rev<sync.rev){ sync.last={}; sync.rev=-1; sync.busy=false; chip(); syncSoon(); return; }
+    if(body.unchanged){ sync.busy=false; chip(); if(wasMode!=='live') safeRender(); return; }
+    var remote={}, meta={}; Object.keys(body.fields||{}).forEach(function(p){var f=body.fields[p]; meta[p]={by:f.by,at:f.at}; if(f.v!==null) remote[p]=f.v;});
+    var merged={}, baseAfter={}; Object.keys(remote).forEach(function(p){merged[p]=remote[p]; baseAfter[p]=remote[p];});
+    if(first){
+      // first time on this device: the shared copy wins where both have a value; anything only held here is sent next
+      var cur0=flat(ov); Object.keys(cur0).forEach(function(p){ if(!(p in remote)) merged[p]=cur0[p]; });
+    } else {
+      // edits made while the request was in flight stay on top and go out next time
+      diff(flat(ov),sent).forEach(function(c){ if(c.v===null) delete merged[c.p]; else merged[c.p]=c.v; });
+      (body.rejected||[]).forEach(function(x){ if(sent[x.p]!==undefined){ baseAfter[x.p]=sent[x.p]; merged[x.p]=sent[x.p]; } else { delete baseAfter[x.p]; } });
+    }
+    var next=unflat(merged), changed=!same(next,ov);
+    ov=next; try{localStorage.setItem(STORE,JSON.stringify(ov));}catch(e){}
+    sync.last=baseAfter; sync.rev=body.rev; sync.meta=meta;
+    try{localStorage.setItem(SYNCKEY,JSON.stringify({rev:sync.rev,last:sync.last}));}catch(e){}
+    sync.busy=false; chip();
+    if(changed||wasMode!=='live') safeRender();
+    if(first||sync.again||diff(flat(ov),sync.last).length){sync.again=false; syncSoon();}
+  }).catch(function(e){
+    sync.busy=false; if(sync.mode!=='off'){sync.mode='err'; sync.fails++;} chip(); if(sync.mode==='off') safeRender();
+  });
+}
+setInterval(function(){ if(sync.stale&&!uiBusy()) safeRender(); if(!document.hidden&&sync.mode!=='off') syncNow(); },15000);
+document.addEventListener('focusout',function(){ if(sync.stale) setTimeout(function(){ if(sync.stale&&!uiBusy()) safeRender(); },250); });
+document.addEventListener('visibilitychange',function(){ if(!document.hidden) syncNow(); });
+window.addEventListener('online',function(){ syncNow(); });
+if(location.protocol==='file:'){ sync.mode='off'; }
 route(); render();
+chip(); syncNow();
 </script>
 </body>
 </html>

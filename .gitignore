@@ -106,6 +106,12 @@
 !netlify/functions/design-plan.js
 !netlify/functions/lib/
 !netlify/functions/lib/clickup.js
+# GTM Priority Runway shared edits: Netlify function + its Blobs dependency (pinned, lockfile committed).
+# Data lives in Netlify Blobs, never in this repo. Sign-in comes from the pb-auth edge function above.
+!netlify/functions/runway-state.mjs
+!netlify/functions/lib/runway-core.mjs
+!netlify/functions/package.json
+!netlify/functions/package-lock.json
 
 # Sales Workshops tracker: five product-group sessions with Sales. Plain doc,
 # no scripts, names of internal attendees only.
