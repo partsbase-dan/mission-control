@@ -1,0 +1,9 @@
+{
+  "name": "runway-state-source",
+  "private": true,
+  "description": "Source for netlify/functions/runway-state.mjs. Mission Control deploys without npm install, so the function is bundled into one file with build.sh and that file is committed. Netlify never installs these.",
+  "type": "module",
+  "scripts": { "build": "sh build.sh", "test": "node ../../../GTM-Strategy/dashboards/runway/tests/sync-core.test.mjs" },
+  "dependencies": { "@netlify/blobs": "10.0.0" },
+  "devDependencies": { "esbuild": "0.25.12" }
+}
